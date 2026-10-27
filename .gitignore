@@ -1,0 +1,50 @@
+# Μυστικά — ΠΟΤΕ δεν ανεβαίνουν πουθενά.
+.env
+.env.*
+!.env.example
+
+# Παράγεται από το build, δεν το κρατάμε στο αποθετήριο.
+public/episode/
+public/guest/
+public/show/
+public/video/
+public/category/
+public/index.html
+public/guests.html
+public/search.html
+public/shows.html
+public/categories.html
+public/episodes.html
+public/episodes-*.html
+public/404.html
+public/sitemap.xml
+public/robots.txt
+
+# Οι απομαγνητοφωνήσεις που σερβίρονται στον browser. Παράγονται από το
+# data/transcripts/ σε κάθε build — δεν τις κρατάμε δύο φορές.
+public/transcript/
+
+# Το ευρετήριο αναζήτησης — παράγεται από το Pagefind μετά το build.
+public/pagefind/
+
+# Ο καιρός αλλάζει κάθε μέρα. Αν λείπει, η λωρίδα δείχνει μόνο τα σόσιαλ.
+data/weather.json
+
+# ΔΕΝ αγνοούμε το υπόλοιπο data/:
+#   people-aliases.json, curation.json  — γραμμένα με το χέρι
+#   news.json                           — ΣΥΣΣΩΡΕΥΤΙΚΟ, χάνεται ιστορικό
+#   videos.json                         — θέλει YOUTUBE_API_KEY για να ξαναγίνει
+#   transcripts/                        — 20MB που κατεβαίνουν μία φορά
+
+# Ρυθμίσεις του εργαλείου, όχι του project: έχουν απόλυτες διαδρομές
+# αυτού του μηχανήματος και δεν δουλεύουν αλλού.
+.claude/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Windows / editors
+Thumbs.db
+Desktop.ini
+.DS_Store

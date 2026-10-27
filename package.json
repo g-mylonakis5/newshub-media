@@ -1,0 +1,16 @@
+{
+  "name": "newshub-media",
+  "version": "1.0.0",
+  "description": "Το multimedia site του newshub.gr — στατικό, χωρίς framework.",
+  "private": true,
+  "scripts": {
+    "fetch": "node fetch-episodes.js && node fetch-videos.js && node fetch-weather.js",
+    "build": "npm run fetch && node publish.js",
+    "build:fast": "node build.js",
+    "serve": "node serve.js",
+    "index": "npx -y pagefind@latest --site public"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
