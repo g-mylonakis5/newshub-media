@@ -1,0 +1,4596 @@
+:root{
+  --bg: #121010;
+  --surface: #1A1917;
+  --line: #26231F;
+  --text: #F0EDE8;
+  --muted: #9A938A;
+
+  /* Ανάμεσα στο --text και στο --muted. Το --muted είναι φτιαγμένο για
+     μικρές γραμμές — ημερομηνίες, ετικέτες — και σε παράγραφο 17px που
+     διαβάζεται ολόκληρη κουράζει. Εδώ πάει το σώμα του κειμένου. */
+  --read: #C9C2B8;
+  --news: #CF2233;
+  --audio: #D9A441;
+
+  /* Σκούρο μπλε, δεύτερο χρώμα μάρκας του newshub.gr (#012754), λίγο
+     ανοιγμένο για το σκούρο φόντο. ΔΕΝ το χρησιμοποιούν οι ετικέτες —
+     δες το σχόλιο στο .card-label--video. Μένει για τα θέματα. */
+  --video: #24456F;
+
+  /* Το φόντο της κόκκινης λωρίδας «Latest». Βαθύ κρασί, όχι το καθαρό
+     --news: σε όλο το πλάτος και πίσω από οκτώ κάρτες, το σκέτο κόκκινο
+     ούρλιαζε. ΑΝΕΒΑΣΕ ΤΟ ΕΔΩ αν το θες πιο έντονο. */
+  --band-news: #3E1218;
+
+  /* Το ύψος της κεφαλίδας: πάνω γραμμή 30 + μενού 58 + δύο γραμμές.
+     Το χρησιμοποιεί το hero για να γεμίζει την υπόλοιπη οθόνη. */
+  --chrome: 90px;
+
+  /* Πού κοιτάζει η φωτογραφία της εισαγωγικής ζώνης. Το μικρόφωνο
+     κάθεται δεξιά και το αριστερό μέρος είναι σχεδόν μαύρο — εκεί
+     πέφτει το κείμενο. ΡΥΘΜΙΣΕ ΑΠΟ ΕΔΩ αν αλλάξει η φωτογραφία. */
+  --intro-pos: 78% 50%;
+  --intro-pos-sm: 88% 50%;
+
+  /* Πόσο σκοτεινό το στρώμα πάνω από τη φωτογραφία. Χωρίς θόλωμα: η
+     εικόνα είναι ήδη σκοτεινή και το μικρόφωνο πρέπει να φαίνεται. */
+  --intro-veil: 0.4;
+
+  /* Πόσο της επόμενης ενότητας αφήνουμε να φαίνεται κάτω από το hero,
+     ώστε να καταλαβαίνει ο επισκέπτης ότι συνεχίζει. */
+  --peek: 70px;
+
+  /* Το κενό κάτω από την κεφαλίδα. Το χρειάζεται και το page-hero, για
+     να απλωθεί ΠΙΣΩ από αυτό: αλλιώς το θολό υπόβαθρο ξεκινούσε μετά
+     το κενό και έμενε μαύρη λωρίδα κάτω από το μενού. */
+  --header-gap: 3rem;
+
+  /* Μία καμπύλη και ένας χρόνος για ΟΛΕΣ τις κινήσεις του site: γρήγορο
+     ξεκίνημα, απαλό σταμάτημα. Αλλάζουν από εδώ, παντού μαζί. */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --ease-time: 0.4s;
+
+  /* Το γαλάζιο της ενότητας podcast. Δεν είναι το --video: εκείνο είναι
+     σκούρο ναυτικό για μικρές ταμπέλες, αυτό θέλει να λάμπει. */
+  --sky: #3E96CE;
+
+  /* Το ίδιο φόντο σε μορφή αριθμών, για σκιάσεις με διαφάνεια.
+     Πρέπει να ταιριάζει με το --bg από πάνω. */
+  --bg-rgb: 18, 16, 16;
+
+  /* Το κόκκινο όταν περνάς από πάνω του */
+  --news-hover: #E03344;
+
+  /* Κείμενο πάνω σε έγχρωμο κουμπί, και κείμενο πάνω σε ανοιχτό κουμπί */
+  --on-color: #FFFFFF;
+  --on-light: var(--bg);
+
+  /* Το χρώμα κάθε θέματος, για τη μπάρα του στην αρχική. Βαθιά και
+     κορεσμένα ώστε να ξεχωρίζουν πάνω στο σκούρο, όπως στο newshub.gr.
+     Όποιο θέμα δεν έχει δικό του παίρνει το --t-default. */
+  --t-kriti:        #1F3A63;
+  --t-geopolitiki:  #CF2233;
+  --t-agronews:     #2C5A38;
+  --t-istoria:      #6B3A5B;
+  --t-politiki:     #1F3A63;
+  --t-ellada:       #2C5A38;
+  --t-kosmos:       #1F5C57;
+  --t-ygeia:        #8C3A2E;
+  --t-oikonomia:    #4A4327;
+  --t-perivallon:   #1F5C57;
+  --t-athlitika:    #3E2F6B;
+  --t-politismos:   #6B3A5B;
+  --t-tech-hub:     #2A4A6B;
+  --t-apopseis:     #4A4327;
+  --t-default:      #3A3631;
+
+  --serif: "Source Serif 4", Georgia,serif;
+  --sans: "Commissioner", system-ui, sans-serif;
+
+  /* Δύο γραμματοσειρές, όχι τρεις: σερίφ για ΚΑΘΕ επικεφαλίδα, sans για
+     ετικέτες και μικρά κείμενα. Η τρίτη (Fira Sans Condensed) βγήκε —
+     έκανε κάθε ενότητα να μοιάζει με άλλο site. */
+
+  --radius : 10px;
+  --gap: 1.5rem;
+
+  /* Μία κοινή γραμμή για ΟΛΟ το site: το περιεχόμενο δεν ξεπερνά το --wrap
+     και κρατάει πάντα --edge απόσταση από την άκρη της οθόνης. Λωρίδα,
+     header, hero και κάρτες ξεκινούν όλα από το ίδιο σημείο. */
+  --wrap: 1500px;
+  --edge: 1.75rem;
+
+  /* λέει στον browser να βάψει σκούρα τα δικά του χειριστήρια,
+     όπως τα κουμπιά του <audio> και τις μπάρες κύλισης */
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box;}
+
+/* Το κοινό περίβλημα. Ό,τι το φοράει, ευθυγραμμίζεται με όλα τα άλλα. */
+.wrap{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+}
+
+body{
+  margin:0;
+  /* Χωρίς πλαϊνό περιθώριο: το αναλαμβάνει το .wrap, ώστε οι λωρίδες να
+     φτάνουν στις άκρες ενώ το περιεχόμενό τους μένει στοιχισμένο. */
+  padding: 0 0 4rem;
+  background: var(--bg);
+  color:var(--text);
+  font-family: var(--sans);
+  line-height:1.5;
+}
+
+h1{
+  font-family:var(--serif);
+  font-weight: 600;
+  font-size: 1.75rem;
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto 2rem;
+
+
+}
+
+/*grid*/
+
+.grid{
+  display: grid;
+  /* 330 αντί για 260: βγάζει 4 στήλες αντί για 5 στο πλήρες πλάτος, άρα
+     κάρτα ~343px και εικόνα 193px ύψος. Τα εξώφυλλά μας έχουν το πρόσωπο
+     του καλεσμένου στο δεξί τρίτο — στα 152px δεν αναγνωριζόταν. */
+  grid-template-columns: repeat(auto-fill,minmax(330px,1fr));
+  /* Πιο πολύ κενό ανάμεσα στις σειρές: χωρίς κουτιά, το κενό είναι το
+     μόνο που χωρίζει τη μια κάρτα από την άλλη. */
+  gap: 2.75rem var(--gap);
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+}
+
+/* Η κάρτα δεν είναι κουτί: ούτε περίγραμμα, ούτε φόντο, ούτε γέμισμα.
+   Τις χωρίζει το κενό ανάμεσά τους. Πριν ήταν «κουτί μέσα σε κουτί» —
+   η κάρτα είχε κορνίζα και μέσα της η εικόνα δική της. */
+.card{
+  background: none;
+  border: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-link{
+  color:inherit;
+  text-decoration:none;
+  display:flex;
+  flex-direction:column;
+  flex: 1;
+}
+
+
+/* Οι ειδήσεις ξεχωρίζουν πλέον μόνο από την κόκκινη ταμπέλα τους: χωρίς
+   κουτί δεν υπάρχει πλαίσιο να βαφτεί. */
+
+/* Το κουτί της εικόνας. Υπάρχει για να κάθονται πάνω του το κουμπί
+   αναπαραγωγής και η διάρκεια. */
+/* Το overflow κόβει τη μεγέθυνση της εικόνας στο hover. */
+.card-media{
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.card-image{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display:block;
+  transition: transform var(--ease-time) var(--ease);
+}
+
+/* Χωρίς κουτί, το hover χρειάζεται δικό του σημάδι: η εικόνα μεγαλώνει
+   μέσα στο πλαίσιο που την κόβει, ο τίτλος ανοίγει στο λευκό, και το
+   στρογγυλό κουμπί εμφανίζεται. */
+.card-link:hover .card-image,
+.card-link:focus-visible .card-image{ transform: scale(1.03); }
+
+.card-title{ transition: color var(--ease-time) var(--ease); }
+
+.card-link:hover .card-title,
+.card-link:focus-visible .card-title{ color: var(--on-color); }
+
+/* Τα εξώφυλλα των επεισοδίων είναι σύνθετα γραφικά 16:9: λογότυπο και
+   κυματομορφή αριστερά, η φωτογραφία του καλεσμένου ΔΕΞΙΑ. Κομμένα από
+   το κέντρο έδειχναν γραφικά αντί για πρόσωπα. Οι ειδήσεις μένουν στο
+   κέντρο — εκεί είναι κανονικές φωτογραφίες. */
+.card[data-kind="podcast"] .card-image,
+.card[data-kind="video"] .card-image{
+  object-position: 78% 50%;
+}
+
+/* Στρογγυλό κουμπί αναπαραγωγής, κάτω αριστερά. Εμφανίζεται στο hover —
+   στην οθόνη αφής, όπου δεν υπάρχει hover, φαίνεται πάντα. */
+.card-play{
+  position: absolute;
+  left: 0.7rem;
+  bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: var(--news);
+  color: var(--on-color);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity var(--ease-time) var(--ease), transform var(--ease-time) var(--ease);
+}
+
+.card-play svg{ width: 1.5rem; height: 1.5rem; }
+
+.card-link:hover .card-play,
+.card-link:focus-visible .card-play{
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Σε οθόνη αφής δεν υπάρχει hover — εκεί φαίνεται μόνιμα. */
+@media (hover: none){
+  .card-play{ opacity: 1; transform: none; }
+}
+
+/* Η διάρκεια, κάτω δεξιά. Πάντα ορατή: είναι πληροφορία, όχι διακόσμηση. */
+.card-time{
+  position: absolute;
+  right: 0.7rem;
+  bottom: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(var(--bg-rgb), 0.82);
+  color: var(--text);
+  font-size: 0.76rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* Σκέτο χρωματιστό κείμενο, όχι γεμάτη πινακίδα. Ο τίτλος πρέπει να
+   τραβάει το μάτι πρώτος· ένα έγχρωμο πλακίδιο τον προλάβαινε.
+
+   ΔΥΟ ΧΡΩΜΑΤΑ ΣΥΝΟΛΙΚΑ, με κανόνα:
+     χρυσό = κατηγορία  (Κρήτη, Υγεία, Γεωπολιτική…)
+     γκρι  = είδος      (Podcast, Βίντεο — όταν δεν ξέρουμε κατηγορία)
+
+   Πριν, το χρώμα έδειχνε το είδος ενώ το κείμενο έλεγε κατηγορία, οπότε
+   η ίδια λέξη εμφανιζόταν σε τρία χρώματα χωρίς λόγο. */
+.card-label{
+  display: block;
+  font-size: 0.7rem;
+  font-weight:600;
+  letter-spacing: 0.18em;
+  text-transform:uppercase;
+  color: var(--audio);
+  margin: 0 0 0.5rem;
+}
+
+/* Η ετικέτα πάνω από τον τίτλο ΜΙΑΣ ΣΕΛΙΔΑΣ — «Αρχείο», «Πρόσωπα»,
+   «Θέματα». Δεν είναι κατηγορία περιεχομένου, γι' αυτό δεν φοράει το
+   χρυσό: αλλιώς θα διαβαζόταν σαν να ήταν θέμα. */
+.page-label{
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+/* Το όνομα κατέβηκε ΚΑΤΩ από τον τίτλο και έγινε πεζό. Πριν ήταν τρία
+   στοιχεία σε κεφαλαία στην ίδια κάρτα — ταμπέλα, όνομα, ημερομηνία —
+   και έκαναν θόρυβο. Τώρα είναι ένα. */
+.card-guest{
+  font-family:var(--sans);
+  font-size:0.88rem;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
+/* Ελαφρύ σφίξιμο: στα μεγάλα μεγέθη τα σερίφ ανοίγουν και ο τίτλος
+   μοιάζει αραιός. Ισχύει σε κάθε τίτλο κάρτας του site. */
+.card-title,
+.row-card-title,
+.show-latest-title,
+.queue-title,
+.show-tile-name,
+.show-card .show-name{ letter-spacing: -0.01em; }
+
+.card-title{
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.35rem;
+  line-height: 1.28;
+  margin: 0 0 0.45rem;
+}
+
+/* Η μετα-πληροφορία σταματά να είναι ψιλά γράμματα: σερίφ, έντονη,
+   κεφαλαία. Μένει σβηστή στο χρώμα — το χρώμα το κρατάει η πινακίδα. */
+.card-meta{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color:var(--muted);
+  margin: 0;
+  margin-top:auto;
+}
+
+/* σελίδα επεισοδίου */
+
+
+
+
+
+/* Το <main> της σελίδας επεισοδίου είναι απλό κουτί. Τη διάταξη σε
+   στήλες την κάνει το .episode-grid από μέσα — αν βάλουμε πλέγμα και
+   εδώ, το ένα στριμώχνει το άλλο. */
+.episode{
+  display: block;
+}
+
+.episode-art img{
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--line);
+  display: block;
+}
+
+.episode-title{
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.25;
+  margin: 0 0 0.6rem;
+}
+
+.episode-meta{
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0 0 1.75rem;
+}
+
+.episode-audio{
+  width: 100%;
+  margin-bottom: 1.75rem;
+}
+
+/* Η περιγραφή διαβάζεται ολόκληρη, δεν τη ματιάζεις: μεγαλύτερο γράμμα,
+   πιο ανοιχτό γκρι, πιο αραιές γραμμές. Το 62ch κρατάει τη γραμμή σε
+   μήκος που το μάτι ξαναβρίσκει εύκολα στην επόμενη σειρά. */
+.episode-summary{
+  max-width: 62ch;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--read);
+  margin: 0 0 1.5rem;
+}
+
+/* Τα σημεία της συζήτησης — όπου η περιγραφή τα χωρίζει με « - ».
+   Παύλα αντί για κουκκίδα: πιο ήσυχη, και στοιχίζεται με το κείμενο. */
+.episode-points{
+  max-width: 62ch;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.episode-points li{
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--read);
+}
+
+.episode-points li::before{
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--audio);
+}
+
+/* Ποιος μιλάει, κάτω από τον τίτλο. */
+.episode-byline{
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
+.episode-byline a{
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.episode-byline a:hover{
+  color: var(--audio);
+  border-color: var(--audio);
+}
+
+.byline-count{
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-left: 1px solid var(--line);
+  margin-left: 0.5rem;
+  padding-left: 0.6rem;
+}
+
+.episode-links{ display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 2rem; }
+
+.episode-links a{
+  color: var(--audio);
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  display: inline-block;
+}
+
+.episode-links a:hover{ border-color: var(--audio); }
+
+@media (max-width: 760px){
+  .episode{
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .episode-art{ max-width: 260px; }
+  .episode-title{ font-size: 1.6rem; }
+}
+
+/* λωρίδα πάνω από το header: καιρός αριστερά, σόσιαλ δεξιά */
+
+/* Η λωρίδα και το header πιάνουν όλο το πλάτος της οθόνης. Τα αρνητικά
+   περιθώρια ακυρώνουν το padding του body· το δικό τους padding κρατάει
+   το περιεχόμενο μακριά από την άκρη. */
+.topstrip{
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* Ακριβή ύψη για την κεφαλίδα, ώστε ο υπολογισμός του hero παρακάτω να
+   βγαίνει σωστός και όχι κατ' εκτίμηση. Αν αλλάξουν, αλλάζει και το
+   --chrome στο :root. */
+.topstrip .strip-inner{
+  min-height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.site-header .strip-inner{
+  min-height: 58px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Το εσωτερικό κάθε λωρίδας: απλώνει τα άκρα της, μέσα στην κοινή γραμμή. */
+.strip-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.topstrip-left{
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* το widget καιρού: πόλη πάνω, εικονίδιο και θερμοκρασία από κάτω */
+/* Μονόγραμμος, όχι κουτί δύο σειρών: ήταν ό,τι ψήλωνε περισσότερο την
+   πάνω γραμμή, και η γραμμή τρώει ύψος από την πρώτη οθόνη. */
+.weather{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.weather-city{
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.weather-now{
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.weather-icon{
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  color: var(--text);
+}
+
+.weather-temp{
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.today{ white-space: nowrap; }
+
+.social{
+  display: flex;
+  gap: 0.35rem;
+}
+
+.social a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  color: var(--muted);
+}
+
+.social svg{
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+}
+
+.social a:hover{
+  color: var(--text);
+  background: var(--surface);
+}
+
+@media (max-width: 520px){
+  .topstrip{ font-size: 0.7rem; }
+  .social a{ width: 26px; height: 26px; }
+}
+
+/* Καιρός, πέντε εικονίδια και ολόκληρη ημερομηνία δεν χωράνε σε μία
+   γραμμή 390px: η ημερομηνία είναι nowrap, οπότε έσπρωχνε τη σελίδα
+   στα 489px και ΟΛΟ το περιεχόμενο κοβόταν δεξιά.
+   Φεύγουν τα εικονίδια — υπάρχουν ούτως ή άλλως στο υποσέλιδο. */
+@media (max-width: 620px){
+  .topstrip .social{ display: none; }
+}
+
+/* Ίδιο φόντο με τη λωρίδα από πάνω, ώστε οι δύο να διαβάζονται ως μία
+   ενιαία ζώνη κεφαλίδας και όχι ως δύο ξεχωριστά κομμάτια. */
+.site-header{
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--header-gap);
+}
+
+.site-header .strip-inner{
+  position: relative;
+  gap: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Το μενού κεντράρεται ΑΠΟΛΥΤΑ στη γραμμή, όχι με μοίρασμα του κενού.
+   Δεξιά και αριστερά κάθονται στοιχεία διαφορετικού πλάτους — λογότυπο,
+   λούπα, «newshub.gr» — οπότε το μοίρασμα το έριχνε πάντα στραβά, και
+   θα το ξανάριχνε με κάθε αλλαγή στο μενού.
+
+   Μπαίνει μόνο από 1100px και πάνω: πιο κάτω το κεντραρισμένο μενού δεν
+   χωράει και θα έπεφτε πάνω στο λογότυπο ή στη λούπα. */
+@media (min-width: 1100px){
+  .site-header .site-nav{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Το μενού βγήκε από τη ροή, οπότε έμειναν τρία στοιχεία να μοιράσουν
+     το κενό — και η λούπα κατέληγε στο κέντρο, πάνω στο μενού. Με το
+     auto περιθώριο, όλο το κενό πάει αριστερά της και η λούπα κολλάει
+     στο «newshub.gr», εκεί που ανήκει. */
+  .site-header .site-search{ margin-left: auto; }
+}
+
+.wordmark{
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--text);
+  text-decoration: none;
+  white-space:nowrap;
+}
+
+.wordmark span{
+  font-family:var(--sans);
+  font-size: 0.62rem;
+  font-weight:600;
+  letter-spacing: 0.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-left:0.3rem;
+
+}
+
+.site-nav{
+  display:flex;
+  gap: 1.75rem;
+  font-size:0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color:var(--muted);
+
+
+}
+
+.site-nav a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-nav a:hover{ color: var(--text); }
+
+.site-search{
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+}
+
+.site-search svg{ width: 18px; height: 18px; }
+.site-search:hover{ color: var(--text); }
+
+/* Αναζήτηση — το Pagefind φέρνει δικό του στυλ, το γυρνάμε στην παλέτα μας */
+#search{
+  --pagefind-ui-primary: var(--text);
+  --pagefind-ui-text: var(--text);
+  --pagefind-ui-background: var(--bg);
+  --pagefind-ui-border: var(--line);
+  --pagefind-ui-tag: var(--surface);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 8px;
+  --pagefind-ui-font: var(--sans);
+  max-width: 820px;
+}
+
+#search .pagefind-ui__result-title a{ font-family: var(--serif); font-weight: 400; }
+#search .pagefind-ui__result-link{ color: var(--text); }
+#search mark{ background: transparent; color: var(--audio); font-weight: 600; }
+
+.site-out{
+  font-size: 0.68rem;
+  font-weight:600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color:var(--muted);
+  text-decoration: none;
+  white-space:nowrap;
+}
+
+.site-out:hover{color: var(--text)}
+
+@media (max-width:760px){
+  .topstrip{ padding: 0.6rem 1.25rem; }
+  /* Το flex είναι στο .strip-inner, όχι στο .site-header — ο παλιός
+     κανόνας έδινε flex-wrap σε στοιχείο που δεν είναι flex. */
+  .site-header .strip-inner{ flex-wrap: wrap; gap: 0.9rem 1rem; }
+  /* Χωρίς το wrap, τα πέντε στοιχεία έμεναν σε μία σειρά και σε στενή
+     οθόνη έσπρωχναν το πλάτος ΟΛΗΣ της σελίδας — στα 390px το
+     περιεχόμενο κοβόταν δεξιά. */
+  .site-nav{
+    order: 3;
+    width: 100%;
+    gap: 0.75rem 1.1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+
+.guest{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+}
+
+.guest-name{
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 2.25rem;
+  line-height: 1.15;
+  margin: 0 0 0.3rem;
+}
+
+.guest-count{
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0 0 2.5rem;
+}
+
+/* πρωτοσέλιδο — το μεγάλο banner */
+
+/* Η κύρια είδηση πιάνει ΟΛΟ το πλάτος της οθόνης, από άκρη σε άκρη —
+   ρητή απαίτηση του αφεντικού. Γι' αυτό δεν φοράει το --wrap και δεν
+   έχει στρογγυλές γωνίες: το κείμενό της μέσα είναι που ευθυγραμμίζεται
+   με την υπόλοιπη σελίδα, όχι η ίδια η λωρίδα. */
+.hero{
+  position: relative;
+  width: auto;
+  max-width: none;
+  /* Ακυρώνει το κάτω περιθώριο της κεφαλίδας, ώστε το hero να ξεκινά
+     ακριβώς από κάτω της και να μη χάνονται 48px από την πρώτη οθόνη. */
+  margin: -3rem 0 var(--gap);
+  /* Γεμίζει την οθόνη μείον την κεφαλίδα, αφήνοντας να φαίνεται μια
+     λωρίδα της επόμενης ενότητας. Τα όρια το κρατούν λογικό σε πολύ
+     κοντές και σε πολύ ψηλές οθόνες. */
+  height: calc(100vh - var(--chrome) - var(--peek));
+  min-height: 420px;
+  max-height: 760px;
+  overflow: hidden;
+  background: var(--surface);
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-image{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---- το μπάσιμο του πρωτοσέλιδου ----
+   --------------------------------------
+   Παίζει σε κάθε φόρτωση της αρχικής, και ξαναπαίζει όταν γυρνάς σε
+   αυτήν με την εσωτερική πλοήγηση — το #page ξαναγράφεται, άρα τα
+   στοιχεία είναι καινούργια και το animation ξεκινάει από την αρχή.
+
+   Η εικόνα ξεζουμάρει αργά· τα λόγια ανεβαίνουν ένα-ένα από κάτω.
+   Το «both» κρατάει την ΑΡΧΙΚΗ κατάσταση πριν ξεκινήσει, αλλιώς
+   φαίνονται για ένα καρέ στη θέση τους και μετά πηδάνε. */
+@keyframes hero-zoom{
+  from{ opacity: 0; transform: scale(1.06); }
+  to{   opacity: 1; transform: none; }
+}
+
+@keyframes hero-rise{
+  from{ opacity: 0; transform: translateY(16px); }
+  to{   opacity: 1; transform: none; }
+}
+
+/* Η σκίαση ΜΟΝΟ σβήνει μέσα — δεν μετακινείται. Με το translateY
+   έφευγε 16px προς τα κάτω και άφηνε την κορυφή της φωτογραφίας
+   ασκίαστη για μισό δευτερόλεπτο. */
+@keyframes hero-fade{
+  from{ opacity: 0; }
+  to{   opacity: 1; }
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .hero-image{
+    animation: hero-zoom 1.2s var(--ease) both;
+  }
+
+  /* Η σκίαση μπαίνει μαζί με την εικόνα, αλλιώς το κείμενο κάθεται
+     για μισό δευτερόλεπτο πάνω σε φωτογραφία χωρίς σκούρο από κάτω. */
+  .hero::after{
+    animation: hero-fade 0.8s var(--ease) both;
+  }
+
+  .hero-block > *{
+    animation: hero-rise 0.7s var(--ease) both;
+  }
+
+  .hero-block > *:nth-child(1){ animation-delay: 0.20s; }
+  .hero-block > *:nth-child(2){ animation-delay: 0.28s; }
+  .hero-block > *:nth-child(3){ animation-delay: 0.36s; }
+  .hero-block > *:nth-child(4){ animation-delay: 0.44s; }
+  .hero-block > *:nth-child(5){ animation-delay: 0.52s; }
+}
+
+/* Η σκίαση είναι βαθμιαία από αριστερά, όχι συμπαγής μαύρη λωρίδα. */
+.hero::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Δύο βαθμιαίες σκιάσεις, καμία συμπαγής λωρίδα: μία από αριστερά για
+     το κείμενο, και μία απαλή από κάτω — σε όλο το πλάτος ο τίτλος
+     κάθεται χαμηλά και χρειάζεται στήριγμα για να διαβάζεται. */
+  background:
+    linear-gradient(to top,
+      rgba(var(--bg-rgb), 0.92) 0%,
+      rgba(var(--bg-rgb), 0.55) 32%,
+      rgba(var(--bg-rgb), 0.05) 68%),
+    linear-gradient(100deg,
+      rgba(var(--bg-rgb), 0.88) 0%,
+      rgba(var(--bg-rgb), 0.55) 38%,
+      rgba(var(--bg-rgb), 0.12) 72%,
+      rgba(var(--bg-rgb), 0) 100%);
+}
+
+/* Η λωρίδα φτάνει στις άκρες, το κείμενο όμως ξεκινά εκεί που ξεκινούν
+   και οι κάρτες από κάτω. Το ίδιο κόλπο με το .wrap. */
+.hero-text{
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.hero-block{ max-width: 900px; }
+
+/* Ίδιος κανόνας με τις κάρτες: χρυσό η κατηγορία, γκρι το είδος. */
+.hero-eyebrow{
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--audio);
+  margin: 0 0 0.8rem;
+}
+
+
+
+/* Η ημερομηνία του πρωτοσέλιδου: σερίφ, έντονη, κεφαλαία, στο χρώμα του
+   είδους. Στις κάρτες μένει σβηστή — εδώ μόνο της επιτρέπουμε χρώμα,
+   ώστε να μη γεμίσει η σελίδα χρωματιστές ημερομηνίες. */
+.hero-date{
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+}
+
+.hero-date--news{ color: var(--news); }
+.hero-date--podcast{ color: var(--audio); }
+.hero-date--video{ color: var(--text); }
+
+.hero-guest{
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0 0 0.5rem;
+}
+
+.hero-title{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.1rem, 4.6vw, 3.8rem);
+  line-height: 1.15;
+  margin: 0 0 0.9rem;
+}
+
+.hero-title a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero-title a:hover{ color: var(--audio); }
+
+.hero-cta{
+  display: inline-block;
+  background: var(--news);
+  color: var(--on-color);
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.4rem;
+  border-radius: 6px;
+}
+
+.hero-cta:hover{ background: var(--news-hover); }
+
+/* τα 4 δευτερεύοντα */
+
+.secondary{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto 3.5rem;
+}
+
+@media (max-width: 900px){
+  .secondary{ grid-template-columns: repeat(2, 1fr); }
+  .hero-text{ padding: 1.75rem; }
+}
+
+@media (max-width: 520px){
+  .secondary{ grid-template-columns: 1fr; }
+}
+
+/* θέση εικόνας που δεν ήρθε ακόμα — κρατάει το ύψος της, μηδέν αναπήδηση */
+.card-image--empty,
+.hero-image--empty{
+  background: var(--line);
+}
+
+
+/* εκπομπές */
+
+.shows{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 3.5rem auto 0;
+}
+
+/* Διπλή γραμμή που τρέχει δίπλα στην επικεφαλίδα μέχρι την άκρη —
+   τυπογραφικό τέχνασμα εφημερίδας. Δίνει κύρος χωρίς να προσθέσει
+   ούτε ένα στοιχείο στην οθόνη. */
+.section-head{
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 2rem;
+  margin: 0 0 1.5rem;
+}
+
+.section-head::after{
+  content: "";
+  flex: 1;
+  height: 5px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.shows-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--gap);
+}
+
+/* Η κάρτα εκπομπής είναι αφίσα, όχι κουτί: η εικόνα γεμίζει, το όνομα
+   κάθεται πάνω της, και μια σκίαση από κάτω το κρατάει ευανάγνωστο. */
+.show-card{
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--line);
+}
+
+.show-card .card-link{
+  display: block;
+  position: relative;
+  color: var(--on-color);
+}
+
+.show-card .card-image{
+  aspect-ratio: 4/3;
+  margin: 0;
+  border-radius: 0;
+  /* Ίδιο κόψιμο με τις κάρτες επεισοδίου: το πρόσωπο είναι δεξιά. */
+  object-position: 72% 50%;
+  transition: transform 0.35s ease;
+}
+
+.show-card:hover .card-image{ transform: scale(1.06); }
+
+/* Η σκίαση. Μπαίνει πάνω από την εικόνα και κάτω από το κείμενο. */
+.show-card .card-link::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(var(--bg-rgb), 0.95) 0%,
+    rgba(var(--bg-rgb), 0.70) 32%,
+    rgba(var(--bg-rgb), 0.12) 62%,
+    transparent 100%);
+}
+
+.show-card .show-name,
+.show-card .card-meta{
+  position: relative;
+  z-index: 1;
+}
+
+.show-card .show-name{
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 1.9rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.show-card .card-meta{
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.75rem;
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--sky);
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .show-card .card-image{ transition: none; }
+  .show-card:hover .card-image{ transform: none; }
+}
+
+/* Η μεγάλη μορφή, για τη σελίδα των εκπομπών: ίδια αφίσα, αλλά με τον
+   τελευταίο τίτλο από κάτω. Το overflow ξεκλειδώνει, γιατί το κείμενο
+   βγαίνει πλέον έξω από την εικόνα. */
+.shows-grid--big{
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.75rem var(--gap);
+}
+
+.show-card--big{
+  overflow: visible;
+  background: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.show-card--big .card-link{
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.show-card--big .card-image{ aspect-ratio: 16/9; }
+
+.show-card--big .show-name{ font-size: 1.4rem; }
+
+/* Ο τελευταίος τίτλος. Δύο γραμμές και κόβεται, ώστε οι κάρτες να
+   κρατούν το ίδιο ύψος όποιο κι αν είναι το μήκος του. */
+.show-latest{
+  display: block;
+  margin-top: 0.85rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.show-latest-label{
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 0.3rem;
+}
+
+.show-latest-title{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.show-latest:hover .show-latest-title{ color: var(--text); }
+
+/* Η λωρίδα ρυθμού: δώδεκα κουτάκια, ένα ανά μήνα. */
+.show-rate{
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0.85rem 0 0;
+}
+
+.spark{
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  width: 5.5rem;
+  height: 1.6rem;
+}
+
+.spark i{
+  flex: 1;
+  min-height: 2px;
+  height: calc(var(--h) * 100%);
+  background: var(--sky);
+  border-radius: 1px;
+}
+
+/* Μήνας χωρίς επεισόδιο: μένει ένα αχνό αποτύπωμα, ώστε να μετριέται το
+   κενό. Αν έλειπε εντελώς, δώδεκα κουτάκια θα γίνονταν οκτώ. */
+.spark i.is-off{
+  height: 2px;
+  background: var(--line);
+}
+
+.show-rate-text{
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+/* ---- η επικεφαλίδα του αρχείου επεισοδίων ---- */
+
+/* Χρυσό πλαίσιο, όχι γαλάζιο: εδώ είναι ο ήχος, και το χρώμα του ήχου
+   είναι το --audio σε όλο το site. Έτσι ξεχωρίζει με μια ματιά από τη
+   σελίδα των εκπομπών. */
+.arch-open{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto 3rem;
+  padding: 2.25rem 2rem 2.5rem;
+  border: 2px solid var(--audio);
+  border-radius: var(--radius);
+  background: linear-gradient(165deg,
+    rgba(217, 164, 65, 0.22) 0%,
+    rgba(217, 164, 65, 0.06) 55%,
+    transparent 100%);
+  text-align: center;
+}
+
+/* Το μέγεθος του αρχείου είναι το γραφικό — το μέγεθος, όχι τα χρώματα. */
+.arch-big{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(3.5rem, 11vw, 7rem);
+  line-height: 0.9;
+  margin: 0;
+  color: var(--audio);
+}
+
+.arch-unit{
+  margin: 0.35rem 0 1.1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--audio);
+}
+
+.arch-title{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  line-height: 1.2;
+  margin: 0 auto 0.6rem;
+  width: auto;
+  max-width: none;
+}
+
+.arch-title .nh{ font-size: 1.2em; }
+
+.arch-note{
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.arch{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+}
+
+.arch .grid{ width: 100%; max-width: none; margin: 0; }
+
+.arch-page{
+  margin: 0 0 1.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Πλοήγηση ανά χρονιά. Κάθε χρονιά ξέρει σε ποια σελίδα ξεκινά, οπότε
+   το άλμα είναι απλός σύνδεσμος — δεν χρειάζεται JavaScript. */
+.arch-years{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.arch-years-label{
+  margin-right: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.arch-year{
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.arch-year:hover{ color: var(--text); border-color: var(--audio); }
+
+/* Η χρονιά που ξεκινά σε αυτή τη σελίδα. */
+.arch-year.is-on{
+  background: var(--audio);
+  border-color: var(--audio);
+  color: var(--on-light);
+  font-weight: 600;
+}
+
+/* Η επικεφαλίδα μήνα πιάνει ΟΛΗ τη γραμμή του πλέγματος, αλλιώς θα
+   καθόταν σε μία στήλη σαν να ήταν κάρτα. */
+.arch-month{
+  grid-column: 1 / -1;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--audio);
+  margin: 1.5rem 0 0;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.arch-month:first-child{ margin-top: 0; }
+
+/* ---- η επικεφαλίδα της σελίδας εκπομπών ---- */
+
+/* Το μπλε πλαίσιο μένει ΜΟΝΟ στην επικεφαλίδα. Οι κάρτες από κάτω
+   στέκονται ελεύθερες — ένα πλαίσιο γύρω από ολόκληρη τη σελίδα έκανε
+   τα πάντα να μοιάζουν με ένα μεγάλο κουτί. */
+.shows-open{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto 3.5rem;
+  padding: 2.25rem 2rem;
+  border: 2px solid var(--sky);
+  border-radius: var(--radius);
+  background: linear-gradient(165deg,
+    rgba(62, 150, 206, 0.26) 0%,
+    rgba(62, 150, 206, 0.07) 55%,
+    transparent 100%);
+  text-align: center;
+}
+
+/* Μπλε είναι ΤΟ ΠΛΑΙΣΙΟ και η κυματομορφή — όχι τα γράμματα. Ο τίτλος
+   φοράει το σερίφ του site: το στενό condensed σε ελληνικά κεφαλαία
+   έβγαζε φράχτη. */
+.shows-open-title{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1;
+  color: var(--text);
+  margin: 1.25rem auto 0;
+  width: auto;
+  max-width: none;
+}
+
+.shows-open-by{
+  margin: 0.6rem 0 0.8rem;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+/* Το λογότυπο μέσα στη γραμμή «του …» μικραίνει, για να μην κλέβει τη
+   σκηνή από τον τίτλο. */
+.shows-open-by .nh{ font-size: 1.5rem; }
+
+.shows-open-count{
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Η κυματομορφή. Θεματικό σήμα για ήχο, και δεν το χρησιμοποιεί καμία
+   άλλη ενότητα — γι' αυτό η σελίδα δεν μοιάζει με την αρχική. */
+.shows-wave{
+  display: block;
+  width: min(20rem, 70%);
+  height: 2.6rem;
+  margin: 0 auto;
+  color: var(--sky);
+}
+
+/* ---- οι αριθμημένες κάρτες ---- */
+
+.shows-tiles{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 3rem var(--gap);
+}
+
+/* Οι πλατφόρμες στο τέλος: δικό τους πλαίσιο, όλα στο κέντρο. */
+.shows-platforms{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 4.5rem auto 0;
+  padding: 2.5rem 2rem;
+  border: 2px solid var(--sky);
+  border-radius: var(--radius);
+  background: linear-gradient(195deg,
+    rgba(62, 150, 206, 0.22) 0%,
+    rgba(62, 150, 206, 0.05) 60%,
+    transparent 100%);
+  text-align: center;
+}
+
+.shows-platforms-icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  padding: 0.8rem;
+  border-radius: 50%;
+  background: var(--sky);
+  color: var(--on-color);
+}
+
+.shows-platforms-icon svg{ width: 100%; height: 100%; }
+
+.shows-platforms-title{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.1;
+  margin: 1rem 0 0.4rem;
+}
+
+.shows-platforms-note{
+  margin: 0 0 1.75rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.shows-platforms .platforms-links{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.show-tile-art{
+  position: relative;
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--line);
+}
+
+.show-tile-art img,
+.show-tile-blank{
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  object-position: 72% 50%;
+  transition: transform 0.35s ease;
+}
+
+.show-tile-art:hover img{ transform: scale(1.06); }
+
+.show-tile-text{ padding-top: 0.9rem; }
+
+/* Σερίφ και πεζά, όχι condensed κεφαλαία. Το «Συνεντεύξεις και πρόσωπα
+   της επικαιρότητας» σε στενά ελληνικά κεφαλαία γινόταν φράχτης — και
+   έτσι κάνει αντίθεση με τον τεράστιο τίτλο της σελίδας από πάνω. */
+.show-tile-name{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+}
+
+.show-tile-name a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.show-tile-name a:hover{ color: var(--sky); }
+
+.show-tile-meta{
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 0.7rem;
+}
+
+.show-tile-count{
+  flex: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .show-tile-art img{ transition: none; }
+  .show-tile-art:hover img{ transform: none; }
+}
+
+/* σελίδα «Τα θέματά μας» */
+
+.cat-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.6rem;
+}
+
+/* Το πλήθος κάθεται ΔΙΠΛΑ στο όνομα, όχι σπρωγμένο στην άλλη άκρη. Με
+   το space-between σχηματιζόταν μια κολόνα από νούμερα στα δεξιά, και
+   το μάτι την διάβαζε πριν από τα ονόματα. */
+.cat{
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+}
+
+.cat:hover{ border-color: var(--news); }
+
+.cat-name{
+  font-family: var(--serif);
+  font-size: 1.1rem;
+}
+
+.cat-count{
+  font-size: 0.72rem;
+  color: var(--muted);
+  opacity: 0.65;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Τα θέματα που δεν έχουν ακόμα περιεχόμενο φαίνονται, αλλά σβηστά. */
+.cat--empty{
+  opacity: 0.45;
+  cursor: default;
+}
+
+.cat:hover .cat-name{ color: var(--news); }
+.cat--empty:hover .cat-name{ color: inherit; }
+
+/* ---- σελίδα «Τα θέματά μας» ----
+   -------------------------------
+   Τα τέσσερα μεγαλύτερα θέματα παίρνουν εικόνα, τα υπόλοιπα στήλη με
+   τίτλους. Οι κάρτες έχουν εξώφυλλο από το πιο πρόσφατο κομμάτι τους
+   και το χρώμα του θέματος ως σκίαση — το ίδιο --t-* που φοράει το
+   θέμα σε όλο το site, ώστε να αναγνωρίζεται. */
+.tcard-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-bottom: 4rem;
+}
+
+.tcard{
+  position: relative;
+  display: block;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.tcard-media{
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: var(--line);
+}
+
+.tcard-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.55;
+  transition: opacity var(--ease-time) var(--ease),
+              transform var(--ease-time) var(--ease);
+}
+
+.tcard:hover .tcard-media img{ opacity: 0.75; transform: scale(1.04); }
+
+/* Η σκίαση ανεβαίνει από κάτω στο χρώμα του θέματος. Βαθμιαία, όχι
+   συμπαγής λωρίδα — ο ίδιος κανόνας που ακολουθεί και το hero. */
+.tcard-text{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1.1rem;
+  /* Εφεδρεία πρώτη: αν ο browser δεν ξέρει color-mix, αγνοεί ΟΛΗ τη
+     δήλωση που το περιέχει — και χωρίς σκίαση το όνομα του θέματος
+     γίνεται αδιάβαστο πάνω στην εικόνα. */
+  background: linear-gradient(to top,
+    rgba(var(--bg-rgb), 0.92) 0%,
+    rgba(var(--bg-rgb), 0.45) 55%,
+    transparent 100%);
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--tint) 85%, #000) 0%,
+    color-mix(in srgb, var(--tint) 45%, transparent) 55%,
+    transparent 100%);
+}
+
+.tcard-icon{
+  width: 26px;
+  height: 26px;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+.tcard-icon svg{ width: 100%; height: 100%; display: block; }
+
+.tcard-name{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+/* Το πλήθος είναι υποσημείωση, όχι τίτλος: μικρό και σβηστό. Πριν
+   διάβαζε κανείς πρώτα τους αριθμούς και μετά τα ονόματα. */
+.tcard-n,
+.tcol-n{
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--text);
+  opacity: 0.5;
+  font-variant-numeric: tabular-nums;
+}
+
+.tcol-n{ color: var(--muted); opacity: 0.7; margin-left: auto; }
+
+/* τα υπόλοιπα θέματα, σε στήλες */
+
+.tlist-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 2.5rem var(--gap);
+}
+
+.tcol{ display: flex; flex-direction: column; }
+
+/* Η γραμμή του θέματος, με τη χρωματιστή του ράβδο αριστερά. */
+.tcol-head{
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 0 0.7rem;
+  margin-bottom: 0.3rem;
+  border-bottom: 2px solid var(--tint);
+  color: inherit;
+  text-decoration: none;
+}
+
+.tcol-icon{
+  width: 20px;
+  height: 20px;
+  color: var(--tint);
+  flex: none;
+  /* Τα σκούρα χρώματα των θεμάτων χάνονται πάνω στο σκούρο φόντο. */
+  filter: brightness(1.9) saturate(1.2);
+}
+
+.tcol-icon svg{ width: 100%; height: 100%; display: block; }
+
+.tcol-name{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.tcol-head:hover .tcol-name{ color: var(--audio); }
+
+.tcol-row{
+  display: block;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+
+.tcol-title{
+  font-family: var(--serif);
+  font-size: 0.98rem;
+  line-height: 1.35;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.tcol-row:hover .tcol-title{ color: var(--audio); }
+
+.tcol-meta{
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.tcol-all{
+  margin-top: 0.7rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.tcol-all:hover{ color: var(--audio); }
+
+@media (max-width: 1100px){
+  .tcard-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px){
+  .tcard-grid{ grid-template-columns: minmax(0, 1fr); }
+  .tcard{ aspect-ratio: 16/9; }
+  .tcard-name{ font-size: 1.3rem; }
+}
+
+/* ---- τα θέματα στην αρχική ---- */
+
+/* Η λεπτή λωρίδα πάνω από τη ροή. Μόνο κείμενο, καμία εικόνα και κανένα
+   πλαίσιο: έτσι δεν μοιάζει με τις κάρτες των εκπομπών πιο κάτω. */
+.topics{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 3.5rem auto 1.75rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+}
+
+.topics-label{
+  flex: none;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Σε στενή οθόνη κυλάει πλάγια αντί να σπάσει σε τρεις σειρές. */
+.topics-list{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.4rem;
+}
+
+.topic{
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 1.08rem;
+  white-space: nowrap;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid transparent;
+}
+
+.topic:hover{ color: var(--text); }
+
+/* Το θέμα που δείχνουμε τώρα. Κόκκινο = ειδήσεις, όπως σε όλο το site. */
+.topic.is-on{
+  color: var(--text);
+  border-bottom-color: var(--news);
+}
+
+.topic-n{
+  margin-left: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.topic.is-on .topic-n{ color: var(--news); }
+
+/* Οι κάρτες είναι display:flex, άρα το hidden του browser δεν τις κρύβει
+   μόνο του — χρειάζεται αυτή η γραμμή. */
+.card[hidden]{ display: none; }
+
+/* Η κόκκινη λωρίδα. Πιάνει όλο το πλάτος της οθόνης· το περιεχόμενό της
+   μένει στοιχισμένο με την υπόλοιπη σελίδα, όπως και το hero. */
+.band{
+  width: auto;
+  max-width: none;
+  margin: 4rem 0;
+  padding: 3.5rem 0 4rem;
+}
+
+.band--latest{ background: var(--band-news); }
+
+/* Μέσα στην κόκκινη λωρίδα τα σβηστά γκρι δεν διαβάζονται. Ό,τι ήταν
+   --muted γίνεται λευκό με διαφάνεια, και οι γραμμές ανοίγουν. */
+.band--latest .topics{
+  margin-top: 0;
+  border-bottom-color: rgba(255, 255, 255, 0.18);
+}
+
+.band--latest .topics-label,
+.band--latest .topic,
+.band--latest .topic-n{ color: rgba(255, 255, 255, 0.6); }
+
+.band--latest .topic:hover,
+.band--latest .topic.is-on,
+.band--latest .topic.is-on .topic-n{ color: var(--on-color); }
+
+.band--latest .topic.is-on{ border-bottom-color: var(--on-color); }
+
+.band--latest .flow-all a{ color: rgba(255, 255, 255, 0.7); }
+.band--latest .flow-all a:hover{ color: var(--on-color); }
+
+.band-head{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+/* Ο τίτλος της ροής. Μεγάλο γράμμα, κουκκίδα που χτυπάει, και γραμμές
+   δεξιά κι αριστερά. Το δεύτερο μισό της λέξης είναι πιο σβηστό — το
+   ίδιο μοτίβο με το λογότυπο του newshub.gr, όπου το «hub» ξεχωρίζει. */
+.mark{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  margin: 0 0 0.3rem;
+}
+
+.mark-word{
+  flex: none;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1;
+  color: var(--on-color);
+}
+
+.mark-word em{
+  font-style: normal;
+  opacity: 0.55;
+}
+
+/* Γραμμές και από τις δύο πλευρές, ώστε η λέξη να κάθεται στο κέντρο.
+   Το max-width τις κρατάει κοντά στη λέξη σε πολύ φαρδιές οθόνες. */
+.mark::before,
+.mark::after{
+  content: "";
+  flex: 1;
+  max-width: 16rem;
+  height: 2px;
+  background: var(--on-color);
+  opacity: 0.3;
+}
+
+.mark-dot{
+  flex: none;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: var(--on-color);
+  animation: mark-pulse 2.4s ease-in-out infinite;
+}
+
+/* Τώρα που ο τίτλος της ροής είναι το «LATEST», η από κάτω γραμμή
+   γίνεται υπότιτλος — αλλιώς δύο μεγάλα κείμενα παλεύουν μεταξύ τους. */
+.band-head h1,
+.band-sub{
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-color);
+  opacity: 0.6;
+  width: auto;
+  max-width: none;
+  margin: 0;
+}
+
+@keyframes mark-pulse{
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.7); }
+}
+
+/* Όποιος έχει ζητήσει λιγότερη κίνηση, δεν τη βλέπει. */
+@media (prefers-reduced-motion: reduce){
+  .mark-dot{ animation: none; }
+}
+
+/* Η ροή του Latest πιάνει τώρα όλο το πλάτος: η ροή ειδήσεων βγήκε από
+   δίπλα της και πήγε στη δεξιά στήλη όλης της σελίδας. */
+.flow{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+}
+
+.flow .grid{
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.flow-all{ margin: 1.75rem 0 0; }
+
+.flow-all a{
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.flow-all a:hover{ color: var(--news); }
+
+/* Μία λωρίδα ανά μεγάλο θέμα. Η γραμμή από πάνω τις χωρίζει, όπως οι
+   ενότητες σε εφημερίδα. */
+/* Περισσότερο κενό ανάμεσα στα θέματα, και καμία γραμμή από πάνω: τη
+   δουλειά του χωρισμού την κάνει πλέον η γραμμή μέσα στην επικεφαλίδα. */
+.topic-row{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 5.5rem auto 0;
+}
+
+/* Η επικεφαλίδα του θέματος: εικονίδιο, όνομα, μία λεπτή γραμμή ως το
+   τέλος, και ο δρόμος προς όλα. Χωρίς έγχρωμο πλακάτο — το χρώμα μένει
+   μόνο στο εικονίδιο, όσο χρειάζεται για να ξεχωρίζει το θέμα. */
+.topic-bar{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Τα χρώματα των θεμάτων φτιάχτηκαν ως ΦΟΝΤΑ — βαθιά, για λευκά γράμματα
+   από πάνω. Ως χρώμα γραμμής πάνω στο σκούρο φόντο εξαφανίζονται, γι'
+   αυτό τα ανοίγουμε. Η πρώτη γραμμή είναι η εφεδρεία για παλιό browser. */
+.topic-bar-icon{
+  flex: none;
+  display: flex;
+  width: 1.8rem;
+  height: 1.8rem;
+  color: var(--topic, var(--muted));
+  color: color-mix(in srgb, var(--topic, var(--muted)) 55%, #FFFFFF);
+}
+
+.topic-bar-icon svg{ width: 100%; height: 100%; }
+
+.topic-bar-name{
+  flex: none;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* Η λεπτή γραμμή. Παίρνει όσο χώρο περισσεύει ανάμεσα στο όνομα και
+   στο «Όλα τα…», οπότε δουλεύει σε κάθε μήκος τίτλου. */
+.topic-bar::after{
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.topic-bar-all{
+  flex: none;
+  order: 1;
+  font-size: 0.85rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.topic-bar:hover .topic-bar-all{ color: var(--news); }
+.topic-bar:hover .topic-bar-name{ color: var(--news); }
+
+/* ---- μία μεγάλη + τρεις μικρές ---- */
+
+.topic-split{
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 2rem var(--gap);
+  align-items: start;
+}
+
+/* Η μεγάλη. Ο τίτλος της μεγαλώνει ανάλογα, αλλιώς θα χανόταν κάτω από
+   μια εικόνα διπλάσια από τις άλλες. */
+.card--lead .card-title{
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.2;
+}
+
+.card--lead .card-guest{ font-size: 0.95rem; }
+
+.topic-side{
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Η μικρή οριζόντια κάρτα. */
+.row-card-link{
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Το πλαίσιο που κόβει τη μεγέθυνση στο hover. */
+.row-card-media{
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--line);
+  aspect-ratio: 16/9;
+}
+
+.row-card-art{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% 50%;
+  transition: transform var(--ease-time) var(--ease);
+}
+
+.row-card-link:hover .row-card-art,
+.row-card-link:focus-visible .row-card-art{ transform: scale(1.03); }
+
+/* Οι ειδήσεις είναι κανονικές φωτογραφίες — μένουν στο κέντρο. */
+.row-card[data-kind="news"] .row-card-art{ object-position: 50% 50%; }
+
+.row-card-text{
+  display: grid;
+  gap: 0.4rem;
+}
+
+.row-card-label{
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--audio);
+}
+
+/* Τρεις γραμμές και κόβεται, ώστε οι τρεις μικρές να μένουν ισοϋψείς
+   με τη μεγάλη δίπλα τους. */
+.row-card-title{
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.row-card-meta{
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.row-card-title{ transition: color var(--ease-time) var(--ease); }
+
+.row-card-link:hover .row-card-title,
+.row-card-link:focus-visible .row-card-title{ color: var(--on-color); }
+
+@media (max-width: 900px){
+  .topic-split{ grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 420px){
+  .row-card-link{ grid-template-columns: 96px minmax(0, 1fr); gap: 0.75rem; }
+}
+
+/* Κάθε θέμα ΔΙΝΕΙ το χρώμα του ως --topic, και όποιο στοιχείο από μέσα
+   το χρειάζεται το ζητάει. Έτσι μια νέα θέση που θέλει το χρώμα του
+   θέματος δεν χρειάζεται δεκατέσσερις νέους κανόνες — μία γραμμή. */
+[data-topic="kriti"]       { --topic: var(--t-kriti); }
+[data-topic="geopolitiki"] { --topic: var(--t-geopolitiki); }
+[data-topic="agronews"]    { --topic: var(--t-agronews); }
+[data-topic="istoria"]     { --topic: var(--t-istoria); }
+[data-topic="politiki"]    { --topic: var(--t-politiki); }
+[data-topic="ellada"]      { --topic: var(--t-ellada); }
+[data-topic="kosmos"]      { --topic: var(--t-kosmos); }
+[data-topic="ygeia"]       { --topic: var(--t-ygeia); }
+[data-topic="oikonomia"]   { --topic: var(--t-oikonomia); }
+[data-topic="perivallon"]  { --topic: var(--t-perivallon); }
+[data-topic="athlitika"]   { --topic: var(--t-athlitika); }
+[data-topic="politismos"]  { --topic: var(--t-politismos); }
+[data-topic="tech-hub"]    { --topic: var(--t-tech-hub); }
+[data-topic="apopseis"]    { --topic: var(--t-apopseis); }
+
+/* Όποιο θέμα δεν έχει δικό του χρώμα πέφτει στο --t-default, άρα καμία
+   θέση δεν μένει ποτέ χωρίς φόντο. */
+.more-topic-icon,
+.sec-head-icon{ background: var(--topic, var(--t-default)); }
+
+/* ---- «Και ακόμα»: τα θέματα που δεν πήραν λωρίδα ---- */
+
+/* Η λωρίδα της ενότητας. Διακριτικό φόντο, όχι δεύτερο έντονο χρώμα —
+   μία κόκκινη λωρίδα στη σελίδα αρκεί. */
+.band--more{ background: var(--surface); }
+
+/* Άλλο σήμα από το «Latest»: αριστερά αντί για κέντρο, σερίφ αντί για
+   sans, χοντρή κόκκινη γραμμή από πάνω αντί για κουκκίδα και γραμμές
+   στο πλάι. Δύο ενότητες με το ίδιο γραφικό θα έμοιαζαν αντίγραφα. */
+.band-open{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Ίδια γραμματοσειρά με κάθε άλλη επικεφαλίδα του site. Το μέγεθος είναι
+   που την κάνει σήμα ενότητας, όχι διαφορετική γραμματοσειρά ή χρώματα. */
+.band-open-title{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  line-height: 1;
+  text-align: center;
+  margin: 0;
+  color: var(--text);
+}
+
+
+/* Δύο μικρές ενότητες δίπλα-δίπλα. Κάθε μία παίρνει τον μισό χώρο, άρα
+   οι κάρτες της βγαίνουν σχεδόν στο ίδιο μέγεθος με τις μεγάλες. */
+.more-grid{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3.5rem var(--gap);
+}
+
+@media (max-width: 1000px){
+  .more-grid{ grid-template-columns: 1fr; }
+}
+
+.grid--2{ grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 560px){
+  .grid--2{ grid-template-columns: 1fr; }
+}
+
+/* ---- ενότητες με χρωματιστό πλαίσιο ---- */
+
+/* Το πλαίσιο παίρνει το χρώμα του θέματος: πράσινο το Agronews, μπλε το
+   Tech-Hub. Μέσα, ένα πολύ αραιό στρώμα του ίδιου χρώματος ξεχωρίζει
+   την ενότητα από τη σελίδα χωρίς να σκεπάζει τις κάρτες. */
+.spot{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 3.5rem auto 0;
+  padding: 2rem 2rem 2.25rem;
+  border: 2px solid var(--topic, var(--line));
+  border-radius: var(--radius);
+}
+
+.spot-head{
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.spot-icon{
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-color);
+  background: var(--topic, var(--t-default));
+}
+
+.spot-icon svg{ width: 100%; height: 100%; }
+
+.spot-text{ flex: 1; min-width: 0; }
+
+.spot-sub{
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0.3rem 0 0;
+}
+
+.spot-all{
+  flex: none;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.spot-all:hover{ color: var(--text); }
+
+/* --- Agronews: εικονίδιο μεγάλο στο πλάι, τίτλος με σερίφ --- */
+
+.spot--agro{
+  background: linear-gradient(160deg,
+    rgba(44, 90, 56, 0.22) 0%,
+    rgba(44, 90, 56, 0.04) 60%,
+    transparent 100%);
+}
+
+.spot--agro .spot-icon{
+  width: 4.2rem;
+  height: 4.2rem;
+  padding: 0.9rem;
+  border-radius: 50%;
+}
+
+.spot--agro .spot-title{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* --- Tech-Hub: άλλο γραφικό. Τετράγωνο εικονίδιο, τίτλος με κεφαλαία
+       sans και αραιά γράμματα, και λεπτή γραμμή από κάτω. --- */
+
+.spot--tech{
+  background: linear-gradient(160deg,
+    rgba(42, 74, 107, 0.26) 0%,
+    rgba(42, 74, 107, 0.05) 60%,
+    transparent 100%);
+}
+
+.spot--tech .spot-head{
+  align-items: flex-start;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--topic, var(--line));
+}
+
+.spot--tech .spot-icon{
+  width: 3.4rem;
+  height: 3.4rem;
+  padding: 0.7rem;
+  border-radius: 6px;
+}
+
+.spot--tech .spot-title{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* --- Podcasts: γαλάζιο πλαίσιο, μικρόφωνο σε στρογγυλό, και οι
+       πλατφόρμες μέσα στο ίδιο πλαίσιο, πάνω σε σκούρο πάτο --- */
+
+.spot--pod{
+  border-color: var(--sky);
+  padding-bottom: 0;
+  overflow: hidden;
+  background: linear-gradient(165deg,
+    rgba(62, 150, 206, 0.26) 0%,
+    rgba(62, 150, 206, 0.07) 55%,
+    transparent 100%);
+}
+
+.spot--pod .spot-icon{
+  width: 4rem;
+  height: 4rem;
+  padding: 0.85rem;
+  border-radius: 50%;
+  background: var(--sky);
+}
+
+/* Τα ελληνικά κεφαλαία σε βαρύ condensed βγαίνουν μπλοκαρισμένα, γι' αυτό
+   δεν παλεύουν με το λογότυπο: γίνονται μικρή, αραιή γραμμή από πάνω και
+   το λογότυπο μένει το κύριο. */
+.spot--pod .spot-title{
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.spot-eyebrow{
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+
+/* Το λογότυπο του newshub.gr με γράμματα: «news» κανονικά, «hub» μέσα
+   σε κόκκινο στρογγυλεμένο πλακίδιο, «.gr» από πίσω. Παίρνει το μέγεθος
+   του τίτλου γύρω του, οπότε μεγαλώνει και μικραίνει μαζί του. */
+.nh{
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.nh b{
+  font-weight: 800;
+  background: var(--news);
+  color: var(--on-color);
+  border-radius: 0.28em;
+  padding: 0.04em 0.18em;
+  margin: 0 0.04em;
+}
+
+.nh i{ font-style: normal; }
+
+.spot--pod .spot-all{ color: var(--sky); }
+.spot--pod .spot-all:hover{ color: var(--text); }
+
+/* Ο σκούρος πάτος με τις πλατφόρμες. Βγαίνει ως τις άκρες του πλαισίου,
+   γι' αυτό η ενότητα δεν έχει κάτω γέμισμα και κόβει ό,τι περισσεύει. */
+.pod-platforms{
+  margin: 2rem -2rem 0;
+  padding: 1.75rem 2rem;
+  background: var(--bg);
+  border-top: 1px solid var(--sky);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.pod-platforms-label{
+  flex: none;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+
+.pod-platforms .platforms-links{
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+@media (max-width: 700px){
+  .spot{ padding: 1.5rem 1.25rem 1.75rem; }
+  .spot-head{ flex-wrap: wrap; gap: 0.9rem; }
+  .spot-all{ width: 100%; }
+
+  .spot--pod{ padding-bottom: 0; }
+  .pod-platforms{ margin: 1.5rem -1.25rem 0; padding: 1.5rem 1.25rem; }
+}
+
+/* Η μικρή επικεφαλίδα: ίδιο στοιχείο με τις μεγάλες λωρίδες, μικρότερο. */
+.topic-bar--sm{ margin-bottom: 1.25rem; }
+
+.topic-bar--sm .topic-bar-icon{ width: 1.4rem; height: 1.4rem; }
+
+.topic-bar--sm .topic-bar-name{ font-size: 1.35rem; }
+
+.topic-bar--sm .topic-bar-all{ font-size: 0.78rem; }
+
+/* Τέσσερις κάρτες στη σειρά, αλλά όχι με το ζόρι: κάτω από 1100px
+   πέφτουν σε δύο και στο κινητό σε μία. */
+.grid--4{ grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1100px){
+  .grid--4{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px){
+  .grid--4{ grid-template-columns: 1fr; }
+
+  .topics{
+    display: block;
+  }
+
+  .topics-label{ display: block; margin-bottom: 0.6rem; }
+
+  /* Μία σειρά που κυλάει, αντί για τοίχο από ετικέτες. */
+  .topics-list{
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .topics-list::-webkit-scrollbar{ display: none; }
+}
+
+.episode-meta a{
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.episode-meta a:hover{ color: var(--text); border-color: var(--muted); }
+
+/* σελίδα «Οι εκπομπές μας» */
+
+.show-list{
+  display: grid;
+  gap: 0.5rem;
+}
+
+.show-row{
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+}
+
+.show-row:hover{ border-color: var(--audio); }
+
+.show-row img,
+.show-blank{
+  width: 132px;
+  height: 74px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--line);
+  flex: none;
+}
+
+.show-row-text{
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.show-row-name{
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.show-row-meta{
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.show-row-latest{
+  font-size: 0.85rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.show-row:hover .show-row-name{ color: var(--audio); }
+
+@media (max-width: 560px){
+  .show-row img, .show-blank{ width: 92px; height: 56px; }
+  .show-row-name{ font-size: 1.05rem; }
+  .show-row-latest{ display: none; }
+}
+
+/* ---- επικεφαλίδα σελίδας θέματος / εκπομπής ---- */
+
+.sec-head{
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Το έγχρωμο τετράγωνο με το εικονίδιο. Παίρνει το χρώμα του θέματος
+   από τους κανόνες .topic-row[data-topic=...] πιο πάνω — γι' αυτό η
+   επικεφαλίδα κουβαλάει το ίδιο data-topic. */
+.sec-head-icon{
+  flex: none;
+  display: flex;
+  width: 3.4rem;
+  height: 3.4rem;
+  padding: 0.7rem;
+  border-radius: var(--radius);
+  background: var(--t-default);
+  color: var(--on-color);
+}
+
+.sec-head-icon svg{ width: 100%; height: 100%; }
+
+.sec-head-text{ min-width: 0; }
+
+.sec-head-kind{
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.3rem;
+}
+
+.sec-head .guest-name{ margin: 0 0 0.3rem; }
+.sec-head .guest-count{ margin: 0; }
+
+/* ================= ΚΙΝΗΣΗ ================= */
+
+/* --- Σκελετός φόρτωσης ---
+   Όσο δεν έχει κατέβει η εικόνα από το Buzzsprout, φαίνεται το κουτί
+   από κάτω της με ένα κύμα φωτός. Μόλις φορτώσει, η εικόνα το σκεπάζει
+   — γι' αυτό είναι position: relative, για να ζωγραφιστεί από πάνω.
+
+   Το κύμα τρέχει οκτώ φορές και σταματά: αν έμενε για πάντα, θα
+   ζωγράφιζε συνέχεια κάτω από 114 εικόνες χωρίς να το βλέπει κανείς. */
+.card-media,
+.row-card-media,
+.show-tile-art{
+  background-image: linear-gradient(100deg,
+    var(--line) 28%,
+    rgba(255, 255, 255, 0.07) 48%,
+    var(--line) 68%);
+  background-size: 220% 100%;
+  animation: shimmer 1.5s linear 8;
+}
+
+@keyframes shimmer{
+  from{ background-position: 140% 0; }
+  to  { background-position: -40% 0; }
+}
+
+/* --- Οι ενότητες εμφανίζονται καθώς κατεβαίνεις ---
+   Μέσα σε @supports: όπου δεν υποστηρίζεται, δεν μπαίνει καθόλου και
+   όλα φαίνονται κανονικά. Ποτέ δεν μένει κάτι αόρατο. */
+@keyframes rise{
+  from{ opacity: 0; transform: translateY(22px); }
+  to  { opacity: 1; transform: none; }
+}
+
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .topic-row,
+    .more-topic,
+    .spot,
+    .band--more,
+    .people,
+    .intro--photo,
+    .shows-tiles > *,
+    .shows-platforms{
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 28%;
+    }
+  }
+}
+
+/* --- Τα πρόσωπα ---
+   Ασπρόμαυρα, και παίρνουν χρώμα όταν περάσεις από πάνω. */
+.person img{
+  filter: grayscale(1);
+  transition: filter var(--ease-time) var(--ease);
+}
+
+.person:hover img,
+.person:focus-visible img{ filter: none; }
+
+/* --- Όποιος έχει ζητήσει λιγότερη κίνηση, δεν βλέπει καμία ---
+   Ένας κανόνας για όλο το site, αντί για έναν ανά εφέ. */
+@media (prefers-reduced-motion: reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .card-link:hover .card-image,
+  .row-card-link:hover .row-card-art,
+  .show-tile-art:hover img{ transform: none; }
+}
+
+/* ---- τα «από κάτω» της αναζήτησης ---- */
+
+.search-extra{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 4rem auto 0;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.search-extra .grid,
+.search-extra .cat-grid{ width: 100%; max-width: none; margin: 0; }
+
+/* ---- μπάρα σελίδων ---- */
+
+.pager{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.pg-nums{
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.pg{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.4rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.pg:hover{ color: var(--text); border-color: var(--muted); }
+
+/* Η σελίδα που βλέπεις τώρα. Δεν είναι σύνδεσμος. */
+.pg--on{
+  background: var(--news);
+  border-color: var(--news);
+  color: var(--on-color);
+}
+
+.pg--step{ min-width: 0; }
+
+/* «Προηγούμενη» στην πρώτη σελίδα: φαίνεται, αλλά σβηστή και ανενεργή —
+   ώστε να μην πηδάει η μπάρα όταν αλλάζεις σελίδα. */
+.pg--off{
+  opacity: 0.3;
+  border-color: transparent;
+}
+
+.pg-gap{
+  padding: 0 0.3rem;
+  color: var(--muted);
+}
+
+@media (max-width: 560px){
+  /* Στο κινητό μένουν τα βελάκια και η τρέχουσα σελίδα. */
+  .pg-nums .pg:not(.pg--on),
+  .pg-gap{ display: none; }
+}
+
+.show-more{
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 2rem 0 0;
+}
+
+.show-name{
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.3;
+  margin: 0 0 0.35rem;
+}
+
+/* η φράση κάτω από το header — εδώ θα μπει και η φωτογραφία studio */
+
+.intro{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: -1rem auto 3rem;
+}
+
+/* Με φωτογραφία: τα λόγια κάθονται πάνω της. */
+/* Κολλάει στην μπάρα από πάνω και φτάνει ως τις άκρες της οθόνης: τα
+   αρνητικά περιθώρια ακυρώνουν το padding του body και το κενό του header. */
+.intro--photo{
+  position: relative;
+  /* Ακυρώνει το όριο πλάτους του βασικού .intro, αλλιώς η λωρίδα μένει
+     κλεισμένη σε 1200px και δεν φτάνει ποτέ στην άκρη της οθόνης. */
+  max-width: none;
+  width: auto;
+  /* Κατέβηκε κάτω από το πρωτοσέλιδο, οπότε δεν τραβιέται πια προς τα
+     πάνω — κάθεται ανάμεσα σε ενότητες με κανονικό κενό. */
+  margin: 3.5rem 0 0;
+  height: clamp(420px, 32vw, 480px);
+  /* Η επόμενη ενότητα έχει δικό της margin-top· κολλάει πάνω στη ζώνη
+     ώστε να μη μένει μαύρη λωρίδα ανάμεσα. Δες .intro--photo + .band. */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ΜΙΑ ενιαία εικόνα σε όλο το πλάτος. Πριν έπιανε μόνο το δεξί 62% και
+   η σκίαση άλλο 62%, οπότε φαινόταν κομμένη σε κάθετες λωρίδες. */
+.intro-bg{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--intro-pos);
+  display: block;
+}
+
+/* Ό,τι ακολουθεί τη ζώνη κολλάει πάνω της. Το .band--latest φέρνει
+   δικό του margin-top 64px, που άφηνε μαύρη λωρίδα 42px ανάμεσα στη
+   φωτογραφία και στην κόκκινη ενότητα. */
+.intro--photo + .band,
+.intro--photo + section{ margin-top: 0; }
+
+/* ΜΟΝΟ ομοιόμορφο σκούρο στρώμα, χωρίς θόλωμα και χωρίς βαριά κλίση.
+   Η φωτογραφία είναι ήδη σχεδόν μαύρη αριστερά — εκεί πέφτει το
+   κείμενο — και το μικρόφωνο δεξιά πρέπει να φαίνεται καθαρά. */
+.intro--photo::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--bg-rgb), var(--intro-veil));
+}
+
+.intro--photo .intro-text{
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+  padding: 1.5rem 0;
+}
+
+/* Τίτλος και περιγραφή στο αριστερό τρίτο, πάνω στο σκοτεινό μέρος
+   της φωτογραφίας. */
+.intro--photo .intro-text > *{ max-width: min(33%, 46ch); }
+
+/* Ο τίτλος μεγάλωσε μαζί με τη ζώνη: στα 480px ύψος, τα 2.2rem
+   κολυμπούσαν μέσα στο κενό. */
+.intro--photo .intro-slogan{
+  font-size: clamp(2.1rem, 3.6vw, 3.1rem);
+  line-height: 1.06;
+  margin-bottom: 0.6rem;
+}
+
+.intro--photo .intro-sub{
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text);
+  opacity: 0.82;
+  margin-bottom: 0.8rem;
+}
+
+.intro--photo .intro-cta{ margin-top: 1rem; padding: 0.6rem 1.3rem; font-size: 0.78rem; }
+
+.intro--photo .intro-plats a{
+  font-size: 0.66rem;
+  padding: 0.25rem 0.6rem 0.25rem 0.35rem;
+}
+
+.intro--photo .intro-plats svg{ width: 14px; height: 14px; }
+
+.intro-slogan{
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.75rem;
+}
+
+.intro-sub{
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 56ch;
+  margin: 0 0 1.5rem;
+}
+
+/* Ένα κουμπί, με περίγραμμα στο κίτρινο του site — όχι γεμάτο κόκκινο.
+   Γεμίζει μόνο όταν περάσεις από πάνω. */
+.intro-cta{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--audio);
+  text-decoration: none;
+  border: 1px solid var(--audio);
+  border-radius: 999px;
+  padding: 0.7rem 1.5rem;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.intro-cta:hover{
+  background: var(--audio);
+  color: var(--on-light);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .intro-cta{ transition: none; }
+}
+
+.intro-photo{
+  aspect-ratio: 4/3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.intro-photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 860px){
+  /* Στο κινητό δεν χωράει κείμενο πλάι στην εικόνα: η εικόνα πιάνει όλο
+     το πλάτος και το κείμενο κάθεται από πάνω της, με σκίαση από κάτω. */
+  .intro--photo{
+    align-items: flex-end;
+    height: 360px;
+    margin: 2.5rem 0 1.25rem;
+  }
+
+  /* Σκίαση από κάτω, όσο χρειάζεται για να διαβάζονται τα λόγια και
+     όχι άλλο: με την παλιά (0.97/0.85/0.55 ΚΑΙ βάση 0.35) η εικόνα
+     έσβηνε τελείως και έμενε μια μαύρη επιφάνεια. */
+  .intro--photo::after{
+    background: linear-gradient(to top,
+      rgba(var(--bg-rgb), 0.94) 12%,
+      rgba(var(--bg-rgb), 0.68) 48%,
+      rgba(var(--bg-rgb), 0.25) 100%);
+  }
+
+  .intro--photo .intro-text{ padding: 1.25rem 1.5rem 1.5rem; }
+  .intro--photo .intro-text > *{ max-width: none; }
+}
+
+/* Σε στενή οθόνη το cover κόβει από τα πλάγια, και με object-position
+   στο 78% έμενε το σκοτεινό αριστερό κομμάτι — μια μαύρη επιφάνεια
+   χωρίς τίποτα μέσα. Πάμε πιο δεξιά, ώστε να μείνει το μικρόφωνο. */
+@media (max-width: 768px){
+  .intro-bg{ object-position: var(--intro-pos-sm); }
+}
+
+/* ---- το κουμπί-πλέγμα και το πάνελ του ----
+   --------------------------------------------
+   Το κύριο μενού ΔΕΝ κρύβεται στον υπολογιστή: το πάνελ είναι επιπλέον,
+   για το βάθος που δεν χωράει στη γραμμή — εκπομπές, θέματα, πρόσωπα,
+   πλατφόρμες, social.
+
+   Στο κινητό παίρνει μέσα του και το κύριο μενού, οπότε η κεφαλίδα
+   πέφτει από δύο σειρές σε μία. */
+.site-grid{
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.4rem;
+  margin-left: 0.6rem;
+  display: inline-flex;
+  flex: none;
+  border-radius: 6px;
+}
+
+.site-grid svg{ width: 22px; height: 22px; fill: currentColor; }
+
+.site-grid:hover,
+.site-grid[aria-expanded="true"]{ color: var(--text); }
+
+/* Το πάνελ κρέμεται από την κεφαλίδα και πιάνει όλο το πλάτος. */
+.gm{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 60;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.gm[hidden]{ display: none; }
+
+/* Η κεφαλίδα γίνεται το σημείο αναφοράς του πάνελ. */
+.site-header{ position: relative; }
+
+.gm-cols{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 2rem var(--gap);
+  padding: 2rem 0 2.25rem;
+  /* Το πάνελ δεν πρέπει να ξεπερνά την οθόνη: με 382 πρόσωπα και 13
+     θέματα, σε χαμηλό παράθυρο θα έβγαινε έξω. */
+  max-height: calc(100vh - var(--chrome) - 2rem);
+  overflow-y: auto;
+}
+
+.gm-head{
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.9rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.gm-link{
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.42rem 0;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.gm-link span{ min-width: 0; }
+
+/* Το νούμερο σπρώχνεται δεξιά και μένει σβηστό — πληροφορία, όχι τίτλος. */
+.gm-link i{
+  margin-left: auto;
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.gm-link:hover{ color: var(--audio); }
+
+.gm-social svg{ width: 15px; height: 15px; flex: none; color: var(--muted); }
+.gm-social:hover svg{ color: var(--audio); }
+
+.gm-all{
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.gm-all:hover{ color: var(--audio); }
+
+/* Το κύριο μενού μέσα στο πάνελ — μόνο στο κινητό. */
+.gm-nav{ display: none; }
+
+@media (max-width: 760px){
+  /* Κάτω από εδώ το μενού ζει μέσα στο πάνελ. Χωρίς αυτό έσπαγε σε δύο
+     σειρές και η κεφαλίδα έτρωγε 170px από τα 700 της οθόνης. */
+  .site-header .site-nav{ display: none; }
+
+  /* Το «newshub.gr ↗» πιάνει 110px και, μαζί με το κενό των 2rem,
+     έσπρωχνε το πλέγμα σε δική του σειρά. Μετακομίζει στο πάνελ. */
+  .site-header .site-out{ display: none; }
+
+  /* Με τρία στοιχεία σε 334px, το κενό των 2rem είναι μόνο του αρκετό
+     για να τα σπάσει: 297px περιεχόμενο + 96px κενά = 393px. */
+  .site-header .strip-inner{ gap: 0.75rem; flex-wrap: nowrap; }
+
+  /* ΜΟΝΟ στην κεφαλίδα: σπρώχνει λούπα και πλέγμα στη δεξιά άκρη.
+     Χωρίς τον περιορισμό έπιανε και το σήμα του υποσέλιδου, που
+     έπρεπε να είναι κεντραρισμένο, και το τραβούσε αριστερά. */
+  .site-header .wordmark{ margin-right: auto; }
+
+  .gm-nav{
+    display: grid;
+    gap: 0.1rem;
+    grid-column: 1 / -1;
+    padding-bottom: 1.2rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .gm-nav a{
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.45rem 0;
+  }
+
+  .gm-nav a:hover{ color: var(--audio); }
+
+  .gm-cols{ padding: 1.5rem 0 2rem; }
+}
+
+/* ---- σελίδα «Όλοι οι καλεσμένοι» ----
+   --------------------------------------
+   Ήταν ένας τοίχος από 382 ονόματα. Τώρα: πρώτα τα πρόσωπα που θα
+   αναζητήσει κάποιος, μετά όλοι με φίλτρο και αλφάβητο.
+
+   ΠΡΟΣΟΧΗ: πορτρέτα δεν έχουμε για κανέναν. Οι «φωτογραφίες» είναι
+   εξώφυλλα επεισοδίων — αφίσες με το πρόσωπο συνήθως στο δεξί τρίτο.
+   Γι' αυτό μπαίνει object-position δεξιά: σε στρογγυλό κόψιμο, το
+   κέντρο της αφίσας είναι λογότυπο, όχι άνθρωπος. */
+.top-people,
+.all-people{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 3.5rem auto 0;
+}
+
+.faces{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2rem var(--gap);
+}
+
+.face{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.face-pic{
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--line);
+  display: block;
+  transition: box-shadow var(--ease-time) var(--ease);
+}
+
+.face-pic img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 30%;
+  display: block;
+}
+
+/* Το avatar με αρχικά γεμίζει τον κύκλο όταν δεν υπάρχει ούτε αφίσα. */
+.face-pic .avatar{
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  font-size: 2rem;
+}
+
+.face:hover .face-pic{ box-shadow: 0 0 0 2px var(--audio); }
+
+.face-name{
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.face:hover .face-name{ color: var(--audio); }
+
+.face-n{
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+/* ---- η αλφαβητική λίστα ---- */
+
+.plist-tools{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.plist-find{
+  flex: 0 1 280px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  padding: 0.6rem 1.1rem;
+}
+
+.plist-find:focus{
+  outline: none;
+  border-color: var(--audio);
+}
+
+.plist-find::placeholder{ color: var(--muted); }
+
+.plist-abc{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+}
+
+.plist-abc a{
+  min-width: 1.7rem;
+  padding: 0.25rem 0.1rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.plist-abc a:hover{ color: var(--on-light); background: var(--audio); }
+
+/* Δύο στήλες, χωρίς γραμμές ανάμεσα: το κενό χωρίζει. */
+.plist{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 3rem;
+}
+
+.plist-mark{
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--audio);
+  margin: 1.5rem 0 0.6rem;
+  /* Το γράμμα δεν πρέπει να μείνει μόνο του στο τέλος της στήλης. */
+  break-after: avoid;
+  break-inside: avoid;
+}
+
+.plist-mark:first-child{ margin-top: 0; }
+
+.plist-row{ break-inside: avoid; }
+
+.plist-row a{
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.plist-pic{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--line);
+  flex: none;
+  display: block;
+}
+
+.plist-pic img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 30%;
+  display: block;
+}
+
+.plist-pic .avatar{
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  font-size: 0.6rem;
+}
+
+.plist-name{
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.3;
+}
+
+.plist-row a:hover .plist-name{ color: var(--audio); }
+
+.plist-n{
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Τακτικός συνομιλητής: ξεχωρίζει χωρίς να χρειάζεται να μετρήσεις. */
+.plist-n.is-often{ color: var(--audio); }
+
+/* Το κρύβει το φίλτρο καθώς γράφεις. */
+.plist-row[hidden],
+.plist-mark[hidden]{ display: none; }
+
+.plist-none{
+  color: var(--muted);
+  margin: 1.5rem 0 0;
+}
+
+@media (max-width: 760px){
+  .plist{ columns: 1; }
+  .faces{ grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 1.5rem 1rem; }
+  .face-pic{ width: 84px; height: 84px; }
+  .face-name{ font-size: 0.92rem; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .face-pic{ transition: none; }
+}
+
+/* ---- σελίδα προσώπου ----
+   -------------------------- */
+.bio{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+}
+
+.bio-head{ margin-bottom: 3rem; }
+
+.bio-name{
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.08;
+  margin: 0 0 0.6rem;
+}
+
+/* Ο τίτλος («Δρ.») είναι ιδιότητα, όχι μέρος του ονόματος: μικρότερος
+   και σβηστός, ώστε το όνομα να διαβάζεται μόνο του. */
+.bio-title{
+  font-family: var(--sans);
+  font-size: 0.45em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  vertical-align: 0.35em;
+}
+
+.bio-facts{
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---- η γραμμή χρόνου ----
+   Μία κουκκίδα ανά επεισόδιο. Πυκνές κουκκίδες = σταθερός συνομιλητής,
+   δύο στις άκρες = πέρασε δύο φορές με χρόνια ανάμεσα. */
+.life{
+  position: relative;
+  height: 34px;
+  margin-top: 1.5rem;
+  max-width: 620px;
+}
+
+.life-line{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 11px;
+  height: 1px;
+  background: var(--line);
+}
+
+.life-dot{
+  position: absolute;
+  top: 7px;
+  width: 9px;
+  height: 9px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: var(--audio);
+  /* Οι κουκκίδες πέφτουν συχνά η μία πάνω στην άλλη — δύο επεισόδια
+     την ίδια βδομάδα. Το φόντο τις ξεχωρίζει χωρίς να τις χωρίζει. */
+  box-shadow: 0 0 0 2px var(--bg);
+}
+
+.life-from,
+.life-to{
+  position: absolute;
+  top: 20px;
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.life-from{ left: 0; }
+.life-to{ right: 0; }
+
+/* ---- μιλάει για ---- */
+
+.bio-sub{
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.9rem;
+}
+
+.bio-topics{ margin-bottom: 3.5rem; }
+
+.ptags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Κάθε θέμα φοράει το δικό του χρώμα, το ίδιο που έχει παντού αλλού
+   στο site — έτσι αναγνωρίζεται χωρίς να διαβαστεί. */
+.ptag{
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--tint);
+  border-radius: 6px;
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--ease-time) var(--ease);
+}
+
+.ptag:hover{ border-color: var(--audio); border-left-color: var(--tint); }
+
+.ptag-name{ font-size: 0.9rem; }
+
+.ptag-n{
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- τα επεισόδια ---- */
+
+/* Η μεγάλη κάρτα μένει ΜΕΣΑ στο ίδιο πλέγμα και πιάνει δύο στήλες.
+   Σε δικό της μπλοκ άφηνε μισή οθόνη κενή στα δεξιά της, και το κενό
+   έσπαγε τη χρονολογική σειρά στα δύο. */
+.bio-grid .card--lead{ grid-column: span 2; }
+
+@media (max-width: 760px){
+  .bio-grid .card--lead{ grid-column: auto; }
+}
+
+.bio-work{ margin-bottom: 4rem; }
+
+/* ---- άλλοι για τα ίδια θέματα ---- */
+
+.pnear-row{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--gap);
+}
+
+.pnear{
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--ease-time) var(--ease);
+}
+
+.pnear:hover{ border-color: var(--audio); }
+
+.pnear-text{ display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+
+.pnear-name{
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.pnear:hover .pnear-name{ color: var(--audio); }
+
+.pnear-n{
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+@media (max-width: 760px){
+  .bio-head{ margin-bottom: 2rem; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .ptag, .pnear{ transition: none; }
+}
+
+/* ---- page-hero: θολό υπόβαθρο στην κορυφή μιας σελίδας ----
+   -----------------------------------------------------------
+   Φτιαγμένο από εικόνα που έχουμε ήδη — εξώφυλλο επεισοδίου, κάρτα
+   εκπομπής, το πιο πρόσφατο του θέματος. Δίνει χρώμα και ατμόσφαιρα
+   χωρίς να κατεβάσουμε ούτε ένα αρχείο παραπάνω.
+
+   Ύψος μηδέν: δεν σπρώχνει τίποτα: κάθεται ΠΙΣΩ από τα ψίχουλα και
+   την κορυφή του περιεχομένου. */
+.page-hero{
+  position: relative;
+  height: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Το κουτί που κόβει. Χρειάζεται επειδή η εικόνα μέσα του είναι
+   μεγεθυσμένη: χωρίς overflow:hidden το scale έβγαζε 51px έξω από τη
+   σελίδα και εμφανιζόταν οριζόντια μπάρα κύλισης. Ο γονέας .page-hero
+   δεν μπορεί να κόψει, γιατί έχει ύψος μηδέν. */
+.page-hero-box{
+  position: absolute;
+  /* Ανεβαίνει ΠΙΣΩ από το κενό της κεφαλίδας. Το .page-hero κάθεται
+     στη ροή μετά το margin του header, οπότε χωρίς αυτό το υπόβαθρο
+     ξεκινούσε 48px πιο κάτω και έμενε μαύρη λωρίδα κάτω από το μενού. */
+  top: calc(-1 * var(--header-gap));
+  left: 0;
+  width: 100%;
+  height: calc(var(--hero-bg-h, 420px) + var(--header-gap));
+  overflow: hidden;
+}
+
+/* Το θόλωμα μπαίνει ΕΔΩ, στην εικόνα — ποτέ σε γονέα που περιέχει
+   κείμενο, γιατί θα θόλωνε και τα γράμματα.
+
+   Το scale(1.08) κρύβει τα διάφανα άκρα που αφήνει το blur: χωρίς
+   αυτό φαίνεται ένα ξεθωριασμένο πλαίσιο γύρω γύρω. */
+.page-hero-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+  display: block;
+  filter: blur(8px) saturate(0.7) brightness(0.45);
+  transform: scale(1.08);
+}
+
+/* Το στρώμα του χρώματος φόντου από πάνω: διάφανο ψηλά, συμπαγές κάτω,
+   ώστε η εικόνα να λιώνει μέσα στη σελίδα αντί να κόβεται με γραμμή. */
+.page-hero-box::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(var(--bg-rgb), 0.15) 0%,
+    rgba(var(--bg-rgb), 0.55) 45%,
+    rgba(var(--bg-rgb), 0.88) 78%,
+    var(--bg) 100%);
+}
+
+/* Ό,τι ακολουθεί το hero ανεβαίνει από πάνω του. Χωρίς αυτό, τα
+   ψίχουλα και οι κάρτες κάθονται ΚΑΤΩ από το υπόβαθρο. */
+.page-hero ~ .crumbs,
+.page-hero ~ main{
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 760px){
+  .page-hero-box{ --hero-bg-h: 300px; }
+}
+
+/* υποσέλιδο */
+
+/* Υποσέλιδο στη δομή του newshub.gr: όλα στο κέντρο, και χωριστή
+   γραμμή κάτω με τα δικαιώματα. */
+.site-footer{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 4rem auto 0;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.foot-nav,
+.foot-legal{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Οι κάθετες γραμμές ανάμεσα στους συνδέσμους, όπως στο κεντρικό.
+   Μπαίνουν με ::before ώστε να μη χρειάζεται markup — και να μη
+   μένει γραμμή στην άκρη όταν αναδιπλωθούν. */
+.foot-nav a,
+.foot-legal a{
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.25rem 0;
+}
+
+.foot-nav a + a::before,
+.foot-legal a + a::before{
+  content: "|";
+  color: var(--line);
+  margin: 0 0.9rem;
+}
+
+.foot-nav a:hover,
+.foot-legal a:hover{ color: var(--text); }
+
+.foot-nav{
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Τα θεσμικά είναι δεύτερης σειράς: πεζά και πιο σβηστά. */
+.foot-legal{
+  font-size: 0.78rem;
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+.foot-social{ gap: 0.4rem; }
+
+/* Το σήμα φοράει .wordmark για τα χρώματα και τη γραμματοσειρά του —
+   σκέτο <a> έβγαινε στο μπλε του browser. */
+.foot-mark{ margin-top: 0.25rem; }
+
+/* Το κουμπί «πάνω» κάθεται πάνω στη γραμμή που χωρίζει, όπως στο
+   κεντρικό: μισό πάνω από αυτήν, μισό κάτω. */
+.foot-top{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--news);
+  color: var(--on-color);
+  margin-bottom: -21px;
+  position: relative;
+  z-index: 1;
+  transition: background var(--ease-time) var(--ease);
+}
+
+.foot-top svg{ width: 20px; height: 20px; }
+
+.foot-top:hover{ background: var(--news-hover); }
+
+.foot-bar{
+  width: 100%;
+  border-top: 1px solid var(--line);
+  padding: 1.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.foot-rights,
+.foot-place{ margin: 0; }
+
+@media (prefers-reduced-motion: reduce){
+  .foot-top{ transition: none; }
+}
+
+@media (max-width: 560px){
+  .foot-nav a + a::before,
+  .foot-legal a + a::before{ margin: 0 0.5rem; }
+  .foot-bar{ justify-content: center; text-align: center; }
+}
+
+/* η μπάρα του μόνιμου player */
+
+.bar{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem var(--edge);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+}
+
+.bar[hidden]{ display: none; }
+
+/* Ώστε η μπάρα να μην κρύβει το τέλος της σελίδας. */
+body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
+
+.bar-now{
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+  width: 280px;
+  color: inherit;
+  text-decoration: none;
+  flex: none;
+}
+
+.bar-art{
+  width: 44px;
+  height: 44px;
+  border-radius: 5px;
+  object-fit: cover;
+  background: var(--line);
+  flex: none;
+}
+
+.bar-text{
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.bar-show{
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--audio);
+}
+
+.bar-title{
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bar-now:hover .bar-title{ color: var(--audio); }
+
+.bar-controls{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: none;
+}
+
+.bar-btn{
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  padding: 0.35rem 0.6rem;
+}
+
+.bar-btn:hover{ color: var(--text); border-color: var(--muted); }
+
+.bar-play{
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--audio);
+  color: var(--on-light);
+  font-size: 0.95rem;
+  cursor: pointer;
+  flex: none;
+}
+
+.bar-time{
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 3.2rem;
+  text-align: center;
+  flex: none;
+}
+
+.bar-seek{
+  flex: 1;
+  min-width: 80px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+  cursor: pointer;
+}
+
+.bar-fill{
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: var(--audio);
+}
+
+.bar-seek:focus-visible{ outline: 2px solid var(--audio); outline-offset: 4px; }
+
+.bar-close{ font-size: 0.8rem; }
+
+@media (max-width: 860px){
+  .bar{ gap: 0.6rem; padding: 0.5rem 0.9rem; flex-wrap: wrap; }
+  .bar-now{ width: auto; flex: 1; }
+  .bar-time, .bar-close{ display: none; }
+  .bar-seek{ order: 10; flex-basis: 100%; }
+}
+
+/* ψίχουλα πλοήγησης */
+
+.crumbs{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto 1.5rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crumbs a{ color: var(--muted); text-decoration: none; }
+.crumbs a:hover{ color: var(--text); }
+.crumbs i{ font-style: normal; opacity: 0.5; }
+.crumbs span:last-child{ color: var(--text); }
+
+/* σελίδα επεισοδίου */
+
+.episode-head{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto 1.75rem;
+}
+
+/* Οθόνη και χειριστήρια αριστερά, πλαϊνή στήλη δεξιά. */
+.episode-grid{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* Η γραμμή κάτω από τα χειριστήρια: διακόπτης, ταχύτητα, ενέργειες. */
+.strip{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: -1rem 0 2rem;
+}
+
+.strip .modes{ margin: 0; }
+
+.strip-note{
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* ο διακόπτης Βλέπω / Ακούω */
+.modes{
+  display: inline-flex;
+  gap: 0.3rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.mode{
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.mode.is-on{
+  background: var(--text);
+  color: var(--on-light);
+}
+
+.stage-art{
+  aspect-ratio: 16/9;
+  background: var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.stage-art img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* η πλαϊνή στήλη */
+
+/* Η πλαϊνή στήλη έχει δύο κουτιά και τελειώνει· το κείμενο δεξιά
+   συνεχίζει για τρεις οθόνες. Χωρίς το sticky, από τη μέση της σελίδας
+   και κάτω η δεξιά μεριά ήταν άδεια. Έτσι τα κουτιά ακολουθούν.
+   Το --chrome είναι το ύψος της κεφαλίδας, που μένει πάνω. */
+.episode-side{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  position: sticky;
+  top: calc(var(--chrome) + 1.5rem);
+}
+
+.side-box{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+}
+
+.side-head{
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.9rem;
+}
+
+.platforms-stack{
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.platforms-stack a{ text-align: center; }
+
+/* πλατφόρμες + ενέργειες, κάτω από την οθόνη */
+.actions{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.actions .platforms-links{ margin: 0; }
+
+.act{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.act:hover{ color: var(--text); border-color: var(--muted); }
+
+.act.is-on{
+  color: var(--audio);
+  border-color: var(--audio);
+}
+
+.player-note{
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: -1rem 0 1.75rem;
+}
+
+.panel-head{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 2.25rem 0 0.75rem;
+}
+
+/* τα αρχικά αντί για πορτρέτο */
+.avatar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 6px;
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  color: var(--text);
+  margin-bottom: 0.7rem;
+}
+
+.avatar--round{
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.gbox-more{
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.gbox:hover .gbox-more{ color: var(--audio); }
+
+@media (max-width: 900px){
+  .episode-grid{ grid-template-columns: 1fr; }
+}
+
+/* σελίδα βίντεο — η σκηνή */
+
+.stage{
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: var(--gap);
+  align-items: start;
+}
+
+/* Βίντεο χωρίς καλεσμένο: δεν υπάρχει πάνελ αριστερά, άρα η οθόνη παίρνει
+   όλη τη γραμμή. Το όριο την κρατάει στο ίδιο πλάτος που έχει και όταν
+   υπάρχει πάνελ δίπλα της, ώστε οι δύο σελίδες να μοιάζουν μεταξύ τους. */
+.stage--solo{ grid-template-columns: minmax(0, 1fr); }
+.stage--solo .stage-media{ max-width: 1200px; }
+
+/* το πάνελ του καλεσμένου, πάνω αριστερά */
+.gbox{
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.gbox:hover{ border-color: var(--audio); }
+
+.gbox-label{
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
+}
+
+.gbox-row{
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.gbox-id{
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.gbox-name{
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.2;
+}
+
+.gbox-sub{
+  font-size: 0.7rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.gbox-more{
+  display: block;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.gbox:hover .gbox-name{ color: var(--audio); }
+.gbox:hover .gbox-more{ color: var(--audio); }
+
+.stage-media{
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.stage-media--art{ cursor: default; }
+
+.stage-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Το βίντεο κάθεται ΠΑΝΩ από τη μικρογραφία. Όταν αφαιρεθεί, η
+   μικρογραφία είναι ακόμα από κάτω και εμφανίζεται ξανά. */
+.stage-media iframe,
+.video-frame iframe{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 2;
+}
+
+/* τα άλλα μέσα, κάτω από την οθόνη */
+.platforms-row{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto 2.5rem;
+}
+
+/* τα χειριστήρια */
+
+.player{
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.player button{
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  padding: 0.45rem 0.7rem;
+}
+
+.player button:hover{ border-color: var(--audio); }
+
+.player-play{
+  width: 52px;
+  height: 52px;
+  border-radius: 50% !important;
+  background: var(--audio) !important;
+  color: var(--on-light) !important;
+  border: 0 !important;
+  font-size: 1.05rem !important;
+  padding: 0 !important;
+}
+
+.player-now,
+.player-total{
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 3.4rem;
+  text-align: center;
+}
+
+.player-bar{
+  flex: 1;
+  min-width: 140px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+  cursor: pointer;
+  position: relative;
+}
+
+.player-fill{
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: var(--audio);
+}
+
+.player-bar:focus-visible{ outline: 2px solid var(--audio); outline-offset: 4px; }
+
+/* στη σειρά */
+
+.queue{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 3rem auto 0;
+}
+
+.queue-row{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Διπλάσιες από πριν (ήταν 74×42). Στα 74 πλάτος η μικρογραφία δεν
+   έδειχνε τίποτα αναγνωρίσιμο — ήταν διακοσμητική κουκκίδα. */
+.queue-row img,
+.queue-blank{
+  width: 148px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--line);
+  flex: none;
+}
+
+.queue-title{
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.3;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.queue-meta{
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.queue-row:hover .queue-title{ color: var(--audio); }
+
+/* απομαγνητοφώνηση
+   -----------------
+   Κλειστή από προεπιλογή. Το κείμενο είναι 1.300 λέξεις κατά μέσο όρο —
+   ανοιχτό θα έπνιγε όλη τη σελίδα, και είναι αυτόματο, άρα όχι κάτι που
+   δείχνεις πρώτο. Μένει όμως μέσα στο HTML, ώστε να το βρίσκει η
+   αναζήτηση ακόμα κι όταν δεν το έχει ανοίξει κανείς. */
+.transcript{
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  margin: 0 0 2rem;
+  max-width: 68ch;
+}
+
+.transcript-head{
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.9rem;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+/* Το τριγωνάκι του browser φεύγει και μπαίνει δικό μας, για να γυρίζει. */
+.transcript-head::-webkit-details-marker{ display: none; }
+
+.transcript-head::after{
+  content: "▾";
+  margin-left: auto;
+  color: var(--muted);
+  transition: transform var(--ease-time) var(--ease);
+}
+
+.transcript[open] .transcript-head::after{ transform: rotate(180deg); }
+
+.transcript-title{
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--audio);
+}
+
+.transcript-note{
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.transcript-body{
+  border-top: 1px solid var(--line);
+  padding: 1.2rem;
+  max-height: 32rem;
+  overflow-y: auto;
+}
+
+.transcript-hint{
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin: 0 0 1.2rem;
+}
+
+/* Το «Φορτώνει…» μέχρι να έρθει το αρχείο, και το μήνυμα αν δεν έρθει. */
+.transcript-load{
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Μια γραμμή: η ώρα αριστερά σε σταθερή στήλη, τα λόγια δεξιά. */
+.tr-row{
+  display: grid;
+  grid-template-columns: 4.2rem minmax(0, 1fr);
+  gap: 0.9rem;
+  margin: 0 0 1rem;
+  line-height: 1.7;
+  color: var(--read);
+}
+
+/* Ονόματα ομιλητών δεν έχουμε — το Buzzsprout δίνει «SPEAKER_00». Αντί
+   για ψεύτικο όνομα, μια λεπτή γραμμή που αλλάζει χρώμα σε κάθε αλλαγή
+   ομιλητή: φαίνεται ποιος ρωτάει και ποιος απαντάει, χωρίς να πούμε
+   ποιος είναι. */
+.tr-row .tr-text{
+  border-left: 2px solid var(--line);
+  padding-left: 0.9rem;
+}
+
+.tr-row[data-who="0"] .tr-text{ border-color: var(--line); }
+.tr-row[data-who="1"] .tr-text{ border-color: var(--audio); }
+.tr-row[data-who="2"] .tr-text{ border-color: var(--sky); }
+.tr-row[data-who="3"] .tr-text{ border-color: var(--news); }
+
+.tr-at{
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  padding: 0;
+  cursor: pointer;
+}
+
+.tr-at:hover{ color: var(--audio); }
+
+/* Η γραμμή στην οποία βρίσκεται τώρα ο ήχος. */
+.tr-row.is-now .tr-text{ color: var(--text); }
+.tr-row.is-now .tr-at{ color: var(--audio); font-weight: 600; }
+
+@media (max-width: 760px){
+  .stage{ grid-template-columns: 1fr; }
+  .episode-side{ position: static; }
+  .queue-row img, .queue-blank{ width: 108px; height: 61px; }
+  .tr-row{ grid-template-columns: 3.4rem minmax(0, 1fr); gap: 0.6rem; }
+  .gbox{ flex-direction: row; align-items: center; gap: 0.9rem; }
+  .gbox img, .gbox-blank{ width: 64px; margin: 0; }
+  .gbox-label{ display: none; }
+}
+
+/* σελίδα βίντεο */
+
+.video{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+}
+
+.video-frame{
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+.video-frame img,
+.video-frame iframe{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: 0;
+}
+
+.video-play{
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--news);
+  color: var(--on-color);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.video-frame:hover .video-play{ background: var(--news-hover); }
+
+/* πρόσωπα */
+
+.people{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 3.5rem auto 0;
+}
+
+.people-row{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: var(--gap);
+}
+
+.person{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.3rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.person img,
+.person-blank{
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--line);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.person-name{
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.person-count{
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.person:hover .person-name{ color: var(--audio); }
+
+.people-all{
+  display: inline-block;
+  margin-top: 1.75rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.people-all:hover{ color: var(--text); }
+
+/* σελίδα με όλους τους καλεσμένους */
+
+.guest-index{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 3;
+  column-gap: 2.5rem;
+}
+
+.guest-index li{
+  break-inside: avoid;
+  border-bottom: 1px solid var(--line);
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.guest-index a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.guest-index a:hover{ color: var(--audio); }
+
+.guest-index span{
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 760px){
+  .guest-index{ columns: 1; }
+}
+
+/* «σε όλες τις πλατφόρμες» */
+
+.platforms{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 3rem auto 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+}
+
+.platforms-label{
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--audio);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.platforms-links{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Το --brand το δίνει το build ανά σύνδεσμο: το ΕΙΚΟΝΙΔΙΟ παίρνει το
+   χρώμα της μάρκας, το κουμπί μένει στην παλέτα μας. */
+.platforms-links a{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem 0.45rem 0.55rem;
+  white-space: nowrap;
+}
+
+.platforms-links svg{
+  width: 20px;
+  height: 20px;
+  color: var(--brand);
+  flex: none;
+}
+
+.platforms-links i{
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.platforms-links a:hover{
+  border-color: var(--brand);
+}
+
+/* ροή ειδήσεων στο πλάι */
+
+/* ---- οι δύο στήλες της αρχικής ---- */
+
+/* Αριστερά οι ενότητες, δεξιά η ροή ειδήσεων. Το align-items: start
+   είναι ΑΠΑΡΑΙΤΗΤΟ: χωρίς αυτό η δεξιά στήλη τεντώνεται σε όλο το ύψος
+   και το sticky δεν έχει πού να κινηθεί. */
+.page-cols{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* Η ροή ακολουθεί το σκρολάρισμα σε όλο το ύψος της αριστερής στήλης. */
+.page-side{
+  position: sticky;
+  top: 1.5rem;
+}
+
+/* Μέσα στη στήλη οι ενότητες δεν βάζουν δικό τους όριο πλάτους — το
+   όριο το βάζει πλέον η στήλη. Αλλιώς θα έβγαιναν έξω από αυτήν. */
+.page-main > *,
+.page-main .band-open,
+.page-main .more-grid{
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Οι λωρίδες δεν πιάνουν πια όλη την οθόνη, άρα γίνονται κουτιά. */
+.page-main .band{
+  padding: 2.5rem 2rem 3rem;
+  border-radius: var(--radius);
+  margin-top: 3.5rem;
+  margin-bottom: 0;
+}
+
+/* Σε στενή οθόνη η ροή πάει από κάτω και σταματά να κολλάει. */
+@media (max-width: 1100px){
+  .page-cols{ grid-template-columns: minmax(0, 1fr); }
+  .page-side{ position: static; }
+}
+
+/* Το κολλητό το αναλαμβάνει πλέον η .page-side, που τρέχει σε όλο το
+   ύψος της σελίδας. Εδώ μένει μόνο η εμφάνιση του κουτιού. */
+.ticker{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.ticker-head{
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--news);
+  margin: 0 0 1rem;
+}
+
+.ticker-list{
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.ticker-list li + li{
+  border-top: 1px solid var(--line);
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+}
+
+.ticker-list a{
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
+.ticker-cat{
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--news);
+  margin-bottom: 0.3rem;
+}
+
+.ticker-title{
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.ticker-list a:hover .ticker-title{ color: var(--audio); }
+
+.ticker-all{
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.ticker-all:hover{ color: var(--text); }
+
