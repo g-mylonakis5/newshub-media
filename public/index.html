@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NewsHub Media</title>
+  <meta name="description" content="Podcasts, βίντεο και συζητήσεις του newshub.gr — από την Κρήτη και τον κόσμο.">
+  <link rel="canonical" href="https://media.newshub.gr/">
+
+  <!-- Η κάρτα που εμφανίζεται όταν μοιράζεται ο σύνδεσμος.
+       Ο τίτλος φτάνει εδώ ήδη περασμένος από esc() — δεν τον ξαναπερνάμε,
+       γιατί το &quot; θα γινόταν &amp;quot; και θα φαινόταν στην κάρτα. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Newshub Media">
+  <meta property="og:locale" content="el_GR">
+  <meta property="og:title" content="NewsHub Media">
+  <meta property="og:description" content="Podcasts, βίντεο και συζητήσεις του newshub.gr — από την Κρήτη και τον κόσμο.">
+  <meta property="og:url" content="https://media.newshub.gr/">
+  <meta property="og:image" content="https://media.newshub.gr/intro.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NewsHub Media">
+  <meta name="twitter:description" content="Podcasts, βίντεο και συζητήσεις του newshub.gr — από την Κρήτη και τον κόσμο.">
+  <meta name="twitter:image" content="https://media.newshub.gr/intro.jpg">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400..900&family=Source+Serif+4:wght@400..600&display=swap">
+  <link rel="stylesheet" href="styles.css?v=a6cc1418">
+  <script src="player.js?v=407aae58" defer></script>
+</head>
+<body>
+<div id="page">
+  <div class="topstrip" id="top">
+    <div class="wrap strip-inner">
+      <div class="topstrip-left">
+        <div class="weather" title="Συννεφιά · 17°/26°">
+      <span class="weather-city">Ηράκλειο</span>
+      <span class="weather-now">
+        <svg class="weather-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 19h9.9a3.9 3.9 0 0 0 .5-7.77 5.6 5.6 0 0 0-10.78-1.2A4.3 4.3 0 0 0 7.2 19z"/></svg>
+        <span class="weather-temp">17 °C</span>
+      </span>
+    </div>
+        <nav class="social"><a href="https://www.facebook.com/newshub.gr" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9h2V6h-2c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2.2l.3-3H14v-2c0-.6.4-1 1-1z"/></svg></a><a href="https://www.instagram.com/newshub.gr" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0 5.3a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM16 4H8a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4zm2.9 12a2.9 2.9 0 0 1-2.9 2.9H8A2.9 2.9 0 0 1 5.1 16V8A2.9 2.9 0 0 1 8 5.1h8A2.9 2.9 0 0 1 18.9 8zm-1.6-7.8a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0z"/></svg></a><a href="https://twitter.com/NewshubG" target="_blank" rel="noopener" aria-label="X" title="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 4h2.6l-5.7 6.5L21 20h-5.2l-4.1-5.4L6.9 20H4.3l6.1-7-5.9-9h5.4l3.7 4.9zm-.9 14.4h1.4L8.4 5.5H6.9z"/></svg></a><a href="https://www.youtube.com/@newshubgr" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2c-.2-.9-.9-1.6-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4c-.9.2-1.6.9-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8c.2.9.9 1.6 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg></a><a href="https://www.tiktok.com/@newshub.gr" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 3c.3 1.9 1.4 3.1 3.3 3.3v2.3c-1.1.1-2.1-.2-3.3-.9v5.9c0 4.7-5.1 6.2-7.2 2.9-1.3-2.1-.5-5.9 3.7-6v2.4c-.3.1-.7.1-1 .3-1 .3-1.5 1-1.4 2 .3 2 3.9 2.5 3.6-1.3V3z"/></svg></a></nav>
+      </div>
+      <span class="today">Παρασκευή, 30 Οκτωβρίου 2026</span>
+    </div>
+  </div>
+
+<header class = "site-header">
+  <div class="wrap strip-inner">
+  <a class = "wordmark" href="index.html">Newshub <span>Media</span></a>
+  <nav class = "site-nav">
+  <a href="shows.html">Εκπομπές</a>
+     <a href="episodes.html">Podcasts</a>
+     <a href="categories.html">Θέματα</a>
+     <a href="guests.html">Πρόσωπα</a>
+     <a href="search.html" data-reload>Αρχείο</a>
+  </nav>
+  <a class="site-search" href="search.html" data-reload aria-label="Αναζήτηση">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </a>
+  <a class="site-out" href="https://www.newshub.gr">newshub.gr ↗</a>
+  <button type="button" class="site-grid" data-gridmenu
+          aria-controls="gridmenu" aria-expanded="false" aria-label="Όλες οι ενότητες">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="6" cy="6" r="1.6"/><circle cx="12" cy="6" r="1.6"/><circle cx="18" cy="6" r="1.6"/>
+      <circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/>
+      <circle cx="6" cy="18" r="1.6"/><circle cx="12" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/>
+    </svg>
+  </button>
+  </div>
+  <div class="gm" id="gridmenu" hidden>
+    <div class="wrap gm-cols">
+      <nav class="gm-nav">
+        <a href="shows.html">Εκπομπές</a>
+        <a href="episodes.html">Podcasts</a>
+        <a href="categories.html">Θέματα</a>
+        <a href="guests.html">Πρόσωπα</a>
+        <a href="search.html" data-reload>Αρχείο</a>
+      </nav>
+      <div class="gm-col">
+        <p class="gm-head">Εκπομπές</p>
+        <a class="gm-link" href="show/epikairotita.html"><span>Επικαιρότητα</span><i>1.532</i></a>
+        <a class="gm-link" href="show/synentevxeis-kai-prosopa-tis-epikairotitas.html"><span>Συνεντεύξεις και πρόσωπα της επικαιρότητας</span><i>1.367</i></a>
+        <a class="gm-link" href="show/analyseis-sto-newshub-gr.html"><span>Αναλύσεις στο newshub.gr</span><i>310</i></a>
+        <a class="gm-link" href="show/agrotiki-epikairotita.html"><span>Αγροτική επικαιρότητα</span><i>128</i></a>
+        <a class="gm-link" href="show/istoria-sto-newshub-gr.html"><span>Ιστορία στο newshub.gr</span><i>87</i></a>
+        <a class="gm-link" href="show/afieromata.html"><span>Αφιερώματα</span><i>73</i></a>
+        <a class="gm-link" href="show/ygeia-kai-epistimes.html"><span>Υγεία και Επιστήμες</span><i>51</i></a>
+        <a class="gm-link" href="show/paraskinio.html"><span>Παρασκήνιο</span><i>51</i></a>
+        <a class="gm-all" href="shows.html">Όλες οι εκπομπές →</a>
+      </div>
+      <div class="gm-col">
+        <p class="gm-head">Θέματα</p>
+        <a class="gm-link" href="category/kriti.html"><span>Κρήτη</span><i>1.083</i></a>
+        <a class="gm-link" href="category/geopolitiki.html"><span>Γεωπολιτική</span><i>401</i></a>
+        <a class="gm-link" href="category/politiki.html"><span>Πολιτική</span><i>215</i></a>
+        <a class="gm-link" href="category/kosmos.html"><span>Κόσμος</span><i>201</i></a>
+        <a class="gm-link" href="category/ellada.html"><span>Ελλάδα</span><i>201</i></a>
+        <a class="gm-link" href="category/agronews.html"><span>Agronews</span><i>171</i></a>
+        <a class="gm-link" href="category/istoria.html"><span>Ιστορία</span><i>150</i></a>
+        <a class="gm-link" href="category/ygeia.html"><span>Υγεία</span><i>144</i></a>
+        <a class="gm-all" href="categories.html">Όλα τα θέματα →</a>
+      </div>
+      <div class="gm-col">
+        <p class="gm-head">Πρόσωπα</p>
+        <a class="gm-link" href="guest/giorgos-atsalakis.html"><span>Γιώργος Ατσαλάκης</span><i>28</i></a>
+        <a class="gm-link" href="guest/giorgos-ayfantis.html"><span>Γιώργος Αϋφαντής</span><i>26</i></a>
+        <a class="gm-link" href="guest/giorgos-karampelias.html"><span>Γιώργος Καραμπελιάς</span><i>26</i></a>
+        <a class="gm-link" href="guest/giorgos-kapopoulos.html"><span>Γιώργος Καπόπουλος</span><i>21</i></a>
+        <a class="gm-link" href="guest/meletis-meletopoulos.html"><span>Μελέτης Μελετόπουλος</span><i>19</i></a>
+        <a class="gm-link" href="guest/kostas-grivas.html"><span>Κώστας Γρίβας</span><i>17</i></a>
+        <a class="gm-link" href="guest/sotiris-livas.html"><span>Σωτήρης Λίβας</span><i>13</i></a>
+        <a class="gm-link" href="guest/aggelos-syrigos.html"><span>Άγγελος Συρίγος</span><i>12</i></a>
+        <a class="gm-all" href="guests.html">Όλα τα πρόσωπα →</a>
+      </div>
+      <div class="gm-col">
+        <p class="gm-head">Άκου παντού</p>
+        <a class="gm-link" href="https://www.youtube.com/@newshubgr/podcasts" target="_blank" rel="noopener"><span>YouTube</span><i>↗</i></a>
+        <a class="gm-link" href="https://open.spotify.com/show/1W9rhtqzGlbfs8xGWNK7gN" target="_blank" rel="noopener"><span>Spotify</span><i>↗</i></a>
+        <a class="gm-link" href="https://podcasts.apple.com/gr/podcast/%CF%84%CE%B1-podcast-%CF%84%CE%BF%CF%85-newshub-gr/id1601368308?l=el" target="_blank" rel="noopener"><span>Apple Podcasts</span><i>↗</i></a>
+        <a class="gm-link" href="https://pocketcasts.com/podcast/%CF%84%CE%B1-podcasts-%CF%84%CE%BF%CF%85-newshubgr/ee0a5f70-401d-013a-d681-0acc26574db2" target="_blank" rel="noopener"><span>Pocket Casts</span><i>↗</i></a>
+        <a class="gm-link" href="https://www.audible.com/podcast/podcasts-newshubgr/B08K57X52T" target="_blank" rel="noopener"><span>Audible</span><i>↗</i></a>
+        <a class="gm-link" href="https://www.buzzsprout.com/1904089" target="_blank" rel="noopener"><span>Buzzsprout</span><i>↗</i></a>
+      </div>
+      <div class="gm-col">
+        <p class="gm-head">Follow</p>
+        <a class="gm-link gm-social" href="https://www.facebook.com/newshub.gr" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9h2V6h-2c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2.2l.3-3H14v-2c0-.6.4-1 1-1z" fill="currentColor"/></svg>
+          <span>Facebook</span>
+        </a>
+        <a class="gm-link gm-social" href="https://www.instagram.com/newshub.gr" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0 5.3a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM16 4H8a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4zm2.9 12a2.9 2.9 0 0 1-2.9 2.9H8A2.9 2.9 0 0 1 5.1 16V8A2.9 2.9 0 0 1 8 5.1h8A2.9 2.9 0 0 1 18.9 8zm-1.6-7.8a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0z" fill="currentColor"/></svg>
+          <span>Instagram</span>
+        </a>
+        <a class="gm-link gm-social" href="https://twitter.com/NewshubG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 4h2.6l-5.7 6.5L21 20h-5.2l-4.1-5.4L6.9 20H4.3l6.1-7-5.9-9h5.4l3.7 4.9zm-.9 14.4h1.4L8.4 5.5H6.9z" fill="currentColor"/></svg>
+          <span>X</span>
+        </a>
+        <a class="gm-link gm-social" href="https://www.youtube.com/@newshubgr" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2c-.2-.9-.9-1.6-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4c-.9.2-1.6.9-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8c.2.9.9 1.6 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z" fill="currentColor"/></svg>
+          <span>YouTube</span>
+        </a>
+        <a class="gm-link gm-social" href="https://www.tiktok.com/@newshub.gr" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 3c.3 1.9 1.4 3.1 3.3 3.3v2.3c-1.1.1-2.1-.2-3.3-.9v5.9c0 4.7-5.1 6.2-7.2 2.9-1.3-2.1-.5-5.9 3.7-6v2.4c-.3.1-.7.1-1 .3-1 .3-1.5 1-1.4 2 .3 2 3.9 2.5 3.6-1.3V3z" fill="currentColor"/></svg>
+          <span>TikTok</span>
+        </a>
+        <a class="gm-link gm-out" href="https://www.newshub.gr"><span>newshub.gr</span><i>↗</i></a>
+      </div>
+    </div>
+  </div>
+  </header>
+
+  <section class="hero">
+    <img class="hero-image" src="https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/19-10/maketa-parisi-gallia-epeisodia.jpg" alt="">
+    <div class="hero-text">
+      <div class="hero-block">
+        <p class="hero-eyebrow">Γεωπολιτική</p>
+        
+        <h2 class="hero-title"><a href="https://www.newshub.gr/el/geopolitiki/apo-to-parisi-eos-ta-tirana-i-koinoniki-orgi-exaplonetai-stin-eyropi-oi-chores-poy-dokimazontai-poies-oi-aities-tis-anatarachis" target="_blank" rel="noopener">Από το Παρίσι έως τα Τίρανα: Η κοινωνική οργή εξαπλώνεται στην Ευρώπη – Οι χώρες που δοκιμάζονται, ποιες οι αιτίες της αναταραχής</a></h2>
+        <p class="hero-date hero-date--news">19 Οκτ 2026</p>
+        <a class="hero-cta" href="https://www.newshub.gr/el/geopolitiki/apo-to-parisi-eos-ta-tirana-i-koinoniki-orgi-exaplonetai-stin-eyropi-oi-chores-poy-dokimazontai-poies-oi-aities-tis-anatarachis" target="_blank" rel="noopener">Διάβασε το άρθρο</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="secondary">
+    <article class="card" data-kind="news" data-topics="ellada">
+    <a class="card-link" href="https://www.newshub.gr/el/ellada/michalis-chrysochoidis-stin-imera-tis-ellinikis-astynomias-i-asfaleia-einai-ena-dimokratiko-dikaioma-to-stoichima-gia-tis-geitonies" target="_blank" rel="noopener">
+    <span class="card-media">
+      <img class="card-image" src="https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/19-10/xrysoxoidis-astynomia1.jpg" alt="" loading="lazy">
+      
+      
+    </span>
+    <p class="card-label">Ελλάδα</p>
+    <h2 class="card-title">Μιχάλης Χρυσοχοΐδης στην Ημέρα της Ελληνικής Αστυνομίας: «Η ασφάλεια είναι ένα δημοκρατικό δικαίωμα» -Το στοίχημα για τις γειτονιές</h2>
+    
+    <p class="card-meta">19 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="video">
+    <a class="card-link" href="video/80whB6P0360-kostas-pikramenos-narko-tromokratia-to-aorato-nima.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/80whB6P0360/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    
+    <h2 class="card-title">Κώστας Πικραμένος: Ναρκο-τρομοκρατία, το αόρατο νήμα οργανωμένου εγκλήματος και τυφλού φανατισμού!</h2>
+    
+    <p class="card-meta">12 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="politiki kosmos">
+    <a class="card-link" href="episode/20015084-ypothesi-gkilfoil-oi-endiameses-ekloges-stis-ipa-kai.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/6zzukvcfw08v831jsqgncbch01aa?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">22 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτική</p>
+    <h2 class="card-title">Υπόθεση Γκιλφόιλ, οι ενδιάμεσες εκλογές στις ΗΠΑ και οι ισορροπίες στην περιοχή</h2>
+    <p class="card-guest">Νίκος Μολφέτας</p>
+    <p class="card-meta">25 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="news" data-topics="ellada">
+    <a class="card-link" href="https://www.newshub.gr/el/ellada/nea-apochorisi-idrytikoy-meloys-apo-to-kinima-tis-marias-karystianoy-me-aichmes-gia-tin-leitoyrgia-tis-igesias" target="_blank" rel="noopener">
+    <span class="card-media">
+      <img class="card-image" src="https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/19-10/karystianou-maria.jpg" alt="" loading="lazy">
+      
+      
+    </span>
+    <p class="card-label">Ελλάδα</p>
+    <h2 class="card-title">Νέα αποχώρηση ιδρυτικού μέλους από το Κίνημα της Μαρίας Καρυστιανού με αιχμές για την λειτουργία της ηγεσίας</h2>
+    
+    <p class="card-meta">19 Οκτ 2026</p>
+    </a>
+  </article>
+  </div>
+
+  <section class="intro intro--photo">
+    <img class="intro-bg" src="intro.jpg" alt="" fetchpriority="high">
+    <div class="intro-text">
+      <h2 class="intro-slogan">Ιστορίες που αξίζει να ακούς.</h2>
+      <p class="intro-sub">Podcasts και βίντεο του newshub.gr — συζητήσεις, αναλύσεις και πρόσωπα, από την Κρήτη και τον κόσμο.</p>
+
+      <a class="intro-cta" href="episode/20015084-ypothesi-gkilfoil-oi-endiameses-ekloges-stis-ipa-kai.html">♪ Άκουσε το τελευταίο</a>
+    </div>
+  </section>
+
+  <section class="band band--latest">
+    <div class="band-head">
+      <p class="mark">
+        <span class="mark-dot"></span>
+        <span class="mark-word">Lat<em>est</em></span>
+      </p>
+      <h1 data-flow-head>Τελευταία επεισόδια</h1>
+    </div>
+
+  <nav class="topics" aria-label="Θέματα">
+    <span class="topics-label">Θέματα</span>
+    <div class="topics-list">
+        <a class="topic is-on" href="categories.html" data-topic="all">Όλα</a>
+        <a class="topic" href="category/kriti.html" data-topic="kriti" data-name="Κρήτη" data-count="1.083">Κρήτη<span class="topic-n">1.083</span></a>
+        <a class="topic" href="category/geopolitiki.html" data-topic="geopolitiki" data-name="Γεωπολιτική" data-count="401">Γεωπολιτική<span class="topic-n">401</span></a>
+        <a class="topic" href="category/politiki.html" data-topic="politiki" data-name="Πολιτική" data-count="215">Πολιτική<span class="topic-n">215</span></a>
+        <a class="topic" href="category/kosmos.html" data-topic="kosmos" data-name="Κόσμος" data-count="201">Κόσμος<span class="topic-n">201</span></a>
+        <a class="topic" href="category/ellada.html" data-topic="ellada" data-name="Ελλάδα" data-count="201">Ελλάδα<span class="topic-n">201</span></a>
+        <a class="topic" href="category/agronews.html" data-topic="agronews" data-name="Agronews" data-count="171">Agronews<span class="topic-n">171</span></a>
+        <a class="topic" href="category/istoria.html" data-topic="istoria" data-name="Ιστορία" data-count="150">Ιστορία<span class="topic-n">150</span></a>
+        <a class="topic" href="category/ygeia.html" data-topic="ygeia" data-name="Υγεία" data-count="144">Υγεία<span class="topic-n">144</span></a>
+        <a class="topic" href="category/oikonomia.html" data-topic="oikonomia" data-name="Οικονομία" data-count="112">Οικονομία<span class="topic-n">112</span></a>
+        <a class="topic" href="category/perivallon.html" data-topic="perivallon" data-name="Περιβάλλον" data-count="75">Περιβάλλον<span class="topic-n">75</span></a>
+        <a class="topic" href="category/athlitika.html" data-topic="athlitika" data-name="Αθλητικά" data-count="63">Αθλητικά<span class="topic-n">63</span></a>
+        <a class="topic" href="category/politismos.html" data-topic="politismos" data-name="Πολιτισμός" data-count="54">Πολιτισμός<span class="topic-n">54</span></a>
+        <a class="topic" href="category/tech-hub.html" data-topic="tech-hub" data-name="Tech-Hub" data-count="33">Tech-Hub<span class="topic-n">33</span></a>
+    </div>
+  </nav>
+
+    <div class="flow" data-topic="all">
+      <div class ="grid">
+    <article class="card" data-kind="podcast">
+    <a class="card-link" href="episode/20014196-pavlos-melas-ena-pallikari-me-idanika.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/pp98c0zrlouij5sv1n04xk88ez3v?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">18 λεπτά</span>
+    </span>
+    
+    <h2 class="card-title">Παύλος Μελάς - Ένα παλληκάρι με ιδανικά!</h2>
+    <p class="card-guest">Κωνσταντίνος Χολέβας</p>
+    <p class="card-meta">25 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast">
+    <a class="card-link" href="episode/20005101-ithiko-politika-ofeila-na-paraititho-ola-ginontai-stin.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/1j2v4eg1zzc68tp4h8bzlbr7zc05?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">12 λεπτά</span>
+    </span>
+    
+    <h2 class="card-title">Ηθικο-πολιτικά όφειλα να παραιτηθώ - Όλα γίνονται στην ώρα τους!</h2>
+    <p class="card-guest">Χάρης Μαμουλάκης</p>
+    <p class="card-meta">22 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast">
+    <a class="card-link" href="episode/20005079-i-periemminopavsi-den-einai-tampou-otan-soma-kai.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/lc3kwfi8tw66vrsudv62rpqjagim?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">27 λεπτά</span>
+    </span>
+    
+    <h2 class="card-title">Η περιεμμηνόπαυση δεν είναι ταμπού -  Όταν σώμα και διάθεση αλλάζουν, η γυναίκα αναζητά απαντήσεις!</h2>
+    <p class="card-guest">Αρετή Αυγουλέα</p>
+    <p class="card-meta">22 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast">
+    <a class="card-link" href="episode/20000241-giati-i-christougenniatiki-agora-prepei-na-parameinei.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/uhozcc5bqhkapqlqnfsusl8xh6ec?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">17 λεπτά</span>
+    </span>
+    
+    <h2 class="card-title">Γιατί η χριστουγεννιάτικη αγορά πρέπει να παραμείνει στην πλατεία Ελευθερίας</h2>
+    <p class="card-guest">Μιχάλης Καραμαλάκης</p>
+    <p class="card-meta">22 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="geopolitiki">
+    <a class="card-link" href="episode/19990840-diapragmatevseis-gia-kourdiko-oi-kourdoi-to-vlepoun-os.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/9fksxgq62otvb6o95d5m56pmoflf?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">23 λεπτά</span>
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Διαπραγματεύσεις για κουρδικό - Οι κούρδοι το βλέπουν ως απαραίτητη φάση για την επίλυση, η Τουρκία όμως συνεχίζει να τους βλέπει ως τρομοκράτες!</h2>
+    <p class="card-guest">Μουράτ Ισσί</p>
+    <p class="card-meta">20 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast">
+    <a class="card-link" href="episode/19990750-konstantinos-tsatsos-enas-gigantas-anamesa-stous.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/9vkfx9mbbh9vnn5vb6ssnf421ogt?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">44 λεπτά</span>
+    </span>
+    
+    <h2 class="card-title">Κωνσταντίνος Τσάτσος, ένας γίγαντας ανάμεσα στους γίγαντες της πολιτικής και του πνεύματος!</h2>
+    <p class="card-guest">Σπύρος Κουτρούλης</p>
+    <p class="card-meta">20 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="geopolitiki kosmos">
+    <a class="card-link" href="episode/19979743-opla-kai-exoplismoi-neas-epochis-apo-tis-ipa-gia-tis.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/mxzvl68gezeki4ay5ut85rwecizn?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">19 λεπτά</span>
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Όπλα και εξοπλισμοί νέας εποχής από τις ΗΠΑ για τις Ένοπλες Δυνάμεις!</h2>
+    <p class="card-guest">Γιάννης Νικήτας</p>
+    <p class="card-meta">18 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="geopolitiki kriti">
+    <a class="card-link" href="episode/19979716-i-navtex-gia-to-kalodio-i-tourkia-kai-i-metanastevtiki.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/xl6vozgvaleipq1zoumg8d4w3rmi?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">33 λεπτά</span>
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Η NAVTEX για το καλώδιο, η Τουρκία και η μεταναστευτική «βόμβα» στη νότια Κρήτη!</h2>
+    <p class="card-guest">Γιώργος Θεοδωρίδης</p>
+    <p class="card-meta">18 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="politiki">
+    <a class="card-link" href="episode/19974527-paramenei-choris-eklogiki-apeili-o-mitsotakis-elas-kai.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/9bcyyjfk7fps1613irwer2mf9xs4?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">20 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτική</p>
+    <h2 class="card-title">Παραμένει χωρίς εκλογική απειλή ο Μητσοτάκης! ΕΛΑΣ και ΠΑΣΟΚ αναλώνονται στη κόντρα για την 2η θέση!</h2>
+    <p class="card-guest">Σταύρος Χριστακόπουλος</p>
+    <p class="card-meta">17 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="politiki">
+    <a class="card-link" href="episode/19956835-se-avtes-tis-ekloges-oloi-oi-archigoi-dinoun-tin.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/75pmqbvspgkjwlmkvq0miku6xw26?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">47 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτική</p>
+    <h2 class="card-title">Σε αυτές τις εκλογές όλοι οι αρχηγοί δίνουν την τελευταία τους μεγάλη μάχη!</h2>
+    <p class="card-guest">Γιώργος Βουλγαράκης</p>
+    <p class="card-meta">13 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="geopolitiki politiki kosmos">
+    <a class="card-link" href="episode/19908884-poso-allazoun-tis-geopolitikes-isorropies-oi-ekloges.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/95qj0tfl8imbns88dkeqqwnjhhh9?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">23 λεπτά</span>
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Πόσο αλλάζουν τις γεωπολιτικές ισορροπίες οι εκλογές σε Ισραήλ και ΗΠΑ!</h2>
+    <p class="card-guest">Σωτήρης Λίβας</p>
+    <p class="card-meta">5 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="politiki ellada">
+    <a class="card-link" href="episode/19887902-septemvrios-1996-oi-ekloges-pou-eftiaxan-tin-ellada.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/wj4svznkdx4tbxm5o8stn6kpuskf?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">54 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτική</p>
+    <h2 class="card-title">Σεπτέμβριος 1996, οι εκλογές που έφτιαξαν την Ελλάδα του ευρώ!</h2>
+    <p class="card-guest">Βαγγέλης Κούμπουλης</p>
+    <p class="card-meta">30 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="politiki">
+    <a class="card-link" href="episode/19857186-o-eklogikos-rolos-tou-pasok-kai-tou-syriza-echei.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/43aolm814aiwnr9of7kdtjv2984x?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">26 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτική</p>
+    <h2 class="card-title">Ο εκλογικός ρόλος του ΠΑΣΟΚ και του ΣΥΡΙΖΑ έχει κλείσει - Τι λέει για τα τοπικά ψηφοδέλτια της ΕΛΑΣ</h2>
+    <p class="card-guest">Σπύρος Δανέλλης</p>
+    <p class="card-meta">24 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="kosmos">
+    <a class="card-link" href="episode/19975646-i-gallia-einai-se-vathia-politiki-axiaki-krisi-oi-neoi.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/s93fwzgrwq8vyy4vo5jay4k3y8jk?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">24 λεπτά</span>
+    </span>
+    <p class="card-label">Κόσμος</p>
+    <h2 class="card-title">Η Γαλλία είναι σε βαθιά πολιτική, αξιακή κρίση! Οι νέοι δεν κάνουν πια όνειρα!</h2>
+    <p class="card-guest">Δημοσθένης Δαββέτας</p>
+    <p class="card-meta">17 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="kosmos">
+    <a class="card-link" href="episode/19966237-oi-ipa-tha-kinithoun-sto-paraskinio-gia-to-kalodio-to.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/uwohnm3g5bt0dyz1hcsaesfpooz9?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">14 λεπτά</span>
+    </span>
+    <p class="card-label">Κόσμος</p>
+    <h2 class="card-title">Οι ΗΠΑ θα κινηθούν στο παρασκήνιο για το καλώδιο – Το έργο θα υλοποιηθεί!</h2>
+    <p class="card-guest">Γιώργος Καπόπουλος</p>
+    <p class="card-meta">17 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="oikonomia kosmos">
+    <a class="card-link" href="episode/19941798-i-germania-metaxy-skandalou-kataskopeias-plithorismou.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/ob1wgz3fj8x472qbbxbbyos7mlp0?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">29 λεπτά</span>
+    </span>
+    <p class="card-label">Οικονομία</p>
+    <h2 class="card-title">Η Γερμανία μεταξύ σκανδάλου κατασκοπείας, πληθωρισμού και ανόδου της Ακροδεξιάς!</h2>
+    <p class="card-guest">Ειρήνη Αναστασοπούλου</p>
+    <p class="card-meta">11 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="geopolitiki">
+    <a class="card-link" href="episode/19941777-stin-kaso-den-tha-apantisoume-an-vgoun-tourkika.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/wyw92xy59v3vayuna3shl0k9v9p9?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">28 λεπτά</span>
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Στην Κάσο δεν θα απαντήσουμε αν βγουν τουρκικά πολεμικά! – Τι φοβάται για το καλώδιο</h2>
+    <p class="card-guest">Γιώργος Αϋφαντής</p>
+    <p class="card-meta">11 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="geopolitiki">
+    <a class="card-link" href="episode/19928917-i-7i-oktovriou-opos-tin-ezisa-kai-osa-allaxan-sto.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/hge25itoy40hnlztnhl5ycujlnmt?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">1ω 20 λεπτά</span>
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Η 7η Οκτωβρίου όπως την έζησα και όσα άλλαξαν στο Ισραήλ μετά από 3 χρόνια!</h2>
+    <p class="card-guest">Γαβριήλ Χαρίτος</p>
+    <p class="card-meta">8 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="geopolitiki">
+    <a class="card-link" href="video/Ppz6tXXfNy0-konstantinos-loukopoulos-sto-pedio-ti-krisimi-stigmi.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/Ppz6tXXfNy0/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Κωνσταντίνος Λουκόπουλος: Στο πεδίο, τη κρίσιμη στιγμή, θα είμαστε μόνοι μας, απέναντι στην Τουρκία!</h2>
+    
+    <p class="card-meta">6 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="athlitika kriti">
+    <a class="card-link" href="episode/19975649-ethniki-katastrofi-i-epektasi-sta-12-navtika-milia.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/fp98mpac20mn39nxbwq7p03h29dg?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">32 λεπτά</span>
+    </span>
+    <p class="card-label">Αθλητικά</p>
+    <h2 class="card-title">«Εθνική καταστροφή» η επέκταση στα 12 ναυτικά μίλια μόνο νοτιοδυτικά της Κρήτης!</h2>
+    <p class="card-guest">Κωνσταντίνος Λουκόπουλος</p>
+    <p class="card-meta">17 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="kriti">
+    <a class="card-link" href="video/9z18c8pLL9s-afthonidis-para-polla-ladia-irthan-stin-kriti-kai.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/9z18c8pLL9s/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Κρήτη</p>
+    <h2 class="card-title">Αφθονίδης: Πάρα πολλά λάδια ήρθαν στην Κρήτη και ελληνοποιήθηκαν</h2>
+    
+    <p class="card-meta">8 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="kriti">
+    <a class="card-link" href="video/eCLiDYu5iI8-stavros-tzedakis-to-provlima-ston-elaiokomiko-tomea.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/eCLiDYu5iI8/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Κρήτη</p>
+    <h2 class="card-title">Σταύρος Τζεδάκης: Το πρόβλημα στον ελαιοκομικό τομέα της Κρήτης ειναι μεγάλο</h2>
+    
+    <p class="card-meta">8 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="kriti">
+    <a class="card-link" href="episode/19920804-den-mporei-ston-4o-dimo-tis-choras-to-irakleio-na-min.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/h49fogqcmmu2hb5ihg3ia29711jb?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">25 λεπτά</span>
+    </span>
+    <p class="card-label">Κρήτη</p>
+    <h2 class="card-title">Δεν μπορεί στον 4ο Δήμο της χώρας, το Ηράκλειο, να μην λειτουργεί Κέντρο Αστέγων - Τι προτείνει η ίδια</h2>
+    <p class="card-guest">Μαρία Καναβάκη</p>
+    <p class="card-meta">6 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="kriti">
+    <a class="card-link" href="video/0ZkCG-_DyVM-katapeltis-o-dimitris-vrysalis-gia-tin-antapokrisi-tou.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/0ZkCG-_DyVM/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Κρήτη</p>
+    <h2 class="card-title">Καταπέλτης ο Δημήτρης Βρύσαλης για την ανταπόκριση του κράτους απέναντι στις καταστροφές στην Κρήτη</h2>
+    
+    <p class="card-meta">5 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="ellada">
+    <a class="card-link" href="episode/19975659-ypothesi-gkilfoil-olo-to-paraskinio-pou-syntaraxe.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/drtdq4345r4vtuznf4kywpk0q344?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">1ω 29 λεπτά</span>
+    </span>
+    <p class="card-label">Ελλάδα</p>
+    <h2 class="card-title">Υπόθεση Γκιλφόιλ, όλο το παρασκήνιο που συντάραξε Ουάσιγκτον και Αθήνα!</h2>
+    <p class="card-guest">Ευφροσύνη Παυλακούδη</p>
+    <p class="card-meta">17 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="ellada">
+    <a class="card-link" href="episode/19940793-ellada-kai-voulgaria-katektisan-to-epipedo.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/3awm3ag3j9aw5q2gylgkam4cz7y8?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">42 λεπτά</span>
+    </span>
+    <p class="card-label">Ελλάδα</p>
+    <h2 class="card-title">Ελλάδα και Βουλγαρία κατέκτησαν το επίπεδο εμπιστοσύνης που λύνει τα προβλήματα!</h2>
+    <p class="card-guest">Δανάη Κουμανάκου</p>
+    <p class="card-meta">11 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="ellada">
+    <a class="card-link" href="episode/19939579-syntriptika-yper-tis-elladas-ta-minymata-tis.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/6b9ikpyo3mksx09khjxbot163sxu?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">29 λεπτά</span>
+    </span>
+    <p class="card-label">Ελλάδα</p>
+    <h2 class="card-title">Συντριπτικά υπέρ της Ελλάδας τα μηνύματα της επίσκεψης Ρούμπιο!</h2>
+    <p class="card-guest">Ινώ Αφεντούλη</p>
+    <p class="card-meta">10 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="oikonomia ellada">
+    <a class="card-link" href="episode/19933597-giati-i-energeiaki-anelastikotita-einai-to-empodio-sti.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/r36kvavxd23iw69ma1rcdqcyrqar?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">21 λεπτά</span>
+    </span>
+    <p class="card-label">Οικονομία</p>
+    <h2 class="card-title">Γιατί η ενεργειακή ανελαστικότητα είναι το εμπόδιο στη πτώση τιμών ενέργειας! Τι πρέπει να κάνει η Ελλάδα!</h2>
+    <p class="card-guest">Γιάννης Μπασιάς</p>
+    <p class="card-meta">9 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="kriti ellada">
+    <a class="card-link" href="episode/19910905-synergasia-tis-elstat-me-ta-panepistimia-tis-kritis-i.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/1flecus014xq7x52klv1tl2d83sx?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">20 λεπτά</span>
+    </span>
+    <p class="card-label">Κρήτη</p>
+    <h2 class="card-title">Συνεργασία της ΕΛΣΤΑΤ με τα Πανεπιστήμια της Κρήτης! Η προϊσταμένη της ΕΛΣΤΑΤ νοτίου Ελλάδας, Ανδρομάχη Πιπεράκη στο newshub.gr</h2>
+    
+    <p class="card-meta">5 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="geopolitiki ellada">
+    <a class="card-link" href="episode/19908866-i-ellada-prepei-na-einai-etoimi-gia-kathe-endechomeno.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/ttdw0tcidr0rmjuyr68vl2aly6jc?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">25 λεπτά</span>
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Η Ελλάδα πρέπει να είναι έτοιμη για κάθε ενδεχόμενο εξ Ανατολών!</h2>
+    <p class="card-guest">Δημόκριτος Ζερβάκης</p>
+    <p class="card-meta">5 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="athlitika kriti">
+    <a class="card-link" href="video/Dfk5FBsAu9Q-evkola-o-ofi-ston-teliko-tou-tournoua-nikos-loulis.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/Dfk5FBsAu9Q/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Αθλητικά</p>
+    <h2 class="card-title">Εύκολα ο ΟΦΗ στον τελικό του τουρνουά «Νίκος Λούλης» - Νίκησε το Ηράκλειο 73 - 60 (B)</h2>
+    
+    <p class="card-meta">27 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="athlitika kriti">
+    <a class="card-link" href="video/EsGGvFY3v30-evkola-o-ofi-ston-teliko-tou-tournoua-nikos-loulis.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/EsGGvFY3v30/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Αθλητικά</p>
+    <h2 class="card-title">Εύκολα ο ΟΦΗ στον τελικό του τουρνουά «Νίκος Λούλης» - Νίκησε το Ηράκλειο 73 - 60</h2>
+    
+    <p class="card-meta">27 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="athlitika">
+    <a class="card-link" href="video/NpC-279ffAM-i-omada-mpasket-tou-ofi-konta-stous-mathites-sta.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/NpC-279ffAM/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Αθλητικά</p>
+    <h2 class="card-title">Η ομάδα μπάσκετ του ΟΦΗ κοντά στους μαθητές, στα πλαίσια της πανελλήνιας ημέρας σχολικού αθλητισμού</h2>
+    
+    <p class="card-meta">25 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="athlitika ygeia">
+    <a class="card-link" href="video/1lWJVwMzoqo-eirini-masaouti-trofi-einai-i-glossa-tis-avtofrontidas.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/1lWJVwMzoqo/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Αθλητικά</p>
+    <h2 class="card-title">Ειρήνη Μασαούτη: Τροφή είναι η γλώσσα της αυτοφροντίδας! Ακραίες διατροφικές συμπεριφορές &amp; παγίδες!</h2>
+    
+    <p class="card-meta">22 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="athlitika">
+    <a class="card-link" href="video/e-XnGEQiJHI-me-polla-thetika-to-proto-proponitikou-charaktira.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/e-XnGEQiJHI/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Αθλητικά</p>
+    <h2 class="card-title">Με πολλά θετικά, το πρώτο, προπονητικού χαρακτήρα, φιλικό της ομάδας μπάσκετ του ΟΦΗ (2)</h2>
+    
+    <p class="card-meta">12 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="oikonomia">
+    <a class="card-link" href="video/Q4nbUF18Mng-giannis-mpasias-i-energeiaki-anelastikotita-empodio.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/Q4nbUF18Mng/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Οικονομία</p>
+    <h2 class="card-title">Γιάννης Μπασιάς: Η ενεργειακή ανελαστικότητα εμπόδιο στη πτώση τιμών ενέργειας! Τι πρέπει να γίνει!</h2>
+    
+    <p class="card-meta">7 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="geopolitiki oikonomia kosmos">
+    <a class="card-link" href="episode/19744409-stratigikes-tis-kinas-meros-8o-epicheirisi-oikonomikos.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/qjkxzobb22m8y758bdchjgp2vbfn?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">1ω 7 λεπτά</span>
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Στρατηγικές της Κίνας (Μέρος 8ο) - Επιχείρηση «Οικονομικός Παρίας»: ΗΠΑ, Ιράν, Κίνα και η «νέα» Μέση Ανατολή!</h2>
+    <p class="card-guest">Ανδρέας Λιούμπας</p>
+    <p class="card-meta">3 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="geopolitiki oikonomia kosmos">
+    <a class="card-link" href="video/bFMIYpnT5hc-andreas-lioumpas-stratigikes-tis-kinas-meros-8o-o.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/bFMIYpnT5hc/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Ανδρέας Λιούμπας: Στρατηγικές της Κίνας(Μέρος 8ο) - O «Οικονομικός Παρίας» και η «νέα» Μέση Ανατολή!</h2>
+    
+    <p class="card-meta">1 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="oikonomia kosmos">
+    <a class="card-link" href="episode/19607481-i-antifatiki-rosiki-oikonomia-oi-krisimes-efodiastikes.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/bnm0m4a7234xmkhxuimvo6ekm3n8?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">21 λεπτά</span>
+    </span>
+    <p class="card-label">Οικονομία</p>
+    <h2 class="card-title">Η αντιφατική Ρωσική οικονομία, οι κρίσιμες εφοδιαστικές αλυσίδες και η καθηλωμένη Ευρώπη!</h2>
+    <p class="card-guest">Γιώργος Ατσαλάκης</p>
+    <p class="card-meta">6 Αυγ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="ygeia">
+    <a class="card-link" href="episode/19920447-pnevmoniki-inosi-oi-nees-therapeies-sto-pagni-pou.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/zm775ky6zead603xlbfxhod0ihdc?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">22 λεπτά</span>
+    </span>
+    <p class="card-label">Υγεία</p>
+    <h2 class="card-title">Πνευμονική ίνωση - Οι νέες θεραπείες στο ΠΑΓΝΗ που δίνουν ελπίδα στους ασθενείς!</h2>
+    
+    <p class="card-meta">6 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="ygeia">
+    <a class="card-link" href="video/6grO8o11idk-flytzanis-oxymena-ta-provlimata-sti-dimosia-ygeia.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/6grO8o11idk/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Υγεία</p>
+    <h2 class="card-title">Φλυτζανής: Οξυμενα τα προβλήματα στη Δημόσια Υγεία</h2>
+    
+    <p class="card-meta">30 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="ygeia">
+    <a class="card-link" href="video/2aLffWkBP7o-dimitris-vrysalis-klimakonoume-ton-agona-gia.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/2aLffWkBP7o/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Υγεία</p>
+    <h2 class="card-title">Δημήτρης Βρύσαλης: Κλιμακώνουμε τον αγώνα για αποκλειστικά Δημόσια και δωρεάν Υγεία</h2>
+    
+    <p class="card-meta">30 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="ygeia">
+    <a class="card-link" href="video/0JVV94NFt1w-g-evaggelou-to-thema-einai-i-asfaleia-to-pagni.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/0JVV94NFt1w/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Υγεία</p>
+    <h2 class="card-title">Γ. Ευαγγέλου: Το θέμα είναι η ασφάλεια! Tο ΠΑΓΝΗ αποδέκτης σοβαρών επιπλοκών από αισθητικές πράξεις!</h2>
+    
+    <p class="card-meta">26 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="ygeia">
+    <a class="card-link" href="video/so531xTZbMs-s-mpleka-protes-voitheies-psychikis-ygeias-pos.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/so531xTZbMs/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Υγεία</p>
+    <h2 class="card-title">Σ. Μπλέκα: Πρώτες Βοήθειες Ψυχικής Υγείας- Πώς προσεγγίζουμε και στηρίζουμε έναν άνθρωπο σε δυσκολία</h2>
+    
+    <p class="card-meta">17 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="tech-hub">
+    <a class="card-link" href="episode/19914731-i-techniti-noimosyni-prepei-na-ginei-koryfaio-zitima.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/k0j4koidit9ih3dllgjbfafj5e21?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">32 λεπτά</span>
+    </span>
+    <p class="card-label">Tech-Hub</p>
+    <h2 class="card-title">Η Τεχνητή Νοημοσύνη πρέπει να γίνει κορυφαίο ζήτημα του κράτους δικαίου!</h2>
+    <p class="card-guest">Βασίλης Τζέμος</p>
+    <p class="card-meta">5 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="tech-hub politiki">
+    <a class="card-link" href="episode/19795970-poioi-kai-pos-paremvainoun-psifiaka-sta-apotelesmata.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/etgm7dbfxz2nim4b92od1v11eeai?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">37 λεπτά</span>
+    </span>
+    <p class="card-label">Tech-Hub</p>
+    <h2 class="card-title">Ποιοί και πώς παρεμβαίνουν ψηφιακά στα αποτελέσματα των εκλογών!</h2>
+    <p class="card-guest">Ελένη Καψοκόλη</p>
+    <p class="card-meta">13 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="tech-hub">
+    <a class="card-link" href="episode/19650821-nea-epochi-ston-elegcho-mastou-sto-diagnostiko-kentro.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/syxtc80dcs2hds6gwzij6hc37etf?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">18 λεπτά</span>
+    </span>
+    <p class="card-label">Tech-Hub</p>
+    <h2 class="card-title">Νέα εποχή στον έλεγχο μαστού στο Διαγνωστικό Κέντρο Ηρόδοτος – Όταν η τεχνολογία σώζει ζωές!</h2>
+    <p class="card-guest">Αικ. Ανδριανάκη</p>
+    <p class="card-meta">15 Αυγ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="tech-hub">
+    <a class="card-link" href="episode/19539360-ti-einai-kai-ti-allages-fernei-to-psifiako-evro.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/aoxf0ip7r76eh3sxbk37mdyolp56?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">32 λεπτά</span>
+    </span>
+    <p class="card-label">Tech-Hub</p>
+    <h2 class="card-title">Τι είναι και τι αλλαγές φέρνει το ψηφιακό ευρώ!</h2>
+    <p class="card-guest">Κωνσταντίνος Γκράβας</p>
+    <p class="card-meta">23 Ιουλ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="tech-hub">
+    <a class="card-link" href="episode/19207407-pos-den-tha-pesoume-thymata-psifiakon-apateonon.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/6ay2ccd1k9q6hyi7gtdwembt98da?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">28 λεπτά</span>
+    </span>
+    <p class="card-label">Tech-Hub</p>
+    <h2 class="card-title">Πώς δεν θα πέσουμε θύματα ψηφιακών απατεώνων!</h2>
+    <p class="card-guest">Κέλλυ Ιωάννου</p>
+    <p class="card-meta">20 Μαϊ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="tech-hub">
+    <a class="card-link" href="episode/18860595-apagorevsi-i-psifiaki-paideia-to-megalo-dilimma-ton.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/qu6kzyswkoc73u1w1ml3duwgxmz1?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">35 λεπτά</span>
+    </span>
+    <p class="card-label">Tech-Hub</p>
+    <h2 class="card-title">«Απαγόρευση ή Ψηφιακή Παιδεία; Το μεγάλο δίλημμα των γονέων στην εποχή της AI»</h2>
+    <p class="card-guest">Παρασκευή Φραγκοπούλου</p>
+    <p class="card-meta">17 Μαρ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="agronews">
+    <a class="card-link" href="video/LPwRr-1KWbo-potami-oi-agrotikoi-dromoi-sta-anogeia-logo-vrochis.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/LPwRr-1KWbo/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Agronews</p>
+    <h2 class="card-title">Ποταμι οι αγροτικοί δρομοι στα Ανώγεια λόγω βροχής</h2>
+    
+    <p class="card-meta">3 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="agronews">
+    <a class="card-link" href="episode/19899102-lagopsychoi-kyvernitikoi-axiomatouchoi-kalliergoun-tin.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/qkfhovugyx4guz9whp1xrxj9iyn5?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">30 λεπτά</span>
+    </span>
+    <p class="card-label">Agronews</p>
+    <h2 class="card-title">«Λαγόψυχοι» κυβερνητικοί αξιωματούχοι καλλιεργούν την ηττοπάθεια! «Προ των πυλών» απώλεια εθνικής κυριαρχίας στο Αιγαίο!</h2>
+    <p class="card-guest">Γιώργος Αϋφαντής</p>
+    <p class="card-meta">2 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="agronews kriti">
+    <a class="card-link" href="video/O33oECn_RdE-ston-aera-exakolouthoun-na-vriskontai-chiliades.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/O33oECn_RdE/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Agronews</p>
+    <h2 class="card-title">Στον «αέρα» εξακολουθουν να βρίσκονται χιλιαδες αγροτικές επιδοτήσεις και στην Κρήτη</h2>
+    
+    <p class="card-meta">16 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="agronews">
+    <a class="card-link" href="video/mFs06S2x7L0-ston-aera-exakolouthoun-na-vriskontai-chiliades.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/mFs06S2x7L0/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Agronews</p>
+    <h2 class="card-title">Στον «αέρα» εξακολουθουν να βρίσκονται χιλιαδες αγροτικές επιδοτήσεις</h2>
+    
+    <p class="card-meta">16 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="agronews istoria geopolitiki">
+    <a class="card-link" href="episode/19805093-i-anodos-tis-akrodexias-deichnei-tin-istoriki.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/6yhwc6r9b5tu4pyyitj7hv2ar8re?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">23 λεπτά</span>
+    </span>
+    <p class="card-label">Agronews</p>
+    <h2 class="card-title">Η άνοδος της Ακροδεξιάς δείχνει την ιστορική μετατόπιση της Ευρώπης από την «αποικιοκρατία», στην «άμυνα»</h2>
+    <p class="card-guest">Γιώργος Καραμπελιάς</p>
+    <p class="card-meta">14 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="agronews geopolitiki">
+    <a class="card-link" href="video/pUntRBJjUMM-giorgos-karampelias-i-akrodexia-deichnei-ti-metakinisi.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/pUntRBJjUMM/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Agronews</p>
+    <h2 class="card-title">Γιώργος Καραμπελιάς: Η Ακροδεξιά δείχνει τη μετακίνηση της Ευρώπης από την αποικιοκρατία στην άμυνα!</h2>
+    
+    <p class="card-meta">11 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="istoria">
+    <a class="card-link" href="episode/19895735-yemeni-i-evdaimon-aravia-apo-tous-othomanous-stous.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/hpwe88nhl0ig5dbzypemx663xu9l?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">53 λεπτά</span>
+    </span>
+    <p class="card-label">Ιστορία</p>
+    <h2 class="card-title">Υεμένη, η «Ευδαίμων Αραβία» από τους Οθωμανούς στους Χούθι!</h2>
+    <p class="card-guest">Δημήτρης Λυβάνιος</p>
+    <p class="card-meta">1 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="istoria">
+    <a class="card-link" href="episode/19887949-mono-i-syspeirosi-tis-kentroaristeras-tha-rixei-to.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/2b029wdb9stguy0brcu19lgv9wkf?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">14 λεπτά</span>
+    </span>
+    <p class="card-label">Ιστορία</p>
+    <h2 class="card-title">Μόνο η συσπείρωση της κεντροαριστεράς θα ρίξει το… νεοθωμανικό κράτος της Ν.Δ.!</h2>
+    <p class="card-guest">Ρόζα Βρεττού</p>
+    <p class="card-meta">30 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="istoria">
+    <a class="card-link" href="episode/19869868-i-istoria-tis-evp-meros-5o-ta-chronia-tis-esostrefeias.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/p3f2roebwkv9g5bpelcd800n0uv6?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">1ω 26 λεπτά</span>
+    </span>
+    <p class="card-label">Ιστορία</p>
+    <h2 class="card-title">Η ιστορία της ΕΥΠ (Μέρος 5ο) -  Τα χρόνια της εσωστρέφειας και των σκανδάλων!</h2>
+    
+    <p class="card-meta">27 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="istoria">
+    <a class="card-link" href="video/2HKuZKZVvY8-ex-aporriton-i-istoria-tis-evp-5-ta-chronia-tis.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/2HKuZKZVvY8/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Ιστορία</p>
+    <h2 class="card-title">Εξ Απορρήτων: Η ιστορία της ΕΥΠ (5): Τα χρόνια της εσωστρέφειας και των σκανδάλων!</h2>
+    
+    <p class="card-meta">25 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="istoria">
+    <a class="card-link" href="video/olTT-gDD_Ls-spyros-danellis-o-istorikos-rolos-pasok-kai-syriza.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/olTT-gDD_Ls/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Ιστορία</p>
+    <h2 class="card-title">Σπύρος Δανέλλης: Ο ιστορικός ρόλος ΠΑΣΟΚ και ΣΥΡΙΖΑ έχει κλείσει - τα τοπικά ψηφοδέλτια της ΕΛΑΣ</h2>
+    
+    <p class="card-meta">21 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="istoria ellada">
+    <a class="card-link" href="episode/19820419-septemvrios-1926-venizelikos-emfylios-mesa-stin-athina.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/c6r3dhaklaa2d7atcwg1wn82ytbk?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">52 λεπτά</span>
+    </span>
+    <p class="card-label">Ιστορία</p>
+    <h2 class="card-title">Σεπτέμβριος 1926, βενιζελικός «εμφύλιος» μέσα στην Αθήνα! (podcast)</h2>
+    <p class="card-guest">Γιάννης Δασκαρόλης</p>
+    <p class="card-meta">17 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="perivallon">
+    <a class="card-link" href="video/Cev7pyvh60k-ti-eipe-o-manolis-syntychakis-gia-ta-pente-chronia-apo.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/Cev7pyvh60k/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Περιβάλλον</p>
+    <h2 class="card-title">Τι είπε ο Μανόλης Συντυχακης για τα πέντε χρόνια απο το σεισμό στο Αρκαλοχώρι</h2>
+    
+    <p class="card-meta">25 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="ygeia perivallon kriti">
+    <a class="card-link" href="episode/19795977-i-plasmafairesi-ginetai-exeidikevmena-se-nosokomeiako.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/jia60plnmtat9zqakoyzai8sdgxt?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">21 λεπτά</span>
+    </span>
+    <p class="card-label">Υγεία</p>
+    <h2 class="card-title">«Η πλασμαφαίρεση γίνεται εξειδικευμένα σε νοσοκομειακό περιβάλλον» – Πρόστιμα και αφαιρέσεις αδειών σε ιδιωτικά ιατρεία στο Ηράκλειο</h2>
+    <p class="card-guest">Δημήτρης Ξυδάκης</p>
+    <p class="card-meta">14 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="perivallon">
+    <a class="card-link" href="episode/19630603-ola-osa-kryvontai-piso-apo-tin-amartoli-ypothesi-me-ta.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/o5moviannzajwqtcfr0cc8lbknj9?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">50 λεπτά</span>
+    </span>
+    <p class="card-label">Περιβάλλον</p>
+    <h2 class="card-title">Όλα όσα κρύβονται πίσω από την αμαρτωλή υπόθεση με τα «σπιτάκια ανακύκλωσης»!</h2>
+    <p class="card-guest">Ελπίδα Τσαμπουράκη</p>
+    <p class="card-meta">11 Αυγ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="perivallon">
+    <a class="card-link" href="episode/19617596-i-kratiki-arogi-stous-idiotes-giati-i-apokatastasi-tou.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/yagpquta345wjndwvrm6m5u9icnn?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">22 λεπτά</span>
+    </span>
+    <p class="card-label">Περιβάλλον</p>
+    <h2 class="card-title">Η κρατική αρωγή στους ιδιώτες- Γιατί η αποκατάσταση του Αρκαλοχωρίου από το σεισμό δεν είναι προτεραιότητα για το Κράτος!</h2>
+    <p class="card-guest">Μ. Συντυχάκης</p>
+    <p class="card-meta">8 Αυγ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="perivallon kriti">
+    <a class="card-link" href="episode/19492864-i-kriti-kai-i-mesogeios-einai-to-hot-spot-tis.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/b2deav363q8wvokqqrxzjrpt1r53?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">35 λεπτά</span>
+    </span>
+    <p class="card-label">Περιβάλλον</p>
+    <h2 class="card-title">Η Κρήτη και η Μεσόγειος ειναι το hot spot της κλιματικής αλλαγής παγκοσμίως!</h2>
+    <p class="card-guest">Γιάννης Αναστασάκης</p>
+    <p class="card-meta">14 Ιουλ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="athlitika perivallon">
+    <a class="card-link" href="episode/19414166-egklimatiki-energeia-i-apofasi-tis-politeias-na.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/7jpags1wvq4h0y0sre2e3rvms6ch?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">17 λεπτά</span>
+    </span>
+    <p class="card-label">Αθλητικά</p>
+    <h2 class="card-title">Εγκληματική ενέργεια η απόφαση της Πολιτείας να ζητήσει επιστροφή ενισχύσεων από τους σεισμόπληκτους!</h2>
+    <p class="card-guest">Κώστας Γκαντάτσιος</p>
+    <p class="card-meta">28 Ιουν 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="politismos ellada">
+    <a class="card-link" href="episode/19779720-levkadios-chern-o-logotechnis-pou-vrike-tin-ellada.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/stx4qq7z5zkbl53vq9u6ls6qbfns?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">34 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτισμός</p>
+    <h2 class="card-title">Λευκάδιος Χερν, ο λογοτέχνης που βρήκε την... Ελλάδα στην Ιαπωνία!</h2>
+    <p class="card-guest">Στέλιος Παπαλεξανδρόπουλος</p>
+    <p class="card-meta">9 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="politismos">
+    <a class="card-link" href="video/27qjGvuqvNo-sofia-zoraki-chorevoume-gia-ti-zoi-otan-o-politismos.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/27qjGvuqvNo/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Πολιτισμός</p>
+    <h2 class="card-title">Σοφία Ζωράκη: «Χορεύουμε για τη Ζωή»: Όταν ο πολιτισμός γίνεται πράξη στήριξης για τον ΗΡ.Υ.Δ.Α.</h2>
+    
+    <p class="card-meta">29 Αυγ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="politismos">
+    <a class="card-link" href="episode/19587774-o-soloup-pou-ekane-komik-me-epitychia-ton-zormpa.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/rnqxlgnuc66b9gtntehl4byd3yjq?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">16 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτισμός</p>
+    <h2 class="card-title">Ο Soloup που έκανε κόμικ με επιτυχία τον…Ζορμπά, συμμετέχει στο Φεστιβάλ λόγου και τέχνης «Ζορμπάς» του Μουσείου Καζαντζάκη!</h2>
+    
+    <p class="card-meta">2 Αυγ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="politismos">
+    <a class="card-link" href="episode/19539167-80-chronia-meta-ton-zormpa-i-marilena-milathianaki.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/unril1yhnwgpt26x1loos8iet7ca?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">25 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτισμός</p>
+    <h2 class="card-title">80 χρόνια μετά τον «Ζορμπά»: Η Μαριλένα Μηλαθιανάκη μιλά στο Newshub.gr για το μεγάλο φεστιβάλ του Μουσείου Καζαντζάκη</h2>
+    
+    <p class="card-meta">23 Ιουλ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="video" data-topics="politismos">
+    <a class="card-link" href="video/2rYPP5_9W2U-80-chronia-meta-ton-zormpa-i-marilena-milathianaki-gia.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/2rYPP5_9W2U/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Πολιτισμός</p>
+    <h2 class="card-title">80 χρόνια μετά τον «Ζορμπά»: Η Μαριλένα Μηλαθιανάκη για το μεγάλο φεστιβάλ του Μουσείου Καζαντζάκη!</h2>
+    
+    <p class="card-meta">21 Ιουλ 2026</p>
+    </a>
+  </article>
+<article class="card is-extra" hidden data-kind="podcast" data-topics="politismos politiki">
+    <a class="card-link" href="episode/19482512-o-spyros-mpimpilas-sto-newshub-gr-to-theatro-einai-o.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/n5xzdcbs5ivjvxip6d8vj7bgb9f7?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">20 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτισμός</p>
+    <h2 class="card-title">Ο Σπύρος Μπιμπίλας στο Newshub.gr: «Το θέατρο είναι ο παράδεισός μου – Μετά τη Βουλή, ήρθε η ώρα να ζήσω για μένα»</h2>
+    
+    <p class="card-meta">12 Ιουλ 2026</p>
+    </a>
+  </article>
+      </div>
+      <p class="flow-all"><a data-flow-all href="episodes.html">Όλα τα επεισόδια →</a></p>
+    </div>
+  </section>
+
+  <div class="page-cols">
+    <div class="page-main">
+  <section class="spot spot--pod">
+    <header class="spot-head">
+      <span class="spot-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M8.5 21h7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+      <div class="spot-text">
+        <h2 class="spot-title">
+          <span class="spot-eyebrow">Οι εκπομπές του</span>
+          <span class="nh">news<b>hub</b><i>.gr</i></span>
+        </h2>
+        <p class="spot-sub">12 εκπομπές, νέο επεισόδιο σχεδόν κάθε μέρα</p>
+      </div>
+      <a class="spot-all" href="shows.html">Όλες οι εκπομπές →</a>
+    </header>
+
+    <div class="shows-grid">
+      <article class="show-card">
+        <a class="card-link" href="show/epikairotita.html">
+          <img class="card-image" src="https://i.ytimg.com/vi/z0Xrph1nNkA/sddefault.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Επικαιρότητα</h3>
+          <p class="card-meta">1.532 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/synentevxeis-kai-prosopa-tis-epikairotitas.html">
+          <img class="card-image" src="https://storage.buzzsprout.com/uwohnm3g5bt0dyz1hcsaesfpooz9?.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Συνεντεύξεις και πρόσωπα της επικαιρότητας</h3>
+          <p class="card-meta">1.367 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/analyseis-sto-newshub-gr.html">
+          <img class="card-image" src="show-art/analyseis-sto-newshub-gr.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Αναλύσεις στο newshub.gr</h3>
+          <p class="card-meta">310 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/agrotiki-epikairotita.html">
+          <img class="card-image" src="https://i.ytimg.com/vi/9z18c8pLL9s/sddefault.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Αγροτική επικαιρότητα</h3>
+          <p class="card-meta">128 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/istoria-sto-newshub-gr.html">
+          <img class="card-image" src="show-art/istoria-sto-newshub-gr.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Ιστορία στο newshub.gr</h3>
+          <p class="card-meta">87 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/afieromata.html">
+          <img class="card-image" src="show-art/afieromata.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Αφιερώματα</h3>
+          <p class="card-meta">73 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/ygeia-kai-epistimes.html">
+          <img class="card-image" src="https://i.ytimg.com/vi/JILCFCpQ1TM/maxresdefault.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Υγεία και Επιστήμες</h3>
+          <p class="card-meta">51 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/paraskinio.html">
+          <img class="card-image" src="show-art/paraskinio.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Παρασκήνιο</h3>
+          <p class="card-meta">51 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/koinonia-se-1o-prosopo.html">
+          <img class="card-image" src="https://i.ytimg.com/vi/1Q16OCeiluI/maxresdefault.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Κοινωνία σε 1ο πρόσωπο</h3>
+          <p class="card-meta">25 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/25-mathimata-gia-tin-elliniki-istoria.html">
+          <img class="card-image" src="https://i.ytimg.com/vi/yV6w11aY9II/maxresdefault.jpg" alt="" loading="lazy">
+          <h3 class="show-name">25 μαθήματα για την ελληνική ιστορία</h3>
+          <p class="card-meta">24 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/istories-tou-irakleiou.html">
+          <img class="card-image" src="show-art/istories-tou-irakleiou.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Ιστορίες του Ηρακλείου</h3>
+          <p class="card-meta">4 επεισόδια</p>
+        </a>
+      </article>
+      <article class="show-card">
+        <a class="card-link" href="show/ex-aporriton.html">
+          <img class="card-image" src="https://i.ytimg.com/vi/pxsXimM38DU/maxresdefault.jpg" alt="" loading="lazy">
+          <h3 class="show-name">Εξ Απορρήτων</h3>
+          <p class="card-meta">4 επεισόδια</p>
+        </a>
+      </article>
+    </div>
+
+    <div class="pod-platforms">
+      <p class="pod-platforms-label">Σε όλες τις πλατφόρμες</p>
+      <nav class="platforms-links">
+        <a class="plat" href="https://www.youtube.com/@newshubgr/podcasts" target="_blank" rel="noopener" style="--brand:#FF0000">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2c-.2-.9-.9-1.6-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4c-.9.2-1.6.9-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8c.2.9.9 1.6 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z" fill="currentColor"/></svg>
+          <span>YouTube</span>
+          <i>↗</i>
+        </a>
+        <a class="plat" href="https://open.spotify.com/show/1W9rhtqzGlbfs8xGWNK7gN" target="_blank" rel="noopener" style="--brand:#1DB954">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7 9.4c3.3-.9 6.8-.6 9.5 1M7.6 12.6c2.8-.7 5.8-.4 8.1.9M8.3 15.6c2.2-.5 4.5-.3 6.3.7" stroke="var(--bg)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          <span>Spotify</span>
+          <i>↗</i>
+        </a>
+        <a class="plat" href="https://podcasts.apple.com/gr/podcast/%CF%84%CE%B1-podcast-%CF%84%CE%BF%CF%85-newshub-gr/id1601368308?l=el" target="_blank" rel="noopener" style="--brand:#9933CC">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M12 7a2 2 0 0 1 2 2v2.6a2 2 0 1 1-4 0V9a2 2 0 0 1 2-2zm-3.6 5a.8.8 0 0 1 .8.8 2.8 2.8 0 0 0 5.6 0 .8.8 0 1 1 1.6 0 4.4 4.4 0 0 1-3.6 4.3v1.2a.8.8 0 1 1-1.6 0v-1.2A4.4 4.4 0 0 1 7.6 12.8a.8.8 0 0 1 .8-.8z" fill="var(--bg)"/></svg>
+          <span>Apple Podcasts</span>
+          <i>↗</i>
+        </a>
+        <a class="plat" href="https://pocketcasts.com/podcast/%CF%84%CE%B1-podcasts-%CF%84%CE%BF%CF%85-newshubgr/ee0a5f70-401d-013a-d681-0acc26574db2" target="_blank" rel="noopener" style="--brand:#F43E37">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M12 6.6a5.4 5.4 0 1 0 5.4 5.4h-1.9A3.5 3.5 0 1 1 12 8.5z" fill="var(--bg)"/><path d="M10.6 9.9l3.8 2.1-3.8 2.1z" fill="var(--bg)"/></svg>
+          <span>Pocket Casts</span>
+          <i>↗</i>
+        </a>
+        <a class="plat" href="https://www.audible.com/podcast/podcasts-newshubgr/B08K57X52T" target="_blank" rel="noopener" style="--brand:#F8991C">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M6.5 12h1.8l1.6-3.4 2 7 1.8-5.2 1.3 1.6h2.5" stroke="var(--bg)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Audible</span>
+          <i>↗</i>
+        </a>
+        <a class="plat" href="https://www.buzzsprout.com/1904089" target="_blank" rel="noopener" style="--brand:#5BA829">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.4 16.6c-.5-4.4 2.7-8 9-8.2.5 5.3-3.1 8.8-9 8.2z" fill="var(--bg)"/></svg>
+          <span>Buzzsprout</span>
+          <i>↗</i>
+        </a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="topic-row" data-topic="kriti">
+    <a class="topic-bar" href="category/kriti.html">
+      <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></svg></span>
+      <h2 class="topic-bar-name">Κρήτη</h2>
+      <span class="topic-bar-all">Όλα τα 1.083 →</span>
+    </a>
+    <div class="topic-split">
+<article class="card card--lead" data-kind="podcast" data-topics="geopolitiki kriti">
+    <a class="card-link" href="episode/19979716-i-navtex-gia-to-kalodio-i-tourkia-kai-i-metanastevtiki.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/xl6vozgvaleipq1zoumg8d4w3rmi?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">33 λεπτά</span>
+    </span>
+    <p class="card-label">Κρήτη</p>
+    <h2 class="card-title">Η NAVTEX για το καλώδιο, η Τουρκία και η μεταναστευτική «βόμβα» στη νότια Κρήτη!</h2>
+    <p class="card-guest">Γιώργος Θεοδωρίδης</p>
+    <p class="card-meta">18 Οκτ 2026</p>
+    </a>
+  </article>
+
+      <div class="topic-side">
+        <article class="row-card" data-kind="podcast">
+          <a class="row-card-link" href="episode/19975649-ethniki-katastrofi-i-epektasi-sta-12-navtika-milia.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://storage.buzzsprout.com/fp98mpac20mn39nxbwq7p03h29dg?.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Κρήτη</span>
+              <span class="row-card-title">«Εθνική καταστροφή» η επέκταση στα 12 ναυτικά μίλια μόνο νοτιοδυτικά της Κρήτης!</span>
+              <span class="row-card-meta">17 Οκτ 2026</span>
+            </span>
+          </a>
+        </article>
+        <article class="row-card" data-kind="video">
+          <a class="row-card-link" href="video/9z18c8pLL9s-afthonidis-para-polla-ladia-irthan-stin-kriti-kai.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://i.ytimg.com/vi/9z18c8pLL9s/sddefault.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Κρήτη</span>
+              <span class="row-card-title">Αφθονίδης: Πάρα πολλά λάδια ήρθαν στην Κρήτη και ελληνοποιήθηκαν</span>
+              <span class="row-card-meta">8 Οκτ 2026</span>
+            </span>
+          </a>
+        </article>
+        <article class="row-card" data-kind="video">
+          <a class="row-card-link" href="video/eCLiDYu5iI8-stavros-tzedakis-to-provlima-ston-elaiokomiko-tomea.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://i.ytimg.com/vi/eCLiDYu5iI8/sddefault.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Κρήτη</span>
+              <span class="row-card-title">Σταύρος Τζεδάκης: Το πρόβλημα στον ελαιοκομικό τομέα της Κρήτης ειναι μεγάλο</span>
+              <span class="row-card-meta">8 Οκτ 2026</span>
+            </span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="topic-row" data-topic="geopolitiki">
+    <a class="topic-bar" href="category/geopolitiki.html">
+      <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span>
+      <h2 class="topic-bar-name">Γεωπολιτική</h2>
+      <span class="topic-bar-all">Όλα τα 401 →</span>
+    </a>
+    <div class="topic-split">
+<article class="card card--lead" data-kind="podcast" data-topics="geopolitiki">
+    <a class="card-link" href="episode/19990840-diapragmatevseis-gia-kourdiko-oi-kourdoi-to-vlepoun-os.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/9fksxgq62otvb6o95d5m56pmoflf?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">23 λεπτά</span>
+    </span>
+    <p class="card-label">Γεωπολιτική</p>
+    <h2 class="card-title">Διαπραγματεύσεις για κουρδικό - Οι κούρδοι το βλέπουν ως απαραίτητη φάση για την επίλυση, η Τουρκία όμως συνεχίζει να τους βλέπει ως τρομοκράτες!</h2>
+    <p class="card-guest">Μουράτ Ισσί</p>
+    <p class="card-meta">20 Οκτ 2026</p>
+    </a>
+  </article>
+
+      <div class="topic-side">
+        <article class="row-card" data-kind="podcast">
+          <a class="row-card-link" href="episode/19979743-opla-kai-exoplismoi-neas-epochis-apo-tis-ipa-gia-tis.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://storage.buzzsprout.com/mxzvl68gezeki4ay5ut85rwecizn?.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Γεωπολιτική</span>
+              <span class="row-card-title">Όπλα και εξοπλισμοί νέας εποχής από τις ΗΠΑ για τις Ένοπλες Δυνάμεις!</span>
+              <span class="row-card-meta">18 Οκτ 2026</span>
+            </span>
+          </a>
+        </article>
+        <article class="row-card" data-kind="podcast">
+          <a class="row-card-link" href="episode/19979716-i-navtex-gia-to-kalodio-i-tourkia-kai-i-metanastevtiki.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://storage.buzzsprout.com/xl6vozgvaleipq1zoumg8d4w3rmi?.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Γεωπολιτική</span>
+              <span class="row-card-title">Η NAVTEX για το καλώδιο, η Τουρκία και η μεταναστευτική «βόμβα» στη νότια Κρήτη!</span>
+              <span class="row-card-meta">18 Οκτ 2026</span>
+            </span>
+          </a>
+        </article>
+        <article class="row-card" data-kind="podcast">
+          <a class="row-card-link" href="episode/19941777-stin-kaso-den-tha-apantisoume-an-vgoun-tourkika.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://storage.buzzsprout.com/wyw92xy59v3vayuna3shl0k9v9p9?.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Γεωπολιτική</span>
+              <span class="row-card-title">Στην Κάσο δεν θα απαντήσουμε αν βγουν τουρκικά πολεμικά! – Τι φοβάται για το καλώδιο</span>
+              <span class="row-card-meta">11 Οκτ 2026</span>
+            </span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="topic-row" data-topic="politiki">
+    <a class="topic-bar" href="category/politiki.html">
+      <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v17M5 8l7-3 7 3M5 8l-1.5 5a3.2 3.2 0 0 0 6.4 0zM19 8l1.5 5a3.2 3.2 0 0 1-6.4 0z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7.5 20.5h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+      <h2 class="topic-bar-name">Πολιτική</h2>
+      <span class="topic-bar-all">Όλα τα 215 →</span>
+    </a>
+    <div class="topic-split">
+<article class="card card--lead" data-kind="podcast" data-topics="politiki kosmos">
+    <a class="card-link" href="episode/20015084-ypothesi-gkilfoil-oi-endiameses-ekloges-stis-ipa-kai.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/6zzukvcfw08v831jsqgncbch01aa?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">22 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτική</p>
+    <h2 class="card-title">Υπόθεση Γκιλφόιλ, οι ενδιάμεσες εκλογές στις ΗΠΑ και οι ισορροπίες στην περιοχή</h2>
+    <p class="card-guest">Νίκος Μολφέτας</p>
+    <p class="card-meta">25 Οκτ 2026</p>
+    </a>
+  </article>
+
+      <div class="topic-side">
+        <article class="row-card" data-kind="podcast">
+          <a class="row-card-link" href="episode/19974527-paramenei-choris-eklogiki-apeili-o-mitsotakis-elas-kai.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://storage.buzzsprout.com/9bcyyjfk7fps1613irwer2mf9xs4?.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Πολιτική</span>
+              <span class="row-card-title">Παραμένει χωρίς εκλογική απειλή ο Μητσοτάκης! ΕΛΑΣ και ΠΑΣΟΚ αναλώνονται στη κόντρα για την 2η θέση!</span>
+              <span class="row-card-meta">17 Οκτ 2026</span>
+            </span>
+          </a>
+        </article>
+        <article class="row-card" data-kind="podcast">
+          <a class="row-card-link" href="episode/19956835-se-avtes-tis-ekloges-oloi-oi-archigoi-dinoun-tin.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://storage.buzzsprout.com/75pmqbvspgkjwlmkvq0miku6xw26?.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Πολιτική</span>
+              <span class="row-card-title">Σε αυτές τις εκλογές όλοι οι αρχηγοί δίνουν την τελευταία τους μεγάλη μάχη!</span>
+              <span class="row-card-meta">13 Οκτ 2026</span>
+            </span>
+          </a>
+        </article>
+        <article class="row-card" data-kind="podcast">
+          <a class="row-card-link" href="episode/19908884-poso-allazoun-tis-geopolitikes-isorropies-oi-ekloges.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://storage.buzzsprout.com/95qj0tfl8imbns88dkeqqwnjhhh9?.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Πολιτική</span>
+              <span class="row-card-title">Πόσο αλλάζουν τις γεωπολιτικές ισορροπίες οι εκλογές σε Ισραήλ και ΗΠΑ!</span>
+              <span class="row-card-meta">5 Οκτ 2026</span>
+            </span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="topic-row" data-topic="istoria">
+    <a class="topic-bar" href="category/istoria.html">
+      <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M6.5 20V9M10 20V9M14 20V9M17.5 20V9M3.5 9h17L12 4.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+      <h2 class="topic-bar-name">Ιστορία</h2>
+      <span class="topic-bar-all">Όλα τα 150 →</span>
+    </a>
+    <div class="topic-split">
+<article class="card card--lead" data-kind="podcast" data-topics="istoria">
+    <a class="card-link" href="episode/19895735-yemeni-i-evdaimon-aravia-apo-tous-othomanous-stous.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/hpwe88nhl0ig5dbzypemx663xu9l?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">53 λεπτά</span>
+    </span>
+    <p class="card-label">Ιστορία</p>
+    <h2 class="card-title">Υεμένη, η «Ευδαίμων Αραβία» από τους Οθωμανούς στους Χούθι!</h2>
+    <p class="card-guest">Δημήτρης Λυβάνιος</p>
+    <p class="card-meta">1 Οκτ 2026</p>
+    </a>
+  </article>
+
+      <div class="topic-side">
+        <article class="row-card" data-kind="podcast">
+          <a class="row-card-link" href="episode/19887949-mono-i-syspeirosi-tis-kentroaristeras-tha-rixei-to.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://storage.buzzsprout.com/2b029wdb9stguy0brcu19lgv9wkf?.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Ιστορία</span>
+              <span class="row-card-title">Μόνο η συσπείρωση της κεντροαριστεράς θα ρίξει το… νεοθωμανικό κράτος της Ν.Δ.!</span>
+              <span class="row-card-meta">30 Σεπ 2026</span>
+            </span>
+          </a>
+        </article>
+        <article class="row-card" data-kind="podcast">
+          <a class="row-card-link" href="episode/19869868-i-istoria-tis-evp-meros-5o-ta-chronia-tis-esostrefeias.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://storage.buzzsprout.com/p3f2roebwkv9g5bpelcd800n0uv6?.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Ιστορία</span>
+              <span class="row-card-title">Η ιστορία της ΕΥΠ (Μέρος 5ο) -  Τα χρόνια της εσωστρέφειας και των σκανδάλων!</span>
+              <span class="row-card-meta">27 Σεπ 2026</span>
+            </span>
+          </a>
+        </article>
+        <article class="row-card" data-kind="video">
+          <a class="row-card-link" href="video/2HKuZKZVvY8-ex-aporriton-i-istoria-tis-evp-5-ta-chronia-tis.html">
+            <span class="row-card-media">
+              <img class="row-card-art" src="https://i.ytimg.com/vi/2HKuZKZVvY8/maxresdefault.jpg" alt="" loading="lazy">
+            </span>
+            <span class="row-card-text">
+              <span class="row-card-label">Ιστορία</span>
+              <span class="row-card-title">Εξ Απορρήτων: Η ιστορία της ΕΥΠ (5): Τα χρόνια της εσωστρέφειας και των σκανδάλων!</span>
+              <span class="row-card-meta">25 Σεπ 2026</span>
+            </span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--more">
+    <div class="band-open">
+      <h2 class="band-open-title">Και ακόμα</h2>
+    </div>
+
+    <div class="more-grid">
+      <section class="more-topic" data-topic="kosmos">
+        <a class="topic-bar topic-bar--sm" href="category/kosmos.html">
+          <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span>
+          <h3 class="topic-bar-name">Κόσμος</h3>
+          <span class="topic-bar-all">Όλα τα 201 →</span>
+        </a>
+        <div class="grid grid--2">
+<article class="card" data-kind="podcast" data-topics="politiki kosmos">
+    <a class="card-link" href="episode/20015084-ypothesi-gkilfoil-oi-endiameses-ekloges-stis-ipa-kai.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/6zzukvcfw08v831jsqgncbch01aa?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">22 λεπτά</span>
+    </span>
+    <p class="card-label">Κόσμος</p>
+    <h2 class="card-title">Υπόθεση Γκιλφόιλ, οι ενδιάμεσες εκλογές στις ΗΠΑ και οι ισορροπίες στην περιοχή</h2>
+    <p class="card-guest">Νίκος Μολφέτας</p>
+    <p class="card-meta">25 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="geopolitiki kosmos">
+    <a class="card-link" href="episode/19979743-opla-kai-exoplismoi-neas-epochis-apo-tis-ipa-gia-tis.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/mxzvl68gezeki4ay5ut85rwecizn?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">19 λεπτά</span>
+    </span>
+    <p class="card-label">Κόσμος</p>
+    <h2 class="card-title">Όπλα και εξοπλισμοί νέας εποχής από τις ΗΠΑ για τις Ένοπλες Δυνάμεις!</h2>
+    <p class="card-guest">Γιάννης Νικήτας</p>
+    <p class="card-meta">18 Οκτ 2026</p>
+    </a>
+  </article>
+        </div>
+      </section>
+      <section class="more-topic" data-topic="ellada">
+        <a class="topic-bar topic-bar--sm" href="category/ellada.html">
+          <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M6 20V9M10 20V9M14 20V9M18 20V9M4.5 9h15L12 4.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <h3 class="topic-bar-name">Ελλάδα</h3>
+          <span class="topic-bar-all">Όλα τα 201 →</span>
+        </a>
+        <div class="grid grid--2">
+<article class="card" data-kind="podcast" data-topics="ellada">
+    <a class="card-link" href="episode/19975659-ypothesi-gkilfoil-olo-to-paraskinio-pou-syntaraxe.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/drtdq4345r4vtuznf4kywpk0q344?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">1ω 29 λεπτά</span>
+    </span>
+    <p class="card-label">Ελλάδα</p>
+    <h2 class="card-title">Υπόθεση Γκιλφόιλ, όλο το παρασκήνιο που συντάραξε Ουάσιγκτον και Αθήνα!</h2>
+    <p class="card-guest">Ευφροσύνη Παυλακούδη</p>
+    <p class="card-meta">17 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="ellada">
+    <a class="card-link" href="episode/19940793-ellada-kai-voulgaria-katektisan-to-epipedo.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/3awm3ag3j9aw5q2gylgkam4cz7y8?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">42 λεπτά</span>
+    </span>
+    <p class="card-label">Ελλάδα</p>
+    <h2 class="card-title">Ελλάδα και Βουλγαρία κατέκτησαν το επίπεδο εμπιστοσύνης που λύνει τα προβλήματα!</h2>
+    <p class="card-guest">Δανάη Κουμανάκου</p>
+    <p class="card-meta">11 Οκτ 2026</p>
+    </a>
+  </article>
+        </div>
+      </section>
+      <section class="more-topic" data-topic="ygeia">
+        <a class="topic-bar topic-bar--sm" href="category/ygeia.html">
+          <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.6-7-9.5A4 4 0 0 1 12 7a4 4 0 0 1 7 3.5c0 4.9-7 9.5-7 9.5z" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></span>
+          <h3 class="topic-bar-name">Υγεία</h3>
+          <span class="topic-bar-all">Όλα τα 144 →</span>
+        </a>
+        <div class="grid grid--2">
+<article class="card" data-kind="podcast" data-topics="ygeia">
+    <a class="card-link" href="episode/19920447-pnevmoniki-inosi-oi-nees-therapeies-sto-pagni-pou.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/zm775ky6zead603xlbfxhod0ihdc?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">22 λεπτά</span>
+    </span>
+    <p class="card-label">Υγεία</p>
+    <h2 class="card-title">Πνευμονική ίνωση - Οι νέες θεραπείες στο ΠΑΓΝΗ που δίνουν ελπίδα στους ασθενείς!</h2>
+    
+    <p class="card-meta">6 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="video" data-topics="ygeia">
+    <a class="card-link" href="video/6grO8o11idk-flytzanis-oxymena-ta-provlimata-sti-dimosia-ygeia.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/6grO8o11idk/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Υγεία</p>
+    <h2 class="card-title">Φλυτζανής: Οξυμενα τα προβλήματα στη Δημόσια Υγεία</h2>
+    
+    <p class="card-meta">30 Σεπ 2026</p>
+    </a>
+  </article>
+        </div>
+      </section>
+      <section class="more-topic" data-topic="oikonomia">
+        <a class="topic-bar topic-bar--sm" href="category/oikonomia.html">
+          <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l5-5 3.5 3L20 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3 class="topic-bar-name">Οικονομία</h3>
+          <span class="topic-bar-all">Όλα τα 112 →</span>
+        </a>
+        <div class="grid grid--2">
+<article class="card" data-kind="podcast" data-topics="oikonomia kosmos">
+    <a class="card-link" href="episode/19941798-i-germania-metaxy-skandalou-kataskopeias-plithorismou.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/ob1wgz3fj8x472qbbxbbyos7mlp0?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">29 λεπτά</span>
+    </span>
+    <p class="card-label">Οικονομία</p>
+    <h2 class="card-title">Η Γερμανία μεταξύ σκανδάλου κατασκοπείας, πληθωρισμού και ανόδου της Ακροδεξιάς!</h2>
+    <p class="card-guest">Ειρήνη Αναστασοπούλου</p>
+    <p class="card-meta">11 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="oikonomia ellada">
+    <a class="card-link" href="episode/19933597-giati-i-energeiaki-anelastikotita-einai-to-empodio-sti.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/r36kvavxd23iw69ma1rcdqcyrqar?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">21 λεπτά</span>
+    </span>
+    <p class="card-label">Οικονομία</p>
+    <h2 class="card-title">Γιατί η ενεργειακή ανελαστικότητα είναι το εμπόδιο στη πτώση τιμών ενέργειας! Τι πρέπει να κάνει η Ελλάδα!</h2>
+    <p class="card-guest">Γιάννης Μπασιάς</p>
+    <p class="card-meta">9 Οκτ 2026</p>
+    </a>
+  </article>
+        </div>
+      </section>
+      <section class="more-topic" data-topic="perivallon">
+        <a class="topic-bar topic-bar--sm" href="category/perivallon.html">
+          <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V11M12 11c0-4 3-6.5 7-6.5 0 4.5-3 6.5-7 6.5zM12 14c0-3-2.4-5-5.5-5 0 3.5 2.4 5 5.5 5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <h3 class="topic-bar-name">Περιβάλλον</h3>
+          <span class="topic-bar-all">Όλα τα 75 →</span>
+        </a>
+        <div class="grid grid--2">
+<article class="card" data-kind="video" data-topics="perivallon">
+    <a class="card-link" href="video/Cev7pyvh60k-ti-eipe-o-manolis-syntychakis-gia-ta-pente-chronia-apo.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/Cev7pyvh60k/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Περιβάλλον</p>
+    <h2 class="card-title">Τι είπε ο Μανόλης Συντυχακης για τα πέντε χρόνια απο το σεισμό στο Αρκαλοχώρι</h2>
+    
+    <p class="card-meta">25 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="ygeia perivallon kriti">
+    <a class="card-link" href="episode/19795977-i-plasmafairesi-ginetai-exeidikevmena-se-nosokomeiako.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/jia60plnmtat9zqakoyzai8sdgxt?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">21 λεπτά</span>
+    </span>
+    <p class="card-label">Περιβάλλον</p>
+    <h2 class="card-title">«Η πλασμαφαίρεση γίνεται εξειδικευμένα σε νοσοκομειακό περιβάλλον» – Πρόστιμα και αφαιρέσεις αδειών σε ιδιωτικά ιατρεία στο Ηράκλειο</h2>
+    <p class="card-guest">Δημήτρης Ξυδάκης</p>
+    <p class="card-meta">14 Σεπ 2026</p>
+    </a>
+  </article>
+        </div>
+      </section>
+      <section class="more-topic" data-topic="athlitika">
+        <a class="topic-bar topic-bar--sm" href="category/athlitika.html">
+          <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 3.5c3 3 3 14 0 17M3.6 9.5c5 2 11.8 2 16.8 0M3.6 14.5c5-2 11.8-2 16.8 0" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span>
+          <h3 class="topic-bar-name">Αθλητικά</h3>
+          <span class="topic-bar-all">Όλα τα 63 →</span>
+        </a>
+        <div class="grid grid--2">
+<article class="card" data-kind="podcast" data-topics="athlitika kriti">
+    <a class="card-link" href="episode/19975649-ethniki-katastrofi-i-epektasi-sta-12-navtika-milia.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/fp98mpac20mn39nxbwq7p03h29dg?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">32 λεπτά</span>
+    </span>
+    <p class="card-label">Αθλητικά</p>
+    <h2 class="card-title">«Εθνική καταστροφή» η επέκταση στα 12 ναυτικά μίλια μόνο νοτιοδυτικά της Κρήτης!</h2>
+    <p class="card-guest">Κωνσταντίνος Λουκόπουλος</p>
+    <p class="card-meta">17 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="video" data-topics="athlitika kriti">
+    <a class="card-link" href="video/Dfk5FBsAu9Q-evkola-o-ofi-ston-teliko-tou-tournoua-nikos-loulis.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/Dfk5FBsAu9Q/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Αθλητικά</p>
+    <h2 class="card-title">Εύκολα ο ΟΦΗ στον τελικό του τουρνουά «Νίκος Λούλης» - Νίκησε το Ηράκλειο 73 - 60 (B)</h2>
+    
+    <p class="card-meta">27 Σεπ 2026</p>
+    </a>
+  </article>
+        </div>
+      </section>
+      <section class="more-topic" data-topic="politismos">
+        <a class="topic-bar topic-bar--sm" href="category/politismos.html">
+          <span class="topic-bar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="17" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11.6 17V6l7-1.5V15" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="15" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+          <h3 class="topic-bar-name">Πολιτισμός</h3>
+          <span class="topic-bar-all">Όλα τα 54 →</span>
+        </a>
+        <div class="grid grid--2">
+<article class="card" data-kind="podcast" data-topics="politismos ellada">
+    <a class="card-link" href="episode/19779720-levkadios-chern-o-logotechnis-pou-vrike-tin-ellada.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/stx4qq7z5zkbl53vq9u6ls6qbfns?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">34 λεπτά</span>
+    </span>
+    <p class="card-label">Πολιτισμός</p>
+    <h2 class="card-title">Λευκάδιος Χερν, ο λογοτέχνης που βρήκε την... Ελλάδα στην Ιαπωνία!</h2>
+    <p class="card-guest">Στέλιος Παπαλεξανδρόπουλος</p>
+    <p class="card-meta">9 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="video" data-topics="politismos">
+    <a class="card-link" href="video/27qjGvuqvNo-sofia-zoraki-chorevoume-gia-ti-zoi-otan-o-politismos.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/27qjGvuqvNo/maxresdefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Πολιτισμός</p>
+    <h2 class="card-title">Σοφία Ζωράκη: «Χορεύουμε για τη Ζωή»: Όταν ο πολιτισμός γίνεται πράξη στήριξης για τον ΗΡ.Υ.Δ.Α.</h2>
+    
+    <p class="card-meta">29 Αυγ 2026</p>
+    </a>
+  </article>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="spot spot--agro" data-topic="agronews">
+    <header class="spot-head">
+      <span class="spot-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20c0-8 5-14.2 14.5-15C20 15 14 20 5 20z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 20C8 15.5 12 11.5 17 8.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span>
+      <div class="spot-text">
+        <h2 class="spot-title">Agronews</h2>
+        <p class="spot-sub">Η γη της Κρήτης, από το χωράφι στην αγορά</p>
+      </div>
+      <a class="spot-all" href="category/agronews.html">Όλα τα 171 →</a>
+    </header>
+
+    <div class="grid grid--4">
+<article class="card" data-kind="video" data-topics="agronews">
+    <a class="card-link" href="video/LPwRr-1KWbo-potami-oi-agrotikoi-dromoi-sta-anogeia-logo-vrochis.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/LPwRr-1KWbo/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Agronews</p>
+    <h2 class="card-title">Ποταμι οι αγροτικοί δρομοι στα Ανώγεια λόγω βροχής</h2>
+    
+    <p class="card-meta">3 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="agronews">
+    <a class="card-link" href="episode/19899102-lagopsychoi-kyvernitikoi-axiomatouchoi-kalliergoun-tin.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/qkfhovugyx4guz9whp1xrxj9iyn5?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">30 λεπτά</span>
+    </span>
+    <p class="card-label">Agronews</p>
+    <h2 class="card-title">«Λαγόψυχοι» κυβερνητικοί αξιωματούχοι καλλιεργούν την ηττοπάθεια! «Προ των πυλών» απώλεια εθνικής κυριαρχίας στο Αιγαίο!</h2>
+    <p class="card-guest">Γιώργος Αϋφαντής</p>
+    <p class="card-meta">2 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="video" data-topics="agronews kriti">
+    <a class="card-link" href="video/O33oECn_RdE-ston-aera-exakolouthoun-na-vriskontai-chiliades.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/O33oECn_RdE/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Agronews</p>
+    <h2 class="card-title">Στον «αέρα» εξακολουθουν να βρίσκονται χιλιαδες αγροτικές επιδοτήσεις και στην Κρήτη</h2>
+    
+    <p class="card-meta">16 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="video" data-topics="agronews">
+    <a class="card-link" href="video/mFs06S2x7L0-ston-aera-exakolouthoun-na-vriskontai-chiliades.html">
+    <span class="card-media">
+      <img class="card-image" src="https://i.ytimg.com/vi/mFs06S2x7L0/sddefault.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      
+    </span>
+    <p class="card-label">Agronews</p>
+    <h2 class="card-title">Στον «αέρα» εξακολουθουν να βρίσκονται χιλιαδες αγροτικές επιδοτήσεις</h2>
+    
+    <p class="card-meta">16 Σεπ 2026</p>
+    </a>
+  </article>
+    </div>
+  </section>
+
+  <section class="spot spot--tech" data-topic="tech-hub">
+    <header class="spot-head">
+      <span class="spot-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10 7V4M14 7V4M10 20v-3M14 20v-3M7 10H4M7 14H4M20 10h-3M20 14h-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      <div class="spot-text">
+        <h2 class="spot-title">Tech-Hub</h2>
+        <p class="spot-sub">Τεχνολογία, ψηφιακά και τεχνητή νοημοσύνη</p>
+      </div>
+      <a class="spot-all" href="category/tech-hub.html">Όλα τα 33 →</a>
+    </header>
+
+    <div class="grid grid--4">
+<article class="card" data-kind="podcast" data-topics="tech-hub">
+    <a class="card-link" href="episode/19914731-i-techniti-noimosyni-prepei-na-ginei-koryfaio-zitima.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/k0j4koidit9ih3dllgjbfafj5e21?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">32 λεπτά</span>
+    </span>
+    <p class="card-label">Tech-Hub</p>
+    <h2 class="card-title">Η Τεχνητή Νοημοσύνη πρέπει να γίνει κορυφαίο ζήτημα του κράτους δικαίου!</h2>
+    <p class="card-guest">Βασίλης Τζέμος</p>
+    <p class="card-meta">5 Οκτ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="tech-hub politiki">
+    <a class="card-link" href="episode/19795970-poioi-kai-pos-paremvainoun-psifiaka-sta-apotelesmata.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/etgm7dbfxz2nim4b92od1v11eeai?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">37 λεπτά</span>
+    </span>
+    <p class="card-label">Tech-Hub</p>
+    <h2 class="card-title">Ποιοί και πώς παρεμβαίνουν ψηφιακά στα αποτελέσματα των εκλογών!</h2>
+    <p class="card-guest">Ελένη Καψοκόλη</p>
+    <p class="card-meta">13 Σεπ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="tech-hub">
+    <a class="card-link" href="episode/19650821-nea-epochi-ston-elegcho-mastou-sto-diagnostiko-kentro.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/syxtc80dcs2hds6gwzij6hc37etf?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">18 λεπτά</span>
+    </span>
+    <p class="card-label">Tech-Hub</p>
+    <h2 class="card-title">Νέα εποχή στον έλεγχο μαστού στο Διαγνωστικό Κέντρο Ηρόδοτος – Όταν η τεχνολογία σώζει ζωές!</h2>
+    <p class="card-guest">Αικ. Ανδριανάκη</p>
+    <p class="card-meta">15 Αυγ 2026</p>
+    </a>
+  </article>
+<article class="card" data-kind="podcast" data-topics="tech-hub">
+    <a class="card-link" href="episode/19539360-ti-einai-kai-ti-allages-fernei-to-psifiako-evro.html">
+    <span class="card-media">
+      <img class="card-image" src="https://storage.buzzsprout.com/aoxf0ip7r76eh3sxbk37mdyolp56?.jpg" alt="" loading="lazy">
+      <span class="card-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
+      </span>
+      <span class="card-time">32 λεπτά</span>
+    </span>
+    <p class="card-label">Tech-Hub</p>
+    <h2 class="card-title">Τι είναι και τι αλλαγές φέρνει το ψηφιακό ευρώ!</h2>
+    <p class="card-guest">Κωνσταντίνος Γκράβας</p>
+    <p class="card-meta">23 Ιουλ 2026</p>
+    </a>
+  </article>
+    </div>
+  </section>
+    </div>
+
+    <div class="page-side">
+    <aside class="ticker">
+      <p class="ticker-head">Ροή ειδήσεων</p>
+      <ul class="ticker-list">
+      <li>
+        <a href="https://www.newshub.gr/el/geopolitiki/apo-to-parisi-eos-ta-tirana-i-koinoniki-orgi-exaplonetai-stin-eyropi-oi-chores-poy-dokimazontai-poies-oi-aities-tis-anatarachis" target="_blank" rel="noopener">
+          <span class="ticker-cat">Γεωπολιτική</span>
+          <span class="ticker-title">Από το Παρίσι έως τα Τίρανα: Η κοινωνική οργή εξαπλώνεται στην Ευρώπη – Οι χώρες που δοκιμάζονται, ποιες οι αιτίες της αναταραχής</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.newshub.gr/el/ellada/michalis-chrysochoidis-stin-imera-tis-ellinikis-astynomias-i-asfaleia-einai-ena-dimokratiko-dikaioma-to-stoichima-gia-tis-geitonies" target="_blank" rel="noopener">
+          <span class="ticker-cat">Ελλάδα</span>
+          <span class="ticker-title">Μιχάλης Χρυσοχοΐδης στην Ημέρα της Ελληνικής Αστυνομίας: «Η ασφάλεια είναι ένα δημοκρατικό δικαίωμα» -Το στοίχημα για τις γειτονιές</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.newshub.gr/el/ellada/nea-apochorisi-idrytikoy-meloys-apo-to-kinima-tis-marias-karystianoy-me-aichmes-gia-tin-leitoyrgia-tis-igesias" target="_blank" rel="noopener">
+          <span class="ticker-cat">Ελλάδα</span>
+          <span class="ticker-title">Νέα αποχώρηση ιδρυτικού μέλους από το Κίνημα της Μαρίας Καρυστιανού με αιχμές για την λειτουργία της ηγεσίας</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.newshub.gr/el/ellada/thessaloniki-exarthrothike-kykloma-diakinisis-narkotikon-apo-to-deos-proseggizan-anilikoys-meso-kryptografimenon-efarmogon" target="_blank" rel="noopener">
+          <span class="ticker-cat">Ελλάδα</span>
+          <span class="ticker-title">Θεσσαλονίκη: Εξαρθρώθηκε κύκλωμα διακίνησης ναρκωτικών από το ΔΕΟΣ -Προσέγγιζαν ανήλικους μέσω κρυπτογραφημένων εφαρμογών</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.newshub.gr/el/geopolitiki/nees-aichmes-tramp-kata-zelenski-irthe-i-ora-kapoios-allos-na-diapragmateytei-gia-tin-oykrania" target="_blank" rel="noopener">
+          <span class="ticker-cat">Γεωπολιτική</span>
+          <span class="ticker-title">Νέες αιχμές Τραμπ κατά Ζελένσκι: «Ήρθε η ώρα κάποιος άλλος να διαπραγματευτεί για την Ουκρανία»</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.newshub.gr/el/ellada/kivotos-toy-kosmoy-athooi-o-pateras-antonios-kai-dyo-akomi-katigoroymenoi" target="_blank" rel="noopener">
+          <span class="ticker-cat">Ελλάδα</span>
+          <span class="ticker-title">Κιβωτός του Κόσμου: Αθώοι ο πατέρας Αντώνιος και δύο ακόμη κατηγορούμενοι</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.newshub.gr/el/kosmos/toyrkos-epicheirimatias-katiggeile-symvoylo-toy-tramp-oti-toy-pire-17-6-ekat-gia-prosvasi-ston-leyko-oiko-zitise-ereyna-o-amerikanos-proedros" target="_blank" rel="noopener">
+          <span class="ticker-cat">Κόσμος</span>
+          <span class="ticker-title">Τούρκος επιχειρηματίας κατήγγειλε σύμβουλο του Τραμπ  ότι του πήρε 17,6 εκατ. για πρόσβαση στον Λευκό Οίκο -Ζήτησε έρευνα ο Αμερικανός πρόεδρος</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.newshub.gr/el/kriti/ierapetra-trochaio-me-ektropi-kai-anatropi-i-ch-ena-atomo-sto-nosokomeio" target="_blank" rel="noopener">
+          <span class="ticker-cat">Κρήτη</span>
+          <span class="ticker-title">Ιεράπετρα: Τροχαίο με εκτροπή και ανατροπή Ι.Χ. – Ένα άτομο στο νοσοκομείο</span>
+        </a>
+      </li>
+      </ul>
+      <a class="ticker-all" href="https://www.newshub.gr/" target="_blank" rel="noopener">Όλες οι ειδήσεις →</a>
+    </aside>
+    </div>
+  </div>
+
+  <section class="people">
+    <h2 class="section-head">382 πρόσωπα έχουν μιλήσει εδώ</h2>
+    <div class="people-row">
+      <a class="person" href="guest/giorgos-atsalakis.html">
+        <img src="https://storage.buzzsprout.com/2ffi0c52x5po5j5he20rb8qg8gro?.jpg" alt="" loading="lazy">
+        <span class="person-name">Γιώργος Ατσαλάκης</span>
+        <span class="person-count">28 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/giorgos-ayfantis.html">
+        <img src="https://storage.buzzsprout.com/wyw92xy59v3vayuna3shl0k9v9p9?.jpg" alt="" loading="lazy">
+        <span class="person-name">Γιώργος Αϋφαντής</span>
+        <span class="person-count">26 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/giorgos-karampelias.html">
+        <img src="https://storage.buzzsprout.com/6yhwc6r9b5tu4pyyitj7hv2ar8re?.jpg" alt="" loading="lazy">
+        <span class="person-name">Γιώργος Καραμπελιάς</span>
+        <span class="person-count">26 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/giorgos-kapopoulos.html">
+        <img src="https://storage.buzzsprout.com/uwohnm3g5bt0dyz1hcsaesfpooz9?.jpg" alt="" loading="lazy">
+        <span class="person-name">Γιώργος Καπόπουλος</span>
+        <span class="person-count">21 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/meletis-meletopoulos.html">
+        <img src="https://storage.buzzsprout.com/fnlhykiuzbhqti86bapbaq8runnf?.jpg" alt="" loading="lazy">
+        <span class="person-name">Μελέτης Μελετόπουλος</span>
+        <span class="person-count">19 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/kostas-grivas.html">
+        <img src="https://storage.buzzsprout.com/owp8j27rq2rxfxf0k4wmggwk32wz?.jpg" alt="" loading="lazy">
+        <span class="person-name">Κώστας Γρίβας</span>
+        <span class="person-count">17 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/sotiris-livas.html">
+        <img src="https://storage.buzzsprout.com/95qj0tfl8imbns88dkeqqwnjhhh9?.jpg" alt="" loading="lazy">
+        <span class="person-name">Σωτήρης Λίβας</span>
+        <span class="person-count">13 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/aggelos-syrigos.html">
+        <img src="https://storage.buzzsprout.com/y3bo66uetlmq48fqb9733sbmuojp?.jpg" alt="" loading="lazy">
+        <span class="person-name">Άγγελος Συρίγος</span>
+        <span class="person-count">12 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/manolis-kottakis.html">
+        <img src="https://storage.buzzsprout.com/6vbbymhq1lk5urmsr0v7kvsjmrqj?.jpg" alt="" loading="lazy">
+        <span class="person-name">Μανώλης Κοττάκης</span>
+        <span class="person-count">12 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/zacharias-michas.html">
+        <img src="https://storage.buzzsprout.com/c74799sk4t52e85w442ae8s8y9vj?.jpg" alt="" loading="lazy">
+        <span class="person-name">Ζαχαρίας Μίχας</span>
+        <span class="person-count">10 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/kostas-lapavitsas.html">
+        <img src="https://storage.buzzsprout.com/ijckoleacx3wkq977bb8m7h6fwn1?.jpg" alt="" loading="lazy">
+        <span class="person-name">Κώστας Λαπαβίτσας</span>
+        <span class="person-count">10 συμμετοχές</span>
+      </a>
+      <a class="person" href="guest/chronis-varsos.html">
+        <img src="https://storage.buzzsprout.com/r1ufn1ot2f4lp4r9sehrcc4kh9j6?.jpg" alt="" loading="lazy">
+        <span class="person-name">Χρόνης Βάρσος</span>
+        <span class="person-count">10 συμμετοχές</span>
+      </a>
+    </div>
+    <a class="people-all" href="guests.html">Όλα τα πρόσωπα →</a>
+  </section>
+
+  <footer class="site-footer">
+    <nav class="foot-nav">
+      <a href="shows.html">Εκπομπές</a>
+      <a href="episodes.html">Podcasts</a>
+      <a href="categories.html">Θέματα</a>
+      <a href="guests.html">Πρόσωπα</a>
+      <a href="search.html" data-reload>Αρχείο</a>
+    </nav>
+
+    <nav class="foot-legal">
+      <a href="https://www.newshub.gr/el/taytotita" target="_blank" rel="noopener">Ταυτότητα</a>
+      <a href="https://www.newshub.gr/el/epikoinonia" target="_blank" rel="noopener">Επικοινωνία</a>
+      <a href="https://www.newshub.gr/el/oroi-chrisis" target="_blank" rel="noopener">Όροι χρήσης</a>
+      <a href="https://www.newshub.gr/el/politiki-cookies" target="_blank" rel="noopener">Πολιτική Cookies</a>
+      <a href="https://www.newshub.gr" target="_blank" rel="noopener">newshub.gr ↗</a>
+    </nav>
+
+    <nav class="social foot-social"><a href="https://www.facebook.com/newshub.gr" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9h2V6h-2c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2.2l.3-3H14v-2c0-.6.4-1 1-1z"/></svg></a><a href="https://www.instagram.com/newshub.gr" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0 5.3a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM16 4H8a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4zm2.9 12a2.9 2.9 0 0 1-2.9 2.9H8A2.9 2.9 0 0 1 5.1 16V8A2.9 2.9 0 0 1 8 5.1h8A2.9 2.9 0 0 1 18.9 8zm-1.6-7.8a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0z"/></svg></a><a href="https://twitter.com/NewshubG" target="_blank" rel="noopener" aria-label="X" title="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 4h2.6l-5.7 6.5L21 20h-5.2l-4.1-5.4L6.9 20H4.3l6.1-7-5.9-9h5.4l3.7 4.9zm-.9 14.4h1.4L8.4 5.5H6.9z"/></svg></a><a href="https://www.youtube.com/@newshubgr" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2c-.2-.9-.9-1.6-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4c-.9.2-1.6.9-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8c.2.9.9 1.6 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg></a><a href="https://www.tiktok.com/@newshub.gr" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 3c.3 1.9 1.4 3.1 3.3 3.3v2.3c-1.1.1-2.1-.2-3.3-.9v5.9c0 4.7-5.1 6.2-7.2 2.9-1.3-2.1-.5-5.9 3.7-6v2.4c-.3.1-.7.1-1 .3-1 .3-1.5 1-1.4 2 .3 2 3.9 2.5 3.6-1.3V3z"/></svg></a></nav>
+
+    <a class="wordmark foot-mark" href="index.html">Newshub <span>Media</span></a>
+
+    <a class="foot-top" href="#top" aria-label="Πάνω">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <div class="foot-bar">
+      <p class="foot-rights">© Newshub Media, 2021 – 2026 · Με επιφύλαξη παντός δικαιώματος.</p>
+      <p class="foot-place">Ηράκλειο Κρήτης</p>
+    </div>
+  </footer>
+</div>
+
+  <div class="bar" hidden aria-label="Αναπαραγωγή">
+    <a class="bar-now" href="#">
+      <img class="bar-art" src="" alt="">
+      <span class="bar-text">
+        <span class="bar-show"></span>
+        <span class="bar-title"></span>
+      </span>
+    </a>
+
+    <div class="bar-controls">
+      <button type="button" class="bar-btn" data-player="skip" data-by="-15" aria-label="15 δευτερόλεπτα πίσω">−15</button>
+      <button type="button" class="bar-play" data-player="toggle" aria-label="Αναπαραγωγή">▶</button>
+      <button type="button" class="bar-btn" data-player="skip" data-by="15" aria-label="15 δευτερόλεπτα μπροστά">+15</button>
+    </div>
+
+    <span class="bar-time" data-player-now>0:00</span>
+    <div class="bar-seek" data-player="seek" role="slider" tabindex="0" aria-label="Θέση" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="bar-fill"></div>
+    </div>
+    <span class="bar-time" data-player-total>--:--</span>
+
+    <button type="button" class="bar-btn" data-player="speed" aria-label="Ταχύτητα">1×</button>
+    <button type="button" class="bar-btn bar-close" data-player="close" aria-label="Κλείσιμο">✕</button>
+  </div>
+</body>
+</html>
