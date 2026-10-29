@@ -1352,6 +1352,24 @@ function buildShows(videos, episodes){
 
 // Η ενότητα «Εκπομπές» της αρχικής: μία κάρτα ανά εκπομπή, με τη
 // μικρογραφία του πιο πρόσφατου βίντεό της.
+// Το επίσημο εξώφυλλο μιας εκπομπής, φτιαγμένο από τη σύνταξη.
+//
+// Μπαίνει ως public/show-art/<slug>.jpg — το ίδιο slug με τη σελίδα της.
+// Όπου δεν υπάρχει, πέφτουμε πίσω στη μικρογραφία του τελευταίου
+// βίντεο, που είναι στιγμιότυπο συζήτησης και όχι αφίσα.
+//
+// Για να μπει νέα: βάλε το αρχείο με το σωστό όνομα και ξανατρέξε το
+// build. Καμία αλλαγή στον κώδικα.
+const artSeen = {};
+function showArt(name, depth = 0){
+  const slug = slugify(name);
+  if (artSeen[slug] === undefined) {
+    artSeen[slug] = fs.existsSync(path.join(PUBLIC_DIR, 'show-art', `${slug}.jpg`));
+  }
+  if (!artSeen[slug]) return '';
+  return `${depth === 0 ? '' : '../'}show-art/${slug}.jpg`;
+}
+
 function showsSection(groups, depth = 0){
   const keys = Object.keys(groups);
   if (!keys.length) return '';
@@ -1364,10 +1382,12 @@ function showsSection(groups, depth = 0){
       const latest = g.items[0];
       const count = g.items.length;
 
+      const art = showArt(g.name, depth) || (latest && latest.image) || '';
+
       return `      <article class="show-card">
         <a class="card-link" href="${up}${showUrl(g.name)}">
-          ${latest && latest.image
-            ? `<img class="card-image" src="${latest.image}" alt="" loading="lazy">`
+          ${art
+            ? `<img class="card-image" src="${art}" alt="" loading="lazy">`
             : '<div class="card-image card-image--empty"></div>'}
           <h3 class="show-name">${esc(showName(g.name))}</h3>
           <p class="card-meta">${count === 1 ? '1 επεισόδιο' : `${count.toLocaleString('el')} επεισόδια`}</p>
@@ -2135,8 +2155,8 @@ function showsIndexPage(groups){
 
     return `      <article class="show-tile">
         <a class="show-tile-art" href="${showUrl(g.name)}">
-          ${latest && latest.image
-            ? `<img src="${latest.image}" alt="" loading="lazy">`
+          ${showArt(g.name) || (latest && latest.image)
+            ? `<img src="${showArt(g.name) || latest.image}" alt="" loading="lazy">`
             : '<span class="show-tile-blank"></span>'}
         </a>
 
@@ -2201,11 +2221,13 @@ function showPage(group, n = 1){
     .slice((n - 1) * PER_PAGE, n * PER_PAGE)
     .map((it) => card(it, 1)).join('\n');
 
-  // Το υπόβαθρο της εκπομπής: η κάρτα του πιο πρόσφατου βίντεό της.
+  // Το υπόβαθρο: το επίσημο εξώφυλλο της εκπομπής όπου υπάρχει, αλλιώς
+  // η κάρτα του πιο πρόσφατου βίντεό της.
   const pic = group.items.find((it) => it.image);
+  const art = showArt(group.name, 1) || (pic ? pic.image : '');
 
   const body = `${siteHeader(1)}
-${pageHero(pic ? pic.image : '')}
+${pageHero(art)}
 
 ${breadcrumb([
     { label: 'Αρχική', href: 'index.html' },
