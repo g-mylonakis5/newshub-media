@@ -11,6 +11,7 @@ const fs = require('fs');
 const path = require('path');
 
 const OUT_FILE = path.join(__dirname, 'data/videos.json');
+const SHOWS_FILE = path.join(__dirname, 'data/shows.json');
 const ENV_FILE = path.join(__dirname, '.env');
 
 // Τα ονόματα των εκπομπών ΔΕΝ τα γράφουμε εδώ — τα δίνει το ίδιο το
@@ -28,6 +29,17 @@ const PLAYLISTS = [
   'PLpwq9QIFWXECDlVuWnkwmOKIxhFtuPuX4', // Αγροτική επικαιρότητα
   'PLpwq9QIFWXED9-fM7AxBxEsHPCGbknkhp', // ΕΠΙΚΑΙΡΟΤΗΤΑ
   'PLpwq9QIFWXEDoXajk01BWxrjMpYITTYeg', // Συνεντεύξεις και πρόσωπα
+
+  // Νέες εκπομπές. Η λίστα γράφεται με το χέρι, οπότε ό,τι ανοίγει στο
+  // YouTube δεν φτάνει εδώ μόνο του — ήταν αόρατες στο site.
+  // Για να βρεις τι λείπει:
+  //   node -e "…playlists?channelId=UCgI7vd72xX-ZNWb_x7zzWJg…"
+  'PLZULcgj6z5z4',                      // Επίκαιρα στο Newshub.gr
+  'PLEWTnP9rz2So',                      // Αντίλογος στο Newshub.gr
+  'PLpwq9QIFWXEA2GoQ07cap1MW7B8EbbQhB', // Τα μονοπάτια ιστορίας
+
+  // ΠΡΟΣΩΡΙΝΑ ΕΚΤΟΣ — ξεσχολίασέ τα όταν γεμίσουν:
+  // 'PLLcdtU9QLgvs',                   // Αθλητικά (2 βίντεο)
 ];
 
 // Διαβάζει το .env χωρίς βιβλιοθήκη: κάθε γραμμή ΟΝΟΜΑ=τιμή.
@@ -105,10 +117,24 @@ async function api(endpoint, params, key) {
   return data;
 }
 
+// Οι περιγραφές των εκπομπών, όπως τις έγραψε η σύνταξη στο YouTube.
+// Σώζονται χωριστά, στο data/shows.json: είναι μία ανά εκπομπή, όχι ανά
+// βίντεο, και δεν έχει νόημα να επαναλαμβάνονται 1.500 φορές μέσα στο
+// videos.json. Η σύνταξη δεν μαθαίνει τίποτα νέο — ήδη τις γράφει εκεί.
+const showInfo = {};
+
 async function viaApi(playlistId, key) {
   // Πρώτα το όνομα της λίστας...
   const info = await api('playlists', { part: 'snippet', id: playlistId }, key);
-  const show = info.items && info.items[0] ? info.items[0].snippet.title : '';
+  const snip = info.items && info.items[0] ? info.items[0].snippet : null;
+  const show = snip ? snip.title : '';
+
+  if (show) {
+    showInfo[show] = {
+      description: (snip.description || '').trim(),
+      playlist: playlistId,
+    };
+  }
 
   // ...μετά τα βίντεο, 50 τη φορά όσο υπάρχει επόμενη σελίδα.
   const videos = [];
@@ -174,6 +200,16 @@ async function main() {
 
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
   fs.writeFileSync(OUT_FILE, JSON.stringify(all, null, 2), 'utf8');
+
+  // Οι περιγραφές των εκπομπών. Γράφονται μόνο αν μαζέψαμε κάποια —
+  // χωρίς κλειδί ο δρόμος του RSS δεν τις δίνει, και δεν θέλουμε να
+  // σβήσουμε ό,τι είχαμε από προηγούμενο τρέξιμο με κλειδί.
+  const names = Object.keys(showInfo);
+  if (names.length) {
+    const withText = names.filter((n) => showInfo[n].description).length;
+    fs.writeFileSync(SHOWS_FILE, JSON.stringify(showInfo, null, 2), 'utf8');
+    console.log(`Σώθηκαν ${names.length} εκπομπές στο data/shows.json (${withText} με περιγραφή)`);
+  }
 
   console.log('');
   console.log(`Σώθηκαν ${all.length} βίντεο στο data/videos.json`);
