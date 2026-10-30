@@ -15,6 +15,8 @@ const VIDEO_FILE = path.join(__dirname, 'data/videos.json');
 const TRANSCRIPT_DIR = path.join(__dirname, 'data/transcripts');
 const TRANSCRIPT_OUT = path.join(__dirname, 'public/transcript');
 const ALIAS_FILE = path.join(__dirname, 'data/people-aliases.json');
+const SHOW_ART_FILE = path.join(__dirname, 'data/show-art.json');
+const SHOWS_FILE = path.join(__dirname, 'data/shows.json');
 const SHOW_DIR = path.join(PUBLIC_DIR, 'show');
 const VIDEO_DIR = path.join(PUBLIC_DIR, 'video');
 const CATEGORY_DIR = path.join(PUBLIC_DIR, 'category');
@@ -524,7 +526,7 @@ function siteFooter(depth = 0){
 const MENU = [
   ['Εκπομπές', 'shows.html'],
   ['Podcasts', 'episodes.html'],
-  ['Θέματα', 'categories.html'],
+  ['Ενότητες', 'categories.html'],
   ['Πρόσωπα', 'guests.html'],
   ['Αρχείο', 'search.html', true],
 ];
@@ -591,7 +593,7 @@ ${MENU.map(([t, href, reload]) => `        <a href="${up}${href}"${reload ? ' da
     <div class="wrap gm-cols">
 ${nav}
 ${menuData.shows.length ? col('Εκπομπές', 'Όλες οι εκπομπές', 'shows.html', menuData.shows) : ''}
-${menuData.topics.length ? col('Θέματα', 'Όλα τα θέματα', 'categories.html', menuData.topics) : ''}
+${menuData.topics.length ? col('Ενότητες', 'Όλες οι ενότητες', 'categories.html', menuData.topics) : ''}
 ${menuData.people.length ? col('Πρόσωπα', 'Όλα τα πρόσωπα', 'guests.html', menuData.people) : ''}
       <div class="gm-col">
         <p class="gm-head">Άκου παντού</p>
@@ -714,6 +716,15 @@ function card(item, depth = 0){
     .filter(Boolean).join(' ');
   const hide = item.extra ? ' hidden' : '';
 
+  // Το κείμενο κάθεται ΚΑΤΩ από την εικόνα, όχι μέσα της.
+  //
+  // Δοκιμάστηκε και μέσα, με σκίαση στο κάτω μέρος. Στις μεγάλες κάρτες
+  // της ροής διαβαζόταν· στις μικρές — λωρίδες θεμάτων, «και ακόμα»,
+  // spotlight — γινόταν χάος: τα εξώφυλλά μας είναι αφίσες με δικό τους
+  // κείμενο και πρόσωπα, και ο τίτλος μας έπεφτε από πάνω τους.
+  //
+  // Εδώ η εικόνα μένει ολόκληρη και καθαρή, και το κείμενο διαβάζεται
+  // πάντα — ανεξάρτητα από το πόσο μικρή είναι η κάρτα.
   return `<article class="${cls}"${hide} data-kind="${item.kind}"${topics ? ` data-topics="${topics}"` : ''}>
     <a class="card-link" href="${href}"${out}>
     <span class="card-media">
@@ -723,10 +734,13 @@ function card(item, depth = 0){
       </span>`}
       ${item.duration ? `<span class="card-time">${item.duration}</span>` : ''}
     </span>
-    ${item.label ? `<p class="card-label">${esc(item.label)}</p>` : ''}
-    <h2 class="card-title">${esc(item.title)}</h2>
-    ${item.name ? `<p class="card-guest">${esc(item.name)}</p>` : ''}
-    <p class="card-meta">${item.meta}</p>
+
+    <span class="card-text">
+      ${item.label ? `<span class="card-label">${esc(item.label)}</span>` : ''}
+      <h2 class="card-title">${esc(item.title)}</h2>
+      ${item.name ? `<span class="card-guest">${esc(item.name)}</span>` : ''}
+      <span class="card-meta">${item.meta}</span>
+    </span>
     </a>
   </article>`;
 }
@@ -1352,22 +1366,103 @@ function buildShows(videos, episodes){
 
 // Η ενότητα «Εκπομπές» της αρχικής: μία κάρτα ανά εκπομπή, με τη
 // μικρογραφία του πιο πρόσφατου βίντεό της.
-// Το επίσημο εξώφυλλο μιας εκπομπής, φτιαγμένο από τη σύνταξη.
+// ---- τα εξώφυλλα των εκπομπών ----
 //
-// Μπαίνει ως public/show-art/<slug>.jpg — το ίδιο slug με τη σελίδα της.
-// Όπου δεν υπάρχει, πέφτουμε πίσω στη μικρογραφία του τελευταίου
-// βίντεο, που είναι στιγμιότυπο συζήτησης και όχι αφίσα.
+// Έχουν τον τίτλο ΨΗΜΕΝΟ μέσα στην εικόνα, στο κέντρο, σε 16:9.
+// Από αυτό βγαίνουν δύο κανόνες που δεν παραβιάζονται πουθενά:
 //
-// Για να μπει νέα: βάλε το αρχείο με το σωστό όνομα και ξανατρέξε το
-// build. Καμία αλλαγή στον κώδικα.
-const artSeen = {};
-function showArt(name, depth = 0){
-  const slug = slugify(name);
-  if (artSeen[slug] === undefined) {
-    artSeen[slug] = fs.existsSync(path.join(PUBLIC_DIR, 'show-art', `${slug}.jpg`));
+//   1. ΠΟΤΕ crop. Το παραμικρό κόψιμο τρώει τον τίτλο. Όπου μπαίνουν,
+//      μπαίνουν ολόκληρες, σε θέση 16:9.
+//   2. Ποτέ δικός μας τίτλος από πάνω τους. Θα γραφόταν δύο φορές.
+//
+// Η αντιστοίχιση είναι ΔΕΔΟΜΕΝΑ, στο data/show-art.json: τα ονόματα
+// των εκπομπών έρχονται από το YouTube και δεν μαντεύονται από slug.
+let artMap;
+function showArtMap(){
+  if (!artMap) {
+    artMap = {};
+    try {
+      const raw = JSON.parse(fs.readFileSync(SHOW_ART_FILE, 'utf8'));
+      for (const [show, v] of Object.entries(raw.art || {})) {
+        // Δέχεται και σκέτο όνομα αρχείου, για να μη σπάσει αν κάποιος
+        // γράψει γρήγορα «"Εκπομπή": "αρχείο"» χωρίς τα υπόλοιπα.
+        artMap[matchKey(show)] = typeof v === 'string'
+          ? { file: v, titled: true }
+          : { file: v.file, titled: v.titled !== false };
+      }
+    } catch (err) {
+      if (err.code !== 'ENOENT') {
+        console.warn('ΠΡΟΣΟΧΗ: το data/show-art.json δεν διαβάζεται —', err.message);
+      }
+    }
   }
-  if (!artSeen[slug]) return '';
-  return `${depth === 0 ? '' : '../'}show-art/${slug}.jpg`;
+  return artMap;
+}
+
+// Η εγγραφή μιας εκπομπής, ή null. Το matchKey ισοπεδώνει τόνους και
+// κεφαλαία, ώστε «Newshub.gr» και «newshub.gr» να πέφτουν μαζί.
+function showArtOf(name){
+  const m = showArtMap();
+  return m[matchKey(showName(name))] || m[matchKey(name)] || null;
+}
+
+// Έχει ο τίτλος ψηθεί μέσα στην εικόνα; Τότε δεν τον ξαναγράφουμε.
+function artIsTitled(name){
+  const a = showArtOf(name);
+  return !!(a && a.titled);
+}
+
+// Η περιγραφή μιας εκπομπής, γραμμένη από τη σύνταξη στο YouTube και
+// κατεβασμένη από το fetch-videos.js. 12 από τις 16 έχουν — οι
+// υπόλοιπες απλώς δεν δείχνουν παράγραφο.
+//
+// Δεν τις γράφουμε εμείς: η σύνταξη τις έχει ήδη, και έτσι μένουν
+// συγχρονισμένες χωρίς να μάθει κανείς καινούργιο εργαλείο.
+let showsInfo;
+function showAbout(name){
+  if (!showsInfo) {
+    showsInfo = {};
+    try {
+      const raw = JSON.parse(fs.readFileSync(SHOWS_FILE, 'utf8'));
+      for (const [show, v] of Object.entries(raw)) {
+        if (v && v.description) showsInfo[matchKey(show)] = v.description;
+      }
+    } catch (err) {
+      if (err.code !== 'ENOENT') {
+        console.warn('ΠΡΟΣΟΧΗ: το data/shows.json δεν διαβάζεται —', err.message);
+      }
+    }
+  }
+
+  const text = showsInfo[matchKey(showName(name))] || showsInfo[matchKey(name)] || '';
+  // Οι περιγραφές του YouTube έχουν αλλαγές γραμμής και διπλά κενά,
+  // και μερικές τελειώνουν με σύνδεσμο ή hashtags.
+  return clip(text.split(/\s*https?:\/\//)[0].replace(/\s+/g, ' ').trim(), 260);
+}
+
+// Η εικόνα σε τρία μεγέθη. Ο browser διαλέγει μόνος του από το srcset:
+// μια κάρτα 343px κατεβάζει 24KB, όχι το πλήρες των 300KB.
+//
+// Το «sizes» λέει πόσο ΠΛΑΤΟΣ θα πιάσει η εικόνα στη σελίδα — χωρίς
+// αυτό ο browser υποθέτει 100vw και κατεβάζει πάντα το μεγαλύτερο.
+// Κάτω από αυτό το πλάτος ο ψημένος τίτλος δεν διαβάζεται: η εικόνα
+// γίνεται θολή κηλίδα και είναι χειρότερη από ένα στιγμιότυπο. Όποια
+// θέση είναι πιο στενή, παίρνει το εξώφυλλο του τελευταίου επεισοδίου.
+const ART_MIN = 200;
+
+function showArtImg(name, { depth = 0, sizes, cls = '', eager = false, minWidth = 999 } = {}){
+  if (minWidth < ART_MIN) return '';
+
+  const art = showArtOf(name);
+  if (!art) return '';
+
+  const up = depth === 0 ? '' : '../';
+  const src = `${up}shows/${art.file}`;
+
+  return `<img${cls ? ` class="${cls}"` : ''} src="${src}-800.webp"
+            srcset="${src}-400.webp 400w, ${src}-800.webp 800w, ${src}.webp 1600w"
+            sizes="${sizes}" alt="${esc(showName(name))}"
+            width="1600" height="900"${eager ? '' : ' loading="lazy"'}>`;
 }
 
 function showsSection(groups, depth = 0){
@@ -1382,13 +1477,29 @@ function showsSection(groups, depth = 0){
       const latest = g.items[0];
       const count = g.items.length;
 
-      const art = showArt(g.name, depth) || (latest && latest.image) || '';
+      // Με δικό της εξώφυλλο, η κάρτα ΔΕΝ γράφει τον τίτλο: είναι ήδη
+      // μέσα στην εικόνα. Χωρίς εξώφυλλο, το στιγμιότυπο του βίντεο
+      // δεν λέει τίποτα μόνο του, οπότε το όνομα μπαίνει από κάτω.
+      const art = showArtImg(g.name, {
+        depth,
+        cls: 'card-image show-cover',
+        // Τέσσερις στήλες στο πλήρες πλάτος, δύο στα μεσαία, μία στο κινητό.
+        sizes: '(max-width: 560px) 90vw, (max-width: 1100px) 45vw, 23vw',
+        // Μετρημένο: 256px στα 1280, 290px στα 390 — το στενότερο είναι 256.
+        minWidth: 256,
+      });
 
-      return `      <article class="show-card">
+      // Το όνομα γράφεται ΠΑΝΤΑ. Το είχα παραλείψει όπου ο τίτλος είναι
+      // ψημένος στην αφίσα, αλλά σε κάρτα 256px δεν διαβάζεται — και οι
+      // μισές κάρτες έμεναν ανώνυμες δίπλα στις άλλες.
+      //
+      // Η διαφορά είναι ΠΟΥ κάθεται: με αφίσα πάει από κάτω, ώστε να
+      // μη σκεπάζει την εικόνα· χωρίς, μένει πάνω της με σκίαση.
+      return `      <article class="show-card${art ? ' show-card--art' : ''}">
         <a class="card-link" href="${up}${showUrl(g.name)}">
-          ${art
-            ? `<img class="card-image" src="${art}" alt="" loading="lazy">`
-            : '<div class="card-image card-image--empty"></div>'}
+          ${art || (latest && latest.image
+            ? `<img class="card-image" src="${latest.image}" alt="" loading="lazy">`
+            : '<div class="card-image card-image--empty"></div>')}
           <h3 class="show-name">${esc(showName(g.name))}</h3>
           <p class="card-meta">${count === 1 ? '1 επεισόδιο' : `${count.toLocaleString('el')} επεισόδια`}</p>
         </a>
@@ -1629,12 +1740,12 @@ ${pageHero(pic ? pic.image : '')}
 
 ${breadcrumb([
     { label: 'Αρχική', href: 'index.html' },
-    { label: 'Θέματα', href: 'categories.html' },
+    { label: 'Ενότητες', href: 'categories.html' },
     { label: group.name },
   ], 1)}
 
   <main class="guest">
-${sectionHead('Θέμα', name, pageCountLine(total, n, pages), base)}
+${sectionHead('Ενότητα', name, pageCountLine(total, n, pages), base)}
 
     <div class="grid">
       ${cards}
@@ -1835,16 +1946,16 @@ ${rows}
   const body = `${siteHeader()}
 
   <main class="guest">
-    <p class="page-label">Θέματα</p>
-    <h1 class="guest-name">Τα θέματά μας</h1>
-    <p class="guest-count">${live.length} θέματα · ${total.toLocaleString('el')} κομμάτια ταξινομημένα</p>
+    <p class="page-label">Ενότητες</p>
+    <h1 class="guest-name">Οι ενότητές μας</h1>
+    <p class="guest-count">${live.length} ενότητες · ${total.toLocaleString('el')} κομμάτια ταξινομημένα</p>
 
     <div class="tcard-grid">
 ${leadCards}
     </div>
 ${rest.length ? `
     <section class="tlist">
-      <h2 class="section-head">Και τα υπόλοιπα θέματα</h2>
+      <h2 class="section-head">Και οι υπόλοιπες ενότητες</h2>
       <div class="tlist-grid">
 ${restCols}
       </div>
@@ -1852,9 +1963,9 @@ ${restCols}
   </main>`;
 
   return page({
-    title: 'Τα θέματά μας — Newshub Media',
+    title: 'Οι ενότητές μας — Newshub Media',
     body,
-    description: `Τα ${live.length} θέματα του Newshub Media: ${live.slice(0, 6).map((c) => c.name).join(', ')} και άλλα.`,
+    description: `Οι ${live.length} ενότητες του Newshub Media: ${live.slice(0, 6).map((c) => c.name).join(', ')} και άλλα.`,
     url: 'categories.html',
   });
 }
@@ -1881,8 +1992,11 @@ function topicStrip(groups){
     return `        <a class="topic" href="${categoryUrl(g.name)}" data-topic="${key}" data-name="${esc(g.name)}" data-count="${n}">${esc(g.name)}<span class="topic-n">${n}</span></a>`;
   }).join('\n');
 
-  return `  <nav class="topics" aria-label="Θέματα">
-    <span class="topics-label">Θέματα</span>
+  // Χωρίς ορατή ετικέτα «Θέματα» μπροστά: οι ίδιες οι ετικέτες λένε τι
+  // είναι, και η λωρίδα κάθεται ήδη κάτω από τον τίτλο της ενότητας.
+  // Το aria-label μένει — όποιος ακούει τη σελίδα δεν βλέπει τα χρώματα
+  // και χρειάζεται να ξέρει τι είναι αυτή η ομάδα συνδέσμων.
+  return `  <nav class="topics" aria-label="Φίλτρα θεμάτων">
     <div class="topics-list">
         <a class="topic is-on" href="categories.html" data-topic="all">Όλα</a>
 ${chips}
@@ -2155,9 +2269,10 @@ function showsIndexPage(groups){
 
     return `      <article class="show-tile">
         <a class="show-tile-art" href="${showUrl(g.name)}">
-          ${showArt(g.name) || (latest && latest.image)
-            ? `<img src="${showArt(g.name) || latest.image}" alt="" loading="lazy">`
-            : '<span class="show-tile-blank"></span>'}
+          ${showArtImg(g.name, { cls: 'show-cover', sizes: '(max-width: 760px) 92vw, 30vw', minWidth: 360 })
+            || (latest && latest.image
+              ? `<img src="${latest.image}" alt="" loading="lazy">`
+              : '<span class="show-tile-blank"></span>')}
         </a>
 
         <div class="show-tile-text">
@@ -2221,13 +2336,44 @@ function showPage(group, n = 1){
     .slice((n - 1) * PER_PAGE, n * PER_PAGE)
     .map((it) => card(it, 1)).join('\n');
 
-  // Το υπόβαθρο: το επίσημο εξώφυλλο της εκπομπής όπου υπάρχει, αλλιώς
-  // η κάρτα του πιο πρόσφατου βίντεό της.
+  // Η κορυφή: η αφίσα σε ΛΟΓΙΚΟ πλάτος, όχι σε όλη την οθόνη, και η
+  // ίδια εικόνα θολή από πίσω για να γεμίζει τον χώρο.
+  //
+  // Σε πλήρες πλάτος έπιανε 1224×689 — μισή οθόνη πριν δεις ένα
+  // επεισόδιο. Και τέσσερις από τις αφίσες ήρθαν σε 426px, οπότε
+  // τεντωμένες σε 1224 θα ήταν θολές ούτως ή άλλως.
+  //
+  // Ο <h1> μένει κρυμμένος όπου ο τίτλος είναι ψημένος στην εικόνα:
+  // τον χρειάζονται η Google και όποιος ακούει τη σελίδα.
+  const art = showArtImg(group.name, {
+    depth: 1,
+    // Η κλάση ΔΕΝ είναι διακοσμητική: δίνει contain και height:auto.
+    // Χωρίς αυτήν το height="900" του attribute κόβει την αφίσα.
+    cls: 'show-cover',
+    // Το πλάτος της αφίσας, κλειδωμένο από το CSS — δες .show-head-art.
+    sizes: '(max-width: 760px) 92vw, 460px',
+    eager: true,
+    minWidth: 360,
+  });
   const pic = group.items.find((it) => it.image);
-  const art = showArt(group.name, 1) || (pic ? pic.image : '');
+  const titled = art && artIsTitled(group.name);
+  const about = showAbout(group.name);
+
+  const head = art
+    ? `    <header class="show-head">
+      <div class="show-head-art">${art}</div>
+      <div class="show-head-text">
+        ${titled
+          ? `<h1 class="only-read">${name}</h1>`
+          : `<p class="page-label">Εκπομπή</p>\n        <h1 class="show-head-name">${name}</h1>`}
+        ${about ? `<p class="show-about">${esc(about)}</p>` : ''}
+        <p class="show-head-line">${pageCountLine(total, n, pages)}</p>
+      </div>
+    </header>`
+    : sectionHead('Εκπομπή', name, pageCountLine(total, n, pages), base);
 
   const body = `${siteHeader(1)}
-${pageHero(art)}
+${pageHero(art ? `../shows/${showArtOf(group.name).file}-800.webp` : (pic ? pic.image : ''))}
 
 ${breadcrumb([
     { label: 'Αρχική', href: 'index.html' },
@@ -2236,7 +2382,7 @@ ${breadcrumb([
   ], 1)}
 
   <main class="guest">
-${sectionHead('Εκπομπή', name, pageCountLine(total, n, pages), base)}
+${head}
 
     <div class="grid">
       ${cards}
@@ -2563,39 +2709,6 @@ function mostCommon(list){
   }
   return best;
 }
-// Η ενότητα «N πρόσωπα έχουν μιλήσει εδώ» του mockup. Πορτρέτα δεν
-// έχουμε, οπότε δείχνουμε στρογγυλεμένο το εξώφυλλο του πιο πρόσφατου
-// επεισοδίου τους — όπως προβλέπει και το PDF προς το αφεντικό.
-function peopleSection(groups, depth = 0){
-  const keys = Object.keys(groups);
-  if (!keys.length) return '';
-
-  const up = depth === 0 ? '' : '../';
-  const top = keys
-    .sort((a, b) => groups[b].episodes.length - groups[a].episodes.length)
-    .slice(0, 12);
-
-  const cards = top.map((key) => {
-    const g = groups[key];
-    const name = mostCommon(g.names);
-    const n = g.episodes.length;
-    const face = g.episodes.find((ep) => ep.image);
-
-    return `      <a class="person" href="${up}guest/${slugify(name)}.html">
-        ${face ? `<img src="${face.image}" alt="" loading="lazy">` : '<span class="person-blank"></span>'}
-        <span class="person-name">${esc(name)}</span>
-        <span class="person-count">${n === 1 ? '1 συμμετοχή' : `${n} συμμετοχές`}</span>
-      </a>`;
-  }).join('\n');
-
-  return `  <section class="people">
-    <h2 class="section-head">${keys.length} πρόσωπα έχουν μιλήσει εδώ</h2>
-    <div class="people-row">
-${cards}
-    </div>
-    <a class="people-all" href="${up}guests.html">Όλα τα πρόσωπα →</a>
-  </section>`;
-}
 
 // Σελίδα για διευθύνσεις που δεν υπάρχουν. Δεν αφήνουμε τον επισκέπτη
 // σε λευκή οθόνη του browser — του δίνουμε δρόμους να συνεχίσει.
@@ -2611,7 +2724,7 @@ function notFoundPage(){
       <a class="cat" href="index.html"><span class="cat-name">Αρχική</span><span class="cat-count">→</span></a>
       <a class="cat" href="search.html" data-reload><span class="cat-name">Αναζήτηση</span><span class="cat-count">→</span></a>
       <a class="cat" href="shows.html"><span class="cat-name">Εκπομπές</span><span class="cat-count">→</span></a>
-      <a class="cat" href="categories.html"><span class="cat-name">Θέματα</span><span class="cat-count">→</span></a>
+      <a class="cat" href="categories.html"><span class="cat-name">Ενότητες</span><span class="cat-count">→</span></a>
       <a class="cat" href="guests.html"><span class="cat-name">Πρόσωπα</span><span class="cat-count">→</span></a>
     </div>
   </main>`;
@@ -2682,7 +2795,7 @@ ${latest}
         showImages: true,
         pageSize: 12,
         translations: {
-          placeholder: 'Αναζήτησε επεισόδια, πρόσωπα, θέματα...',
+          placeholder: 'Αναζήτησε επεισόδια, πρόσωπα, ενότητες...',
           clear_search: 'Καθαρισμός',
           load_more: 'Περισσότερα αποτελέσματα',
           search_label: 'Αναζήτηση στο αρχείο',
@@ -2709,6 +2822,51 @@ const OFTEN = 5;
 function firstLetter(name){
   return String(name).trim().charAt(0).toUpperCase()
     .normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
+// Πόσα ονόματα δείχνει η ενότητα «Τα πρόσωπα» στην αρχική.
+const NAMES_SHOWN = 40;
+
+// Φωτογραφίες προσώπων δεν έχουμε για κανέναν από τους 382. Όταν
+// αποκτήσουμε, γίνεται true ΕΔΩ και μόνο εδώ: το markup κουβαλάει ήδη
+// τη θέση της φωτογραφίας και το CSS ξέρει να τη δείξει.
+const PEOPLE_FACES = false;
+
+// Η ενότητα «Τα πρόσωπα»: ποιοι μιλούν εδώ, σε μία ματιά.
+//
+// Ονόματα και αριθμοί, χωρίς εικόνες — γιατί οι «εικόνες» που θα
+// είχαμε είναι εξώφυλλα επεισοδίων, δηλαδή αφίσες, όχι πρόσωπα.
+// Σαράντα αφίσες στη σειρά θα έλεγαν λιγότερα από σαράντα ονόματα.
+function namesSection(groups, depth = 0){
+  const keys = Object.keys(groups);
+  if (!keys.length) return '';
+
+  const up = depth === 0 ? '' : '../';
+
+  const people = keys
+    .map((key) => ({
+      name: mostCommon(groups[key].names),
+      n: groups[key].episodes.length,
+      face: groups[key].episodes.find((e) => e.image),
+    }))
+    .sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, 'el'))
+    .slice(0, NAMES_SHOWN);
+
+  const chips = people.map((p) => `      <a class="pname" href="${up}guest/${slugify(p.name)}.html">
+        ${PEOPLE_FACES && p.face ? `<span class="pname-face"><img src="${p.face.image}" alt="" loading="lazy"></span>` : ''}
+        <span class="pname-text">${esc(p.name)}</span>
+        <span class="pname-n">${p.n}</span>
+      </a>`).join('\n');
+
+  return `  <section class="band band--people">
+${bandMark('Τα', ' πρόσωπα', `      <p class="band-sub">${keys.length} άνθρωποι έχουν μιλήσει στο newshub.gr</p>`)}
+
+    <div class="pnames${PEOPLE_FACES ? ' pnames--faces' : ''}">
+${chips}
+    </div>
+
+    <p class="band-open"><a href="${up}guests.html">Όλα τα πρόσωπα →</a></p>
+  </section>`;
 }
 
 function guestsIndexPage(groups){
@@ -2930,7 +3088,7 @@ ${lead}${rest ? `\n${rest}` : ''}
     </section>
 
 ${near ? `    <section class="bio-near">
-      <h2 class="section-head">Άλλοι για τα ίδια θέματα</h2>
+      <h2 class="section-head">Άλλοι στις ίδιες ενότητες</h2>
       <div class="pnear-row">
 ${near}
       </div>
@@ -3412,11 +3570,17 @@ function main(){
   ];
 
   const featured = pickFeatured(pool, curation);
-  const picked = pickSecondary(pool, curation, featured);
-  const secondary = picked.map((it) => card(it)).join('\n');
 
-  // Ό,τι μπήκε στα banners δεν ξαναμπαίνει στη ροή από κάτω.
-  const onTop = new Set([featured, ...picked].map((it) => it.href));
+  // Οι τέσσερις δευτερεύουσες κάρτες κάτω από το πρωτοσέλιδο βγήκαν:
+  // μετά τη μεγάλη κάρτα ακολουθεί κατευθείαν η ροή.
+  //
+  // ΠΡΟΣΟΧΗ: το claude.md γράφει ότι τα τέσσερα δευτερεύοντα τα ζήτησε
+  // ρητά το αφεντικό. Η pickSecondary μένει στον κώδικα και δουλεύει —
+  // επαναφέρεται με δύο γραμμές εδώ.
+  //
+  // Μόνο το πρωτοσέλιδο κρατιέται έξω από τη ροή τώρα· όσα έβγαιναν
+  // στα δευτερεύοντα επιστρέφουν κανονικά μέσα της.
+  const onTop = new Set([featured.href]);
 
   // Η ροή κάτω από τα banners. Φαίνονται τα 24 πιο πρόσφατα, αλλά μέσα
   // της κρύβονται και τα 6 πιο πρόσφατα ΚΑΘΕ θέματος. Έτσι όταν κάποιος
@@ -3450,12 +3614,6 @@ function main(){
 
 ${heroBanner(featured)}
 
-  <div class="secondary">
-    ${secondary}
-  </div>
-
-${intro(episodes[0], videos[0])}
-
   <section class="band band--latest">
 ${bandMark('Lat', 'est', '      <h1 data-flow-head>Τελευταία επεισόδια</h1>')}
 
@@ -3475,6 +3633,8 @@ ${showsSection(showGroups)}
 
 ${topicRows(catGroups)}
 
+${namesSection(groups)}
+
 ${moreTopics(catGroups)}
 
 ${spotlightSections(catGroups)}
@@ -3485,7 +3645,7 @@ ${newsTicker(articles)}
     </div>
   </div>
 
-${peopleSection(groups)}`,
+${intro(episodes[0], videos[0])}`,
   });
 
   fs.mkdirSync(PUBLIC_DIR, { recursive: true }); //creation of the public directory if it doesn't exist
