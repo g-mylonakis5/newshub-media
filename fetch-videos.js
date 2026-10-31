@@ -248,7 +248,16 @@ async function main() {
     console.error('(404 σε όλες), οπότε δεν υπάρχει εφεδρικός δρόμος.');
     console.error('Το data/videos.json μένει ως έχει.');
     console.error('');
-    process.exitCode = 1;
+
+    // ΔΕΝ βγαίνουμε με σφάλμα: το build πρέπει να συνεχίσει με τα
+    // δεδομένα που ήδη υπάρχουν στο repo. Αν σπάγαμε εδώ, ένα
+    // ξεχασμένο κλειδί θα μπλόκαρε κάθε δημοσίευση.
+    const have = (() => {
+      try { return JSON.parse(fs.readFileSync(OUT_FILE, 'utf8')).length; }
+      catch { return 0; }
+    })();
+    console.error(`Συνεχίζω με τα ${have} βίντεο που ήδη υπάρχουν.`);
+    console.error('');
     return;
   }
 
@@ -305,7 +314,8 @@ async function main() {
     console.error('  εξαντλημένο ημερήσιο όριο, ή αλλαγμένα playlist ids.');
     console.error('  Έλεγξε με:  node fetch-videos.js --check');
     console.error('');
-    process.exitCode = 1;
+    console.error(`  Συνεχίζω με τα ${before.length} βίντεο που ήδη υπάρχουν.`);
+    console.error('');
     return;
   }
 

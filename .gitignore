@@ -3,31 +3,22 @@
 .env.*
 !.env.example
 
-# Παράγεται από το build, δεν το κρατάμε στο αποθετήριο.
-public/episode/
-public/guest/
-public/show/
-public/video/
-public/category/
-public/index.html
-public/guests.html
-public/search.html
-public/shows.html
-public/categories.html
-public/episodes.html
-public/episodes-*.html
-public/404.html
-public/sitemap.xml
-public/robots.txt
+# ---- public/ ----
+#
+# Το Cloudflare τρέχει μόνο του «npm run build», άρα ΟΛΟ το public/
+# παράγεται εκεί. Δεν το ανεβάζουμε: 8.682 αρχεία που ξαναγράφονται
+# σε κάθε deployment, και το Pages δέχεται έως 20.000.
+#
+# Η λογική είναι ανάποδη επίτηδες — αγνοούμε τα πάντα και ξεχωρίζουμε
+# μόνο τα πηγαία. Έτσι κάθε νέος παραγόμενος φάκελος μένει εκτός από
+# μόνος του, χωρίς να θυμηθεί κανείς να τον προσθέσει εδώ.
+public/*
+!public/styles.css
+!public/player.js
+!public/favicon.svg
+!public/intro.jpg
+!public/shows/
 
-# Οι απομαγνητοφωνήσεις που σερβίρονται στον browser. Παράγονται από το
-# data/transcripts/ σε κάθε build — δεν τις κρατάμε δύο φορές.
-public/transcript/
-
-# Το ευρετήριο αναζήτησης — παράγεται από το Pagefind μετά το build.
-public/pagefind/
-
-# Ο καιρός αλλάζει κάθε μέρα. Αν λείπει, η λωρίδα δείχνει μόνο τα σόσιαλ.
 data/weather.json
 
 # ΔΕΝ αγνοούμε το υπόλοιπο data/:
