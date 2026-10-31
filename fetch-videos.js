@@ -172,18 +172,91 @@ async function viaApi(playlistId, key) {
   return { show, videos };
 }
 
+// node fetch-videos.js --check
+//
+// Ρωτάει κάθε λίστα χωριστά και λέει ποια απαντά και ποια όχι, ΧΩΡΙΣ
+// να γράψει τίποτα. Για όταν το κανονικό τρέξιμο βγάλει 404 παντού.
+async function check() {
+  const key = readEnv().YOUTUBE_API_KEY || process.env.YOUTUBE_API_KEY || '';
+  if (!key) {
+    console.log('Δεν υπάρχει YOUTUBE_API_KEY — ο έλεγχος αφορά μόνο το API.');
+    return;
+  }
+
+  console.log(`Κλειδί: ${key.slice(0, 6)}…${key.slice(-4)} (${key.length} χαρακτήρες)\n`);
+
+  // Πρώτα το ίδιο το κλειδί, με ένα ερώτημα που δουλεύει πάντα.
+  try {
+    const r = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&id=UCgI7vd72xX-ZNWb_x7zzWJg&key=${key}`);
+    const j = await r.json();
+    if (j.error) {
+      console.log(`ΤΟ ΚΛΕΙΔΙ ΔΕΝ ΔΟΥΛΕΥΕΙ: ${j.error.code} — ${j.error.message}`);
+      const reason = j.error.errors && j.error.errors[0] && j.error.errors[0].reason;
+      if (reason) console.log(`αιτία: ${reason}`);
+      return;
+    }
+    console.log('Το κλειδί δουλεύει.\n');
+  } catch (err) {
+    console.log('Δεν βγήκε σύνδεση:', err.message);
+    return;
+  }
+
+  let ok = 0;
+  for (const id of PLAYLISTS) {
+    try {
+      const r = await fetch(`https://www.googleapis.com/youtube/v3/playlists?part=snippet,contentDetails&id=${id}&key=${key}`);
+      const j = await r.json();
+      if (j.error) {
+        console.log(`  ✗ ${id.padEnd(36)} ${j.error.code} ${j.error.message.slice(0, 50)}`);
+      } else if (!j.items || !j.items.length) {
+        console.log(`  ✗ ${id.padEnd(36)} δεν υπάρχει πια (σβήστηκε ή έγινε ιδιωτική)`);
+      } else {
+        ok++;
+        const s = j.items[0];
+        console.log(`  ✓ ${id.padEnd(36)} ${String(s.contentDetails.itemCount).padStart(5)}  ${s.snippet.title}`);
+      }
+    } catch (err) {
+      console.log(`  ✗ ${id.padEnd(36)} ${err.message}`);
+    }
+  }
+  console.log(`\n${ok} από ${PLAYLISTS.length} λίστες απαντούν.`);
+}
+
 async function main() {
+  if (process.argv.includes('--check')) return check();
+
   const key = readEnv().YOUTUBE_API_KEY || process.env.YOUTUBE_API_KEY || '';
 
-  if (key) {
-    console.log('Βρέθηκε κλειδί — τραβάω ΟΛΑ τα βίντεο από το YouTube Data API.');
-  } else {
-    console.log('Χωρίς κλειδί — πέφτω στα δημόσια RSS (15 ανά λίστα).');
-    console.log('Βάλε YOUTUBE_API_KEY στο .env για ολόκληρο το αρχείο.');
+  // ΧΩΡΙΣ ΚΛΕΙΔΙ ΔΕΝ ΠΡΟΧΩΡΑΜΕ.
+  //
+  // Υπήρχε εφεδρεία στα δημόσια RSS του YouTube. Το YouTube τα
+  // ΚΑΤΑΡΓΗΣΕ για λίστες αναπαραγωγής: το
+  // youtube.com/feeds/videos.xml?playlist_id=… απαντά 404 σε κάθε
+  // λίστα, επαληθευμένα.
+  //
+  // Η εφεδρεία έγινε έτσι παγίδα: χωρίς κλειδί το script έπαιρνε 404
+  // παντού, έγραφε άδειο αρχείο, και το build έσβηνε 3.075 σελίδες.
+  // Καλύτερα να σταματήσει αμέσως και να το πει.
+  if (!key) {
+    console.error('');
+    console.error('Δεν βρέθηκε YOUTUBE_API_KEY.');
+    console.error('');
+    console.error('  · τοπικά:  βάλ\' το στο .env  ->  YOUTUBE_API_KEY=…');
+    console.error('  · στο CI:  πέρασέ το ως μυστικό μεταβλητής περιβάλλοντος');
+    console.error('');
+    console.error('Τα δημόσια RSS του YouTube ΔΕΝ δουλεύουν πια για λίστες');
+    console.error('(404 σε όλες), οπότε δεν υπάρχει εφεδρικός δρόμος.');
+    console.error('Το data/videos.json μένει ως έχει.');
+    console.error('');
+    process.exitCode = 1;
+    return;
   }
+
+  console.log('Βρέθηκε κλειδί — τραβάω ΟΛΑ τα βίντεο από το YouTube Data API.');
   console.log('');
 
   const all = [];
+  let failed = 0;
 
   for (const id of PLAYLISTS) {
     try {
@@ -191,6 +264,7 @@ async function main() {
       all.push(...videos);
       console.log(`  ${String(videos.length).padStart(5)} βίντεο  ${show}`);
     } catch (err) {
+      failed++;
       console.warn(`  ΣΦΑΛΜΑ στη λίστα ${id}: ${err.message}`);
     }
   }
@@ -198,8 +272,49 @@ async function main() {
   // Νεότερα πρώτα, όπως και τα επεισόδια.
   all.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+  // ---- ΠΡΟΣΤΑΣΙΑ: δεν σβήνουμε ό,τι έχουμε ----
+  //
+  // Μια φορά το YouTube απάντησε 404 σε ΟΛΕΣ τις λίστες. Το script
+  // έγραψε άδειο videos.json, και το επόμενο build έσβησε 3.075
+  // σελίδες βίντεο και 72 εκπομπών — επειδή «δεν υπάρχουν πια».
+  //
+  // Ένα προσωρινό πρόβλημα δικτύου ή ένα ληγμένο κλειδί δεν σημαίνει
+  // ότι χάθηκαν τα βίντεο. Αν το αποτέλεσμα είναι άδειο ή πολύ
+  // μικρότερο από ό,τι είχαμε, κρατάμε το παλιό και φωνάζουμε.
+  const before = (() => {
+    try {
+      return JSON.parse(fs.readFileSync(OUT_FILE, 'utf8'));
+    } catch {
+      return [];
+    }
+  })();
+
+  // Κάτω από το μισό = κάτι πήγε στραβά, όχι πραγματική μείωση.
+  const SAFE_DROP = 0.5;
+
+  if (before.length && all.length < before.length * SAFE_DROP) {
+    console.error('');
+    console.error('╔══════════════════════════════════════════════════════════╗');
+    console.error('║  ΤΟ ΑΡΧΕΙΟ ΔΕΝ ΓΡΑΦΤΗΚΕ — τα παλιά δεδομένα κρατήθηκαν   ║');
+    console.error('╚══════════════════════════════════════════════════════════╝');
+    console.error(`  είχαμε:    ${before.length} βίντεο`);
+    console.error(`  ήρθαν:     ${all.length} βίντεο`);
+    console.error(`  απέτυχαν:  ${failed} από ${PLAYLISTS.length} λίστες`);
+    console.error('');
+    console.error('  Πιθανές αιτίες: ληγμένο ή μπλοκαρισμένο YOUTUBE_API_KEY,');
+    console.error('  εξαντλημένο ημερήσιο όριο, ή αλλαγμένα playlist ids.');
+    console.error('  Έλεγξε με:  node fetch-videos.js --check');
+    console.error('');
+    process.exitCode = 1;
+    return;
+  }
+
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
   fs.writeFileSync(OUT_FILE, JSON.stringify(all, null, 2), 'utf8');
+
+  if (failed) {
+    console.warn(`ΠΡΟΣΟΧΗ: ${failed} λίστες απέτυχαν — το αρχείο γράφτηκε με ${all.length} βίντεο.`);
+  }
 
   // Οι περιγραφές των εκπομπών. Γράφονται μόνο αν μαζέψαμε κάποια —
   // χωρίς κλειδί ο δρόμος του RSS δεν τις δίνει, και δεν θέλουμε να

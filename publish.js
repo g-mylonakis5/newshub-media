@@ -51,12 +51,39 @@ function indexIsStale() {
 }
 
 function reindex() {
+  // ΠΡΩΤΑ σβήνουμε τον παλιό φάκελο.
+  //
+  // Το Pagefind γράφει ένα αρχείο ανά κομμάτι σελίδας με όνομα που
+  // βγαίνει από το περιεχόμενο. Όταν αλλάζει μια σελίδα, γράφεται ΝΕΟ
+  // αρχείο — το παλιό μένει για πάντα.
+  //
+  // Σε επτά builds είχαν μαζευτεί 19.009 fragments για 4.660 σελίδες,
+  // και το deployment χτύπησε στο όριο των 20.000 αρχείων του
+  // Cloudflare Pages. Τα 14.886 ήταν νεκρά.
+  fs.rmSync(INDEX_DIR, { recursive: true, force: true });
+
   // Το npx κατεβάζει το Pagefind την πρώτη φορά και μετά το βρίσκει έτοιμο.
   execFileSync('npx', ['-y', 'pagefind@latest', '--site', 'public'], {
     cwd: __dirname,
     stdio: 'inherit',
     shell: true,
   });
+
+  const files = countFiles(path.join(__dirname, 'public'));
+  console.log(`Αρχεία στο public/: ${files.toLocaleString('el')} (όριο Cloudflare: 20.000)`);
+  if (files > 19000) {
+    console.warn('ΠΡΟΣΟΧΗ: πλησιάζουμε το όριο αρχείων του Cloudflare Pages.');
+  }
+}
+
+// Πόσα αρχεία θα σταλούν — το Cloudflare Pages δέχεται έως 20.000.
+function countFiles(dir) {
+  let n = 0;
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (e.isDirectory()) n += countFiles(path.join(dir, e.name));
+    else n++;
+  }
+  return n;
 }
 
 function main() {
