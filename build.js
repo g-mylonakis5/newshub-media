@@ -282,7 +282,8 @@ ${prev ? `  <link rel="prev" href="${SITE_URL}/${prev}">\n` : ''}${next ? `  <li
   <meta name="twitter:description" content="${desc}">
   <meta name="twitter:image" content="${pic}">
 
-  <link rel="icon" href="${up}favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="${up}shows/logo-icon.png" type="image/png" sizes="512x512">
+  <link rel="apple-touch-icon" href="${up}shows/logo-icon.png">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400..900&family=Source+Serif+4:wght@400..600&display=swap">
   <link rel="stylesheet" href="${up}styles.css${assetVersion('styles.css')}">
@@ -501,7 +502,9 @@ function siteFooter(depth = 0){
 
     <nav class="social foot-social">${socialLinks()}</nav>
 
-    <a class="wordmark foot-mark" href="${up}index.html">Newshub <span>Media</span></a>
+    <a class="wordmark foot-mark" href="${up}index.html" aria-label="Newshub Media">
+      <img src="${up}shows/logo-full-dark.png" alt="Newshub Media" width="220" height="70" loading="lazy">
+    </a>
 
     <a class="foot-top" href="#top" aria-label="Πάνω">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
