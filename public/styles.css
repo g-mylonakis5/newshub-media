@@ -30,8 +30,10 @@
   /* Το ύψος της κεφαλίδας: πάνω γραμμή 30 + μενού 58 + γραμμές και
      περιθώρια. Το χρησιμοποιεί το hero για να γεμίζει την υπόλοιπη οθόνη.
      Μετρημένο στον browser, όχι υπολογισμένο: .site-header τελειώνει
-     στα 99px. Ήταν 90 και το hero έβγαινε 9px ψηλότερο απ' όσο νομίζαμε. */
-  --chrome: 99px;
+     στα 99px. Ήταν 90 και το hero έβγαινε 9px ψηλότερο απ' όσο νομίζαμε.
+
+     Με το σήμα στα 4.8rem (από 3.2) η κεφαλίδα ψήλωσε 25.6px: 125px. */
+  --chrome: 125px;
 
   /* Πού κοιτάζει η φωτογραφία της εισαγωγικής ζώνης. Το μικρόφωνο
      κάθεται δεξιά και το αριστερό μέρος είναι σχεδόν μαύρο — εκεί
@@ -178,6 +180,15 @@ h1{
   margin: 0 auto;
 }
 
+/* Στις σελίδες λίστας — ενότητα, εκπομπή, πρόσωπο — οι κάρτες είναι
+   ΜΙΚΡΟΤΕΡΕΣ. Εκεί ο επισκέπτης σαρώνει πολλά επεισόδια, δεν διαβάζει
+   πρωτοσέλιδο: με ελάχιστο 320 μπαίνουν τέσσερις στη σειρά αντί τρεις.
+   Το σχήμα μένει το ίδιο — τετράγωνη αφίσα, μόνο πιο μικρή. */
+.guest .grid{
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  gap: 2.25rem var(--gap);
+}
+
 /* Η κάρτα δεν είναι κουτί: ούτε περίγραμμα, ούτε φόντο, ούτε γέμισμα.
    Τις χωρίζει το κενό ανάμεσά τους. Πριν ήταν «κουτί μέσα σε κουτί» —
    η κάρτα είχε κορνίζα και μέσα της η εικόνα δική της. */
@@ -250,6 +261,24 @@ h1{
 .card[data-kind="podcast"] .card-image,
 .card[data-kind="video"] .card-image{
   object-position: center;
+}
+
+/* Το podcast παίρνει ΤΕΤΡΑΓΩΝΟ πλαίσιο, όσο και η αφίσα: φαίνεται
+   ολόκληρη και στο μέγεθός της.
+
+   Δοκιμάστηκε και contain μέσα σε 16:9, για να έχουν όλες οι κάρτες το
+   ίδιο σχήμα — η αφίσα έβγαινε πολύ μικρή, με δύο κενές λωρίδες.
+   Προτιμάμε το σχήμα της αφίσας από το ενιαίο ύψος της σειράς. */
+.card[data-kind="podcast"] .card-image{
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+/* Μηδέν ζουμ στο hover: η αφίσα χωράει ακριβώς, και το scale θα έκοβε
+   3% από κάθε πλευρά — δηλαδή το όνομα της εκπομπής. */
+.card[data-kind="podcast"] .card-link:hover .card-image,
+.card[data-kind="podcast"] .card-link:focus-visible .card-image{
+  transform: none;
 }
 
 /* Στρογγυλό κουμπί αναπαραγωγής, κάτω αριστερά μέσα στην εικόνα.
@@ -693,14 +722,17 @@ h1{
   align-items:center;
 }
 
+/* Το σήμα είναι η ταυτότητα: μεγάλο, να φαίνεται ποιοι είμαστε.
+   Ήταν 3.2rem και χανόταν δίπλα στο μενού. Αν αλλάξει εδώ, αλλάζει
+   και το --chrome στην κορυφή — το ύψος της κεφαλίδας το μετράει. */
 .wordmark img{
   display:block;
-  height: 3.2rem;
+  height: 4.8rem;
   width: auto;
 }
 
 @media (max-width: 640px){
-  .wordmark img{ height: 2.4rem; }
+  .wordmark img{ height: 3.4rem; }
 }
 
 .wordmark span{
@@ -1317,7 +1349,14 @@ h1{
   margin: 0 auto;
 }
 
-.arch .grid{ width: 100%; max-width: none; margin: 0; }
+/* Ίδιο μέτρο με τις σελίδες ενότητας: λίστα προς σάρωση, μικρές κάρτες. */
+.arch .grid{
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  gap: 2.25rem var(--gap);
+}
 
 .arch-page{
   margin: 0 0 1.5rem;
@@ -2199,6 +2238,21 @@ h1{
 
 /* Οι ειδήσεις είναι κανονικές φωτογραφίες — μένουν στο κέντρο. */
 .row-card[data-kind="news"] .row-card-art{ object-position: 50% 50%; }
+
+/* Ίδια λογική με τις κάρτες: τετράγωνο πλαίσιο για την τετράγωνη αφίσα.
+   Η μικρογραφία στενεύει από 130 σε 104px — ένα τετράγωνο 130άρι θα
+   ψήλωνε τη σειρά πάνω από τις τρεις γραμμές του τίτλου. */
+.row-card[data-kind="podcast"] .row-card-link{
+  grid-template-columns: 104px minmax(0, 1fr);
+}
+
+.row-card[data-kind="podcast"] .row-card-media{ aspect-ratio: 1/1; }
+
+.row-card[data-kind="podcast"] .row-card-art{ object-position: 50% 50%; }
+.row-card[data-kind="podcast"] .row-card-link:hover .row-card-art,
+.row-card[data-kind="podcast"] .row-card-link:focus-visible .row-card-art{
+  transform: none;
+}
 
 .row-card-text{
   display: grid;
@@ -4132,8 +4186,15 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   color: var(--on-light);
 }
 
+/* Το εξώφυλλο του επεισοδίου: ΤΕΤΡΑΓΩΝΟ, όσο και η αφίσα.
+   Με φραγμό πλάτους και στο κέντρο: σε όλο το πλάτος της στήλης ένα
+   τετράγωνο θα έπιανε ~700px και θα έσπρωχνε τον player κάτω από την
+   πρώτη οθόνη. */
 .stage-art{
-  aspect-ratio: 16/9;
+  aspect-ratio: 1/1;
+  width: 100%;
+  max-width: 460px;
+  margin-inline: auto;
   background: var(--line);
   border-radius: var(--radius);
   overflow: hidden;
@@ -4471,10 +4532,12 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
 
 /* Διπλάσιες από πριν (ήταν 74×42). Στα 74 πλάτος η μικρογραφία δεν
    έδειχνε τίποτα αναγνωρίσιμο — ήταν διακοσμητική κουκκίδα. */
+/* ΤΕΤΡΑΓΩΝΕΣ: η ουρά δείχνει podcast, και η αφίσα είναι 1:1. Στα
+   148×84 κοβόταν πάνω-κάτω. */
 .queue-row img,
 .queue-blank{
-  width: 148px;
-  height: 84px;
+  width: 96px;
+  height: 96px;
   object-fit: cover;
   border-radius: 6px;
   background: var(--line);
