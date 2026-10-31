@@ -374,15 +374,11 @@ function topBar(weather){
     </div>`
     : '';
 
-  return `  <div class="topstrip" id="top">
-    <div class="wrap strip-inner">
-      <div class="topstrip-left">
-        ${w}
-        <nav class="social">${socialLinks()}</nav>
-      </div>
-      <span class="today">${todayLabel()}</span>
-    </div>
-  </div>`;
+  // ΔΕΝ είναι πια ξεχωριστή λωρίδα. Ο καιρός και τα κοινωνικά δίκτυα
+  // κατεβαίνουν στη γραμμή του μενού, αριστερά· η ημερομηνία πάει δίπλα
+  // στο σήμα. Η παλιά πάνω λωρίδα έφευγε — ήταν μια τρίτη οριζόντια
+  // ζώνη που έτρωγε ύψος χωρίς να λέει κάτι.
+  return { weather: w, social: `<nav class="social">${socialLinks()}</nav>`, today: todayLabel() };
 }
 
 const DAYS = ['Κυριακή', 'Δευτέρα', 'Τρίτη', 'Τετάρτη', 'Πέμπτη', 'Παρασκευή', 'Σάββατο'];
@@ -615,20 +611,30 @@ function siteHeader(depth = 0){
   const up = depth === 0 ? '': '../';
   const items = MENU.map(([t, href, reload]) => [t, `${up}${href}`, reload]);
 
-  return `${topBar(weather())}
+  const bar = topBar(weather());
 
-<header class = "site-header">
+  return `<header class = "site-header" id="top">
+  <div class="wrap mast">
+    <span class="mast-today">${bar.today}</span>
+    <a class="wordmark" href="${up}index.html" aria-label="Newshub Media">
+      <img src="${up}shows/logo-full-dark.png" alt="Newshub Media" width="1920" height="640" fetchpriority="high">
+    </a>
+  </div>
   <div class="wrap strip-inner">
-  <a class="wordmark" href="${up}index.html" aria-label="Newshub Media">
-    <img src="${up}shows/logo-full-dark.png" alt="Newshub Media" width="220" height="70" fetchpriority="high">
-  </a>
+  <div class="topstrip-left">
+    ${bar.weather}
+    ${bar.social}
+  </div>
   <nav class = "site-nav">
   ${items.map(([t, href, reload]) => (href ? `<a href="${href}"${reload ? ' data-reload' : ''}>${t}</a>` : `<span>${t}</span>`)).join('\n     ')}
   </nav>
   <a class="site-search" href="${up}search.html" data-reload aria-label="Αναζήτηση">
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
   </a>
-  <a class="site-out" href="https://www.newshub.gr">newshub.gr ↗</a>
+  <a class="site-out" href="https://www.newshub.gr" title="Μετάβαση στο newshub.gr">
+    <span class="site-out-label">Μετάβαση στο</span>
+    <img class="site-out-logo" src="${up}shows/logo-newshub.png" alt="newshub.gr" width="1920" height="640" loading="lazy">
+  </a>
   <button type="button" class="site-grid" data-gridmenu
           aria-controls="gridmenu" aria-expanded="false" aria-label="Όλες οι ενότητες">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -719,6 +725,14 @@ function card(item, depth = 0){
   // βλέπει τα 24 πιο πρόσφατα, όχι και τα ενενήντα μαζί.
   const cls = ['card', item.extra ? 'is-extra' : '', item.lead ? 'card--lead' : '']
     .filter(Boolean).join(' ');
+
+  // Το YouTube δίνει τρία μεγέθη μικρογραφίας και ΔΕΝ είναι ίδιου σχήματος:
+  // το maxresdefault είναι καθαρό 16:9, ενώ το sddefault (640×480) και το
+  // hqdefault (480×360) είναι 4:3 με μαύρες λωρίδες πάνω και κάτω.
+  // 585 από τα βίντεό μας δεν έχουν maxres. Τα σημαδεύουμε εδώ, και το CSS
+  // τα μεγεθύνει τόσο όσο χρειάζεται για να φύγουν οι λωρίδες.
+  const letterbox = /\/(sddefault|hqdefault)\.jpg/.test(item.image || '');
+  const imgCls = `card-image${letterbox ? ' card-image--letterbox' : ''}`;
   const hide = item.extra ? ' hidden' : '';
 
   // Το κείμενο κάθεται ΚΑΤΩ από την εικόνα, όχι μέσα της.
@@ -733,7 +747,8 @@ function card(item, depth = 0){
   return `<article class="${cls}"${hide} data-kind="${item.kind}"${topics ? ` data-topics="${topics}"` : ''}>
     <a class="card-link" href="${href}"${out}>
     <span class="card-media">
-      ${item.image ? `<img class="card-image" src="${item.image}" alt="" loading="lazy">` : '<span class="card-image card-image--empty"></span>'}
+      ${item.image ? `<img class="card-bloom${letterbox ? ' card-bloom--letterbox' : ''}" src="${item.image}" alt="" aria-hidden="true" loading="lazy">
+      <img class="${imgCls}" src="${item.image}" alt="" loading="lazy">` : '<span class="card-image card-image--empty"></span>'}
       ${item.kind === 'news' ? '' : `<span class="card-play" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
       </span>`}
@@ -770,7 +785,8 @@ function rowCard(item, depth = 0){
           <a class="row-card-link" href="${href}"${out}>
             <span class="row-card-media">
               ${item.image
-                ? `<img class="row-card-art" src="${item.image}" alt="" loading="lazy">`
+                ? `<img class="card-bloom${/\/(sddefault|hqdefault)\.jpg/.test(item.image) ? ' card-bloom--letterbox' : ''}" src="${item.image}" alt="" aria-hidden="true" loading="lazy">
+              <img class="row-card-art${/\/(sddefault|hqdefault)\.jpg/.test(item.image) ? ' row-card-art--letterbox' : ''}" src="${item.image}" alt="" loading="lazy">`
                 : ''}
             </span>
             <span class="row-card-text">
@@ -939,13 +955,44 @@ function pickSecondary(items, curation, featured){
   return out.slice(0, 4);
 }
 
+// Πόσο πλατιά είναι ΣΤΗΝ ΠΡΑΓΜΑΤΙΚΟΤΗΤΑ η εικόνα. Δεν το μαντεύουμε: το
+// λέει η ίδια η διεύθυνση.
+//   · ειδήσεις  — static.newshub.gr/765x435/... (μόνο αυτό το μέγεθος
+//     υπάρχει· δοκιμάστηκαν 1200, 1600, 1920 και απαντά 404)
+//   · YouTube   — maxresdefault 1280, sddefault 640, hqdefault 480
+//   · Buzzsprout— οι αφίσες είναι 1400×1400
+// Το χρειάζεται το πρωτοσέλιδο, για να μην τραβήξει μια μικρή φωτογραφία
+// στα 1600 και τη θολώσει.
+function naturalWidth(url = ''){
+  const nh = url.match(/static\.newshub\.gr\/(\d+)x\d+\//);
+  if (nh) return Number(nh[1]);
+  if (/maxresdefault\.jpg/.test(url)) return 1280;
+  if (/sddefault\.jpg/.test(url)) return 640;
+  if (/hqdefault\.jpg/.test(url)) return 480;
+  if (/buzzsprout\.com/.test(url)) return 1400;
+  return 1200;
+}
+
 function heroBanner(item){
   const out = item.external ? ' target="_blank" rel="noopener"' : '';
 
-  return `  <section class="hero">
+  // ΚΑΜΙΑ εικόνα του πρωτοσέλιδου δεν κόβεται. Οι πηγές μας έχουν δύο
+  // σχήματα — τετράγωνη αφίσα podcast, 16:9 φωτογραφία βίντεο και
+  // είδησης — και καμία λωρίδα δεν τα χωράει και τα δύο γεμάτα.
+  //
+  // Οπότε: η εικόνα μπαίνει ΟΛΟΚΛΗΡΗ στη μέση της λωρίδας, και τη
+  // λωρίδα τη γεμίζει η ΙΔΙΑ εικόνα θολωμένη από πίσω. Ο τίτλος δεν
+  // κάθεται πια πάνω της — πάει από κάτω, στη ροή της σελίδας, όπου
+  // διαβάζεται χωρίς σκιές και χωρίς να κρύβει τίποτα.
+  const art = item.kind === 'podcast';
+
+  return `  <section class="hero${art ? ' hero--art' : ''}">
+    <div class="hero-stage">
     ${item.hero
-      ? `<img class="hero-image" src="${item.hero}" alt="">`
+      ? `<img class="hero-bloom" src="${item.hero}" alt="" aria-hidden="true">
+    <img class="hero-image" src="${item.hero}" alt="" style="--nat: ${naturalWidth(item.hero)}px">`
       : '<div class="hero-image hero-image--empty"></div>'}
+    </div>
     <div class="hero-text">
       <div class="hero-block">
         ${item.label ? `<p class="hero-eyebrow">${esc(item.label)}</p>` : ''}
@@ -1537,7 +1584,7 @@ function showsSection(groups, depth = 0){
       <div class="spot-text">
         <h2 class="spot-title">
           <span class="spot-eyebrow">Οι εκπομπές του</span>
-          ${nhLogo()}
+          <img class="spot-logo" src="${up}shows/logo-full-dark.png" alt="Newshub Media" width="1920" height="640" loading="lazy">
         </h2>
         <p class="spot-sub">${keys.length} εκπομπές, νέο επεισόδιο σχεδόν κάθε μέρα</p>
       </div>
@@ -2049,8 +2096,10 @@ function topicIcon(key){
   return `<svg viewBox="0 0 24 24" aria-hidden="true">${glyph}</svg>`;
 }
 
-// Πόσες κάρτες παίρνει κάθε θέμα στη λωρίδα του.
-const TOPIC_ROW = 4;
+// Πόσες κάρτες παίρνει κάθε θέμα στη λωρίδα του: μία μεγάλη και τέσσερις
+// μικρές. Ήταν 4 συνολικά — με τετράγωνη τη μεγάλη εικόνα, οι τρεις
+// μικρές τελείωναν πολύ πιο ψηλά και η δεξιά στήλη έμενε μισοάδεια.
+const TOPIC_ROW = 5;
 
 // Πόσες κάρτες κάθε θέματος κρύβονται μέσα στη ροή της αρχικής, ώστε το
 // φιλτράρισμα να έχει πάντα τι να δείξει.
