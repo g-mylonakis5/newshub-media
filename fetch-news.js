@@ -68,7 +68,7 @@ function get(url, until = '') {
   return new Promise((resolve, reject) => {
     const req = https.get(url, {
       headers: {
-        'User-Agent': 'newshub-media-build/1.0 (+https://media.newshub.gr)',
+        'User-Agent': 'newshub-media-build/1.0 (+https://newshubmedia.gr)',
         Connection: 'close',
       },
       // Φρέσκια σύνδεση κάθε φορά. Κόβουμε τη λήψη στη μέση μόλις βρούμε
