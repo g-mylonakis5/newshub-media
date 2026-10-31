@@ -1,0 +1,65 @@
+# Φρέσκο υλικό, χωρίς να το ζητήσει κανείς.
+#
+# Γιατί τρέχει εδώ και όχι στο Cloudflare: το data/news.json είναι
+# ΣΥΣΣΩΡΕΥΤΙΚΟ — κρατά ειδήσεις που το sitemap του newshub.gr δεν δίνει
+# πια. Ο δίσκος του Cloudflare σβήνεται μετά από κάθε build, άρα εκεί το
+# ιστορικό θα ξεκινούσε από το μηδέν κάθε φορά. Το ίδιο και οι 20MB
+# απομαγνητοφωνήσεις, που θα ξανακατέβαιναν όλες.
+#
+# Εδώ τα κατεβάζουμε, τα κάνουμε commit στο git, και το push ξυπνά μόνο
+# του το Cloudflare. Ο καιρός ΔΕΝ μπαίνει εδώ: είναι εφήμερος εξ ορισμού
+# και τον τραβάει το ίδιο το build.
+
+name: Φρέσκο υλικό
+
+on:
+  schedule:
+    - cron: '20 * * * *'        # ειδήσεις — κάθε ώρα
+    - cron: '40 4,10,16 * * *'  # επεισόδια, βίντεο, απομαγνητοφωνήσεις — 3 φορές τη μέρα
+  workflow_dispatch:            # και με το χέρι, από την καρτέλα Actions
+
+permissions:
+  contents: write
+
+# Δύο τρεξίματα μαζί θα χτυπούσαν το ένα το push του άλλου.
+concurrency:
+  group: fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Ειδήσεις
+        run: node fetch-news.js
+
+      # Στο ωριαίο τρέξιμο τα παραλείπουμε: το feed και το YouTube δεν
+      # αλλάζουν τόσο συχνά, και το YouTube API έχει ημερήσιο όριο.
+      - name: Επεισόδια, βίντεο, απομαγνητοφωνήσεις
+        if: github.event.schedule != '20 * * * *'
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          node fetch-episodes.js
+          node fetch-videos.js
+          node fetch-transcripts.js
+
+      # Commit ΜΟΝΟ αν άλλαξε κάτι — αλλιώς το Cloudflare θα ξανάχτιζε
+      # 4.600 σελίδες για το τίποτα, κάθε ώρα.
+      - name: Commit και push
+        run: |
+          git config user.name  'newshub-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data
+          if git diff --cached --quiet; then
+            echo 'Καμία αλλαγή — δεν χτίζουμε.'
+            exit 0
+          fi
+          git commit -m "Φρέσκο υλικό — $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
