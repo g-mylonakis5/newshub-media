@@ -617,7 +617,7 @@ function siteHeader(depth = 0){
 <header class = "site-header">
   <div class="wrap strip-inner">
   <a class="wordmark" href="${up}index.html" aria-label="Newshub Media">
-    <img src="${up}logo-full-dark.png" alt="Newshub Media" width="220" height="70" fetchpriority="high">
+    <img src="${up}shows/logo-full-dark.png" alt="Newshub Media" width="220" height="70" fetchpriority="high">
   </a>
   <nav class = "site-nav">
   ${items.map(([t, href, reload]) => (href ? `<a href="${href}"${reload ? ' data-reload' : ''}>${t}</a>` : `<span>${t}</span>`)).join('\n     ')}
@@ -3671,16 +3671,7 @@ ${intro(episodes[0], videos[0])}`,
 
   fs.mkdirSync(PUBLIC_DIR, { recursive: true }); //creation of the public directory if it doesn't exist
 
-  // Αντιγραφή των λογοτύπων από το assets-src/ στο public/
-  for (const name of ['logo-icon.png', 'logo-full-dark.png', 'logo-full-light.png']) {
-    const src = path.join(__dirname, 'assets-src', name);
-    const dst = path.join(PUBLIC_DIR, name);
-    if (fs.existsSync(src)) {
-      const srcBuf = fs.readFileSync(src);
-      const same = fs.existsSync(dst) && fs.readFileSync(dst).equals(srcBuf);
-      if (!same) fs.writeFileSync(dst, srcBuf);
-    }
-  }
+  // Τα λογότυπα ζουν στο public/shows/ — ανεβαίνουν στο git, δεν παράγονται.
 
   writeIfChanged(path.join(PUBLIC_DIR, 'index.html'), html); //writes the generated HTML to the index.html file
   writeIfChanged(path.join(PUBLIC_DIR, 'guests.html'), guestsIndexPage(groups));
