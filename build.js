@@ -567,7 +567,7 @@ function gridPanel(depth = 0){
 
   const col = (title, all, allHref, rows) => `      <div class="gm-col">
         <p class="gm-head">${title}</p>
-${rows.map((r) => `        <a class="gm-link" href="${up}${r.href}"><span>${esc(r.name)}</span><i>${r.n.toLocaleString('el')}</i></a>`).join('\n')}
+${rows.map((r) => `        <a class="gm-link" href="${up}${r.href}"><span>${esc(r.name)}</span></a>`).join('\n')}
         <a class="gm-all" href="${up}${allHref}">${all} →</a>
       </div>`;
 
@@ -1438,9 +1438,23 @@ function showAbout(name){
   }
 
   const text = showsInfo[matchKey(showName(name))] || showsInfo[matchKey(name)] || '';
-  // Οι περιγραφές του YouTube έχουν αλλαγές γραμμής και διπλά κενά,
-  // και μερικές τελειώνουν με σύνδεσμο ή hashtags.
-  return clip(text.split(/\s*https?:\/\//)[0].replace(/\s+/g, ' ').trim(), 260);
+  if (!text) return [];
+
+  // Η περιγραφή του YouTube είναι γραμμένη σε ΓΡΑΜΜΕΣ, και οι γραμμές
+  // σημαίνουν κάτι: η τελευταία είναι συνήθως «Παρουσίαση: Όνομα».
+  //
+  // Τις ισοπεδώναμε σε κενά, κι έβγαινε «…ιστορία, πολιτισμός
+  // παρουσίαση: Γιάννης Χαραλαμπίδης» — δύο προτάσεις κολλημένες,
+  // με πεζό αρχικό στη μέση. Τώρα κάθε γραμμή μένει χωριστή.
+  return text
+    .split(/\s*https?:\/\//)[0]          // ό,τι ακολουθεί σύνδεσμο φεύγει
+    .split(/\r?\n/)
+    .map((line) => line.replace(/[ \t]+/g, ' ').trim())
+    .filter(Boolean)
+    // Το YouTube γράφει άλλοτε «Παρουσίαση» και άλλοτε «παρουσίαση».
+    // Κεφαλαίο το πρώτο γράμμα κάθε γραμμής — είναι αρχή πρότασης.
+    .map((line) => line.charAt(0).toLocaleUpperCase('el') + line.slice(1))
+    .slice(0, 3);
 }
 
 // Η εικόνα σε τρία μεγέθη. Ο browser διαλέγει μόνος του από το srcset:
@@ -2369,7 +2383,9 @@ function showPage(group, n = 1){
         ${titled
           ? `<h1 class="only-read">${name}</h1>`
           : `<p class="page-label">Εκπομπή</p>\n        <h1 class="show-head-name">${name}</h1>`}
-        ${about ? `<p class="show-about">${esc(about)}</p>` : ''}
+        ${about.map((line, i) => i === 0
+          ? `<p class="show-about">${esc(clip(line, 260))}</p>`
+          : `<p class="show-credit">${esc(clip(line, 120))}</p>`).join('\n        ')}
         <p class="show-head-line">${pageCountLine(total, n, pages)}</p>
       </div>
     </header>`
