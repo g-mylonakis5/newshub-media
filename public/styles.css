@@ -689,6 +689,18 @@ h1{
   color: var(--text);
   text-decoration: none;
   white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+}
+
+.wordmark img{
+  display:block;
+  height: 3.2rem;
+  width: auto;
+}
+
+@media (max-width: 640px){
+  .wordmark img{ height: 2.4rem; }
 }
 
 .wordmark span{
