@@ -356,20 +356,21 @@ h1{
 /* Μέσα στην εικόνα ο τίτλος θέλει περισσότερο βάρος για να κρατήσει
    απέναντι στο γραφικό από πίσω, και σκιά για τα ανοιχτόχρωμα
    εξώφυλλα — μερικά έχουν λευκό φόντο ακριβώς εκεί. */
+/* ΟΛΟΚΛΗΡΟΣ ο τίτλος, ποτέ κομμένος.
+
+   Είχε όριο δύο σειρών με αποσιωπητικά. Οι τίτλοι μας έχουν διάμεσο
+   80 χαρακτήρες και φτάνουν τους 156, οπότε στο 22% των καρτών ο
+   αναγνώστης δεν μάθαινε ποτέ για τι πράγμα είναι το επεισόδιο.
+
+   Το μέγεθος κατέβηκε από 1.22rem σε 1.05rem ώστε να χωρούν χωρίς να
+   γίνονται οι κάρτες τοίχος κειμένου. */
 .card-title{
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 1.22rem;
-  line-height: 1.24;
+  font-size: 1.05rem;
+  line-height: 1.3;
   margin: 0 0 0.3rem;
-
-  /* Το πολύ δύο γραμμές: οι τίτλοι μας φτάνουν τους 120 χαρακτήρες και
-     χωρίς όριο οι κάρτες έβγαιναν ανόμοιου ύψους. */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  text-wrap: pretty;
 }
 
 /* Η μετα-πληροφορία σταματά να είναι ψιλά γράμματα: σερίφ, έντονη,
@@ -1188,11 +1189,7 @@ h1{
 }
 
 .show-latest-title{
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  display: block;
   font-family: var(--serif);
   font-size: 1.2rem;
   line-height: 1.35;
@@ -2197,14 +2194,11 @@ h1{
   color: var(--audio);
 }
 
-/* Τρεις γραμμές και κόβεται, ώστε οι τρεις μικρές να μένουν ισοϋψείς
-   με τη μεγάλη δίπλα τους. */
+/* Ολόκληρος, χωρίς κόψιμο. Κοβόταν στις τρεις γραμμές για να μένουν
+   οι τρεις μικρές ισοϋψείς με τη μεγάλη δίπλα — αλλά ένας μισός
+   τίτλος δεν λέει για τι πράγμα είναι το επεισόδιο. */
 .row-card-title{
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  display: block;
   font-family: var(--serif);
   font-weight: 500;
   font-size: 1.2rem;
