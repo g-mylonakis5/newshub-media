@@ -24,7 +24,7 @@ const CATEGORY_DIR = path.join(PUBLIC_DIR, 'category');
 // Η τελική διεύθυνση του site. Χρειάζεται για τις κάρτες κοινοποίησης,
 // το canonical και το sitemap — όλα θέλουν ΠΛΗΡΗ διεύθυνση, όχι σχετική.
 // Άλλαξέ τη μόλις κλειδώσει το domain.
-const SITE_URL = 'https://media.newshub.gr';
+const SITE_URL = 'https://newshubmedia.gr';
 const SITE_NAME = 'Newshub Media';
 
 const GREEK = {
