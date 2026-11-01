@@ -297,6 +297,7 @@ ${siteFooter(depth)}
 </div>
 
 ${playerBar()}
+
 </body>
 </html>
 `;
@@ -887,11 +888,18 @@ function pickFeatured(items, curation){
       console.log(`Πρωτοσέλιδο: η χειροκίνητη επιλογή έληξε στις ${curation.featuredUntil} — γυρίζω στην αυτόματη`);
     } else {
       const chosen = items.find((it) => sameItem(it, want));
-      if (chosen && chosen.hero) {
-        console.log(`Πρωτοσέλιδο: χειροκίνητο — ${String(chosen.title).slice(0, 60)}`);
-        return chosen;
+      if (chosen) {
+        if (curation.featuredHero) {
+          chosen.hero = curation.featuredHero;
+        }
+        if (chosen.hero) {
+          console.log(`Πρωτοσέλιδο: χειροκίνητο — ${String(chosen.title).slice(0, 60)}`);
+          return chosen;
+        }
+        console.warn(`ΠΡΟΣΟΧΗ: το πρωτοσέλιδο «${want.slice(0, 60)}» δεν έχει εικόνα — γυρίζω στην αυτόματη επιλογή`);
+      } else {
+        console.warn(`ΠΡΟΣΟΧΗ: το πρωτοσέλιδο «${want.slice(0, 60)}» δεν βρέθηκε — γυρίζω στην αυτόματη επιλογή`);
       }
-      console.warn(`ΠΡΟΣΟΧΗ: το πρωτοσέλιδο «${want.slice(0, 60)}» ${chosen ? 'δεν έχει εικόνα' : 'δεν βρέθηκε'} — γυρίζω στην αυτόματη επιλογή`);
     }
   }
 
@@ -3655,6 +3663,19 @@ function main(){
     ...uniqueVideos.slice(0, 20).map((v) => ({ ...itemFromVideo(v), id: v.id })),
     ...episodes.slice(0, 40).map((ep) => ({ ...itemFromEpisode(ep), id: ep.id })),
   ];
+
+  if (curation.featured && !pool.some((it) => sameItem(it, curation.featured))) {
+    const want = String(curation.featured).trim();
+    const epMatch = episodes.find((ep) => sameItem({ id: ep.id, href: episodeUrl(ep) }, want));
+    if (epMatch) {
+      pool.push({ ...itemFromEpisode(epMatch), id: epMatch.id });
+    } else {
+      const vidMatch = videos.find((v) => sameItem({ id: v.id, href: videoUrl(v) }, want));
+      if (vidMatch) {
+        pool.push({ ...itemFromVideo(vidMatch), id: vidMatch.id });
+      }
+    }
+  }
 
   const featured = pickFeatured(pool, curation);
 
