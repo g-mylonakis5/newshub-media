@@ -973,21 +973,32 @@ function naturalWidth(url = ''){
   return 1200;
 }
 
+// Η ΑΝΑΛΟΓΙΑ της εικόνας, για να πάρει η λωρίδα το σχήμα της.
+// Το sddefault και το hqdefault είναι 4:3 ΜΕ μαύρες λωρίδες γύρω από
+// περιεχόμενο 16:9 — μετράει το περιεχόμενο, άρα 16/9 και αυτά.
+function naturalRatio(url = ''){
+  const nh = url.match(/static\.newshub\.gr\/(\d+)x(\d+)\//);
+  if (nh) return Number(nh[1]) / Number(nh[2]);
+  return 16 / 9;
+}
+
 function heroBanner(item){
   const out = item.external ? ' target="_blank" rel="noopener"' : '';
 
-  // ΚΑΜΙΑ εικόνα του πρωτοσέλιδου δεν κόβεται. Οι πηγές μας έχουν δύο
-  // σχήματα — τετράγωνη αφίσα podcast, 16:9 φωτογραφία βίντεο και
-  // είδησης — και καμία λωρίδα δεν τα χωράει και τα δύο γεμάτα.
+  // ΔΥΟ ΣΧΗΜΑΤΑ ΠΗΓΗΣ, ΔΥΟ ΣΥΜΠΕΡΙΦΟΡΕΣ — και στις δύο ολόκληρη εικόνα.
   //
-  // Οπότε: η εικόνα μπαίνει ΟΛΟΚΛΗΡΗ στη μέση της λωρίδας, και τη
-  // λωρίδα τη γεμίζει η ΙΔΙΑ εικόνα θολωμένη από πίσω. Ο τίτλος δεν
-  // κάθεται πια πάνω της — πάει από κάτω, στη ροή της σελίδας, όπου
-  // διαβάζεται χωρίς σκιές και χωρίς να κρύβει τίποτα.
+  // · ΕΙΔΗΣΗ / ΒΙΝΤΕΟ: η φωτογραφία είναι φαρδιά, οπότε η λωρίδα παίρνει
+  //   ΤΟ ΣΧΗΜΑ ΤΗΣ και τη γεμίζει από άκρη σε άκρη. Μηδέν θολό.
+  // · PODCAST: η αφίσα είναι τετράγωνη. Σε φαρδιά λωρίδα ή θα κοπεί ή θα
+  //   αφήσει κενό — διαλέγουμε το κενό, και το γεμίζει η ίδια θολωμένη.
+  //
+  // Ο τίτλος δεν κάθεται πάνω στην εικόνα σε καμία περίπτωση: πάει από
+  // κάτω, στη ροή, όπου διαβάζεται χωρίς σκιές.
   const art = item.kind === 'podcast';
+  const ar = naturalRatio(item.hero).toFixed(3);
 
-  return `  <section class="hero${art ? ' hero--art' : ''}">
-    <div class="hero-stage">
+  return `  <section class="hero${art ? ' hero--art' : ' hero--photo'}">
+    <div class="hero-stage"${art ? '' : ` style="--ar: ${ar}"`}>
     ${item.hero
       ? `<img class="hero-bloom" src="${item.hero}" alt="" aria-hidden="true">
     <img class="hero-image" src="${item.hero}" alt="" style="--nat: ${naturalWidth(item.hero)}px">`
