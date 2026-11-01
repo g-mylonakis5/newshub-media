@@ -628,21 +628,23 @@ function siteHeader(depth = 0){
   <nav class = "site-nav">
   ${items.map(([t, href, reload]) => (href ? `<a href="${href}"${reload ? ' data-reload' : ''}>${t}</a>` : `<span>${t}</span>`)).join('\n     ')}
   </nav>
-  <a class="site-search" href="${up}search.html" data-reload aria-label="Αναζήτηση">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-  </a>
-  <a class="site-out" href="https://www.newshub.gr" title="Μετάβαση στο newshub.gr">
-    <span class="site-out-label">Μετάβαση στο</span>
-    <img class="site-out-logo" src="${up}shows/logo-newshub.png" alt="newshub.gr" width="1920" height="640" loading="lazy">
-  </a>
-  <button type="button" class="site-grid" data-gridmenu
-          aria-controls="gridmenu" aria-expanded="false" aria-label="Όλες οι ενότητες">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="6" cy="6" r="1.6"/><circle cx="12" cy="6" r="1.6"/><circle cx="18" cy="6" r="1.6"/>
-      <circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/>
-      <circle cx="6" cy="18" r="1.6"/><circle cx="12" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/>
-    </svg>
-  </button>
+  <div class="topstrip-right">
+    <a class="site-out" href="https://www.newshub.gr" title="Μετάβαση στο newshub.gr">
+      <span class="site-out-label">Μετάβαση στο</span>
+      <img class="site-out-logo" src="${up}shows/logo-newshub.png" alt="newshub.gr" width="1920" height="640" loading="lazy">
+    </a>
+    <a class="site-search" href="${up}search.html" data-reload aria-label="Αναζήτηση">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </a>
+    <button type="button" class="site-grid" data-gridmenu
+            aria-controls="gridmenu" aria-expanded="false" aria-label="Όλες οι ενότητες">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="6" cy="6" r="1.6"/><circle cx="12" cy="6" r="1.6"/><circle cx="18" cy="6" r="1.6"/>
+        <circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/>
+        <circle cx="6" cy="18" r="1.6"/><circle cx="12" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/>
+      </svg>
+    </button>
+  </div>
   </div>
 ${gridPanel(depth)}
   </header>`
@@ -652,6 +654,7 @@ ${gridPanel(depth)}
 // σε αυτήν και δεν χρειάζεται να ξέρουν τι είναι το καθένα — αλλάζει μόνο
 // το χρώμα της ετικέτας. Έτσι μπαίνουν στην ίδια ροή, όπως στο mockup.
 function itemFromEpisode(ep){
+  const vt = videoTwin(ep);
   return {
     kind: 'podcast',
     href: episodeUrl(ep),
@@ -665,7 +668,7 @@ function itemFromEpisode(ep){
     name: guestOf(ep),
     title: decode(ep.headline),
     image: ep.image,
-    hero: ep.image,
+    hero: (vt && vt.image) ? vt.image : ep.image,
     date: ep.date,
     // Η διάρκεια βγήκε από το meta και πήγε σε δικό της πλακίδιο πάνω
     // στην εικόνα — αλλιώς θα γραφόταν δύο φορές στην ίδια κάρτα.
@@ -994,7 +997,7 @@ function heroBanner(item){
   //
   // Ο τίτλος δεν κάθεται πάνω στην εικόνα σε καμία περίπτωση: πάει από
   // κάτω, στη ροή, όπου διαβάζεται χωρίς σκιές.
-  const art = item.kind === 'podcast';
+  const art = item.kind === 'podcast' && naturalRatio(item.hero) < 1.3;
   const ar = naturalRatio(item.hero).toFixed(3);
 
   return `  <section class="hero${art ? ' hero--art' : ' hero--photo'}">
