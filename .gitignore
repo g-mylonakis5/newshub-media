@@ -17,6 +17,10 @@ public/*
 !public/player.js
 !public/favicon.svg
 !public/intro.jpg
+!public/*.jpg
+!public/*.jpeg
+!public/*.png
+!public/*.webp
 !public/shows/
 
 data/weather.json
