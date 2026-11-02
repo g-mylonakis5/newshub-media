@@ -293,6 +293,8 @@ ${tags}
 <div id="page">
 ${body}
 
+${adSlot('footer', 'leaderboard')}
+
 ${siteFooter(depth)}
 </div>
 
@@ -475,6 +477,120 @@ const LEGAL = [
 
 // Το υποσέλιδο ακολουθεί τη δομή του newshub.gr: σύνδεσμοι στο κέντρο,
 // σόσιαλ από κάτω, σήμα, και χωριστή γραμμή με τα δικαιώματα.
+// Θέση διαφήμισης. ΜΟΝΟ ο χώρος — το δίκτυο δεν έχει επιλεγεί ακόμα.
+//
+// Οι απαιτήσεις του αφεντικού, κατά λέξη: καμία διαφήμιση δεν σκεπάζει
+// περιεχόμενο, κάθε θέση έχει δεσμευμένο ύψος από την αρχή, φορτώνουν
+// τελευταίες, καμία μέσα ή πάνω από τον player. Οι τρεις πρώτες
+// κρίνονται εδώ, η τέταρτη στο πού καλείται αυτή η συνάρτηση.
+//
+// Το ύψος το δεσμεύει το CSS μέσω της κλάσης, ΟΧΙ inline style: έτσι
+// το responsive μένει σε ένα σημείο. Γι' αυτό κάθε νέο όνομα θέσης
+// χρειάζεται και κανόνα .ad--<όνομα> στο styles.css, αλλιώς βγαίνει
+// με ύψος μηδέν και ξαναγυρίζει το layout shift που αποφεύγουμε.
+//
+//   place  — πού κάθεται· μπαίνει ως data-ad, εκεί θα κρεμάσει το
+//            δίκτυο το δικό του div όταν έρθει η ώρα
+//   size   — ποια κλάση μεγέθους, από το styles.css
+function adSlot(place, size){
+  return `  <aside class="ad ad--${size}" data-ad="${place}" aria-label="Διαφήμιση">
+    <span class="ad-note">Διαφήμιση</span>
+  </aside>`;
+}
+
+// Παρεμβάλλει θέσεις ανάμεσα στις κάρτες μιας λίστας.
+//
+// Ανά 20 και όχι πυκνότερα: η σελίδα δείχνει 60 κάρτες, οπότε βγαίνουν
+// δύο θέσεις — μαζί με τη θέση του footer, τρεις σε όλη τη σελίδα.
+// Το ύφος που ζητήθηκε είναι «πολύς αέρας, λίγα στοιχεία ανά οθόνη».
+//
+// ΠΟΤΕ στο τέλος: εκεί ακολουθεί ήδη η θέση του footer, και δύο
+// διαφημίσεις η μία πάνω στην άλλη μοιάζουν με σελίδα-σκουπίδι.
+const CARDS_PER_AD = 20;
+
+function cardsWithAds(cards, place){
+  const out = [];
+
+  cards.forEach((html, i) => {
+    if (i > 0 && i % CARDS_PER_AD === 0) {
+      out.push(adSlot(`${place}-${i / CARDS_PER_AD}`, 'leaderboard'));
+    }
+    out.push(html);
+  });
+
+  return out.join('\n');
+}
+
+// ---- η κυματομορφή του player ----
+//
+// ΔΙΑΚΟΣΜΗΤΙΚΗ, όχι αληθινή: ΔΕΝ δείχνει πού μιλάει κάποιος και πού
+// υπάρχει σιωπή. Το λέμε καθαρά εδώ ώστε να μην το ανακαλύψει κανείς
+// με έκπληξη σε έξι μήνες.
+//
+// Γιατί όχι αληθινή: τα 1.059 επεισόδια είναι 25,7 GB. Για πραγματικά
+// peaks πρέπει να κατέβουν όλα και να περάσουν από ffmpeg. Γίνεται —
+// σταδιακά στο GitHub Actions, όπως οι απομαγνητοφωνήσεις — αλλά είναι
+// δουλειά ημερών και η προθεσμία είναι κοντά. Αν γίνει, αλλάζει ΜΟΝΟ
+// αυτή η συνάρτηση: η όψη και ο player μένουν ως έχουν.
+//
+// Σταθερή ανά επεισόδιο: βγαίνει από το id, άρα το ίδιο επεισόδιο
+// δείχνει πάντα την ίδια κυματομορφή — σε κάθε build και σε κάθε
+// συσκευή. Τυχαία θα «ανακατευόταν» σε κάθε ανανέωση.
+const WAVE_BARS = 48;
+
+function waveMask(seed){
+  // Ένας μικρός ντετερμινιστικός γεννήτορας. Δεν θέλουμε ποιότητα
+  // κρυπτογραφίας, θέλουμε να μη βγαίνει το ίδιο σχήμα σε όλους.
+  let h = 0;
+  for (const ch of String(seed)) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const next = () => {
+    h = (h * 1103515245 + 12345) >>> 0;
+    return h / 4294967296;
+  };
+
+  const bars = [];
+  for (let i = 0; i < WAVE_BARS; i++) {
+    // Ένα ημίτονο δίνει το γενικό σχήμα — χωρίς αυτό οι μπάρες μοιάζουν
+    // με θόρυβο, όχι με ομιλία. Ο τυχαίος παράγοντας σπάει τη συμμετρία.
+    // Το ημίτονο δίνει το γενικό σχήμα. Ήταν 0.45 ± 0.3 και στο κάτω
+    // μέρος του κύματος η κυματομορφή ισοπεδωνόταν σε σχεδόν ευθεία
+    // γραμμή — έμοιαζε με σφάλμα φόρτωσης, όχι με ήχο. Μικρότερο
+    // εύρος γύρω από ψηλότερη βάση κρατά παντού ζωή.
+    const curve = 0.68 + 0.17 * Math.sin((i / WAVE_BARS) * Math.PI * 3.1);
+    const height = Math.max(0.3, Math.min(1, curve * (0.7 + next() * 0.62)));
+    bars.push(height);
+  }
+
+  // Το SVG γίνεται ΜΑΣΚΑ, όχι εικόνα: το χρώμα το δίνουν από κάτω τα
+  // δύο στρώματα του player. Έτσι το «παιγμένο» κόκκινο και το
+  // «υπόλοιπο» μπλε βγαίνουν με ένα μόνο width, όπως και πριν —
+  // ο player.js δεν χρειάστηκε να αλλάξει ούτε γραμμή.
+  // Το SVG μπαίνει σε HTML attribute και πολλαπλασιάζεται επί 1.059
+  // σελίδες, οπότε κάθε χαρακτήρας μετράει δύο φορές:
+  //
+  //   1) Εισαγωγικά — ΑΠΑΓΟΡΕΥΟΝΤΑΙ. Το πρώτο γράψιμο έβγαζε
+  //      style="--wave: url("data:...")" και το διπλό εισαγωγικό
+  //      τερμάτιζε το attribute στη μέση. Λύση: encodeURIComponent,
+  //      που τα κωδικοποιεί όλα, και url() χωρίς εισαγωγικά.
+  //
+  //   2) Μέγεθος — ακέραιες συντεταγμένες αντί για δεκαδικά, και
+  //      viewBox σε πλέγμα που βγάζει στρογγυλούς αριθμούς. Τα
+  //      δεκαδικά τριπλασίαζαν το μήκος χωρίς ορατή διαφορά.
+  const step = 20;
+  const rects = bars.map((v, i) => {
+    const h = Math.round(v * 100);
+    return `<rect x='${i * step}' y='${Math.round((100 - h) / 2)}' width='12' height='${h}' rx='6'/>`;
+  }).join('');
+
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${WAVE_BARS * step} 100' preserveAspectRatio='none' fill='#fff'>${rects}</svg>`;
+  // Το encodeURIComponent αφήνει άθικτα τα ' ( ) ! * — δες τον ορισμό
+  // του. Μέσα σε url(...) χωρίς εισαγωγικά, ένα ' αρκεί για να μη
+  // διαβαστεί ο κανόνας καθόλου: η μάσκα δεν εφαρμοζόταν και ο player
+  // έβγαινε δύο συμπαγή ορθογώνια. Τα κωδικοποιούμε ρητά.
+  const data = encodeURIComponent(svg).replace(/'/g, '%27').replace(/[()]/g, (c) => (c === '(' ? '%28' : '%29'));
+  return `url(data:image/svg+xml,${data})`;
+}
+
 function siteFooter(depth = 0){
   const up = depth === 0 ? '' : '../';
   const year = new Date().getFullYear();
@@ -1086,7 +1202,7 @@ function videoPage(v, category){
           <button type="button" class="player-play" data-player="toggle" aria-label="Αναπαραγωγή">▶</button>
           <button type="button" class="player-skip" data-player="skip" data-by="15" aria-label="15 δευτερόλεπτα μπροστά">+15</button>
           <span class="player-now" data-player-now>0:00</span>
-          <div class="player-bar" data-player="seek" role="slider" tabindex="0" aria-label="Θέση" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="player-bar" data-player="seek" role="slider" tabindex="0" aria-label="Θέση" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="--wave: ${waveMask(twin.id)}">
             <div class="player-fill"></div>
           </div>
           <span class="player-total" data-player-total>--:--</span>
@@ -1819,9 +1935,10 @@ function categoryPage(group, n = 1){
   const pages = pageCount(total);
   const base = `${slugify(group.name)}`;
 
-  const cards = group.items
-    .slice((n - 1) * PER_PAGE, n * PER_PAGE)
-    .map((it) => card(inTopic(it, group.name), 1)).join('\n');
+  const cards = cardsWithAds(
+    group.items.slice((n - 1) * PER_PAGE, n * PER_PAGE).map((it) => card(inTopic(it, group.name), 1)),
+    'category-list'
+  );
 
   // Το υπόβαθρο του θέματος: το εξώφυλλο του πιο πρόσφατου κομματιού του.
   const pic = group.items.find((it) => it.image);
@@ -1901,7 +2018,7 @@ function episodesPage(episodes, n = 1){
   const slice = episodes.slice((n - 1) * PER_PAGE, n * PER_PAGE);
 
   let lastMonth = '';
-  const cards = slice.map((ep) => {
+  const rows = slice.map((ep) => {
     const d = new Date(ep.date);
     const key = isNaN(d) ? '' : `${d.getFullYear()}-${d.getMonth()}`;
 
@@ -1912,7 +2029,9 @@ function episodesPage(episodes, n = 1){
     }
 
     return head + episodeCard(ep);
-  }).join('\n');
+  });
+
+  const cards = cardsWithAds(rows, 'archive-list');
 
   const jumps = yearJumps(episodes).map(([year, page]) =>
     `      <a class="arch-year${page === n ? ' is-on' : ''}" href="${pagedName('episodes', page)}">${year}</a>`,
@@ -2425,9 +2544,10 @@ function showPage(group, n = 1){
   const pages = pageCount(total);
   const base = `${slugify(group.name)}`;
 
-  const cards = group.items
-    .slice((n - 1) * PER_PAGE, n * PER_PAGE)
-    .map((it) => card(it, 1)).join('\n');
+  const cards = cardsWithAds(
+    group.items.slice((n - 1) * PER_PAGE, n * PER_PAGE).map((it) => card(it, 1)),
+    'show-list'
+  );
 
   // Η κορυφή: η αφίσα σε ΛΟΓΙΚΟ πλάτος, όχι σε όλη την οθόνη, και η
   // ίδια εικόνα θολή από πίσω για να γεμίζει τον χώρο.
@@ -2556,6 +2676,14 @@ function cleanGuestName(name){
     .replace(/[\s,–-]*μέρος\s+\S+$/i, '')
     // Αρχές που δεν είναι μέρος του ονόματος. Το «O» μπαίνει και λατινικό.
     .replace(/^\s*αποκλειστικ[όο]\s*!?\s*/i, '')
+    // Επίθετα-καμπάνα που η σύνταξη κολλάει μπροστά από το όνομα:
+    // «Αποκαλυπτικός Σταυρος Λυγερός: ...». Περνούσαν τον έλεγχο
+    // looksLikePerson — τρεις λέξεις, όλες με κεφαλαίο — και έφτιαχναν
+    // τρίτη σελίδα για άνθρωπο που είχε ήδη δύο.
+    //
+    // Ρητή λίστα, ΟΧΙ κανόνας για καταλήξεις σε -ικός: υπάρχουν
+    // επώνυμα που τελειώνουν έτσι και θα τα έτρωγε.
+    .replace(/^\s*(αποκαλυπτικ|συγκλονιστικ|συγκινητικ)[όοήηάαέεςσ]*\s+/i, '')
     // Το «i» είναι απαραίτητο: οι τίτλοι γράφουν «Ο Αλέξανδρος», με
     // κεφαλαίο άρθρο. Μπαίνει και λατινικό o, που ξεφεύγει στο γράψιμο.
     .replace(/^(ο|η|το|o)\s+/i, '')
@@ -2580,6 +2708,16 @@ function looksLikePerson(name){
 
   const words = n.split(/[\s.\-–]+/).filter(Boolean);
   if (words.length < 2 || words.length > 4) return false;
+
+  // Επετειακοί τίτλοι: «Παγκόσμια Ημέρα Θαλασσαιμίας», «Παγκόσμια Ημέρα
+  // Ραδιοφώνου». Τρεις λέξεις με κεφαλαία, άρα περνούσαν όλους τους
+  // παρακάτω ελέγχους και έπαιρναν σελίδα προσώπου.
+  //
+  // ΧΩΡΙΣ \b: στη JavaScript το \b ορίζεται πάνω στο [A-Za-z0-9_], άρα
+  // δίπλα σε ελληνικό γράμμα δεν βρίσκει ποτέ όριο λέξης και ο κανόνας
+  // δεν πιάνει τίποτα. Το έμαθα εδώ — ισχύει για κάθε ελληνικό regex
+  // αυτού του αρχείου.
+  if (/(^|\s)ημέρα(\s|$)/i.test(n)) return false;
 
   for (const w of words) {
     // Κάθε κομμάτι ονόματος ξεκινά με κεφαλαίο. Το «και», «της», «στο»
@@ -3568,7 +3706,7 @@ ${stage}
           <button type="button" class="player-play" data-player="toggle" aria-label="Αναπαραγωγή">▶</button>
           <button type="button" class="player-skip" data-player="skip" data-by="15" aria-label="15 δευτερόλεπτα μπροστά">+15</button>
           <span class="player-now" data-player-now>0:00</span>
-          <div class="player-bar" data-player="seek" role="slider" tabindex="0" aria-label="Θέση" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="player-bar" data-player="seek" role="slider" tabindex="0" aria-label="Θέση" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="--wave: ${waveMask(ep.id)}">
             <div class="player-fill"></div>
           </div>
           <span class="player-total" data-player-total>--:--</span>
@@ -3594,6 +3732,12 @@ ${summaryHtml(ep.summary)}
         </p>
 
 ${transcriptSection(ep)}
+
+${/* Η μόνη θέση της σελίδας επεισοδίου, και μπαίνει ΕΔΩ επίτηδες:
+     μετά το περιεχόμενο, πριν τις προτάσεις. Ο player κάθεται στην
+     κορυφή, οπότε ανάμεσά τους μεσολαβεί ολόκληρη η σελίδα — «καμία
+     διαφήμιση μέσα ή πάνω από τον player». */ ''}
+${adSlot('episode-mid', 'leaderboard')}
 
         ${queue ? `<section class="queue">
           <h2 class="section-head">${queueHead}</h2>
@@ -3734,6 +3878,8 @@ ${topicStrip(catGroups)}
       <p class="flow-all"><a data-flow-all href="episodes.html">Όλα τα επεισόδια →</a></p>
     </div>
   </section>
+
+${adSlot('home-top', 'billboard')}
 
   <div class="page-cols">
     <div class="page-main">

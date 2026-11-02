@@ -126,6 +126,42 @@
   --wrap: 1500px;
   --edge: 1.75rem;
 
+  /* Τα ύψη των θέσεων διαφήμισης. Είναι τα πρότυπα μεγέθη της αγοράς
+     (billboard 970×250, leaderboard 728×90, MPU 300×250), ώστε να
+     δέχονται ό,τι δίκτυο κι αν μπει.
+
+     ΓΙΑΤΙ ΕΙΝΑΙ ΜΕΤΑΒΛΗΤΕΣ: η θέση δεσμεύει αυτό το ύψος από το πρώτο
+     καρέ, πριν φορτώσει τίποτα. Αν αλλάξει το μέγεθος που σερβίρει το
+     δίκτυο, αλλάζει ΕΔΩ και πουθενά αλλού — αλλιώς η σελίδα πηδάει
+     όταν έρθει η διαφήμιση, που το αφεντικό το απέκλεισε ρητά. */
+  --ad-billboard: 250px;
+  --ad-leaderboard: 90px;
+  --ad-mpu: 250px;
+
+  /* Σε κινητό δεν χωρά κανένα από τα παραπάνω: μπαίνει το 320×100. */
+  --ad-mobile: 100px;
+
+  /* ---- η κυματομορφή του player ----
+     Μπλε το ανήκουστο, κόκκινο της μάρκας το ακουσμένο.
+
+     Το --video είναι το δεύτερο χρώμα του newshub.gr. Σκέτο --line
+     ήταν πολύ σβηστό για να φανεί σχήμα, και το --surface χανόταν
+     πάνω στο φόντο.
+
+     ΠΡΟΣΟΧΗ στο ύψος: η κυματομορφή θέλει χώρο για να διαβαστεί ως
+     σχήμα. Στα 6px της παλιάς γραμμής έμοιαζε με διακεκομμένη παύλα.
+     Η μπάρα του player κρατιέται χαμηλότερη: κάθεται μόνιμα πάνω από
+     το περιεχόμενο και δεν πρέπει να τρώει ύψος οθόνης. */
+  --wave-rest: #24456F;
+  --wave-played: #CF2233;
+
+  /* Πάνω στο κόκκινο το κείμενο γίνεται λευκό. Το --on-light είναι
+     φτιαγμένο για το κίτρινο --audio: σκούρο πάνω σε ανοιχτό. Στο
+     κόκκινο σχεδόν χανόταν. */
+  --on-wave: #FFFFFF;
+  --wave-h: 34px;
+  --wave-h-bar: 22px;
+
   /* λέει στον browser να βάψει σκούρα τα δικά του χειριστήρια,
      όπως τα κουμπιά του <audio> και τις μπάρες κύλισης */
   color-scheme: dark;
@@ -1076,11 +1112,8 @@ h1{
   color: var(--text);
   text-shadow: none;
 
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  /* Χωρίς κόψιμο: ο τίτλος κάθεται ΚΑΤΩ από τη φωτογραφία, άρα
+     υπάρχει χώρος να βγει ολόκληρος. */
 }
 
 .hero-title a{
@@ -1181,12 +1214,6 @@ h1{
     max-width: 100%;
   }
 
-  .hero-title,
-  .hero--art .hero-title,
-  .hero--photo .hero-title{
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-  }
 }
 
 /* ---- Animation κατά το άνοιγμα της σελίδας ---- */
@@ -4280,8 +4307,8 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   height: 42px;
   border: 0;
   border-radius: 50%;
-  background: var(--audio);
-  color: var(--on-light);
+  background: var(--wave-played);
+  color: var(--on-wave);
   font-size: 0.95rem;
   cursor: pointer;
   flex: none;
@@ -4299,18 +4326,32 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
 .bar-seek{
   flex: 1;
   min-width: 80px;
-  height: 6px;
+  height: var(--wave-h-bar);
   border-radius: 999px;
-  background: var(--line);
+  background: var(--wave-rest);
   cursor: pointer;
+
+  /* Το --wave το βάζει ο player.js όταν αλλάζει επεισόδιο — δες
+     waveOf() εκεί. Η μπάρα ζει πάνω από τις αλλαγές σελίδας, οπότε
+     δεν μπορεί να το γράψει το build. */
+  -webkit-mask-image: var(--wave);
+  mask-image: var(--wave);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
+
+.bar-seek[style*="--wave"]{ border-radius: 0; }
 
 .bar-fill{
   height: 100%;
   width: 0;
   border-radius: 999px;
-  background: var(--audio);
+  background: var(--wave-played);
 }
+
+.bar-seek[style*="--wave"] .bar-fill{ border-radius: 0; }
 
 .bar-seek:focus-visible{ outline: 2px solid var(--hover); outline-offset: 4px; }
 
@@ -4698,8 +4739,8 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   width: 52px;
   height: 52px;
   border-radius: 50% !important;
-  background: var(--audio) !important;
-  color: var(--on-light) !important;
+  background: var(--wave-played) !important;
+  color: var(--on-wave) !important;
   border: 0 !important;
   font-size: 1.05rem !important;
   padding: 0 !important;
@@ -4717,19 +4758,36 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
 .player-bar{
   flex: 1;
   min-width: 140px;
-  height: 6px;
+  height: var(--wave-h);
   border-radius: 999px;
-  background: var(--line);
+  background: var(--wave-rest);
   cursor: pointer;
   position: relative;
+
+  /* Η κυματομορφή είναι ΜΑΣΚΑ πάνω στα δύο χρώματα, όχι εικόνα.
+     Η μεταβλητή --wave έρχεται από το build, μία ανά επεισόδιο.
+     Όπου λείπει, το mask-image είναι άδειο και μένει η παλιά λεπτή
+     γραμμή — καμία σελίδα δεν σπάει. */
+  -webkit-mask-image: var(--wave);
+  mask-image: var(--wave);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
+
+/* Με κυματομορφή οι στρογγυλεμένες άκρες περισσεύουν: τις δίνουν ήδη
+   τα ίδια τα ραβδία μέσα στο SVG. */
+.player-bar[style*="--wave"]{ border-radius: 0; }
 
 .player-fill{
   height: 100%;
   width: 0;
   border-radius: 999px;
-  background: var(--audio);
+  background: var(--wave-played);
 }
+
+.player-bar[style*="--wave"] .player-fill{ border-radius: 0; }
 
 .player-bar:focus-visible{ outline: 2px solid var(--hover); outline-offset: 4px; }
 
@@ -5220,3 +5278,99 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
 
 .ticker-all:hover{ color: var(--text); }
 
+
+/* ---- Θέσεις διαφήμισης ----
+ *
+ * Εδώ ορίζεται ΜΟΝΟ ο χώρος. Το δίκτυο δεν έχει επιλεγεί, οπότε κάθε
+ * θέση είναι προς το παρόν ένα άδειο κουτί με τη λέξη «Διαφήμιση».
+ *
+ * Οι τέσσερις απαιτήσεις, και πού τηρείται καθεμιά:
+ *   δεν σκεπάζει      -> κανένα position: fixed/sticky, καμία
+ *                        διαφήμιση δεν βγαίνει από τη ροή της σελίδας
+ *   δεσμευμένο ύψος   -> min-height από την αρχή, με τις μεταβλητές
+ *                        --ad-* στην κορυφή του αρχείου
+ *   φορτώνει τελευταία-> ο χώρος υπάρχει χωρίς τίποτα μέσα, άρα το
+ *                        script μπορεί να έρθει όποτε θέλει
+ *   όχι στον player   -> θέμα τοποθέτησης, κρίνεται στο build.js
+ */
+.ad{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Δεσμεύει τον χώρο ΠΡΙΝ φορτώσει οτιδήποτε. Το min-height και όχι
+     height: αν το δίκτυο στείλει κάτι ψηλότερο, μεγαλώνει το κουτί
+     αντί να ξεχειλίσει το περιεχόμενό του πάνω στη σελίδα. */
+  min-height: var(--ad-h, var(--ad-leaderboard));
+
+  /* Ίδια γραμμή με όλο το υπόλοιπο site — δες το --wrap στην κορυφή.
+     Χωρίς το calc στο width, σε οθόνη στενότερη από --wrap η θέση
+     ακούμπαγε στις δύο άκρες ενώ όλα τα άλλα κρατούσαν απόσταση. */
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 3rem auto;
+
+  background: var(--surface);
+  border-radius: var(--radius);
+
+  /* Η γραμμή μπαίνει ως ΕΣΩΤΕΡΙΚΗ σκιά, όχι ως border.
+     Με border 1px το κουτί δεσμεύει 250px συνολικά, άρα μένουν 248 για
+     το περιεχόμενο — και μια διαφήμιση 250px το έσπρωχνε στα 252,
+     κουνώντας τη σελίδα 2px. Μετρημένο, όχι υποθετικό. Η σκιά δεν
+     πιάνει χώρο, οπότε τα 250 μένουν 250. */
+  box-shadow: inset 0 0 0 1px var(--line);
+
+  /* Ό,τι στείλει το δίκτυο μένει μέσα στο κουτί. Χωρίς αυτό, ένα
+     κακογραμμένο creative μπορεί να σπρώξει τη σελίδα πλάγια. */
+  overflow: hidden;
+}
+
+/* Η λέξη «Διαφήμιση» — και προσωρινός δείκτης ότι η θέση υπάρχει.
+   Όταν μπει το δίκτυο, μένει ως σήμανση: οι αναγνώστες έχουν δικαίωμα
+   να ξέρουν τι είναι διαφήμιση και τι είδηση. */
+.ad-note{
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Τα μεγέθη. Κάθε κλάση ορίζει ΜΟΝΟ το ύψος — το πλάτος το δίνει η
+   στήλη μέσα στην οποία κάθεται. */
+.ad--billboard{ --ad-h: var(--ad-billboard); }
+.ad--leaderboard{ --ad-h: var(--ad-leaderboard); }
+
+/* Θέση παρεμβαλλόμενη σε λίστα καρτών. Χωρίς αυτό το aside πιάνει μία
+   κυψέλη του grid — μια κάρτα-φάντασμα ανάμεσα στα επεισόδια. */
+.grid > .ad{
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: none;
+  margin: 1rem 0;
+}
+
+.ad--mpu{
+  --ad-h: var(--ad-mpu);
+  max-width: 300px;
+  margin: 2rem auto;
+}
+
+/* Το billboard θέλει 970px πλάτος. Κάτω από ~1000 δεν χωράει, άρα το
+   δίκτυο θα στείλει leaderboard — και η θέση πρέπει να δεσμεύει το
+   ύψος ΕΚΕΙΝΟΥ, αλλιώς μένει μια τρύπα 160px κάτω από τη διαφήμιση. */
+@media (max-width: 1000px){
+  .ad--billboard{ --ad-h: var(--ad-leaderboard); }
+}
+
+/* Σε κινητό όλα τα μεγάλα μεγέθη γίνονται ένα: 320×100. Το billboard
+   των 250px θα έτρωγε το μισό τηλέφωνο. */
+@media (max-width: 760px){
+  .ad--billboard,
+  .ad--leaderboard{
+    --ad-h: var(--ad-mobile);
+  }
+
+  .ad{ margin: 2.5rem auto; }
+}
