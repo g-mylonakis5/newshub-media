@@ -928,7 +928,9 @@ h1{
 
 .site-out-logo{
   display: block;
-  height: 2.15rem;
+  /* Ήταν 2.15rem. Είναι ο σύνδεσμος προς το κεντρικό site — το σήμα
+     πρέπει να αναγνωρίζεται, όχι να ψάχνεται. */
+  height: 2.9rem;
   width: auto;
 }
 
@@ -1106,8 +1108,8 @@ h1{
 .hero--photo .hero-title{
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(1.65rem, 2.5vw, 2.45rem);
-  line-height: 1.24;
+  font-size: clamp(1.45rem, 2.1vw, 2.05rem);
+  line-height: 1.26;
   margin: 0 0 0.85rem;
   color: var(--text);
   text-shadow: none;
@@ -1330,10 +1332,24 @@ h1{
   border-bottom: 1px solid var(--line);
 }
 
+/* Τρεις αφίσες ανά σειρά σε όλο το πλάτος. Ήταν minmax(200px) που
+   έβγαζε τέσσερις των 226px μέσα στη στήλη· το όνομα της εκπομπής
+   είναι ψημένο μέσα στην αφίσα και σε αυτό το μέγεθος δεν διαβαζόταν. */
 .shows-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* Το min(...) ΔΕΝ είναι διακοσμητικό: με σκέτο minmax(340px, 1fr) η
+     κάρτα έμενε 340px σε οθόνη 390px, δηλαδή πλατύτερη από το πλαίσιο
+     που την κρατάει, και κοβόταν στην άκρη. */
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
   gap: var(--gap);
+}
+
+/* Σε tablet τα 340px αφήνουν ΜΙΑ κάρτα 636px — μια αφίσα όσο η οθόνη.
+   Χαμηλότερο κατώφλι φέρνει πίσω τις δύο. */
+@media (max-width: 900px){
+  .shows-grid{
+    grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  }
 }
 
 /* Η κάρτα εκπομπής είναι αφίσα, όχι κουτί: η εικόνα γεμίζει, το όνομα
@@ -2276,6 +2292,19 @@ h1{
   opacity: 0.3;
 }
 
+/* Το σήμα του Newshub Multimedia. Μικρό επίτηδες: κάθεται δίπλα στην
+   τελεία, δεν ανταγωνίζεται τη λέξη. */
+.mark-sign{
+  flex: none;
+  /* Ίδιο clamp με τη λέξη δίπλα του — δες .mark-word. Με σταθερό
+     3.6rem το σήμα έμενε 58px ενώ η λέξη έπεφτε στα 35px σε τηλέφωνο,
+     και το σήμα κατέληγε μεγαλύτερο από το «Latest». */
+  width: clamp(2.2rem, 5vw, 3.6rem);
+  height: clamp(2.2rem, 5vw, 3.6rem);
+  object-fit: contain;
+  display: block;
+}
+
 .mark-dot{
   flex: none;
   width: 0.85rem;
@@ -2428,11 +2457,12 @@ h1{
 }
 
 /* Η μικρή οριζόντια κάρτα. Τετράγωνη μικρογραφία, όπως και οι μεγάλες
-   κάρτες: ένα σχήμα σε όλο το site. Στα 112px το τετράγωνο δεν ψηλώνει
-   τη σειρά πάνω από τις τρεις γραμμές του τίτλου. */
+   κάρτες: ένα σχήμα σε όλο το site.
+   Ήταν 112px όταν οι μικρές ήταν τέσσερις. Με τρεις περισσεύει ύψος
+   στη στήλη, οπότε η μικρογραφία το παίρνει — δες TOPIC_ROW. */
 .row-card-link{
   display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
+  grid-template-columns: 190px minmax(0, 1fr);
   gap: 1rem;
   align-items: start;
   color: inherit;
@@ -2736,8 +2766,10 @@ h1{
 .spot-eyebrow{
   font-family: var(--sans);
   font-weight: 600;
-  font-size: 0.78rem;
-  letter-spacing: 0.26em;
+  /* Ήταν 0.78rem — ψιλόγραμμα δίπλα σε λογότυπο 4.4rem. Τώρα που η
+     ενότητα πιάνει όλο το πλάτος, η φράση σηκώνει το μέγεθός της. */
+  font-size: 1.05rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--sky);
 }
@@ -2746,7 +2778,7 @@ h1{
    από κάτω το λογότυπο του multimedia, στο μέγεθος που θα είχε ο τίτλος. */
 .spot-logo{
   display: block;
-  height: 4.4rem;
+  height: 5.6rem;
   width: auto;
 }
 
@@ -2833,14 +2865,16 @@ h1{
 
 /* Τέσσερις κάρτες στη σειρά, αλλά όχι με το ζόρι: κάτω από 1100px
    πέφτουν σε δύο και στο κινητό σε μία. */
-.grid--4{ grid-template-columns: repeat(4, 1fr); }
+/* Τρεις κάρτες στις ενότητες με πλαίσιο (Agronews, Tech-Hub). Ήταν
+   τέσσερις και έβγαιναν 196px η καθεμιά μέσα στη στήλη. */
+.grid--3{ grid-template-columns: repeat(3, 1fr); }
 
 @media (max-width: 1100px){
-  .grid--4{ grid-template-columns: repeat(2, 1fr); }
+  .grid--3{ grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 560px){
-  .grid--4{ grid-template-columns: 1fr; }
+  .grid--3{ grid-template-columns: 1fr; }
 
   .topics{
     display: block;
@@ -3741,14 +3775,26 @@ h1{
 
 .plist-abc a:hover{ color: var(--on-light); background: var(--hover); }
 
-/* Δύο στήλες, χωρίς γραμμές ανάμεσα: το κενό χωρίζει. */
+/* Το γράμμα που φιλτράρει τώρα. Χωρίς αυτό δεν φαίνεται γιατί η λίστα
+   έχει 18 ονόματα αντί για 373, και μοιάζει με χαμένο περιεχόμενο. */
+.plist-abc a.is-on{
+  color: var(--on-light);
+  background: var(--text);
+  font-weight: 700;
+}
+
+/* Χωρίς γραμμές ανάμεσα στις στήλες: το κενό χωρίζει. */
+/* 373 ονόματα. Με 2 στήλες η λίστα έβγαινε 8.232px — το 80% μιας
+   σελίδας 10.347px, δηλαδή εννιά οθόνες σκρολ μόνο για ονόματα.
+   Οι στήλες δένουν με το πλάτος: όσες χωρούν στα 240px η καθεμιά. */
 .plist{
   list-style: none;
   margin: 0;
   padding: 0;
-  columns: 2;
-  column-gap: 3rem;
+  columns: 240px 4;
+  column-gap: 2rem;
 }
+
 
 .plist-mark{
   font-family: var(--serif);
@@ -3767,10 +3813,13 @@ h1{
 .plist-row a{
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.5rem 0;
+  gap: 0.6rem;
+  /* Ήταν 0.5rem πάνω-κάτω, δηλαδή 40px ανά όνομα. Σε 373 ονόματα κάθε
+     pixel ύψους κοστίζει 373 pixels σελίδας. */
+  padding: 0.28rem 0;
   color: inherit;
   text-decoration: none;
+  font-size: 0.92rem;
 }
 
 .plist-pic{
@@ -3826,7 +3875,17 @@ h1{
 }
 
 @media (max-width: 760px){
-  .plist{ columns: 1; }
+  /* Ήταν columns: 1 και η λίστα έβγαινε 13.793px σε τηλέφωνο. Τα
+     ονόματα είναι κοντά· δύο στενές στήλες χωρούν και κόβουν το ύψος
+     στο μισό. Η μικρογραφία φεύγει — στα 24px δεν αναγνωρίζεται
+     κανένα πρόσωπο και τρώει το πλάτος που χρειάζεται το όνομα. */
+  .plist{
+    columns: 2;
+    column-gap: 1rem;
+  }
+
+  .plist-pic{ display: none; }
+
   .faces{ grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 1.5rem 1rem; }
   .face-pic{ width: 84px; height: 84px; }
   .face-name{ font-size: 0.92rem; }

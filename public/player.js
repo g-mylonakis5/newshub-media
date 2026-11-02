@@ -284,16 +284,24 @@
       .trim();
   }
 
+  // Ποιο γράμμα είναι επιλεγμένο. Κενό = όλα.
+  var pickedLetter = '';
+
   function filterPeople(box) {
-    var want = flatten(box.value);
-    var list = box.closest('.all-people');
+    var want = box ? flatten(box.value) : '';
+    var list = box ? box.closest('.all-people') : document.querySelector('.all-people');
     if (!list) return;
 
     var rows = list.querySelectorAll('.plist-row');
     var shown = 0;
 
     for (var i = 0; i < rows.length; i++) {
-      var ok = !want || rows[i].dataset.find.indexOf(want) !== -1;
+      // Δύο φίλτρα μαζί: το γραμμένο όνομα ΚΑΙ το γράμμα. Όποιος
+      // γράφει στο κουτί ενώ έχει διαλέξει «Κ» περιμένει να ψάξει
+      // μέσα στα Κ, όχι να του αλλάξει κρυφά η επιλογή.
+      var okText = !want || rows[i].dataset.find.indexOf(want) !== -1;
+      var okLetter = !pickedLetter || rows[i].dataset.letter === pickedLetter;
+      var ok = okText && okLetter;
       rows[i].hidden = !ok;
       if (ok) shown++;
     }
@@ -302,6 +310,11 @@
     // αλλιώς μένει ένα «Κ» να δείχνει το κενό.
     var marks = list.querySelectorAll('.plist-mark');
     for (var j = 0; j < marks.length; j++) {
+      // Με επιλεγμένο γράμμα όλοι οι δείκτες περισσεύουν: το γράμμα το
+      // λέει ήδη το αλφάβητο από πάνω, τονισμένο. Το «Κ» πάνω από μια
+      // λίστα μόνο με Κ έτρωγε μια θέση στήλης χωρίς να λέει τίποτα.
+      if (pickedLetter) { marks[j].hidden = true; continue; }
+
       var any = false;
       var el = marks[j].nextElementSibling;
       while (el && !el.classList.contains('plist-mark')) {
@@ -314,9 +327,8 @@
     var none = list.querySelector('.plist-none');
     if (none) none.hidden = shown > 0;
 
-    // Με ενεργό φίλτρο το αλφάβητο δεν οδηγεί πουθενά.
-    var abc = list.querySelector('.plist-abc');
-    if (abc) abc.hidden = !!want;
+    // Το αλφάβητο ΜΕΝΕΙ ορατό όταν γράφεις: είναι πλέον φίλτρο, όχι
+    // σύνολο αγκυρών, και χρειάζεσαι τον δρόμο της επιστροφής στο «Όλα».
   }
 
   // Το «input» ανεβαίνει στο document, σε αντίθεση με focus/blur — οπότε
@@ -324,6 +336,26 @@
   document.addEventListener('input', function (e) {
     var box = e.target.closest('[data-people-filter]');
     if (box) filterPeople(box);
+  });
+
+  // Κλικ σε γράμμα: δείχνει μόνο αυτό. Ο ίδιος listener πιάνει και το
+  // «Όλα», που καθαρίζει την επιλογή.
+  document.addEventListener('click', function (e) {
+    var pick = e.target.closest('[data-letter-pick], [data-letter-all]');
+    if (!pick) return;
+
+    var abc = pick.closest('.plist-abc');
+    if (!abc) return;
+
+    e.preventDefault();
+    pickedLetter = pick.dataset.letterPick || '';
+
+    var links = abc.querySelectorAll('a');
+    for (var i = 0; i < links.length; i++) {
+      links[i].classList.toggle('is-on', links[i] === pick);
+    }
+
+    filterPeople(document.querySelector('[data-people-filter]'));
   });
 
   // Η γραμμή που ακούγεται τώρα. Οι γραμμές είναι έως 158, και το
