@@ -2237,10 +2237,15 @@ function topicIcon(key){
   return `<svg viewBox="0 0 24 24" aria-hidden="true">${glyph}</svg>`;
 }
 
-// Πόσες κάρτες παίρνει κάθε θέμα στη λωρίδα του: μία μεγάλη και τέσσερις
-// μικρές. Ήταν 4 συνολικά — με τετράγωνη τη μεγάλη εικόνα, οι τρεις
-// μικρές τελείωναν πολύ πιο ψηλά και η δεξιά στήλη έμενε μισοάδεια.
-const TOPIC_ROW = 5;
+// Πόσες κάρτες παίρνει κάθε θέμα στη λωρίδα του: μία μεγάλη και τρεις
+// μικρές.
+//
+// Ήταν 5 (μία συν τέσσερις), για να μη μένει μισοάδεια η δεξιά στήλη
+// δίπλα στην τετράγωνη μεγάλη εικόνα. Το γέμιζε, αλλά στρίμωχνε τις
+// μικρογραφίες. Τώρα οι μικρές είναι τρεις και η μικρογραφία τους
+// μεγάλωσε αντίστοιχα — δες το .row-card-link στο styles.css, που
+// πρέπει να αλλάζει ΜΑΖΙ με αυτόν τον αριθμό, αλλιώς ξαναμένει κενό.
+const TOPIC_ROW = 4;
 
 // Πόσες κάρτες κάθε θέματος κρύβονται μέσα στη ροή της αρχικής, ώστε το
 // φιλτράρισμα να έχει πάντα τι να δείξει.
@@ -2299,6 +2304,7 @@ function spotlightSections(groups){
       const total = g.items.length;
       const cards = g.items.slice(0, SPOTLIGHT_CARDS).map((it) => card(inTopic(it, g.name))).join('\n');
 
+
       return `  <section class="spot spot--${variant}" data-topic="${key}">
     <header class="spot-head">
       <span class="spot-icon">${topicIcon(key)}</span>
@@ -2309,7 +2315,7 @@ function spotlightSections(groups){
       <a class="spot-all" href="${categoryUrl(g.name)}">Όλα τα ${total.toLocaleString('el')} →</a>
     </header>
 
-    <div class="grid grid--4">
+    <div class="grid grid--3">
 ${cards}
     </div>
   </section>`;
@@ -2318,15 +2324,29 @@ ${cards}
 }
 
 // Πόσες κάρτες δείχνει μια ενότητα με πλαίσιο.
-const SPOTLIGHT_CARDS = 4;
+//
+// Ήταν 4 και οι κάρτες έβγαιναν 196px μέσα στη στήλη — η εικόνα τόσο
+// μικρή που δεν έλεγε τίποτα. Τρεις πιάνουν τον ίδιο χώρο και
+// αναπνέουν. Αλλάζει ΜΑΖΙ με την κλάση .grid--3 παρακάτω.
+const SPOTLIGHT_CARDS = 3;
 
 // Το γραφικό σήμα μιας ενότητας: κουκκίδα που χτυπάει, μεγάλη λέξη σε
 // δύο τόνους, γραμμές δεξιά κι αριστερά. Το «δεύτερο μισό πιο σβηστό»
 // είναι το μοτίβο του λογοτύπου του newshub.gr, όπου το «hub» ξεχωρίζει.
 // Γράφεται ΜΙΑ φορά και το φοράνε όλες οι ενότητες.
-function bandMark(first, second, sub){
+function bandMark(first, second, sub, depth = 0){
+  const up = depth === 0 ? '' : '../';
+
+  // Το σήμα μπαίνει ΑΝΑΜΕΣΑ στη γραμμή και στην τελεία που αναβοσβήνει.
+  // Σκοπός του δεν είναι να διαβαστεί — είναι να αναγνωρίζεται. Κάθε
+  // λωρίδα της αρχικής το περνάει μπροστά από τα μάτια, ώστε να μένει
+  // ότι αυτό εδώ είναι το Newshub Multimedia, όχι το κεντρικό site.
+  //
+  // aria-hidden: ο αναγνώστης οθόνης δεν έχει λόγο να το ακούσει σε
+  // κάθε ενότητα — η επικεφαλίδα από κάτω λέει ήδη τι είναι.
   return `    <div class="band-head">
       <p class="mark">
+        <img class="mark-sign" src="${up}shows/logo-icon.png" alt="" aria-hidden="true" width="512" height="512" loading="lazy">
         <span class="mark-dot"></span>
         <span class="mark-word">${first}<em>${second}</em></span>
       </p>
@@ -3152,7 +3172,7 @@ function guestsIndexPage(groups){
       letters.push(p.letter);
       rows.push(`      <li class="plist-mark" id="g-${p.letter}" data-letter="${p.letter}">${p.letter}</li>`);
     }
-    rows.push(`      <li class="plist-row" data-find="${esc(p.find)}">
+    rows.push(`      <li class="plist-row" data-find="${esc(p.find)}" data-letter="${p.letter}">
         <a href="guest/${p.slug}.html">
           <span class="plist-pic">${p.image
             ? `<img src="${p.image}" alt="" loading="lazy">`
@@ -3163,7 +3183,17 @@ function guestsIndexPage(groups){
       </li>`);
   }
 
-  const abc = letters.map((l) => `        <a href="#g-${l}">${l}</a>`).join('\n');
+  // Τα γράμματα ήταν άγκυρες: σε πήγαιναν στο «Κ» μέσα σε μια λίστα
+  // 373 ονομάτων που έμενε ολόκληρη ανοιχτή. Τώρα φιλτράρουν —
+  // δείχνουν ΜΟΝΟ τα ονόματα του γράμματος, και η σελίδα από εννιά
+  // οθόνες γίνεται μισή.
+  //
+  // Μένουν <a href="#g-X">: χωρίς JavaScript εξακολουθούν να είναι
+  // άγκυρες που δουλεύουν, όπως πριν. Η JS απλώς τα αναβαθμίζει.
+  const abc = [
+    `        <a href="#g-all" data-letter-all class="is-on">Όλα</a>`,
+    ...letters.map((l) => `        <a href="#g-${l}" data-letter-pick="${l}">${l}</a>`),
+  ].join('\n');
 
   const body = `${siteHeader()}
 
@@ -3881,10 +3911,14 @@ ${topicStrip(catGroups)}
 
 ${adSlot('home-top', 'billboard')}
 
-  <div class="page-cols">
-    <div class="page-main">
+${/* Οι εκπομπές βγαίνουν ΕΞΩ από τις δύο στήλες, επίτηδες: μέσα στην
+     αριστερή στήλη το πλαίσιο έπιανε 1.044px και οι αφίσες έβγαιναν
+     226px — πολύ μικρές για να διαβαστεί το όνομα της εκπομπής που
+     είναι ψημένο μέσα τους. Σε όλο το πλάτος χωρούν τρεις μεγάλες. */ ''}
 ${showsSection(showGroups)}
 
+  <div class="page-cols">
+    <div class="page-main">
 ${topicRows(catGroups)}
 
 ${namesSection(groups)}
