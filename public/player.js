@@ -98,6 +98,12 @@
       if (sh && sh.textContent !== track.show) sh.textContent = track.show;
       var link = bar.querySelector('.bar-now');
       if (link && track.href) link.setAttribute('href', track.href);
+
+      // Η κυματομορφή του τρέχοντος επεισοδίου πάνω στη μόνιμη μπάρα.
+      var seek = bar.querySelector('.bar-seek');
+      if (seek && seek.style.getPropertyValue('--wave') !== track.wave) {
+        seek.style.setProperty('--wave', track.wave || '');
+      }
     }
   }
 
@@ -351,7 +357,20 @@
       show: el.dataset.show || '',
       art: el.dataset.art || '',
       href: el.dataset.href || location.pathname,
+      // Η κυματομορφή του επεισοδίου. Τη γράφει το build μέσα στη
+      // σελίδα, πάνω στο .player-bar, ως μεταβλητή --wave. Η μόνιμη
+      // μπάρα την κουβαλάει μαζί της όταν αλλάξεις σελίδα, αλλιώς θα
+      // γύριζε σε σκέτη γραμμή ενώ παίζει το ίδιο επεισόδιο.
+      wave: waveOf(el),
     };
+  }
+
+  // Το --wave κάθεται στο .player-bar μέσα στην όψη. Αν λείπει — παλιά
+  // σελίδα, ή όψη χωρίς μπάρα — γυρίζουμε κενό και ο CSS κανόνας
+  // αφήνει την απλή γραμμή, που δουλεύει μια χαρά.
+  function waveOf(el) {
+    var seek = el.querySelector ? el.querySelector('.player-bar') : null;
+    return (seek && seek.style.getPropertyValue('--wave')) || '';
   }
 
   function seekFrom(el, event) {
