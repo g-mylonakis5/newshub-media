@@ -508,6 +508,23 @@ function adSlot(place, size){
 // διαφημίσεις η μία πάνω στην άλλη μοιάζουν με σελίδα-σκουπίδι.
 const CARDS_PER_AD = 20;
 
+// Είναι η λίστα ΟΛΗ βίντεο; Τότε οι κάρτες της παίρνουν πλαίσιο 16:9
+// αντί για τετράγωνο, και οι μικρογραφίες του YouTube γεμίζουν χωρίς
+// θολό πάνω-κάτω. Δες .grid--wide στο styles.css.
+//
+// «Σχεδόν όλα» και όχι «όλα»: η Αγροτική επικαιρότητα έχει 59 βίντεο
+// και ΕΝΑ podcast, και με απαίτηση για καθαρή λίστα έμενε αδιόρθωτη —
+// 59 κάρτες με θολό εξαιτίας μιας. Η μοναδική τετράγωνη αφίσα ΔΕΝ
+// κόβεται: μπαίνει ολόκληρη μέσα στο φαρδύ πλαίσιο, με το θολό της.
+// Δες .grid--wide .card[data-kind="podcast"] στο styles.css.
+const WIDE_SHARE = 0.8;
+
+function allVideo(items){
+  if (!items.length) return false;
+  const wide = items.filter((it) => it.kind === 'video').length;
+  return wide / items.length >= WIDE_SHARE;
+}
+
 function cardsWithAds(cards, place){
   const out = [];
 
@@ -2564,10 +2581,12 @@ function showPage(group, n = 1){
   const pages = pageCount(total);
   const base = `${slugify(group.name)}`;
 
-  const cards = cardsWithAds(
-    group.items.slice((n - 1) * PER_PAGE, n * PER_PAGE).map((it) => card(it, 1)),
-    'show-list'
-  );
+  const page = group.items.slice((n - 1) * PER_PAGE, n * PER_PAGE);
+  const cards = cardsWithAds(page.map((it) => card(it, 1)), 'show-list');
+
+  // Οι εκπομπές που ζουν στο YouTube βγάζουν σελίδα μόνο με βίντεο,
+  // οπότε οι μικρογραφίες τους μπορούν να γεμίσουν πλαίσιο 16:9.
+  const wide = allVideo(page) ? ' grid--wide' : '';
 
   // Η κορυφή: η αφίσα σε ΛΟΓΙΚΟ πλάτος, όχι σε όλη την οθόνη, και η
   // ίδια εικόνα θολή από πίσω για να γεμίζει τον χώρο.
@@ -2619,7 +2638,7 @@ ${breadcrumb([
   <main class="guest">
 ${head}
 
-    <div class="grid">
+    <div class="grid${wide}">
       ${cards}
     </div>
 ${pager(base, n, pages)}
