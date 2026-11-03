@@ -395,7 +395,7 @@ function todayLabel(){
 
 // Το σλόγκαν και η φράση από κάτω. Γράφονται ΕΔΩ και πουθενά αλλού.
 // Προσωρινή διατύπωση — περιμένει την τελική από το αφεντικό.
-const SLOGAN = 'Ιστορίες που αξίζει να ακούς.';
+const SLOGAN = 'Ενημέρωση που αξίζει να έχεις.';
 const TAGLINE = 'Podcasts και βίντεο του newshub.gr — συζητήσεις, αναλύσεις και πρόσωπα, από την Κρήτη και τον κόσμο.';
 
 // Η φωτογραφία της λωρίδας. Μπαίνει ως public/intro.jpg όποτε υπάρχει·
@@ -2709,6 +2709,89 @@ const PLATFORMS = [
     `<circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.4 16.6c-.5-4.4 2.7-8 9-8.2.5 5.3-3.1 8.8-9 8.2z" fill="${DARK}"/>`],
 ];
 
+// ---- «Must read» ----
+//
+// Τα κορυφαία άρθρα του κεντρικού site, σε δική τους ζώνη με κόκκινο
+// πλαίσιο και το λογότυπο του newshub.gr — ώστε να είναι σαφές ότι εδώ
+// μιλάει το κεντρικό site, όχι το multimedia.
+//
+// ΠΡΟΣΟΧΗ: «κορυφαία» δεν το ξέρει κανείς αυτόματα. Δεν έχουμε
+// επισκεψιμότητα, ούτε ετικέτα στο feed. Άρα δύο δρόμοι, με την ίδια
+// σειρά προτεραιότητας που ακολουθεί και το πρωτοσέλιδο:
+//   1. χειροκίνητα — data/curation.json, πεδίο mustRead
+//   2. αυτόματα — τα πιο πρόσφατα, ΕΝΑ ανά κατηγορία, ώστε να μη βγουν
+//      τέσσερα «Οικονομία» στη σειρά.
+const MUST_COUNT = 4;
+
+function pickMustRead(articles, curation, taken = new Set()){
+  const want = (curation.mustRead || []).map((s) => String(s).trim()).filter(Boolean);
+
+  const chosen = want
+    .map((w) => articles.find((a) => sameItem({ id: a.id, href: a.url }, w)))
+    .filter(Boolean);
+
+  const have = new Set(chosen.map((a) => a.url));
+  const seenCat = new Set(chosen.map((a) => a.category));
+
+  // Δύο περάσματα: πρώτα ένα ανά κατηγορία, μετά ό,τι μένει — αλλιώς με
+  // λίγες κατηγορίες στο feed η ζώνη θα έβγαινε μισοάδεια.
+  for (const strict of [true, false]) {
+    for (const a of articles) {
+      if (chosen.length >= MUST_COUNT) break;
+      if (have.has(a.url) || taken.has(a.url)) continue;
+      if (strict && seenCat.has(a.category)) continue;
+      chosen.push(a);
+      have.add(a.url);
+      seenCat.add(a.category);
+    }
+  }
+
+  return chosen.slice(0, MUST_COUNT);
+}
+
+function mustReadSection(articles, curation, taken){
+  const picks = pickMustRead(articles, curation, taken);
+
+  // Με λιγότερα από δύο η ζώνη δεν στέκει: ένα μοναχικό άρθρο μέσα σε
+  // κόκκινο πλαίσιο μοιάζει με διαφήμιση.
+  if (picks.length < 2) return '';
+
+  const cards = picks.map((a, i) => {
+    const img = a.image_large || a.image_thumb || '';
+
+    return `      <article class="must-card">
+        <a class="must-link" href="${a.url}" target="_blank" rel="noopener">
+          <span class="must-media">
+            ${img
+              ? `<img class="must-image" src="${img}" alt="" loading="lazy" width="765" height="435">`
+              : '<span class="must-image must-image--empty"></span>'}
+            <span class="must-no" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+          </span>
+          <span class="must-text">
+            ${a.category ? `<span class="must-cat">${esc(a.category)}</span>` : ''}
+            <h3 class="must-title">${esc(a.title)}</h3>
+            <span class="must-meta">${formatDate(a.date)}</span>
+          </span>
+        </a>
+      </article>`;
+  }).join('\n');
+
+  return `  <section class="must" aria-labelledby="must-head">
+    <div class="must-head">
+      <p class="must-mark" id="must-head">
+        <span class="must-word">Must<em>read</em></span>
+        <span class="must-by">από το</span>
+        <img class="must-logo" src="shows/logo-newshub.png" alt="Newshub.gr" loading="lazy">
+      </p>
+      <a class="must-all" href="https://www.newshub.gr/" target="_blank" rel="noopener">Όλες οι ειδήσεις →</a>
+    </div>
+
+    <div class="must-grid">
+${cards}
+    </div>
+  </section>`;
+}
+
 // Η ροή ειδήσεων στο πλάι. Αν δεν υπάρχουν ειδήσεις, δεν βγαίνει καθόλου
 // — καλύτερα να λείπει το πλαίσιο παρά να στέκει άδειο.
 function newsTicker(articles){
@@ -4005,6 +4088,12 @@ ${/* Οι εκπομπές βγαίνουν ΕΞΩ από τις δύο στήλ
      226px — πολύ μικρές για να διαβαστεί το όνομα της εκπομπής που
      είναι ψημένο μέσα τους. Σε όλο το πλάτος χωρούν τρεις μεγάλες. */ ''}
 ${showsSection(showGroups)}
+
+${/* Το «Must read» κάθεται ανάμεσα στις εκπομπές και στα θέματα: μετά
+     τις εκπομπές το δικό μας υλικό έχει ήδη παρουσιαστεί, και πριν τις
+     κατηγορίες ο αναγνώστης κάνει μια παύση με ειδήσεις πριν μπει στο
+     βαθύ μέρος της σελίδας. */ ''}
+${mustReadSection(articles, curation, onTop)}
 
   <div class="page-cols">
     <div class="page-main">

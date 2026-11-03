@@ -3528,7 +3528,9 @@ h1{
   justify-content: center;
   text-align: center;
   margin: 0 auto 3rem;
-  max-width: 960px;
+  /* Το όριο της κεφαλίδας περιορίζει ΚΑΙ την αφίσα: στα 960 η αφίσα δεν
+     μπορούσε να μεγαλώσει άλλο όσο κι αν το ζητούσε το .show-head-art. */
+  max-width: 1200px;
   width: 100%;
 }
 
@@ -3537,7 +3539,9 @@ h1{
   justify-content: center;
   align-items: center;
   width: auto;
-  max-width: min(100%, 840px);
+  /* Η αφίσα ΚΥΡΙΑΡΧΕΙ στη σελίδα της εκπομπής — ρητή οδηγία. Η λίστα
+     των επεισοδίων ακολουθεί από κάτω. */
+  max-width: min(100%, 1180px);
   border-radius: 14px;
   overflow: hidden;
   background: var(--surface);
@@ -3550,7 +3554,10 @@ h1{
   width: auto;
   max-width: 100%;
   height: auto;
-  max-height: 480px;
+  /* Σε vh και όχι σε px: η αφίσα πιάνει τα δύο τρίτα της οθόνης όποια
+     κι αν είναι αυτή, αλλά ΠΟΤΕ ολόκληρη — από κάτω της πρέπει να
+     φαίνεται ότι αρχίζει λίστα επεισοδίων. */
+  max-height: clamp(320px, 66vh, 660px);
   aspect-ratio: auto !important;
   object-fit: cover !important;
   display: block;
@@ -4776,6 +4783,17 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
 
 @media (max-width: 900px){
   .episode-grid{ grid-template-columns: 1fr; }
+
+  /* ΕΔΩ είναι η «πολύ μεγάλη μακέτα» της σελίδας επεισοδίου.
+     Σε φαρδιά οθόνη το banner της εκπομπής ζει σε στήλη 330px και
+     βγαίνει 330×186. Μόλις οι δύο στήλες γίνουν μία, το ίδιο banner
+     απλώνεται σε ΟΛΟ το πλάτος — στα 900px γίνεται 860×484, δηλαδή
+     μισή οθόνη αφίσα κάτω από τον player. Από εδώ και κάτω κρατάει
+     το πλάτος που είχε, στο κέντρο. */
+  .side-box--show{
+    max-width: 380px;
+    margin-inline: auto;
+  }
 }
 
 /* σελίδα βίντεο — η σκηνή */
@@ -5398,6 +5416,205 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   .page-cols{ grid-template-columns: minmax(0, 1fr); }
   .page-side{ position: static; }
 }
+
+/* ---- «Must read» ----
+ *
+ * Τα κορυφαία άρθρα του κεντρικού site. Είναι η ΜΟΝΗ ενότητα της
+ * αρχικής με ορατό πλαίσιο, και αυτό είναι σκόπιμο: το περιεχόμενο
+ * δεν είναι δικό μας, φεύγει σε άλλο domain, και το κουτί το δηλώνει
+ * πριν το διαβάσει κανείς. Το κόκκινο είναι ήδη το χρώμα της είδησης
+ * (--news), οπότε δεν μπαίνει καινούργιο χρώμα στην παλέτα.
+ */
+.must{
+  width: calc(100% - 2 * var(--edge));
+  max-width: calc(var(--wrap) - 2 * var(--edge));
+  margin: 4rem auto;
+  padding: 1.9rem 1.9rem 2.1rem;
+  border: 1px solid var(--news);
+  border-radius: var(--radius);
+  position: relative;
+  /* Το κόκκινο σβήνει προς τα κάτω: συμπαγές φόντο θα έκανε τη ζώνη
+     να φωνάζει πιο δυνατά από το πρωτοσέλιδο. */
+  background:
+    linear-gradient(180deg, rgba(207, 34, 51, 0.12), rgba(207, 34, 51, 0) 240px),
+    var(--surface);
+}
+
+/* Η χοντρή γραμμή στην κορυφή. Κάθεται πάνω στο ίδιο το περίγραμμα
+   (-1px και στις τρεις πλευρές), αλλιώς έμενε μια κόκκινη γραμμή με
+   μια δεύτερη από κάτω της. */
+.must::before{
+  content: "";
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: -1px;
+  height: 4px;
+  background: var(--news);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.must-head{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-bottom: 1.4rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Το σήμα είναι ΓΡΑΦΙΚΟ, όχι επικεφαλίδα ενότητας: ο ρόλος του είναι να
+   σταματήσει το μάτι. Όλα τα μέρη του μετριούνται σε em πάνω σε αυτό το
+   ένα μέγεθος — αλλάζεις το clamp εδώ, μεγαλώνουν όλα μαζί. */
+.must-mark{
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  margin: 0;
+  flex-wrap: wrap;
+  font-size: clamp(1.35rem, 3vw, 2.2rem);
+  line-height: 1;
+}
+
+.must-word{
+  font-family: var(--sans);
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 0.1em;        /* λιγότερο από 0.2em: σε αυτό το μέγεθος
+                                   το αραιό γράμμα διαλύει τη λέξη */
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Το em δεν γέρνει — αλλάζει μόνο χρώμα, όπως και στα .mark-word. */
+.must-word em{
+  font-style: normal;
+  color: var(--news);
+}
+
+.must-by{
+  font-family: var(--sans);
+  font-size: 0.32em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  align-self: center;
+}
+
+/* Το λογότυπο του κεντρικού site. Ύψος σε em πάνω στο .must-mark, όχι σε
+   px: μεγαλώνει μαζί με τη λέξη και δεν ξεκολλάει από αυτήν.
+   Το 1.9 είναι σκόπιμα πάνω από το ύψος του γράμματος — το αρχείο έχει
+   διάφανο περιθώριο γύρω από τα γράμματα, οπότε στο ίδιο ύψος έδειχνε
+   μικρότερο από ό,τι είναι. */
+.must-logo{
+  height: 1.9em;
+  width: auto;
+  display: block;
+}
+
+.must-all{
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.must-all:hover{ color: var(--text); }
+
+.must-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+  gap: 1.75rem var(--gap);
+}
+
+.must-link{
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
+.must-media{
+  display: block;
+  position: relative;
+  aspect-ratio: 765 / 435;      /* το μόνο μέγεθος που δίνει το newshub.gr */
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--line);
+}
+
+.must-image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.must-image--empty{ display: block; }
+
+/* Η αρίθμηση. Δεν είναι διακόσμηση: λέει ότι η σειρά σημαίνει κάτι —
+   αυτό εδώ είναι το πρώτο που πρέπει να διαβαστεί. */
+.must-no{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--news);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px 0 6px 0;
+}
+
+.must-text{ display: block; }
+
+.must-cat{
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--news);
+  margin: 0.8rem 0 0.35rem;
+}
+
+.must-title{
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  margin: 0 0 0.4rem;
+  transition: color 0.2s ease;
+}
+
+.must-meta{
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.must-link:hover .must-title{ color: var(--news-hover); }
+.must-link:hover .must-image{ transform: scale(1.04); }
+
+@media (prefers-reduced-motion: reduce){
+  .must-image{ transition: none; }
+  .must-link:hover .must-image{ transform: none; }
+}
+
+@media (max-width: 700px){
+  .must{ padding: 1.5rem 1.25rem 1.75rem; }
+  .must-head{ flex-direction: column; align-items: flex-start; }
+}
+
 
 /* Το κολλητό το αναλαμβάνει πλέον η .page-side, που τρέχει σε όλο το
    ύψος της σελίδας. Εδώ μένει μόνο η εμφάνιση του κουτιού. */
