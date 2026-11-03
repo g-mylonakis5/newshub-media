@@ -3171,22 +3171,40 @@ ${chips}
   </section>`;
 }
 
+// Εξαγωγή επωνύμου και ονόματος για αλφαβητική ταξινόμηση ανά επώνυμο
+function parseGuestName(fullName) {
+  const s = String(fullName || '').trim();
+  if (s === 'Κ.Φίλης') return { surname: 'Φίλης', firstname: 'Κ.' };
+  if (s === 'Ζένια Σαριδάκη Ζώρα') return { surname: 'Σαριδάκη Ζώρα', firstname: 'Ζένια' };
+  if (s === 'Ρένα Παπαδάκη - Σκαλίδη') return { surname: 'Παπαδάκη - Σκαλίδη', firstname: 'Ρένα' };
+  if (s === 'Χρήστος Αρμ. Γκέζος') return { surname: 'Γκέζος', firstname: 'Χρήστος Αρμ.' };
+  if (s === 'Gian Andrea Paolo Garancini') return { surname: 'Garancini', firstname: 'Gian Andrea Paolo' };
+
+  const parts = s.split(/\s+/);
+  if (parts.length <= 1) return { surname: parts[0] || '', firstname: '' };
+  
+  const surname = parts[parts.length - 1];
+  const firstname = parts.slice(0, -1).join(' ');
+  return { surname, firstname };
+}
+
 function guestsIndexPage(groups){
   const people = Object.keys(groups).map((key) => {
-    const name = mostCommon(groups[key].names);
+    const rawName = mostCommon(groups[key].names);
+    const pName = parseGuestName(rawName);
     const eps = groups[key].episodes;
-    // Πορτρέτα δεν έχουμε για ΚΑΝΕΝΑΝ. Στη θέση τους το εξώφυλλο του
-    // πιο πρόσφατου επεισοδίου· όπου λείπει κι αυτό, τα αρχικά.
     const face = eps.find((ep) => ep.image);
+    const displayName = pName.firstname ? `${pName.surname} ${pName.firstname}` : pName.surname;
     return {
-      name,
-      slug: slugify(name),
+      name: rawName,
+      displayName,
+      surname: pName.surname,
+      firstname: pName.firstname,
+      slug: slugify(rawName),
       n: eps.length,
       image: face ? face.image : '',
-      letter: firstLetter(name),
-      // Για το φιλτράρισμα: πεζά χωρίς τόνους, ώστε να βρίσκει κανείς
-      // το «Συρίγος» γράφοντας «συριγ».
-      find: matchKey(name),
+      letter: firstLetter(pName.surname),
+      find: `${matchKey(pName.surname)} ${matchKey(pName.firstname)} ${matchKey(rawName)}`,
     };
   });
 
@@ -3212,7 +3230,7 @@ function guestsIndexPage(groups){
       </a>`).join('\n');
 
   // ---- όλοι αλφαβητικά ----
-  const sorted = [...people].sort((a, b) => a.name.localeCompare(b.name, 'el'));
+  const sorted = [...people].sort((a, b) => a.surname.localeCompare(b.surname, 'el') || a.firstname.localeCompare(b.firstname, 'el'));
 
   const letters = [];
   const rows = [];
@@ -3226,7 +3244,7 @@ function guestsIndexPage(groups){
           <span class="plist-pic">${p.image
             ? `<img src="${p.image}" alt="" loading="lazy">`
             : avatar(p.name)}</span>
-          <span class="plist-name">${esc(p.name)}</span>
+          <span class="plist-name">${esc(p.displayName)}</span>
           <span class="plist-n${p.n > OFTEN ? ' is-often' : ''}">${p.n}</span>
         </a>
       </li>`);
