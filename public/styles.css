@@ -664,6 +664,31 @@ h1{
 .episode-links a:hover{ border-color: var(--hover); }
 
 @media (max-width: 760px){
+  /* Μικρότερες κάρτες και εικόνες στο κινητό για λιγότερο κάθετο σκρολάρισμα */
+  .grid{
+    gap: 1.5rem var(--gap);
+  }
+
+  .card-media{
+    aspect-ratio: 16 / 9;
+    max-height: 200px;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-media .card-image{
+    object-fit: cover;
+  }
+
+  .card-title{
+    font-size: 1.05rem;
+    line-height: 1.25;
+    margin-bottom: 0.35rem;
+  }
+
+  .card-meta{
+    font-size: 0.72rem;
+  }
+
   .episode{
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -694,7 +719,7 @@ h1{
 }
 
 .site-header .strip-inner{
-  min-height: 58px;
+  min-height: 60px;
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -805,9 +830,12 @@ h1{
 
 .site-header .strip-inner{
   position: relative;
-  gap: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1rem, 2vw, 2rem);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 /* Η ΜΑΣΤΟΡΙΑ: το σήμα σε δική του γραμμή, κεντραρισμένο, μεγάλο.
@@ -845,21 +873,20 @@ h1{
    το έριχνε πάντα στραβά. Μόνο από 1100px και πάνω — πιο κάτω δεν
    χωράει και θα έπεφτε πάνω στα εικονίδια. */
 .site-header .topstrip-left{
-  flex: 1 1 0;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 1.25rem;
-  min-width: 0;
 }
 
 .topstrip-right{
-  flex: 1 1 0;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 1.4rem;
-  min-width: 0;
+  gap: 1.25rem;
+  margin-left: auto;
 }
 
 .wordmark{
@@ -905,17 +932,18 @@ h1{
 }
 
 .site-nav{
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: center;
+  gap: clamp(0.9rem, 1.4vw, 1.5rem);
   font-size: 0.84rem;
   font-weight: 700;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color:var(--muted);
-
-
+  color: var(--muted);
+  white-space: nowrap;
+  margin: 0 auto;
 }
 
 .site-nav a{
@@ -961,31 +989,27 @@ h1{
 .site-out{
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.82rem;
+  gap: 0.65rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color:var(--muted);
+  color: var(--muted);
   text-decoration: none;
-  white-space:nowrap;
-  opacity: 0.85;
-  transition: opacity var(--ease-time) var(--ease);
+  white-space: nowrap;
+  opacity: 0.9;
+  transition: opacity var(--ease-time) var(--ease), color var(--ease-time) var(--ease);
 }
 
 .site-out-logo{
   display: block;
-  /* Ήταν 2.15rem. Είναι ο σύνδεσμος προς το κεντρικό site — το σήμα
-     πρέπει να αναγνωρίζεται, όχι να ψάχνεται. */
-  height: 2.9rem;
+  height: 3.45rem;
   width: auto;
 }
 
 .site-out:hover{ color: var(--text); opacity: 1; }
 
-/* Σε στενή οθόνη μένει μόνο το σήμα: η ετικέτα «Μετάβαση στο» είναι το
-   πρώτο που περισσεύει. */
-@media (max-width: 1100px){
+@media (max-width: 1280px){
   .site-out-label{ display: none; }
 }
 
@@ -1004,6 +1028,7 @@ h1{
      οθόνη έσπρωχναν το πλάτος ΟΛΗΣ της σελίδας — στα 390px το
      περιεχόμενο κοβόταν δεξιά. */
   .site-nav{
+    margin: 0;
     order: 3;
     width: 100%;
     gap: 0.75rem 1.1rem;
@@ -1049,7 +1074,7 @@ h1{
   width: 100%;
   max-width: none;
   display: block;
-  margin: -1.5rem 0 0;
+  margin: calc(-1 * var(--header-gap)) 0 0;
   background: transparent;
 }
 
@@ -1060,9 +1085,28 @@ h1{
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: clamp(440px, 58vh, 640px);
-  min-height: 440px;
-  max-height: 640px;
+  /* Το ύψος ορίζει ΚΑΙ το πλάτος: η εικόνα είναι height:100% / width:auto,
+     οπότε μεγαλώνοντας εδώ μεγαλώνει αναλογικά και στις δύο διαστάσεις.
+     Ήταν 440-640· σε οθόνη 1080p η φωτογραφία έβγαινε 1.138px φαρδιά
+     μέσα σε 1.800 διαθέσιμα και έμενε αέρας δεξιά κι αριστερά. */
+  /* Το min() με το 100vh ΔΕΝ είναι διακοσμητικό.
+     Με σκέτο clamp(480px, 72vh, 820px) η σκηνή έβγαινε 684px και —
+     μαζί με την κεφαλίδα των 235px — έσπρωχνε τον τίτλο στα 1.029px,
+     κάτω από το fold σε laptop (768) και σε 1080p (950). Ο αναγνώστης
+     έβλεπε φωτογραφία χωρίς να ξέρει τι είναι.
+     Έτσι η εικόνα παίρνει όσο ύψος υπάρχει, αφήνοντας πάντα χώρο για
+     τον τίτλο και το «Διάβασε το άρθρο». */
+  /* Η εικόνα έχει ΠΡΟΤΕΡΑΙΟΤΗΤΑ — ρητή απαίτηση. Γεμίζει όλη την οθόνη
+     κάτω από την κεφαλίδα, και ο τίτλος πάει από κάτω: ο αναγνώστης
+     σκρολάρει λίγο για να τον διαβάσει.
+     Αυτό ήταν συνειδητή επιλογή έναντι της εναλλακτικής — να μικρύνει
+     η κεφαλίδα, που θα έθιγε το σήμα. Το σήμα μένει ως έχει.
+     Το 265 αφήνει επίτηδες μια λωρίδα να φαίνεται κάτω από την εικόνα:
+     χωρίς αυτήν, η φωτογραφία γεμίζει ακριβώς την οθόνη και τίποτα δεν
+     προδίδει ότι υπάρχει συνέχεια παρακάτω. */
+  height: clamp(560px, 75vh, 880px);
+  min-height: 520px;
+  max-height: 880px;
   background: var(--surface);
   display: flex;
   align-items: center;
@@ -1116,7 +1160,7 @@ h1{
   position: static;
   transform: none;
   left: auto;
-  width: min(calc(100% - 2 * var(--edge)), calc(clamp(440px, 58vh, 640px) * var(--ar, 1.778)), 1380px);
+  width: min(calc(100% - 2 * var(--edge)), calc(clamp(560px, 75vh, 880px) * var(--ar, 1.778)), 1440px);
   margin: 1.8rem auto 2.5rem;
   padding: 0 1rem;
   box-sizing: border-box;
@@ -1155,8 +1199,8 @@ h1{
 .hero--photo .hero-title{
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(1.45rem, 2.1vw, 2.05rem);
-  line-height: 1.26;
+  font-size: clamp(1rem, 1.3vw, 1.32rem);
+  line-height: 1.32;
   margin: 0 0 0.85rem;
   color: var(--text);
   text-shadow: none;
@@ -1226,7 +1270,7 @@ h1{
 @media (max-width: 760px){
   .hero{
     width: 100%;
-    margin-top: -1rem;
+    margin-top: calc(-1 * var(--header-gap));
   }
 
   .hero-stage,
@@ -2164,10 +2208,7 @@ h1{
 }
 
 .topic-n{
-  margin-left: 0.4rem;
-  font-size: 0.72rem;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
+  display: none !important;
 }
 
 .topic.is-on .topic-n{ color: var(--news); }
@@ -3481,64 +3522,103 @@ h1{
    οθόνη πριν φανεί ένα επεισόδιο. Το θολό υπόβαθρο (page-hero)
    γεμίζει τον υπόλοιπο χώρο. */
 .show-head{
-  display: grid;
-  grid-template-columns: 460px minmax(0, 1fr);
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 2.5rem;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto 3rem;
+  max-width: 960px;
+  width: 100%;
 }
 
 .show-head-art{
-  border-radius: var(--radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  max-width: min(100%, 840px);
+  border-radius: 14px;
   overflow: hidden;
   background: var(--surface);
-  /* Η αφίσα δεν ξεπερνά ποτέ αυτό το πλάτος, ακόμα κι αν το αρχείο
-     είναι 1600px: τέσσερις από τις επτά ήρθαν σε 426px. */
-  max-width: 460px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+  margin: 0 auto 2rem;
+}
+
+.show-head-art .show-cover,
+.show-head-art img{
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 480px;
+  aspect-ratio: auto !important;
+  object-fit: cover !important;
+  display: block;
+  background: transparent !important;
+}
+
+.show-head-text{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.show-head-text .page-label{
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin: 0 auto 0.5rem;
+  text-align: center;
 }
 
 .show-head-name{
   font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-  line-height: 1.1;
-  margin: 0 0 0.75rem;
+  font-weight: 600;
+  font-size: clamp(1.85rem, 3.4vw, 2.6rem);
+  line-height: 1.22;
+  margin: 0 auto 0.85rem;
+  color: var(--text);
+  text-align: center;
+  max-width: 760px;
 }
 
-/* Η περιγραφή της εκπομπής, από το YouTube. */
 .show-about{
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--read);
-  max-width: 52ch;
-  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  line-height: 1.68;
+  color: var(--muted);
+  max-width: 68ch;
+  margin: 0 auto 0.75rem;
+  text-align: center;
 }
 
-/* Οι επόμενες γραμμές της περιγραφής — συνήθως «Παρουσίαση: Όνομα».
-   Χωριστή παράγραφος, πιο σβηστή: δεν είναι μέρος του κειμένου. */
 .show-credit{
-  font-size: 0.88rem;
-  line-height: 1.6;
-  color: var(--muted);
-  max-width: 52ch;
-  margin: -0.5rem 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--sky);
+  font-weight: 500;
+  max-width: 68ch;
+  margin: 0 auto 0.85rem;
+  text-align: center;
 }
 
 .show-head-line{
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 0;
+  margin: 0.25rem auto 0;
+  text-align: center;
 }
 
 @media (max-width: 860px){
-  .show-head{
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
-    margin-bottom: 2rem;
-  }
-  .show-head-art{ max-width: none; }
+  .show-head{ margin-bottom: 2rem; }
 }
 
 /* Κείμενο που διαβάζεται αλλά δεν φαίνεται: ο τίτλος της εκπομπής
@@ -5479,4 +5559,113 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   }
 
   .ad{ margin: 2.5rem auto; }
+}
+
+/* Επικεφαλίδα εκπομπών αρχικής: σηματάκι από πάνω και κείμενο στο κέντρο */
+.spot-head--center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto 2.25rem;
+  gap: 0.35rem;
+}
+
+.spot-head--center .spot-sign{
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  margin: 0 auto 0.5rem;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+}
+
+.spot-head--center .spot-title{
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.spot-head--center .spot-sub{
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0.2rem 0 0.6rem;
+}
+
+.spot-head--center .spot-all{
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--sky);
+  text-decoration: none;
+  transition: color var(--ease-time) var(--ease);
+}
+
+.spot-head--center .spot-all:hover{
+  color: var(--text);
+}
+
+/* Νέο Newshub Multimedia logo στη σελίδα εκπομπών */
+.shows-open-logo{
+  display: block;
+  height: clamp(3.2rem, 6vw, 4.5rem);
+  width: auto;
+  margin: 0.75rem auto 0.5rem;
+}
+
+/* Banner εκπομπής στην πλαϊνή στήλη του player */
+.side-box--show{
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  margin-bottom: 1.25rem;
+  transition: transform var(--ease-time) var(--ease), box-shadow var(--ease-time) var(--ease);
+}
+
+.side-box--show:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.side-show-link{
+  display: block;
+  line-height: 0;
+}
+
+.side-show-art{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+
+/* Logo πολυμέσων στην επικεφαλίδα εκπομπών */
+.spot-title-logo{
+  display: inline-block;
+  vertical-align: middle;
+  height: clamp(2.4rem, 4vw, 3.2rem) !important;
+  max-height: 56px !important;
+  width: auto !important;
+  max-width: 300px !important;
+  margin-left: 0.6rem;
+  object-fit: contain;
+}
+
+.spot-head--center .shows-wave{
+  width: min(18rem, 65%);
+  height: 2.2rem;
+  margin: 0 auto 0.6rem;
+  color: var(--sky);
 }

@@ -8,7 +8,7 @@ const EPISODE_DIR = path.join(PUBLIC_DIR, 'episode');
 const GUEST_DIR = path.join(PUBLIC_DIR,'guest');
 // Πόσες κάρτες φαίνονται στη ροή της αρχικής. Κρατιέται μικρή επίτηδες:
 // από κάτω υπάρχει σύνδεσμος για ολόκληρο το αρχείο.
-const HOW_MANY = 8;
+const HOW_MANY = 9;
 const CURATION_FILE = path.join(__dirname, 'data/curation.json');
 const NEWS_FILE = path.join(__dirname, 'data/news.json');
 const VIDEO_FILE = path.join(__dirname, 'data/videos.json');
@@ -1291,6 +1291,7 @@ ${queue}
 
       <aside class="episode-side">
 ${gbox}
+${showBannerBox(v.show, 1)}
 
         <div class="side-box">
           <p class="side-head">Άκου ή δες όπου θέλεις</p>
@@ -1452,6 +1453,44 @@ const SHOW_NAME = {
 
 function showName(raw){
   return SHOW_NAME[raw] || raw;
+}
+
+// Η σειρά με την οποία βγαίνουν οι εκπομπές στην αρχική και στη σελίδα
+// «Εκπομπές». Μέχρι τώρα ήταν κατά πλήθος επεισοδίων — ο αριθμός όμως
+// δεν λέει τι είναι σημαντικό για το site. Η σειρά είναι συντακτική
+// απόφαση, όχι στατιστικό, και γράφεται εδώ.
+//
+// Τα ονόματα μπαίνουν ΑΚΡΙΒΩΣ όπως έρχονται από το YouTube και γίνονται
+// slug, ώστε να μη σπάσει τίποτα αν κάποιος γράψει τόνο διαφορετικά.
+// Ό,τι δεν είναι στη λίστα βγαίνει μετά, με το παλιό κριτήριο.
+const SHOW_ORDER = [
+  'Συνεντεύξεις και πρόσωπα της επικαιρότητας',
+  'Αναλύσεις στο Newshub.gr',
+  'Επίκαιρα στο Newshub.gr',
+  'Αντίλογος στο Newshub.gr',
+  'Υγεία και Επιστήμες',
+  'Παρασκήνιο',
+  'Ιστορία στο newshub.gr',
+  'Αφιερώματα',
+  'Ιστορίες του Ηρακλείου',
+  'Εξ Απορρήτων',
+  'Τα μονοπάτια ιστορίας του Newshub.gr',
+].map(slugify);
+
+// Εκπομπές που ΔΕΝ εμφανίζονται στις λίστες. Η σελίδα τους εξακολουθεί
+// να χτίζεται και οι παλιοί σύνδεσμοι δουλεύουν — απλώς δεν τη δείχνουμε
+// πουθενά. Έτσι, αν το αφεντικό το ξανασκεφτεί, είναι μία γραμμή πίσω.
+const SHOW_HIDDEN = ['Αγροτική επικαιρότητα'].map(slugify);
+
+function orderedShowKeys(groups){
+  const rank = (k) => {
+    const i = SHOW_ORDER.indexOf(k);
+    return i === -1 ? SHOW_ORDER.length : i;
+  };
+
+  return Object.keys(groups)
+    .filter((k) => !SHOW_HIDDEN.includes(k))
+    .sort((a, b) => rank(a) - rank(b) || groups[b].items.length - groups[a].items.length);
 }
 
 function showLabel(name){
@@ -1690,12 +1729,11 @@ function showArtImg(name, { depth = 0, sizes, cls = '', eager = false, minWidth 
 }
 
 function showsSection(groups, depth = 0){
-  const keys = Object.keys(groups);
+  const keys = orderedShowKeys(groups);
   if (!keys.length) return '';
 
   const up = depth === 0 ? '' : '../';
-  const cards = keys
-    .sort((a, b) => groups[b].items.length - groups[a].items.length)
+  const cards = orderedShowKeys(groups)
     .map((key) => {
       const g = groups[key];
       const latest = g.items[0];
@@ -1734,15 +1772,10 @@ function showsSection(groups, depth = 0){
   // απαντούν στο ίδιο ερώτημα — «τι ακούω και πού». Χωριστά, ο κόσμος
   // έβλεπε τις εκπομπές και έφτανε στις πλατφόρμες τρεις ενότητες μετά.
   return `  <section class="spot spot--pod">
-    <header class="spot-head">
-      <span class="spot-icon">${micIcon()}</span>
-      <div class="spot-text">
-        <h2 class="spot-title">
-          <span class="spot-eyebrow">Οι εκπομπές του</span>
-          <img class="spot-logo" src="${up}shows/logo-full-dark.png" alt="Newshub Media" width="1920" height="640" loading="lazy">
-        </h2>
-        <p class="spot-sub">${keys.length} εκπομπές, νέο επεισόδιο σχεδόν κάθε μέρα</p>
-      </div>
+    <header class="spot-head spot-head--center">
+      ${waveform()}
+      <h2 class="spot-title">Οι εκπομπές του <img class="spot-title-logo" src="${up}shows/logo-inline.png" alt="Newshub Multimedia" width="1764" height="331" style="height: 3.2rem; max-height: 56px; width: auto; max-width: 300px; display: inline-block; vertical-align: middle; margin-left: 0.6rem; object-fit: contain;" loading="lazy"></h2>
+      <p class="spot-sub">${keys.length} εκπομπές, νέο επεισόδιο σχεδόν κάθε μέρα</p>
       <a class="spot-all" href="${up}shows.html">Όλες οι εκπομπές →</a>
     </header>
 
@@ -2216,7 +2249,7 @@ function topicStrip(groups){
   const chips = keys.map((key) => {
     const g = groups[key];
     const n = g.items.length.toLocaleString('el');
-    return `        <a class="topic" href="${categoryUrl(g.name)}" data-topic="${key}" data-name="${esc(g.name)}" data-count="${n}">${esc(g.name)}<span class="topic-n">${n}</span></a>`;
+    return `        <a class="topic" href="${categoryUrl(g.name)}" data-topic="${key}" data-name="${esc(g.name)}" data-count="${n}">${esc(g.name)}</a>`;
   }).join('\n');
 
   // Χωρίς ορατή ετικέτα «Θέματα» μπροστά: οι ίδιες οι ετικέτες λένε τι
@@ -2500,8 +2533,7 @@ function rateLine(s){
 }
 
 function showsIndexPage(groups){
-  const keys = Object.keys(groups)
-    .sort((a, b) => groups[b].items.length - groups[a].items.length);
+  const keys = orderedShowKeys(groups);
 
   const total = keys.reduce((sum, k) => sum + groups[k].items.length, 0);
 
@@ -2550,7 +2582,7 @@ ${breadcrumb([
   <header class="shows-open">
     ${waveform()}
     <h1 class="shows-open-title">Εκπομπές</h1>
-    <p class="shows-open-by">του ${nhLogo()}</p>
+    <p class="shows-open-by"><img class="shows-open-logo" src="shows/logo-full-dark.png" alt="Newshub Multimedia" width="1920" height="640" loading="lazy"></p>
     <p class="shows-open-count">${keys.length} εκπομπές · ${total.toLocaleString('el')} επεισόδια σε ήχο και βίντεο</p>
   </header>
 
@@ -2603,7 +2635,7 @@ function showPage(group, n = 1){
     // Χωρίς αυτήν το height="900" του attribute κόβει την αφίσα.
     cls: 'show-cover',
     // Το πλάτος της αφίσας, κλειδωμένο από το CSS — δες .show-head-art.
-    sizes: '(max-width: 760px) 92vw, 460px',
+    sizes: '(max-width: 760px) 96vw, 840px',
     eager: true,
     minWidth: 360,
   });
@@ -2615,9 +2647,7 @@ function showPage(group, n = 1){
     ? `    <header class="show-head">
       <div class="show-head-art">${art}</div>
       <div class="show-head-text">
-        ${titled
-          ? `<h1 class="only-read">${name}</h1>`
-          : `<p class="page-label">Εκπομπή</p>\n        <h1 class="show-head-name">${name}</h1>`}
+        <p class="page-label">Εκπομπή</p>\n        <h1 class="show-head-name">${name}</h1>
         ${about.map((line, i) => i === 0
           ? `<p class="show-about">${esc(clip(line, 260))}</p>`
           : `<p class="show-credit">${esc(clip(line, 120))}</p>`).join('\n        ')}
@@ -3030,7 +3060,7 @@ function searchPage(episodes, catGroups){
         <span class="cat-count">${catGroups[k].items.length.toLocaleString('el')}</span>
       </a>`).join('\n');
 
-  const latest = (episodes || []).slice(0, 8).map((ep) => episodeCard(ep)).join('\n');
+  const latest = (episodes || []).slice(0, 9).map((ep) => episodeCard(ep)).join('\n');
 
   const body = `${siteHeader()}
 
@@ -3524,6 +3554,26 @@ function guestPanel(name, href, count = 0, last = ''){
 }
 
 // Για επεισόδιο: ο καλεσμένος είναι γραμμένος στο ίδιο το πεδίο.
+
+// Banner εκπομπής στην πλαϊνή στήλη του player / επεισοδίου.
+// Οδηγεί κατευθείαν στη σελίδα της εκπομπής.
+function showBannerBox(show, depth = 1){
+  const targetShow = show || 'Συνεντεύξεις και πρόσωπα της επικαιρότητας';
+  const up = depth === 0 ? '' : '../';
+  const art = showArtImg(targetShow, {
+    depth,
+    cls: 'side-show-art',
+    sizes: '(max-width: 760px) 100vw, 360px',
+    minWidth: 200,
+  });
+  if (!art) return '';
+  return `        <div class="side-box side-box--show">
+          <a class="side-show-link" href="${up}${showUrl(targetShow)}" title="Μετάβαση στην εκπομπή ${esc(showName(targetShow))}">
+            ${art}
+          </a>
+        </div>`;
+}
+
 function guestBox(ep, depth = 1){
   const name = guestOf(ep);
   if (!name) return '';
@@ -3796,6 +3846,8 @@ ${queue}
 
       <aside class="episode-side">
 ${guestBox(ep, 1)}
+${showBannerBox(show, 1)}
+
 
         <div class="side-box">
           <p class="side-head">Άκου ή δες όπου θέλεις</p>
@@ -3897,8 +3949,8 @@ function main(){
   };
 
   for (const ep of episodes) {
-    if (flow.length >= HOW_MANY) break;
     pushFlow(itemFromEpisode(ep));
+    if (flow.length >= 9) break;
   }
 
   for (const key of Object.keys(catGroups)) {
@@ -4182,6 +4234,33 @@ console.log(`Σελίδες επεισοδίου: ${written} γράφτηκαν,
   console.log(`Απομαγνητοφωνήσεις: ${expectedTr.size} συνολικά, ${trWritten} γράφτηκαν, ${trRemoved} σβήστηκαν`);
 console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτηκαν, ${guestsRemoved} σβήστηκαν`);
 
+  // ---- το διαχειριστικό ----
+  //
+  // Ο πηγαίος κώδικάς του ζει στο admin/ και αντιγράφεται εδώ. ΔΕΝ
+  // γράφεται κατευθείαν στο public/, γιατί το .gitignore πετάει όλο το
+  // public/ ως παραγόμενο — ό,τι έμπαινε εκεί χανόταν στο επόμενο
+  // deployment. Αντιγραφή, όχι μετακίνηση: το admin/ μένει η πηγή.
+  const ADMIN_SRC = path.join(__dirname, 'admin');
+  const ADMIN_OUT = path.join(PUBLIC_DIR, 'admin');
+  let adminFiles = 0;
+
+  if (fs.existsSync(ADMIN_SRC)) {
+    fs.mkdirSync(ADMIN_OUT, { recursive: true });
+    for (const file of fs.readdirSync(ADMIN_SRC)) {
+      const from = path.join(ADMIN_SRC, file);
+      if (!fs.statSync(from).isFile()) continue;
+      const to = path.join(ADMIN_OUT, file);
+      const next = fs.readFileSync(from);
+      // Γράφουμε μόνο ό,τι άλλαξε: αλλιώς το publish.js νομίζει πως
+      // πειράχτηκαν σελίδες και ξαναχτίζει το ευρετήριο για το τίποτα.
+      if (!fs.existsSync(to) || !fs.readFileSync(to).equals(next)) {
+        fs.writeFileSync(to, next);
+        adminFiles++;
+      }
+    }
+    console.log(`Διαχειριστικό: ${adminFiles} αρχεία αντιγράφηκαν`);
+  }
+
   // Πόσα αρχεία πειράχτηκαν συνολικά. Το χρειάζεται το publish.js για να
   // αποφασίσει αν αξίζει να ξαναφτιαχτεί το ευρετήριο αναζήτησης.
   // Το «writes» μετράει τις μοναδικές σελίδες — αρχική, θέματα, αρχείο,
@@ -4189,7 +4268,7 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
   // στο ευρετήριο αναζήτησης.
   return written + removed + guestsWritten + guestsRemoved
     + showsWritten + showsRemoved + videosWritten + videosRemoved
-    + catsWritten + catsRemoved + writes;
+    + catsWritten + catsRemoved + writes + adminFiles;
 }
 
 // Τρέχει μόνο του όταν το καλείς κατευθείαν (node build.js). Όταν το

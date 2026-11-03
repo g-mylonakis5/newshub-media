@@ -48,3 +48,8 @@ npm-debug.log*
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Οι φωτογραφίες που ανεβάζουν οι δημοσιογράφοι. ΔΕΝ μπαίνουν στο git:
+# τα binary μένουν στο ιστορικό για πάντα και το Cloudflare Pages δέχεται
+# 20.000 αρχεία — το public/ έχει ήδη 9.726. Στον αέρα ζουν σε R2.
+uploads/

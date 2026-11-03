@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Διαχειριστικό — Newshub Multimedia</title>
+
+<!-- Το διαχειριστικό ΔΕΝ μπαίνει στη Google. Είναι εσωτερικό εργαλείο. -->
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400..900&family=Source+Serif+4:wght@400..600&display=swap">
+<link rel="stylesheet" href="admin.css">
+</head>
+<!-- data-pagefind-ignore: το Pagefind σαρώνει ΟΛΟ το public/ και χωρίς
+     αυτό τα λόγια του διαχειριστικού θα έβγαιναν στην αναζήτηση του
+     site. Το noindex κρατάει έξω τη Google, αυτό τη δική μας. -->
+<body data-pagefind-ignore>
+
+<header class="top">
+  <a class="brand" href="../index.html" target="_blank" rel="noopener">
+    <img src="../shows/logo-icon.png" alt="" width="512" height="512">
+    <span>Διαχειριστικό</span>
+  </a>
+
+  <!-- Η κατάσταση αποθήκευσης. Οι δημοσιογράφοι έρχονται από εργαλείο
+       όπου η αλλαγή είναι ακαριαία· εδώ περνούν ~2 λεπτά μέχρι να
+       χτιστεί το site. Αν δεν το πει κάποιος καθαρά, θα νομίζουν ότι
+       χάθηκε η δουλειά τους και θα την ξανακάνουν. -->
+  <p class="state" data-state hidden></p>
+
+  <nav class="who">
+    <span data-who>τοπικά</span>
+  </nav>
+</header>
+
+<div class="shell">
+  <nav class="side">
+    <a class="tab is-on" href="#proto" data-tab="proto">Πρωτοσέλιδο</a>
+    <a class="tab" href="#arthra" data-tab="arthra">Άρθρα</a>
+    <a class="tab" href="#fotos" data-tab="fotos">Φωτογραφίες</a>
+    <a class="tab" href="#katigories" data-tab="katigories">Κατηγορίες</a>
+    <a class="tab" href="#prosopa" data-tab="prosopa">Πρόσωπα</a>
+    <a class="tab" href="#ekpompes" data-tab="ekpompes">Εκπομπές</a>
+  </nav>
+
+  <main class="work">
+
+    <!-- ========== ΠΡΩΤΟΣΕΛΙΔΟ ========== -->
+    <section class="panel is-on" data-panel="proto">
+      <header class="panel-head">
+        <div>
+          <h1>Πρωτοσέλιδο</h1>
+          <p class="hint">Τι βλέπει πρώτο όποιος ανοίγει το site.</p>
+        </div>
+        <button type="button" class="btn btn--go" data-save="curation" disabled>Αποθήκευση</button>
+      </header>
+
+      <!-- Η τρέχουσα επιλογή, μεγάλη. Πρώτα ΤΙ ισχύει τώρα, μετά η
+           αλλαγή: αλλιώς ο συντάκτης διαλέγει χωρίς να ξέρει τι χαλάει. -->
+      <div class="now" data-now-featured>
+        <p class="now-label">Τώρα στο πρωτοσέλιδο</p>
+        <div class="now-body" data-now-body>
+          <p class="muted">Φόρτωση…</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="until">Ισχύει μέχρι</label>
+        <input type="date" id="until" data-until>
+        <p class="hint">
+          Μετά από αυτή την ημερομηνία το πρωτοσέλιδο γυρίζει μόνο του στο
+          πιο πρόσφατο. Δικλείδα: χωρίς αυτό, μια ξεχασμένη επιλογή παγώνει
+          την αρχική για μήνες.
+        </p>
+      </div>
+
+      <h2 class="sub">Διάλεξε τι μπαίνει μεγάλο</h2>
+
+      <div class="tools">
+        <input type="search" class="find" data-find placeholder="Βρες τίτλο, καλεσμένο, εκπομπή…"
+               aria-label="Αναζήτηση">
+        <div class="chips" data-kind-filter>
+          <button type="button" class="chip is-on" data-kind="">Όλα</button>
+          <button type="button" class="chip" data-kind="podcast">Podcast</button>
+          <button type="button" class="chip" data-kind="video">Βίντεο</button>
+          <button type="button" class="chip" data-kind="news">Ειδήσεις</button>
+        </div>
+      </div>
+
+      <div class="picks" data-picks>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+
+      <p class="more">
+        <button type="button" class="btn btn--ghost" data-more hidden>Δείξε περισσότερα</button>
+      </p>
+    </section>
+
+    <!-- ========== ΟΙ ΥΠΟΛΟΙΠΕΣ — έρχονται ========== -->
+    <section class="panel" data-panel="arthra">
+      <header class="panel-head"><div><h1>Άρθρα</h1>
+        <p class="hint">Σύνταξη άρθρου με κείμενο, φωτογραφίες και ενσωματωμένο ηχητικό ή βίντεο.</p></div></header>
+      <p class="soon">Έρχεται. Σειρά: μετά το πρωτοσέλιδο και τις κατηγορίες.</p>
+    </section>
+
+    <section class="panel" data-panel="fotos">
+      <header class="panel-head">
+        <div>
+          <h1>Φωτογραφίες</h1>
+          <p class="hint">Σύρε τις εδώ ή διάλεξε αρχεία. Σμικρύνονται μόνες τους πριν ανέβουν.</p>
+        </div>
+      </header>
+
+      <!-- Η ζώνη ρίψης. Δέχεται και σύρσιμο και κλικ: ο ένας συντάκτης
+           σέρνει από τον φάκελο, ο άλλος ψάχνει κουμπί. -->
+      <div class="drop" data-drop tabindex="0" role="button"
+           aria-label="Ανέβασμα φωτογραφιών">
+        <p class="drop-big">Σύρε φωτογραφίες εδώ</p>
+        <p class="hint">ή πάτησε για να διαλέξεις · JPG, PNG, WebP</p>
+        <input type="file" accept="image/*" multiple hidden data-file>
+      </div>
+
+      <p class="state state--inline" data-upload hidden></p>
+
+      <h2 class="sub">Η βιβλιοθήκη</h2>
+      <div class="shots" data-shots>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="katigories">
+      <header class="panel-head"><div><h1>Κατηγορίες</h1>
+        <p class="hint">Διόρθωσε την κατηγορία ενός επεισοδίου όπου η αυτόματη πέφτει έξω.</p></div></header>
+      <p class="soon">Έρχεται.</p>
+    </section>
+
+    <section class="panel" data-panel="prosopa">
+      <header class="panel-head"><div><h1>Πρόσωπα</h1>
+        <p class="hint">Ένωσε διπλοεγγραφές, σβήσε ό,τι δεν είναι άνθρωπος, βάλε ιδιότητα.</p></div></header>
+      <p class="soon">Έρχεται.</p>
+    </section>
+
+    <section class="panel" data-panel="ekpompes">
+      <header class="panel-head"><div><h1>Εκπομπές</h1>
+        <p class="hint">Ονόματα, περιγραφές, αφίσες.</p></div></header>
+      <p class="soon">Έρχεται.</p>
+    </section>
+
+  </main>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
