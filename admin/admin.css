@@ -1,0 +1,430 @@
+/* admin.css — το διαχειριστικό.
+ *
+ * ΞΕΧΩΡΙΣΤΟ από το styles.css του site, επίτηδες. Το site είναι φτιαγμένο
+ * για ανάγνωση: πολύς αέρας, λίγα στοιχεία ανά οθόνη. Ένα εργαλείο
+ * δουλειάς θέλει το αντίθετο — πυκνό, γρήγορο, πολλά μπροστά στα μάτια.
+ * Μοιράζονται μόνο τα χρώματα και τις γραμματοσειρές, ώστε να μη μοιάζει
+ * ξένο σώμα.
+ */
+
+:root{
+  --bg: #0A1322;
+  --surface: #111E31;
+  --raise: #16263F;
+  --line: #1D2D44;
+  --text: #EDF1F6;
+  --muted: #8A95A6;
+  --news: #CF2233;
+  --audio: #D9A441;
+  --sky: #3E96CE;
+  --ok: #2E9E6B;
+
+  --serif: "Source Serif 4", Georgia, serif;
+  --sans: "Commissioner", system-ui, sans-serif;
+
+  --radius: 8px;
+  --top: 56px;
+
+  color-scheme: dark;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ---- πάνω μπάρα ---- */
+
+.top{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: var(--top);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 1.25rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.brand img{ width: 26px; height: 26px; }
+
+.who{ margin-left: auto; color: var(--muted); font-size: 0.8rem; }
+
+/* Η κατάσταση αποθήκευσης. Τρεις μορφές: δουλεύει / έγινε / χάλασε. */
+.state{
+  margin: 0;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--raise);
+  color: var(--muted);
+}
+
+.state[data-kind="ok"]{ background: rgba(46,158,107,0.18); color: #7BD9AC; }
+.state[data-kind="bad"]{ background: rgba(207,34,51,0.18); color: #FF9AA5; }
+
+/* ---- σκελετός ---- */
+
+.shell{
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  min-height: calc(100vh - var(--top));
+}
+
+.side{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.6rem;
+  gap: 0.15rem;
+  border-right: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.tab{
+  padding: 0.55rem 0.8rem;
+  border-radius: var(--radius);
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.tab:hover{ background: var(--raise); color: var(--text); }
+.tab.is-on{ background: var(--raise); color: var(--text); }
+
+.work{ padding: 1.5rem 1.75rem 5rem; max-width: 1100px; }
+
+.panel{ display: none; }
+.panel.is-on{ display: block; }
+
+.panel-head{
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.panel-head h1{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+.sub{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 2rem 0 0.8rem;
+}
+
+.hint{ margin: 0.2rem 0 0; color: var(--muted); font-size: 0.85rem; }
+.muted{ color: var(--muted); }
+.soon{ color: var(--muted); font-style: italic; }
+
+/* ---- κουμπιά ---- */
+
+.btn{
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--raise);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled){ border-color: var(--sky); }
+
+.btn:disabled{ opacity: 0.4; cursor: default; }
+
+.btn--go{ margin-left: auto; background: var(--news); border-color: var(--news); }
+.btn--go:hover:not(:disabled){ background: #E0394A; border-color: #E0394A; }
+
+.btn--ghost{ background: transparent; }
+
+/* ---- τι ισχύει τώρα ---- */
+
+.now{
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  margin-bottom: 1.25rem;
+}
+
+.now-label{
+  margin: 0 0 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.now-body{ display: flex; gap: 1rem; align-items: center; }
+
+.now-body img{
+  width: 150px;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 6px;
+  flex: none;
+  background: var(--raise);
+}
+
+.now-title{ margin: 0 0 0.25rem; font-family: var(--serif); font-size: 1.05rem; font-weight: 600; }
+.now-meta{ margin: 0; font-size: 0.8rem; color: var(--muted); }
+
+/* ---- πεδία ---- */
+
+.field{ margin-bottom: 1.25rem; max-width: 460px; }
+
+.field label{
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.field input{
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.field input:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
+
+/* ---- εργαλεία αναζήτησης ---- */
+
+.tools{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.find{
+  flex: 1;
+  min-width: 220px;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.find:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
+
+.chips{ display: flex; gap: 0.3rem; }
+
+.chip{
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chip:hover{ color: var(--text); }
+.chip.is-on{ background: var(--raise); color: var(--text); border-color: var(--sky); }
+
+/* ---- η λίστα επιλογής ---- */
+
+.picks{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 0.8rem;
+}
+
+.pick{
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 0.8rem;
+  padding: 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: left;
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.pick:hover{ border-color: var(--sky); }
+
+/* Η τρέχουσα επιλογή ξεχωρίζει: αλλιώς ο συντάκτης ξαναδιαλέγει αυτό
+   που ήδη ισχύει και νομίζει ότι άλλαξε κάτι. */
+.pick.is-on{ border-color: var(--news); background: var(--raise); }
+
+.pick img{
+  width: 110px;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 5px;
+  background: var(--raise);
+}
+
+/* block, όχι inline: είναι <span> μέσα σε <button> επειδή ένα <button>
+   δεν επιτρέπεται να περιέχει <p>. Χωρίς αυτό η ταμπέλα «ΕΙΔΗΣΗ»
+   κολλούσε στο τέλος του τίτλου αντί να πάει στη γραμμή από κάτω. */
+.pick-title,
+.pick-meta{ display: block; }
+
+.pick-title{
+  margin: 0 0 0.2rem;
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.pick-meta{ margin: 0; font-size: 0.76rem; color: var(--muted); }
+
+/* Η ταμπέλα του είδους. Ίδιος κώδικας χρώματος με το site: κόκκινο
+   είδηση, κίτρινο ήχος — ώστε να μη μαθαίνουν δεύτερο σύστημα. */
+.tag{
+  display: inline-block;
+  margin-right: 0.4rem;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tag--news{ color: var(--news); }
+.tag--podcast{ color: var(--audio); }
+.tag--video{ color: var(--sky); }
+
+.more{ margin: 1.25rem 0 0; text-align: center; }
+
+/* ---- φωτογραφίες ---- */
+
+.drop{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  min-height: 140px;
+  padding: 1.5rem;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  text-align: center;
+}
+
+.drop:hover,
+.drop:focus-visible{ border-color: var(--sky); outline: none; }
+
+/* Όσο κρατάς αρχείο από πάνω. Χωρίς αυτό ο συντάκτης δεν ξέρει αν η
+   σελίδα κατάλαβε το σύρσιμο και αφήνει το αρχείο στο κενό. */
+.drop.is-over{ border-color: var(--sky); background: var(--raise); }
+
+.drop-big{
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.state--inline{ display: inline-block; margin: 0.8rem 0 0; }
+
+.shots{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(170px, 100%), 1fr));
+  gap: 0.8rem;
+}
+
+.shot{
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.shot img{
+  display: block;
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.shot-name{
+  display: block;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.72rem;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shot-day{ color: var(--muted); }
+
+/* Κουμπί αντιγραφής διεύθυνσης — φαίνεται στο hover, και πάντα σε
+   οθόνη αφής όπου δεν υπάρχει hover. */
+.shot-copy{
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(10,19,34,0.85);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.shot:hover .shot-copy,
+.shot-copy:focus-visible{ opacity: 1; }
+
+@media (hover: none){
+  .shot-copy{ opacity: 1; }
+}
+
+@media (max-width: 760px){
+  .shell{ grid-template-columns: 1fr; }
+  .side{ flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .work{ padding: 1rem; }
+}
