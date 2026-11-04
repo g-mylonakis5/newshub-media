@@ -18,6 +18,12 @@ const ALIAS_FILE = path.join(__dirname, 'data/people-aliases.json');
 const SHOW_ART_FILE = path.join(__dirname, 'data/show-art.json');
 const SHOWS_FILE = path.join(__dirname, 'data/shows.json');
 const SHOW_DIR = path.join(PUBLIC_DIR, 'show');
+const ARTICLE_DIR = path.join(PUBLIC_DIR, 'arthro');
+// Τα σώματα των ειδήσεων του newshub.gr. ΔΕΝ είναι το data/articles.json
+// — εκείνο το γράφει το διαχειριστικό και κρατάει τα δικά μας άρθρα.
+const NEWS_BODY_DIR = path.join(__dirname, 'data/news-bodies');
+// Τα δικά μας άρθρα, γραμμένα στο διαχειριστικό.
+const OWN_ARTICLES_FILE = path.join(__dirname, 'data/articles.json');
 const VIDEO_DIR = path.join(PUBLIC_DIR, 'video');
 const CATEGORY_DIR = path.join(PUBLIC_DIR, 'category');
 
@@ -244,7 +250,7 @@ function assetVersion(name){
   return stamps[name] ? `?v=${stamps[name]}` : '';
 }
 
-function page({ title, body, depth = 0, scripts = [], description = '', image = '', url = '', type = 'website', prev = '', next = '' }){
+function page({ title, body, depth = 0, scripts = [], description = '', image = '', url = '', type = 'website', prev = '', next = '', canonical = '' }){
   const up = depth === 0 ? '' : '../';
   // Ο player φορτώνει ΠΑΝΤΟΥ: κρατάει τον ήχο ζωντανό και αναλαμβάνει την
   // πλοήγηση, οπότε πρέπει να υπάρχει και στις σελίδες που δεν παίζουν ήχο.
@@ -258,6 +264,12 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   const full = `${SITE_URL}/${url}`;
   const pic = image || `${SITE_URL}/intro.jpg`;
 
+  // Το canonical δείχνει κανονικά στη ΔΙΚΗ μας διεύθυνση. Εξαίρεση: οι
+  // σελίδες άρθρων του newshub.gr, που δηλώνουν πρωτότυπο το δικό τους.
+  // Έτσι ο αναγνώστης διαβάζει εδώ, αλλά η Google μετράει την αξία εκεί
+  // — αυτός είναι όλος ο σκοπός, το SEO του newshub.gr.
+  const canon = canonical || full;
+
   return `<!DOCTYPE html>
 <html lang="el">
 <head>
@@ -265,7 +277,7 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title}</title>
   <meta name="description" content="${desc}">
-  <link rel="canonical" href="${full}">
+  <link rel="canonical" href="${canon}">
 ${prev ? `  <link rel="prev" href="${SITE_URL}/${prev}">\n` : ''}${next ? `  <link rel="next" href="${SITE_URL}/${next}">\n` : ''}
   <!-- Η κάρτα που εμφανίζεται όταν μοιράζεται ο σύνδεσμος.
        Ο τίτλος φτάνει εδώ ήδη περασμένος από esc() — δεν τον ξαναπερνάμε,
@@ -830,11 +842,49 @@ function itemFromVideo(v){
   };
 }
 
+// ---- Τα άρθρα του newshub.gr που ανοίγουν ΕΔΩ ----
+//
+// Οδηγία του αφεντικού, 4 Νοεμβρίου: όσα άρθρα ανεβαίνουν στο Media
+// channel — τα must read και το πρωτοσέλιδο όταν είναι είδηση —
+// ανοίγουν σε δική μας σελίδα, με backlink προς το newshub.gr. Η ροή
+// ειδήσεων στο πλάι ΔΕΝ αλλάζει: εκείνη οδηγεί στο newshub.gr.
+//
+// Σελίδα παίρνει μόνο όποιο άρθρο έχει σώμα στο data/news-bodies/. Το
+// γράφει το fetch-news.js, και μόνο για όσα μπορεί να χρειαστούν.
+// Χωρίς σώμα, το άρθρο μένει εξωτερικός σύνδεσμος — ποτέ μισοάδεια
+// σελίδα, που θα έκανε ακριβώς το αντίθετο για το SEO.
+const bodyCache = new Map();
+function articleBody(id){
+  if (bodyCache.has(id)) return bodyCache.get(id);
+
+  let body = null;
+  try {
+    const raw = JSON.parse(fs.readFileSync(path.join(NEWS_BODY_DIR, `${id}.json`), 'utf8'));
+    if (Array.isArray(raw.body) && raw.body.length >= 2) body = raw.body;
+  } catch (err) {
+    if (err.code !== 'ENOENT') {
+      console.warn(`ΠΡΟΣΟΧΗ: το data/news-bodies/${id}.json δεν διαβάζεται —`, err.message);
+    }
+  }
+
+  bodyCache.set(id, body);
+  return body;
+}
+
+function articleUrl(a){
+  return `arthro/${a.id}.html`;
+}
+
 function itemFromArticle(a){
+  const mine = !!articleBody(a.id);
+
   return {
     kind: 'news',
-    href: a.url,
-    external: true,                 // ζει στο newshub.gr, όχι εδώ
+    href: mine ? articleUrl(a) : a.url,
+    // Η διεύθυνση στο newshub.gr μένει μαζί, ώστε να αναγνωρίζεται η
+    // χειροκίνητη επιλογή του συντάκτη όπως κι αν τη γράψει.
+    source: a.url,
+    external: !mine,                // χωρίς σώμα, ζει μόνο στο newshub.gr
     label: a.category || '',
     name: '',
     title: a.title,
@@ -1003,6 +1053,105 @@ function loadNews(){
   }
 }
 
+// ---- Τα ΔΙΚΑ ΜΑΣ άρθρα ----
+//
+// Γράφονται στο διαχειριστικό και ζουν στο data/articles.json. Δεν
+// υπάρχουν πουθενά αλλού: κανένα feed, καμία πηγή, μόνο εδώ. Γι' αυτό
+// και σε όλα διαφέρουν από τις αναδημοσιεύσεις — canonical σε εμάς,
+// μπαίνουν στο sitemap, καμία γραμμή προέλευσης.
+//
+// Το σχήμα του σώματος είναι ΤΟ ΙΔΙΟ με των ειδήσεων ({type, text}),
+// με δύο επιπλέον τύπους: image και embed. Έτσι ο κώδικας που τα
+// ζωγραφίζει μένει ένας.
+function loadOwnArticles(){
+  if (!fs.existsSync(OWN_ARTICLES_FILE)) return [];
+
+  let list;
+  try {
+    list = JSON.parse(fs.readFileSync(OWN_ARTICLES_FILE, 'utf8'));
+  } catch (err) {
+    console.warn('ΠΡΟΣΟΧΗ: το data/articles.json δεν διαβάζεται —', err.message);
+    return [];
+  }
+
+  if (!Array.isArray(list)) {
+    console.warn('ΠΡΟΣΟΧΗ: το data/articles.json δεν είναι λίστα — το αγνοώ.');
+    return [];
+  }
+
+  const now = Date.now();
+  const out = [];
+  let drafts = 0;
+  let later = 0;
+
+  for (const a of list) {
+    if (!a || !a.id || !a.title) continue;
+
+    // Πρόχειρο: ο συντάκτης δεν το έχει δημοσιεύσει ακόμα.
+    if (a.status && a.status !== 'published') { drafts++; continue; }
+
+    // Προγραμματισμένο για αργότερα. Δεν το βγάζουμε εμείς πριν την ώρα
+    // του — ίδιος κανόνας με τις ειδήσεις του feed.
+    if (a.date && new Date(a.date) > now) { later++; continue; }
+
+    // Σώμα κάτω από μία παράγραφο δεν είναι άρθρο. Καλύτερα να λείπει
+    // παρά να βγει σελίδα με τίτλο και τίποτα από κάτω.
+    const body = Array.isArray(a.body) ? a.body.filter((b) => b && b.type) : [];
+    if (!body.length) {
+      console.warn(`ΠΡΟΣΟΧΗ: το άρθρο «${a.title}» δεν έχει σώμα — δεν βγαίνει σελίδα.`);
+      continue;
+    }
+
+    out.push({ ...a, body });
+  }
+
+  if (drafts) console.log(`Δικά μας άρθρα: ${drafts} πρόχειρα, δεν δημοσιεύονται`);
+  if (later) console.log(`Δικά μας άρθρα: ${later} προγραμματισμένα για αργότερα`);
+
+  return out.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+}
+
+function ownArticleUrl(a){
+  return `arthro/${a.id}.html`;
+}
+
+// Το επεισόδιο με αυτόν τον κωδικό, για τις ενσωματώσεις μέσα στα
+// άρθρα. Δέχεται και «Buzzsprout-19907711» και σκέτο «19907711»: ο
+// συντάκτης αντιγράφει ό,τι βλέπει, και τα δύο κυκλοφορούν.
+let episodeIndex;
+function episodeById(id){
+  if (!episodeIndex) {
+    episodeIndex = new Map();
+    try {
+      for (const ep of JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'))) {
+        episodeIndex.set(String(ep.id).toLowerCase(), ep);
+        episodeIndex.set(String(ep.id).replace(/\D/g, ''), ep);
+      }
+    } catch (err) {
+      console.warn('ΠΡΟΣΟΧΗ: τα επεισόδια δεν διαβάστηκαν για τις ενσωματώσεις —', err.message);
+    }
+  }
+  const key = String(id).trim();
+  return episodeIndex.get(key.toLowerCase()) || episodeIndex.get(key.replace(/\D/g, '')) || null;
+}
+
+function itemFromOwnArticle(a){
+  return {
+    kind: 'news',
+    href: ownArticleUrl(a),
+    external: false,                // δικό μας, ζει εδώ
+    label: a.category || '',
+    name: a.author || '',
+    title: a.title,
+    image: a.image || '',
+    hero: a.image || '',
+    date: a.date,
+    meta: formatDate(a.date),
+    cta: 'Διάβασε το άρθρο',
+    topics: a.category ? [a.category] : [],
+  };
+}
+
 // Ποιο μπαίνει μεγάλο — podcast, video ή είδηση, ό,τι είναι σημαντικότερο.
 // Σειρά προτεραιότητας: επιλογή συντάκτη, μετά είδηση σημασμένη ως
 // featured, μετά το πιο πρόσφατο επεισόδιο.
@@ -1063,8 +1212,19 @@ function sameItem(it, want){
   const mine = strip(it.href);
   if (mine === target) return true;
 
-  // Τελευταία ευκαιρία: μόνο το όνομα του αρχείου.
-  return mine.split('/').pop() === target.split('/').pop();
+  // Η ΠΗΓΑΙΑ διεύθυνση, όταν το αντικείμενο ζει αλλού.
+  //
+  // Τα άρθρα του newshub.gr δείχνουν πλέον στη δική μας σελίδα, οπότε
+  // το href τους είναι «arthro/κάτι.html». Ο συντάκτης όμως κολλάει
+  // στο curation.json τη διεύθυνση που βλέπει στον browser — τη δική
+  // ΤΟΥΣ. Χωρίς αυτόν τον έλεγχο η επιλογή του αποτύγχανε σιωπηλά και
+  // η αρχική γύριζε στην αυτόματη, σαν να μην είχε γράψει τίποτα.
+  if (it.source && strip(it.source) === target) return true;
+
+  // Τελευταία ευκαιρία: μόνο το όνομα του αρχείου, χωρίς κατάληξη —
+  // «arthro/x.html» και «el/kriti/x» είναι το ίδιο πράγμα.
+  const tail = (s) => s.split('/').pop().replace(/\.html?$/, '');
+  return tail(mine) === tail(target);
 }
 
 // Η χειροκίνητη επιλογή λήγει, αν έχει οριστεί ημερομηνία. Χωρίς αυτό,
@@ -1310,6 +1470,203 @@ ${showBannerBox(v.show, 1)}
     description: `${decode(v.title)} — ${v.show}`,
     image: v.image,
     url: videoUrl(v),
+    type: 'article',
+  });
+}
+
+// Η σελίδα ενός άρθρου του newshub.gr, φιλοξενούμενη εδώ.
+//
+// Τρία πράγματα την κρατούν τίμια απέναντι στην πηγή, και τα τρία
+// είναι απαίτηση — χωρίς αυτά η σελίδα θα ανταγωνιζόταν το πρωτότυπο
+// αντί να το στηρίζει:
+//   1. canonical προς το newshub.gr
+//   2. η προέλευση γραμμένη ΠΑΝΩ από το κείμενο, όχι κρυμμένη στο τέλος
+//   3. σύνδεσμος πίσω στο πρωτότυπο, χωρίς nofollow
+//
+// Έξω από το sitemap μας: σελίδα που δηλώνει αλλού το πρωτότυπό της
+// δεν ζητάει ευρετηρίαση για τον εαυτό της.
+// Το hasCat λέει αν υπάρχει ΔΙΚΗ μας σελίδα γι' αυτή την κατηγορία.
+// Τέσσερις από τις δικές τους — Sugar, Τα εν οίκω, Έξοδος,
+// Προσωπογραφίες — δεν έχουν, γιατί δεν έχουμε περιεχόμενο εκεί. Η
+// ετικέτα γράφεται πάντα, αλλά γίνεται σύνδεσμος μόνο όταν οδηγεί
+// κάπου.
+// Το σώμα ενός άρθρου σε HTML. Κοινό για τις αναδημοσιεύσεις και για
+// τα δικά μας: οι πρώτες φέρνουν μόνο p και h, τα δεύτερα και εικόνες
+// και ενσωματώσεις.
+//
+// Ό,τι δεν αναγνωρίζεται ΠΑΡΑΛΕΙΠΕΤΑΙ σιωπηλά αντί να τυπωθεί ωμό. Το
+// data/articles.json το γράφει το διαχειριστικό, δηλαδή τελικά ένας
+// browser — δεν το εμπιστευόμαστε να βγει αυτούσιο στη σελίδα.
+function articleBodyHtml(body){
+  return body.map((p) => {
+    if (p.type === 'h') return `        <h2 class="art-sub">${esc(p.text)}</h2>`;
+    if (p.type === 'p') return `        <p>${esc(p.text)}</p>`;
+
+    if (p.type === 'image' && p.src) {
+      return `        <figure class="art-inline">
+          <img src="${esc(p.src)}" alt="${esc(p.alt || '')}" loading="lazy">
+          ${p.caption ? `<figcaption>${esc(p.caption)}</figcaption>` : ''}
+        </figure>`;
+    }
+
+    // Οι ενσωματώσεις μπαίνουν ΜΟΝΟ με κωδικό, ποτέ με ελεύθερο HTML
+    // ή ελεύθερη διεύθυνση: αλλιώς το διαχειριστικό γίνεται τρόπος να
+    // μπει ξένο script στη σελίδα.
+    if (p.type === 'embed' && p.id) {
+      if (p.kind === 'youtube' && /^[\w-]{6,20}$/.test(p.id)) {
+        return `        <div class="art-embed stage-media" data-embed="${esc(p.id)}">
+          <img src="https://i.ytimg.com/vi/${esc(p.id)}/hqdefault.jpg" alt="" loading="lazy">
+          <button type="button" class="video-play" aria-label="Αναπαραγωγή">▶</button>
+        </div>`;
+      }
+      if (p.kind === 'episode') {
+        const ep = episodeById(p.id);
+        if (ep) {
+          return `        <a class="art-embed-ep queue-row" href="../${episodeUrl(ep)}">
+          ${ep.image ? `<img src="${ep.image}" alt="" loading="lazy">` : '<span class="queue-blank"></span>'}
+          <span class="queue-text">
+            <span class="queue-title">${esc(decode(ep.headline || ep.title))}</span>
+            <span class="queue-meta">Επεισόδιο · ${formatDate(ep.date)}</span>
+          </span>
+        </a>`;
+        }
+        console.warn(`ΠΡΟΣΟΧΗ: ενσωματωμένο επεισόδιο που δεν υπάρχει — ${p.id}`);
+      }
+    }
+
+    return '';
+  }).filter(Boolean).join('\n');
+}
+
+function articlePage(a, body, hasCat = false){
+  const title = esc(a.title);
+  const img = a.image_large || a.image_thumb || '';
+
+  const text = articleBodyHtml(body);
+
+  const words = body.reduce((n, p) => n + p.text.split(/\s+/).length, 0);
+  const minutes = Math.max(1, Math.round(words / 200));
+
+  const inner = `${siteHeader(1)}
+
+${breadcrumb([
+    { label: 'Αρχική', href: 'index.html' },
+    a.category ? { label: a.category, href: hasCat ? categoryUrl(a.category) : '' } : null,
+    { label: a.title },
+  ], 1)}
+
+  <main class="art" data-pagefind-body
+        data-pagefind-meta="image:${img},type:Είδηση,date:${formatDate(a.date)}"
+        data-pagefind-filter="Είδος:Είδηση${a.category ? `,Κατηγορία:${esc(a.category)}` : ''}">
+    <article class="art-wrap">
+      <header class="art-head">
+        ${a.category ? `<p class="card-label">${esc(a.category)}</p>` : ''}
+        <h1 class="art-title">${title}</h1>
+        <p class="art-meta">${formatDate(a.date)} · ${minutes}′ ανάγνωση</p>
+
+        <!-- Η προέλευση μπαίνει ΠΡΙΝ το κείμενο. Ο αναγνώστης πρέπει να
+             ξέρει ποιος το έγραψε προτού το διαβάσει, όχι αφού. -->
+        <p class="art-origin">
+          Δημοσιεύτηκε πρώτα στο
+          <a href="${a.url}" rel="noopener">newshub.gr</a>
+        </p>
+      </header>
+
+${img ? `      <figure class="art-figure">
+        <img src="${img}" alt="" width="765" height="435">
+      </figure>` : ''}
+
+      <div class="art-body">
+${text}
+      </div>
+
+      <footer class="art-foot">
+        <p class="art-foot-line">
+          Ολόκληρο το άρθρο και η συνέχεια της είδησης στο
+          <a class="art-source" href="${a.url}" rel="noopener">newshub.gr ↗</a>
+        </p>
+        ${hasCat ? `<p class="art-foot-more">
+          <a href="../${categoryUrl(a.category)}">Περισσότερα: ${esc(a.category)} →</a>
+        </p>` : ''}
+      </footer>
+    </article>
+  </main>`;
+
+  return page({
+    title: `${title} — ${SITE_NAME}`,
+    body: inner,
+    depth: 1,
+    description: a.summary || a.title,
+    image: img,
+    url: articleUrl(a),
+    type: 'article',
+    canonical: a.url,
+  });
+}
+
+// Η σελίδα ενός ΔΙΚΟΥ ΜΑΣ άρθρου, γραμμένου στο διαχειριστικό.
+//
+// Σχεδόν ίδια όψη με την αναδημοσίευση — ο αναγνώστης δεν πρέπει να
+// μαθαίνει δεύτερη διάταξη — αλλά τρία πράγματα αλλάζουν, και όλα
+// λένε «αυτό είναι δικό μας»:
+//   · canonical στη δική μας διεύθυνση (το βάζει μόνο του το page)
+//   · καμία γραμμή προέλευσης, κανένα backlink
+//   · υπογραφή του δημοσιογράφου
+function ownArticlePage(a, hasCat = false){
+  const title = esc(a.title);
+
+  // Σκέτο το όνομα. Το «από τον/την Γιώργος Παυλουδής» θέλει γενική
+  // («του Γιώργου Παυλουδή»), και τη γενική δεν τη βγάζουμε από
+  // ονομαστική χωρίς να ξέρουμε το όνομα — ούτε το φύλο, που δεν το
+  // ρωτάμε. Τα περισσότερα site γράφουν σκέτο το όνομα· το ίδιο.
+  const byline = [a.author ? esc(a.author) : '', formatDate(a.date)]
+    .filter(Boolean).join(' · ');
+
+  const words = a.body.reduce((n, p) => n + String(p.text || '').split(/\s+/).length, 0);
+  const minutes = Math.max(1, Math.round(words / 200));
+
+  const inner = `${siteHeader(1)}
+
+${breadcrumb([
+    { label: 'Αρχική', href: 'index.html' },
+    a.category ? { label: a.category, href: hasCat ? categoryUrl(a.category) : '' } : null,
+    { label: a.title },
+  ], 1)}
+
+  <main class="art" data-pagefind-body
+        data-pagefind-meta="image:${a.image || ''},type:Άρθρο,date:${formatDate(a.date)}"
+        data-pagefind-filter="Είδος:Άρθρο${a.category ? `,Κατηγορία:${esc(a.category)}` : ''}">
+    <article class="art-wrap">
+      <header class="art-head">
+        ${a.category ? `<p class="card-label">${esc(a.category)}</p>` : ''}
+        <h1 class="art-title">${title}</h1>
+        <p class="art-meta">${byline} · ${minutes}′ ανάγνωση</p>
+      </header>
+
+${a.image ? `      <figure class="art-figure">
+        <img src="${esc(a.image)}" alt="${esc(a.imageAlt || '')}" loading="lazy">
+        ${a.imageCaption ? `<figcaption>${esc(a.imageCaption)}</figcaption>` : ''}
+      </figure>` : ''}
+
+      <div class="art-body">
+${articleBodyHtml(a.body)}
+      </div>
+
+      <footer class="art-foot">
+        ${hasCat ? `<p class="art-foot-more">
+          <a href="../${categoryUrl(a.category)}">Περισσότερα: ${esc(a.category)} →</a>
+        </p>` : ''}
+      </footer>
+    </article>
+  </main>`;
+
+  return page({
+    title: `${title} — ${SITE_NAME}`,
+    body: inner,
+    depth: 1,
+    description: a.summary || a.title,
+    image: a.image || '',
+    url: ownArticleUrl(a),
     type: 'article',
   });
 }
@@ -1713,6 +2070,41 @@ function showAbout(name){
 // θέση είναι πιο στενή, παίρνει το εξώφυλλο του τελευταίου επεισοδίου.
 const ART_MIN = 200;
 
+// Οι διαστάσεις ενός webp, διαβασμένες από το ΙΔΙΟ το αρχείο.
+//
+// Γράφαμε παντού «400w, 800w, 1600w» και «width=1600 height=900» χωρίς
+// να τα ελέγχει κανείς, και δύο πράγματα χαλούσαν:
+//   · όποια αφίσα ήταν μικρότερη, ο browser τη θεωρούσε 1600άρα και τη
+//     ζωγράφιζε σμικρυμένη — 426px αρχείο έβγαινε 224px στη σελίδα
+//   · η τετράγωνη αφίσα δήλωνε 16:9, άρα η σελίδα τιναζόταν μόλις
+//     φόρτωνε η εικόνα και φαινόταν το αληθινό της σχήμα
+// Τα αρχεία είναι 40 και διαβάζονται μία φορά το καθένα.
+const artSizeCache = new Map();
+function webpSize(file){
+  if (artSizeCache.has(file)) return artSizeCache.get(file);
+
+  let size = null;
+  try {
+    const b = fs.readFileSync(path.join(PUBLIC_DIR, 'shows', file));
+    const tag = b.toString('ascii', 12, 16);
+    if (tag === 'VP8X') {
+      size = { w: (b.readUIntLE(24, 3) & 0xffffff) + 1, h: (b.readUIntLE(27, 3) & 0xffffff) + 1 };
+    } else if (tag === 'VP8 ') {
+      size = { w: b.readUInt16LE(26) & 0x3fff, h: b.readUInt16LE(28) & 0x3fff };
+    } else if (tag === 'VP8L') {
+      const bits = b.readUInt32LE(21);
+      size = { w: (bits & 0x3fff) + 1, h: ((bits >> 14) & 0x3fff) + 1 };
+    }
+  } catch (err) {
+    if (err.code !== 'ENOENT') {
+      console.warn(`ΠΡΟΣΟΧΗ: το public/shows/${file} δεν διαβάζεται —`, err.message);
+    }
+  }
+
+  artSizeCache.set(file, size);
+  return size;
+}
+
 function showArtImg(name, { depth = 0, sizes, cls = '', eager = false, minWidth = 999 } = {}){
   if (minWidth < ART_MIN) return '';
 
@@ -1722,10 +2114,24 @@ function showArtImg(name, { depth = 0, sizes, cls = '', eager = false, minWidth 
   const up = depth === 0 ? '' : '../';
   const src = `${up}shows/${art.file}`;
 
+  // Το μεγάλο αρχείο ορίζει σχήμα και αναλογία· τα -800/-400 είναι
+  // σμικρύνσεις του ίδιου καρέ. Αν λείπει κάποιο, το παραλείπουμε από
+  // το srcset αντί να πούμε ψέματα για το πλάτος του.
+  const full = webpSize(`${art.file}.webp`);
+  const srcset = [
+    [`${src}-400.webp`, webpSize(`${art.file}-400.webp`)],
+    [`${src}-800.webp`, webpSize(`${art.file}-800.webp`)],
+    [`${src}.webp`, full],
+  ]
+    .filter(([, s]) => s)
+    .map(([url, s]) => `${url} ${s.w}w`)
+    .join(', ');
+
+  const dims = full ? ` width="${full.w}" height="${full.h}"` : '';
+
   return `<img${cls ? ` class="${cls}"` : ''} src="${src}-800.webp"
-            srcset="${src}-400.webp 400w, ${src}-800.webp 800w, ${src}.webp 1600w"
-            sizes="${sizes}" alt="${esc(showName(name))}"
-            width="1600" height="900"${eager ? '' : ' loading="lazy"'}>`;
+            srcset="${srcset}"
+            sizes="${sizes}" alt="${esc(showName(name))}"${dims}${eager ? '' : ' loading="lazy"'}>`;
 }
 
 function showsSection(groups, depth = 0){
@@ -1808,7 +2214,16 @@ function micIcon(){
 
 // Μία ομάδα ανά κατηγορία, με επεισόδια ΚΑΙ βίντεο μαζί. Όπου ένα βίντεο
 // έχει δίδυμο επεισόδιο, κρατάμε το επεισόδιο — έχει δική μας σελίδα.
-function buildCategories(videos, episodes){
+// Τα δικά μας άρθρα μπαίνουν ΚΑΙ ΑΥΤΑ στις σελίδες κατηγορίας.
+//
+// Χωρίς αυτό, ο δημοσιογράφος διάλεγε «Κρήτη» στο διαχειριστικό και η
+// επιλογή του έκανε μόνο την ετικέτα στην κάρτα: το άρθρο δεν φαινόταν
+// ποτέ στο /category/kriti.html. Η επιλογή πρέπει να σημαίνει αυτό που
+// δείχνει ότι σημαίνει.
+//
+// Η κατηγορία εδώ είναι ΡΗΤΗ — τη διάλεξε άνθρωπος — σε αντίθεση με
+// επεισόδια και βίντεο, όπου τη μαντεύουμε από τον τίτλο.
+function buildCategories(videos, episodes, ownArticles = []){
   const groups = {};
   const seen = new Set();
 
@@ -1832,6 +2247,11 @@ function buildCategories(videos, episodes){
   for (const v of videos) {
     if (videoHasTwin(v)) continue;          // το podcast του μπήκε ήδη
     add(categoriesFor(v.id, v.title), itemFromVideo(v), v.id);
+  }
+
+  for (const a of ownArticles) {
+    if (!a.category) continue;
+    add([a.category], itemFromOwnArticle(a), `arthro:${a.id}`);
   }
 
   for (const key of Object.keys(groups)) {
@@ -2759,8 +3179,15 @@ function mustReadSection(articles, curation, taken){
   const cards = picks.map((a, i) => {
     const img = a.image_large || a.image_thumb || '';
 
+    // Τα must read ανοίγουν ΕΔΩ, όταν έχουμε το κείμενο — ρητή οδηγία
+    // του αφεντικού. Όσα δεν έχουν σώμα κρατούν την παλιά συμπεριφορά
+    // και φεύγουν για το newshub.gr, σε νέα καρτέλα.
+    const mine = !!articleBody(a.id);
+    const href = mine ? articleUrl(a) : a.url;
+    const out = mine ? '' : ' target="_blank" rel="noopener"';
+
     return `      <article class="must-card">
-        <a class="must-link" href="${a.url}" target="_blank" rel="noopener">
+        <a class="must-link" href="${href}"${out}>
           <span class="must-media">
             ${img
               ? `<img class="must-image" src="${img}" alt="" loading="lazy" width="765" height="435">`
@@ -3988,12 +4415,13 @@ function main(){
   // μπαίνουν στην ίδια δεξαμενή — η σημαντικότητα κρίνει, όχι ο τύπος.
   const curation = loadCuration();
   const articles = loadNews();
+  const ownArticles = loadOwnArticles();
   const videos = loadVideos();
   const showGroups = buildShows(videos, episodes);
 
   // Οι ομάδες θεμάτων χρειάζονται ΕΔΩ, πριν γραφτεί η αρχική: από αυτές
   // βγαίνει η λωρίδα-φίλτρο και οι τέσσερις θεματικές λωρίδες.
-  const catGroups = buildCategories(videos, episodes);
+  const catGroups = buildCategories(videos, episodes, ownArticles);
   indexMenu(showGroups, catGroups);
 
   // Ένα βίντεο μπορεί να υπάρχει σε πολλές λίστες. Κρατάμε μία εγγραφή
@@ -4005,6 +4433,9 @@ function main(){
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const pool = [
+    // Τα δικά μας πρώτα: είναι λίγα και γραμμένα με το χέρι, άρα όταν
+    // υπάρχουν αξίζουν τουλάχιστον ίση θέση με ό,τι τραβήχτηκε αυτόματα.
+    ...ownArticles.map((a) => ({ ...itemFromOwnArticle(a), id: a.id })),
     ...articles.map((a) => ({ ...itemFromArticle(a), id: a.id, featured: a.featured })),
     ...uniqueVideos.slice(0, 20).map((v) => ({ ...itemFromVideo(v), id: v.id })),
     ...episodes.slice(0, 40).map((ep) => ({ ...itemFromEpisode(ep), id: ep.id })),
@@ -4020,6 +4451,21 @@ function main(){
       if (vidMatch) {
         pool.push({ ...itemFromVideo(vidMatch), id: vidMatch.id });
       }
+    }
+  }
+
+  // Διάλεξε ο συντάκτης άρθρο που ΔΕΝ έχει σώμα;
+  //
+  // Τότε δεν θα ανοίξει εδώ — θα φύγει για το newshub.gr, σιωπηλά, και
+  // ο συντάκτης θα νομίζει ότι το ανέβασε στο Media channel. Συμβαίνει
+  // όταν διαλέξει άρθρο παλιότερο από όσα κρατάει το fetch-news.js.
+  // Δεν το διορθώνουμε αυτόματα — το build δεν κατεβάζει από το δίκτυο
+  // — αλλά ΔΕΝ το αφήνουμε να περάσει αμίλητο.
+  for (const want of [curation.featured, ...(curation.mustRead || [])].filter(Boolean)) {
+    const hit = articles.find((a) => sameItem({ id: a.id, href: a.url }, want));
+    if (hit && !articleBody(hit.id)) {
+      console.warn(`ΠΡΟΣΟΧΗ: το επιλεγμένο άρθρο «${hit.title.slice(0, 50)}» δεν έχει κείμενο`);
+      console.warn('  Ανοίγει στο newshub.gr αντί για εδώ. Τρέξε «node fetch-news.js» και ξαναχτίσε.');
     }
   }
 
@@ -4048,6 +4494,11 @@ function main(){
     inFlow.add(item.href);
     flow.push(item);
   };
+
+  // Τα δικά μας άρθρα μπαίνουν στη ροή πριν από τα επεισόδια: είναι
+  // πρωτότυπο περιεχόμενο που δεν υπάρχει πουθενά αλλού, και αν δεν
+  // φαίνεται στην αρχική δεν θα το δει κανείς.
+  for (const a of ownArticles) pushFlow(itemFromOwnArticle(a));
 
   for (const ep of episodes) {
     pushFlow(itemFromEpisode(ep));
@@ -4276,6 +4727,51 @@ ${intro(episodes[0], videos[0])}`,
 
   writeIfChanged(path.join(PUBLIC_DIR, 'categories.html'), categoriesIndexPage(catGroups));
 
+  // Σελίδες άρθρων — όσα έχουν σώμα στο data/news-bodies/.
+  //
+  // Γράφονται ΜΕΤΑ τις κατηγορίες επίτηδες: το άρθρο δείχνει τη
+  // κατηγορία του, και 4 από τις 16 κατηγορίες των ειδήσεών τους
+  // (Sugar, Τα εν οίκω, Έξοδος, Προσωπογραφίες) δεν έχουν δική μας
+  // σελίδα. Χωρίς αυτόν τον έλεγχο, το άρθρο έδειχνε σε 404.
+  //
+  // ΔΕΝ σβήνουμε όσες περισσέψουν. Ένα άρθρο βγαίνει από τα must read
+  // μέσα σε ώρες, αλλά η σελίδα του μπορεί να έχει ήδη μοιραστεί ή να
+  // έχει μπει στη Google. Αν τη σβήναμε, θα γινόταν 404 — και το 404
+  // σε σελίδα που δείχνει το newshub.gr ως πρωτότυπο βλάπτει ακριβώς
+  // αυτό που ήρθε να βοηθήσει. Ο φάκελος μεγαλώνει όσο τα σώματα, και
+  // εκείνα τα κρατάει μετρημένα το fetch-news.js.
+  fs.mkdirSync(ARTICLE_DIR, { recursive: true });
+  const hasCatPage = (cat) => !!cat && expectedCats.has(path.basename(categoryUrl(cat)));
+
+  // ΠΡΩΤΑ τα δικά μας. Μοιράζονται φάκελο με τις αναδημοσιεύσεις —
+  // για τον αναγνώστη είναι το ίδιο πράγμα — αλλά αν δύο άρθρα πέσουν
+  // στο ίδιο όνομα, κερδίζει το δικό μας και το λέμε δυνατά. Σιωπηλό
+  // πάτημα σημαίνει ότι ο δημοσιογράφος έγραψε άρθρο που δεν βγήκε
+  // ποτέ, και θα το μάθαινε μόνο αν τύχαινε να το ψάξει.
+  const ownTaken = new Set();
+  let ownWritten = 0;
+  for (const a of ownArticles) {
+    const file = path.join(ARTICLE_DIR, `${a.id}.html`);
+    ownTaken.add(`${a.id}.html`);
+    if (writeIfChanged(file, ownArticlePage(a, hasCatPage(a.category)))) ownWritten++;
+  }
+
+  let artWritten = 0;
+  let artSkipped = 0;
+  let artClash = 0;
+  for (const a of articles) {
+    const body = articleBody(a.id);
+    if (!body) { artSkipped++; continue; }
+    if (ownTaken.has(`${a.id}.html`)) {
+      console.warn(`ΠΡΟΣΟΧΗ: σύγκρουση ονόματος «${a.id}» — κρατάω το δικό μας άρθρο, η αναδημοσίευση δεν γράφεται.`);
+      artClash++;
+      continue;
+    }
+    const hasCat = hasCatPage(a.category);
+    const file = path.join(ARTICLE_DIR, `${a.id}.html`);
+    if (writeIfChanged(file, articlePage(a, body, hasCat))) artWritten++;
+  }
+
   // Σελίδες εκπομπών — ίδιο μοτίβο: γράψε ό,τι άλλαξε, σβήσε τα ορφανά.
   fs.mkdirSync(SHOW_DIR, { recursive: true });
   const expectedShows = new Set();
@@ -4328,6 +4824,10 @@ ${intro(episodes[0], videos[0])}`,
     ...[...expectedShows].map((n) => ({ loc: `show/${n}` })),
     ...[...expectedCats].map((n) => ({ loc: `category/${n}` })),
     ...[...expectedGuests].map((n) => ({ loc: `guest/${n}` })),
+    // ΜΟΝΟ τα δικά μας άρθρα. Οι αναδημοσιεύσεις του newshub.gr μένουν
+    // έξω: δηλώνουν αλλού το πρωτότυπό τους, άρα δεν ζητούν
+    // ευρετηρίαση για τον εαυτό τους.
+    ...ownArticles.map((a) => ({ loc: ownArticleUrl(a), date: a.date })),
   ];
   writeIfChanged(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapXml(sitemap));
   console.log(`Κατάλογος sitemap.xml: ${sitemap.length} διευθύνσεις`);
@@ -4335,6 +4835,8 @@ ${intro(episodes[0], videos[0])}`,
   console.log('Η αρχική δημιουργήθηκε στο public/index.html');
   console.log(`Σελίδες βίντεο: ${videosWritten} γράφτηκαν, ${videosRemoved} σβήστηκαν`);
   console.log(`Σελίδες θεμάτων: ${catsWritten} γράφτηκαν, ${catsRemoved} σβήστηκαν`);
+  console.log(`Δικά μας άρθρα: ${ownWritten} γράφτηκαν, ${ownArticles.length} δημοσιευμένα συνολικά`);
+  console.log(`Αναδημοσιεύσεις: ${artWritten} γράφτηκαν, ${artSkipped} χωρίς σώμα μένουν στο newshub.gr${artClash ? `, ${artClash} σε σύγκρουση` : ''}`);
   console.log(`Σελίδες εκπομπών: ${showsWritten} γράφτηκαν, ${showsRemoved} σβήστηκαν`);
   
 console.log(`Σελίδες επεισοδίου: ${written} γράφτηκαν, ${episodes.length - written} ήταν ήδη ενημερωμένες, ${removed} σβήστηκαν`);

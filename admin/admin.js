@@ -476,6 +476,468 @@ function wireShots(){
 }
 
 // ---------------------------------------------------------------------
+// Άρθρα — τα ΔΙΚΑ ΜΑΣ, γραμμένα εδώ
+// ---------------------------------------------------------------------
+//
+// Το κείμενο γράφεται μπλοκ-μπλοκ: κάθε παράγραφος, υπότιτλος,
+// φωτογραφία ή ενσωμάτωση είναι ξεχωριστό κουτί.
+//
+// Γιατί όχι ένας επεξεργαστής σαν του Word: ό,τι επικολληθεί από Word
+// κουβαλάει HTML που δεν ελέγχουμε, και θα κατέληγε αυτούσιο στη
+// σελίδα. Εδώ ό,τι γράφεται είναι ΚΕΙΜΕΝΟ, και η δομή είναι ρητή —
+// αδύνατο να σπάσει η σελίδα, και το build δέχεται το αρχείο όπως
+// ακριβώς βγαίνει.
+
+// Οι κατηγορίες του site. Ίδιες με του build — αν αλλάξουν εκεί,
+// αλλάζουν κι εδώ.
+var CATS = ['Κρήτη', 'Ελλάδα', 'Κόσμος', 'Οικονομία', 'Γεωπολιτική', 'Πολιτική',
+  'Υγεία', 'Αθλητικά', 'Agronews', 'Tech-Hub', 'Ιστορία', 'Πολιτισμός',
+  'Περιβάλλον', 'Απόψεις'];
+
+var GREEK = {
+  α: 'a', β: 'v', γ: 'g', δ: 'd', ε: 'e', ζ: 'z', η: 'i', θ: 'th',
+  ι: 'i', κ: 'k', λ: 'l', μ: 'm', ν: 'n', ξ: 'x', ο: 'o', π: 'p',
+  ρ: 'r', σ: 's', ς: 's', τ: 't', υ: 'y', φ: 'f', χ: 'ch', ψ: 'ps', ω: 'o',
+};
+
+// Η διεύθυνση της σελίδας, από τον τίτλο. Λατινικά: ένα ελληνικό όνομα
+// αρχείου ταξιδεύει ως %CF%86%CE%B1… και αρκεί ένα εργαλείο στη μέση
+// που δεν το αποκωδικοποιεί για να σπάσει ο σύνδεσμος.
+function slugify(s){
+  return String(s || '').toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .split('').map(function (ch) { return GREEK[ch] || ch; }).join('')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 80)
+    .replace(/-+$/, '');
+}
+
+// Το <input type="datetime-local"> θέλει «2026-11-04T10:00» σε ΤΟΠΙΚΗ
+// ώρα, ενώ εμείς κρατάμε ISO σε UTC. Οι δύο μετατροπές.
+function toLocalInput(iso){
+  var d = new Date(iso);
+  if (isNaN(d)) return '';
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+  return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate())
+    + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+}
+
+function fromLocalInput(v){
+  if (!v) return '';
+  var d = new Date(v);
+  return isNaN(d) ? '' : d.toISOString();
+}
+
+var art = {
+  list: [],        // όλα τα άρθρα
+  open: null,      // αυτό που συντάσσεται τώρα
+  index: -1,       // η θέση του στη list, ή -1 για καινούριο
+  dirty: false,
+};
+
+function artSay(text, kind){
+  var el = $('[data-art-state]');
+  el.textContent = text || '';
+  if (kind) el.setAttribute('data-kind', kind); else el.removeAttribute('data-kind');
+}
+
+function artDirty(on){
+  art.dirty = on;
+  state.dirty = on;      // μπαίνει στην ίδια δικλείδα «μη φύγεις»
+  if (on) artSay('Μη αποθηκευμένες αλλαγές', 'warn');
+}
+
+// ---- η λίστα ----
+
+function drawArtList(){
+  var box = $('[data-art-list]');
+
+  if (!art.list.length) {
+    box.innerHTML = '<p class="muted">Κανένα άρθρο ακόμα. Πάτησε «Νέο άρθρο».</p>';
+    return;
+  }
+
+  // Τα πιο πρόσφατα πρώτα — εκείνα δουλεύει κανείς.
+  var rows = art.list.map(function (a, i) {
+    return { a: a, i: i };
+  }).sort(function (x, y) {
+    return new Date(y.a.date || 0) - new Date(x.a.date || 0);
+  });
+
+  box.innerHTML = rows.map(function (r) {
+    var a = r.a;
+    var draft = a.status !== 'published';
+    var future = a.date && new Date(a.date) > new Date();
+
+    var tag = draft ? '<span class="pill pill--draft">Πρόχειρο</span>'
+      : future ? '<span class="pill pill--later">Προγραμματισμένο</span>'
+        : '<span class="pill pill--live">Δημοσιευμένο</span>';
+
+    return '<article class="artrow" data-open="' + r.i + '">'
+      + (a.image ? '<img class="artrow-img" src="' + esc(a.image) + '" alt="" loading="lazy">'
+        : '<span class="artrow-img artrow-img--empty"></span>')
+      + '<span class="artrow-text">'
+      + '<span class="artrow-title">' + esc(a.title || '(χωρίς τίτλο)') + '</span>'
+      + '<span class="artrow-meta">' + tag
+      + (a.category ? ' · ' + esc(a.category) : '')
+      + (a.date ? ' · ' + when(a.date) : '')
+      + (a.author ? ' · ' + esc(a.author) : '')
+      + '</span></span></article>';
+  }).join('');
+}
+
+// ---- άνοιγμα / κλείσιμο ----
+
+function blankArticle(){
+  return {
+    id: '', title: '', summary: '', category: CATS[0], author: '',
+    date: new Date().toISOString(), image: '', imageCaption: '',
+    status: 'draft', body: [{ type: 'p', text: '' }],
+  };
+}
+
+function openArticle(i){
+  art.index = typeof i === 'number' ? i : -1;
+  // Αντίγραφο, όχι το ίδιο αντικείμενο: αν ο συντάκτης φύγει χωρίς
+  // αποθήκευση, η λίστα δεν πρέπει να έχει ήδη αλλάξει.
+  art.open = art.index >= 0
+    ? JSON.parse(JSON.stringify(art.list[art.index]))
+    : blankArticle();
+
+  $('[data-art-list]').hidden = true;
+  $('[data-new-article]').hidden = true;
+  $('[data-art-editor]').hidden = false;
+  $('[data-art-delete]').hidden = art.index < 0;
+
+  $('[data-art="title"]').value = art.open.title || '';
+  $('[data-art="summary"]').value = art.open.summary || '';
+  $('[data-art="category"]').value = art.open.category || CATS[0];
+  $('[data-art="author"]').value = art.open.author || '';
+  $('[data-art="date"]').value = toLocalInput(art.open.date);
+  $('[data-art="status"]').value = art.open.status || 'draft';
+  $('[data-art="image"]').value = art.open.image || '';
+  $('[data-art="imageCaption"]').value = art.open.imageCaption || '';
+
+  drawSlug();
+  drawThumb();
+  drawBlocks();
+  artDirty(false);
+  artSay('');
+}
+
+function closeArticle(){
+  art.open = null;
+  art.index = -1;
+  artDirty(false);
+  $('[data-art-editor]').hidden = true;
+  $('[data-art-list]').hidden = false;
+  $('[data-new-article]').hidden = false;
+  drawArtList();
+}
+
+function drawSlug(){
+  var a = art.open;
+  var slug = a.id || slugify(a.title);
+  $('[data-art-slug]').textContent = slug ? '/arthro/' + slug + '.html' : '—';
+}
+
+function drawThumb(){
+  var box = $('[data-art-thumb]');
+  var url = art.open.image;
+  box.hidden = !url;
+  if (!url) return;
+
+  var img = box.querySelector('img');
+  // Λάθος διαδρομή = σπασμένη εικόνα στο site, με τη λεζάντα να
+  // κρέμεται μόνη της. Ο συντάκτης δεν θα το δει ποτέ αν δεν του το
+  // πούμε ΕΔΩ: στο διαχειριστικό η εικόνα απλώς δεν εμφανίζεται, και
+  // μοιάζει με καθυστέρηση φόρτωσης.
+  img.onerror = function () {
+    artSay('Η φωτογραφία δεν βρέθηκε: ' + url + ' — διάλεξέ την από τις «Φωτογραφίες».', 'bad');
+  };
+  img.onload = function () {
+    if ($('[data-art-state]').getAttribute('data-kind') === 'bad') artSay('');
+  };
+  img.src = url;
+}
+
+// ---- τα μπλοκ ----
+
+var BLOCK_NAME = {
+  p: 'Παράγραφος', h: 'Υπότιτλος', image: 'Φωτογραφία',
+  youtube: 'Βίντεο YouTube', episode: 'Επεισόδιο',
+};
+
+// Το μπλοκ όπως το κρατάει το αρχείο -> τι είδος κουτί δείχνουμε.
+function blockKind(b){
+  if (b.type === 'embed') return b.kind === 'episode' ? 'episode' : 'youtube';
+  return b.type;
+}
+
+function drawBlocks(){
+  var box = $('[data-art-blocks]');
+  var body = art.open.body || [];
+
+  box.innerHTML = body.map(function (b, i) {
+    var kind = blockKind(b);
+    var inner;
+
+    if (kind === 'p' || kind === 'h') {
+      inner = '<textarea data-bx="text" rows="' + (kind === 'h' ? 1 : 3) + '" placeholder="'
+        + (kind === 'h' ? 'Ο υπότιτλος' : 'Γράψε την παράγραφο…') + '">'
+        + esc(b.text || '') + '</textarea>';
+    } else if (kind === 'image') {
+      inner = '<div class="pickline">'
+        + '<input type="text" data-bx="src" value="' + esc(b.src || '') + '" placeholder="/uploads/…">'
+        + '<button type="button" class="btn btn--ghost" data-bpick="' + i + '">Διάλεξε</button></div>'
+        + '<input type="text" data-bx="caption" value="' + esc(b.caption || '') + '" placeholder="Λεζάντα">'
+        + (b.src ? '<div class="thumb"><img src="' + esc(b.src) + '" alt=""></div>' : '');
+    } else if (kind === 'youtube') {
+      inner = '<input type="text" data-bx="id" value="' + esc(b.id || '') + '" placeholder="Κωδικός ή σύνδεσμος YouTube">'
+        + '<p class="hint">Κόλλησε τον σύνδεσμο — κρατάμε μόνο τον κωδικό.</p>';
+    } else {
+      inner = '<input type="text" data-bx="id" value="' + esc(b.id || '') + '" placeholder="Buzzsprout-19907711">'
+        + '<p class="hint">Ο κωδικός του επεισοδίου, όπως στο πρωτοσέλιδο.</p>';
+    }
+
+    return '<div class="block" data-bi="' + i + '">'
+      + '<div class="block-head"><span class="block-kind">' + BLOCK_NAME[kind] + '</span>'
+      + '<span class="block-acts">'
+      + '<button type="button" data-bmove="-1" aria-label="Πάνω"' + (i === 0 ? ' disabled' : '') + '>↑</button>'
+      + '<button type="button" data-bmove="1" aria-label="Κάτω"' + (i === body.length - 1 ? ' disabled' : '') + '>↓</button>'
+      + '<button type="button" data-bdel aria-label="Διαγραφή">✕</button>'
+      + '</span></div>'
+      + '<div class="block-body">' + inner + '</div></div>';
+  }).join('');
+}
+
+function addBlock(kind){
+  var b = kind === 'image' ? { type: 'image', src: '', caption: '' }
+    : kind === 'youtube' ? { type: 'embed', kind: 'youtube', id: '' }
+      : kind === 'episode' ? { type: 'embed', kind: 'episode', id: '' }
+        : { type: kind, text: '' };
+
+  art.open.body.push(b);
+  drawBlocks();
+  artDirty(true);
+
+  // Ο δρομέας στο καινούριο κουτί: αλλιώς ο συντάκτης πατάει
+  // «+ Παράγραφος» και μετά πρέπει να ψάξει πού πήγε.
+  var boxes = $$('.block');
+  var last = boxes[boxes.length - 1];
+  if (last) {
+    var f = last.querySelector('textarea, input');
+    if (f) f.focus();
+    last.scrollIntoView({ block: 'center' });
+  }
+}
+
+// Από τον σύνδεσμο YouTube κρατάμε ΜΟΝΟ τον κωδικό. Ο συντάκτης
+// κολλάει ό,τι του δώσει ο browser — watch?v=, youtu.be/, /embed/ —
+// και όλα πρέπει να καταλήγουν στο ίδιο.
+function youtubeId(v){
+  var s = String(v || '').trim();
+  var m = s.match(/(?:v=|youtu\.be\/|\/embed\/|\/shorts\/)([\w-]{6,20})/);
+  if (m) return m[1];
+  return /^[\w-]{6,20}$/.test(s) ? s : s;
+}
+
+// ---- αποθήκευση ----
+
+function collect(){
+  var a = art.open;
+
+  a.title = $('[data-art="title"]').value.trim();
+  a.summary = $('[data-art="summary"]').value.trim();
+  a.category = $('[data-art="category"]').value;
+  a.author = $('[data-art="author"]').value.trim();
+  a.date = fromLocalInput($('[data-art="date"]').value) || new Date().toISOString();
+  a.status = $('[data-art="status"]').value;
+  a.image = $('[data-art="image"]').value.trim();
+  a.imageCaption = $('[data-art="imageCaption"]').value.trim();
+
+  // Ο κωδικός κλειδώνει στην ΠΡΩΤΗ αποθήκευση και δεν ξανααλλάζει.
+  // Αλλιώς μια διόρθωση στον τίτλο θα άλλαζε τη διεύθυνση ενός άρθρου
+  // που κυκλοφορεί ήδη — και κάθε σύνδεσμος προς αυτό θα έσπαγε.
+  if (!a.id) a.id = slugify(a.title);
+
+  // Τα άδεια μπλοκ φεύγουν. Ο συντάκτης προσθέτει παράγραφο και
+  // μετά αλλάζει γνώμη· δεν χρειάζεται να τη σβήσει με το χέρι.
+  a.body = (a.body || []).filter(function (b) {
+    if (b.type === 'p' || b.type === 'h') return String(b.text || '').trim();
+    if (b.type === 'image') return String(b.src || '').trim();
+    if (b.type === 'embed') return String(b.id || '').trim();
+    return false;
+  });
+
+  return a;
+}
+
+function saveArticle(){
+  var a = collect();
+
+  if (!a.title) { artSay('Ο τίτλος λείπει.', 'bad'); return; }
+  if (!a.id) { artSay('Ο τίτλος δεν δίνει έγκυρη διεύθυνση.', 'bad'); return; }
+  if (!a.body.length) { artSay('Το άρθρο δεν έχει κείμενο.', 'bad'); return; }
+
+  // Δύο άρθρα με τον ίδιο κωδικό θα πατούσε το ένα το άλλο.
+  var clash = art.list.some(function (other, i) {
+    return i !== art.index && other.id === a.id;
+  });
+  if (clash) { artSay('Υπάρχει ήδη άρθρο με αυτή τη διεύθυνση. Άλλαξε τον τίτλο.', 'bad'); return; }
+
+  if (a.status === 'published' && !a.summary) {
+    artSay('Βάλε περίληψη πριν δημοσιεύσεις — φαίνεται στην κάρτα και στη Google.', 'bad');
+    return;
+  }
+
+  var next = art.list.slice();
+  if (art.index >= 0) next[art.index] = a; else next.push(a);
+
+  artSay('Αποθηκεύεται…');
+  api('articles', 'PUT', next).then(function () {
+    art.list = next;
+    art.index = art.index >= 0 ? art.index : next.length - 1;
+    // Το άρθρο υπάρχει πια — άρα μπορεί και να διαγραφεί. Χωρίς αυτό,
+    // ο συντάκτης έπρεπε να βγει στη λίστα και να το ξανανοίξει.
+    $('[data-art-delete]').hidden = false;
+    artDirty(false);
+    artSay(a.status === 'published'
+      ? 'Αποθηκεύτηκε. Φαίνεται στο site μόλις ξαναχτιστεί (~2 λεπτά).'
+      : 'Αποθηκεύτηκε ως πρόχειρο.', 'ok');
+    drawArtList();
+  }).catch(function (err) {
+    artSay('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+function deleteArticle(){
+  if (art.index < 0) return;
+  var a = art.list[art.index];
+  if (!window.confirm('Να διαγραφεί οριστικά το «' + (a.title || 'χωρίς τίτλο') + '»;')) return;
+
+  var next = art.list.slice();
+  next.splice(art.index, 1);
+
+  artSay('Διαγράφεται…');
+  api('articles', 'PUT', next).then(function () {
+    art.list = next;
+    artDirty(false);
+    closeArticle();
+  }).catch(function (err) {
+    artSay('Δεν διαγράφηκε: ' + err.message, 'bad');
+  });
+}
+
+// ---- επιλογή φωτογραφίας από τη βιβλιοθήκη ----
+//
+// Αντί για δεύτερο παράθυρο: στέλνουμε τον συντάκτη στην καρτέλα
+// «Φωτογραφίες», όπου κάθε φωτογραφία έχει ήδη κουμπί αντιγραφής.
+function pickImage(target){
+  artSay('Πήγαινε στις «Φωτογραφίες», πάτησε «Αντιγραφή» και κόλλησέ το εδώ.', 'warn');
+  var tab = $('.tab[data-tab="fotos"]');
+  if (tab) tab.click();
+  art.pending = target;
+}
+
+function wireArticles(){
+  $('[data-art="category"]').innerHTML = CATS.map(function (c) {
+    return '<option value="' + esc(c) + '">' + esc(c) + '</option>';
+  }).join('');
+
+  $('[data-new-article]').addEventListener('click', function () { openArticle(-1); });
+  $('[data-art-back]').addEventListener('click', function () {
+    if (art.dirty && !window.confirm('Υπάρχουν αλλαγές που δεν αποθηκεύτηκαν. Να χαθούν;')) return;
+    closeArticle();
+  });
+
+  $('[data-art-list]').addEventListener('click', function (e) {
+    var row = e.target.closest('[data-open]');
+    if (row) openArticle(Number(row.dataset.open));
+  });
+
+  $('[data-art-save]').addEventListener('click', saveArticle);
+  $('[data-art-delete]').addEventListener('click', deleteArticle);
+
+  // Τα πεδία της κεφαλίδας — ένας listener για όλα.
+  $('[data-art-editor]').addEventListener('input', function (e) {
+    var f = e.target.closest('[data-art]');
+    if (!f) return;
+    artDirty(true);
+    if (f.dataset.art === 'title') { art.open.title = f.value; drawSlug(); }
+    if (f.dataset.art === 'image') { art.open.image = f.value; drawThumb(); }
+  });
+
+  // Τα μπλοκ — επίσης ένας listener.
+  var blocks = $('[data-art-blocks]');
+
+  blocks.addEventListener('input', function (e) {
+    var field = e.target.closest('[data-bx]');
+    var box = e.target.closest('[data-bi]');
+    if (!field || !box) return;
+
+    var b = art.open.body[Number(box.dataset.bi)];
+    if (!b) return;
+
+    var key = field.dataset.bx;
+    b[key] = key === 'id' && blockKind(b) === 'youtube' ? youtubeId(field.value) : field.value;
+    artDirty(true);
+  });
+
+  blocks.addEventListener('click', function (e) {
+    var box = e.target.closest('[data-bi]');
+    if (!box) return;
+    var i = Number(box.dataset.bi);
+    var body = art.open.body;
+
+    var move = e.target.closest('[data-bmove]');
+    if (move) {
+      var to = i + Number(move.dataset.bmove);
+      if (to < 0 || to >= body.length) return;
+      var tmp = body[i]; body[i] = body[to]; body[to] = tmp;
+      drawBlocks();
+      artDirty(true);
+      return;
+    }
+
+    if (e.target.closest('[data-bdel]')) {
+      body.splice(i, 1);
+      drawBlocks();
+      artDirty(true);
+      return;
+    }
+
+    var pick = e.target.closest('[data-bpick]');
+    if (pick) pickImage({ block: i });
+  });
+
+  // Όταν φύγει ο δρομέας από το πεδίο — ΟΧΙ σε κάθε πληκτρολόγηση,
+  // γιατί θα χανόταν η θέση του δρομέα στη μέση της λέξης.
+  blocks.addEventListener('change', function (e) {
+    var box = e.target.closest('[data-bi]');
+    if (!box) return;
+    var b = art.open.body[Number(box.dataset.bi)];
+    if (!b) return;
+
+    // Ο σύνδεσμος YouTube γίνεται κωδικός ΚΑΙ στην οθόνη. Χωρίς αυτό ο
+    // συντάκτης βλέπει ακόμα ό,τι κόλλησε και νομίζει ότι δεν πιάστηκε.
+    if (e.target.dataset.bx === 'id' && blockKind(b) === 'youtube') {
+      e.target.value = b.id;
+    }
+
+    // Η προεπισκόπηση της φωτογραφίας θέλει ξαναζωγράφισμα.
+    if (e.target.dataset.bx === 'src') drawBlocks();
+  });
+
+  $$('[data-add]').forEach(function (btn) {
+    btn.addEventListener('click', function () { addBlock(btn.dataset.add); });
+  });
+
+  $('[data-art-pickimg]').addEventListener('click', function () { pickImage({ main: true }); });
+}
+
+// ---------------------------------------------------------------------
 // Σύνδεση
 // ---------------------------------------------------------------------
 
@@ -525,6 +987,7 @@ function wire(){
   $('[data-save="curation"]').addEventListener('click', save);
 
   wireShots();
+  wireArticles();
 
   // Δικλείδα: φεύγει η σελίδα με αναλλοίωτη δουλειά μέσα.
   window.addEventListener('beforeunload', function (e) {
@@ -545,12 +1008,17 @@ function boot(){
     api('episodes'),
     api('videos'),
     api('news'),
+    api('articles'),
   ]).then(function (r) {
     state.curation = r[0] || {};
     state.items = normalize(r[1], r[2], r[3]);
+    // Το αρχείο δεν υπάρχει μέχρι να γραφτεί το πρώτο άρθρο — τότε το
+    // API επιστρέφει null, όχι σφάλμα.
+    art.list = Array.isArray(r[4]) ? r[4] : [];
     $('[data-until]').value = state.curation.featuredUntil || '';
     drawNow();
     drawPicks();
+    drawArtList();
     loadShots();
     say('');
   }).catch(function (err) {

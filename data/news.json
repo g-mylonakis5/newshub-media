@@ -1,5 +1,38 @@
 [
   {
+    "id": "oak-syllypitiria-gia-tin-apoleia-tis-miteras-ergazomenoy",
+    "title": "ΟΑΚ: Συλλυπητήρια για την απώλεια της μητέρας εργαζομένου",
+    "url": "https://www.newshub.gr/el/ta-en-oiko/oak-syllypitiria-gia-tin-apoleia-tis-miteras-ergazomenoy",
+    "date": "2026-11-04T12:50:00.000Z",
+    "category": "Τα εν οίκω",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/keri.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/keri.jpg",
+    "summary": "Τη βαθιά του θλίψη για την απώλεια της μητέρας του εργαζομένου του Οργανισμού Ανάπτυξης Κρήτης, Σπύρου Λαγουδάκη, εκφράζει η Διοίκηση και το προσωπικό του Ορ...",
+    "featured": false
+  },
+  {
+    "id": "programma-episkepseon-kinitis-monadas-kentroy-psychikis-ygeias-chanion-ston-dimo-platania-5",
+    "title": "Πρόγραμμα Επισκέψεων Κινητής Μονάδας Κέντρου Ψυχικής Υγείας Χανίων, στον Δήμο Πλατανιά",
+    "url": "https://www.newshub.gr/el/kriti/programma-episkepseon-kinitis-monadas-kentroy-psychikis-ygeias-chanion-ston-dimo-platania-5",
+    "date": "2026-11-04T12:40:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/demarcheio-platania-1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/demarcheio-platania-1.jpg",
+    "summary": "Η Κινητή Μονάδα του Κέντρου Ψυχικής Υγείας Νομού Χανίων πραγματοποιεί επισκέψεις σε εβδομαδιαία βάση σε Κέντρα Υγείας και Περιφερειακά Ιατρεία του νομού.&nbs...",
+    "featured": false
+  },
+  {
+    "id": "next-skills-academy-neo-programma-anaptyxis-epaggelmatikon-dexiotiton",
+    "title": "Next Skills Academy: Νέο πρόγραμμα ανάπτυξης επαγγελματικών δεξιοτήτων",
+    "url": "https://www.newshub.gr/el/oikonomia/next-skills-academy-neo-programma-anaptyxis-epaggelmatikon-dexiotiton",
+    "date": "2026-11-04T12:38:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/next_skills_academy.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/next_skills_academy.jpg",
+    "summary": "Ένα νέο πανελλαδικό πρόγραμμα που αποτελεί πρωτοβουλία εταιρικής υπευθυνότητας του ΑΔΜΗΕ και υλοποιείται από τη Wise Greece, συνδέει τις ψηφιακές και πράσινε...",
+    "featured": false
+  },
+  {
     "id": "oi-apofaseis-tis-dimotikis-epitropis-dimoy-chersonisoy-gia-odiko-diktyo-kai-scholikes-monades",
     "title": "Οι αποφάσεις της Δημοτικής Επιτροπής Δήμου Χερσονήσου για οδικό δίκτυο και σχολικές Μονάδες",
     "url": "https://www.newshub.gr/el/kriti/oi-apofaseis-tis-dimotikis-epitropis-dimoy-chersonisoy-gia-odiko-diktyo-kai-scholikes-monades",
@@ -216,7 +249,7 @@
     "category": "Κρήτη",
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/4-10/67067546_2564548096918256_2289558245573918720_n.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/4-10/67067546_2564548096918256_2289558245573918720_n.jpg",
-    "summary": "Με αφορμή τον εορτασμό του προστάτη της Πολεμικής Αεροπορίας, Αρχαγγέλου Μιχαήλ, το Γενικό Επιτελείο Αεροπορίας, σε συνεργασία με την Περιφέρεια Κρήτης και τ...",
+    "summary": "Με αφορμή τον εορτασμό του προστάτη της Πολεμικής Αεροπορίας, Αρχαγγέλου Μιχαήλ, το Γενικό Επιτελείο Αεροπορίας, σε συνεργασία με την Περιφέρεια Κρ...",
     "featured": false
   },
   {
@@ -6564,39 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/30-10/2-10chxyt.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/30-10/2-10chxyt.jpg",
     "summary": "Συνελήφθη στη Ρόδο 47χρονος Γερμανός, κατηγορούμενος για έκθεση σε κίνδυνο του 15χρονου γιου του, ο οποίος μεταφέρθηκε στο νοσοκομείο έπειτα από κατανάλωση α...",
-    "featured": false
-  },
-  {
-    "id": "xekina-tin-triti-3-noemvrioy-to-diimero-ekpaideytiko-seminario-cyber-secure-crete-2026-kyvernoasfaleia-gia-oloys",
-    "title": "Ξεκινά την Τρίτη 3 Νοεμβρίου το διήμερο εκπαιδευτικό σεμινάριο «cyber Secure Crete 2026-Κυβερνοασφάλεια για όλους»",
-    "url": "https://www.newshub.gr/el/kriti/xekina-tin-triti-3-noemvrioy-to-diimero-ekpaideytiko-seminario-cyber-secure-crete-2026-kyvernoasfaleia-gia-oloys",
-    "date": "2026-10-30T11:48:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/30-10/cyber-security.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/30-10/cyber-security.jpg",
-    "summary": "Ξεκινά την Τρίτη 3 Νοεμβρίου 2026 το διήμερο εκπαιδευτικό σεμινάριο και επιστημονική διημερίδα με θέμα «CYBER SECURE CRETE 2026 &ndash; Κυβερνοασφάλεια...",
-    "featured": false
-  },
-  {
-    "id": "petrelaio-thermansis-kai-kaysima-ayrio-oi-anakoinoseis-gia-tis-epidotiseis",
-    "title": "Πετρέλαιο θέρμανσης και καύσιμα: Αύριο οι ανακοινώσεις για τις επιδοτήσεις",
-    "url": "https://www.newshub.gr/el/oikonomia/petrelaio-thermansis-kai-kaysima-ayrio-oi-anakoinoseis-gia-tis-epidotiseis",
-    "date": "2026-10-30T11:41:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/30-10/kausimamama.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/30-10/kausimamama.jpg",
-    "summary": "Αμετάβλητες αναμένεται να παραμείνουν οι επιδοτήσεις για την αμόλυβδη βενζίνη, το πετρέλαιο κίνησης και το πετρέλαιο θέρμανσης κατά το πρώτο δεκαπενθήμερο το...",
-    "featured": false
-  },
-  {
-    "id": "sto-mellon-para-sports-center-mathites-apo-scholeia-toy-irakleioy",
-    "title": "Στο «ΜέλλΟΝ Para Sports Center» μαθητές από σχολεία του Ηρακλείου",
-    "url": "https://www.newshub.gr/el/kriti/sto-mellon-para-sports-center-mathites-apo-scholeia-toy-irakleioy",
-    "date": "2026-10-30T11:34:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/30-10/1-8.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/30-10/1-8.jpg",
-    "summary": "Μια ξεχωριστή εκπαιδευτική εμπειρία είχαν την ευκαιρία να βιώσουν χθες Πέμπτη 29 Οκτωβρίου, μαθητές και εκπαιδευτικοί σχολείων του Ηρακλείου, οι οποίοι επισκ...",
     "featured": false
   }
 ]
