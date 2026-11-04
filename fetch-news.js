@@ -20,11 +20,34 @@ const https = require('https');
 const SITEMAP = 'https://www.newshub.gr/sitemap_google_news.php';
 const HOMEPAGE = 'https://www.newshub.gr/';
 const OUT = path.join(__dirname, 'data', 'news.json');
+const CURATION = path.join(__dirname, 'data', 'curation.json');
+
+// Τα σώματα των ΕΙΔΗΣΕΩΝ του newshub.gr, ένα αρχείο το καθένα.
+//
+// ΟΧΙ μέσα στο news.json: εκείνο ξαναγράφεται ολόκληρο σε κάθε λήψη και
+// είναι στο git. Με 600 σώματα μέσα του θα έστελνε ~2,5MB σε κάθε
+// commit «Φρέσκο υλικό», πολλές φορές τη μέρα. Χωριστά αρχεία αλλάζουν
+// μόνο όταν όντως προστεθεί άρθρο — ίδιο μοτίβο με το data/transcripts/.
+//
+// ΟΧΙ «articles»: το όνομα είναι πιασμένο. Το admin-api.js γράφει τα
+// ΔΙΚΑ ΜΑΣ άρθρα — όσα συντάσσουν οι δημοσιογράφοι — στο
+// data/articles.json. Δύο διαφορετικά πράγματα δεν μοιράζονται όνομα.
+const BODY_DIR = path.join(__dirname, 'data', 'news-bodies');
 
 // Πόσα άρθρα κρατάμε συνολικά. Το sitemap είναι κυλιόμενο παράθυρο 3
 // ημερών — ό,τι δεν σώσουμε τώρα, χάνεται για πάντα. Γι' αυτό
 // συσσωρεύουμε αντί να αντικαθιστούμε.
 const KEEP = 600;
+
+// Για πόσα από τα πιο πρόσφατα κρατάμε ΣΩΜΑ.
+//
+// Σώμα χρειάζονται μόνο όσα θα πάρουν δική τους σελίδα στο
+// newshubmedia: τα must read και το πρωτοσέλιδο όταν είναι είδηση. Δεν
+// ξέρουμε εδώ ποια θα διαλέξει το build, οπότε κρατάμε με το παραπάνω
+// τα πιο πρόσφατα — από εκεί βγαίνουν — συν όσα ονομάζει το χέρι στο
+// curation.json. Η ροή ειδήσεων στο πλάι ΔΕΝ θέλει σώμα: ανοίγει στο
+// newshub.gr, όπως ζήτησε το αφεντικό.
+const BODY_FOR = 20;
 
 // Πόσα άρθρα κατεβάζουμε ταυτόχρονα. Το newshub.gr είναι μικρό site σε
 // κοινόχρηστο server — δεν του ρίχνουμε 250 αιτήσεις μαζί.
@@ -225,10 +248,63 @@ function when(html, fallbackDay) {
   return d > Date.now() ? null : d.toISOString();
 }
 
-async function details(item) {
+// Το σώμα του άρθρου, σε παραγράφους.
+//
+// Κάθεται πάντα σε <div id="news-desc" class="cmslinks"> και τελειώνει
+// στο σημάδι news-tags. Μέσα είναι σκέτα <p>· όσα είναι ολόκληρα σε
+// <strong> είναι υπότιτλοι και τα σημαδεύουμε ως τέτοιους, ώστε στη
+// δική μας σελίδα να γίνουν κανονικές επικεφαλίδες και όχι ψεύτικο
+// έντονο κείμενο.
+//
+// Κρατάμε ΚΕΙΜΕΝΟ, όχι HTML: ό,τι φτάνει εδώ είναι ξένη σελίδα και δεν
+// το εμπιστευόμαστε να περάσει αυτούσιο μέσα στις δικές μας.
+function articleBody(html) {
+  const start = html.indexOf('id="news-desc"');
+  if (start < 0) return [];
+
+  let block = html.slice(start);
+
+  // Τέλος: το σημάδι των ετικετών, ή — αν λείπει — το μπλοκ «Ακολουθήστε
+  // μας», που είναι κολλημένο στο τέλος του κειμένου και δεν είναι άρθρο.
+  for (const mark of ['news-tags', 'follow-news-social', 'news-related']) {
+    const end = block.indexOf(mark);
+    if (end > 0) block = block.slice(0, end);
+  }
+
+  const out = [];
+  for (const m of block.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)) {
+    const raw = m[1];
+    const text = decode(raw.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' '));
+    if (text.length < 2) continue;
+
+    // Υπότιτλος: όλη η παράγραφος μέσα σε <strong>, χωρίς άλλο κείμενο.
+    const bold = raw.match(/^\s*<strong[^>]*>([\s\S]*?)<\/strong>\s*$/i);
+    out.push({ type: bold ? 'h' : 'p', text });
+  }
+
+  return trimTail(out);
+}
+
+// Πολλά άρθρα τελειώνουν με «Διαβάστε επίσης:» και συνδέσμους προς άλλα
+// δικά τους. Είναι δική τους πλοήγηση, όχι κείμενο του άρθρου — και στη
+// δική μας σελίδα θα έβγαινε επικεφαλίδα που δεν οδηγεί πουθενά.
+//
+// Κόβουμε ΜΟΝΟ όταν βρίσκεται στο τελευταίο τέταρτο. Η ίδια φράση στη
+// μέση ενός κειμένου είναι παραπομπή του συντάκτη και δεν πειράζεται·
+// αλλιώς ένα άρθρο θα έχανε τη μισή του ουσία.
+const TAIL = /^\s*(Διαβάστε|Δείτε|Δειτε|Διαβαστε)\s+(επίσης|επισης|κι ακόμα)/i;
+
+function trimTail(paras) {
+  const from = Math.floor(paras.length * 0.75);
+  const cut = paras.findIndex((p, i) => i >= from && TAIL.test(p.text));
+  return cut > 0 ? paras.slice(0, cut) : paras;
+}
+
+async function details(item, wantBody = false) {
   // Σταματάμε μόλις περάσουμε την ημερομηνία — είναι λίγο κάτω από τον
-  // τίτλο, άρα κατεβάζουμε ένα κλάσμα της σελίδας.
-  const html = await get(item.url, 'news-share-container');
+  // τίτλο, άρα κατεβάζουμε ένα κλάσμα της σελίδας. Όταν θέλουμε και το
+  // σώμα, κατεβαίνουμε ως τις ετικέτες: ~45KB αντί 32KB, ίδια αίτηση.
+  const html = await get(item.url, wantBody ? 'news-tags' : 'news-share-container');
   const head = html.split('</head>')[0];
   const img = meta(head, 'og:image');
 
@@ -247,6 +323,89 @@ async function details(item) {
     summary: decode(meta(head, 'og:description')),
     featured: false,
   };
+}
+
+// ---- Τα σώματα ----
+
+function bodyPath(id) {
+  return path.join(BODY_DIR, `${id}.json`);
+}
+
+function hasBody(id) {
+  return fs.existsSync(bodyPath(id));
+}
+
+function saveBody(article, paras) {
+  // Σώμα κάτω από δύο παραγράφους δεν είναι άρθρο — είναι φωτογραφία με
+  // λεζάντα ή σελίδα που δεν διαβάστηκε σωστά. Δεν το σώζουμε· έτσι το
+  // build θα αφήσει το άρθρο να ανοίγει στο newshub.gr, αντί να βγάλει
+  // δική μας σελίδα μισοάδεια.
+  if (paras.length < 2) return false;
+
+  fs.mkdirSync(BODY_DIR, { recursive: true });
+  fs.writeFileSync(bodyPath(article.id), JSON.stringify({
+    id: article.id,
+    url: article.url,
+    title: article.title,
+    fetched: new Date().toISOString(),
+    body: paras,
+  }, null, 2), 'utf8');
+  return true;
+}
+
+// Ποια άρθρα ονομάζει το χέρι στο curation.json; Εκείνα θέλουν σώμα
+// όποια κι αν είναι η ημερομηνία τους — μπορεί να είναι μηνών.
+function handPicked() {
+  try {
+    const c = JSON.parse(fs.readFileSync(CURATION, 'utf8'));
+    return [...(c.mustRead || []), c.featured || '']
+      .map((s) => String(s).trim())
+      .filter(Boolean);
+  } catch (err) {
+    if (err.code !== 'ENOENT') {
+      console.warn('ΠΡΟΣΟΧΗ: το data/curation.json δεν διαβάστηκε —', err.message);
+    }
+    return [];
+  }
+}
+
+// Κατεβάζει τα σώματα που λείπουν, για όσα άρθρα μπορεί να πάρουν δική
+// τους σελίδα. Τρέχει ΜΕΤΑ τη συγχώνευση, όταν ξέρουμε τη σειρά.
+async function ensureBodies(all) {
+  const want = new Map();
+
+  for (const a of all.slice(0, BODY_FOR)) want.set(a.id, a);
+
+  const picks = handPicked();
+  if (picks.length) {
+    for (const a of all) {
+      if (picks.some((p) => p === a.url || p === a.id || p.includes(a.id))) want.set(a.id, a);
+    }
+  }
+
+  const missing = [...want.values()].filter((a) => !hasBody(a.id));
+  if (!missing.length) {
+    console.log('Σώματα άρθρων: δεν λείπει κανένα');
+    return;
+  }
+
+  console.log(`Σώματα άρθρων: κατεβάζω ${missing.length}`);
+  let got = 0;
+  let thin = 0;
+
+  for (const a of missing) {
+    try {
+      const html = await get(a.url, 'news-tags');
+      const paras = articleBody(html);
+      if (saveBody(a, paras)) got++; else thin++;
+    } catch (err) {
+      console.warn('  παραλείπεται:', a.id, '—', err.code || err.message);
+    }
+    await new Promise((r) => setTimeout(r, 150));
+  }
+
+  console.log(`  ${got} σώματα γράφτηκαν στο data/news-bodies/`);
+  if (thin) console.log(`  ${thin} ήταν πολύ μικρά — μένουν σύνδεσμος προς το newshub.gr`);
 }
 
 // Τρέχουν λίγα μαζί, όχι όλα: AT_ONCE εργάτες που τραβούν από την ίδια ουρά.
@@ -336,6 +495,11 @@ async function main() {
   console.log();
   console.log(`Γράφτηκαν ${all.length} άρθρα στο data/news.json`);
   if (marked) console.log(`Πρωτοσέλιδο: ${marked.slice(0, 70)}`);
+
+  // Τα σώματα έρχονται τελευταία: χρειάζονται τη ΣΕΙΡΑ των άρθρων, και
+  // αν κάτι πάει στραβά εδώ, το news.json έχει ήδη γραφτεί σωστά.
+  console.log();
+  await ensureBodies(all);
 
   // Αν η ροή σταματήσει, πρέπει να το μάθουμε — όχι να σερβίρουμε
   // χθεσινές ειδήσεις σαν σημερινές.

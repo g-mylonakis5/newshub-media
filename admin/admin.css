@@ -428,3 +428,185 @@ body{
   .side{ flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
   .work{ padding: 1rem; }
 }
+
+
+/* =====================================================================
+   ΑΡΘΡΑ
+   ===================================================================== */
+
+/* Τα πεδία του συντάκτη θέλουν περισσότερο πλάτος από τα 460px των
+   υπολοίπων: εδώ γράφεται κείμενο, δεν συμπληρώνεται ρύθμιση. */
+.editor .field{ max-width: 760px; }
+
+.editor .field textarea,
+.editor .field select{
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.editor .field textarea{ resize: vertical; line-height: 1.6; }
+.editor .field textarea:focus,
+.editor .field select:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
+
+.editor .field input + input{ margin-top: 0.4rem; }
+
+.row2{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0 1.2rem;
+  max-width: 760px;
+}
+
+/* Η μπάρα του συντάκτη κολλάει στην κορυφή. Ένα μεγάλο άρθρο είναι
+   πολλές οθόνες — χωρίς αυτό, η «Αποθήκευση» χάνεται στο σκρολ και ο
+   συντάκτης δεν ξέρει αν έχει σωθεί η δουλειά του. */
+.editor-bar{
+  position: sticky;
+  top: var(--top);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 0;
+  margin-bottom: 1.2rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.editor-acts{ margin-left: auto; display: flex; gap: 0.5rem; }
+
+.editor-state{ font-size: 0.85rem; color: var(--muted); }
+.editor-state[data-kind="ok"]{ color: #7BD9AC; }
+.editor-state[data-kind="bad"]{ color: #FF9AA5; }
+.editor-state[data-kind="warn"]{ color: var(--audio); }
+
+/* ---- η λίστα ---- */
+
+.artrow{
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+}
+
+.artrow:hover{ border-color: var(--sky); }
+
+.artrow-img{
+  width: 84px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex: none;
+  background: var(--raise);
+}
+
+.artrow-text{ display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.artrow-title{ font-weight: 600; }
+.artrow-meta{ font-size: 0.8rem; color: var(--muted); }
+
+.pill{
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.pill--draft{ background: rgba(138,149,166,0.2); color: var(--muted); }
+.pill--later{ background: rgba(217,164,65,0.18); color: var(--audio); }
+.pill--live{ background: rgba(46,158,107,0.18); color: #7BD9AC; }
+
+/* ---- τα μπλοκ κειμένου ---- */
+
+.blocks{ max-width: 760px; }
+
+.block{
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  margin-bottom: 0.7rem;
+}
+
+.block-head{
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.block-kind{
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.block-acts{ margin-left: auto; display: flex; gap: 0.2rem; }
+
+.block-acts button{
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.block-acts button:hover:not(:disabled){ background: var(--raise); color: var(--text); }
+.block-acts button:disabled{ opacity: 0.3; cursor: default; }
+
+.block-body{ padding: 0.7rem; }
+
+.block-body textarea,
+.block-body input{
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.block-body textarea{ resize: vertical; }
+.block-body input + input{ margin-top: 0.4rem; }
+.block-body textarea:focus,
+.block-body input:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
+
+.addbar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  max-width: 760px;
+}
+
+.pickline{ display: flex; gap: 0.4rem; }
+.pickline input{ flex: 1; }
+
+.thumb{ margin-top: 0.5rem; }
+
+.thumb img{
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}

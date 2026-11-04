@@ -101,9 +101,93 @@
 
     <!-- ========== ΟΙ ΥΠΟΛΟΙΠΕΣ — έρχονται ========== -->
     <section class="panel" data-panel="arthra">
-      <header class="panel-head"><div><h1>Άρθρα</h1>
-        <p class="hint">Σύνταξη άρθρου με κείμενο, φωτογραφίες και ενσωματωμένο ηχητικό ή βίντεο.</p></div></header>
-      <p class="soon">Έρχεται. Σειρά: μετά το πρωτοσέλιδο και τις κατηγορίες.</p>
+      <header class="panel-head">
+        <div>
+          <h1>Άρθρα</h1>
+          <p class="hint">Σύνταξη άρθρου με κείμενο, φωτογραφίες και ενσωματωμένο ηχητικό ή βίντεο.</p>
+        </div>
+        <button type="button" class="btn btn--go" data-new-article>+ Νέο άρθρο</button>
+      </header>
+
+      <!-- Η ΛΙΣΤΑ. Φαίνεται όταν δεν συντάσσουμε κάτι. -->
+      <div data-art-list>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+
+      <!-- Ο ΣΥΝΤΑΚΤΗΣ. Κρυμμένος μέχρι να ανοίξει άρθρο. -->
+      <div class="editor" data-art-editor hidden>
+
+        <div class="editor-bar">
+          <button type="button" class="btn btn--ghost" data-art-back>← Πίσω στη λίστα</button>
+          <span class="editor-state" data-art-state></span>
+          <div class="editor-acts">
+            <button type="button" class="btn btn--ghost" data-art-delete>Διαγραφή</button>
+            <button type="button" class="btn btn--go" data-art-save>Αποθήκευση</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="art-title">Τίτλος</label>
+          <input type="text" id="art-title" data-art="title" placeholder="Ο τίτλος του άρθρου">
+          <p class="hint">Η διεύθυνση της σελίδας βγαίνει από τον τίτλο:
+            <code data-art-slug>—</code></p>
+        </div>
+
+        <div class="field">
+          <label for="art-summary">Περίληψη</label>
+          <textarea id="art-summary" data-art="summary" rows="2"
+                    placeholder="Δύο γραμμές — φαίνονται στην κάρτα και στη Google"></textarea>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="art-category">Κατηγορία</label>
+            <select id="art-category" data-art="category"></select>
+          </div>
+          <div class="field">
+            <label for="art-author">Υπογραφή</label>
+            <input type="text" id="art-author" data-art="author" placeholder="Όνομα δημοσιογράφου">
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="art-date">Ημερομηνία δημοσίευσης</label>
+            <input type="datetime-local" id="art-date" data-art="date">
+            <p class="hint">Ημερομηνία στο μέλλον = δημοσιεύεται μόνο του όταν έρθει η ώρα.</p>
+          </div>
+          <div class="field">
+            <label for="art-status">Κατάσταση</label>
+            <select id="art-status" data-art="status">
+              <option value="draft">Πρόχειρο — δεν φαίνεται πουθενά</option>
+              <option value="published">Δημοσιευμένο</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="art-image">Κεντρική φωτογραφία</label>
+          <div class="pickline">
+            <input type="text" id="art-image" data-art="image" placeholder="/uploads/…">
+            <button type="button" class="btn btn--ghost" data-art-pickimg="image">Διάλεξε</button>
+          </div>
+          <input type="text" data-art="imageCaption" placeholder="Λεζάντα (προαιρετική)">
+          <div class="thumb" data-art-thumb hidden><img src="" alt=""></div>
+        </div>
+
+        <h2 class="sub">Το κείμενο</h2>
+        <p class="hint">Κάθε κομμάτι είναι ξεχωριστό. Πρόσθεσε όσα θέλεις, με όποια σειρά.</p>
+
+        <div class="blocks" data-art-blocks></div>
+
+        <div class="addbar">
+          <button type="button" class="btn btn--ghost" data-add="p">+ Παράγραφος</button>
+          <button type="button" class="btn btn--ghost" data-add="h">+ Υπότιτλος</button>
+          <button type="button" class="btn btn--ghost" data-add="image">+ Φωτογραφία</button>
+          <button type="button" class="btn btn--ghost" data-add="youtube">+ Βίντεο YouTube</button>
+          <button type="button" class="btn btn--ghost" data-add="episode">+ Επεισόδιο</button>
+        </div>
+      </div>
     </section>
 
     <section class="panel" data-panel="fotos">
