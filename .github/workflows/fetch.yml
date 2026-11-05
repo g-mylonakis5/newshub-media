@@ -37,6 +37,7 @@ on:
 
 permissions:
   contents: write
+  issues: write     # για την ειδοποίηση όταν παγώσει η ροή
 
 # Δύο τρεξίματα μαζί θα χτυπούσαν το ένα το push του άλλου.
 concurrency:
@@ -87,3 +88,68 @@ jobs:
           fi
           git commit -m "Φρέσκο υλικό — $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
+
+      # Η δικλείδα. Κοιτάζει ΑΠΟΤΕΛΕΣΜΑ, όχι σφάλματα: πόση ώρα έχει να
+      # μπει καινούρια είδηση. Έτσι πιάνει με έναν έλεγχο όλα όσα
+      # σταματούν τη ροή σιωπηλά — σπασμένο ή άδειο sitemap, ληγμένο
+      # token, ανασχεδιασμό του newshub.gr.
+      #
+      # continue-on-error: το πάγωμα δεν είναι αποτυχία της εργασίας. Η
+      # λήψη έγινε σωστά· το πρόβλημα είναι ότι δεν υπήρχε τίποτα να
+      # ληφθεί, και θέλουμε να το πούμε με δικά μας λόγια.
+      - name: Δικλείδα — μπαίνουν όντως ειδήσεις;
+        id: fresh
+        continue-on-error: true
+        run: node check-fresh.js
+
+      # Ένα issue, όχι δέκα: το GitHub στέλνει email μόλις ανοίξει, και
+      # με έλεγχο κάθε μισή ώρα θα γέμιζε το inbox μέχρι να το δει
+      # κάποιος. Αν υπάρχει ήδη ανοιχτό, προσθέτουμε σχόλιο ΜΟΝΟ την
+      # πρώτη φορά κάθε μέρα, ώστε να φαίνεται ότι συνεχίζεται.
+      - name: Ειδοποίηση αν πάγωσε η ροή
+        if: steps.fresh.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE='Πάγωσε η ροή ειδήσεων'
+
+          # Την πρώτη φορά η ετικέτα δεν υπάρχει, και χωρίς αυτήν το
+          # «gh issue list --label» σφάλλει αντί να γυρίσει άδειο.
+          gh label create pagoma --repo "$REPO" --color B60205 \
+            --description 'Η ροή σταμάτησε να ανανεώνεται' 2>/dev/null || true
+
+          OPEN=$(gh issue list --repo "$REPO" --state open --label pagoma \
+                   --json number --jq '.[0].number // empty' 2>/dev/null || true)
+
+          if [ -z "$OPEN" ]; then
+            gh issue create --repo "$REPO" --title "$TITLE" --label pagoma --body "$(cat <<BODY
+          Ο έλεγχος βρήκε ότι δεν μπαίνουν νέες ειδήσεις.
+
+          \`\`\`
+          $(node check-fresh.js 2>&1 || true)
+          \`\`\`
+
+          **Γιατί επείγει:** το sitemap του newshub.gr είναι κυλιόμενο
+          παράθυρο τριών ημερών. Ό,τι δεν σωθεί μέσα σε αυτές τις τρεις
+          μέρες χάνεται οριστικά.
+
+          **Τι να ελέγξεις, με αυτή τη σειρά:**
+
+          1. Ανοίγει το <https://www.newshub.gr/sitemap_google_news.php>; Έχει μέσα άρθρα;
+          2. Το τρέξιμο που το εντόπισε: $RUN
+          3. Μήπως έληξε το GitHub token ή το YOUTUBE_API_KEY;
+
+          Κλείσε αυτό το issue όταν ξαναμπούν ειδήσεις — θα ξανανοίξει μόνο του αν χρειαστεί.
+          BODY
+          )"
+          else
+            SINCE=$(date -u '+%Y-%m-%d')
+            SEEN=$(gh issue view "$OPEN" --repo "$REPO" --json comments \
+                     --jq "[.comments[] | select(.body | startswith(\"$SINCE\"))] | length")
+            if [ "$SEEN" = '0' ]; then
+              gh issue comment "$OPEN" --repo "$REPO" \
+                --body "$SINCE — συνεχίζεται. Τελευταίο τρέξιμο: $RUN"
+            fi
+          fi
