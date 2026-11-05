@@ -344,31 +344,39 @@ function sayUpload(text, kind){
   if (kind) el.setAttribute('data-kind', kind); else el.removeAttribute('data-kind');
 }
 
-function upload(files){
+// Το ανέβασμα γίνεται από δύο σημεία: την καρτέλα «Φωτογραφίες» και τον
+// επιλογέα μέσα στο άρθρο. Αλλάζει μόνο πού γράφεται το μήνυμα και τι
+// γίνεται στο τέλος — όχι η ίδια η δουλειά.
+function upload(files, ctx){
+  ctx = ctx || {};
+  var say = ctx.say || sayUpload;
+  var after = ctx.after || function () { loadShots(); };
+
   var list = Array.prototype.slice.call(files).filter(function (f) {
     return /^image\//.test(f.type);
   });
-  if (!list.length) { sayUpload('Μόνο φωτογραφίες.', 'bad'); return; }
+  if (!list.length) { say('Μόνο φωτογραφίες.', 'bad'); return; }
 
   var done = 0;
   var failed = [];
+  var last = '';    // η διεύθυνση της τελευταίας που ανέβηκε
 
   // Μία-μία και όχι όλες μαζί: σε αδύναμο σήμα, δέκα παράλληλα
   // ανεβάσματα μπλοκάρουν το ένα το άλλο και κόβονται όλα μαζί.
   function next(i){
     if (i >= list.length) {
-      sayUpload(
+      say(
         failed.length
           ? done + ' ανέβηκαν, ' + failed.length + ' απέτυχαν: ' + failed.join(', ')
           : (done === 1 ? 'Η φωτογραφία ανέβηκε.' : done + ' φωτογραφίες ανέβηκαν.'),
         failed.length ? 'bad' : 'ok'
       );
-      loadShots();
+      after(last, done);
       return;
     }
 
     var file = list[i];
-    sayUpload('Ανεβαίνει ' + (i + 1) + ' από ' + list.length + '…');
+    say('Ανεβαίνει ' + (i + 1) + ' από ' + list.length + '…');
 
     shrink(file).then(function (blob) {
       return fetch('/api/images', {
@@ -383,6 +391,7 @@ function upload(files){
       return res.json().then(function (d) {
         if (!res.ok) throw new Error(d.error || 'σφάλμα');
         done++;
+        last = d.url || '';
       });
     }).catch(function (err) {
       failed.push(file.name + ' (' + err.message + ')');
@@ -394,34 +403,78 @@ function upload(files){
   next(0);
 }
 
-function loadShots(){
-  var box = $('[data-shots]');
+// Η κάρτα μιας φωτογραφίας. Ίδια στη βιβλιοθήκη και στον επιλογέα —
+// αλλάζει μόνο τι κουμπί κουβαλάει: «Αντιγραφή» στη βιβλιοθήκη, ενώ
+// στον επιλογέα ολόκληρη η κάρτα είναι το κουμπί.
+function shotHTML(f, mode){
+  // Το αποθηκευμένο όνομα ξεκινά με χρονοσφραγίδα 14 ψηφίων. Δείχνοντάς
+  // τη, η λεζάντα κοβόταν στο «20261103102706…» και δύο φωτογραφίες
+  // της ίδιας μέρας ήταν αδιάκριτες. Σπάμε τα δύο μέρη: η ημερομηνία
+  // μικρή, το όνομα ολόκληρο.
+  var m = f.name.match(/^(\d{8})(\d{6})-(.+)\.\w+$/);
+  var label = m ? m[3].replace(/-/g, ' ') : f.name;
+  var day = m ? m[1].slice(6, 8) + '/' + m[1].slice(4, 6) : '';
+  var pick = mode === 'pick';
 
-  fetch('/api/images').then(function (r) { return r.json(); }).then(function (files) {
+  return '<figure class="shot"'
+    + (pick ? ' tabindex="0" role="button" data-take="' + esc(f.url) + '"' : '') + '>'
+    + '<img src="' + esc(f.url) + '" alt="" loading="lazy">'
+    + '<button type="button" class="shot-del" data-del="' + esc(f.name) + '"'
+    + ' aria-label="Διαγραφή">✕</button>'
+    + (pick ? ''
+      : '<button type="button" class="shot-copy" data-copy="' + esc(f.url) + '">Αντιγραφή</button>')
+    + '<figcaption class="shot-name" title="' + esc(f.name) + '">'
+    + (day ? '<span class="shot-day">' + day + '</span> ' : '')
+    + esc(label) + '</figcaption>'
+    + '</figure>';
+}
+
+function fillShots(box, mode){
+  return fetch('/api/images').then(function (r) { return r.json(); }).then(function (files) {
     if (!files.length) {
       box.innerHTML = '<p class="muted">Καμία φωτογραφία ακόμα.</p>';
       return;
     }
-    box.innerHTML = files.map(function (f) {
-      // Το αποθηκευμένο όνομα ξεκινά με χρονοσφραγίδα 14 ψηφίων. Δείχνοντάς
-      // τη, η λεζάντα κοβόταν στο «20261103102706…» και δύο φωτογραφίες
-      // της ίδιας μέρας ήταν αδιάκριτες. Σπάμε τα δύο μέρη: η ημερομηνία
-      // μικρή, το όνομα ολόκληρο.
-      var m = f.name.match(/^(\d{8})(\d{6})-(.+)\.\w+$/);
-      var label = m ? m[3].replace(/-/g, ' ') : f.name;
-      var day = m ? m[1].slice(6, 8) + '/' + m[1].slice(4, 6) : '';
-
-      return '<figure class="shot">'
-        + '<img src="' + esc(f.url) + '" alt="" loading="lazy">'
-        + '<button type="button" class="shot-copy" data-copy="' + esc(f.url) + '">Αντιγραφή</button>'
-        + '<figcaption class="shot-name" title="' + esc(f.name) + '">'
-        + (day ? '<span class="shot-day">' + day + '</span> ' : '')
-        + esc(label) + '</figcaption>'
-        + '</figure>';
-    }).join('');
+    box.innerHTML = files.map(function (f) { return shotHTML(f, mode); }).join('');
   }).catch(function (err) {
     box.innerHTML = '<p class="muted">Δεν φόρτωσαν: ' + esc(err.message) + '</p>';
   });
+}
+
+function loadShots(){ return fillShots($('[data-shots]'), 'lib'); }
+function loadPickShots(){ return fillShots($('[data-pick-shots]'), 'pick'); }
+
+// Μετά από ανέβασμα ή διαγραφή ενημερώνονται και τα δύο πλέγματα —
+// αλλιώς ο επιλογέας δείχνει φωτογραφία που μόλις σβήστηκε.
+function refreshShots(){
+  loadShots();
+  if (!$('[data-picker]').hidden) loadPickShots();
+}
+
+// ΟΡΙΣΤΙΚΗ: οι φωτογραφίες ζουν σε R2, όχι στο git — δεν υπάρχει
+// ιστορικό να τις γυρίσει πίσω. Γι' αυτό και η προειδοποίηση για τα
+// άρθρα: δεν μπορούμε να ξέρουμε ποιο άρθρο δείχνει πού, και μια
+// σβησμένη φωτογραφία αφήνει σπασμένη εικόνα μέσα στο κείμενο.
+function delShot(name){
+  var ok = window.confirm(
+    'Να διαγραφεί οριστικά η «' + name + '»;\n\n'
+    + 'Αν χρησιμοποιείται σε άρθρο, η εικόνα εκεί θα σπάσει.'
+  );
+  if (!ok) return;
+
+  fetch('/api/images?name=' + encodeURIComponent(name), { method: 'DELETE' })
+    .then(function (res) {
+      return res.json().then(function (d) {
+        if (!res.ok) throw new Error(d.error || 'σφάλμα');
+      });
+    })
+    .then(function () {
+      sayUpload('Η φωτογραφία διαγράφηκε.', 'ok');
+      refreshShots();
+    })
+    .catch(function (err) {
+      sayUpload('Δεν διαγράφηκε: ' + err.message, 'bad');
+    });
 }
 
 function wireShots(){
@@ -456,6 +509,9 @@ function wireShots(){
   window.addEventListener('drop', function (e) { e.preventDefault(); });
 
   $('[data-shots]').addEventListener('click', function (e) {
+    var del = e.target.closest('[data-del]');
+    if (del) { delShot(del.dataset.del); return; }
+
     var btn = e.target.closest('[data-copy]');
     if (!btn) return;
 
@@ -942,6 +998,7 @@ var art = {
   open: null,      // αυτό που συντάσσεται τώρα
   index: -1,       // η θέση του στη list, ή -1 για καινούριο
   dirty: false,
+  pending: null,   // πού πάει η φωτογραφία που θα διαλέξει ο επιλογέας
 };
 
 function artSay(text, kind){
@@ -1242,11 +1299,113 @@ function deleteArticle(){
 //
 // Αντί για δεύτερο παράθυρο: στέλνουμε τον συντάκτη στην καρτέλα
 // «Φωτογραφίες», όπου κάθε φωτογραφία έχει ήδη κουμπί αντιγραφής.
+// Ο επιλογέας. Πριν, εδώ υπήρχε μόνο ένα μήνυμα «πήγαινε στις
+// Φωτογραφίες και κόλλησε τη διεύθυνση», που πετούσε τον συντάκτη έξω
+// από το άρθρο που έγραφε — και η `art.pending` δεν διαβαζόταν ποτέ.
+//
+// Το target είναι { main: true } για την κεντρική φωτογραφία, ή
+// { block: <θέση> } για μπλοκ μέσα στο κείμενο.
 function pickImage(target){
-  artSay('Πήγαινε στις «Φωτογραφίες», πάτησε «Αντιγραφή» και κόλλησέ το εδώ.', 'warn');
-  var tab = $('.tab[data-tab="fotos"]');
-  if (tab) tab.click();
   art.pending = target;
+  sayPick('');
+  $('[data-picker]').hidden = false;
+  loadPickShots();
+}
+
+function pickClose(){
+  $('[data-picker]').hidden = true;
+  art.pending = null;
+}
+
+function sayPick(text, kind){
+  var el = $('[data-pick-state]');
+  if (!text) { el.hidden = true; return; }
+  el.hidden = false;
+  el.textContent = text;
+  if (kind) el.setAttribute('data-kind', kind); else el.removeAttribute('data-kind');
+}
+
+function applyPick(url){
+  var t = art.pending;
+  if (!t || !art.open) { pickClose(); return; }
+
+  if (t.main) {
+    $('[data-art="image"]').value = url;
+    art.open.image = url;
+    drawThumb();
+  } else {
+    var b = art.open.body[t.block];
+    if (b) b.src = url;
+    drawBlocks();
+  }
+
+  artDirty(true);
+  pickClose();
+}
+
+function pickUpload(files){
+  upload(files, {
+    say: sayPick,
+    after: function (url, done) {
+      loadShots();
+      loadPickShots();
+      // Μία φωτογραφία = σαφής πρόθεση: μπαίνει κατευθείαν. Πολλές
+      // μαζί σημαίνει ότι γεμίζει τη βιβλιοθήκη, οπότε διαλέγει μόνος.
+      if (done === 1 && url) applyPick(url);
+    },
+  });
+}
+
+function wirePicker(){
+  var box = $('[data-picker]');
+  var shots = $('[data-pick-shots]');
+  var drop = $('[data-pick-drop]');
+  var input = $('[data-pick-file]');
+
+  $$('[data-picker-close]').forEach(function (el) {
+    el.addEventListener('click', pickClose);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !box.hidden) pickClose();
+  });
+
+  shots.addEventListener('click', function (e) {
+    // Η διαγραφή πρώτη: το κουμπί κάθεται ΠΑΝΩ στην κάρτα που επιλέγει,
+    // και χωρίς αυτό ένα κλικ στο ✕ θα έβαζε κιόλας τη φωτογραφία.
+    var del = e.target.closest('[data-del]');
+    if (del) { e.stopPropagation(); delShot(del.dataset.del); return; }
+
+    var take = e.target.closest('[data-take]');
+    if (take) applyPick(take.dataset.take);
+  });
+
+  shots.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var take = e.target.closest('[data-take]');
+    if (!take) return;
+    e.preventDefault();
+    applyPick(take.dataset.take);
+  });
+
+  drop.addEventListener('click', function () { input.click(); });
+  drop.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+  });
+  input.addEventListener('change', function () {
+    pickUpload(input.files);
+    input.value = '';
+  });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('is-over'); });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('is-over'); });
+  });
+  drop.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files) pickUpload(e.dataTransfer.files);
+  });
 }
 
 function wireArticles(){
@@ -1871,6 +2030,7 @@ function wire(){
   $('[data-save="curation"]').addEventListener('click', save);
 
   wireShots();
+  wirePicker();
   wireArticles();
   wireMustRead();
   wireCats();

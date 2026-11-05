@@ -325,6 +325,34 @@
   </main>
 </div>
 
+<!-- Ο επιλογέας φωτογραφίας. Ζει ΕΞΩ από τις καρτέλες γιατί τον
+     ανοίγουν και η κεντρική φωτογραφία και τα μπλοκ μέσα στο κείμενο.
+     Πριν υπήρχε μόνο ένα μήνυμα «πήγαινε στις Φωτογραφίες και κόλλησε
+     τη διεύθυνση» — ο συντάκτης έχανε τη θέση του μέσα στο άρθρο. -->
+<div class="picker" data-picker hidden>
+  <div class="picker-back" data-picker-close></div>
+
+  <div class="picker-box" role="dialog" aria-modal="true" aria-label="Διάλεξε φωτογραφία">
+    <header class="picker-head">
+      <h2>Διάλεξε φωτογραφία</h2>
+      <button type="button" class="picker-x" data-picker-close aria-label="Κλείσιμο">✕</button>
+    </header>
+
+    <div class="drop drop--slim" data-pick-drop tabindex="0" role="button"
+         aria-label="Ανέβασμα φωτογραφίας">
+      <p class="drop-big">Σύρε μια φωτογραφία εδώ</p>
+      <p class="hint">ή πάτησε για να διαλέξεις · JPG, PNG, WebP</p>
+      <input type="file" accept="image/*" multiple hidden data-pick-file>
+    </div>
+
+    <p class="state state--inline" data-pick-state hidden></p>
+
+    <div class="shots picker-shots" data-pick-shots>
+      <p class="muted">Φόρτωση…</p>
+    </div>
+  </div>
+</div>
+
 <script src="admin.js"></script>
 </body>
 </html>

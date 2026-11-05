@@ -419,8 +419,108 @@ body{
 .shot:hover .shot-copy,
 .shot-copy:focus-visible{ opacity: 1; }
 
+/* Κουμπί διαγραφής — αριστερά, μακριά από την «Αντιγραφή», ώστε να μην
+   πατηθεί κατά λάθος. Κόκκινο: είναι οριστικό, οι φωτογραφίες δεν
+   μπαίνουν στο git και δεν επαναφέρονται. */
+.shot-del{
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(10,19,34,0.85);
+  color: var(--news);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.shot:hover .shot-del,
+.shot-del:focus-visible{ opacity: 1; }
+
+.shot-del:hover{ background: var(--news); color: #fff; }
+
 @media (hover: none){
-  .shot-copy{ opacity: 1; }
+  .shot-copy,
+  .shot-del{ opacity: 1; }
+}
+
+/* ---- ο επιλογέας φωτογραφίας ---- */
+
+.picker{
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.picker[hidden]{ display: none; }
+
+.picker-back{
+  position: absolute;
+  inset: 0;
+  background: rgba(5,10,18,0.72);
+}
+
+.picker-box{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  width: min(900px, 100%);
+  max-height: min(80vh, 760px);
+  padding: 1.1rem 1.2rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  overflow: auto;
+}
+
+.picker-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.picker-head h2{
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.picker-x{
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.picker-x:hover{ color: var(--text); }
+
+/* Μέσα στο παράθυρο η ζώνη ρίψης είναι βοηθητική, όχι το κύριο θέμα:
+   τις περισσότερες φορές ο συντάκτης διαλέγει κάτι που υπάρχει ήδη. */
+.drop--slim{ min-height: 86px; padding: 0.9rem; }
+
+/* Οι μικρογραφίες εδώ είναι κουμπιά, όχι απλές εικόνες. */
+.picker-shots .shot{ cursor: pointer; }
+
+.picker-shots .shot:hover,
+.picker-shots .shot:focus-visible{
+  border-color: var(--sky);
+  outline: none;
 }
 
 @media (max-width: 760px){

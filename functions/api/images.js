@@ -51,5 +51,12 @@ export async function onRequest(context) {
     return json(r.status, r.body);
   }
 
-  return json(405, { error: 'Μόνο GET και POST' });
+  if (request.method === 'DELETE') {
+    // Το όνομα έρχεται στη διεύθυνση: /api/images?name=<αρχείο>
+    const name = new URL(request.url).searchParams.get('name');
+    const r = await admin.deleteImage(store, name);
+    return json(r.status, r.body);
+  }
+
+  return json(405, { error: 'Μόνο GET, POST και DELETE' });
 }

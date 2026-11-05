@@ -177,6 +177,13 @@ export function gitStore(env) {
       // ανάποδη αλφαβητική σειρά είναι και χρονολογική.
       return out.sort().reverse();
     },
+
+    delImage: async (file) => {
+      if (!env.UPLOADS) throw new Error('Δεν έχει ρυθμιστεί ο χώρος φωτογραφιών (R2).');
+      // Το R2 δεν σφάλλει για αρχείο που δεν υπάρχει. Μας βολεύει: δύο
+      // συντάκτες που πατούν διαγραφή στο ίδιο δεν βλέπουν σφάλμα.
+      await env.UPLOADS.delete(file);
+    },
   };
 }
 
