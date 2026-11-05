@@ -335,7 +335,9 @@
         <div>
           <h1>Εκπομπές</h1>
           <p class="hint">Περιγραφή, playlist και αφίσα. Το όνομα δεν αλλάζει από εδώ:
-            έρχεται από το YouTube και πάνω του δένουν τα επεισόδια.</p>
+            έρχεται από το YouTube και πάνω του δένουν τα επεισόδια.<br>
+            «Ο τίτλος είναι ψημένος μέσα στην εικόνα» = δεν τον ξαναγράφουμε από πάνω
+            και η εικόνα δεν κόβεται ποτέ.</p>
         </div>
         <button type="button" class="btn btn--go" data-save="shows" disabled>Αποθήκευση</button>
       </header>
@@ -375,6 +377,26 @@
     <div class="shots picker-shots" data-pick-shots>
       <p class="muted">Φόρτωση…</p>
     </div>
+  </div>
+</div>
+
+<!-- Ο επιλογέας επεισοδίου και βίντεο.
+     Κανείς δεν θυμάται κωδικούς τύπου «Buzzsprout-19907711» — ούτε
+     πρέπει. Ψάχνει στα ίδια δεδομένα που έχει ήδη φορτωμένα η σελίδα
+     για το πρωτοσέλιδο, οπότε δεν κατεβαίνει τίποτα καινούριο. -->
+<div class="picker" data-finder hidden>
+  <div class="picker-back" data-finder-close></div>
+
+  <div class="picker-box" role="dialog" aria-modal="true" aria-labelledby="finder-title">
+    <header class="picker-head">
+      <h2 id="finder-title" data-finder-title>Διάλεξε</h2>
+      <button type="button" class="picker-x" data-finder-close aria-label="Κλείσιμο">✕</button>
+    </header>
+
+    <input type="search" class="find" data-finder-find
+           placeholder="Βρες τίτλο, καλεσμένο, εκπομπή…" aria-label="Αναζήτηση">
+
+    <div class="picks finder-list" data-finder-list></div>
   </div>
 </div>
 
