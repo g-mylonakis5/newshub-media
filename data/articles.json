@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "id": "kimi-timi",
+    "title": "Kimi Timi",
+    "summary": "Kimi Timi",
+    "category": "Πολιτική",
+    "author": "Γιάννης Κουζέλογλου",
+    "date": "2026-11-05T13:42:00.000Z",
+    "image": "/uploads/20261105124937-dokimi.jpg",
+    "imageCaption": "",
+    "status": "published",
+    "body": [
+      {
+        "type": "p",
+        "text": "Kimi Raikonnen Kimiiiii Raikonen Raikona "
+      }
+    ]
+  }
+]
