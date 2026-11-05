@@ -1,0 +1,47 @@
+#!/bin/sh
+# pre-commit — κρατάει τα παραγόμενα δεδομένα έξω από τα δικά μας commits.
+#
+# Το data/news.json το ξαναγράφει ΟΛΟΚΛΗΡΟ το GitHub Action «Φρέσκο υλικό»
+# πολλές φορές τη μέρα (.github/workflows/fetch.yml). Είναι ένα αρχείο με
+# 600 άρθρα, οπότε κάθε φορά που το κομμιτάρουμε κι εμείς, το git βρίσκει
+# δύο πλευρές που άλλαξαν τις ίδιες γραμμές και σκάει σε σύγκρουση στο
+# επόμενο pull. Έγινε στις 5 Νοεμβρίου 2026.
+#
+# ΔΕΝ μπαίνει στο .gitignore: το Cloudflare χτίζει από το repo και το
+# build.js διαβάζει αυτό το αρχείο — χωρίς αυτό, μηδέν ειδήσεις στο site.
+# Ιδιοκτήτης του είναι το bot. Εμείς απλώς δεν το αγγίζουμε.
+#
+# Τα data/news-bodies/ ΜΕΝΟΥΝ: είναι χωριστά αρχεία, ένα ανά άρθρο, και
+# δεν συγκρούονται ποτέ. Το bot δεν τα πιάνει πάντα — τα συμπληρώνει το
+# τοπικό τρέξιμο του fetch-news.js, οπότε αξίζουν commit.
+#
+# Στήνεται μία φορά:  git config core.hooksPath .githooks
+
+OWNED_BY_BOT="data/news.json"
+
+removed=0
+
+for file in $OWNED_BY_BOT; do
+  # Σκέτο «δεν άλλαξε» -> δεν έχουμε τίποτα να κάνουμε.
+  if git diff --cached --quiet -- "$file" 2>/dev/null; then
+    continue
+  fi
+
+  git restore --staged -- "$file" 2>/dev/null || git reset -q HEAD -- "$file"
+  echo "pre-commit: το $file βγήκε από το commit — το ανανεώνει το bot." >&2
+  removed=1
+done
+
+# Αν μετά την αφαίρεση δεν έμεινε τίποτα, το λέμε καθαρά αντί να βγει το
+# σκέτο «nothing to commit» που δεν εξηγεί γιατί.
+#
+# ΜΟΝΟ αν αφαιρέσαμε κάτι εμείς. Το «άδειο staging» είναι κανονική
+# κατάσταση στο git commit --amend, που ξαναγράφει μήνυμα χωρίς νέες
+# αλλαγές — το μπλοκάραμε άθελά μας την πρώτη φορά.
+if [ "$removed" = "1" ] && git diff --cached --quiet; then
+  echo "pre-commit: δεν έμεινε καμία δική μας αλλαγή στο commit." >&2
+  echo "            Για να φύγουν και από τον φάκελο:  npm run sync" >&2
+  exit 1
+fi
+
+exit 0
