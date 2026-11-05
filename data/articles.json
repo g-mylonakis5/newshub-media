@@ -1,0 +1,19 @@
+[
+  {
+    "id": "dokimi-leitoyrgias-toy-systimatos",
+    "title": "Δοκιμή λειτουργίας του συστήματος",
+    "summary": "Δοκιμή λειτουργίας του συστήματος",
+    "category": "Κρήτη",
+    "author": "Γιάννης Κουζέλογλου",
+    "date": "2026-11-05T13:02:00.000Z",
+    "image": "/uploads/20261105124937-dokimi.jpg",
+    "imageCaption": "",
+    "status": "draft",
+    "body": [
+      {
+        "type": "p",
+        "text": "Δοκιμή λειτουργίας του συστήματος "
+      }
+    ]
+  }
+]
