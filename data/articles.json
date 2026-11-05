@@ -13,6 +13,16 @@
       {
         "type": "p",
         "text": "Δοκιμή λειτουργίας του συστήματος "
+      },
+      {
+        "type": "embed",
+        "kind": "episode",
+        "id": "Buzzsprout-19907711"
+      },
+      {
+        "type": "embed",
+        "kind": "youtube",
+        "id": "Hh_Wlk91jo4"
       }
     ]
   }
