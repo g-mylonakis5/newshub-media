@@ -12,6 +12,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { execFile } = require('child_process');
 
 const admin = require('./admin-api.js');
 
@@ -163,6 +164,42 @@ async function handleImages(req, res){
   sendJson(res, 405, { error: 'Μόνο GET, POST και DELETE' });
 }
 
+// «Φέρε τα νέα τώρα».
+//
+// Στον αέρα αυτό ξεκινά το workflow του GitHub — δες το
+// functions/api/refresh.js. Τοπικά δεν υπάρχει GitHub: τρέχουμε
+// κατευθείαν τα ίδια scripts, στον ίδιο υπολογιστή.
+//
+// Τα βαριά (βίντεο, απομαγνητοφωνήσεις) μένουν έξω: το YouTube θέλει
+// κλειδί που τοπικά συνήθως λείπει, και οι απομαγνητοφωνήσεις είναι
+// 20 MB που τις έχουμε ήδη.
+let refreshing = false;
+
+async function handleRefresh(req, res){
+  if (req.method !== 'POST') return sendJson(res, 405, { error: 'Μόνο POST' });
+
+  // Δύο μαζί θα έγραφαν το ένα πάνω στο άλλο τα ίδια αρχεία.
+  if (refreshing) return sendJson(res, 409, { error: 'Τρέχει ήδη.' });
+  refreshing = true;
+
+  const run = (file) => new Promise((resolve, reject) => {
+    execFile(process.execPath, [path.join(__dirname, file)], (err, out, errOut) => {
+      if (err) reject(new Error(`${file}: ${String(errOut || err.message).slice(0, 200)}`));
+      else resolve();
+    });
+  });
+
+  try {
+    await run('fetch-news.js');
+    await run('fetch-episodes.js');
+    sendJson(res, 200, { ok: true, who: 'τοπικά' });
+  } catch (err) {
+    sendJson(res, 500, { error: err.message });
+  } finally {
+    refreshing = false;
+  }
+}
+
 const server = http.createServer((req, res) => {
   // Κόβουμε το ερωτηματικό και αποκωδικοποιούμε τα ελληνικά στη διεύθυνση.
   let rel = decodeURIComponent(req.url.split('?')[0]);
@@ -174,6 +211,11 @@ const server = http.createServer((req, res) => {
 
   if (rel === '/api/images') {
     handleImages(req, res).catch((err) => sendJson(res, 500, { error: String(err.message) }));
+    return;
+  }
+
+  if (rel === '/api/refresh') {
+    handleRefresh(req, res).catch((err) => sendJson(res, 500, { error: String(err.message) }));
     return;
   }
 
