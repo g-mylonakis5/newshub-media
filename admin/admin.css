@@ -329,6 +329,82 @@ body{
 .tag--news{ color: var(--news); }
 .tag--podcast{ color: var(--audio); }
 .tag--video{ color: var(--sky); }
+.tag--article{ color: var(--ok); }
+
+/* Κουτάκι επιλογής με ετικέτα δίπλα. Ολόκληρη η ετικέτα είναι στόχος
+   κλικ — στο κινητό το σκέτο τετραγωνάκι είναι πολύ μικρό. */
+.check{
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0.2rem 0 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.check input{ width: 1.05rem; height: 1.05rem; accent-color: var(--news); }
+
+.check[hidden]{ display: none; }
+
+/* ---- εκπομπές ---- */
+
+.showlist{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(420px, 100%), 1fr));
+  gap: 1rem;
+}
+
+.show{
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.show-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.show-name{
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* Μικρή και σταθερού ύψους: η αφίσα είναι υπενθύμιση ποια εκπομπή
+   κοιτάς, όχι το θέμα της κάρτας. Οι αναλογίες διαφέρουν — άλλες
+   τετράγωνες, άλλες πλατιές — γι' αυτό contain και όχι cover. */
+.show-art{
+  flex: none;
+  width: 96px;
+  height: 54px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: var(--raise);
+}
+
+.show-noart{
+  flex: none;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.pair{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+@media (max-width: 560px){
+  .pair{ grid-template-columns: 1fr; }
+}
 
 .more{ margin: 1.25rem 0 0; text-align: center; }
 

@@ -77,6 +77,40 @@ function validate(name, data){
     return 'Τα άρθρα πρέπει να είναι λίστα.';
   }
 
+  if (name === 'shows') {
+    if (Array.isArray(data)) return 'Οι εκπομπές πρέπει να είναι αντικείμενο.';
+    for (const [show, v] of Object.entries(data)) {
+      if (v === null || typeof v !== 'object' || Array.isArray(v)) {
+        return `Η εκπομπή «${show}» πρέπει να είναι αντικείμενο.`;
+      }
+      if (v.description != null && typeof v.description !== 'string') {
+        return `Η περιγραφή της «${show}» πρέπει να είναι κείμενο.`;
+      }
+      if (v.playlist != null && typeof v.playlist !== 'string') {
+        return `Το playlist της «${show}» πρέπει να είναι κείμενο.`;
+      }
+    }
+  }
+
+  if (name === 'show-art') {
+    if (Array.isArray(data)) return 'Οι αφίσες πρέπει να είναι αντικείμενο.';
+
+    // Το build διαβάζει ΜΟΝΟ το data.art. Αν χαθεί, δεν σκάει τίποτα —
+    // απλώς κάθε εκπομπή μένει χωρίς αφίσα, σιωπηλά. Γι' αυτό ο έλεγχος.
+    if (data.art == null || typeof data.art !== 'object' || Array.isArray(data.art)) {
+      return 'Λείπει το «art» με την αντιστοίχιση εκπομπής σε αφίσα.';
+    }
+    for (const [show, v] of Object.entries(data.art)) {
+      if (v === null || typeof v !== 'object' || Array.isArray(v)) {
+        return `Η αφίσα της «${show}» πρέπει να είναι αντικείμενο.`;
+      }
+      // Το όνομα γίνεται διαδρομή αρχείου στο public/shows/.
+      if (typeof v.file !== 'string' || !/^[\w-]+$/.test(v.file)) {
+        return `Άκυρο όνομα αφίσας στην «${show}».`;
+      }
+    }
+  }
+
   if (name === 'people-aliases') {
     if (Array.isArray(data)) return 'Τα πρόσωπα πρέπει να είναι αντικείμενο.';
 
