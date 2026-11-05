@@ -187,11 +187,53 @@ export function gitStore(env) {
   };
 }
 
-// Ποιος έκανε την αλλαγή. Το Cloudflare Access βάζει το email του
-// χρήστη σε κεφαλίδα — το γράφουμε στο μήνυμα του commit, ώστε το
-// ιστορικό να λέει ποιος άλλαξε τι.
+// Το email μέσα από το εισιτήριο του Access.
+//
+// ΔΕΝ είναι έλεγχος ασφαλείας: την υπογραφή την έχει ήδη επαληθεύσει
+// το Access πριν φτάσει εδώ το αίτημα, και χωρίς έγκυρο εισιτήριο δεν
+// περνάει τίποτα. Εμείς διαβάζουμε μόνο ένα όνομα για το μήνυμα του
+// commit, οπότε αρκεί να ανοίξουμε το μεσαίο κομμάτι.
+function emailFromJwt(token){
+  try {
+    const part = String(token || '').split('.')[1];
+    if (!part) return '';
+
+    // base64url -> base64, και συμπλήρωμα που το atob απαιτεί.
+    const b64 = part.replace(/-/g, '+').replace(/_/g, '/');
+    const full = b64 + '='.repeat((4 - (b64.length % 4)) % 4);
+
+    const bin = atob(full);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+
+    const data = JSON.parse(new TextDecoder().decode(bytes));
+    return String(data.email || '');
+  } catch (err) {
+    return '';
+  }
+}
+
+function cookieFrom(request, name){
+  const raw = request.headers.get('Cookie') || '';
+  for (const part of raw.split(';')) {
+    const eq = part.indexOf('=');
+    if (eq > 0 && part.slice(0, eq).trim() === name) return part.slice(eq + 1).trim();
+  }
+  return '';
+}
+
+// Ποιος έκανε την αλλαγή. Μπαίνει στο μήνυμα του commit, ώστε το
+// ιστορικό να λέει ποιος άλλαξε τι — ο λόγος που η αποθήκη είναι git.
+//
+// Τρεις πηγές, με αυτή τη σειρά. Η πρώτη είναι η τεκμηριωμένη, αλλά
+// ΔΕΝ φτάνει πάντα στις Pages Functions: τα πρώτα commits από το
+// διαχειριστικό βγήκαν όλα χωρίς email. Οι άλλες δύο κουβαλούν το ίδιο
+// εισιτήριο του Access και υπάρχουν πάντα.
 export function whoFrom(request) {
-  return request.headers.get('Cf-Access-Authenticated-User-Email') || '';
+  return request.headers.get('Cf-Access-Authenticated-User-Email')
+    || emailFromJwt(request.headers.get('Cf-Access-Jwt-Assertion'))
+    || emailFromJwt(cookieFrom(request, 'CF_Authorization'))
+    || '';
 }
 
 // Δικλείδα: αν λείπει κάτι από τις ρυθμίσεις, το λέμε ΚΑΘΑΡΑ αντί να
