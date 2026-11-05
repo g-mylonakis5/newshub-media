@@ -1,0 +1,7 @@
+# Τα git hooks τρέχουν με sh, ακόμα και στα Windows.
+#
+# Το core.autocrlf είναι true σε αυτό το μηχάνημα, οπότε χωρίς αυτή τη
+# γραμμή το pre-commit κατεβαίνει με CRLF: η πρώτη γραμμή γίνεται
+# «#!/bin/sh\r» και το sh απαντά «bad interpreter». Το hook δεν τρέχει
+# ποτέ και δεν λέει γιατί.
+.githooks/* text eol=lf
