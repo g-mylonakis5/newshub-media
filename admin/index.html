@@ -88,6 +88,7 @@
           <button type="button" class="chip" data-kind="podcast">Podcast</button>
           <button type="button" class="chip" data-kind="video">Βίντεο</button>
           <button type="button" class="chip" data-kind="news">Ειδήσεις</button>
+          <button type="button" class="chip" data-kind="article">Άρθρα</button>
         </div>
       </div>
 
@@ -199,6 +200,19 @@
             </select>
           </div>
         </div>
+
+        <!-- Η συντομία για το συνηθισμένο: γράφω την είδηση της ημέρας
+             και τη θέλω αμέσως μεγάλη στην αρχική. Χωρίς αυτό ο
+             συντάκτης σώζει, πάει στο Πρωτοσέλιδο, ψάχνει το άρθρο του
+             μέσα σε 1.700 κομμάτια και σώζει ξανά. -->
+        <label class="check" data-art-top-wrap>
+          <input type="checkbox" data-art-top>
+          <span>Βάλ' το στο πρωτοσέλιδο</span>
+        </label>
+        <p class="hint" data-art-top-hint hidden>
+          Αντικαθιστά ό,τι είναι τώρα μεγάλο στην αρχική, για 7 ημέρες.
+          Αλλάζει δύο αρχεία, άρα γίνονται δύο αποθηκεύσεις.
+        </p>
 
         <div class="field">
           <label for="art-image">Κεντρική φωτογραφία</label>
@@ -317,9 +331,20 @@
     </section>
 
     <section class="panel" data-panel="ekpompes">
-      <header class="panel-head"><div><h1>Εκπομπές</h1>
-        <p class="hint">Ονόματα, περιγραφές, αφίσες.</p></div></header>
-      <p class="soon">Έρχεται.</p>
+      <header class="panel-head">
+        <div>
+          <h1>Εκπομπές</h1>
+          <p class="hint">Περιγραφή, playlist και αφίσα. Το όνομα δεν αλλάζει από εδώ:
+            έρχεται από το YouTube και πάνω του δένουν τα επεισόδια.</p>
+        </div>
+        <button type="button" class="btn btn--go" data-save="shows" disabled>Αποθήκευση</button>
+      </header>
+
+      <p class="state" data-sh-state></p>
+
+      <div class="showlist" data-showlist>
+        <p class="muted">Φόρτωση…</p>
+      </div>
     </section>
 
   </main>

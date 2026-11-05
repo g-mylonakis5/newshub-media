@@ -20,6 +20,9 @@ var PAGE = 24;
 var state = {
   curation: null,
   items: [],        // όλα τα διαθέσιμα, ενωμένα και ταξινομημένα
+  // Οι πηγές όπως ήρθαν. Τις κρατάμε για να ξαναφτιαχτεί η παραπάνω
+  // λίστα όταν αλλάξει άρθρο, χωρίς να ξανακατέβουν 5 MB δεδομένων.
+  raw: { episodes: [], videos: [], news: [] },
   shown: PAGE,
   find: '',
   kind: '',
@@ -86,7 +89,7 @@ function api(name, method, body){
 // Ενώνουμε επεισόδια, βίντεο και ειδήσεις σε ΜΙΑ λίστα με κοινή μορφή.
 // Ο συντάκτης δεν θέλει να σκεφτεί «σε ποια καρτέλα είναι αυτό που
 // ψάχνω» — θέλει να γράψει δυο λέξεις και να το βρει.
-function normalize(episodes, videos, news){
+function normalize(episodes, videos, news, articles){
   var out = [];
 
   (episodes || []).forEach(function (e) {
@@ -123,6 +126,25 @@ function normalize(episodes, videos, news){
       title: a.title || '',
       who: a.category || '',
       image: a.image_large || a.image_thumb || '',
+      date: a.date,
+    });
+  });
+
+  // Τα δικά μας άρθρα. Έλειπαν εντελώς από εδώ, οπότε δεν υπήρχε
+  // κανένας τρόπος να μπει δικό μας άρθρο στο πρωτοσέλιδο.
+  //
+  // Μόνο τα δημοσιευμένα: ένα πρόχειρο στο πρωτοσέλιδο θα έστελνε τον
+  // κόσμο σε σελίδα που δεν υπάρχει.
+  (articles || []).forEach(function (a) {
+    if (a.status !== 'published') return;
+    out.push({
+      kind: 'article',
+      id: a.id,
+      // Ό,τι καταλαβαίνει το build για δικό μας άρθρο — δες sameItem().
+      ref: 'arthro/' + a.id + '.html',
+      title: a.title || '',
+      who: a.category || '',
+      image: a.image || '',
       date: a.date,
     });
   });
@@ -176,7 +198,7 @@ function isChosen(it, want){
 // Ζωγραφική
 // ---------------------------------------------------------------------
 
-var TAGS = { podcast: 'Podcast', video: 'Βίντεο', news: 'Είδηση' };
+var TAGS = { podcast: 'Podcast', video: 'Βίντεο', news: 'Είδηση', article: 'Άρθρο' };
 
 function drawNow(){
   var box = $('[data-now-body]');
@@ -1084,9 +1106,14 @@ function openArticle(i){
   $('[data-art="image"]').value = art.open.image || '';
   $('[data-art="imageCaption"]').value = art.open.imageCaption || '';
 
+  // Τσεκαρισμένο αν αυτό το άρθρο είναι ήδη το μεγάλο της αρχικής.
+  $('[data-art-top]').checked =
+    !!art.open.id && state.curation.featured === artRef(art.open.id);
+
   drawSlug();
   drawThumb();
   drawBlocks();
+  drawTop();
   artDirty(false);
   artSay('');
 }
@@ -1239,6 +1266,57 @@ function collect(){
   return a;
 }
 
+// Η διεύθυνση ενός δικού μας άρθρου, όπως τη γράφει το build.
+function artRef(id){ return 'arthro/' + id + '.html'; }
+
+// Δείχνει το κουτάκι μόνο σε δημοσιευμένο άρθρο, και τσεκαρισμένο αν
+// αυτό το άρθρο είναι ΗΔΗ το μεγάλο της αρχικής — ώστε να λέει την
+// αλήθεια και να μη χρειάζεται ο συντάκτης να πάει να κοιτάξει.
+function drawTop(){
+  if (!art.open) return;
+
+  var on = $('[data-art="status"]').value === 'published';
+  var box = $('[data-art-top]');
+
+  $('[data-art-top-wrap]').hidden = !on;
+  if (!on) box.checked = false;
+
+  $('[data-art-top-hint]').hidden = !on || !box.checked;
+}
+
+// Κρατάει το πρωτοσέλιδο συμβατό με το άρθρο.
+//
+// Το κρίσιμο δεν είναι το «βάλ' το»· είναι το ΑΝΤΙΘΕΤΟ. Αν ένα άρθρο
+// που είναι μεγάλο στην αρχική γίνει πρόχειρο ή διαγραφεί, η αρχική
+// δείχνει σε σελίδα που δεν υπάρχει. Γι' αυτό η συνάρτηση καθαρίζει
+// και μόνη της, χωρίς να το ζητήσει κανείς.
+function syncFeatured(a, want){
+  var ref = artRef(a.id);
+  var isNow = state.curation.featured === ref;
+  var should = !!want && a.status === 'published';
+
+  if (should === isNow) return Promise.resolve('');
+
+  if (should) {
+    state.curation.featured = ref;
+    var d = new Date();
+    d.setDate(d.getDate() + 7);
+    state.curation.featuredUntil = d.toISOString().slice(0, 10);
+  } else {
+    state.curation.featured = '';
+  }
+
+  // Η χειροκίνητη εικόνα ανήκει στην προηγούμενη επιλογή — δες choose().
+  state.curation.featuredHero = '';
+
+  return api('curation', 'PUT', state.curation).then(function () {
+    $('[data-until]').value = state.curation.featuredUntil || '';
+    drawNow();
+    drawPicks();
+    return should ? ' Μπήκε και στο πρωτοσέλιδο.' : ' Βγήκε από το πρωτοσέλιδο.';
+  });
+}
+
 function saveArticle(){
   var a = collect();
 
@@ -1257,6 +1335,14 @@ function saveArticle(){
     return;
   }
 
+  // Το πρωτοσέλιδο ΠΡΕΠΕΙ να έχει εικόνα: χωρίς αυτήν το build αγνοεί
+  // την επιλογή και γυρίζει στην αυτόματη, χωρίς να το δει κανείς —
+  // ο συντάκτης νομίζει ότι το έβαλε και δεν το έβαλε.
+  if ($('[data-art-top]').checked && a.status === 'published' && !a.image) {
+    artSay('Το πρωτοσέλιδο θέλει κεντρική φωτογραφία. Βάλε μία ή ξετσέκαρε το κουτάκι.', 'bad');
+    return;
+  }
+
   var next = art.list.slice();
   if (art.index >= 0) next[art.index] = a; else next.push(a);
 
@@ -1268,10 +1354,15 @@ function saveArticle(){
     // ο συντάκτης έπρεπε να βγει στη λίστα και να το ξανανοίξει.
     $('[data-art-delete]').hidden = false;
     artDirty(false);
-    artSay(a.status === 'published'
-      ? 'Αποθηκεύτηκε. Φαίνεται στο site μόλις ξαναχτιστεί (~2 λεπτά).'
-      : 'Αποθηκεύτηκε ως πρόχειρο.', 'ok');
     drawArtList();
+    // Η λίστα του πρωτοσέλιδου ξέρει πια το νέο ή αλλαγμένο άρθρο.
+    state.items = normalize(state.raw.episodes, state.raw.videos, state.raw.news, art.list);
+
+    return syncFeatured(a, $('[data-art-top]').checked);
+  }).then(function (extra) {
+    artSay((a.status === 'published'
+      ? 'Αποθηκεύτηκε. Φαίνεται στο site μόλις ξαναχτιστεί (~2 λεπτά).'
+      : 'Αποθηκεύτηκε ως πρόχειρο.') + (extra || ''), 'ok');
   }).catch(function (err) {
     artSay('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
   });
@@ -1288,6 +1379,11 @@ function deleteArticle(){
   artSay('Διαγράφεται…');
   api('articles', 'PUT', next).then(function () {
     art.list = next;
+    state.items = normalize(state.raw.episodes, state.raw.videos, state.raw.news, art.list);
+    // Διαγραμμένο άρθρο δεν γίνεται να μένει μεγάλο στην αρχική: ο
+    // σύνδεσμος θα οδηγούσε σε σελίδα που δεν υπάρχει.
+    return syncFeatured(a, false);
+  }).then(function () {
     artDirty(false);
     closeArticle();
   }).catch(function (err) {
@@ -1297,8 +1393,6 @@ function deleteArticle(){
 
 // ---- επιλογή φωτογραφίας από τη βιβλιοθήκη ----
 //
-// Αντί για δεύτερο παράθυρο: στέλνουμε τον συντάκτη στην καρτέλα
-// «Φωτογραφίες», όπου κάθε φωτογραφία έχει ήδη κουμπί αντιγραφής.
 // Ο επιλογέας. Πριν, εδώ υπήρχε μόνο ένα μήνυμα «πήγαινε στις
 // Φωτογραφίες και κόλλησε τη διεύθυνση», που πετούσε τον συντάκτη έξω
 // από το άρθρο που έγραφε — και η `art.pending` δεν διαβαζόταν ποτέ.
@@ -1434,6 +1528,13 @@ function wireArticles(){
     artDirty(true);
     if (f.dataset.art === 'title') { art.open.title = f.value; drawSlug(); }
     if (f.dataset.art === 'image') { art.open.image = f.value; drawThumb(); }
+    // Πρόχειρο δεν μπαίνει στο πρωτοσέλιδο — το κουτάκι κρύβεται.
+    if (f.dataset.art === 'status') drawTop();
+  });
+
+  $('[data-art-top]').addEventListener('change', function () {
+    drawTop();
+    artDirty(true);
   });
 
   // Τα μπλοκ — επίσης ένας listener.
@@ -1981,6 +2082,173 @@ function loadPeople(){
 }
 
 // ---------------------------------------------------------------------
+// Εκπομπές
+// ---------------------------------------------------------------------
+//
+// Δύο αρχεία, γιατί έχουν διαφορετική προέλευση και ρυθμό:
+//
+//   shows.json     περιγραφή και playlist — κείμενο που γράφει η σύνταξη
+//   show-art.json  ποια αφίσα ανήκει σε ποια εκπομπή
+//
+// Το ΟΝΟΜΑ της εκπομπής είναι το κλειδί και στα δύο, και έρχεται από το
+// YouTube. Δεν αλλάζει από εδώ: πάνω του δένουν τα επεισόδια, και μια
+// μετονομασία θα άδειαζε σιωπηλά τη σελίδα της εκπομπής.
+
+var sh = {
+  shows: {},     // ό,τι λέει το shows.json
+  art: null,     // ΟΛΟΚΛΗΡΟ το show-art.json, με τα σχόλιά του
+  files: [],     // τα διαθέσιμα αρχεία αφίσας
+  dirty: false,
+};
+
+function shSay(text, kind){
+  var el = $('[data-sh-state]');
+  el.textContent = text || '';
+  if (kind) el.setAttribute('data-kind', kind); else el.removeAttribute('data-kind');
+}
+
+function shDirty(on){
+  sh.dirty = on;
+  state.dirty = on;
+  $('[data-save="shows"]').disabled = !on;
+  if (on) shSay('Μη αποθηκευμένες αλλαγές', 'warn');
+}
+
+function shReady(shows, art){
+  sh.shows = shows && typeof shows === 'object' ? shows : {};
+  sh.art = art && typeof art === 'object' ? art : {};
+  if (!sh.art.art || typeof sh.art.art !== 'object') sh.art.art = {};
+
+  // Οι διαθέσιμες αφίσες: όσες χρησιμοποιούνται ήδη. Καινούρια δεν
+  // ανεβαίνει από εδώ — θέλει τρία μεγέθη που τα φτιάχνει το
+  // make-shows.js από τα πρωτότυπα του σχεδιαστή.
+  var seen = {};
+  Object.keys(sh.art.art).forEach(function (name) {
+    var f = sh.art.art[name] && sh.art.art[name].file;
+    if (f) seen[f] = true;
+  });
+  sh.files = Object.keys(seen).sort();
+}
+
+function drawShows(){
+  var box = $('[data-showlist]');
+  var names = Object.keys(sh.shows).sort(function (a, b) { return a.localeCompare(b, 'el'); });
+
+  if (!names.length) {
+    box.innerHTML = '<p class="muted">Καμία εκπομπή.</p>';
+    return;
+  }
+
+  box.innerHTML = names.map(function (name) {
+    var s = sh.shows[name] || {};
+    var a = sh.art.art[name] || {};
+    var file = a.file || '';
+
+    var options = ['<option value="">— καμία, παίρνει τη μικρογραφία του τελευταίου βίντεο —</option>']
+      .concat(sh.files.map(function (f) {
+        return '<option value="' + esc(f) + '"' + (f === file ? ' selected' : '') + '>'
+          + esc(f) + '</option>';
+      })).join('');
+
+    return '<article class="show" data-show="' + esc(name) + '">'
+      + '<header class="show-head">'
+      + '<h2 class="show-name">' + esc(name) + '</h2>'
+      + (file
+        ? '<img class="show-art" src="/shows/' + esc(file) + '-400.webp" alt="" loading="lazy">'
+        : '<span class="show-noart">χωρίς αφίσα</span>')
+      + '</header>'
+
+      + '<div class="field">'
+      + '<label>Περιγραφή</label>'
+      + '<textarea rows="3" data-sh="description" placeholder="Τι είναι αυτή η εκπομπή…">'
+      + esc(s.description || '') + '</textarea>'
+      + '</div>'
+
+      + '<div class="pair">'
+      + '<div class="field"><label>Playlist YouTube</label>'
+      + '<input type="text" data-sh="playlist" value="' + esc(s.playlist || '') + '" placeholder="PL…"></div>'
+      + '<div class="field"><label>Αφίσα</label>'
+      + '<select data-sh="file">' + options + '</select></div>'
+      + '</div>'
+
+      + '<label class="check">'
+      + '<input type="checkbox" data-sh="titled"' + (a.titled ? ' checked' : '') + '>'
+      + '<span>Ο τίτλος είναι ήδη ψημένος μέσα στην εικόνα</span>'
+      + '</label>'
+      + '<p class="hint">Αν είναι τσεκαρισμένο, δεν ξαναγράφουμε τον τίτλο από πάνω '
+      + 'και η εικόνα δεν κόβεται ποτέ.</p>'
+      + '</article>';
+  }).join('');
+}
+
+function wireShows(){
+  var box = $('[data-showlist]');
+
+  box.addEventListener('input', function (e) {
+    var f = e.target.closest('[data-sh]');
+    var card = e.target.closest('[data-show]');
+    if (!f || !card) return;
+
+    var name = card.dataset.show;
+    var key = f.dataset.sh;
+
+    if (key === 'description' || key === 'playlist') {
+      if (!sh.shows[name]) sh.shows[name] = {};
+      sh.shows[name][key] = f.value;
+    }
+
+    shDirty(true);
+  });
+
+  // Τα select και τα checkbox δεν βγάζουν «input» παντού.
+  box.addEventListener('change', function (e) {
+    var f = e.target.closest('[data-sh]');
+    var card = e.target.closest('[data-show]');
+    if (!f || !card) return;
+
+    var name = card.dataset.show;
+    var key = f.dataset.sh;
+
+    if (key === 'file') {
+      if (!f.value) delete sh.art.art[name];
+      else {
+        if (!sh.art.art[name]) sh.art.art[name] = { file: '', titled: false };
+        sh.art.art[name].file = f.value;
+      }
+      drawShows();        // για να ανανεωθεί η μικρογραφία
+    }
+
+    if (key === 'titled') {
+      if (!sh.art.art[name]) sh.art.art[name] = { file: '', titled: false };
+      sh.art.art[name].titled = f.checked;
+    }
+
+    shDirty(true);
+  });
+
+  $('[data-save="shows"]').addEventListener('click', saveShows);
+}
+
+function saveShows(){
+  var btn = $('[data-save="shows"]');
+  btn.disabled = true;
+  shSay('Αποθηκεύεται…');
+
+  // Δύο αρχεία, δύο αποθηκεύσεις. Σειριακά και όχι παράλληλα: αν το
+  // δεύτερο αποτύχει, θέλουμε να ξέρουμε ότι το πρώτο πέρασε.
+  api('shows', 'PUT', sh.shows)
+    .then(function () { return api('show-art', 'PUT', sh.art); })
+    .then(function () {
+      shDirty(false);
+      shSay('Αποθηκεύτηκε. Φαίνεται στο site μόλις ξαναχτιστεί (~2 λεπτά).', 'ok');
+    })
+    .catch(function (err) {
+      btn.disabled = false;
+      shSay('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+    });
+}
+
+// ---------------------------------------------------------------------
 // Σύνδεση
 // ---------------------------------------------------------------------
 
@@ -2032,6 +2300,7 @@ function wire(){
   wireShots();
   wirePicker();
   wireArticles();
+  wireShows();
   wireMustRead();
   wireCats();
   wirePeople();
@@ -2059,19 +2328,25 @@ function boot(){
     loadAutoCats(),
     api('people-aliases'),
     loadPeople(),
+    api('shows'),
+    api('show-art'),
   ]).then(function (r) {
     state.curation = r[0] || {};
-    state.items = normalize(r[1], r[2], r[3]);
     cat.auto = r[5] || {};
     // Το αρχείο δεν υπάρχει μέχρι να γραφτεί το πρώτο άρθρο — τότε το
     // API επιστρέφει null, όχι σφάλμα.
     art.list = Array.isArray(r[4]) ? r[4] : [];
+    // Μετά τα άρθρα: η λίστα του πρωτοσέλιδου τα περιλαμβάνει.
+    state.raw = { episodes: r[1], videos: r[2], news: r[3] };
+    state.items = normalize(r[1], r[2], r[3], art.list);
 
     pp.file = ppReady(r[6]);
     var census = r[7] || {};
     pp.list = Array.isArray(census.people) ? census.people : [];
     pp.out = Array.isArray(census.rejected) ? census.rejected : [];
     pp.sug = Array.isArray(census.suggest) ? census.suggest : [];
+
+    shReady(r[8], r[9]);
 
     $('[data-until]').value = state.curation.featuredUntil || '';
     drawNow();
@@ -2081,6 +2356,7 @@ function boot(){
     drawMrPicks();
     drawCats();
     drawPeople();
+    drawShows();
     loadShots();
     say('');
   }).catch(function (err) {
