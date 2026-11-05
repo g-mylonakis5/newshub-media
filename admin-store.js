@@ -58,6 +58,17 @@ function dataPath(name) {
 //
 // Το sha το χρειάζεται το γράψιμο: το GitHub το απαιτεί για να
 // σιγουρευτεί ότι δεν πατάμε αλλαγή που δεν είδαμε.
+//
+// ΠΡΟΣΟΧΗ στο όριο του 1 MB. Το Contents API δεν σφάλλει για μεγάλα
+// αρχεία — γυρίζει κανονική απάντηση με ΑΔΕΙΟ content και encoding
+// "none". Το episodes.json είναι 4 MB και το videos.json 1,3 MB, οπότε
+// και τα δύο έπεφταν εκεί: το άδειο κείμενο έφτανε στο JSON.parse και
+// έβγαζε «Unexpected end of JSON input», χωρίς καμία ένδειξη ότι φταίει
+// το μέγεθος. Τοπικά δεν φαίνεται ποτέ — ο serve.js διαβάζει από δίσκο.
+//
+// Η λύση είναι δεύτερη κλήση με Accept: raw, που σηκώνει ως 100 MB. Δεν
+// τη ζητάμε πάντα: το sha έρχεται μόνο από την JSON απάντηση, και τα
+// μικρά αρχεία — όσα και γράφουμε — τελειώνουν με μία κλήση.
 async function readFile(env, path) {
   const url = `${API}/repos/${env.GITHUB_REPO}/contents/${encodeURI(path)}`
     + `?ref=${encodeURIComponent(env.GITHUB_BRANCH || 'main')}`;
@@ -68,7 +79,21 @@ async function readFile(env, path) {
   if (!res.ok) throw new Error(`GitHub ${res.status}: ${(await res.text()).slice(0, 200)}`);
 
   const body = await res.json();
-  return { text: fromBase64(body.content || ''), sha: body.sha };
+
+  if (body.content) return { text: fromBase64(body.content), sha: body.sha };
+
+  // Άδειο content και μηδενικό μέγεθος σημαίνει πράγματι άδειο αρχείο.
+  if (!body.size) return { text: '', sha: body.sha };
+
+  const raw = await fetch(url, {
+    headers: { ...ghHeaders(env), Accept: 'application/vnd.github.raw' },
+  });
+  if (!raw.ok) {
+    throw new Error(`GitHub ${raw.status} στο μεγάλο αρχείο ${path}: `
+      + `${(await raw.text()).slice(0, 200)}`);
+  }
+
+  return { text: await raw.text(), sha: body.sha };
 }
 
 // Πόσες φορές ξαναπροσπαθούμε όταν κάποιος άλλος πρόλαβε.
