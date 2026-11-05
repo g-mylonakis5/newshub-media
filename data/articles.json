@@ -8,7 +8,7 @@
     "date": "2026-11-05T13:02:00.000Z",
     "image": "/uploads/20261105124937-dokimi.jpg",
     "imageCaption": "",
-    "status": "draft",
+    "status": "published",
     "body": [
       {
         "type": "p",
@@ -23,6 +23,11 @@
         "type": "embed",
         "kind": "youtube",
         "id": "Hh_Wlk91jo4"
+      },
+      {
+        "type": "image",
+        "src": "/uploads/20261105124937-dokimi.jpg",
+        "caption": "Λασ"
       }
     ]
   }
