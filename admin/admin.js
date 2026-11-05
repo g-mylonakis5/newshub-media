@@ -1547,6 +1547,39 @@ function applyFind(id){
   findClose();
 }
 
+// «Φέρε τα νέα τώρα».
+//
+// Το ρολόι φέρνει επεισόδια και ειδήσεις κάθε μισή ώρα. Αυτό είναι για
+// όταν κάποιος ΞΕΡΕΙ ότι μόλις ανέβηκε κάτι — συνήθως το ανέβασε ο
+// ίδιος — και θέλει να γράψει γι' αυτό τώρα.
+//
+// Δεν περιμένουμε να τελειώσει: η δουλειά γίνεται στο GitHub και
+// κρατάει ένα-δυο λεπτά, μαζί με το χτίσιμο. Λέμε τι θα γίνει και
+// κλειδώνουμε το κουμπί για λίγο, ώστε να μην το πατήσει δέκα φορές.
+function wireRefresh(){
+  var btn = $('[data-refresh]');
+  if (!btn) return;
+
+  btn.addEventListener('click', function () {
+    btn.disabled = true;
+    say('Ζητήθηκαν τα νέα…');
+
+    fetch('/api/refresh', { method: 'POST' }).then(function (res) {
+      return res.json().then(function (d) {
+        if (!res.ok) throw new Error(d.error || 'Σφάλμα ' + res.status);
+      });
+    }).then(function () {
+      say('Ξεκίνησε. Τα νέα επεισόδια και οι ειδήσεις θα φανούν εδώ σε '
+        + '1-2 λεπτά — ανανέωσε τη σελίδα τότε.', 'ok');
+      // Όσο τρέχει, δεύτερο πάτημα δεν προσθέτει τίποτα.
+      setTimeout(function () { btn.disabled = false; }, 90000);
+    }).catch(function (err) {
+      say('Δεν ξεκίνησε: ' + err.message, 'bad');
+      btn.disabled = false;
+    });
+  });
+}
+
 function wireFinder(){
   var box = $('[data-finder]');
 
@@ -2417,6 +2450,7 @@ function wire(){
   $('[data-save="curation"]').addEventListener('click', save);
 
   wireShots();
+  wireRefresh();
   wirePicker();
   wireFinder();
   wireArticles();
