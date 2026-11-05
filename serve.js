@@ -67,6 +67,15 @@ const localStore = {
       throw err;
     }
   },
+
+  delImage: async (file) => {
+    try {
+      await fs.promises.unlink(path.join(UPLOADS, file));
+    } catch (err) {
+      // Αρχείο που δεν υπάρχει δεν είναι σφάλμα — όπως και στο R2.
+      if (err.code !== 'ENOENT') throw err;
+    }
+  },
 };
 
 function sendJson(res, status, body){
@@ -145,7 +154,13 @@ async function handleImages(req, res){
     return sendJson(res, r.status, r.body);
   }
 
-  sendJson(res, 405, { error: 'Μόνο GET και POST' });
+  if (req.method === 'DELETE') {
+    const name = new URL(req.url, 'http://localhost').searchParams.get('name');
+    const r = await admin.deleteImage(localStore, name);
+    return sendJson(res, r.status, r.body);
+  }
+
+  sendJson(res, 405, { error: 'Μόνο GET, POST και DELETE' });
 }
 
 const server = http.createServer((req, res) => {

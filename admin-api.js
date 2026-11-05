@@ -250,8 +250,33 @@ async function listImages(store){
   }
 }
 
+// Η διαγραφή είναι ΟΡΙΣΤΙΚΗ: οι φωτογραφίες ζουν σε R2, όχι στο git,
+// οπότε δεν υπάρχει ιστορικό να τις επαναφέρει. Η επιβεβαίωση γίνεται
+// στη διεπαφή.
+//
+// Το φίλτρο του ονόματος είναι ΤΟ ΙΔΙΟ με του /uploads/: μόνο γράμματα,
+// ψηφία, κάτω παύλα, τελεία και παύλα. Χωρίς αυτό ένα «../» θα έσβηνε
+// αρχείο έξω από τον χώρο των φωτογραφιών.
+async function deleteImage(store, name){
+  const file = String(name || '');
+
+  if (!file || !/^[\w.-]+$/.test(file) || file.includes('..')) {
+    return { status: 400, body: { error: 'Άκυρο όνομα αρχείου.' } };
+  }
+  if (!/\.(jpg|jpeg|webp|png)$/i.test(file)) {
+    return { status: 400, body: { error: 'Διαγράφονται μόνο φωτογραφίες.' } };
+  }
+
+  try {
+    await store.delImage(file);
+    return { status: 200, body: { ok: true } };
+  } catch (err) {
+    return { status: 500, body: { error: `Δεν διαγράφηκε: ${err.message}` } };
+  }
+}
+
 module.exports = {
-  readData, writeData, saveImage, listImages,
+  readData, writeData, saveImage, listImages, deleteImage,
   isReadable, isWritable, validate,
   WRITABLE, IMAGE_TYPES, MAX_IMAGE, imageName,
 };
