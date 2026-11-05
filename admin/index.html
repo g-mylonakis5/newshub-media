@@ -39,6 +39,7 @@
 <div class="shell">
   <nav class="side">
     <a class="tab is-on" href="#proto" data-tab="proto">Πρωτοσέλιδο</a>
+    <a class="tab" href="#mustread" data-tab="mustread">Must read</a>
     <a class="tab" href="#arthra" data-tab="arthra">Άρθρα</a>
     <a class="tab" href="#fotos" data-tab="fotos">Φωτογραφίες</a>
     <a class="tab" href="#katigories" data-tab="katigories">Κατηγορίες</a>
@@ -96,6 +97,40 @@
 
       <p class="more">
         <button type="button" class="btn btn--ghost" data-more hidden>Δείξε περισσότερα</button>
+      </p>
+    </section>
+
+    <!-- ========== MUST READ ========== -->
+    <section class="panel" data-panel="mustread">
+      <header class="panel-head">
+        <div>
+          <h1>Must read</h1>
+          <p class="hint">Τα άρθρα του newshub.gr στο κόκκινο πλαίσιο της αρχικής.
+            Ανοίγουν ΕΔΩ, με πλήρες κείμενο και σύνδεσμο πίσω στο newshub.gr.</p>
+        </div>
+        <button type="button" class="btn btn--go" data-save="mustread" disabled>Αποθήκευση</button>
+      </header>
+
+      <!-- Οι τέσσερις θέσεις, με τη σειρά που βγαίνουν στην αρχική.
+           Πρώτα ΤΙ ισχύει, μετά η αλλαγή — ίδια λογική με το
+           πρωτοσέλιδο. -->
+      <div class="slots" data-mr-slots></div>
+
+      <p class="hint" data-mr-note></p>
+
+      <h2 class="sub">Πρόσθεσε άρθρο</h2>
+
+      <div class="tools">
+        <input type="search" class="find" data-mr-find placeholder="Βρες τίτλο ειδησης…"
+               aria-label="Αναζήτηση άρθρου">
+      </div>
+
+      <div class="picks" data-mr-picks>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+
+      <p class="more">
+        <button type="button" class="btn btn--ghost" data-mr-more hidden>Δείξε περισσότερα</button>
       </p>
     </section>
 
@@ -216,15 +251,69 @@
     </section>
 
     <section class="panel" data-panel="katigories">
-      <header class="panel-head"><div><h1>Κατηγορίες</h1>
-        <p class="hint">Διόρθωσε την κατηγορία ενός επεισοδίου όπου η αυτόματη πέφτει έξω.</p></div></header>
-      <p class="soon">Έρχεται.</p>
+      <header class="panel-head">
+        <div>
+          <h1>Κατηγορίες</h1>
+          <p class="hint">Το site μαντεύει την κατηγορία από τον τίτλο. Εδώ τη διορθώνεις
+            όπου πέφτει έξω — και τη βάζεις όπου λείπει.</p>
+        </div>
+        <button type="button" class="btn btn--go" data-save="categories" disabled>Αποθήκευση</button>
+      </header>
+
+      <div class="tools">
+        <input type="search" class="find" data-cat-find placeholder="Βρες τίτλο ή καλεσμένο…"
+               aria-label="Αναζήτηση">
+        <div class="chips" data-cat-filter>
+          <button type="button" class="chip is-on" data-cf="">Όλα</button>
+          <button type="button" class="chip" data-cf="none">Χωρίς κατηγορία</button>
+          <button type="button" class="chip" data-cf="fixed">Διορθωμένα</button>
+          <button type="button" class="chip" data-cf="podcast">Podcast</button>
+          <button type="button" class="chip" data-cf="video">Βίντεο</button>
+        </div>
+      </div>
+
+      <p class="hint" data-cat-count></p>
+
+      <div class="cats" data-cat-rows>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+
+      <p class="more">
+        <button type="button" class="btn btn--ghost" data-cat-more hidden>Δείξε περισσότερα</button>
+      </p>
     </section>
 
     <section class="panel" data-panel="prosopa">
-      <header class="panel-head"><div><h1>Πρόσωπα</h1>
-        <p class="hint">Ένωσε διπλοεγγραφές, σβήσε ό,τι δεν είναι άνθρωπος, βάλε ιδιότητα.</p></div></header>
-      <p class="soon">Έρχεται.</p>
+      <header class="panel-head">
+        <div>
+          <h1>Πρόσωπα</h1>
+          <p class="hint">Ένωσε διπλοεγγραφές, σβήσε ό,τι δεν είναι άνθρωπος, βάλε ιδιότητα.
+            Τα ονόματα βγαίνουν από τους τίτλους των επεισοδίων — εδώ διορθώνονται.</p>
+        </div>
+        <button type="button" class="btn btn--go" data-save="people" disabled>Αποθήκευση</button>
+      </header>
+
+      <div class="tools">
+        <input type="search" class="find" data-pp-find placeholder="Βρες όνομα…"
+               aria-label="Αναζήτηση προσώπου">
+        <div class="chips" data-pp-filter>
+          <button type="button" class="chip is-on" data-pf="">Όλοι</button>
+          <button type="button" class="chip" data-pf="suggest">Προτάσεις ένωσης</button>
+          <button type="button" class="chip" data-pf="role">Χωρίς ιδιότητα</button>
+          <button type="button" class="chip" data-pf="many">Πολλές γραφές</button>
+          <button type="button" class="chip" data-pf="out">Σβησμένοι</button>
+        </div>
+      </div>
+
+      <p class="hint" data-pp-count></p>
+
+      <div class="people" data-pp-rows>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+
+      <p class="more">
+        <button type="button" class="btn btn--ghost" data-pp-more hidden>Δείξε περισσότερους</button>
+      </p>
     </section>
 
     <section class="panel" data-panel="ekpompes">

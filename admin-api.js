@@ -77,6 +77,38 @@ function validate(name, data){
     return 'Τα άρθρα πρέπει να είναι λίστα.';
   }
 
+  if (name === 'people-aliases') {
+    if (Array.isArray(data)) return 'Τα πρόσωπα πρέπει να είναι αντικείμενο.';
+
+    // Κάθε κλειδί χωριστά: ένα χαλασμένο people-aliases.json δεν ρίχνει
+    // το build — το build το πιάνει σε try και συνεχίζει — αλλά ΣΒΗΝΕΙ
+    // σιωπηλά όλες τις ενώσεις, και 39 άνθρωποι ξαναγίνονται 78 σελίδες
+    // χωρίς να το δει κανείς.
+    if (data.aliases != null) {
+      if (typeof data.aliases !== 'object' || Array.isArray(data.aliases)) {
+        return 'Οι ενώσεις πρέπει να είναι αντικείμενο.';
+      }
+      for (const [canonical, list] of Object.entries(data.aliases)) {
+        if (!Array.isArray(list)) {
+          return `Οι γραφές του «${canonical}» πρέπει να είναι λίστα.`;
+        }
+        // Όνομα ενωμένο με τον εαυτό του φτιάχνει βρόχο στο build.
+        if (list.some((v) => v === canonical)) {
+          return `Το «${canonical}» δεν ενώνεται με τον εαυτό του.`;
+        }
+      }
+    }
+    if (data.not_people != null && !Array.isArray(data.not_people)) {
+      return 'Το not_people πρέπει να είναι λίστα.';
+    }
+    if (data.roles != null && (typeof data.roles !== 'object' || Array.isArray(data.roles))) {
+      return 'Οι ιδιότητες πρέπει να είναι αντικείμενο.';
+    }
+    if (data.titles != null && !Array.isArray(data.titles)) {
+      return 'Το titles πρέπει να είναι λίστα.';
+    }
+  }
+
   return '';
 }
 
