@@ -402,6 +402,14 @@ body{
   gap: 0.7rem;
 }
 
+/* Χωρίς αυτό η στήλη φαρδαίνει όσο το μακρύτερο κείμενο του select, και
+   το διπλανό πεδίο στριμώχνεται σε λωρίδα. */
+.pair > *{ min-width: 0; }
+
+/* Μέσα στην κάρτα τα πεδία πιάνουν όλο το πλάτος — δεν είναι φόρμα
+   ρυθμίσεων, είναι μία εκπομπή τη φορά. */
+.show .field{ max-width: none; margin-bottom: 0; }
+
 @media (max-width: 560px){
   .pair{ grid-template-columns: 1fr; }
 }
@@ -599,6 +607,15 @@ body{
   outline: none;
 }
 
+/* Η λίστα επεισοδίων/βίντεο: μία στήλη, ώστε να χωράει ο τίτλος
+   ολόκληρος. Σε πλέγμα όπως του πρωτοσέλιδου κόβονται στη μέση. */
+.finder-list{
+  grid-template-columns: 1fr;
+  align-content: start;
+  min-height: 0;
+  overflow: auto;
+}
+
 @media (max-width: 760px){
   .shell{ grid-template-columns: 1fr; }
   .side{ flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -614,8 +631,11 @@ body{
    υπολοίπων: εδώ γράφεται κείμενο, δεν συμπληρώνεται ρύθμιση. */
 .editor .field{ max-width: 760px; }
 
-.editor .field textarea,
-.editor .field select{
+/* Ίδια εμφάνιση με τα input, παντού. Ήταν γραμμένο μόνο για τον
+   συντάκτη άρθρου, οπότε στην καρτέλα Εκπομπές τα ίδια πεδία έβγαιναν
+   με τη γραμματοσειρά μηχανής του browser και σε σταθερό πλάτος. */
+.field textarea,
+.field select{
   width: 100%;
   padding: 0.5rem 0.7rem;
   border: 1px solid var(--line);
@@ -626,9 +646,9 @@ body{
   font-size: 0.9rem;
 }
 
-.editor .field textarea{ resize: vertical; line-height: 1.6; }
-.editor .field textarea:focus,
-.editor .field select:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
+.field textarea{ resize: vertical; line-height: 1.6; }
+.field textarea:focus,
+.field select:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
 
 .editor .field input + input{ margin-top: 0.4rem; }
 

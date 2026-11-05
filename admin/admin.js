@@ -36,6 +36,24 @@ var state = {
 function $(sel, root){ return (root || document).querySelector(sel); }
 function $$(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
 
+// Ξεκωδικοποιεί ό,τι ήρθε ήδη ως HTML από την πηγή.
+//
+// 83 από τα 1.068 επεισόδια έχουν τίτλο με «&quot;» μέσα — έτσι τα δίνει
+// το RSS του Buzzsprout. Στο site δεν φαίνεται: ο τίτλος μπαίνει σε HTML
+// και ο browser τα ξεκωδικοποιεί μόνος του. Εδώ όμως τα περνάμε από
+// esc() για ασφάλεια, οπότε το «&» γίνεται «&amp;» και ο συντάκτης
+// διαβάζει «Το &quot;ιστορικό&quot; πλαίσιο».
+//
+// Το textarea είναι ο ασφαλής τρόπος: ό,τι μπει μέσα του μένει κείμενο,
+// δεν εκτελείται τίποτα.
+function unent(s){
+  var t = String(s == null ? '' : s);
+  if (t.indexOf('&') === -1) return t;
+  var box = document.createElement('textarea');
+  box.innerHTML = t;
+  return box.value;
+}
+
 function esc(s){
   return String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -98,8 +116,8 @@ function normalize(episodes, videos, news, articles){
       id: e.id,
       // Ο κωδικός είναι ό,τι καταλαβαίνει το build — δες sameItem().
       ref: e.id,
-      title: e.headline || e.title || '',
-      who: e.guest || '',
+      title: unent(e.headline || e.title),
+      who: unent(e.guest),
       image: e.image || '',
       date: e.date,
     });
@@ -110,8 +128,8 @@ function normalize(episodes, videos, news, articles){
       kind: 'video',
       id: v.id,
       ref: v.url || v.id,
-      title: v.title || '',
-      who: v.show || '',
+      title: unent(v.title),
+      who: unent(v.show),
       image: v.image || '',
       date: v.date,
     });
@@ -123,8 +141,8 @@ function normalize(episodes, videos, news, articles){
       id: a.id,
       // Για τις ειδήσεις το build δέχεται τη διεύθυνση του newshub.gr.
       ref: a.url,
-      title: a.title || '',
-      who: a.category || '',
+      title: unent(a.title),
+      who: unent(a.category),
       image: a.image_large || a.image_thumb || '',
       date: a.date,
     });
@@ -142,8 +160,8 @@ function normalize(episodes, videos, news, articles){
       id: a.id,
       // Ό,τι καταλαβαίνει το build για δικό μας άρθρο — δες sameItem().
       ref: 'arthro/' + a.id + '.html',
-      title: a.title || '',
-      who: a.category || '',
+      title: unent(a.title),
+      who: unent(a.category),
       image: a.image || '',
       date: a.date,
     });
@@ -1021,6 +1039,7 @@ var art = {
   index: -1,       // η θέση του στη list, ή -1 για καινούριο
   dirty: false,
   pending: null,   // πού πάει η φωτογραφία που θα διαλέξει ο επιλογέας
+  finding: null,   // ποιο μπλοκ περιμένει επεισόδιο ή βίντεο
 };
 
 function artSay(text, kind){
@@ -1186,11 +1205,15 @@ function drawBlocks(){
         + '<input type="text" data-bx="caption" value="' + esc(b.caption || '') + '" placeholder="Λεζάντα">'
         + (b.src ? '<div class="thumb"><img src="' + esc(b.src) + '" alt=""></div>' : '');
     } else if (kind === 'youtube') {
-      inner = '<input type="text" data-bx="id" value="' + esc(b.id || '') + '" placeholder="Κωδικός ή σύνδεσμος YouTube">'
-        + '<p class="hint">Κόλλησε τον σύνδεσμο — κρατάμε μόνο τον κωδικό.</p>';
+      inner = '<div class="pickline">'
+        + '<input type="text" data-bx="id" value="' + esc(b.id || '') + '" placeholder="Κωδικός ή σύνδεσμος YouTube">'
+        + '<button type="button" class="btn btn--ghost" data-bfind="' + i + '" data-bkind="video">Διάλεξε</button></div>'
+        + '<p class="hint">Διάλεξε από τα βίντεο του καναλιού, ή κόλλησε σύνδεσμο.</p>';
     } else {
-      inner = '<input type="text" data-bx="id" value="' + esc(b.id || '') + '" placeholder="Buzzsprout-19907711">'
-        + '<p class="hint">Ο κωδικός του επεισοδίου, όπως στο πρωτοσέλιδο.</p>';
+      inner = '<div class="pickline">'
+        + '<input type="text" data-bx="id" value="' + esc(b.id || '') + '" placeholder="Buzzsprout-19907711">'
+        + '<button type="button" class="btn btn--ghost" data-bfind="' + i + '" data-bkind="podcast">Διάλεξε</button></div>'
+        + '<p class="hint">Διάλεξε από τα επεισόδια — ο κωδικός μπαίνει μόνος του.</p>';
     }
 
     return '<div class="block" data-bi="' + i + '">'
@@ -1450,6 +1473,99 @@ function pickUpload(files){
   });
 }
 
+// ---- επιλογή επεισοδίου ή βίντεο ----
+//
+// Τα μπλοκ «Επεισόδιο» και «YouTube» ζητούσαν κωδικό: «Buzzsprout-19907711»
+// ή σύνδεσμο. Κανένας δημοσιογράφος δεν τα ξέρει αυτά, και δεν τα βλέπει
+// πουθενά στη δουλειά του — το ίδιο λάθος με το παλιό «Διάλεξε» των
+// φωτογραφιών: ζητάμε κάτι μηχανικό από άνθρωπο.
+//
+// Ψάχνει μέσα στο state.items, που είναι ήδη φορτωμένο για το
+// πρωτοσέλιδο: 1.027 επεισόδια και 560 βίντεο, χωρίς νέο αίτημα.
+
+var FINDER_MAX = 60;     // όσα δείχνουμε· παραπάνω δεν τα κοιτάζει κανείς
+
+function findItem(target){
+  art.finding = target;
+
+  $('[data-finder-title]').textContent =
+    target.kind === 'video' ? 'Διάλεξε βίντεο' : 'Διάλεξε επεισόδιο';
+
+  var find = $('[data-finder-find]');
+  find.value = '';
+  $('[data-finder]').hidden = false;
+  drawFinder();
+  find.focus();
+}
+
+function findClose(){
+  $('[data-finder]').hidden = true;
+  art.finding = null;
+}
+
+function drawFinder(){
+  var t = art.finding;
+  if (!t) return;
+
+  var box = $('[data-finder-list]');
+  var want = flat($('[data-finder-find]').value);
+
+  var hits = state.items.filter(function (it) {
+    if (it.kind !== t.kind) return false;
+    return !want || it.key.indexOf(want) !== -1;
+  });
+
+  if (!hits.length) {
+    box.innerHTML = '<p class="muted">Τίποτα δεν ταιριάζει.</p>';
+    return;
+  }
+
+  box.innerHTML = hits.slice(0, FINDER_MAX).map(function (it) {
+    return '<button type="button" class="pick" data-take-id="' + esc(it.id) + '">'
+      + (it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy">' : '<img alt="">')
+      + '<span>'
+      + '<span class="pick-title">' + esc(it.title) + '</span>'
+      + '<span class="pick-meta">'
+      + (it.who ? esc(it.who) + ' · ' : '') + when(it.date)
+      + '</span></span></button>';
+  }).join('')
+    + (hits.length > FINDER_MAX
+      ? '<p class="muted">…και άλλα ' + (hits.length - FINDER_MAX)
+        + '. Γράψε κάτι για να στενέψει η λίστα.</p>'
+      : '');
+}
+
+function applyFind(id){
+  var t = art.finding;
+  if (!t || !art.open) { findClose(); return; }
+
+  var b = art.open.body[t.block];
+  if (b) b.id = id;
+
+  drawBlocks();
+  artDirty(true);
+  findClose();
+}
+
+function wireFinder(){
+  var box = $('[data-finder]');
+
+  $$('[data-finder-close]').forEach(function (el) {
+    el.addEventListener('click', findClose);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !box.hidden) findClose();
+  });
+
+  $('[data-finder-find]').addEventListener('input', drawFinder);
+
+  $('[data-finder-list]').addEventListener('click', function (e) {
+    var row = e.target.closest('[data-take-id]');
+    if (row) applyFind(row.dataset.takeId);
+  });
+}
+
 function wirePicker(){
   var box = $('[data-picker]');
   var shots = $('[data-pick-shots]');
@@ -1577,7 +1693,10 @@ function wireArticles(){
     }
 
     var pick = e.target.closest('[data-bpick]');
-    if (pick) pickImage({ block: i });
+    if (pick) { pickImage({ block: i }); return; }
+
+    var find = e.target.closest('[data-bfind]');
+    if (find) findItem({ block: i, kind: find.dataset.bkind });
   });
 
   // Όταν φύγει ο δρομέας από το πεδίο — ΟΧΙ σε κάθε πληκτρολόγηση,
@@ -2144,7 +2263,7 @@ function drawShows(){
     var a = sh.art.art[name] || {};
     var file = a.file || '';
 
-    var options = ['<option value="">— καμία, παίρνει τη μικρογραφία του τελευταίου βίντεο —</option>']
+    var options = ['<option value="">— καμία —</option>']
       .concat(sh.files.map(function (f) {
         return '<option value="' + esc(f) + '"' + (f === file ? ' selected' : '') + '>'
           + esc(f) + '</option>';
@@ -2171,12 +2290,12 @@ function drawShows(){
       + '<select data-sh="file">' + options + '</select></div>'
       + '</div>'
 
+      // Η επεξήγηση μπαίνει ΜΙΑ φορά στην κορυφή της καρτέλας: εδώ θα
+      // επαναλαμβανόταν δεκαπέντε φορές και θα έπνιγε τα πεδία.
       + '<label class="check">'
       + '<input type="checkbox" data-sh="titled"' + (a.titled ? ' checked' : '') + '>'
       + '<span>Ο τίτλος είναι ήδη ψημένος μέσα στην εικόνα</span>'
       + '</label>'
-      + '<p class="hint">Αν είναι τσεκαρισμένο, δεν ξαναγράφουμε τον τίτλο από πάνω '
-      + 'και η εικόνα δεν κόβεται ποτέ.</p>'
       + '</article>';
   }).join('');
 }
@@ -2299,6 +2418,7 @@ function wire(){
 
   wireShots();
   wirePicker();
+  wireFinder();
   wireArticles();
   wireShows();
   wireMustRead();
