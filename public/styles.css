@@ -4058,6 +4058,18 @@ h1{
   vertical-align: 0.35em;
 }
 
+/* Η ιδιότητα («καθηγητής διεθνών σχέσεων»). Σερίφ και πλάγια, γιατί
+   διαβάζεται ως συνέχεια του ονόματος — όχι ως ετικέτα. */
+.bio-role{
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--text);
+  max-width: 34rem;
+  margin: 0 0 0.5rem;
+}
+
 .bio-facts{
   font-size: 0.9rem;
   color: var(--muted);

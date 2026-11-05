@@ -176,6 +176,26 @@ const server = http.createServer((req, res) => {
 
   if (rel.endsWith('/')) rel += 'index.html';
 
+  // Το διαχειριστικό σερβίρεται από τον ΠΗΓΑΙΟ φάκελο admin/, όχι από
+  // το public/.
+  //
+  // Γιατί: ό,τι μπαίνει στο public/ ανεβαίνει στο site, και μέχρι να
+  // στηθεί το Cloudflare Access το /admin/ θα ήταν ανοιχτό σε όλους.
+  // Το μετρήσαμε — απαντούσε 200 στο newshubmedia.gr/admin/.
+  //
+  // Έτσι κερδίζουμε και κάτι καθημερινό: η αλλαγή στο admin/admin.js
+  // φαίνεται με απλό refresh, χωρίς να ξανατρέξει το build.
+  if (rel.startsWith('/admin/')) {
+    const name = path.basename(rel);
+    const file = path.join(__dirname, 'admin', name);
+    fs.readFile(file, (err, data) => {
+      if (err) { res.writeHead(404).end('Δεν βρέθηκε'); return; }
+      res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream' });
+      res.end(data);
+    });
+    return;
+  }
+
   // Δεν αφήνουμε κανέναν να βγει έξω από τον φάκελο public με ../
   const file = path.join(ROOT, path.normalize(rel).replace(/^(\.\.[/\\])+/, ''));
   if (!file.startsWith(ROOT)) {

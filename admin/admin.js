@@ -129,11 +129,28 @@ function normalize(episodes, videos, news){
 
   out.sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
 
+  // ΜΙΑ γραμμή ανά αντικείμενο.
+  //
+  // 560 βίντεο υπάρχουν στο videos.json πολλές φορές, επειδή ανήκουν
+  // σε πολλές λίστες του YouTube. Ο συντάκτης τα έβλεπε διπλά: στο
+  // πρωτοσέλιδο διάλεγε «ποιο από τα δύο ίδια;» και στις κατηγορίες
+  // διόρθωνε το ένα και το άλλο φαινόταν ακόμα λάθος — ενώ είναι το
+  // ίδιο βίντεο με τον ίδιο κωδικό. Το site κάνει το ίδιο (moreSpecific
+  // στο build.js), απλώς εκεί δεν φαινόταν.
+  var once = [];
+  var seenId = {};
+  out.forEach(function (it) {
+    var key = it.kind + ':' + it.id;
+    if (seenId[key]) return;
+    seenId[key] = true;
+    once.push(it);
+  });
+
   // Το κλειδί αναζήτησης υπολογίζεται ΜΙΑ φορά: αλλιώς το flat() θα
   // έτρεχε πάνω σε 4.800 εγγραφές σε κάθε πάτημα πλήκτρου.
-  out.forEach(function (it) { it.key = flat(it.title + ' ' + it.who); });
+  once.forEach(function (it) { it.key = flat(it.title + ' ' + it.who); });
 
-  return out;
+  return once;
 }
 
 function matches(it){
@@ -473,6 +490,397 @@ function wireShots(){
       flash(ok ? 'Αντιγράφηκε' : 'Πάτησε Ctrl+C');
     }
   });
+}
+
+// ---------------------------------------------------------------------
+// Κατηγορίες — διόρθωση εκεί που η αυτόματη πέφτει έξω
+// ---------------------------------------------------------------------
+//
+// Το site μαντεύει την κατηγορία από λέξεις του τίτλου. Πέφτει έξω
+// αρκετά συχνά, και σε 1.368 από τα 4.160 δεν βρίσκει τίποτα.
+//
+// Την αυτόματη πρόταση ΔΕΝ την υπολογίζουμε εδώ: τη γράφει το build
+// στο auto-categories.json. Δύο αντίγραφα της ίδιας λογικής θα
+// απέκλιναν, και ο συντάκτης θα διόρθωνε κάτι άλλο από αυτό που
+// βλέπει στο site.
+
+var cat = {
+  auto: {},        // id -> [κατηγορίες] όπως τις βγάζει το site
+  shown: PAGE,
+  find: '',
+  filter: '',
+  openId: null,    // ποια γραμμή είναι ανοιχτή για επεξεργασία
+};
+
+// Μόνο δικό μας περιεχόμενο. Οι ειδήσεις παίρνουν κατηγορία από το
+// newshub.gr και δεν την αλλάζουμε εμείς.
+function catItems(){
+  return state.items.filter(function (it) { return it.kind !== 'news'; });
+}
+
+function catsOf(id){
+  var manual = state.curation.categories && state.curation.categories[id];
+  if (manual) return { list: Array.isArray(manual) ? manual : [manual], manual: true };
+  return { list: cat.auto[id] || [], manual: false };
+}
+
+function drawCats(){
+  var box = $('[data-cat-rows]');
+
+  var hits = catItems().filter(function (it) {
+    // Η ανοιχτή γραμμή μένει ΠΑΝΤΑ ορατή.
+    //
+    // Χωρίς αυτό, στο φίλτρο «Χωρίς κατηγορία» η γραμμή εξαφανιζόταν
+    // μόλις ο συντάκτης έβαζε την πρώτη κατηγορία — δεν προλάβαινε να
+    // βάλει δεύτερη, ούτε να δει τι έκανε.
+    if (cat.openId === it.id) return true;
+
+    if (cat.find && flat(it.title + ' ' + it.who).indexOf(cat.find) < 0) return false;
+
+    var c = catsOf(it.id);
+    if (cat.filter === 'none') return !c.list.length && !c.manual;
+    if (cat.filter === 'fixed') return c.manual;
+    if (cat.filter === 'podcast') return it.kind === 'podcast';
+    if (cat.filter === 'video') return it.kind === 'video';
+    return true;
+  });
+
+  $('[data-cat-count]').textContent = hits.length
+    ? hits.length.toLocaleString('el') + ' αντικείμενα'
+    : '';
+
+  if (!hits.length) {
+    box.innerHTML = '<p class="muted">Τίποτα δεν ταιριάζει.</p>';
+    $('[data-cat-more]').hidden = true;
+    return;
+  }
+
+  box.innerHTML = hits.slice(0, cat.shown).map(function (it) {
+    var c = catsOf(it.id);
+    var open = cat.openId === it.id;
+
+    var chips = c.list.length
+      ? c.list.map(function (name) {
+        return '<span class="catchip' + (c.manual ? ' catchip--manual' : '') + '">'
+          + esc(name) + '</span>';
+      }).join('')
+      : '<span class="catchip catchip--none">καμία</span>';
+
+    var editor = open
+      ? '<div class="catpick">'
+        + CATS.map(function (name) {
+          var on = c.list.indexOf(name) > -1;
+          return '<label class="catopt' + (on ? ' is-on' : '') + '">'
+            + '<input type="checkbox" data-cat-set="' + esc(name) + '"' + (on ? ' checked' : '') + '>'
+            + esc(name) + '</label>';
+        }).join('')
+        + (c.manual
+          ? '<button type="button" class="btn btn--ghost catreset" data-cat-reset>Πίσω στην αυτόματη</button>'
+          : '')
+        + '</div>'
+      : '';
+
+    return '<div class="catrow' + (open ? ' is-open' : '') + '" data-cid="' + esc(it.id) + '">'
+      + '<div class="catrow-head">'
+      + (it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy">' : '<img alt="">')
+      + '<span class="catrow-text">'
+      + '<span class="catrow-title">' + esc(it.title) + '</span>'
+      + '<span class="catrow-meta">'
+      + '<span class="tag tag--' + it.kind + '">' + TAGS[it.kind] + '</span>'
+      + (it.who ? esc(it.who) + ' · ' : '') + when(it.date)
+      + '</span></span>'
+      + '<span class="catrow-cats">' + chips + '</span>'
+      + '</div>' + editor + '</div>';
+  }).join('');
+
+  $('[data-cat-more]').hidden = hits.length <= cat.shown;
+}
+
+function catSet(id, name, on){
+  var c = catsOf(id);
+  // Η πρώτη αλλαγή ξεκινά από ό,τι δείχνει ΤΩΡΑ το site, όχι από το
+  // μηδέν: αλλιώς ο συντάκτης που προσθέτει μία κατηγορία θα έσβηνε
+  // άθελά του τη σωστή που είχε βρει το site.
+  var list = c.list.slice();
+
+  var at = list.indexOf(name);
+  if (on && at < 0) list.push(name);
+  if (!on && at > -1) list.splice(at, 1);
+
+  if (!state.curation.categories) state.curation.categories = {};
+  state.curation.categories[id] = list;
+
+  drawCats();
+  catDirty(true);
+}
+
+function catReset(id){
+  if (state.curation.categories) delete state.curation.categories[id];
+  drawCats();
+  catDirty(true);
+}
+
+function catDirty(on){
+  state.dirty = on;
+  $('[data-save="categories"]').disabled = !on;
+}
+
+function saveCats(){
+  say('Αποθηκεύεται…');
+  api('curation', 'PUT', state.curation).then(function () {
+    catDirty(false);
+    say('Αποθηκεύτηκε. Φαίνεται στο site μόλις ξαναχτιστεί (~2 λεπτά).', 'ok');
+  }).catch(function (err) {
+    say('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+function wireCats(){
+  $('[data-cat-rows]').addEventListener('click', function (e) {
+    var row = e.target.closest('[data-cid]');
+    if (!row) return;
+    var id = row.dataset.cid;
+
+    if (e.target.closest('[data-cat-reset]')) { catReset(id); return; }
+    if (e.target.closest('.catpick')) return;      // τα κουτάκια τα πιάνει το change
+
+    // Κλικ στη γραμμή: ανοίγει ή κλείνει.
+    cat.openId = cat.openId === id ? null : id;
+    drawCats();
+  });
+
+  $('[data-cat-rows]').addEventListener('change', function (e) {
+    var box = e.target.closest('[data-cat-set]');
+    var row = e.target.closest('[data-cid]');
+    if (!box || !row) return;
+    catSet(row.dataset.cid, box.dataset.catSet, box.checked);
+  });
+
+  $('[data-cat-find]').addEventListener('input', function (e) {
+    cat.find = flat(e.target.value);
+    cat.shown = PAGE;
+    drawCats();
+  });
+
+  $('[data-cat-filter]').addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    cat.filter = chip.dataset.cf;
+    cat.shown = PAGE;
+    $$('[data-cat-filter] .chip').forEach(function (c) { c.classList.toggle('is-on', c === chip); });
+    drawCats();
+  });
+
+  $('[data-cat-more]').addEventListener('click', function () {
+    cat.shown += PAGE;
+    drawCats();
+  });
+
+  $('[data-save="categories"]').addEventListener('click', saveCats);
+}
+
+// Οι αυτόματες προτάσεις. Αν λείπει το αρχείο — πρώτο τρέξιμο πριν
+// χτιστεί το site — η καρτέλα δουλεύει, απλώς δείχνει «καμία» παντού.
+function loadAutoCats(){
+  return fetch('auto-categories.json').then(function (r) {
+    return r.ok ? r.json() : {};
+  }).catch(function () { return {}; });
+}
+
+// ---------------------------------------------------------------------
+// Must read — ποια άρθρα του newshub.gr ανοίγουν ΕΔΩ
+// ---------------------------------------------------------------------
+//
+// Τα τέσσερα άρθρα στο κόκκινο πλαίσιο της αρχικής. Από εδώ κρίνεται
+// ΚΑΙ πού ανοίγουν: όσα μπουν εδώ παίρνουν δική μας σελίδα με πλήρες
+// κείμενο και σύνδεσμο πίσω στο newshub.gr — ρητή οδηγία του
+// αφεντικού. Η ροή ειδήσεων στο πλάι δεν επηρεάζεται· εκείνη οδηγεί
+// πάντα στο newshub.gr.
+//
+// Κενό = το site διαλέγει μόνο του τα 4 πιο πρόσφατα, ένα ανά
+// κατηγορία. Γι' αυτό οι θέσεις δείχνουν ΠΑΝΤΑ τι θα βγει, είτε το
+// διάλεξε άνθρωπος είτε όχι.
+
+var MUST = 4;
+
+var mr = {
+  shown: PAGE,
+  find: '',
+};
+
+// Μόνο ειδήσεις: στο κόκκινο πλαίσιο δεν μπαίνει podcast ούτε βίντεο.
+function newsItems(){
+  return state.items.filter(function (it) { return it.kind === 'news'; });
+}
+
+function mrList(){
+  return (state.curation.mustRead || []).slice(0, MUST);
+}
+
+// Τι θα δείξει η αρχική σε κάθε θέση: πρώτα οι χειροκίνητες επιλογές,
+// μετά το αυτόματο γέμισμα. Αντιγράφει τη λογική του pickMustRead στο
+// build.js — ένα ανά κατηγορία, για να μη βγουν τέσσερα «Οικονομία».
+function mrPreview(){
+  var chosen = mrList().map(function (ref) {
+    var hit = null;
+    newsItems().forEach(function (it) { if (!hit && isChosen(it, ref)) hit = it; });
+    return { ref: ref, item: hit, auto: false };
+  });
+
+  var taken = {};
+  var cats = {};
+  chosen.forEach(function (c) {
+    if (c.item) { taken[c.item.ref] = true; cats[c.item.who] = true; }
+  });
+
+  var pool = newsItems();
+  for (var pass = 0; pass < 2 && chosen.length < MUST; pass++) {
+    for (var i = 0; i < pool.length && chosen.length < MUST; i++) {
+      var it = pool[i];
+      if (taken[it.ref]) continue;
+      if (pass === 0 && cats[it.who]) continue;   // πρώτο πέρασμα: μία ανά κατηγορία
+      taken[it.ref] = true;
+      cats[it.who] = true;
+      chosen.push({ ref: it.ref, item: it, auto: true });
+    }
+  }
+
+  return chosen.slice(0, MUST);
+}
+
+function drawMustRead(){
+  var box = $('[data-mr-slots]');
+  var rows = mrPreview();
+
+  box.innerHTML = rows.map(function (r, i) {
+    var it = r.item;
+
+    var body = it
+      ? (it.image ? '<img src="' + esc(it.image) + '" alt="">' : '<img alt="">')
+        + '<div class="slot-text">'
+        + '<p class="slot-title">' + esc(it.title) + '</p>'
+        + '<p class="slot-meta">' + (it.who ? esc(it.who) + ' · ' : '') + when(it.date) + '</p>'
+        + '</div>'
+      : '<img alt=""><div class="slot-text"><p class="slot-title">' + esc(r.ref) + '</p>'
+        + '<p class="slot-meta">Δεν βρέθηκε — μπορεί να είναι παλιό. Το site θα βάλει άλλο.</p></div>';
+
+    return '<div class="slot' + (r.auto ? ' slot--auto' : '') + '">'
+      + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
+      + body
+      + '<span class="slot-acts">'
+      + (r.auto
+        ? '<span class="pill pill--draft">αυτόματο</span>'
+        : '<button type="button" data-mr-up="' + i + '" aria-label="Πάνω"'
+          + (i === 0 ? ' disabled' : '') + '>↑</button>'
+          + '<button type="button" data-mr-del="' + esc(r.ref) + '" aria-label="Αφαίρεση">✕</button>')
+      + '</span></div>';
+  }).join('');
+
+  var n = mrList().length;
+  $('[data-mr-note]').textContent = n === 0
+    ? 'Καμία χειροκίνητη επιλογή — το site βάζει μόνο του τα 4 πιο πρόσφατα, ένα από κάθε κατηγορία.'
+    : n + ' από 4 διαλεγμένα με το χέρι· τις υπόλοιπες θέσεις τις γεμίζει το site.';
+}
+
+function drawMrPicks(){
+  var box = $('[data-mr-picks]');
+  var chosen = mrList();
+
+  var hits = newsItems().filter(function (it) {
+    if (!mr.find) return true;
+    return flat(it.title + ' ' + it.who).indexOf(mr.find) > -1;
+  });
+
+  if (!hits.length) {
+    box.innerHTML = '<p class="muted">Τίποτα δεν ταιριάζει.</p>';
+    $('[data-mr-more]').hidden = true;
+    return;
+  }
+
+  box.innerHTML = hits.slice(0, mr.shown).map(function (it) {
+    var on = chosen.some(function (ref) { return isChosen(it, ref); });
+    return '<button type="button" class="pick' + (on ? ' is-on' : '') + '"'
+      + ' data-mr-add="' + esc(it.ref) + '">'
+      + (it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy">' : '<img alt="">')
+      + '<span><span class="pick-title">' + esc(it.title) + '</span>'
+      + '<span class="pick-meta">'
+      + '<span class="tag tag--news">' + TAGS.news + '</span>'
+      + (it.who ? esc(it.who) + ' · ' : '') + when(it.date)
+      + '</span></span></button>';
+  }).join('');
+
+  $('[data-mr-more]').hidden = hits.length <= mr.shown;
+}
+
+function mrToggle(ref){
+  var list = (state.curation.mustRead || []).slice();
+  var at = -1;
+  list.forEach(function (r, i) { if (r === ref) at = i; });
+
+  if (at > -1) {
+    list.splice(at, 1);                 // ήταν μέσα — βγαίνει
+  } else {
+    if (list.length >= MUST) {
+      say('Οι τέσσερις θέσεις είναι γεμάτες. Αφαίρεσε μία πρώτα.', 'bad');
+      return;
+    }
+    list.push(ref);
+  }
+
+  state.curation.mustRead = list;
+  drawMustRead();
+  drawMrPicks();
+  mrDirty(true);
+}
+
+function mrDirty(on){
+  state.dirty = on;
+  $('[data-save="mustread"]').disabled = !on;
+}
+
+function saveMustRead(){
+  say('Αποθηκεύεται…');
+  api('curation', 'PUT', state.curation).then(function () {
+    mrDirty(false);
+    say('Αποθηκεύτηκε. Φαίνεται στο site μόλις ξαναχτιστεί (~2 λεπτά).', 'ok');
+  }).catch(function (err) {
+    say('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+function wireMustRead(){
+  $('[data-mr-slots]').addEventListener('click', function (e) {
+    var del = e.target.closest('[data-mr-del]');
+    if (del) { mrToggle(del.dataset.mrDel); return; }
+
+    var up = e.target.closest('[data-mr-up]');
+    if (up) {
+      var i = Number(up.dataset.mrUp);
+      var list = state.curation.mustRead || [];
+      if (i <= 0 || i >= list.length) return;
+      var tmp = list[i]; list[i] = list[i - 1]; list[i - 1] = tmp;
+      drawMustRead();
+      mrDirty(true);
+    }
+  });
+
+  $('[data-mr-picks]').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-mr-add]');
+    if (btn) mrToggle(btn.dataset.mrAdd);
+  });
+
+  $('[data-mr-find]').addEventListener('input', function (e) {
+    mr.find = flat(e.target.value);
+    mr.shown = PAGE;
+    drawMrPicks();
+  });
+
+  $('[data-mr-more]').addEventListener('click', function () {
+    mr.shown += PAGE;
+    drawMrPicks();
+  });
+
+  $('[data-save="mustread"]').addEventListener('click', saveMustRead);
 }
 
 // ---------------------------------------------------------------------
@@ -938,6 +1346,482 @@ function wireArticles(){
 }
 
 // ---------------------------------------------------------------------
+// Πρόσωπα — ένας άνθρωπος, ένα όνομα, μία σελίδα
+// ---------------------------------------------------------------------
+//
+// Τα ονόματα δεν τα γράφει κανείς: βγαίνουν από τους τίτλους των
+// επεισοδίων («Άγγελος Συρίγος: η Τουρκία…»). Η σύνταξη γράφει άλλοτε
+// «Α. Συρίγος» και άλλοτε ολόκληρο, οπότε ο ίδιος άνθρωπος παίρνει δύο
+// σελίδες με μοιρασμένα επεισόδια.
+//
+// Εδώ γίνονται τρία πράγματα, και τα τρία γράφονται στο ΙΔΙΟ αρχείο,
+// το people-aliases.json:
+//   · ένωση γραφών        -> aliases
+//   · «δεν είναι άνθρωπος» -> not_people
+//   · ιδιότητα             -> roles
+//
+// Ποιος είναι ποιος ΔΕΝ το υπολογίζουμε εδώ: το γράφει το build στο
+// people.json, μαζί με τις προτάσεις ένωσης. Ίδιος λόγος με τις
+// κατηγορίες — δύο αντίγραφα της λογικής θα απέκλιναν.
+
+var pp = {
+  list: [],        // τα πρόσωπα όπως τα βλέπει το site
+  out: [],         // όσα έχουν σβηστεί ως «δεν είναι άνθρωπος»
+  sug: [],         // προτάσεις ένωσης
+  file: null,      // το people-aliases.json, όπως θα σωθεί
+  shown: PAGE,
+  find: '',
+  filter: '',
+  openName: null,
+  mfind: '',       // η αναζήτηση μέσα στο «ένωσε με…»
+};
+
+// Το αρχείο μπορεί να μην έχει ακόμα τα κλειδιά που πειράζουμε.
+function ppReady(file){
+  var f = file && typeof file === 'object' ? file : {};
+  if (!f.aliases || typeof f.aliases !== 'object') f.aliases = {};
+  if (!f.roles || typeof f.roles !== 'object') f.roles = {};
+  if (!Array.isArray(f.not_people)) f.not_people = [];
+  if (!Array.isArray(f.not_aliases)) f.not_aliases = [];
+  return f;
+}
+
+// Οι συγκρίσεις ονομάτων γίνονται ΠΑΝΤΑ με flat(), ποτέ με ===.
+//
+// Το ίδιο πρόσωπο γράφεται «Αϋφαντής» και «Αυφαντής», και το όνομα που
+// δείχνει το people.json είναι η γραφή που κέρδισε — όχι απαραίτητα
+// αυτή που είναι γραμμένη στο αρχείο.
+function ppSame(a, b){ return flat(a) === flat(b); }
+
+function ppRole(name){
+  var keys = Object.keys(pp.file.roles);
+  for (var i = 0; i < keys.length; i++) {
+    if (ppSame(keys[i], name)) return pp.file.roles[keys[i]];
+  }
+  return '';
+}
+
+function ppIsOut(name){
+  return pp.file.not_people.some(function (n) { return ppSame(n, name); });
+}
+
+// Με ποιον ενώθηκε αυτό το όνομα ΤΩΡΑ, σε αυτή τη συνεδρία. Ό,τι ήταν
+// ήδη ενωμένο δεν φτάνει εδώ: το people.json το δίνει ήδη ενωμένο.
+function ppMovedTo(name){
+  var a = pp.file.aliases;
+  var canon = Object.keys(a);
+  for (var i = 0; i < canon.length; i++) {
+    if (ppSame(canon[i], name)) continue;
+    var list = a[canon[i]] || [];
+    for (var j = 0; j < list.length; j++) {
+      if (ppSame(list[j], name)) return canon[i];
+    }
+  }
+  return '';
+}
+
+// ---- οι ενέργειες ----
+
+function ppSetRole(name, text){
+  // Σβήνουμε ό,τι υπάρχει με άλλη γραφή, αλλιώς μένουν δύο εγγραφές
+  // για τον ίδιο άνθρωπο και κερδίζει όποια θέλει.
+  Object.keys(pp.file.roles).forEach(function (k) {
+    if (ppSame(k, name)) delete pp.file.roles[k];
+  });
+  if (text.trim()) pp.file.roles[name] = text.trim();
+  ppDirty(true);
+}
+
+function ppOut(name){
+  if (!ppIsOut(name)) pp.file.not_people.push(name);
+  // Ό,τι δεν είναι άνθρωπος δεν έχει ιδιότητα.
+  Object.keys(pp.file.roles).forEach(function (k) {
+    if (ppSame(k, name)) delete pp.file.roles[k];
+  });
+  ppDirty(true);
+  drawPeople();
+}
+
+function ppIn(name){
+  pp.file.not_people = pp.file.not_people.filter(function (n) { return !ppSame(n, name); });
+  ppDirty(true);
+  drawPeople();
+}
+
+// Ένωση: ο «from» γίνεται γραφή του «into».
+//
+// Μαζί του μεταφέρονται και ΟΙ ΔΙΚΕΣ ΤΟΥ γραφές — αλλιώς θα έμεναν
+// ορφανές να δείχνουν σε όνομα που δεν έχει πια σελίδα.
+function ppMerge(from, into){
+  if (ppSame(from, into)) return;
+
+  var list = pp.file.aliases[into] || [];
+  var moving = [from];
+
+  Object.keys(pp.file.aliases).forEach(function (k) {
+    if (!ppSame(k, from)) return;
+    moving = moving.concat(pp.file.aliases[k] || []);
+    delete pp.file.aliases[k];
+  });
+
+  moving.forEach(function (n) {
+    if (ppSame(n, into)) return;
+    var have = list.some(function (v) { return ppSame(v, n); });
+    if (!have) list.push(n);
+  });
+
+  pp.file.aliases[into] = list;
+
+  // Η ιδιότητα ακολουθεί, αν ο άλλος δεν έχει δική του.
+  var role = ppRole(from);
+  Object.keys(pp.file.roles).forEach(function (k) {
+    if (ppSame(k, from)) delete pp.file.roles[k];
+  });
+  if (role && !ppRole(into)) pp.file.roles[into] = role;
+
+  pp.openName = null;
+  pp.mfind = '';
+  ppDirty(true);
+  drawPeople();
+}
+
+// Ξεχωρίζει μία γραφή από τον άνθρωπο στον οποίο έχει ενωθεί.
+function ppSplit(canonical, variant){
+  Object.keys(pp.file.aliases).forEach(function (k) {
+    if (!ppSame(k, canonical)) return;
+    pp.file.aliases[k] = (pp.file.aliases[k] || []).filter(function (v) {
+      return !ppSame(v, variant);
+    });
+    if (!pp.file.aliases[k].length) delete pp.file.aliases[k];
+  });
+  ppDirty(true);
+  drawPeople();
+}
+
+// «Όχι, άλλος άνθρωπος». Γράφεται, ώστε η πρόταση να μην ξαναέρθει
+// στο επόμενο build — αλλιώς ο συντάκτης θα την απορρίπτει για πάντα.
+function ppNotAlias(canonical, other){
+  pp.file.not_aliases.push([canonical, other]);
+  ppDirty(true);
+  drawPeople();
+}
+
+function ppDirty(on){
+  state.dirty = on;
+  $('[data-save="people"]').disabled = !on;
+}
+
+function savePeople(){
+  say('Αποθηκεύεται…');
+  api('people-aliases', 'PUT', pp.file).then(function () {
+    ppDirty(false);
+    say('Αποθηκεύτηκε. Οι σελίδες ενώνονται μόλις ξαναχτιστεί το site (~2 λεπτά).', 'ok');
+  }).catch(function (err) {
+    say('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+// ---- η λίστα ----
+
+// Αρχικά του ονόματος, όταν δεν υπάρχει φωτογραφία. Πορτρέτα δεν
+// έχουμε για κανέναν· η εικόνα είναι το εξώφυλλο του επεισοδίου.
+function ppFace(p){
+  if (p.image) return '<img src="' + esc(p.image) + '" alt="" loading="lazy">';
+  var bits = String(p.name).split(/\s+/).filter(Boolean).slice(0, 2)
+    .map(function (w) { return w.charAt(0); }).join('');
+  return '<span class="pface">' + esc(bits) + '</span>';
+}
+
+function ppAll(){
+  var rows = pp.list.map(function (p) {
+    var moved = ppMovedTo(p.name);
+    return {
+      name: p.name,
+      n: p.n,
+      last: p.last,
+      image: p.image,
+      writings: p.writings || [],
+      role: ppRole(p.name),
+      isOut: ppIsOut(p.name),
+      moved: moved,
+    };
+  });
+
+  // Τα σβησμένα δεν υπάρχουν στο people.json ως πρόσωπα — έρχονται
+  // χωριστά, ώστε να μπορεί ο συντάκτης να πάρει πίσω ένα λάθος.
+  pp.out.forEach(function (r) {
+    rows.push({
+      name: r.name, n: r.n, last: '', image: '',
+      writings: [], role: '', isOut: ppIsOut(r.name), moved: '',
+    });
+  });
+
+  return rows;
+}
+
+function drawPeople(){
+  var box = $('[data-pp-rows]');
+
+  if (pp.filter === 'suggest') { drawSuggest(box); return; }
+
+  var hits = ppAll().filter(function (p) {
+    if (pp.openName && ppSame(pp.openName, p.name)) return true;
+    if (pp.find && flat(p.name).indexOf(pp.find) < 0) return false;
+
+    if (pp.filter === 'out') return p.isOut;
+    if (p.isOut) return false;
+    if (pp.filter === 'role') return !p.role && !p.moved;
+    if (pp.filter === 'many') return p.writings.length > 1;
+    return true;
+  });
+
+  $('[data-pp-count]').textContent = hits.length
+    ? hits.length.toLocaleString('el') + ' πρόσωπα'
+    : '';
+
+  if (!hits.length) {
+    box.innerHTML = '<p class="muted">Τίποτα δεν ταιριάζει.</p>';
+    $('[data-pp-more]').hidden = true;
+    return;
+  }
+
+  box.innerHTML = hits.slice(0, pp.shown).map(ppRow).join('');
+  $('[data-pp-more]').hidden = hits.length <= pp.shown;
+}
+
+function ppRow(p){
+  var open = pp.openName && ppSame(pp.openName, p.name);
+
+  var flags = '';
+  if (p.moved) {
+    flags += '<span class="pchip pchip--move">ενώνεται με ' + esc(p.moved) + '</span>';
+  }
+  if (p.isOut) flags += '<span class="pchip pchip--out">δεν είναι άνθρωπος</span>';
+  if (p.writings.length > 1) {
+    flags += '<span class="pchip">' + p.writings.length + ' γραφές</span>';
+  }
+
+  var meta = [
+    p.n ? (p.n === 1 ? '1 εμφάνιση' : p.n.toLocaleString('el') + ' εμφανίσεις') : '',
+    p.last ? 'τελευταία ' + when(p.last) : '',
+  ].filter(Boolean).join(' · ');
+
+  return '<div class="prow' + (open ? ' is-open' : '')
+    + (p.isOut || p.moved ? ' is-pale' : '') + '" data-pname="' + esc(p.name) + '">'
+    + '<div class="prow-head">'
+    + ppFace(p)
+    + '<span class="prow-text">'
+    + '<span class="prow-name">' + esc(p.name) + '</span>'
+    + (p.role ? '<span class="prow-role">' + esc(p.role) + '</span>' : '')
+    + '<span class="prow-meta">' + meta + '</span>'
+    + '</span>'
+    + '<span class="prow-flags">' + flags + '</span>'
+    + '</div>'
+    + (open ? ppEditor(p) : '')
+    + '</div>';
+}
+
+function ppEditor(p){
+  var out = '<div class="pedit">';
+
+  if (!p.isOut) {
+    out += '<label class="pfield">'
+      + '<span>Ιδιότητα — φαίνεται κάτω από το όνομα στη σελίδα του</span>'
+      + '<input type="text" data-pp-role value="' + esc(p.role) + '"'
+      + ' placeholder="π.χ. καθηγητής διεθνών σχέσεων στο Πάντειο">'
+      + '</label>';
+  }
+
+  if (p.writings.length > 1) {
+    out += '<div class="pfield"><span>Γραφές που έχουν ενωθεί σε αυτόν</span>'
+      + '<div class="pwrit">'
+      + p.writings.map(function (w) {
+        if (ppSame(w, p.name)) {
+          return '<span class="pchip pchip--main">' + esc(w) + '</span>';
+        }
+        return '<span class="pchip">' + esc(w)
+          + '<button type="button" class="pchip-x" data-pp-split="' + esc(w) + '"'
+          + ' title="Ξεχώρισέ το">×</button></span>';
+      }).join('')
+      + '</div></div>';
+  }
+
+  if (!p.isOut) {
+    out += '<div class="pfield"><span>Είναι ο ίδιος με κάποιον άλλο;</span>'
+      + '<input type="search" class="find" data-pp-mfind value="' + esc(pp.mfind) + '"'
+      + ' placeholder="Γράψε το σωστό του όνομα…">'
+      + '<div class="pmhits">' + ppMergeHits(p) + '</div>'
+      + '</div>';
+  }
+
+  out += '<div class="pacts">';
+  if (p.isOut) {
+    out += '<button type="button" class="btn btn--ghost" data-pp-in>Είναι άνθρωπος</button>';
+  } else {
+    out += '<button type="button" class="btn btn--ghost" data-pp-out>Δεν είναι άνθρωπος</button>';
+  }
+  out += '</div></div>';
+
+  return out;
+}
+
+// Σε ποιον μπορεί να ενωθεί. Χωρίς αναζήτηση δεν δείχνουμε τίποτα: 373
+// ονόματα σε λίστα δεν βοηθούν κανέναν.
+function ppMergeHits(p){
+  if (!pp.mfind) return '<p class="muted">Γράψε δύο γράμματα.</p>';
+
+  var hits = pp.list.filter(function (o) {
+    if (ppSame(o.name, p.name)) return false;
+    if (ppIsOut(o.name)) return false;
+    return flat(o.name).indexOf(pp.mfind) > -1;
+  }).slice(0, 6);
+
+  if (!hits.length) return '<p class="muted">Κανένα όνομα δεν ταιριάζει.</p>';
+
+  return hits.map(function (o) {
+    return '<button type="button" class="pmhit" data-pp-into="' + esc(o.name) + '">'
+      + '<span>' + esc(o.name) + '</span>'
+      + '<em>' + (o.n === 1 ? '1 εμφάνιση' : o.n + ' εμφανίσεις') + '</em>'
+      + '</button>';
+  }).join('');
+}
+
+// ---- οι προτάσεις ----
+
+function drawSuggest(box){
+  // Ό,τι έχει απαντηθεί σε αυτή τη συνεδρία φεύγει αμέσως: η ένωση
+  // φαίνεται στα aliases, η απόρριψη στα not_aliases.
+  var live = [];
+  pp.sug.forEach(function (f) {
+    f.others.forEach(function (o) {
+      var merged = ppMovedTo(o.name);
+      if (merged && ppSame(merged, f.canonical)) return;
+      var said = pp.file.not_aliases.some(function (pair) {
+        if (!Array.isArray(pair) || pair.length < 2) return false;
+        return ppSame(pair[0], f.canonical) && ppSame(pair[1], o.name);
+      });
+      if (said) return;
+      live.push({ canonical: f.canonical, cn: f.cn, other: o.name, on: o.n });
+    });
+  });
+
+  $('[data-pp-count]').textContent = live.length
+    ? live.length.toLocaleString('el') + ' προτάσεις'
+    : '';
+  $('[data-pp-more]').hidden = true;
+
+  if (!live.length) {
+    box.innerHTML = '<p class="muted">Καμία πρόταση — όλα έχουν απαντηθεί.</p>';
+    return;
+  }
+
+  box.innerHTML = '<p class="hint">Το site υποπτεύεται ότι είναι ο ίδιος άνθρωπος. '
+    + 'ΔΕΝ ενώνει τίποτα μόνο του: δύο αδέρφια με το ίδιο επώνυμο μοιάζουν ίδια '
+    + 'σε κάθε αυτόματο έλεγχο.</p>'
+    + live.map(function (s) {
+      return '<div class="psug" data-pcanon="' + esc(s.canonical) + '"'
+        + ' data-pother="' + esc(s.other) + '">'
+        + '<div class="psug-pair">'
+        + '<span class="psug-keep">' + esc(s.canonical)
+        + '<em>' + s.cn + '</em></span>'
+        + '<span class="psug-arrow">←</span>'
+        + '<span class="psug-drop">' + esc(s.other) + '<em>' + s.on + '</em></span>'
+        + '</div>'
+        + '<div class="pacts">'
+        + '<button type="button" class="btn" data-pp-yes>Ο ίδιος — ένωσέ τους</button>'
+        + '<button type="button" class="btn btn--ghost" data-pp-no>Άλλος άνθρωπος</button>'
+        + '</div></div>';
+    }).join('');
+}
+
+function wirePeople(){
+  var rows = $('[data-pp-rows]');
+
+  rows.addEventListener('click', function (e) {
+    // Οι προτάσεις πρώτα: έχουν δικά τους κουμπιά.
+    var sug = e.target.closest('[data-pcanon]');
+    if (sug) {
+      var canon = sug.dataset.pcanon;
+      var other = sug.dataset.pother;
+      if (e.target.closest('[data-pp-yes]')) ppMerge(other, canon);
+      if (e.target.closest('[data-pp-no]')) ppNotAlias(canon, other);
+      return;
+    }
+
+    var row = e.target.closest('[data-pname]');
+    if (!row) return;
+    var name = row.dataset.pname;
+
+    var into = e.target.closest('[data-pp-into]');
+    if (into) { ppMerge(name, into.dataset.ppInto); return; }
+
+    var split = e.target.closest('[data-pp-split]');
+    if (split) { ppSplit(name, split.dataset.ppSplit); return; }
+
+    if (e.target.closest('[data-pp-out]')) { ppOut(name); return; }
+    if (e.target.closest('[data-pp-in]')) { ppIn(name); return; }
+
+    // Κλικ μέσα στον επεξεργαστή δεν κλείνει τη γραμμή — αλλιώς δεν
+    // μπορείς να πατήσεις μέσα στο κουτί της ιδιότητας.
+    if (e.target.closest('.pedit')) return;
+
+    pp.openName = pp.openName && ppSame(pp.openName, name) ? null : name;
+    pp.mfind = '';
+    drawPeople();
+  });
+
+  // Η ιδιότητα γράφεται ΧΩΡΙΣ ξαναζωγράφισμα: αλλιώς χάνεται ο δρομέας
+  // στο πρώτο γράμμα.
+  rows.addEventListener('input', function (e) {
+    var row = e.target.closest('[data-pname]');
+    if (!row) return;
+
+    if (e.target.matches('[data-pp-role]')) {
+      ppSetRole(row.dataset.pname, e.target.value);
+      return;
+    }
+
+    if (e.target.matches('[data-pp-mfind]')) {
+      pp.mfind = flat(e.target.value);
+      // Μόνο η λίστα αποτελεσμάτων, για τον ίδιο λόγο.
+      var p = ppAll().filter(function (x) { return ppSame(x.name, row.dataset.pname); })[0];
+      if (p) $('.pmhits', row).innerHTML = ppMergeHits(p);
+    }
+  });
+
+  $('[data-pp-find]').addEventListener('input', function (e) {
+    pp.find = flat(e.target.value);
+    pp.shown = PAGE;
+    drawPeople();
+  });
+
+  $('[data-pp-filter]').addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    pp.filter = chip.dataset.pf;
+    pp.shown = PAGE;
+    pp.openName = null;
+    $$('[data-pp-filter] .chip').forEach(function (c) { c.classList.toggle('is-on', c === chip); });
+    drawPeople();
+  });
+
+  $('[data-pp-more]').addEventListener('click', function () {
+    pp.shown += PAGE;
+    drawPeople();
+  });
+
+  $('[data-save="people"]').addEventListener('click', savePeople);
+}
+
+// Η απογραφή προσώπων. Αν λείπει το αρχείο — πρώτο τρέξιμο πριν χτιστεί
+// το site — η καρτέλα δουλεύει, απλώς είναι άδεια.
+function loadPeople(){
+  return fetch('people.json').then(function (r) {
+    return r.ok ? r.json() : null;
+  }).catch(function () { return null; });
+}
+
+// ---------------------------------------------------------------------
 // Σύνδεση
 // ---------------------------------------------------------------------
 
@@ -988,6 +1872,9 @@ function wire(){
 
   wireShots();
   wireArticles();
+  wireMustRead();
+  wireCats();
+  wirePeople();
 
   // Δικλείδα: φεύγει η σελίδα με αναλλοίωτη δουλειά μέσα.
   window.addEventListener('beforeunload', function (e) {
@@ -1009,16 +1896,31 @@ function boot(){
     api('videos'),
     api('news'),
     api('articles'),
+    loadAutoCats(),
+    api('people-aliases'),
+    loadPeople(),
   ]).then(function (r) {
     state.curation = r[0] || {};
     state.items = normalize(r[1], r[2], r[3]);
+    cat.auto = r[5] || {};
     // Το αρχείο δεν υπάρχει μέχρι να γραφτεί το πρώτο άρθρο — τότε το
     // API επιστρέφει null, όχι σφάλμα.
     art.list = Array.isArray(r[4]) ? r[4] : [];
+
+    pp.file = ppReady(r[6]);
+    var census = r[7] || {};
+    pp.list = Array.isArray(census.people) ? census.people : [];
+    pp.out = Array.isArray(census.rejected) ? census.rejected : [];
+    pp.sug = Array.isArray(census.suggest) ? census.suggest : [];
+
     $('[data-until]').value = state.curation.featuredUntil || '';
     drawNow();
     drawPicks();
     drawArtList();
+    drawMustRead();
+    drawMrPicks();
+    drawCats();
+    drawPeople();
     loadShots();
     say('');
   }).catch(function (err) {

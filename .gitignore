@@ -53,3 +53,13 @@ Desktop.ini
 # τα binary μένουν στο ιστορικό για πάντα και το Cloudflare Pages δέχεται
 # 20.000 αρχεία — το public/ έχει ήδη 9.726. Στον αέρα ζουν σε R2.
 uploads/
+
+# Παράγεται από το build.js για το διαχειριστικό: 4.800 εγγραφές
+# που ξαναγράφονται σε κάθε build.
+admin/auto-categories.json
+admin/people.json
+
+# Τα μυστικά του wrangler για τοπική δοκιμή — ΠΟΤΕ στο git.
+.dev.vars
+.dev.vars.*
+.wrangler/

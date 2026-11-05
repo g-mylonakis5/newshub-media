@@ -77,24 +77,16 @@ function parts(name){
   };
 }
 
-function main(){
-  const episodes = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-
-  // όνομα -> πόσα επεισόδια
-  const seen = {};
-  for (const ep of episodes) {
-    if (!ep.guest) continue;
-    const cleaned = cleanGuestName(ep.guest);
-    if (!cleaned) continue;
-    const { name } = splitTitle(cleaned);
-    if (!name) continue;
-    if (!seen[name]) seen[name] = { count: 0, titles: new Set() };
-    seen[name].count++;
-    const t = splitTitle(cleaned).title;
-    if (t) seen[name].titles.add(t);
-  }
-
-  const names = Object.keys(seen);
+// ---- από ονόματα σε ομάδες προς ένωση ----
+//
+// Παίρνει { όνομα: πόσα επεισόδια } και βγάζει [{ canonical, others }].
+//
+// Χωριστή συνάρτηση ΚΑΙ εξαγόμενη, γιατί τη θέλει και το build.js για
+// να γράψει τις προτάσεις στο διαχειριστικό. Δύο αντίγραφα της ίδιας
+// λογικής θα απέκλιναν, και η καρτέλα «Πρόσωπα» θα πρότεινε άλλα από
+// αυτά που βγάζει η γραμμή εντολών.
+function suggestFamilies(counts){
+  const names = Object.keys(counts);
 
   // Ομαδοποίηση κατά επώνυμο.
   const byLast = {};
@@ -102,7 +94,7 @@ function main(){
     const p = parts(n);
     const key = flat(p.last);
     if (!key) continue;
-    (byLast[key] = byLast[key] || []).push({ name: n, ...p, n: seen[n].count });
+    (byLast[key] = byLast[key] || []).push({ name: n, ...p, n: counts[n] });
   }
 
   // Υποψήφια ζεύγη: ίδιο επώνυμο, το ένα με αρχικό που ταιριάζει.
@@ -136,10 +128,6 @@ function main(){
     }
   }
 
-  // Ίδιο όνομα με/χωρίς τίτλο δεν βγαίνει ως ζεύγος, γιατί το splitTitle
-  // τα έχει ήδη ενώσει — τα τυπώνουμε χωριστά για ενημέρωση.
-  const titled = names.filter((n) => seen[n].titles.size);
-
   // ---- από ζεύγη σε ομάδες ----
   //
   // Τα ζεύγη αλυσιδώνουν: «Κώστας Γρίβας» ↔ «Κ. Γρίβας» ↔ «Κωνσταντίνος
@@ -166,17 +154,45 @@ function main(){
   const pick = (list) => {
     const full = list.filter((n) => !isInitial(parts(n).first));
     return (full.length ? full : list).sort((x, y) =>
-      (seen[y].count - seen[x].count) || (y.length - x.length))[0];
+      (counts[y] - counts[x]) || (y.length - x.length))[0];
   };
 
-  const families = Object.values(groups)
+  return Object.values(groups)
     .filter((list) => list.length > 1)
     .map((list) => {
       const canonical = pick(list);
       return { canonical, others: list.filter((n) => n !== canonical) };
     })
-    .sort((x, y) => seen[y.canonical].count - seen[x.canonical].count);
+    .sort((x, y) => counts[y.canonical] - counts[x.canonical]);
+}
 
+function main(){
+  const episodes = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+
+  // όνομα -> πόσα επεισόδια
+  const seen = {};
+  for (const ep of episodes) {
+    if (!ep.guest) continue;
+    const cleaned = cleanGuestName(ep.guest);
+    if (!cleaned) continue;
+    const { name } = splitTitle(cleaned);
+    if (!name) continue;
+    if (!seen[name]) seen[name] = { count: 0, titles: new Set() };
+    seen[name].count++;
+    const t = splitTitle(cleaned).title;
+    if (t) seen[name].titles.add(t);
+  }
+
+  const names = Object.keys(seen);
+
+  // Ίδιο όνομα με/χωρίς τίτλο δεν βγαίνει ως ζεύγος, γιατί το splitTitle
+  // τα έχει ήδη ενώσει — τα τυπώνουμε χωριστά για ενημέρωση.
+  const titled = names.filter((n) => seen[n].titles.size);
+
+  const counts = {};
+  for (const n of names) counts[n] = seen[n].count;
+
+  const families = suggestFamilies(counts);
   const dropped = families.reduce((n, f) => n + f.others.length, 0);
 
   if (asJson || willWrite) {
@@ -237,4 +253,10 @@ function main(){
   console.log(`Αν εγκριθούν όλα:  ${names.length - dropped}   (−${dropped})`);
 }
 
-main();
+// Τρέχει μόνο όταν το καλείς κατευθείαν. Όταν το φορτώνει το build.js,
+// δίνει μόνο τη λογική πρότασης — ΔΕΝ διαβάζει και δεν γράφει αρχεία.
+if (require.main === module) {
+  main();
+} else {
+  module.exports = { suggestFamilies };
+}

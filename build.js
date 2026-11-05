@@ -15,6 +15,9 @@ const VIDEO_FILE = path.join(__dirname, 'data/videos.json');
 const TRANSCRIPT_DIR = path.join(__dirname, 'data/transcripts');
 const TRANSCRIPT_OUT = path.join(__dirname, 'public/transcript');
 const ALIAS_FILE = path.join(__dirname, 'data/people-aliases.json');
+// Η λογική «ποιες γραφές είναι ο ίδιος άνθρωπος» ζει εκεί, και τη
+// δανειζόμαστε για να γράψουμε τις προτάσεις στο διαχειριστικό.
+const { suggestFamilies } = require('./find-aliases.js');
 const SHOW_ART_FILE = path.join(__dirname, 'data/show-art.json');
 const SHOWS_FILE = path.join(__dirname, 'data/shows.json');
 const SHOW_DIR = path.join(PUBLIC_DIR, 'show');
@@ -3309,9 +3312,14 @@ function looksLikePerson(name){
   return true;
 }
 
-// Τα λίγα που περνούν τον έλεγχο αλλά δεν είναι άνθρωποι. Παλιά δεδομένα,
-// κλειστό σύνολο — το διαχειριστικό θα τα διορθώσει στην πηγή.
-const NOT_GUESTS = new Set(['Εκλογές Ιατρικού Συλλόγου Ηρακλείου', 'Τελευταία Προσευχή']);
+// Τα λίγα που περνούν τον έλεγχο αλλά δεν είναι άνθρωποι.
+//
+// Ήταν σκληρογραμμένα εδώ. Τώρα ζουν στο data/people-aliases.json, στο
+// κλειδί not_people, ώστε να τα σβήνει ο συντάκτης από την καρτέλα
+// «Πρόσωπα» — χωρίς αυτό, κάθε νέο σκουπίδι ήθελε αλλαγή κώδικα.
+function notGuest(name){
+  return aliases().notPeople.has(guestKey(name));
+}
 
 // ---- ένα όνομα ανά άνθρωπο ----
 //
@@ -3325,7 +3333,7 @@ const NOT_GUESTS = new Set(['Εκλογές Ιατρικού Συλλόγου Η
 let aliasData;
 function aliases(){
   if (!aliasData) {
-    aliasData = { titles: [], map: {} };
+    aliasData = { titles: [], map: {}, notPeople: new Set(), roles: {}, nos: [] };
     try {
       const raw = JSON.parse(fs.readFileSync(ALIAS_FILE, 'utf8'));
       aliasData.titles = Array.isArray(raw.titles) ? raw.titles : [];
@@ -3333,6 +3341,22 @@ function aliases(){
       // γιατί έτσι διαβάζεται· εδώ θέλουμε «παραλλαγή -> κανονικό».
       for (const [canonical, list] of Object.entries(raw.aliases || {})) {
         for (const variant of list) aliasData.map[guestKey(variant)] = canonical;
+      }
+      // Με κλειδί, όχι με το όνομα όπως γράφτηκε: το σκουπίδι που
+      // σβήνει ο συντάκτης εμφανίζεται στους τίτλους και με άλλους
+      // τόνους, και θα ξαναγύριζε ως πρόσωπο.
+      for (const name of raw.not_people || []) {
+        aliasData.notPeople.add(guestKey(name));
+      }
+      // Ιδιότητα ανά ΚΑΝΟΝΙΚΟ όνομα — μετά την ένωση, αλλιώς ο ίδιος
+      // άνθρωπος θα την ήθελε γραμμένη σε κάθε παραλλαγή.
+      for (const [name, role] of Object.entries(raw.roles || {})) {
+        if (role) aliasData.roles[guestKey(name)] = String(role);
+      }
+      for (const pair of raw.not_aliases || []) {
+        if (Array.isArray(pair) && pair.length === 2) {
+          aliasData.nos.push(`${guestKey(pair[0])}|${guestKey(pair[1])}`);
+        }
       }
     } catch (err) {
       if (err.code !== 'ENOENT') {
@@ -3368,8 +3392,24 @@ function titleOf(ep){
 function guestOf(ep){
   if (!ep.guest) return '';
   const { name } = splitTitle(cleanGuestName(decode(ep.guest)));
-  if (!looksLikePerson(name) || NOT_GUESTS.has(name)) return '';
-  return aliases().map[guestKey(name)] || name;
+  if (!looksLikePerson(name) || notGuest(name)) return '';
+  const canonical = aliases().map[guestKey(name)] || name;
+  // Το σβήσιμο γίνεται και στο κανονικό όνομα: ο συντάκτης σβήνει αυτό
+  // που βλέπει στην καρτέλα, κι εκείνο είναι το ενωμένο.
+  if (notGuest(canonical)) return '';
+  return canonical;
+}
+
+// Η ιδιότητα ενός προσώπου («καθηγητής διεθνών σχέσεων»). Κενό για
+// όσους δεν την έβαλε κανείς — είναι σχόλιο, όχι απαίτηση.
+function roleOf(name){
+  return aliases().roles[guestKey(name)] || '';
+}
+
+// Ζεύγη που ο συντάκτης απέρριψε ρητά: «όχι, άλλος άνθρωπος». Μόνο
+// για τις προτάσεις — δεν αλλάζουν τίποτα στο site.
+function aliasNos(){
+  return aliases().nos;
 }
 
 // Χαλαρό κλειδί ΜΟΝΟ για την ένωση — ισοπεδώνει και τα διαλυτικά, ώστε
@@ -3430,6 +3470,77 @@ function indexGuestSlugs(groups){
   // Ο «Γιώργος Παπαδόπουλος» πρέπει να δοκιμαστεί πριν τον «Γιώργος Παπά»,
   // αλλιώς το μικρότερο όνομα κλέβει το ταίριασμα.
   guestIndex.sort((a, b) => b.weight - a.weight);
+}
+
+// ---- η απογραφή προσώπων για το διαχειριστικό ----
+//
+// Τι βλέπει ο συντάκτης στην καρτέλα «Πρόσωπα»: κάθε άνθρωπος όπως
+// τον βγάζει ΣΗΜΕΡΑ το site, με όλες τις γραφές που έπεσαν πάνω του,
+// όσα σβήστηκαν ως «δεν είναι άνθρωπος», και τις προτάσεις ένωσης.
+//
+// Γράφεται από εδώ και ΜΟΝΟ από εδώ, για τον ίδιο λόγο που γράφεται
+// και το auto-categories.json: τη λογική (καθαρισμός τίτλου, έλεγχος
+// looksLikePerson, ένωση) την ξέρει αυτό το αρχείο. Αντίγραφο στη
+// διεπαφή θα απέκλινε, και ο συντάκτης θα διόρθωνε φαντάσματα.
+function peopleForAdmin(episodes){
+  // Πρώτα η ωμή απογραφή: κάθε γραφή ονόματος όπως βγαίνει από τον
+  // τίτλο, ΠΡΙΝ την ένωση. Χωρίς αυτό δεν φαίνεται τι ενώθηκε με τι.
+  const raw = {};
+  for (const ep of episodes) {
+    if (!ep.guest) continue;
+    const { name } = splitTitle(cleanGuestName(decode(ep.guest)));
+    if (!name || !looksLikePerson(name)) continue;
+    raw[name] = (raw[name] || 0) + 1;
+  }
+
+  // Ποιες γραφές κατέληξαν σε ποιον άνθρωπο, και ποιες σβήστηκαν.
+  const writings = {};   // κλειδί ανθρώπου -> [{ name, n }]
+  const rejected = [];
+  for (const [name, n] of Object.entries(raw)) {
+    const canonical = aliases().map[guestKey(name)] || name;
+    if (notGuest(name) || notGuest(canonical)) {
+      rejected.push({ name, n });
+      continue;
+    }
+    const key = guestKey(canonical);
+    (writings[key] = writings[key] || []).push({ name, n });
+  }
+  for (const list of Object.values(writings)) list.sort((a, b) => b.n - a.n);
+
+  const people = guestIndex.map((p) => ({
+    name: p.name,
+    slug: p.slug,
+    n: p.count,
+    last: p.last,
+    image: p.image,
+    writings: (writings[p.key] || []).map((w) => w.name),
+  })).sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, 'el'));
+
+  // Προτάσεις ένωσης. Κρατάμε μόνο όσες έχουν κάτι να προσφέρουν:
+  // ό,τι είναι ήδη ενωμένο δεν ξαναρωτιέται, αλλιώς η καρτέλα θα
+  // έδειχνε 39 «προτάσεις» που ο συντάκτης έχει ήδη εγκρίνει.
+  //
+  // Ούτε ό,τι έχει ΑΠΟΡΡΙΦΘΕΙ ρητά: δύο αδέρφια με το ίδιο επώνυμο
+  // μοιάζουν ίδια σε κάθε αυτόματο έλεγχο, και η πρόταση θα ξαναρχόταν
+  // σε κάθε build μέχρι να την εγκρίνει κάποιος από κούραση.
+  const map = aliases().map;
+  const no = new Set(aliasNos());
+  const suggest = suggestFamilies(raw)
+    .map((f) => ({
+      canonical: f.canonical,
+      cn: raw[f.canonical] || 0,
+      others: f.others
+        .filter((o) => {
+          if (notGuest(o)) return false;
+          if (no.has(`${guestKey(f.canonical)}|${guestKey(o)}`)) return false;
+          const to = map[guestKey(o)];
+          return guestKey(to || o) !== guestKey(f.canonical);
+        })
+        .map((o) => ({ name: o, n: raw[o] || 0 })),
+    }))
+    .filter((f) => f.others.length && !notGuest(f.canonical));
+
+  return { people, rejected: rejected.sort((a, b) => b.n - a.n), suggest };
 }
 
 // Ποιο πρόσωπο μιλάει για ποια θέματα, και πόσο συχνά.
@@ -3850,6 +3961,11 @@ function guestPage(name, list){
   const key = guestKey(name);
   const title = episodes.map((ep) => titleOf(ep)).find(Boolean) || '';
 
+  // Η ιδιότητα, αν τη γράψει κάποιος από το διαχειριστικό. Μπαίνει
+  // κάτω από το όνομα: «ποιος είναι αυτός» είναι η πρώτη ερώτηση του
+  // επισκέπτη, και σήμερα η σελίδα απαντά μόνο «πόσες φορές ήρθε».
+  const role = roleOf(name);
+
   // Πορτρέτα δεν έχουμε για κανέναν· το υπόβαθρο βγαίνει από το εξώφυλλο
   // του πιο πρόσφατου επεισοδίου στο οποίο μίλησε.
   const pic = episodes.find((ep) => ep.image);
@@ -3909,6 +4025,7 @@ ${breadcrumb([
     <header class="bio-head">
       <p class="page-label">Πρόσωπο</p>
       <h1 class="bio-name">${title ? `<span class="bio-title">${esc(title)}.</span> ` : ''}${safe}</h1>
+${role ? `      <p class="bio-role">${esc(role)}</p>` : ''}
       <p class="bio-facts">${facts}</p>
 ${personSpark(dates)}
     </header>
@@ -4853,7 +4970,57 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
   const ADMIN_OUT = path.join(PUBLIC_DIR, 'admin');
   let adminFiles = 0;
 
+  // Τι κατηγορία ΔΙΝΕΙ ΣΗΜΕΡΑ το site σε κάθε επεισόδιο και βίντεο.
+  //
+  // Το διαχειριστικό πρέπει να δείχνει στον συντάκτη ποια είναι η
+  // αυτόματη πρόταση — χωρίς αυτήν δεν ξέρει τι διορθώνει. Τη λογική
+  // την ξέρει ΜΟΝΟ αυτό το αρχείο (suggestCategories), και δεν την
+  // αντιγράφουμε στη διεπαφή: δύο αντίγραφα αποκλίνουν και ο
+  // συντάκτης θα διόρθωνε κάτι άλλο από αυτό που βλέπει στο site.
+  //
+  // Γράφεται ΠΑΝΤΑ, δίπλα στα υπόλοιπα αρχεία του διαχειριστικού: από
+  // εκεί το σερβίρει το serve.js. Είναι παραγόμενο και μένει έξω από
+  // το git — 4.800 εγγραφές δεν έχουν θέση σε κάθε commit.
   if (fs.existsSync(ADMIN_SRC)) {
+    const autoCats = {};
+    for (const ep of episodes) autoCats[ep.id] = suggestCategories(ep.title);
+    for (const v of videos) autoCats[v.id] = suggestCategories(v.title);
+
+    const catsFile = path.join(ADMIN_SRC, 'auto-categories.json');
+    const catsText = JSON.stringify(autoCats);
+    if (!fs.existsSync(catsFile) || fs.readFileSync(catsFile, 'utf8') !== catsText) {
+      fs.writeFileSync(catsFile, catsText, 'utf8');
+    }
+
+    // Η απογραφή προσώπων — ίδια λογική, ίδιος λόγος. Παραγόμενο, έξω
+    // από το git.
+    const peopleFile = path.join(ADMIN_SRC, 'people.json');
+    const peopleText = JSON.stringify(peopleForAdmin(episodes));
+    if (!fs.existsSync(peopleFile) || fs.readFileSync(peopleFile, 'utf8') !== peopleText) {
+      fs.writeFileSync(peopleFile, peopleText, 'utf8');
+    }
+  }
+
+  // Το διαχειριστικό ΔΕΝ ανεβαίνει στο site μέχρι να υπάρχει πύλη
+  // εισόδου μπροστά του.
+  //
+  // Μετρημένο στις 4 Νοεμβρίου: το newshubmedia.gr/admin/ απαντούσε
+  // 200 σε οποιονδήποτε. Δεν μπορούσε να γράψει τίποτα — το /api/ δεν
+  // υπάρχει ακόμα στον αέρα — αλλά η στιγμή που θα έμπαιναν οι
+  // Functions θα το άνοιγε διάπλατα.
+  //
+  // Τοπικά δεν χάνεται τίποτα: το serve.js το σερβίρει κατευθείαν από
+  // τον φάκελο admin/. Όταν στηθεί το Cloudflare Access, αυτό ανοίγει
+  // με ADMIN_PUBLIC=1 — και ΜΟΝΟ τότε.
+  if (!process.env.ADMIN_PUBLIC) {
+    // Ό,τι ανέβηκε σε προηγούμενο build φεύγει τώρα.
+    if (fs.existsSync(ADMIN_OUT)) {
+      fs.rmSync(ADMIN_OUT, { recursive: true, force: true });
+      console.log('Διαχειριστικό: αφαιρέθηκε από το public/ (δεν υπάρχει ακόμα πύλη εισόδου)');
+    } else {
+      console.log('Διαχειριστικό: δεν ανεβαίνει στο site (τοπικά στο /admin/ κανονικά)');
+    }
+  } else if (fs.existsSync(ADMIN_SRC)) {
     fs.mkdirSync(ADMIN_OUT, { recursive: true });
     for (const file of fs.readdirSync(ADMIN_SRC)) {
       const from = path.join(ADMIN_SRC, file);
@@ -4867,7 +5034,7 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
         adminFiles++;
       }
     }
-    console.log(`Διαχειριστικό: ${adminFiles} αρχεία αντιγράφηκαν`);
+    console.log(`Διαχειριστικό: ${adminFiles} αρχεία αντιγράφηκαν ΣΤΟ SITE (ADMIN_PUBLIC=1)`);
   }
 
   // Πόσα αρχεία πειράχτηκαν συνολικά. Το χρειάζεται το publish.js για να
