@@ -624,8 +624,19 @@ body{
 }
 
 @media (max-width: 760px){
-  .shell{ grid-template-columns: 1fr; }
-  .side{ flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  /* Οι δύο σειρές ορίζονται ρητά. Χωρίς αυτό, το min-height του .shell
+     μοίραζε το περίσσιο ύψος και στις δύο: σε καρτέλα με λίγο
+     περιεχόμενο — π.χ. «Κανένα άρθρο ακόμα» — η μπάρα των καρτελών
+     φούσκωνε σε μισή οθόνη και η επιλεγμένη καρτέλα γινόταν κουτί. */
+  .shell{ grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+
+  .side{
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
 
   /* Χωρίς αυτό το «Must read» σπάει σε δύο αράδες και η μπάρα
      ξεχειλίζει σε ύψος αντί να κυλάει στο πλάι. */
