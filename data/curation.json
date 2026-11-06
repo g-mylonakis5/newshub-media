@@ -34,7 +34,11 @@
   "featuredUntil": "2026-11-13",
   "secondary": [],
   "mustRead": [],
-  "categories": {},
+  "categories": {
+    "Buzzsprout-20066192": [
+      "Γεωπολιτική"
+    ]
+  },
   "featuredTopics": [],
   "featuredHero": ""
 }
