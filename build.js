@@ -5026,7 +5026,24 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
       const from = path.join(ADMIN_SRC, file);
       if (!fs.statSync(from).isFile()) continue;
       const to = path.join(ADMIN_OUT, file);
-      const next = fs.readFileSync(from);
+      let next = fs.readFileSync(from);
+
+      // Σφραγίδα έκδοσης στο CSS και στο JS του διαχειριστικού.
+      //
+      // Τα αρχεία εδώ είναι στατικά όπως όλα τα άλλα, άρα το Cloudflare
+      // λέει στον browser να τα κρατήσει τέσσερις ώρες. Μια διόρθωση
+      // στη διεπαφή δεν έφτανε ποτέ στο κινητό του συντάκτη μέσα στην
+      // ίδια βάρδια — και στον υπολογιστή χρειαζόταν Ctrl+Shift+R, που
+      // κανείς δεν ξέρει. Ίδιο μοτίβο με το assetVersion() του site.
+      if (file === 'index.html') {
+        const tag = (name) => crypto.createHash('md5')
+          .update(fs.readFileSync(path.join(ADMIN_SRC, name)))
+          .digest('hex').slice(0, 8);
+
+        next = Buffer.from(String(next)
+          .replace('href="admin.css"', `href="admin.css?v=${tag('admin.css')}"`)
+          .replace('src="admin.js"', `src="admin.js?v=${tag('admin.js')}"`));
+      }
       // Γράφουμε μόνο ό,τι άλλαξε: αλλιώς το publish.js νομίζει πως
       // πειράχτηκαν σελίδες και ξαναχτίζει το ευρετήριο για το τίποτα.
       if (!fs.existsSync(to) || !fs.readFileSync(to).equals(next)) {
