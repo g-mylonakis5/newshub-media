@@ -1663,7 +1663,13 @@ function drawFinder(){
 
 function applyFind(id){
   var t = art.finding;
-  if (!t || !art.open) { findClose(); return; }
+  if (!t) { findClose(); return; }
+
+  // Δεύτερος πελάτης: η καρτέλα «Ελλείψεις». Ο επιλογέας δεν ξέρει πού
+  // πάει η απάντηση — του το λέει αυτός που τον άνοιξε.
+  if (t.take) { t.take(id); findClose(); return; }
+
+  if (!art.open) { findClose(); return; }
 
   var b = art.open.body[t.block];
   if (b) b.id = id;
@@ -2529,6 +2535,276 @@ function saveShows(){
 }
 
 // ---------------------------------------------------------------------
+// Ελλείψεις — βίντεο και καλεσμένοι που δεν βρέθηκαν μόνα τους
+// ---------------------------------------------------------------------
+//
+// Δύο ευρετήρια φτιάχνονται μόνα τους και αστοχούν σιωπηλά:
+//
+//   βίντεο      δένει με το επεισόδιο ΜΟΝΟ αν ταιριάζει ο τίτλος
+//   καλεσμένος  βγαίνει ΜΟΝΟ από το «Όνομα: θέμα» του τίτλου
+//
+// Όταν αστοχήσουν δεν σπάει τίποτα — λείπει. Το επεισόδιο βγαίνει χωρίς
+// βίντεο, ο άνθρωπος δεν αποκτά σελίδα, και κανένα σφάλμα δεν το λέει.
+//
+// Η λίστα εδώ ΔΕΝ υπολογίζεται στη διεπαφή: τη γράφει το build.js στο
+// admin/pairs-todo.json, γιατί μόνο εκείνο ξέρει τους κανόνες. Αντίγραφο
+// εδώ θα απέκλινε, και ο συντάκτης θα διόρθωνε φαντάσματα.
+//
+// Η απάντηση σώζεται στο data/pairs.json και κερδίζει πάντα το αυτόματο.
+
+var PR_PAGE = 20;
+
+var pr = {
+  file: null,    // το data/pairs.json, όπως θα σωθεί
+  rows: [],      // η απογραφή από το build
+  filter: '',
+  find: '',
+  shown: PR_PAGE,
+};
+
+function prReady(file){
+  var f = (file && typeof file === 'object' && !Array.isArray(file)) ? file : {};
+  if (!f.pairs || typeof f.pairs !== 'object' || Array.isArray(f.pairs)) f.pairs = {};
+  return f;
+}
+
+function prRec(id){ return pr.file.pairs[id] || {}; }
+
+// Τι ισχύει ΤΕΛΙΚΑ για μια γραμμή: η χειροκίνητη απάντηση πρώτη, μετά
+// το αυτόματο. Ίδια σειρά με το build.js — αλλιώς η καρτέλα θα έδειχνε
+// άλλα από όσα βγαίνουν στο site.
+function prNow(r){
+  var rec = prRec(r.id);
+  return {
+    video: rec.novideo ? '' : (rec.video || r.video),
+    guest: rec.noguest ? '' : (rec.guest || r.guest),
+    byHand: !!(rec.video || rec.guest || rec.novideo || rec.noguest),
+    rec: rec,
+  };
+}
+
+function prSet(id, patch){
+  var rec = pr.file.pairs[id] || {};
+  Object.keys(patch).forEach(function (k) { rec[k] = patch[k]; });
+
+  // Ό,τι έμεινε κενό ή ψεύτικο φεύγει. Το αρχείο το διαβάζει και
+  // άνθρωπος· μισοάδειες εγγραφές δεν λένε τίποτα.
+  Object.keys(rec).forEach(function (k) { if (!rec[k]) delete rec[k]; });
+
+  if (Object.keys(rec).length) pr.file.pairs[id] = rec;
+  else delete pr.file.pairs[id];
+
+  prDirty(true);
+}
+
+function prDirty(on){
+  state.dirty = on;
+  $('[data-save="pairs"]').disabled = !on;
+}
+
+function savePairs(){
+  say('Αποθηκεύεται…');
+  api('pairs', 'PUT', pr.file).then(function () {
+    prDirty(false);
+    say('Αποθηκεύτηκε. Τα βίντεο και οι καλεσμένοι δένουν μόλις '
+      + 'ξαναχτιστεί το site (~2 λεπτά).', 'ok');
+  }).catch(function (err) {
+    say('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+// ---- η λίστα ----
+
+// Ο τίτλος ενός βίντεο από τον κωδικό του. Τα βίντεο είναι ήδη
+// φορτωμένα για το πρωτοσέλιδο, οπότε δεν κατεβαίνει τίποτα.
+function prVideoTitle(id){
+  for (var i = 0; i < state.items.length; i++) {
+    if (state.items[i].kind === 'video' && state.items[i].id === id) {
+      return state.items[i].title;
+    }
+  }
+  return id;
+}
+
+function prHits(){
+  return pr.rows.filter(function (r) {
+    if (pr.find && flat(r.title).indexOf(pr.find) < 0) return false;
+
+    var now = prNow(r);
+    if (pr.filter === 'done') return now.byHand;
+    // Τα δηλωμένα «δεν υπάρχει» φεύγουν από τις ελλείψεις: γι' αυτό
+    // μπήκαν — για να στραγγίζει η λίστα αντί να ρωτάει για πάντα.
+    if (pr.filter === 'video') return !now.video && !now.rec.novideo;
+    if (pr.filter === 'guest') return !now.guest && !now.rec.noguest;
+    return true;
+  });
+}
+
+function drawPairs(){
+  var box = $('[data-pr-rows]');
+  var hits = prHits();
+
+  var nv = 0, ng = 0, nd = 0;
+  pr.rows.forEach(function (r) {
+    var now = prNow(r);
+    if (!now.video && !now.rec.novideo) nv++;
+    if (!now.guest && !now.rec.noguest) ng++;
+    if (now.byHand) nd++;
+  });
+
+  $('[data-pr-count]').textContent = nv + ' χωρίς βίντεο · '
+    + ng + ' χωρίς καλεσμένο · ' + nd + ' διορθωμένα με το χέρι';
+
+  if (!hits.length) {
+    box.innerHTML = '<p class="muted">Τίποτα εδώ. '
+      + (pr.filter ? 'Δοκίμασε άλλο φίλτρο.' : 'Όλα δεμένα.') + '</p>';
+    $('[data-pr-more]').hidden = true;
+    return;
+  }
+
+  box.innerHTML = hits.slice(0, pr.shown).map(prRow).join('');
+
+  var more = $('[data-pr-more]');
+  more.hidden = hits.length <= pr.shown;
+  more.textContent = 'Δείξε περισσότερα (' + (hits.length - pr.shown) + ')';
+}
+
+function prRow(r){
+  var now = prNow(r);
+  var rec = now.rec;
+
+  // ---- η γραμμή του βίντεο ----
+  var vid;
+  if (rec.novideo) {
+    vid = '<span class="pair-no">Δεν υπάρχει βίντεο</span>'
+      + '<button type="button" class="btn btn--tiny" data-pr-undo-video>Αναίρεση</button>';
+  } else if (rec.video) {
+    vid = '<span class="pair-ok">' + esc(prVideoTitle(rec.video)) + '</span>'
+      + '<button type="button" class="btn btn--tiny" data-pr-pick>Αλλαγή</button>'
+      + '<button type="button" class="btn btn--tiny" data-pr-undo-video>Καθάρισε</button>';
+  } else if (r.video) {
+    vid = '<span class="pair-auto">αυτόματο: ' + esc(r.vtitle || r.video) + '</span>'
+      + '<button type="button" class="btn btn--tiny" data-pr-pick>Άλλο</button>';
+  } else {
+    vid = '<span class="pair-gap">λείπει</span>'
+      + '<button type="button" class="btn btn--tiny btn--pick" data-pr-pick>Διάλεξε βίντεο</button>'
+      + '<button type="button" class="btn btn--tiny" data-pr-novideo>Δεν υπάρχει</button>';
+  }
+
+  // ---- η γραμμή του καλεσμένου ----
+  var guest;
+  if (rec.noguest) {
+    guest = '<span class="pair-no">Δεν υπάρχει καλεσμένος</span>'
+      + '<button type="button" class="btn btn--tiny" data-pr-undo-guest>Αναίρεση</button>';
+  } else {
+    // Πάντα πεδίο, όχι κουμπί: το όνομα γράφεται, δεν διαλέγεται. Όταν
+    // ο αυτόματος βρήκε κάτι, μπαίνει ως υπόδειξη μέσα στο πεδίο —
+    // έτσι φαίνεται τι θα ισχύσει αν ο συντάκτης δεν γράψει τίποτα.
+    guest = '<input type="text" class="pair-name" data-pr-guest'
+      + ' value="' + esc(rec.guest || '') + '"'
+      + ' placeholder="' + esc(r.guest || 'Όνομα καλεσμένου') + '"'
+      + ' aria-label="Καλεσμένος">'
+      + (r.guest && !rec.guest
+        ? '<span class="pair-auto">αυτόματο</span>'
+        : '<button type="button" class="btn btn--tiny" data-pr-noguest>Δεν υπάρχει</button>');
+  }
+
+  return '<div class="pair-row" data-pr-id="' + esc(r.id) + '">'
+    + (r.image
+      ? '<img class="pair-shot" src="' + esc(r.image) + '" alt="" loading="lazy">'
+      : '<span class="pair-shot"></span>')
+    + '<div class="pair-body">'
+    + '<p class="pair-title">' + esc(r.title) + '</p>'
+    + '<p class="pair-date">' + when(r.date) + '</p>'
+    + '<div class="pair-line"><span class="pair-what">Βίντεο</span>' + vid + '</div>'
+    + '<div class="pair-line"><span class="pair-what">Καλεσμένος</span>' + guest + '</div>'
+    + '</div></div>';
+}
+
+function wirePairs(){
+  $('[data-save="pairs"]').addEventListener('click', savePairs);
+
+  $('[data-pr-find]').addEventListener('input', function (e) {
+    pr.find = flat(e.target.value);
+    pr.shown = PR_PAGE;
+    drawPairs();
+  });
+
+  $('[data-pr-filter]').addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    pr.filter = chip.dataset.prf;
+    pr.shown = PR_PAGE;
+    $$('[data-pr-filter] .chip').forEach(function (c) {
+      c.classList.toggle('is-on', c === chip);
+    });
+    drawPairs();
+  });
+
+  $('[data-pr-more]').addEventListener('click', function () {
+    pr.shown += PR_PAGE;
+    drawPairs();
+  });
+
+  var box = $('[data-pr-rows]');
+
+  box.addEventListener('click', function (e) {
+    var row = e.target.closest('[data-pr-id]');
+    if (!row) return;
+    var id = row.dataset.prId;
+
+    if (e.target.closest('[data-pr-pick]')) {
+      // Ο ίδιος επιλογέας που χρησιμοποιούν τα άρθρα — ψάχνει στα βίντεο
+      // που είναι ήδη φορτωμένα.
+      findItem({ kind: 'video', take: function (vid) {
+        prSet(id, { video: vid, novideo: false });
+        drawPairs();
+      } });
+      return;
+    }
+
+    if (e.target.closest('[data-pr-novideo]')) {
+      prSet(id, { novideo: true, video: '' });
+      drawPairs();
+      return;
+    }
+    if (e.target.closest('[data-pr-undo-video]')) {
+      prSet(id, { novideo: false, video: '' });
+      drawPairs();
+      return;
+    }
+    if (e.target.closest('[data-pr-noguest]')) {
+      prSet(id, { noguest: true, guest: '' });
+      drawPairs();
+      return;
+    }
+    if (e.target.closest('[data-pr-undo-guest]')) {
+      prSet(id, { noguest: false, guest: '' });
+      drawPairs();
+    }
+  });
+
+  // «change» και όχι «input»: με κάθε πάτημα πλήκτρου θα ξανασχεδιαζόταν
+  // η λίστα και το πεδίο θα έχανε την εστίαση στο πρώτο γράμμα.
+  box.addEventListener('change', function (e) {
+    if (!e.target.matches('[data-pr-guest]')) return;
+    var row = e.target.closest('[data-pr-id]');
+    if (!row) return;
+    prSet(row.dataset.prId, { guest: e.target.value.trim(), noguest: false });
+    drawPairs();
+  });
+}
+
+// Η απογραφή είναι παραγόμενη, δεν περνάει από το /api/data: το build
+// τη γράφει δίπλα στα αρχεία του διαχειριστικού. Ίδιο μοτίβο με το
+// people.json και το auto-categories.json.
+function loadPairsTodo(){
+  return fetch('pairs-todo.json').then(function (r) {
+    return r.ok ? r.json() : {};
+  }, function () { return {}; });
+}
+
+// ---------------------------------------------------------------------
 // Σύνδεση
 // ---------------------------------------------------------------------
 
@@ -2565,7 +2841,11 @@ function wire(){
     if (!chip) return;
     state.kind = chip.dataset.kind;
     state.shown = PAGE;
-    $$('.chip').forEach(function (c) { c.classList.toggle('is-on', c === chip); });
+    // Σκοπευμένο στη ΔΙΚΗ του ομάδα: το σκέτο '.chip' έσβηνε το «is-on»
+    // από τα φίλτρα των άλλων καρτελών, που έμεναν ενεργά στην πράξη.
+    $$('[data-kind-filter] .chip').forEach(function (c) {
+      c.classList.toggle('is-on', c === chip);
+    });
     drawPicks();
   });
 
@@ -2590,6 +2870,7 @@ function wire(){
   wireMustRead();
   wireCats();
   wirePeople();
+  wirePairs();
 
   // Δικλείδα: φεύγει η σελίδα με αναλλοίωτη δουλειά μέσα.
   window.addEventListener('beforeunload', function (e) {
@@ -2616,6 +2897,8 @@ function boot(){
     loadPeople(),
     api('shows'),
     api('show-art'),
+    api('pairs'),
+    loadPairsTodo(),
   ]).then(function (r) {
     state.curation = r[0] || {};
     cat.auto = r[5] || {};
@@ -2634,6 +2917,9 @@ function boot(){
 
     shReady(r[8], r[9]);
 
+    pr.file = prReady(r[10]);
+    pr.rows = Array.isArray(r[11] && r[11].rows) ? r[11].rows : [];
+
     $('[data-until]').value = state.curation.featuredUntil || '';
     drawNow();
     drawPicks();
@@ -2643,6 +2929,7 @@ function boot(){
     drawCats();
     drawPeople();
     drawShows();
+    drawPairs();
     loadShots();
     say('');
 

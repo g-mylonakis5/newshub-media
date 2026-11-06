@@ -63,6 +63,7 @@ Desktop.ini
 # που ξαναγράφονται σε κάθε build.
 admin/auto-categories.json
 admin/people.json
+admin/pairs-todo.json
 
 # Τα μυστικά του wrangler για τοπική δοκιμή — ΠΟΤΕ στο git.
 .dev.vars
