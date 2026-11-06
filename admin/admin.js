@@ -2798,8 +2798,12 @@ function wirePairs(){
 // Η απογραφή είναι παραγόμενη, δεν περνάει από το /api/data: το build
 // τη γράφει δίπλα στα αρχεία του διαχειριστικού. Ίδιο μοτίβο με το
 // people.json και το auto-categories.json.
+// no-store: το αρχείο είναι στατικό όπως όλα τα άλλα, άρα το Cloudflare
+// το κρατά τέσσερις ώρες. Μετά την αποθήκευση η λίστα θα έδειχνε ως
+// ελλείψεις γραμμές που έχουν ήδη διορθωθεί — το site σωστό, η καρτέλα
+// ψεύτικη. Εδώ ζητάμε ρητά φρέσκο.
 function loadPairsTodo(){
-  return fetch('pairs-todo.json').then(function (r) {
+  return fetch('pairs-todo.json', { cache: 'no-store' }).then(function (r) {
     return r.ok ? r.json() : {};
   }, function () { return {}; });
 }
