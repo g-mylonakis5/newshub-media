@@ -15,6 +15,8 @@ const VIDEO_FILE = path.join(__dirname, 'data/videos.json');
 const TRANSCRIPT_DIR = path.join(__dirname, 'data/transcripts');
 const TRANSCRIPT_OUT = path.join(__dirname, 'public/transcript');
 const ALIAS_FILE = path.join(__dirname, 'data/people-aliases.json');
+// Οι χειροκίνητες διορθώσεις στο ζευγάρωμα, γραμμένες στο διαχειριστικό.
+const PAIRS_FILE = path.join(__dirname, 'data/pairs.json');
 // Η λογική «ποιες γραφές είναι ο ίδιος άνθρωπος» ζει εκεί, και τη
 // δανειζόμαστε για να γράψουμε τις προτάσεις στο διαχειριστικό.
 const { suggestFamilies } = require('./find-aliases.js');
@@ -1882,6 +1884,64 @@ function headKey(text){
   return matchKey(m ? m[2] : text);
 }
 
+// ---- η χειροκίνητη διόρθωση ----
+//
+// Όλα τα παραπάνω είναι ΜΑΝΤΕΜΑ από τον τίτλο, και αστοχούν σιωπηλά:
+// 299 από τα 1.069 επεισόδια δεν βρίσκουν βίντεο και 94 δεν βγάζουν
+// καλεσμένο, επειδή ο τίτλος γράφτηκε αλλιώς στο YouTube ή δεν έχει
+// άνω τελεία. Τίποτα δεν σπάει — απλώς λείπει, και δεν το βλέπει κανείς.
+//
+// Το data/pairs.json είναι η απάντηση ανθρώπου σε αυτά: ανά επεισόδιο,
+//
+//   "Buzzsprout-20078837": {
+//     "video": "XNLy2B983xs",     ρητό βίντεο
+//     "guest": "Μαρία Παπαδάκη",  ρητός καλεσμένος
+//     "novideo": true,            δεν υπάρχει βίντεο, σταμάτα να ρωτάς
+//     "noguest": true             δεν υπάρχει καλεσμένος
+//   }
+//
+// Κερδίζει ΠΑΝΤΑ τον τίτλο. Ο τίτλος είναι εικασία, αυτό είναι απόφαση.
+let pairData;
+function pairs(){
+  if (pairData) return pairData;
+
+  pairData = { byEpisode: {}, byVideo: {} };
+  try {
+    const raw = JSON.parse(fs.readFileSync(PAIRS_FILE, 'utf8'));
+    for (const [id, rec] of Object.entries((raw && raw.pairs) || {})) {
+      if (!rec || typeof rec !== 'object') continue;
+      pairData.byEpisode[id] = rec;
+      // Ο ανάποδος δρόμος: από το βίντεο στο επεισόδιο. Τον χρειάζεται
+      // η σελίδα βίντεο, που προσφέρει τον ήχο του διδύμου της.
+      if (rec.video) pairData.byVideo[rec.video] = id;
+    }
+  } catch (err) {
+    // Χαλασμένο αρχείο δεν ρίχνει το build — αλλά ΔΕΝ περνάει απαρατήρητο:
+    // σιωπηλά θα έσβηνε κάθε διόρθωση που έγινε με το χέρι.
+    if (err.code !== 'ENOENT') {
+      console.warn('ΠΡΟΣΟΧΗ: το data/pairs.json δεν διαβάζεται —', err.message);
+    }
+  }
+  return pairData;
+}
+
+function pairOf(ep){
+  return (ep && pairs().byEpisode[ep.id]) || null;
+}
+
+// Τα κλειδιά τίτλου ενός επεισοδίου, για όποιον ψάχνει το βίντεό του.
+//
+// Κενά όταν υπάρχει ρητή απάντηση — είτε «αυτό είναι το βίντεο» είτε
+// «βίντεο δεν υπάρχει». Και στις δύο περιπτώσεις το μάντεμα πρέπει να
+// σωπάσει: αλλιώς μια τυχαία ομοιότητα τίτλου θα έφερνε ΔΕΥΤΕΡΟ βίντεο
+// από την πίσω πόρτα, και ο συντάκτης θα κοίταζε μια διόρθωση που δεν
+// ίσχυσε πουθενά.
+function episodeKeys(ep){
+  const fix = pairOf(ep);
+  if (fix && (fix.video || fix.novideo)) return [];
+  return [matchKey(ep.title), headKey(ep.title)];
+}
+
 // Σε ποια εκπομπή ανήκει ένα επεισόδιο — το μαθαίνουμε από το βίντεό του.
 // Κλειδί σύγκρισης ετικέτας: χωρίς δίεση, τόνους και σημεία στίξης.
 function tagKey(s){
@@ -1948,9 +2008,10 @@ function buildShows(videos, episodes){
   // Ίδια λογική με το videoTwin, ανάποδα: βίντεο -> επεισόδιο.
   const byFull = {};
   const byHead = {};
+  const byId = {};
   for (const ep of episodes) {
-    const a = matchKey(ep.title);
-    const b = headKey(ep.title);
+    byId[ep.id] = ep;
+    const [a, b] = episodeKeys(ep);
     if (a && !byFull[a]) byFull[a] = ep;
     if (b && !byHead[b]) byHead[b] = ep;
   }
@@ -1962,7 +2023,9 @@ function buildShows(videos, episodes){
     if (!key) continue;
     if (!groups[key]) groups[key] = { name: v.show, items: [] };
 
-    const twin = byFull[matchKey(v.title)] || byHead[headKey(v.title)];
+    const fixed = pairs().byVideo[v.id];
+    const twin = (fixed && byId[fixed])
+      || byFull[matchKey(v.title)] || byHead[headKey(v.title)];
     groups[key].items.push(twin ? itemFromEpisode(twin) : itemFromVideo(v));
   }
 
@@ -2267,11 +2330,13 @@ function buildCategories(videos, episodes, ownArticles = []){
 // Υπάρχει επεισόδιο με τον ίδιο τίτλο; Τότε το βίντεο είναι διπλό.
 let episodeTitles;
 function videoHasTwin(v){
+  // Ρητό ζευγάρωμα: το βίντεο ανήκει σε επεισόδιο ό,τι κι αν λέει ο τίτλος.
+  if (pairs().byVideo[v.id]) return true;
+
   if (!episodeTitles) {
     episodeTitles = new Set();
     for (const ep of JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'))) {
-      episodeTitles.add(matchKey(ep.title));
-      episodeTitles.add(headKey(ep.title));
+      for (const k of episodeKeys(ep)) if (k) episodeTitles.add(k);
     }
   }
   return episodeTitles.has(matchKey(v.title)) || episodeTitles.has(headKey(v.title));
@@ -2283,14 +2348,18 @@ function videoHasTwin(v){
 let episodeByKey;
 function episodeTwin(v){
   if (!episodeByKey) {
-    episodeByKey = { full: {}, head: {} };
+    episodeByKey = { full: {}, head: {}, id: {} };
     for (const ep of JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'))) {
-      const a = matchKey(ep.title);
-      const b = headKey(ep.title);
+      episodeByKey.id[ep.id] = ep;
+      const [a, b] = episodeKeys(ep);
       if (a && !episodeByKey.full[a]) episodeByKey.full[a] = ep;
       if (b && !episodeByKey.head[b]) episodeByKey.head[b] = ep;
     }
   }
+
+  const fixed = pairs().byVideo[v.id];
+  if (fixed) return episodeByKey.id[fixed] || null;
+
   return episodeByKey.full[matchKey(v.title)]
       || episodeByKey.head[headKey(v.title)]
       || null;
@@ -3390,6 +3459,19 @@ function titleOf(ep){
 // ΟΛΑ τα σημεία περνούν από εδώ, ώστε κάρτα, σελίδα προσώπου και
 // «σχετικά» να συμφωνούν μεταξύ τους.
 function guestOf(ep){
+  // Η χειροκίνητη απάντηση πρώτη, και κερδίζει ακόμα κι όταν ο τίτλος
+  // δεν έχει άνω τελεία — εκεί ο αυτόματος δεν βγάζει ΤΙΠΟΤΑ να
+  // διορθωθεί, και 94 επεισόδια έμεναν για πάντα χωρίς άνθρωπο.
+  //
+  // Περνάει και αυτή από την ένωση γραφών: αλλιώς ένα όνομα γραμμένο με
+  // το χέρι θα έφτιαχνε ΔΕΥΤΕΡΗ σελίδα δίπλα στην κανονική.
+  const fix = pairOf(ep);
+  if (fix && fix.noguest) return '';
+  if (fix && fix.guest) {
+    const typed = String(fix.guest).trim();
+    return aliases().map[guestKey(typed)] || typed;
+  }
+
   if (!ep.guest) return '';
   const { name } = splitTitle(cleanGuestName(decode(ep.guest)));
   if (!looksLikePerson(name) || notGuest(name)) return '';
@@ -3428,7 +3510,9 @@ function groupByGuest(episodes){
   const groups ={};
 
   for (const ep of episodes){
-    if (!ep.guest) continue;
+    // ΟΧΙ «if (!ep.guest) continue» εδώ: ένα επεισόδιο χωρίς άνω τελεία
+    // δεν έχει ep.guest, αλλά μπορεί να έχει καλεσμένο γραμμένο με το
+    // χέρι στο data/pairs.json. Μόνο το guestOf τα ξέρει και τα δύο.
     const name = guestOf(ep);
     const key = guestKey(name);
     if (!key) continue;
@@ -3487,9 +3571,19 @@ function peopleForAdmin(episodes){
   // τίτλο, ΠΡΙΝ την ένωση. Χωρίς αυτό δεν φαίνεται τι ενώθηκε με τι.
   const raw = {};
   for (const ep of episodes) {
-    if (!ep.guest) continue;
-    const { name } = splitTitle(cleanGuestName(decode(ep.guest)));
-    if (!name || !looksLikePerson(name)) continue;
+    const fix = pairOf(ep);
+    if (fix && fix.noguest) continue;
+
+    let name;
+    if (fix && fix.guest) {
+      // Γραμμένο με το χέρι: δεν περνάει από looksLikePerson. Εκείνο
+      // κρίνει ΜΑΝΤΕΜΑ από τίτλο — εδώ κρίνει άνθρωπος.
+      name = String(fix.guest).trim();
+    } else {
+      if (!ep.guest) continue;
+      name = splitTitle(cleanGuestName(decode(ep.guest))).name;
+      if (!name || !looksLikePerson(name)) continue;
+    }
     raw[name] = (raw[name] || 0) + 1;
   }
 
@@ -3541,6 +3635,41 @@ function peopleForAdmin(episodes){
     .filter((f) => f.others.length && !notGuest(f.canonical));
 
   return { people, rejected: rejected.sort((a, b) => b.n - a.n), suggest };
+}
+
+// Η απογραφή του ζευγαρώματος, για το διαχειριστικό.
+//
+// Ίδιος λόγος με το people.json και το auto-categories.json: τη λογική
+// (matchKey, headKey, splitTitle, looksLikePerson) την ξέρει ΜΟΝΟ αυτό
+// το αρχείο. Αντίγραφο στη διεπαφή θα απέκλινε, και ο συντάκτης θα
+// διόρθωνε επεισόδια που στο site φαίνονται μια χαρά.
+//
+// Μπαίνουν μόνο τα προβληματικά — και όσα έχουν ήδη διορθωθεί, ώστε η
+// διόρθωση να φαίνεται και να μπορεί να αναιρεθεί.
+function pairsForAdmin(episodes){
+  const rows = [];
+
+  for (const ep of episodes) {
+    const fix = pairOf(ep) || {};
+    const v = videoTwin(ep);
+    const guest = guestOf(ep);
+    const touched = !!(fix.video || fix.guest || fix.novideo || fix.noguest);
+
+    if (v && guest && !touched) continue;
+
+    rows.push({
+      id: ep.id,
+      title: decode(ep.title),
+      date: ep.date,
+      image: ep.image || '',
+      video: v ? v.id : '',
+      vtitle: v ? decode(v.title) : '',
+      guest,
+    });
+  }
+
+  rows.sort((a, b) => new Date(b.date) - new Date(a.date));
+  return { rows };
 }
 
 // Ποιο πρόσωπο μιλάει για ποια θέματα, και πόσο συχνά.
@@ -4087,14 +4216,34 @@ function moreSpecific(a, b){
 let videoIndex;
 function videoTwin(ep){
   if (!videoIndex) {
-    videoIndex = { full: {}, head: {} };
+    videoIndex = { full: {}, head: {}, id: {} };
     for (const v of loadVideos()) {
+      videoIndex.id[v.id] = v;
       const a = matchKey(v.title);
       const b = headKey(v.title);
       if (a) videoIndex.full[a] = moreSpecific(videoIndex.full[a], v);
       if (b) videoIndex.head[b] = moreSpecific(videoIndex.head[b], v);
     }
   }
+
+  // Η απάντηση του συντάκτη, πρώτη.
+  const fix = pairOf(ep);
+  if (fix && fix.novideo) return null;
+  if (fix && fix.video) {
+    const v = videoIndex.id[fix.video];
+    if (v) return v;
+    // Διαλεγμένο βίντεο που δεν υπάρχει στον κατάλογο: σβήστηκε από το
+    // YouTube, ή το videos.json δεν έχει ξανακατέβει ακόμα. Λέγεται —
+    // αλλιώς ο συντάκτης βλέπει το επεισόδιο χωρίς βίντεο και νομίζει
+    // ότι δεν αποθηκεύτηκε η διόρθωσή του.
+    console.warn(`ΠΡΟΣΟΧΗ: το ${ep.id} δείχνει στο βίντεο ${fix.video}, `
+      + 'που δεν υπάρχει στο data/videos.json');
+    // Δεν γυρνάμε στο μάντεμα: το episodeKeys έχει ήδη σωπάσει γι' αυτό
+    // το επεισόδιο, οπότε ένα βίντεο από τον τίτλο θα εμφανιζόταν ΚΑΙ
+    // εδώ ΚΑΙ μόνο του στις κατηγορίες.
+    return null;
+  }
+
   return videoIndex.full[matchKey(ep.title)]
       || videoIndex.head[headKey(ep.title)]
       || null;
@@ -4998,6 +5147,14 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
     const peopleText = JSON.stringify(peopleForAdmin(episodes));
     if (!fs.existsSync(peopleFile) || fs.readFileSync(peopleFile, 'utf8') !== peopleText) {
       fs.writeFileSync(peopleFile, peopleText, 'utf8');
+    }
+
+    // Και η απογραφή του ζευγαρώματος: ποια επεισόδια δεν βρήκαν βίντεο
+    // ή καλεσμένο. Παραγόμενο, έξω από το git.
+    const todoFile = path.join(ADMIN_SRC, 'pairs-todo.json');
+    const todoText = JSON.stringify(pairsForAdmin(episodes));
+    if (!fs.existsSync(todoFile) || fs.readFileSync(todoFile, 'utf8') !== todoText) {
+      fs.writeFileSync(todoFile, todoText, 'utf8');
     }
   }
 

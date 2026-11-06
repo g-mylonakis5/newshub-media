@@ -50,6 +50,7 @@
     <a class="tab" href="#katigories" data-tab="katigories">Κατηγορίες</a>
     <a class="tab" href="#prosopa" data-tab="prosopa">Πρόσωπα</a>
     <a class="tab" href="#ekpompes" data-tab="ekpompes">Εκπομπές</a>
+    <a class="tab" href="#elleipseis" data-tab="elleipseis">Ελλείψεις</a>
   </nav>
 
   <main class="work">
@@ -352,6 +353,46 @@
       <div class="showlist" data-showlist>
         <p class="muted">Φόρτωση…</p>
       </div>
+    </section>
+
+    <!-- ========== ΕΛΛΕΙΨΕΙΣ ==========
+         Το βίντεο δένει με το επεισόδιο ΜΟΝΟ από τον τίτλο, και ο
+         καλεσμένος βγαίνει ΜΟΝΟ από την άνω τελεία. Όταν ο τίτλος
+         γράφτηκε αλλιώς στο YouTube, ή δεν έχει τελεία, δεν σπάει
+         τίποτα — απλώς λείπει, σιωπηλά. Εδώ φαίνονται όλα μαζί και
+         διορθώνονται με δύο πατήματα. -->
+    <section class="panel" data-panel="elleipseis">
+      <header class="panel-head">
+        <div>
+          <h1>Ελλείψεις</h1>
+          <p class="hint">Επεισόδια που δεν βρήκαν βίντεο ή καλεσμένο.
+            Το site τα δένει μόνο του από τον τίτλο· όταν ο τίτλος διαφέρει
+            ανάμεσα σε Buzzsprout και YouTube, το ζευγάρωμα χάνεται.
+            Εδώ το λες εσύ.</p>
+        </div>
+        <button type="button" class="btn btn--go" data-save="pairs" disabled>Αποθήκευση</button>
+      </header>
+
+      <div class="tools">
+        <input type="search" class="find" data-pr-find placeholder="Βρες τίτλο…"
+               aria-label="Αναζήτηση επεισοδίου">
+        <div class="chips" data-pr-filter>
+          <button type="button" class="chip is-on" data-prf="">Όλα</button>
+          <button type="button" class="chip" data-prf="video">Χωρίς βίντεο</button>
+          <button type="button" class="chip" data-prf="guest">Χωρίς καλεσμένο</button>
+          <button type="button" class="chip" data-prf="done">Διορθωμένα</button>
+        </div>
+      </div>
+
+      <p class="hint" data-pr-count></p>
+
+      <div class="pairlist" data-pr-rows>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+
+      <p class="more">
+        <button type="button" class="btn btn--ghost" data-pr-more hidden>Δείξε περισσότερα</button>
+      </p>
     </section>
 
   </main>

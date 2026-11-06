@@ -29,6 +29,7 @@ const WRITABLE = new Set([
   'shows',           // οι εκπομπές
   'show-art',        // οι αφίσες τους
   'articles',        // τα δικά μας άρθρα
+  'pairs',           // ποιο βίντεο και ποιος καλεσμένος πάει σε ποιο επεισόδιο
 ]);
 
 // Αρχεία που διαβάζονται αλλά ΔΕΝ γράφονται: τα παράγουν τα fetch-*.js
@@ -140,6 +141,43 @@ function validate(name, data){
     }
     if (data.titles != null && !Array.isArray(data.titles)) {
       return 'Το titles πρέπει να είναι λίστα.';
+    }
+  }
+
+  if (name === 'pairs') {
+    if (Array.isArray(data)) return 'Οι αντιστοιχίσεις πρέπει να είναι αντικείμενο.';
+    if (data.pairs == null || typeof data.pairs !== 'object' || Array.isArray(data.pairs)) {
+      return 'Λείπει το «pairs» με τις αντιστοιχίσεις.';
+    }
+
+    for (const [id, rec] of Object.entries(data.pairs)) {
+      if (rec === null || typeof rec !== 'object' || Array.isArray(rec)) {
+        return `Η εγγραφή «${id}» πρέπει να είναι αντικείμενο.`;
+      }
+
+      // Ο κωδικός μπαίνει αυτούσιος σε διεύθυνση youtube.com/embed/… —
+      // ό,τι άλλο δεν σπάει μόνο το ζευγάρωμα, σπάει τη σελίδα.
+      if (rec.video != null
+          && (typeof rec.video !== 'string' || !/^[\w-]{6,20}$/.test(rec.video))) {
+        return `Άκυρος κωδικός βίντεο στο «${id}».`;
+      }
+
+      if (rec.guest != null && typeof rec.guest !== 'string') {
+        return `Ο καλεσμένος του «${id}» πρέπει να είναι κείμενο.`;
+      }
+      // Το όνομα γίνεται τίτλος και διεύθυνση σελίδας προσώπου.
+      if (rec.guest && rec.guest.length > 80) {
+        return `Πολύ μακρύ όνομα καλεσμένου στο «${id}».`;
+      }
+
+      // «Δεν υπάρχει» μαζί με ρητή επιλογή είναι αντίφαση: το build θα
+      // τιμούσε το ένα και ο συντάκτης θα κοίταζε το άλλο.
+      if (rec.novideo && rec.video) {
+        return `Το «${id}» λέει «χωρίς βίντεο» και δίνει βίντεο μαζί.`;
+      }
+      if (rec.noguest && rec.guest) {
+        return `Το «${id}» λέει «χωρίς καλεσμένο» και δίνει καλεσμένο μαζί.`;
+      }
     }
   }
 
