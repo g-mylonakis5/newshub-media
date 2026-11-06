@@ -87,17 +87,49 @@ function say(text, kind){
   else stateEl.removeAttribute('data-kind');
 }
 
+// Όταν λήξει η συνεδρία του Cloudflare Access.
+//
+// Το αίτημα δεν φτάνει ποτέ στη Function: το Access το ανακατευθύνει
+// στη σελίδα σύνδεσης, που ζει σε ΑΛΛΟ domain. Ο browser μπλοκάρει την
+// ανάγνωση και το fetch σκάει με σκέτο «Failed to fetch» — ή, αν η
+// ανακατεύθυνση περάσει, φτάνει HTML εκεί που περιμέναμε JSON και το
+// JSON.parse βγάζει «Unexpected token '<'».
+//
+// Και τα δύο είναι ακατανόητα για τον συντάκτη, και το χειρότερο: τον
+// σπρώχνουν να ανανεώσει τη σελίδα — που είναι ακριβώς η κίνηση που
+// χάνει το μισογραμμένο άρθρο. Το κείμενο ως εκείνη τη στιγμή είναι
+// ασφαλές στη μνήμη.
+var LOST = 'Η σύνδεσή σου έληξε ή χάθηκε το δίκτυο. '
+  + 'ΜΗΝ ανανεώσεις τη σελίδα — το κείμενό σου είναι εδώ. '
+  + 'Άνοιξε το διαχειριστικό σε ΝΕΑ καρτέλα, συνδέσου, '
+  + 'γύρνα εδώ και ξαναπάτα Αποθήκευση.';
+
+// Είναι όντως JSON αυτό που ήρθε; Αν όχι, μας απάντησε κάποιος άλλος —
+// σχεδόν πάντα η σελίδα σύνδεσης του Access.
+function readJson(res){
+  var type = res.headers.get('Content-Type') || '';
+  if (type.indexOf('json') === -1) throw new Error(LOST);
+
+  return res.json().then(function (data) {
+    if (!res.ok) throw new Error(data && data.error ? data.error : 'Σφάλμα ' + res.status);
+    return data;
+  });
+}
+
+// Το fetch απορρίπτει ΜΟΝΟ σε δικτυακή αποτυχία ή μπλοκαρισμένη
+// ανακατεύθυνση — ποτέ για 404 ή 500. Άρα εδώ φτάνει ακριβώς η
+// περίπτωση «δεν έφυγε το αίτημα».
+function netFail(err){
+  if (err instanceof TypeError) throw new Error(LOST);
+  throw err;
+}
+
 function api(name, method, body){
   return fetch('/api/data/' + name, {
     method: method || 'GET',
     headers: body ? { 'Content-Type': 'application/json' } : undefined,
     body: body ? JSON.stringify(body) : undefined,
-  }).then(function (res) {
-    return res.json().then(function (data) {
-      if (!res.ok) throw new Error(data && data.error ? data.error : 'Σφάλμα ' + res.status);
-      return data;
-    });
-  });
+  }).then(readJson, netFail);
 }
 
 // ---------------------------------------------------------------------
@@ -427,12 +459,9 @@ function upload(files, ctx){
         },
         body: blob,
       });
-    }).then(function (res) {
-      return res.json().then(function (d) {
-        if (!res.ok) throw new Error(d.error || 'σφάλμα');
-        done++;
-        last = d.url || '';
-      });
+    }).then(readJson, netFail).then(function (d) {
+      done++;
+      last = d.url || '';
     }).catch(function (err) {
       failed.push(file.name + ' (' + err.message + ')');
     }).then(function () {
@@ -470,7 +499,7 @@ function shotHTML(f, mode){
 }
 
 function fillShots(box, mode){
-  return fetch('/api/images').then(function (r) { return r.json(); }).then(function (files) {
+  return fetch('/api/images').then(readJson, netFail).then(function (files) {
     if (!files.length) {
       box.innerHTML = '<p class="muted">Καμία φωτογραφία ακόμα.</p>';
       return;
@@ -503,11 +532,7 @@ function delShot(name){
   if (!ok) return;
 
   fetch('/api/images?name=' + encodeURIComponent(name), { method: 'DELETE' })
-    .then(function (res) {
-      return res.json().then(function (d) {
-        if (!res.ok) throw new Error(d.error || 'σφάλμα');
-      });
-    })
+    .then(readJson, netFail)
     .then(function () {
       sayUpload('Η φωτογραφία διαγράφηκε.', 'ok');
       refreshShots();
@@ -1040,6 +1065,7 @@ var art = {
   dirty: false,
   pending: null,   // πού πάει η φωτογραφία που θα διαλέξει ο επιλογέας
   finding: null,   // ποιο μπλοκ περιμένει επεισόδιο ή βίντεο
+  ready: false,    // φόρτωσαν τα άρθρα; πριν από αυτό δεν αγγίζουμε λίστα
 };
 
 function artSay(text, kind){
@@ -1052,6 +1078,11 @@ function artDirty(on){
   art.dirty = on;
   state.dirty = on;      // μπαίνει στην ίδια δικλείδα «μη φύγεις»
   if (on) artSay('Μη αποθηκευμένες αλλαγές', 'warn');
+
+  // Κάθε αλλαγή πάει αμέσως στο αντίγραφο του browser. Δεν κοστίζει
+  // τίποτα — ένα άρθρο είναι λίγα κιλομπάιτ — και είναι η διαφορά
+  // ανάμεσα στο «ξαναγράψ' το» και στο «να το, συνέχισε».
+  if (on) draftSave();
 }
 
 // ---- η λίστα ----
@@ -1103,6 +1134,80 @@ function blankArticle(){
   };
 }
 
+// ---- αντίγραφο ασφαλείας στον browser ----
+//
+// Η μόνη αληθινή προστασία του μισογραμμένου άρθρου. Πιάνει ό,τι
+// μπορεί να σβήσει τη μνήμη της σελίδας: λήξη συνεδρίας που οδηγεί σε
+// ανανέωση, κλείσιμο καρτέλας κατά λάθος, πεσμένο δίκτυο, κολλημένο
+// λάπτοπ, διακοπή ρεύματος.
+//
+// Μένει ΜΟΝΟ σε αυτόν τον browser — δεν φεύγει πουθενά και δεν το
+// βλέπει άλλος συντάκτης. Σβήνεται μόλις πετύχει η κανονική
+// αποθήκευση, ώστε να μην προτείνει παλιό κείμενο την επόμενη φορά.
+var DRAFT = 'newshub-draft';
+
+function draftSave(){
+  if (!art.open) return;
+  try {
+    localStorage.setItem(DRAFT, JSON.stringify({
+      at: Date.now(),
+      index: art.index,
+      article: art.open,
+    }));
+  } catch (err) {
+    // Γεμάτος ή κλειδωμένος αποθηκευτικός χώρος (ιδιωτικό παράθυρο).
+    // Δεν είναι λόγος να σταματήσει η σύνταξη — απλώς δεν έχουμε δίχτυ.
+  }
+}
+
+function draftClear(){
+  try { localStorage.removeItem(DRAFT); } catch (err) { /* το ίδιο */ }
+}
+
+function draftRead(){
+  try {
+    var raw = localStorage.getItem(DRAFT);
+    if (!raw) return null;
+    var d = JSON.parse(raw);
+    return d && d.article && d.article.title !== undefined ? d : null;
+  } catch (err) {
+    return null;
+  }
+}
+
+// Ρωτάει μία φορά, στο άνοιγμα της καρτέλας Άρθρα.
+function draftOffer(){
+  // Πριν φορτώσουν τα άρθρα δεν μπορούμε να ανοίξουμε υπάρχον: η
+  // art.list είναι ακόμα άδεια και το openArticle θα έσκαγε.
+  if (!art.ready) return;
+
+  var d = draftRead();
+  if (!d || art.open) return;
+
+  // Το άρθρο που επεξεργαζόταν μπορεί να έχει διαγραφεί στο μεταξύ.
+  if (d.index >= 0 && !art.list[d.index]) d.index = -1;
+
+  var name = d.article.title || 'χωρίς τίτλο';
+  var mins = Math.round((Date.now() - (d.at || 0)) / 60000);
+  var when = mins < 60
+    ? 'πριν ' + mins + ' λεπτά'
+    : 'πριν ' + Math.round(mins / 60) + ' ώρες';
+
+  var ok = window.confirm(
+    'Βρέθηκε άρθρο που δεν προλάβε να αποθηκευτεί:\n\n'
+    + '«' + name + '», ' + when + '.\n\n'
+    + 'Να το επαναφέρω;'
+  );
+
+  if (!ok) { draftClear(); return; }
+
+  openArticle(d.index >= 0 ? d.index : -1);
+  art.open = d.article;
+  fillArticle();
+  artDirty(true);
+  artSay('Επαναφέρθηκε. Έλεγξέ το και πάτα Αποθήκευση.', 'warn');
+}
+
 function openArticle(i){
   art.index = typeof i === 'number' ? i : -1;
   // Αντίγραφο, όχι το ίδιο αντικείμενο: αν ο συντάκτης φύγει χωρίς
@@ -1116,6 +1221,14 @@ function openArticle(i){
   $('[data-art-editor]').hidden = false;
   $('[data-art-delete]').hidden = art.index < 0;
 
+  fillArticle();
+  artDirty(false);
+  artSay('');
+}
+
+// Η φόρμα από το art.open. Ξεχωριστή από το openArticle γιατί τη
+// χρειάζεται και η επαναφορά αντιγράφου, που δεν ανοίγει κάτι νέο.
+function fillArticle(){
   $('[data-art="title"]').value = art.open.title || '';
   $('[data-art="summary"]').value = art.open.summary || '';
   $('[data-art="category"]').value = art.open.category || CATS[0];
@@ -1133,8 +1246,6 @@ function openArticle(i){
   drawThumb();
   drawBlocks();
   drawTop();
-  artDirty(false);
-  artSay('');
 }
 
 function closeArticle(){
@@ -1279,14 +1390,25 @@ function collect(){
 
   // Τα άδεια μπλοκ φεύγουν. Ο συντάκτης προσθέτει παράγραφο και
   // μετά αλλάζει γνώμη· δεν χρειάζεται να τη σβήσει με το χέρι.
-  a.body = (a.body || []).filter(function (b) {
+  //
+  // ΚΡΙΣΙΜΟ: ο καθαρισμός γίνεται σε ΑΝΤΙΓΡΑΦΟ, όχι πάνω στο art.open.
+  //
+  // Γράφοντας πίσω στο art.open.body, μια αποθήκευση που κόβεται στον
+  // έλεγχο — π.χ. «το άρθρο δεν έχει κείμενο» — έσβηνε τα άδεια μπλοκ
+  // από τη μνήμη ενώ αυτά έμεναν στην οθόνη. Ο συντάκτης έγραφε μέσα
+  // τους και ο κώδικας έψαχνε body[0], δεν το έβρισκε, και πετούσε
+  // σιωπηλά κάθε πλήκτρο. Το άρθρο έδειχνε γεμάτο και αποθηκευόταν
+  // άδειο — ή δεν αποθηκευόταν καθόλου, χωρίς εξήγηση.
+  var out = JSON.parse(JSON.stringify(a));
+
+  out.body = (a.body || []).filter(function (b) {
     if (b.type === 'p' || b.type === 'h') return String(b.text || '').trim();
     if (b.type === 'image') return String(b.src || '').trim();
     if (b.type === 'embed') return String(b.id || '').trim();
     return false;
   });
 
-  return a;
+  return out;
 }
 
 // Η διεύθυνση ενός δικού μας άρθρου, όπως τη γράφει το build.
@@ -1377,6 +1499,9 @@ function saveArticle(){
     // ο συντάκτης έπρεπε να βγει στη λίστα και να το ξανανοίξει.
     $('[data-art-delete]').hidden = false;
     artDirty(false);
+    // Σώθηκε αληθινά — το δίχτυ δεν χρειάζεται πια, και αν μείνει θα
+    // προτείνει παλιό κείμενο την επόμενη φορά.
+    draftClear();
     drawArtList();
     // Η λίστα του πρωτοσέλιδου ξέρει πια το νέο ή αλλαγμένο άρθρο.
     state.items = normalize(state.raw.episodes, state.raw.videos, state.raw.news, art.list);
@@ -1408,6 +1533,7 @@ function deleteArticle(){
     return syncFeatured(a, false);
   }).then(function () {
     artDirty(false);
+    draftClear();
     closeArticle();
   }).catch(function (err) {
     artSay('Δεν διαγράφηκε: ' + err.message, 'bad');
@@ -1564,11 +1690,7 @@ function wireRefresh(){
     btn.disabled = true;
     say('Ζητήθηκαν τα νέα…');
 
-    fetch('/api/refresh', { method: 'POST' }).then(function (res) {
-      return res.json().then(function (d) {
-        if (!res.ok) throw new Error(d.error || 'Σφάλμα ' + res.status);
-      });
-    }).then(function () {
+    fetch('/api/refresh', { method: 'POST' }).then(readJson, netFail).then(function () {
       say('Ξεκίνησε. Τα νέα επεισόδια και οι ειδήσεις θα φανούν εδώ σε '
         + '1-2 λεπτά — ανανέωσε τη σελίδα τότε.', 'ok');
       // Όσο τρέχει, δεύτερο πάτημα δεν προσθέτει τίποτα.
@@ -1695,7 +1817,13 @@ function wireArticles(){
     if (!field || !box) return;
 
     var b = art.open.body[Number(box.dataset.bi)];
-    if (!b) return;
+
+    // Δικλείδα: αν η οθόνη δείχνει μπλοκ που δεν υπάρχει πια στη μνήμη,
+    // το πλήκτρο θα χανόταν αμίλητα. Καλύτερα να το πούμε.
+    if (!b) {
+      artSay('Κάτι ξεσυγχρονίστηκε. Πάτησε «Πίσω στη λίστα» και ξανάνοιξε το άρθρο.', 'bad');
+      return;
+    }
 
     var key = field.dataset.bx;
     b[key] = key === 'id' && blockKind(b) === 'youtube' ? youtubeId(field.value) : field.value;
@@ -2413,6 +2541,10 @@ function wire(){
       var name = tab.dataset.tab;
       $$('.panel').forEach(function (p) { p.classList.toggle('is-on', p.dataset.panel === name); });
       location.hash = name;
+      // Το δίχτυ προτείνεται εδώ και όχι στη φόρτωση: ερώτηση που
+      // σκάει μόλις ανοίξει η σελίδα, σε όποια καρτέλα κι αν πήγαινε
+      // ο συντάκτης, είναι ενοχλητική.
+      if (name === 'arthra') draftOffer();
     });
   });
 
@@ -2513,6 +2645,12 @@ function boot(){
     drawShows();
     loadShots();
     say('');
+
+    // Από εδώ και πέρα η λίστα άρθρων είναι αληθινή, οπότε το δίχτυ
+    // μπορεί να προταθεί. Αν ο συντάκτης ήρθε κατευθείαν στα Άρθρα —
+    // π.χ. ανανέωσε ενώ έγραφε — ρωτάμε αμέσως.
+    art.ready = true;
+    if (location.hash === '#arthra') draftOffer();
   }).catch(function (err) {
     say('Δεν φόρτωσαν τα δεδομένα: ' + err.message, 'bad');
   });
