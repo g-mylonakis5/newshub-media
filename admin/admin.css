@@ -623,51 +623,7 @@ body{
   overflow: auto;
 }
 
-@media (max-width: 760px){
-  /* Οι δύο σειρές ορίζονται ρητά. Χωρίς αυτό, το min-height του .shell
-     μοίραζε το περίσσιο ύψος και στις δύο: σε καρτέλα με λίγο
-     περιεχόμενο — π.χ. «Κανένα άρθρο ακόμα» — η μπάρα των καρτελών
-     φούσκωνε σε μισή οθόνη και η επιλεγμένη καρτέλα γινόταν κουτί. */
-  .shell{ grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
 
-  .side{
-    flex-direction: row;
-    align-items: center;
-    overflow-x: auto;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  /* Χωρίς αυτό το «Must read» σπάει σε δύο αράδες και η μπάρα
-     ξεχειλίζει σε ύψος αντί να κυλάει στο πλάι. */
-  .tab{ flex: none; white-space: nowrap; }
-
-  .work{ padding: 1rem; }
-
-  /* Η κεφαλίδα είχε κλειδωμένο ύψος 56px και μία σειρά. Στο κινητό το
-     μήνυμα κατάστασης στριμωχνόταν σε λωρίδα λίγων χαρακτήρων, ψηλή
-     όσο έξι γραμμές, και κάλυπτε λογότυπο, καρτέλες και περιεχόμενο.
-     Εδώ η κεφαλίδα αναδιπλώνεται και το μήνυμα παίρνει δική του σειρά,
-     σε όλο το πλάτος. */
-  .top{
-    height: auto;
-    min-height: var(--top);
-    flex-wrap: wrap;
-    gap: 0.6rem 1rem;
-    padding: 0.6rem 1rem;
-  }
-
-  .state{
-    order: 3;
-    width: 100%;
-    border-radius: var(--radius);
-  }
-
-  /* Το «Φέρε τα νέα τώρα» έσπαγε σε τρεις αράδες δίπλα στο λογότυπο. */
-  .who{ gap: 0.6rem; }
-  .who .btn{ white-space: nowrap; padding: 0.35rem 0.7rem; font-size: 0.78rem; }
-  .who [data-who]{ display: none; }   /* το email χωράει στην οθόνη του υπολογιστή */
-}
 
 
 /* =====================================================================
@@ -1223,4 +1179,128 @@ body{
 @media (max-width: 620px){
   .prow-head{ flex-wrap: wrap; }
   .prow-flags{ max-width: none; width: 100%; justify-content: flex-start; }
+}
+
+
+/* =====================================================================
+   ΚΙΝΗΤΟ
+
+   ΤΕΛΕΥΤΑΙΟ στο αρχείο, επίτηδες. Τα media queries ΔΕΝ προσθέτουν
+   προτεραιότητα: ένας ίδιος κανόνας γραμμένος πιο κάτω θα τα νικούσε.
+   Ό,τι μπει μετά από εδώ πρέπει να μπει ΜΕΣΑ εδώ.
+   ===================================================================== */
+
+@media (max-width: 760px){
+  /* Οι δύο σειρές ορίζονται ρητά. Χωρίς αυτό, το min-height του .shell
+     μοίραζε το περίσσιο ύψος και στις δύο: σε καρτέλα με λίγο
+     περιεχόμενο — π.χ. «Κανένα άρθρο ακόμα» — η μπάρα των καρτελών
+     φούσκωνε σε μισή οθόνη και η επιλεγμένη καρτέλα γινόταν κουτί. */
+  .shell{ grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+
+  .side{
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Χωρίς αυτό το «Must read» σπάει σε δύο αράδες και η μπάρα
+     ξεχειλίζει σε ύψος αντί να κυλάει στο πλάι. */
+  .tab{ flex: none; white-space: nowrap; }
+
+  .work{ padding: 1rem; }
+
+  /* Η κεφαλίδα είχε κλειδωμένο ύψος 56px και μία σειρά. Στο κινητό το
+     μήνυμα κατάστασης στριμωχνόταν σε λωρίδα λίγων χαρακτήρων, ψηλή
+     όσο έξι γραμμές, και κάλυπτε λογότυπο, καρτέλες και περιεχόμενο.
+     Εδώ η κεφαλίδα αναδιπλώνεται και το μήνυμα παίρνει δική του σειρά,
+     σε όλο το πλάτος. */
+  .top{
+    height: auto;
+    min-height: var(--top);
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .state{
+    order: 3;
+    width: 100%;
+    border-radius: var(--radius);
+  }
+
+  /* Το «Φέρε τα νέα τώρα» έσπαγε σε τρεις αράδες δίπλα στο λογότυπο. */
+  .who{ gap: 0.6rem; }
+  .who .btn{ white-space: nowrap; padding: 0.35rem 0.7rem; font-size: 0.78rem; }
+  .who [data-who]{ display: none; }   /* το email χωράει στην οθόνη του υπολογιστή */
+
+  /* --- 16px σε ΚΑΘΕ πεδίο ---
+     Το iPhone μεγεθύνει μόνο του ολόκληρη τη σελίδα μόλις εστιάσεις σε
+     πεδίο με γράμματα κάτω από 16px. Από εκεί έβγαινε το «μοιάζει με
+     έκδοση υπολογιστή»: η σελίδα ζουμάριζε, ο χώρος φάρδαινε, τα
+     δίστηλα έμεναν δίπλα-δίπλα στριμωγμένα και εμφανιζόταν οριζόντια
+     κύλιση. Δεν είναι θέμα αισθητικής — είναι η αιτία. */
+  .field input,
+  .field textarea,
+  .field select,
+  .block-body input,
+  .block-body textarea,
+  .find{ font-size: 16px; }
+
+  /* Μία στήλη. Θα συνέβαινε και μόνο του μόλις φύγει το ζουμ, αλλά
+     δεν το αφήνουμε να εξαρτάται από αυτό. */
+  .row2{ grid-template-columns: 1fr; }
+
+  .panel-head{ flex-wrap: wrap; }
+
+  /* --- η Αποθήκευση στον αντίχειρα ---
+     Ήταν κολλημένη στην κορυφή: έγραφες τρεις παραγράφους και έπρεπε
+     να γυρίσεις πάνω για να σώσεις. Στο κινητό πάει κάτω, σταθερή. */
+  .editor{ padding-bottom: 5.5rem; }
+
+  .editor-bar{
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    /* env(): ο χώρος της μπάρας χειρονομιών στα iPhone χωρίς κουμπί. */
+    padding: 0.6rem 1rem calc(0.6rem + env(safe-area-inset-bottom));
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    border-bottom: 0;
+    box-shadow: 0 -6px 18px rgba(0,0,0,0.35);
+  }
+
+  /* Το μήνυμα πάνω από τα κουμπιά, σε δική του σειρά: δίπλα τους θα
+     στρίμωχνε την Αποθήκευση σε δύο αράδες. */
+  .editor-state{ order: -1; width: 100%; }
+
+  /* --- στόχοι για δάχτυλο ---
+     Τα ↑ ↓ ✕ των μπλοκ ήταν 26 εικονοστοιχεία. Με το δάχτυλο πατάς
+     λάθος και σβήνεις παράγραφο που μόλις έγραψες. */
+  .block-acts{ gap: 0.1rem; }
+  .block-acts button{ width: 40px; height: 40px; font-size: 1.05rem; }
+
+  .btn{ padding: 0.6rem 1rem; }
+
+  /* --- τα παράθυρα επιλογής σε πλήρη οθόνη ---
+     Κουτί στη μέση μικρής οθόνης αφήνει μια λωρίδα για το περιεχόμενο
+     και μεγάλα κενά γύρω του. */
+  .picker{ padding: 0; }
+
+  .picker-box{
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .picker-x{ width: 44px; height: 44px; font-size: 1.3rem; }
 }
