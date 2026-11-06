@@ -1127,13 +1127,9 @@ let episodeIndex;
 function episodeById(id){
   if (!episodeIndex) {
     episodeIndex = new Map();
-    try {
-      for (const ep of JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'))) {
-        episodeIndex.set(String(ep.id).toLowerCase(), ep);
-        episodeIndex.set(String(ep.id).replace(/\D/g, ''), ep);
-      }
-    } catch (err) {
-      console.warn('ΠΡΟΣΟΧΗ: τα επεισόδια δεν διαβάστηκαν για τις ενσωματώσεις —', err.message);
+    for (const ep of loadEpisodes()) {
+      episodeIndex.set(String(ep.id).toLowerCase(), ep);
+      episodeIndex.set(String(ep.id).replace(/\D/g, ''), ep);
     }
   }
   const key = String(id).trim();
@@ -1337,6 +1333,75 @@ function loadVideos(){
     console.warn('ΠΡΟΣΟΧΗ: το data/videos.json δεν διαβάζεται —', err.message);
     return [];
   }
+}
+
+// ---- τα επεισόδια, με διορθωμένη ημερομηνία ----
+//
+// Το Buzzsprout δίνει «πότε ανέβηκε το podcast», όχι «πότε έγινε η
+// συνέντευξη». Τα δύο απέχουν: στα 770 ζευγάρια που βρίσκουμε, το
+// podcast βγαίνει κατά μέσο όρο 1,7 μέρες μετά το βίντεο.
+//
+// Το αποτέλεσμα το είδε χρήστης: συνέντευξη της 31ης Οκτωβρίου —
+// έτσι τη γράφει και το newshub.gr και το YouTube — έβγαινε εδώ ως
+// «χθες», επειδή το podcast ανέβηκε πέντε μέρες αργότερα. Σε
+// ειδησεογραφικό site αυτό δεν είναι λεπτομέρεια.
+//
+// Παίρνουμε λοιπόν την ημερομηνία του βίντεο όταν είναι παλιότερη.
+//
+// ΜΕ ΟΡΙΟ 30 ΗΜΕΡΩΝ, και ο λόγος είναι πραγματικός: υπάρχουν βίντεο
+// του 2024 που ξαναβγήκαν ως podcast το 2026 — ολόκληρες σειρές, σαν
+// τα «25 μαθήματα ελληνικής ιστορίας», 620 μέρες μετά. Εκείνες είναι
+// ΕΠΑΝΕΚΔΟΣΕΙΣ: το newsroom τις ανέβασε επίτηδες για να ξαναφανούν,
+// και αν τις γυρίζαμε στο 2024 δεν θα τις έβλεπε ποτέ κανείς.
+//
+// Το όριο είναι αυθαίρετο και το παραδεχόμαστε. Στις τελευταίες 90
+// μέρες κανένα από τα 140 επεισόδια δεν ξεπερνά τις 7 — οπότε οι 30
+// αφήνουν χώρο χωρίς να αγγίζουν την κανονική ροή.
+const AIR_WINDOW_DAYS = 30;
+
+function airDate(ep){
+  const twin = videoTwin(ep);
+  if (!twin) return ep.date;
+
+  const pod = new Date(ep.date).getTime();
+  const vid = new Date(twin.date).getTime();
+  if (!vid || isNaN(vid) || isNaN(pod)) return ep.date;
+  if (vid >= pod) return ep.date;                              // ήδη σωστή
+  if (pod - vid > AIR_WINDOW_DAYS * 86400000) return ep.date;  // επανέκδοση
+
+  return new Date(vid).toISOString();
+}
+
+// Ένας κατάλογος για όλο το build. Ήταν τέσσερα ξεχωριστά διαβάσματα
+// του ίδιου αρχείου, άρα τέσσερα ανεξάρτητα αντίγραφα: η διόρθωση σε
+// ένα δεν θα φαινόταν στα άλλα, και η σελίδα βίντεο θα έγραφε άλλη
+// ημερομηνία από τη σελίδα επεισοδίου.
+let episodeCache;
+function loadEpisodes(){
+  if (episodeCache) return episodeCache;
+
+  let list;
+  try {
+    list = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+  } catch (err) {
+    console.warn('ΠΡΟΣΟΧΗ: το data/episodes.json δεν διαβάζεται —', err.message);
+    return (episodeCache = []);
+  }
+
+  // Η μνήμη μπαίνει ΠΡΙΝ τη διόρθωση: το airDate κατεβαίνει στο
+  // videoTwin, και χωρίς αυτό ένας μελλοντικός δρόμος πίσω στα
+  // επεισόδια θα γύριζε ατέρμονα.
+  episodeCache = list;
+
+  for (const ep of list) {
+    const when = airDate(ep);
+    if (when === ep.date) continue;
+    ep.published = ep.date;   // πότε ανέβηκε το podcast, αν χρειαστεί ποτέ
+    ep.date = when;
+  }
+
+  list.sort((a, b) => new Date(b.date) - new Date(a.date));
+  return episodeCache;
 }
 
 function showUrl(name){
@@ -2335,7 +2400,7 @@ function videoHasTwin(v){
 
   if (!episodeTitles) {
     episodeTitles = new Set();
-    for (const ep of JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'))) {
+    for (const ep of loadEpisodes()) {
       for (const k of episodeKeys(ep)) if (k) episodeTitles.add(k);
     }
   }
@@ -2349,7 +2414,7 @@ let episodeByKey;
 function episodeTwin(v){
   if (!episodeByKey) {
     episodeByKey = { full: {}, head: {}, id: {} };
-    for (const ep of JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'))) {
+    for (const ep of loadEpisodes()) {
       episodeByKey.id[ep.id] = ep;
       const [a, b] = episodeKeys(ep);
       if (a && !episodeByKey.full[a]) episodeByKey.full[a] = ep;
@@ -4676,8 +4741,8 @@ ${showBannerBox(show, 1)}
 }
 
 function main(){
-  const episodes = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8')); //opens file and reads it as greek string
-  episodes.sort((a,b) => new Date(b.date) -new Date(a.date));
+  // Διαβασμένα, με διορθωμένη ημερομηνία και ταξινομημένα — δες loadEpisodes.
+  const episodes = loadEpisodes();
 
   // Οι ομάδες καλεσμένων πρέπει να υπάρχουν ΠΡΙΝ γραφτεί οτιδήποτε, γιατί
   // από αυτές βγαίνει ο σύνδεσμος που βάζει κάθε επεισόδιο προς τον
