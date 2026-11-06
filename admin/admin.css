@@ -626,7 +626,36 @@ body{
 @media (max-width: 760px){
   .shell{ grid-template-columns: 1fr; }
   .side{ flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+
+  /* Χωρίς αυτό το «Must read» σπάει σε δύο αράδες και η μπάρα
+     ξεχειλίζει σε ύψος αντί να κυλάει στο πλάι. */
+  .tab{ flex: none; white-space: nowrap; }
+
   .work{ padding: 1rem; }
+
+  /* Η κεφαλίδα είχε κλειδωμένο ύψος 56px και μία σειρά. Στο κινητό το
+     μήνυμα κατάστασης στριμωχνόταν σε λωρίδα λίγων χαρακτήρων, ψηλή
+     όσο έξι γραμμές, και κάλυπτε λογότυπο, καρτέλες και περιεχόμενο.
+     Εδώ η κεφαλίδα αναδιπλώνεται και το μήνυμα παίρνει δική του σειρά,
+     σε όλο το πλάτος. */
+  .top{
+    height: auto;
+    min-height: var(--top);
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .state{
+    order: 3;
+    width: 100%;
+    border-radius: var(--radius);
+  }
+
+  /* Το «Φέρε τα νέα τώρα» έσπαγε σε τρεις αράδες δίπλα στο λογότυπο. */
+  .who{ gap: 0.6rem; }
+  .who .btn{ white-space: nowrap; padding: 0.35rem 0.7rem; font-size: 0.78rem; }
+  .who [data-who]{ display: none; }   /* το email χωράει στην οθόνη του υπολογιστή */
 }
 
 
