@@ -1,5 +1,49 @@
 [
   {
+    "id": "eurostat-proteleytaia-i-ellada-stoys-etisioys-misthoys-chasma-22-700-eyro-apo-ton-meso-oro-tis-ee",
+    "title": "Eurostat: Προτελευταία η Ελλάδα στους ετήσιους μισθούς-Χάσμα 22.700 ευρώ από τον μέσο όρο της ΕΕ",
+    "url": "https://www.newshub.gr/el/oikonomia/eurostat-proteleytaia-i-ellada-stoys-etisioys-misthoys-chasma-22-700-eyro-apo-ton-meso-oro-tis-ee",
+    "date": "2026-11-06T11:20:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/misthos-9_0.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/misthos-9_0.jpg",
+    "summary": "Στην προτελευταία θέση της Ευρωπαϊκής Ένωσης όσον αφορά τις μέσες ετήσιες αποδοχές των εργαζομένων βρίσκεται η Ελλάδα, σύμφωνα με τα νέα στοιχεία που δημοσιο...",
+    "featured": false
+  },
+  {
+    "id": "epicheiriseis-kai-prasini-metavasi-stin-kriti-ekdilosi-sto-epimelitirio-irakleioy",
+    "title": "Επιχειρήσεις και Πράσινη Μετάβαση στην Κρήτη»: Εκδήλωση στο Επιμελητήριο Ηρακλείου",
+    "url": "https://www.newshub.gr/el/kriti/epicheiriseis-kai-prasini-metavasi-stin-kriti-ekdilosi-sto-epimelitirio-irakleioy",
+    "date": "2026-11-06T11:18:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/epimeleterio-2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/epimeleterio-2.jpg",
+    "summary": "Ο Σύνδεσμος Εταιριών Φωτοβολταϊκών (HELAPCO), το Τεχνικό Επιμελητήριο Ελλάδας &ndash; Τμήμα Ανατολικής Κρήτης (ΤΕΕ/ΤΑΚ) και το Επιμελητήριο Ηρακλείου σας προ...",
+    "featured": false
+  },
+  {
+    "id": "tee-tmima-dytikis-kritis-gia-data-centers-na-metrithoyn-oi-antoches-toy-nisioy-kai-meta-na-desmeytei-reyma-nero-kai-gi",
+    "title": "ΤΕΕ-Τμήμα Δυτικής Κρήτης για Data Centers: Να μετρηθούν οι αντοχές του νησιού και μετά να δεσμευτεί ρεύμα, νερό και γη",
+    "url": "https://www.newshub.gr/el/kriti/tee-tmima-dytikis-kritis-gia-data-centers-na-metrithoyn-oi-antoches-toy-nisioy-kai-meta-na-desmeytei-reyma-nero-kai-gi",
+    "date": "2026-11-06T11:10:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/admee-data-center-2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/admee-data-center-2.jpg",
+    "summary": "Θέση στο ζήτημα της λειτουργία Data Centers στην Κρήτη παίρνει με ανακοίνωση του το Τμήμα Δυτικής Κρήτης του ΤΕΕ επισημαίνοντας πως πρέπει πρώτα να...",
+    "featured": false
+  },
+  {
+    "id": "kriti-xemeiname-pali-apo-pinakides-kykloforias-gia-nea-ochimata-ti-leei-o-armodios-antiperifereiarchis-sto-newshub-gr",
+    "title": "Κρήτη: Ξεμείναμε πάλι από πινακίδες κυκλοφορίας για νέα οχήματα-Τι λέει ο αρμόδιος Αντιπεριφερειάρχης στο Newshub.gr",
+    "url": "https://www.newshub.gr/el/kriti/kriti-xemeiname-pali-apo-pinakides-kykloforias-gia-nea-ochimata-ti-leei-o-armodios-antiperifereiarchis-sto-newshub-gr",
+    "date": "2026-11-06T11:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/pinakides-16.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/pinakides-16.jpg",
+    "summary": "Μπορεί η κυβέρνηση να δημοσιοποιεί διαρκώς τις επιτυχίες της στον ψηφιακό μετασχηματισμό της χώρας όμως στην Ελλάδα του 2026 δεν μπορούν να κατασκευαστούν νέ...",
+    "featured": true
+  },
+  {
     "id": "to-limani-toy-vivlioy-xekina-ti-leitoyrgia-tis-i-dimotiki-leschi-anagnosis-agioy-nikolaoy-me-to-vivlio-dekatria-toy",
     "title": "«Το Λιμάνι του Βιβλίου» Ξεκινά τη λειτουργία της η Δημοτική Λέσχη Ανάγνωσης Αγίου Νικολάου με το βιβλίο «Δεκατρία» του",
     "url": "https://www.newshub.gr/el/istoria-politismos/to-limani-toy-vivlioy-xekina-ti-leitoyrgia-tis-i-dimotiki-leschi-anagnosis-agioy-nikolaoy-me-to-vivlio-dekatria-toy",
@@ -217,7 +261,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/metanastes-ierapetra-1024x742.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/metanastes-ierapetra-1024x742.jpg",
     "summary": "Με φόντο το τριήμερο εξελίξεων γύρω από την πόντιση του καλωδίου και την έκδοση NAVTEX, ο υπουργός Μετανάστευσης και Ασύλου, Θάνος Πλεύρης, μίλησε στην εκπομ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "mia-xechoristi-prosfora-politismoy-sti-dimotiki-pinakothiki-malevizioy-apo-ti-nelli-varveraki",
@@ -6553,50 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/1-11/screenshot-2026-11-01-182813.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/1-11/screenshot-2026-11-01-182813.jpg",
     "summary": "Η Κ15 της Εθνικής Ελλάδος επέστρεψε στην Ελλάδα με τις αποσκευές της γεμάτες με εμπειρίες και την μεγάλη επιτυχία της 3ης θέσης στο Παγκόσμιο Κύπελλο, κάνοντ...",
-    "featured": false
-  },
-  {
-    "id": "mazikes-kinitopoiiseis-stin-eyropi-sygkroyseis-se-germania-kai-alvania-diadiloseis-gia-ti-stegasi-stin-portogalia",
-    "title": "Μαζικές κινητοποιήσεις στην Ευρώπη: Συγκρούσεις σε Γερμανία και Αλβανία – Διαδηλώσεις για τη στέγαση στην Πορτογαλία",
-    "url": "https://www.newshub.gr/el/geopolitiki/mazikes-kinitopoiiseis-stin-eyropi-sygkroyseis-se-germania-kai-alvania-diadiloseis-gia-ti-stegasi-stin-portogalia",
-    "date": "2026-11-01T17:21:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/1-11/ap26304531156517-1024x683.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/1-11/ap26304531156517-1024x683.jpg",
-    "summary": "Επεισόδια, συγκρούσεις με τις αστυνομικές δυνάμεις, βανδαλισμοί και καταστροφές καταγράφηκαν το Σάββατο, 31 Οκτωβρίου, σε Γερμανία, Πορτογαλία και Αλβανία, μ...",
-    "featured": false
-  },
-  {
-    "id": "kriti-simantikes-oi-vrochoptoseis-poy-simeionontai-simera-1i-noemvrioy",
-    "title": "Κρήτη: Σημαντικές οι βροχοπτώσεις που σημειώνονται σήμερα 1η Νοεμβρίου",
-    "url": "https://www.newshub.gr/el/kriti/kriti-simantikes-oi-vrochoptoseis-poy-simeionontai-simera-1i-noemvrioy",
-    "date": "2026-11-01T17:12:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/1-11/broche2.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/1-11/broche2.jpg",
-    "summary": "Σημαντικές βροχοπτώσεις και καταιγίδες εκδηλώνονται την Κυριακή 1η Νοεμβρίου, κυρίως στην Κεντρική και Ανατολική Μακεδονία, στα Δωδεκάνησα και στην Κρήτη.\r\n\r...",
-    "featured": false
-  },
-  {
-    "id": "kriti-mesa-sto-dekemvrio-pliromes-ton-agrotikon-enischyseon-to-chronodiagramma-tis-igesias-toy-ypoyrgeioy-agr-anaptyxis",
-    "title": "Κρήτη: Μέσα στο Δεκέμβριο πληρωμές των αγροτικών ενισχύσεων - Το χρονοδιάγραμμα της ηγεσίας του Υπουργείου Αγρ. Ανάπτυξης",
-    "url": "https://www.newshub.gr/el/kriti/kriti-mesa-sto-dekemvrio-pliromes-ton-agrotikon-enischyseon-to-chronodiagramma-tis-igesias-toy-ypoyrgeioy-agr-anaptyxis",
-    "date": "2026-11-01T17:02:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/agrotes-lephtaa.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/agrotes-lephtaa.jpg",
-    "summary": "Σημαντική συνάντηση στο Υπουργείο Αγροτικής Ανάπτυξης και Τροφίμων είχε ο πρόεδρος της Κοινότητας και του Αγροτικού Συνεταιρισμού Εμπάρου, Γιώργος Περογιαννά...",
-    "featured": false
-  },
-  {
-    "id": "attiki-dyo-syllipseis-gia-katochi-kai-diakinisi-katergasmenis-kannavis",
-    "title": "Αττική: Δύο συλλήψεις για κατοχή και διακίνηση κατεργασμένης κάνναβης",
-    "url": "https://www.newshub.gr/el/ellada/attiki-dyo-syllipseis-gia-katochi-kai-diakinisi-katergasmenis-kannavis",
-    "date": "2026-11-01T16:55:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/1-11/peripolikoo.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/1-11/peripolikoo.jpg",
-    "summary": "Χειροπέδες σε δύο νεαρούς, ηλικίας 22 και 23 ετών, οι οποίοι κατηγορούνται για κατοχή και διακίνηση κατεργασμένης κάνναβης (σοκολάτα), πέρασαν αστυνομικοί τη...",
     "featured": false
   }
 ]
