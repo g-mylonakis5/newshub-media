@@ -106,9 +106,8 @@ jobs:
         if: always()
         continue-on-error: true
         env:
-          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
-          CF_KV_NAMESPACE: ${{ secrets.CF_KV_NAMESPACE }}
-          CF_KV_TOKEN: ${{ secrets.CF_KV_TOKEN }}
+          ROLOI_URL: https://newshub-roloi.g-mylonakis5.workers.dev
+          ROLOI_KLEIDI: ${{ secrets.ROLOI_KLEIDI }}
         run: node roi-se-kv.js
 
       - name: Επεισόδια

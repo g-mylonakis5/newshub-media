@@ -171,6 +171,55 @@ async function koitaKaiPata(env, anagkastika = false) {
   return `Το πάτησα. Αποτύπωμα: ${tora}`;
 }
 
+// Η ζωντανή ροή, από το Action στο KV.
+//
+// Το περιεχόμενο έρχεται από το δικό μας GitHub Action, με το κλειδί —
+// αλλά το ελέγχουμε ούτως ή άλλως. Ό,τι γράψουμε εδώ θα το δει κάθε
+// επισκέπτης της αρχικής, και ένα σπασμένο σενάριο που γράφει σκουπίδια
+// είναι πολύ πιο πιθανό από κάποιον που βρήκε το κλειδί.
+async function grapseRoi(request, env) {
+  if (!env.ROI) {
+    return new Response('Δεν υπάρχει σύνδεση με το KV.\n', { status: 500 });
+  }
+
+  let data;
+  try {
+    data = await request.json();
+  } catch (err) {
+    return new Response('Το σώμα δεν είναι JSON.\n', { status: 400 });
+  }
+
+  if (!data || !Array.isArray(data.items) || !data.items.length) {
+    // Ποτέ άδεια ροή: θα έσβηνε το πλαίσιο σε όλους, και μια στιγμιαία
+    // αστοχία της λήψης θα γινόταν ορατή βλάβη. Η προηγούμενη ροή,
+    // όσο παλιά κι αν είναι, είναι καλύτερη από το τίποτα.
+    return new Response('Άδεια ροή — δεν γράφω.\n', { status: 400 });
+  }
+
+  for (const it of data.items) {
+    if (!it || typeof it.t !== 'string' || typeof it.u !== 'string') {
+      return new Response('Στοιχείο χωρίς τίτλο ή διεύθυνση.\n', { status: 400 });
+    }
+    // Η διεύθυνση μπαίνει σε href. Μόνο newshub.gr, και μόνο https:
+    // ένα «javascript:» εκεί μέσα θα έτρεχε στον browser του αναγνώστη.
+    if (!it.u.startsWith('https://www.newshub.gr/')) {
+      return new Response(`Ξένη διεύθυνση: ${it.u.slice(0, 60)}\n`, { status: 400 });
+    }
+  }
+
+  await env.ROI.put('roi', JSON.stringify({
+    pote: new Date().toISOString(),
+    proto: typeof data.proto === 'string' ? data.proto : '',
+    items: data.items.map((it) => ({
+      t: it.t,
+      u: it.u,
+      k: typeof it.k === 'string' ? it.k : '',
+    })),
+  }));
+
+  return new Response(`Γράφτηκαν ${data.items.length} τίτλοι.\n`);
+}
+
 export default {
   // Το ρολόι. Οι ώρες ορίζονται στο wrangler.toml.
   //
@@ -201,6 +250,16 @@ export default {
 
     if (!env.KLEIDI || q.get('kleidi') !== env.KLEIDI) {
       return new Response('Λάθος ή απόν κλειδί.\n', { status: 403 });
+    }
+
+    // POST = η ζωντανή ροή, από το GitHub Action (roi-se-kv.js).
+    //
+    // Γιατί περνάει από εδώ και όχι κατευθείαν στο API της Cloudflare:
+    // ο Worker έχει ΗΔΗ δικαίωμα γραψίματος στο KV, από το binding.
+    // Ένα δεύτερο token, με δική του λήξη και δική του διαρροή, για να
+    // κάνει το ίδιο ακριβώς πράγμα, είναι σκέτο βάρος συντήρησης.
+    if (request.method === 'POST') {
+      return grapseRoi(request, env);
     }
 
     try {

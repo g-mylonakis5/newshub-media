@@ -22,13 +22,17 @@
 //
 //   node roi-se-kv.js
 //
-// Θέλει τρεις μεταβλητές περιβάλλοντος. Αν λείπει έστω μία, βγαίνει
+// Δεν μιλάει στην Cloudflare κατευθείαν: στέλνει τους τίτλους στον
+// Worker (roloi/), που έχει ΗΔΗ δικαίωμα γραψίματος στο KV από το
+// binding του. Ένα δεύτερο token, με δική του λήξη και δική του
+// διαρροή, για να κάνει το ίδιο ακριβώς πράγμα, είναι σκέτο βάρος.
+//
+// Θέλει δύο μεταβλητές περιβάλλοντος. Αν λείπει έστω μία, βγαίνει
 // ΗΣΥΧΑ με επιτυχία: η ζωντανή ροή είναι βελτίωση, όχι προϋπόθεση. Αν
 // δεν στηθεί, το site δουλεύει ακριβώς όπως πριν.
 //
-//   CF_ACCOUNT_ID   ο λογαριασμός Cloudflare
-//   CF_KV_NAMESPACE το ID του χώρου KV
-//   CF_KV_TOKEN     token με δικαίωμα «Workers KV Storage: Edit»
+//   ROLOI_URL     η διεύθυνση του Worker
+//   ROLOI_KLEIDI  το μυστικό του — το ίδιο που έχει ο Worker
 
 const fs = require('fs');
 const path = require('path');
@@ -40,9 +44,6 @@ const BLOCK = require('./data/roi-apokleismena.json');
 // αφεντικό δέκα αντί για οκτώ, δεν θέλουμε να ξαναστηθεί τίποτα.
 const POSA = 12;
 
-// Το κλειδί μέσα στο KV. Ένα και μόνο — η ροή γράφεται ολόκληρη κάθε
-// φορά. Είναι 2 KB· δεν αξίζει να παίζουμε με διαφορές.
-const KLEIDI = 'roi';
 
 function xorismaTonon(s) {
   return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -75,9 +76,9 @@ function roi(diales) {
 }
 
 async function main() {
-  const { CF_ACCOUNT_ID, CF_KV_NAMESPACE, CF_KV_TOKEN } = process.env;
+  const { ROLOI_URL, ROLOI_KLEIDI } = process.env;
 
-  if (!CF_ACCOUNT_ID || !CF_KV_NAMESPACE || !CF_KV_TOKEN) {
+  if (!ROLOI_URL || !ROLOI_KLEIDI) {
     console.log('Ζωντανή ροή: δεν είναι στημένη (λείπουν ρυθμίσεις) — προσπερνώ.');
     return;
   }
@@ -107,23 +108,24 @@ async function main() {
     items,
   });
 
-  const url = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}`
-    + `/storage/kv/namespaces/${CF_KV_NAMESPACE}/values/${KLEIDI}`;
+  // Το κλειδί πάει στη διεύθυνση, όχι σε κεφαλίδα: έτσι το δέχεται ο
+  // Worker και στη χειροκίνητη δοκιμή από browser, με έναν τρόπο αντί
+  // για δύο.
+  const url = `${ROLOI_URL.replace(/\/+$/, '')}/?kleidi=${encodeURIComponent(ROLOI_KLEIDI)}`;
 
   const res = await fetch(url, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${CF_KV_TOKEN}`,
-      'Content-Type': 'text/plain',
-    },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: soma,
   });
 
+  const apantisi = (await res.text()).trim();
+
   if (!res.ok) {
-    throw new Error(`Cloudflare ${res.status}: ${(await res.text()).slice(0, 200)}`);
+    throw new Error(`Ο Worker απάντησε ${res.status}: ${apantisi.slice(0, 200)}`);
   }
 
-  console.log(`Ζωντανή ροή: ${items.length} τίτλοι στο KV. Πρώτος: ${items[0].t}`);
+  console.log(`Ζωντανή ροή: ${apantisi} Πρώτος: ${items[0].t}`);
 }
 
 main().catch((err) => {
