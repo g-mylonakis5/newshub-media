@@ -30,6 +30,7 @@ const WRITABLE = new Set([
   'show-art',        // οι αφίσες τους
   'articles',        // τα δικά μας άρθρα
   'pairs',           // ποιο βίντεο και ποιος καλεσμένος πάει σε ποιο επεισόδιο
+  'photos',          // ποιες φωτογραφίες είναι «στάνταρ»
 ]);
 
 // Αρχεία που διαβάζονται αλλά ΔΕΝ γράφονται: τα παράγουν τα fetch-*.js
@@ -71,6 +72,36 @@ function validate(name, data){
     }
     if (data.secondary && !Array.isArray(data.secondary)) {
       return 'Τα δευτερεύοντα πρέπει να είναι λίστα.';
+    }
+
+    // Τα καρφιτσωμένα της ροής. ΔΕΝ ζητάμε ημερομηνία λήξης εδώ — το
+    // νόημά τους είναι ακριβώς να μένουν όσο χρειάζεται. Ελέγχουμε όμως
+    // ότι είναι λίστα από κείμενα: ένα αντικείμενο μέσα εδώ θα έσκαγε
+    // στο sameItem() και θα έριχνε ολόκληρο το build.
+    if (data.latest != null) {
+      if (!Array.isArray(data.latest)) {
+        return 'Τα καρφιτσωμένα της ροής πρέπει να είναι λίστα.';
+      }
+      if (data.latest.some((x) => typeof x !== 'string')) {
+        return 'Κάθε καρφιτσωμένο πρέπει να είναι σύνδεσμος ή κωδικός, σε κείμενο.';
+      }
+    }
+  }
+
+  if (name === 'photos') {
+    if (Array.isArray(data)) return 'Οι φωτογραφίες πρέπει να είναι αντικείμενο.';
+    if (data.standard != null) {
+      if (!Array.isArray(data.standard)) {
+        return 'Οι στάνταρ φωτογραφίες πρέπει να είναι λίστα.';
+      }
+      // Ονόματα αρχείων, τίποτα άλλο. Μια διαδρομή με «/» ή «..» εδώ
+      // δεν σπάει τίποτα σήμερα, αλλά η λίστα διαβάζεται για να βρεθεί
+      // αρχείο στο R2 — και δεν αφήνουμε να μπει τέτοιο σχήμα.
+      for (const n of data.standard) {
+        if (typeof n !== 'string' || !/^[\w.-]+$/.test(n)) {
+          return 'Κάθε στάνταρ φωτογραφία πρέπει να είναι σκέτο όνομα αρχείου.';
+        }
+      }
     }
   }
 
@@ -141,6 +172,22 @@ function validate(name, data){
     }
     if (data.titles != null && !Array.isArray(data.titles)) {
       return 'Το titles πρέπει να είναι λίστα.';
+    }
+
+    // Τα πορτρέτα. Η τιμή μπαίνει αυτούσια σε src εικόνας, οπότε δεν
+    // δεχόμαστε ό,τι να 'ναι: μόνο διεύθυνση μέσα στο site μας ή στον
+    // δικό μας χώρο φωτογραφιών. Ένα «javascript:» ή ένα ξένο domain
+    // εδώ θα ήταν τρύπα, όχι απλώς λάθος εικόνα.
+    if (data.photos != null) {
+      if (typeof data.photos !== 'object' || Array.isArray(data.photos)) {
+        return 'Τα πορτρέτα πρέπει να είναι αντικείμενο.';
+      }
+      for (const [who, url] of Object.entries(data.photos)) {
+        if (url === '' || url === null) continue;   // «βγάλ' την»
+        if (typeof url !== 'string' || !/^\/uploads\/[\w.-]+$/.test(url)) {
+          return `Η φωτογραφία του «${who}» πρέπει να είναι από τη βιβλιοθήκη.`;
+        }
+      }
     }
   }
 

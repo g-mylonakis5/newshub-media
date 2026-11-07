@@ -235,13 +235,43 @@ function matches(it){
 // χαλαρή λογική με το build.js: δέχεται κωδικό ή διεύθυνση.
 function isChosen(it, want){
   if (!want) return false;
-  var w = String(want).trim().toLowerCase();
+
+  // Ίδιο ξεφλούδισμα με το strip() της sameItem στο build.js.
+  var strip = function (s){
+    return String(s == null ? '' : s).trim().toLowerCase()
+      .replace(/^https?:\/\/[^/]+\//, '')
+      .replace(/^\/+/, '')
+      .replace(/[?#].*$/, '');
+  };
+  var tail = function (s){ return s.split('/').pop().replace(/\.html?$/, ''); };
+
+  var w = strip(want);
   if (!w) return false;
-  if (String(it.id).toLowerCase() === w) return true;
-  if (it.ref && String(it.ref).toLowerCase() === w) return true;
-  // Τελευταία ευκαιρία: μόνο το τελευταίο κομμάτι της διεύθυνσης.
-  var tail = w.replace(/[?#].*$/, '').split('/').pop();
-  return tail && String(it.ref || '').toLowerCase().indexOf(tail) !== -1;
+
+  var id = String(it.id == null ? '' : it.id).toLowerCase();
+  if (id && id === w) return true;
+
+  var mine = strip(it.ref);
+  if (mine && mine === w) return true;
+
+  var t = tail(w);
+  if (!t) return false;
+  if (id && t === id) return true;
+  if (mine && tail(mine) === t) return true;
+
+  if (id && t.indexOf(id + '-') === 0) return true;
+
+  // Το επεισόδιο έχει κωδικό «Buzzsprout-20060479», αλλά η σελίδα του
+  // είναι «episode/20060479-ο-τίτλος.html» — ο κωδικός μπαίνει εκεί
+  // ΧΩΡΙΣ το πρόθεμα.
+  //
+  // Χωρίς αυτό, ό,τι κολλούσε ο δημοσιογράφος από τον browser έδειχνε
+  // «δεν βρέθηκε», ενώ το build το έβρισκε κανονικά — γιατί εκεί η
+  // sameItem συγκρίνει με το href της σελίδας, που εμείς εδώ δεν το
+  // έχουμε. Η πιο μπερδευτική μορφή σφάλματος: το site υπακούει και
+  // το διαχειριστικό λέει ότι δεν ξέρει τι του ζήτησες.
+  var num = id.replace(/^buzzsprout-/, '');
+  return !!num && (t === num || t.indexOf(num + '-') === 0);
 }
 
 // ---------------------------------------------------------------------
@@ -422,7 +452,12 @@ function sayUpload(text, kind){
 function upload(files, ctx){
   ctx = ctx || {};
   var say = ctx.say || sayUpload;
-  var after = ctx.after || function () { loadShots(); };
+  // Μετά το ανέβασμα πάμε στον φάκελο της ΣΗΜΕΡΙΝΗΣ μέρας: εκεί μόλις
+  // μπήκαν. Χωρίς αυτό, ο συντάκτης ανεβάζει δέκα φωτογραφίες και
+  // κοιτάζει μια λίστα φακέλων, χωρίς καμία απόδειξη ότι έγινε κάτι.
+  var after = ctx.after || function () {
+    loadShots().then(function () { goTo('lib', 'day:' + todayYmd()); });
+  };
 
   var list = Array.prototype.slice.call(files).filter(function (f) {
     return /^image\//.test(f.type);
@@ -472,6 +507,90 @@ function upload(files, ctx){
   next(0);
 }
 
+// ---------------------------------------------------------------------
+// Η ΒΙΒΛΙΟΘΗΚΗ ΩΣ ΦΑΚΕΛΟΙ
+// ---------------------------------------------------------------------
+//
+// Οι φάκελοι είναι ΥΠΟΛΟΓΙΣΜΕΝΟΙ, δεν υπάρχουν στο R2.
+//
+// Κάθε φωτογραφία αποθηκεύεται ως «20261106102706-dimarcheio.jpg» — τα
+// πρώτα οκτώ ψηφία είναι η ημερομηνία. Άρα μήνας και μέρα βγαίνουν από
+// το όνομα, χωρίς να μετακινηθεί τίποτα.
+//
+// ΓΙΑΤΙ ΟΧΙ ΑΛΗΘΙΝΟΙ ΦΑΚΕΛΟΙ: η διεύθυνση κάθε φωτογραφίας είναι
+// «/uploads/<όνομα>» και κάθεται μέσα σε ήδη δημοσιευμένα άρθρα. Ένας
+// φάκελος θα την έκανε «/uploads/2026-11/<όνομα>» και κάθε τέτοιο
+// άρθρο θα έδειχνε σπασμένη εικόνα. Οι φωτογραφίες δεν είναι στο git
+// — δεν υπάρχει τίποτα να τις γυρίσει πίσω.
+
+var lib = {
+  files: [],        // ό,τι γύρισε το /api/images
+  standard: [],     // τα ονόματα που έχουν αστεράκι
+  // Το υπόλοιπο περιεχόμενο του data/photos.json, όπως ήρθε. Το
+  // ξαναστέλνουμε αυτούσιο σε κάθε αποθήκευση: αλλιώς η πρώτη χρήση
+  // του αστερακιού έσβηνε τις οδηγίες που είναι γραμμένες μέσα στο
+  // αρχείο, και το επόμενο άτομο που θα το άνοιγε δεν θα είχε ιδέα
+  // γιατί υπάρχει.
+  rest: {},
+  loaded: false,
+  // Πού βρίσκεται το καθένα από τα δύο πλέγματα. null = η ρίζα.
+  at: { lib: null, pick: null },
+  find: { lib: '', pick: '' },
+};
+
+// Η χρονοσφραγίδα του ονόματος. Χωρίς αυτή, η φωτογραφία πάει στον
+// φάκελο «Χωρίς ημερομηνία» — μπορεί να ανέβηκε με άλλο εργαλείο.
+function shotStamp(name){
+  var m = String(name || '').match(/^(\d{4})(\d{2})(\d{2})\d{6}-/);
+  if (!m) return null;
+  return { ym: m[1] + m[2], ymd: m[1] + m[2] + m[3], y: m[1], mo: m[2], d: m[3] };
+}
+
+var MONTHS = ['Ιανουαρίου', 'Φεβρουαρίου', 'Μαρτίου', 'Απριλίου', 'Μαΐου',
+  'Ιουνίου', 'Ιουλίου', 'Αυγούστου', 'Σεπτεμβρίου', 'Οκτωβρίου',
+  'Νοεμβρίου', 'Δεκεμβρίου'];
+var MONTHS_NOM = ['Ιανουάριος', 'Φεβρουάριος', 'Μάρτιος', 'Απρίλιος', 'Μάιος',
+  'Ιούνιος', 'Ιούλιος', 'Αύγουστος', 'Σεπτέμβριος', 'Οκτώβριος',
+  'Νοέμβριος', 'Δεκέμβριος'];
+var WEEK = ['Κυρ', 'Δευ', 'Τρί', 'Τετ', 'Πέμ', 'Παρ', 'Σάβ'];
+
+function monthLabel(ym){
+  return MONTHS_NOM[Number(ym.slice(4, 6)) - 1] + ' ' + ym.slice(0, 4);
+}
+
+function dayLabel(ymd){
+  var d = new Date(ymd.slice(0, 4) + '-' + ymd.slice(4, 6) + '-' + ymd.slice(6, 8) + 'T12:00:00');
+  return WEEK[d.getDay()] + ' ' + Number(ymd.slice(6, 8)) + ' '
+    + MONTHS[Number(ymd.slice(4, 6)) - 1];
+}
+
+function todayYmd(){
+  var d = new Date();
+  return String(d.getFullYear())
+    + String(d.getMonth() + 1).padStart(2, '0')
+    + String(d.getDate()).padStart(2, '0');
+}
+
+function isStandard(name){ return lib.standard.indexOf(name) > -1; }
+
+// Ποιες φωτογραφίες ανήκουν σε μια θέση του δέντρου.
+function shotsAt(at){
+  if (!at) return [];
+  if (at.kind === 'std') {
+    return lib.files.filter(function (f) { return isStandard(f.name); });
+  }
+  if (at.kind === 'none') {
+    return lib.files.filter(function (f) { return !shotStamp(f.name); });
+  }
+  return lib.files.filter(function (f) {
+    var s = shotStamp(f.name);
+    if (!s) return false;
+    return at.kind === 'month' ? s.ym === at.ym : s.ymd === at.ymd;
+  });
+}
+
+// ---- οι κάρτες ----
+
 // Η κάρτα μιας φωτογραφίας. Ίδια στη βιβλιοθήκη και στον επιλογέα —
 // αλλάζει μόνο τι κουμπί κουβαλάει: «Αντιγραφή» στη βιβλιοθήκη, ενώ
 // στον επιλογέα ολόκληρη η κάρτα είναι το κουμπί.
@@ -484,10 +603,19 @@ function shotHTML(f, mode){
   var label = m ? m[3].replace(/-/g, ' ') : f.name;
   var day = m ? m[1].slice(6, 8) + '/' + m[1].slice(4, 6) : '';
   var pick = mode === 'pick';
+  var on = isStandard(f.name);
 
   return '<figure class="shot"'
     + (pick ? ' tabindex="0" role="button" data-take="' + esc(f.url) + '"' : '') + '>'
     + '<img src="' + esc(f.url) + '" alt="" loading="lazy">'
+    // Το αστεράκι μπαίνει ΚΑΙ στον επιλογέα: η στιγμή που καταλαβαίνεις
+    // ότι μια φωτογραφία θα τη χρειάζεσαι ξανά είναι όταν τη βάζεις σε
+    // άρθρο, όχι όταν περνάς από τη βιβλιοθήκη.
+    + '<button type="button" class="shot-star' + (on ? ' is-on' : '') + '"'
+    + ' data-star="' + esc(f.name) + '"'
+    + ' aria-pressed="' + (on ? 'true' : 'false') + '"'
+    + ' title="' + (on ? 'Βγάλ’ τη από τις στάνταρ' : 'Βάλ’ τη στις στάνταρ') + '"'
+    + ' aria-label="Στάνταρ φωτογραφία">' + (on ? '★' : '☆') + '</button>'
     + '<button type="button" class="shot-del" data-del="' + esc(f.name) + '"'
     + ' aria-label="Διαγραφή">✕</button>'
     + (pick ? ''
@@ -498,13 +626,166 @@ function shotHTML(f, mode){
     + '</figure>';
 }
 
-function fillShots(box, mode){
-  return fetch('/api/images').then(readJson, netFail).then(function (files) {
-    if (!files.length) {
-      box.innerHTML = '<p class="muted">Καμία φωτογραφία ακόμα.</p>';
-      return;
+// Το πλακίδιο ενός φακέλου: εξώφυλλο, όνομα, πλήθος.
+//
+// Το εξώφυλλο δεν είναι στολίδι. Χωρίς αυτό η οθόνη είναι κουτιά με
+// ημερομηνίες, και κανείς δεν θυμάται τι ανέβασε στις 14 Αυγούστου.
+function folderHTML(go, title, sub, cover, extra){
+  return '<button type="button" class="folder' + (extra || '') + '"'
+    + ' data-go="' + esc(go) + '">'
+    + '<span class="folder-art">'
+    + (cover ? '<img src="' + esc(cover) + '" alt="" loading="lazy">' : '')
+    + '</span>'
+    + '<span class="folder-name">' + esc(title) + '</span>'
+    + '<span class="folder-n">' + esc(sub) + '</span>'
+    + '</button>';
+}
+
+function countLabel(n){ return n === 1 ? '1 φωτογραφία' : n + ' φωτογραφίες'; }
+
+// ---- η ζωγραφική ----
+
+function drawCrumbs(mode){
+  var box = $(mode === 'pick' ? '[data-pick-crumbs]' : '[data-shot-crumbs]');
+  var at = lib.at[mode];
+
+  if (lib.find[mode]) {
+    box.innerHTML = '<span class="crumb-now">Αναζήτηση σε όλους τους φακέλους</span>';
+    return;
+  }
+
+  // Στη ρίζα η διαδρομή είναι σκέτο «Βιβλιοθήκη» που δείχνει στον εαυτό
+  // της — θόρυβος. Εμφανίζεται μόλις μπεις κάπου.
+  if (!at) { box.innerHTML = ''; return; }
+
+  var parts = ['<button type="button" class="crumb" data-go="">Βιβλιοθήκη</button>'];
+
+  if (at && at.kind === 'std') {
+    parts.push('<span class="crumb-now">★ Στάνταρ</span>');
+  } else if (at && at.kind === 'none') {
+    parts.push('<span class="crumb-now">Χωρίς ημερομηνία</span>');
+  } else if (at && at.kind === 'month') {
+    parts.push('<span class="crumb-now">' + esc(monthLabel(at.ym)) + '</span>');
+  } else if (at && at.kind === 'day') {
+    parts.push('<button type="button" class="crumb" data-go="month:'
+      + at.ymd.slice(0, 6) + '">' + esc(monthLabel(at.ymd.slice(0, 6))) + '</button>');
+    parts.push('<span class="crumb-now">' + esc(dayLabel(at.ymd)) + '</span>');
+  }
+
+  box.innerHTML = parts.join('<span class="crumb-sep">/</span>');
+}
+
+function drawShotsBox(mode){
+  var box = $(mode === 'pick' ? '[data-pick-shots]' : '[data-shots]');
+  var at = lib.at[mode];
+  var find = lib.find[mode];
+
+  drawCrumbs(mode);
+
+  if (!lib.files.length) {
+    box.innerHTML = '<p class="muted">Καμία φωτογραφία ακόμα.</p>';
+    return;
+  }
+
+  // Η αναζήτηση αγνοεί τους φακέλους: ψάχνει σε όλα μαζί. Αυτός είναι
+  // ο λόγος που υπάρχει — ο φάκελος βοηθάει όταν ξέρεις πότε, και
+  // εμποδίζει όταν δεν ξέρεις.
+  if (find) {
+    var hits = lib.files.filter(function (f) {
+      return flat(f.name).indexOf(find) > -1;
+    });
+    box.innerHTML = hits.length
+      ? hits.map(function (f) { return shotHTML(f, mode); }).join('')
+      : '<p class="muted">Καμία φωτογραφία δεν ταιριάζει.</p>';
+    return;
+  }
+
+  // Μέσα σε φάκελο: οι φωτογραφίες του.
+  if (at) {
+    var inside = shotsAt(at);
+    box.innerHTML = inside.length
+      ? inside.map(function (f) { return shotHTML(f, mode); }).join('')
+      : '<p class="muted">Άδειος φάκελος.</p>';
+    return;
+  }
+
+  // Η ρίζα: ★ Στάνταρ, μετά οι μήνες από τον νεότερο.
+  var std = lib.files.filter(function (f) { return isStandard(f.name); });
+  var out = [folderHTML('std', '★ Στάνταρ',
+    std.length ? countLabel(std.length) : 'κενό — σημάδεψε με ☆',
+    std.length ? std[0].url : '', ' folder--std')];
+
+  var months = {};
+  var undated = [];
+  lib.files.forEach(function (f) {
+    var s = shotStamp(f.name);
+    if (!s) { undated.push(f); return; }
+    if (!months[s.ym]) months[s.ym] = [];
+    months[s.ym].push(f);
+  });
+
+  Object.keys(months).sort().reverse().forEach(function (ym) {
+    out.push(folderHTML('month:' + ym, monthLabel(ym),
+      countLabel(months[ym].length), months[ym][0].url));
+  });
+
+  if (undated.length) {
+    out.push(folderHTML('none', 'Χωρίς ημερομηνία',
+      countLabel(undated.length), undated[0].url));
+  }
+
+  box.innerHTML = out.join('');
+}
+
+// Μέσα σε μήνα δείχνουμε ΜΕΡΕΣ, όχι φωτογραφίες: ένας μήνας μπορεί να
+// έχει διακόσιες, και τότε ο φάκελος δεν βοήθησε σε τίποτα.
+function drawMonth(mode, ym){
+  var box = $(mode === 'pick' ? '[data-pick-shots]' : '[data-shots]');
+  drawCrumbs(mode);
+
+  var days = {};
+  lib.files.forEach(function (f) {
+    var s = shotStamp(f.name);
+    if (s && s.ym === ym) {
+      if (!days[s.ymd]) days[s.ymd] = [];
+      days[s.ymd].push(f);
     }
-    box.innerHTML = files.map(function (f) { return shotHTML(f, mode); }).join('');
+  });
+
+  var keys = Object.keys(days).sort().reverse();
+  box.innerHTML = keys.length
+    ? keys.map(function (ymd) {
+      return folderHTML('day:' + ymd, dayLabel(ymd),
+        countLabel(days[ymd].length), days[ymd][0].url);
+    }).join('')
+    : '<p class="muted">Άδειος μήνας.</p>';
+}
+
+function drawLib(mode){
+  var at = lib.at[mode];
+  if (at && at.kind === 'month' && !lib.find[mode]) drawMonth(mode, at.ym);
+  else drawShotsBox(mode);
+}
+
+function goTo(mode, where){
+  if (!where) lib.at[mode] = null;
+  else if (where === 'std') lib.at[mode] = { kind: 'std' };
+  else if (where === 'none') lib.at[mode] = { kind: 'none' };
+  else if (where.indexOf('month:') === 0) lib.at[mode] = { kind: 'month', ym: where.slice(6) };
+  else if (where.indexOf('day:') === 0) lib.at[mode] = { kind: 'day', ymd: where.slice(4) };
+  drawLib(mode);
+}
+
+function fetchShots(){
+  return fetch('/api/images').then(readJson, netFail).then(function (files) {
+    lib.files = Array.isArray(files) ? files : [];
+    lib.loaded = true;
+  });
+}
+
+function fillShots(box, mode){
+  return fetchShots().then(function () {
+    drawLib(mode);
   }).catch(function (err) {
     box.innerHTML = '<p class="muted">Δεν φόρτωσαν: ' + esc(err.message) + '</p>';
   });
@@ -512,6 +793,36 @@ function fillShots(box, mode){
 
 function loadShots(){ return fillShots($('[data-shots]'), 'lib'); }
 function loadPickShots(){ return fillShots($('[data-pick-shots]'), 'pick'); }
+
+// Γράφει ΟΛΟ το αρχείο, όχι μόνο τη λίστα: ό,τι άλλο έχει μέσα —
+// οδηγίες, μελλοντικά πεδία — επιβιώνει.
+function savePhotos(){
+  var body = {};
+  Object.keys(lib.rest).forEach(function (k) { body[k] = lib.rest[k]; });
+  body.standard = lib.standard;
+  return api('photos', 'PUT', body);
+}
+
+// Το αστεράκι. Γράφεται αμέσως — δεν υπάρχει κουμπί «Αποθήκευση» στις
+// φωτογραφίες, και μια σήμανση που χάνεται στην ανανέωση είναι χειρότερη
+// από καθόλου σήμανση.
+function toggleStandard(name){
+  var at = lib.standard.indexOf(name);
+  if (at > -1) lib.standard.splice(at, 1);
+  else lib.standard.push(name);
+
+  drawLib('lib');
+  if (!$('[data-picker]').hidden) drawLib('pick');
+
+  savePhotos().catch(function (err) {
+    // Πίσω στην προηγούμενη κατάσταση: αλλιώς η οθόνη λέει ότι σώθηκε
+    // κάτι που δεν σώθηκε, και ο συντάκτης το μαθαίνει αύριο.
+    if (at > -1) lib.standard.splice(at, 0, name);
+    else lib.standard.splice(lib.standard.indexOf(name), 1);
+    drawLib('lib');
+    sayUpload('Δεν αποθηκεύτηκε η σήμανση: ' + err.message, 'bad');
+  });
+}
 
 // Μετά από ανέβασμα ή διαγραφή ενημερώνονται και τα δύο πλέγματα —
 // αλλιώς ο επιλογέας δείχνει φωτογραφία που μόλις σβήστηκε.
@@ -535,6 +846,15 @@ function delShot(name){
     .then(readJson, netFail)
     .then(function () {
       sayUpload('Η φωτογραφία διαγράφηκε.', 'ok');
+
+      // Φεύγει και από τις στάνταρ, αλλιώς ο φάκελος κουβαλάει για
+      // πάντα το όνομα ενός αρχείου που δεν υπάρχει.
+      var at = lib.standard.indexOf(name);
+      if (at > -1) {
+        lib.standard.splice(at, 1);
+        savePhotos().catch(function () { /* σιωπηλά */ });
+      }
+
       refreshShots();
     })
     .catch(function (err) {
@@ -573,7 +893,41 @@ function wireShots(){
   window.addEventListener('dragover', function (e) { e.preventDefault(); });
   window.addEventListener('drop', function (e) { e.preventDefault(); });
 
+  // Η πλοήγηση στους φακέλους — και στα δύο πλέγματα, με τον ίδιο κώδικα.
+  ['lib', 'pick'].forEach(function (mode) {
+    var grid = $(mode === 'pick' ? '[data-pick-shots]' : '[data-shots]');
+    var crumbs = $(mode === 'pick' ? '[data-pick-crumbs]' : '[data-shot-crumbs]');
+    var find = $(mode === 'pick' ? '[data-pick-find]' : '[data-shot-find]');
+
+    crumbs.addEventListener('click', function (e) {
+      var go = e.target.closest('[data-go]');
+      if (go) goTo(mode, go.dataset.go);
+    });
+
+    // Στο πλέγμα ο φάκελος και το αστεράκι πιάνονται ΠΡΙΝ από τα
+    // υπόλοιπα: η κάρτα του επιλογέα είναι ολόκληρη κουμπί, οπότε
+    // χωρίς αυτό το αστεράκι θα διάλεγε τη φωτογραφία.
+    grid.addEventListener('click', function (e) {
+      var go = e.target.closest('[data-go]');
+      if (go) { goTo(mode, go.dataset.go); return; }
+
+      var star = e.target.closest('[data-star]');
+      if (star) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleStandard(star.dataset.star);
+      }
+    }, true);
+
+    find.addEventListener('input', function (e) {
+      lib.find[mode] = flat(e.target.value);
+      drawLib(mode);
+    });
+  });
+
   $('[data-shots]').addEventListener('click', function (e) {
+    if (e.target.closest('[data-go]') || e.target.closest('[data-star]')) return;
+
     var del = e.target.closest('[data-del]');
     if (del) { delShot(del.dataset.del); return; }
 
@@ -821,6 +1175,263 @@ function loadAutoCats(){
 // Κενό = το site διαλέγει μόνο του τα 4 πιο πρόσφατα, ένα ανά
 // κατηγορία. Γι' αυτό οι θέσεις δείχνουν ΠΑΝΤΑ τι θα βγει, είτε το
 // διάλεξε άνθρωπος είτε όχι.
+
+// ---------------------------------------------------------------------
+// ΤΕΛΕΥΤΑΙΑ — η σειρά της ροής στην αρχική
+// ---------------------------------------------------------------------
+//
+// Η ροή είναι χρονολογική, και μια καλή συνέντευξη πέφτει κάτω σε δύο
+// μέρες. Εδώ ο δημοσιογράφος καρφιτσώνει ό,τι αξίζει να μείνει πάνω.
+//
+// Αντιστοιχεί στο curation.latest και στην pinnedFlow() του build.js.
+
+// Όσες θέσεις δείχνει η ροή πριν το «Όλα τα επεισόδια →».
+// Ίδιος αριθμός με το FLOW_VISIBLE στο build.js.
+var LATEST_SLOTS = 9;
+
+// Πάνω από τόσες μέρες, το καρφιτσωμένο θεωρείται ξεχασμένο και το
+// λέμε. Δεν το σβήνουμε — μπορεί να είναι σκόπιμο. Απλώς δεν αφήνουμε
+// κανέναν να ανακαλύψει σε έξι μήνες ότι η αρχική κουβαλάει τον Ιούλιο.
+var LATEST_STALE_DAYS = 30;
+
+var lt = {
+  shown: PAGE,
+  find: '',
+  kind: '',
+};
+
+function ltList(){
+  return (state.curation.latest || []).slice();
+}
+
+function daysOld(iso){
+  var d = new Date(iso);
+  if (isNaN(d)) return null;
+  return Math.floor((Date.now() - d.getTime()) / 86400000);
+}
+
+function drawLatest(){
+  var box = $('[data-lt-slots]');
+  var refs = ltList();
+
+  var rows = refs.map(function (ref) {
+    var hit = null;
+    for (var i = 0; i < state.items.length; i++) {
+      if (isChosen(state.items[i], ref)) { hit = state.items[i]; break; }
+    }
+    return { ref: ref, item: hit };
+  });
+
+  var html = rows.map(function (r, i) {
+    var it = r.item;
+
+    if (!it) {
+      return '<div class="slot">'
+        + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
+        + '<img alt=""><div class="slot-text">'
+        + '<p class="slot-title">' + esc(r.ref) + '</p>'
+        + '<p class="slot-meta">Δεν βρέθηκε — μπορεί να είναι παλιό ή σβησμένο. '
+        + 'Το site θα το προσπεράσει.</p></div>'
+        // Τα βελάκια μπαίνουν ΚΑΙ εδώ: μια γραμμή που δεν αναγνωρίστηκε
+        // πρέπει να μπορεί να μετακινηθεί, αλλιώς μπλοκάρει τη σειρά
+        // όλων των από κάτω.
+        + '<span class="slot-acts">'
+        + '<button type="button" data-lt-up="' + i + '" aria-label="Πάνω"'
+        + (i === 0 ? ' disabled' : '') + '>↑</button>'
+        + '<button type="button" data-lt-down="' + i + '" aria-label="Κάτω"'
+        + (i === refs.length - 1 ? ' disabled' : '') + '>↓</button>'
+        + '<button type="button" data-lt-del="' + esc(r.ref) + '" aria-label="Αφαίρεση">✕</button>'
+        + '</span></div>';
+    }
+
+    var age = daysOld(it.date);
+    var note = (it.who ? esc(it.who) + ' · ' : '') + when(it.date);
+    if (age !== null && age >= LATEST_STALE_DAYS) {
+      note += ' · <strong>' + age + ' μέρες παλιό</strong>';
+    }
+
+    // Το πρωτοσέλιδο δεν ξαναμπαίνει στη ροή — θα έβγαινε δύο φορές
+    // στην ίδια οθόνη. Αν δεν το πούμε εδώ, ο δημοσιογράφος θα
+    // καρφιτσώνει κάτι που δεν εμφανίζεται ποτέ και θα νομίζει ότι
+    // χάλασε το διαχειριστικό.
+    var isHero = state.curation.featured && isChosen(it, state.curation.featured);
+    if (isHero) {
+      note += ' · <strong>είναι ήδη το πρωτοσέλιδο, δεν ξαναβγαίνει εδώ</strong>';
+    }
+
+    return '<div class="slot">'
+      + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
+      + (it.image ? '<img src="' + esc(it.image) + '" alt="">' : '<img alt="">')
+      + '<div class="slot-text">'
+      + '<p class="slot-title">' + esc(it.title) + '</p>'
+      + '<p class="slot-meta">'
+      + '<span class="tag tag--' + it.kind + '">' + TAGS[it.kind] + '</span>'
+      + note + '</p></div>'
+      + '<span class="slot-acts">'
+      + '<button type="button" data-lt-up="' + i + '" aria-label="Πάνω"'
+      + (i === 0 ? ' disabled' : '') + '>↑</button>'
+      + '<button type="button" data-lt-down="' + i + '" aria-label="Κάτω"'
+      + (i === rows.length - 1 ? ' disabled' : '') + '>↓</button>'
+      + '<button type="button" data-lt-del="' + esc(r.ref) + '" aria-label="Αφαίρεση">✕</button>'
+      + '</span></div>';
+  }).join('');
+
+  // Οι αυτόματες θέσεις ΔΕΝ ζωγραφίζονται μία-μία, επίτηδες.
+  //
+  // Θα έπρεπε να μαντέψουμε ποια θα διαλέξει το build — και η επιλογή
+  // του αγνοεί τα βίντεο που έχουν δίδυμο podcast, κάτι που εδώ δεν το
+  // ξέρουμε. Μια πρόβλεψη που πέφτει έξω είναι χειρότερη από καθόλου
+  // πρόβλεψη: ο δημοσιογράφος θα έψαχνε γιατί η αρχική «δεν υπακούει».
+  var free = Math.max(0, LATEST_SLOTS - rows.length);
+  if (free) {
+    html += '<div class="slot slot--auto">'
+      + '<span class="slot-no">' + String(rows.length + 1).padStart(2, '0')
+      + '–' + LATEST_SLOTS + '</span>'
+      + '<img alt=""><div class="slot-text">'
+      + '<p class="slot-title">' + free + (free === 1 ? ' θέση' : ' θέσεις')
+      + ' με τα πιο πρόσφατα</p>'
+      + '<p class="slot-meta">Τις γεμίζει το site μόνο του, με σειρά ημερομηνίας.</p>'
+      + '</div><span class="slot-acts">'
+      + '<span class="pill pill--draft">αυτόματο</span></span></div>';
+  }
+
+  box.innerHTML = html;
+
+  var n = rows.length;
+  var stale = rows.filter(function (r) {
+    var a = r.item && daysOld(r.item.date);
+    return a !== null && a >= LATEST_STALE_DAYS;
+  }).length;
+
+  var note = n === 0
+    ? 'Κανένα καρφιτσωμένο — η ροή δείχνει τα πιο πρόσφατα, όπως πάντα.'
+    : n + (n === 1 ? ' καρφιτσωμένο' : ' καρφιτσωμένα') + ' στην κορυφή, με αυτή τη σειρά.';
+
+  if (n > LATEST_SLOTS) {
+    note += ' Είναι περισσότερα από τις ' + LATEST_SLOTS
+      + ' θέσεις — θα βγουν όλα, η ροή απλώς θα μακρύνει.';
+  }
+  if (stale) {
+    note += ' ' + (stale === 1 ? 'Ένα είναι' : stale + ' είναι')
+      + ' πάνω από ' + LATEST_STALE_DAYS + ' ημερών — σκόπιμο ή ξεχασμένο;';
+  }
+
+  $('[data-lt-note]').textContent = note;
+}
+
+function drawLtPicks(){
+  var box = $('[data-lt-picks]');
+  var chosen = ltList();
+
+  var hits = state.items.filter(function (it) {
+    if (lt.kind && it.kind !== lt.kind) return false;
+    if (!lt.find) return true;
+    return it.key.indexOf(lt.find) > -1;
+  });
+
+  if (!hits.length) {
+    box.innerHTML = '<p class="muted">Τίποτα δεν ταιριάζει.</p>';
+    $('[data-lt-more]').hidden = true;
+    return;
+  }
+
+  box.innerHTML = hits.slice(0, lt.shown).map(function (it) {
+    var on = chosen.some(function (ref) { return isChosen(it, ref); });
+    return '<button type="button" class="pick' + (on ? ' is-on' : '') + '"'
+      + ' data-lt-add="' + esc(it.ref) + '">'
+      + (it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy">' : '<img alt="">')
+      + '<span><span class="pick-title">' + esc(it.title) + '</span>'
+      + '<span class="pick-meta">'
+      + '<span class="tag tag--' + it.kind + '">' + TAGS[it.kind] + '</span>'
+      + (it.who ? esc(it.who) + ' · ' : '') + when(it.date)
+      + '</span></span></button>';
+  }).join('');
+
+  $('[data-lt-more]').hidden = hits.length <= lt.shown;
+}
+
+function ltToggle(ref){
+  var list = ltList();
+  var at = -1;
+  list.forEach(function (r, i) { if (r === ref) at = i; });
+
+  if (at > -1) list.splice(at, 1);
+  else list.push(ref);
+
+  state.curation.latest = list;
+  drawLatest();
+  drawLtPicks();
+  ltDirty(true);
+}
+
+function ltMove(i, step){
+  var list = ltList();
+  var to = i + step;
+  if (i < 0 || i >= list.length || to < 0 || to >= list.length) return;
+  var tmp = list[i];
+  list[i] = list[to];
+  list[to] = tmp;
+  state.curation.latest = list;
+  drawLatest();
+  ltDirty(true);
+}
+
+function ltDirty(on){
+  state.dirty = on;
+  $('[data-save="latest"]').disabled = !on;
+}
+
+function saveLatest(){
+  say('Αποθηκεύεται…');
+  api('curation', 'PUT', state.curation).then(function () {
+    ltDirty(false);
+    say('Αποθηκεύτηκε. Φαίνεται στο site μόλις ξαναχτιστεί (~2 λεπτά).', 'ok');
+  }).catch(function (err) {
+    say('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+function wireLatest(){
+  $('[data-lt-slots]').addEventListener('click', function (e) {
+    var del = e.target.closest('[data-lt-del]');
+    if (del) { ltToggle(del.dataset.ltDel); return; }
+
+    var up = e.target.closest('[data-lt-up]');
+    if (up) { ltMove(Number(up.dataset.ltUp), -1); return; }
+
+    var down = e.target.closest('[data-lt-down]');
+    if (down) ltMove(Number(down.dataset.ltDown), 1);
+  });
+
+  $('[data-lt-picks]').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-lt-add]');
+    if (btn) ltToggle(btn.dataset.ltAdd);
+  });
+
+  $('[data-lt-find]').addEventListener('input', function (e) {
+    lt.find = flat(e.target.value);
+    lt.shown = PAGE;
+    drawLtPicks();
+  });
+
+  $('[data-lt-kind]').addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    lt.kind = chip.dataset.kind;
+    lt.shown = PAGE;
+    $$('[data-lt-kind] .chip').forEach(function (c) {
+      c.classList.toggle('is-on', c === chip);
+    });
+    drawLtPicks();
+  });
+
+  $('[data-lt-more]').addEventListener('click', function () {
+    lt.shown += PAGE;
+    drawLtPicks();
+  });
+
+  $('[data-save="latest"]').addEventListener('click', saveLatest);
+}
 
 var MUST = 4;
 
@@ -1546,13 +2157,30 @@ function deleteArticle(){
 // Φωτογραφίες και κόλλησε τη διεύθυνση», που πετούσε τον συντάκτη έξω
 // από το άρθρο που έγραφε — και η `art.pending` δεν διαβαζόταν ποτέ.
 //
-// Το target είναι { main: true } για την κεντρική φωτογραφία, ή
-// { block: <θέση> } για μπλοκ μέσα στο κείμενο.
+// Το target είναι { main: true } για την κεντρική φωτογραφία άρθρου,
+// { block: <θέση> } για μπλοκ μέσα στο κείμενο, ή { person: <όνομα> }
+// για το πορτρέτο ενός προσώπου.
 function pickImage(target){
   art.pending = target;
   sayPick('');
   $('[data-picker]').hidden = false;
-  loadPickShots();
+  $('[data-pick-find]').value = '';
+  lib.find.pick = '';
+
+  // Ανοίγει στη ΣΗΜΕΡΙΝΗ μέρα, όχι στη ρίζα.
+  //
+  // Όποιος γράφει άρθρο σχεδόν πάντα θέλει κάτι που μόλις ανέβασε. Αν
+  // άνοιγε στη ρίζα, κάθε φωτογραφία θα κόστιζε δύο κλικ παραπάνω για
+  // να ξαναβρεί το σήμερα. Αν δεν υπάρχει τίποτα σημερινό, η ρίζα
+  // είναι η σωστή αφετηρία.
+  lib.at.pick = null;
+  loadPickShots().then(function () {
+    var today = todayYmd();
+    if (lib.files.some(function (f) {
+      var s = shotStamp(f.name);
+      return s && s.ymd === today;
+    })) goTo('pick', 'day:' + today);
+  });
 }
 
 function pickClose(){
@@ -1570,7 +2198,19 @@ function sayPick(text, kind){
 
 function applyPick(url){
   var t = art.pending;
-  if (!t || !art.open) { pickClose(); return; }
+  if (!t) { pickClose(); return; }
+
+  // Το πορτρέτο προσώπου ΠΡΙΝ τον έλεγχο του art.open: δεν υπάρχει
+  // ανοιχτό άρθρο όταν ο επιλογέας καλείται από την καρτέλα «Πρόσωπα»,
+  // και ο παλιός έλεγχος θα έκλεινε το παράθυρο χωρίς να κάνει τίποτα.
+  if (t.person) {
+    ppSetPhoto(t.person, url);
+    pickClose();
+    drawPeople();
+    return;
+  }
+
+  if (!art.open) { pickClose(); return; }
 
   if (t.main) {
     $('[data-art="image"]').value = url;
@@ -1927,6 +2567,7 @@ function ppReady(file){
   var f = file && typeof file === 'object' ? file : {};
   if (!f.aliases || typeof f.aliases !== 'object') f.aliases = {};
   if (!f.roles || typeof f.roles !== 'object') f.roles = {};
+  if (!f.photos || typeof f.photos !== 'object') f.photos = {};
   if (!Array.isArray(f.not_people)) f.not_people = [];
   if (!Array.isArray(f.not_aliases)) f.not_aliases = [];
   return f;
@@ -1949,6 +2590,25 @@ function ppRole(name){
 
 function ppIsOut(name){
   return pp.file.not_people.some(function (n) { return ppSame(n, name); });
+}
+
+// Το πορτρέτο. Ίδιο μοτίβο με την ιδιότητα — και με τον ίδιο λόγο να
+// μη συγκρίνουμε με ===: η γραφή στο αρχείο μπορεί να μην είναι αυτή
+// που δείχνει σήμερα το site.
+function ppPhoto(name){
+  var keys = Object.keys(pp.file.photos);
+  for (var i = 0; i < keys.length; i++) {
+    if (ppSame(keys[i], name)) return pp.file.photos[keys[i]];
+  }
+  return '';
+}
+
+function ppSetPhoto(name, url){
+  Object.keys(pp.file.photos).forEach(function (k) {
+    if (ppSame(k, name)) delete pp.file.photos[k];
+  });
+  if (url) pp.file.photos[name] = url;
+  ppDirty(true);
 }
 
 // Με ποιον ενώθηκε αυτό το όνομα ΤΩΡΑ, σε αυτή τη συνεδρία. Ό,τι ήταν
@@ -2071,8 +2731,14 @@ function savePeople(){
 
 // Αρχικά του ονόματος, όταν δεν υπάρχει φωτογραφία. Πορτρέτα δεν
 // έχουμε για κανέναν· η εικόνα είναι το εξώφυλλο του επεισοδίου.
+// Το πορτρέτο πρώτο, η αφίσα του επεισοδίου ΠΟΤΕ.
+//
+// Εδώ στο διαχειριστικό έδειχνε το p.image — το εξώφυλλο του επεισοδίου
+// — και φαινόταν σαν να έχει ήδη φωτογραφία κάθε πρόσωπο. Έτσι κανείς
+// δεν θα καταλάβαινε ποιανού λείπει. Τώρα: είτε αληθινό πορτρέτο, είτε
+// αρχικά, όπως ακριβώς βγαίνει και στο site.
 function ppFace(p){
-  if (p.image) return '<img src="' + esc(p.image) + '" alt="" loading="lazy">';
+  if (p.photo) return '<img src="' + esc(p.photo) + '" alt="" loading="lazy">';
   var bits = String(p.name).split(/\s+/).filter(Boolean).slice(0, 2)
     .map(function (w) { return w.charAt(0); }).join('');
   return '<span class="pface">' + esc(bits) + '</span>';
@@ -2086,6 +2752,7 @@ function ppAll(){
       n: p.n,
       last: p.last,
       image: p.image,
+      photo: ppPhoto(p.name),
       writings: p.writings || [],
       role: ppRole(p.name),
       isOut: ppIsOut(p.name),
@@ -2171,6 +2838,20 @@ function ppEditor(p){
   var out = '<div class="pedit">';
 
   if (!p.isOut) {
+    out += '<div class="pfield">'
+      + '<span>Φωτογραφία — στη σελίδα του, στη λίστα προσώπων και στην αρχική</span>'
+      + '<div class="pphoto">'
+      + (p.photo
+        ? '<img class="pphoto-pic" src="' + esc(p.photo) + '" alt="">'
+        : '<span class="pphoto-none">χωρίς φωτογραφία — βγαίνουν τα αρχικά</span>')
+      + '<span class="pphoto-acts">'
+      + '<button type="button" class="btn btn--ghost" data-pp-pic>'
+      + (p.photo ? 'Άλλαξέ τη' : 'Διάλεξε φωτογραφία') + '</button>'
+      + (p.photo
+        ? '<button type="button" class="btn btn--ghost" data-pp-pic-off>Αφαίρεσέ τη</button>'
+        : '')
+      + '</span></div></div>';
+
     out += '<label class="pfield">'
       + '<span>Ιδιότητα — φαίνεται κάτω από το όνομα στη σελίδα του</span>'
       + '<input type="text" data-pp-role value="' + esc(p.role) + '"'
@@ -2306,6 +2987,15 @@ function wirePeople(){
 
     if (e.target.closest('[data-pp-out]')) { ppOut(name); return; }
     if (e.target.closest('[data-pp-in]')) { ppIn(name); return; }
+
+    // Ο ΙΔΙΟΣ επιλογέας που έχουν τα άρθρα: φάκελοι, αναζήτηση, ★
+    // στάνταρ, και ανέβασμα νέας με σύρσιμο. Κανένα νέο εργαλείο.
+    if (e.target.closest('[data-pp-pic]')) { pickImage({ person: name }); return; }
+    if (e.target.closest('[data-pp-pic-off]')) {
+      ppSetPhoto(name, '');
+      drawPeople();
+      return;
+    }
 
     // Κλικ μέσα στον επεξεργαστή δεν κλείνει τη γραμμή — αλλιώς δεν
     // μπορείς να πατήσεις μέσα στο κουτί της ιδιότητας.
@@ -2871,6 +3561,7 @@ function wire(){
   wireFinder();
   wireArticles();
   wireShows();
+  wireLatest();
   wireMustRead();
   wireCats();
   wirePeople();
@@ -2903,7 +3594,20 @@ function boot(){
     api('show-art'),
     api('pairs'),
     loadPairsTodo(),
+    // ΑΝΕΚΤΙΚΟ: οι φωτογραφίες-στάνταρ είναι στολίδι μπροστά στο
+    // υπόλοιπο διαχειριστικό. Μέσα σε Promise.all, μια αποτυχία εδώ
+    // ρίχνει ΟΛΑ τα άλλα και ο συντάκτης βλέπει άδεια σελίδα — μου
+    // συνέβη με διακομιστή που δεν είχε ξαναξεκινήσει μετά την
+    // προσθήκη του αρχείου. Χωρίς σήμανση δουλεύουμε· χωρίς άρθρα όχι.
+    api('photos').catch(function () { return null; }),
   ]).then(function (r) {
+    // Το αρχείο μπορεί να μην υπάρχει ακόμα — τότε το API δίνει null.
+    var photos = r[12] && typeof r[12] === 'object' ? r[12] : {};
+    lib.standard = Array.isArray(photos.standard) ? photos.standard : [];
+    lib.rest = {};
+    Object.keys(photos).forEach(function (k) {
+      if (k !== 'standard') lib.rest[k] = photos[k];
+    });
     state.curation = r[0] || {};
     cat.auto = r[5] || {};
     // Το αρχείο δεν υπάρχει μέχρι να γραφτεί το πρώτο άρθρο — τότε το
@@ -2928,6 +3632,8 @@ function boot(){
     drawNow();
     drawPicks();
     drawArtList();
+    drawLatest();
+    drawLtPicks();
     drawMustRead();
     drawMrPicks();
     drawCats();
