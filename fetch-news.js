@@ -130,6 +130,44 @@ function get(url, until = '') {
   });
 }
 
+// Το ίδιο, αλλά ξαναπροσπαθεί.
+//
+// Το sitemap είναι ΜΟΝΟΔΡΟΜΟΣ: αν δεν κατέβει αυτό, δεν ξέρουμε καν
+// ποια άρθρα υπάρχουν, και η λήψη πεθαίνει ολόκληρη. Στις 6 Νοεμβρίου
+// 2026, 14:30, ο διακομιστής τους άργησε πάνω από 20 δευτερόλεπτα μία
+// φορά — και χάθηκε ένα ολόκληρο τρέξιμο, μαζί με τα επεισόδια που δεν
+// είχαν καμία σχέση μαζί του.
+//
+// Ένα αργό sitemap δεν είναι βλάβη, είναι η καθημερινότητα ενός site
+// που δέχεται επισκέψεις. Το σωστό δεν είναι να τα παρατάμε στην πρώτη
+// αργοπορία· είναι να ξαναχτυπήσουμε την πόρτα.
+//
+// Τρεις προσπάθειες με αυξανόμενη αναμονή (5", 15"): αρκετές για να
+// περάσει μια στιγμιαία κορύφωση, λίγες για να μην κρατήσουμε το
+// τρέξιμο όρθιο επί λεπτά όταν το site είναι όντως κάτω.
+const TRIES = 3;
+const WAITS = [5000, 15000];
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function getStubborn(url, until = ''){
+  let last;
+  for (let i = 0; i < TRIES; i++) {
+    try {
+      return await get(url, until);
+    } catch (err) {
+      last = err;
+      if (i < TRIES - 1) {
+        const wait = WAITS[i];
+        console.warn(`  ${err.message} — ξαναπροσπαθώ σε ${wait / 1000}"`
+          + ` (${i + 2}η από ${TRIES})`);
+        await sleep(wait);
+      }
+    }
+  }
+  throw last;
+}
+
 // Το <head> γράφει τα meta με διάφορες σειρές και με tabs ανάμεσα, οπότε
 // ψάχνουμε και τις δύο διατάξεις: content πριν ή μετά το όνομα.
 function meta(head, name) {
@@ -448,7 +486,7 @@ async function fetchAll(list) {
 
 async function main() {
   console.log('Διαβάζω το sitemap ειδήσεων...');
-  const listed = parseSitemap(await get(SITEMAP));
+  const listed = parseSitemap(await getStubborn(SITEMAP));
   console.log(`  ${listed.length} άρθρα στη ροή τους`);
 
   // Ό,τι έχουμε ήδη μένει. Το sitemap κρατάει μόνο 3 μέρες.
