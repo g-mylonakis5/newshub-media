@@ -2210,6 +2210,15 @@ function applyPick(url){
     return;
   }
 
+  // Το ίδιο και για τη φωτογραφία επεισοδίου, από την καρτέλα
+  // «Ζευγάρωμα»: ούτε εκεί υπάρχει ανοιχτό άρθρο.
+  if (t.episode) {
+    prSet(t.episode, { image: url });
+    pickClose();
+    drawPairs();
+    return;
+  }
+
   if (!art.open) { pickClose(); return; }
 
   if (t.main) {
@@ -3247,7 +3256,11 @@ var PR_PAGE = 20;
 var pr = {
   file: null,    // το data/pairs.json, όπως θα σωθεί
   rows: [],      // η απογραφή από το build
-  filter: '',
+  // Προεπιλογή η λίστα δουλειάς, όχι τα 1.074. Η οθόνη δείχνει πλέον
+  // ΟΛΑ τα επεισόδια, ώστε να διορθώνεται τίτλος και περιγραφή όποτε
+  // χρειαστεί — αλλά αυτό που ανοίγει μπροστά σου πρέπει να είναι
+  // αυτό που περιμένει δουλειά.
+  filter: 'gaps',
   find: '',
   shown: PR_PAGE,
 };
@@ -3268,9 +3281,23 @@ function prNow(r){
   return {
     video: rec.novideo ? '' : (rec.video || r.video),
     guest: rec.noguest ? '' : (rec.guest || r.guest),
-    byHand: !!(rec.video || rec.guest || rec.novideo || rec.noguest),
+    byHand: !!(rec.video || rec.guest || rec.novideo || rec.noguest
+      || rec.title || rec.summary || rec.image),
     rec: rec,
   };
+}
+
+// Η περιγραφή που ισχύει τώρα για ένα επεισόδιο.
+//
+// Το αυθεντικό κείμενο το έχουμε ήδη: το διαχειριστικό κατεβάζει
+// ολόκληρο το episodes.json για τη λίστα περιεχομένου. Δεν ξανακατε-
+// βαίνει τίποτα, και δεν φτιάχνουμε δεύτερο αρχείο για να το πούμε.
+function prFeedEpisode(id){
+  var all = (state.raw && state.raw.episodes) || [];
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].id === id) return all[i];
+  }
+  return null;
 }
 
 function prSet(id, patch){
@@ -3321,6 +3348,12 @@ function prHits(){
     if (pr.find && flat(r.title).indexOf(pr.find) < 0) return false;
 
     var now = prNow(r);
+    // «Θέλουν δουλειά»: λείπει βίντεο ή καλεσμένος και δεν έχει
+    // απαντήσει άνθρωπος. Ό,τι έχει ήδη διορθωθεί βγαίνει από τη
+    // λίστα — γι' αυτό υπάρχει.
+    if (pr.filter === 'gaps') {
+      return (!now.video && !now.rec.novideo) || (!now.guest && !now.rec.noguest);
+    }
     if (pr.filter === 'done') return now.byHand;
     // Τα δηλωμένα «δεν υπάρχει» φεύγουν από τις ελλείψεις: γι' αυτό
     // μπήκαν — για να στραγγίζει η λίστα αντί να ρωτάει για πάντα.
@@ -3399,15 +3432,49 @@ function prRow(r){
         : '<button type="button" class="btn btn--tiny" data-pr-noguest>Δεν υπάρχει</button>');
   }
 
+  // ---- οι διορθώσεις στο ίδιο το επεισόδιο ----
+  //
+  // Το Buzzsprout δεν το αγγίζουμε ποτέ — είναι πηγή μόνο για
+  // ανάγνωση. Ό,τι γράφεται εδώ κερδίζει, και δεν το σβήνει καμία
+  // επόμενη λήψη. Άδειο πεδίο σημαίνει «κράτα ό,τι δίνει το feed»,
+  // και γι' αυτό το αυθεντικό μπαίνει ως υπόδειξη μέσα στο πεδίο:
+  // φαίνεται τι θα ισχύσει αν δεν γράψει κανείς τίποτα.
+  var feed = prFeedEpisode(r.id) || {};
+
+  var titleRow = '<input type="text" class="pair-name" data-pr-title'
+    + ' value="' + esc(rec.title || '') + '"'
+    + ' placeholder="' + esc(unent(feed.title || r.title)) + '"'
+    + ' aria-label="Τίτλος επεισοδίου">'
+    + (rec.title
+      ? '<button type="button" class="btn btn--tiny" data-pr-undo-title>Επανάφερε</button>'
+      : '<span class="pair-auto">από το Buzzsprout</span>');
+
+  var sumRow = '<textarea class="pair-text" rows="3" data-pr-summary'
+    + ' placeholder="' + esc(unent(feed.summary || '').slice(0, 220)) + '…"'
+    + ' aria-label="Περιγραφή επεισοδίου">' + esc(rec.summary || '') + '</textarea>'
+    + (rec.summary
+      ? '<button type="button" class="btn btn--tiny" data-pr-undo-summary>Επανάφερε</button>'
+      : '<button type="button" class="btn btn--tiny" data-pr-copy-summary>Ξεκίνα από το υπάρχον</button>');
+
+  var picRow = (rec.image
+    ? '<img class="pair-pic" src="' + esc(rec.image) + '" alt="">'
+      + '<button type="button" class="btn btn--tiny" data-pr-pic>Αλλαγή</button>'
+      + '<button type="button" class="btn btn--tiny" data-pr-undo-image>Επανάφερε</button>'
+    : '<span class="pair-auto">από το Buzzsprout</span>'
+      + '<button type="button" class="btn btn--tiny" data-pr-pic>Διάλεξε φωτογραφία</button>');
+
   return '<div class="pair-row" data-pr-id="' + esc(r.id) + '">'
-    + (r.image
-      ? '<img class="pair-shot" src="' + esc(r.image) + '" alt="" loading="lazy">'
+    + (rec.image || r.image
+      ? '<img class="pair-shot" src="' + esc(rec.image || r.image) + '" alt="" loading="lazy">'
       : '<span class="pair-shot"></span>')
     + '<div class="pair-body">'
-    + '<p class="pair-title">' + esc(r.title) + '</p>'
+    + '<p class="pair-title">' + esc(rec.title || r.title) + '</p>'
     + '<p class="pair-date">' + when(r.date) + '</p>'
     + '<div class="pair-line"><span class="pair-what">Βίντεο</span>' + vid + '</div>'
     + '<div class="pair-line"><span class="pair-what">Καλεσμένος</span>' + guest + '</div>'
+    + '<div class="pair-line"><span class="pair-what">Τίτλος</span>' + titleRow + '</div>'
+    + '<div class="pair-line"><span class="pair-what">Περιγραφή</span>' + sumRow + '</div>'
+    + '<div class="pair-line"><span class="pair-what">Φωτογραφία</span>' + picRow + '</div>'
     + '</div></div>';
 }
 
@@ -3471,16 +3538,68 @@ function wirePairs(){
     if (e.target.closest('[data-pr-undo-guest]')) {
       prSet(id, { noguest: false, guest: '' });
       drawPairs();
+      return;
+    }
+
+    // ---- οι διορθώσεις στο ίδιο το επεισόδιο ----
+    if (e.target.closest('[data-pr-undo-title]')) {
+      prSet(id, { title: '' });
+      drawPairs();
+      return;
+    }
+    if (e.target.closest('[data-pr-undo-summary]')) {
+      prSet(id, { summary: '' });
+      drawPairs();
+      return;
+    }
+    if (e.target.closest('[data-pr-undo-image]')) {
+      prSet(id, { image: '' });
+      drawPairs();
+      return;
+    }
+    if (e.target.closest('[data-pr-pic]')) {
+      pickImage({ episode: id });
+      return;
+    }
+
+    // «Ξεκίνα από το υπάρχον»: αντιγράφει την περιγραφή του Buzzsprout
+    // μέσα στο πεδίο, για να τη διορθώσει αντί να τη γράψει από την
+    // αρχή. Οι περισσότερες αλλαγές είναι μία πρόταση, όχι νέο κείμενο.
+    if (e.target.closest('[data-pr-copy-summary]')) {
+      var feed = prFeedEpisode(id);
+      if (!feed || !feed.summary) {
+        say('Αυτό το επεισόδιο δεν έχει περιγραφή στο Buzzsprout.', 'bad');
+        return;
+      }
+      prSet(id, { summary: unent(feed.summary) });
+      drawPairs();
     }
   });
 
   // «change» και όχι «input»: με κάθε πάτημα πλήκτρου θα ξανασχεδιαζόταν
   // η λίστα και το πεδίο θα έχανε την εστίαση στο πρώτο γράμμα.
   box.addEventListener('change', function (e) {
-    if (!e.target.matches('[data-pr-guest]')) return;
     var row = e.target.closest('[data-pr-id]');
     if (!row) return;
-    prSet(row.dataset.prId, { guest: e.target.value.trim(), noguest: false });
+    var rid = row.dataset.prId;
+
+    if (e.target.matches('[data-pr-title]')) {
+      prSet(rid, { title: e.target.value.trim() });
+      drawPairs();
+      return;
+    }
+
+    // Η περιγραφή κρατάει τις αλλαγές γραμμής: είναι οι παράγραφοί της,
+    // και η σελίδα τις ξαναγυρίζει σε <p>. Μόνο τα κενά στις άκρες
+    // φεύγουν.
+    if (e.target.matches('[data-pr-summary]')) {
+      prSet(rid, { summary: e.target.value.replace(/[^\S\n]+/g, ' ').trim() });
+      drawPairs();
+      return;
+    }
+
+    if (!e.target.matches('[data-pr-guest]')) return;
+    prSet(rid, { guest: e.target.value.trim(), noguest: false });
     drawPairs();
   });
 }

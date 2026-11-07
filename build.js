@@ -4014,10 +4014,19 @@ function pairsForAdmin(episodes){
     const fix = pairOf(ep) || {};
     const v = videoTwin(ep);
     const guest = guestOf(ep);
-    const touched = !!(fix.video || fix.guest || fix.novideo || fix.noguest);
+    const touched = !!(fix.video || fix.guest || fix.novideo || fix.noguest
+      || fix.title || fix.summary || fix.image);
 
-    if (v && guest && !touched) continue;
-
+    // ΟΛΑ τα επεισόδια, όχι μόνο τα ελλιπή.
+    //
+    // Παλιά η λίστα ήταν μόνο «τι λείπει», και σωστά: ήταν λίστα
+    // δουλειάς. Τώρα από την ίδια οθόνη διορθώνεται και τίτλος,
+    // περιγραφή και φωτογραφία — και αυτά δεν «λείπουν» ποτέ, απλώς
+    // κάποια μέρα κάποιος θέλει να τα αλλάξει. Αν δεν είναι στη λίστα,
+    // δεν μπορεί.
+    //
+    // Η λίστα δουλειάς δεν χάνεται: έγινε φίλτρο, και είναι το
+    // προεπιλεγμένο. Το «gaps» λέει αν η γραμμή ανήκει σε αυτήν.
     rows.push({
       id: ep.id,
       title: decode(ep.title),
@@ -4026,6 +4035,8 @@ function pairsForAdmin(episodes){
       video: v ? v.id : '',
       vtitle: v ? decode(v.title) : '',
       guest,
+      gaps: (!v || !guest) ? 1 : 0,
+      edited: touched ? 1 : 0,
     });
   }
 

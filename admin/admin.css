@@ -1393,6 +1393,35 @@ body{
 
 .pair-name:focus{ outline: none; border-color: var(--sky); }
 
+/* Η περιγραφή. Ίδιο ντύσιμο με το πεδίο ονόματος — είναι η ίδια
+   δουλειά, απλώς χωράει παραγράφους. Σπάει σε δική της γραμμή γιατί
+   δίπλα σε ετικέτα και κουμπί δεν της μένει πλάτος να διαβαστεί. */
+.pair-text{
+  flex: 1 1 100%;
+  min-width: 0;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.pair-text:focus{ outline: none; border-color: var(--sky); }
+
+/* Η διαλεγμένη φωτογραφία, σε μέγεθος που δείχνει αν είναι η σωστή
+   χωρίς να σπρώχνει τη γραμμή σε δεύτερη σειρά. */
+.pair-pic{
+  width: 4rem;
+  height: 2.25rem;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--line);
+}
+
 .btn--tiny{ padding: 0.3rem 0.6rem; font-size: 0.78rem; }
 
 /* Το btn--go έχει margin-left: auto για την κεφαλίδα του πάνελ — εδώ
