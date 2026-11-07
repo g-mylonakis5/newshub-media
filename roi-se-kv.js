@@ -57,13 +57,17 @@ function apokleietai(a) {
   return BLOCK.lexeis.some((w) => t.includes(xorismaTonon(w)));
 }
 
-function roi() {
+function diale() {
   const list = JSON.parse(fs.readFileSync(NEWS, 'utf8'));
 
   return list
     .filter((a) => !apokleietai(a))
     .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, POSA)
+    .slice(0, POSA);
+}
+
+function roi(diales) {
+  return diales
     // ΜΟΝΟ τα τρία πεδία που δείχνει το πλαίσιο. Όχι περιλήψεις, όχι
     // εικόνες: ο αναγνώστης θα κατεβάσει αυτό το JSON σε κάθε άνοιγμα
     // της αρχικής, και ό,τι δεν φαίνεται είναι καθαρή καθυστέρηση.
@@ -83,7 +87,8 @@ async function main() {
     return;
   }
 
-  const items = roi();
+  const diales = diale();
+  const items = roi(diales);
   if (!items.length) {
     // Ποτέ άδεια ροή στο KV: θα έσβηνε το πλαίσιο σε όλους, και μια
     // στιγμιαία αστοχία της λήψης θα γινόταν ορατή βλάβη. Καλύτερα να
@@ -92,7 +97,15 @@ async function main() {
     return;
   }
 
-  const soma = JSON.stringify({ pote: new Date().toISOString(), items });
+  // Το «proto» είναι η ώρα της πρώτης είδησης, όχι η ώρα που γράψαμε.
+  // Με αυτό η σελίδα αποφασίζει αν αξίζει να αντικαταστήσει ό,τι έχει
+  // ήδη γραμμένο μέσα της: το KV και το χτίσιμο γεμίζουν από
+  // διαφορετικά μέρη και δεν προλαβαίνουν πάντα με την ίδια σειρά.
+  const soma = JSON.stringify({
+    pote: new Date().toISOString(),
+    proto: diales[0].date || '',
+    items,
+  });
 
   const url = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}`
     + `/storage/kv/namespaces/${CF_KV_NAMESPACE}/values/${KLEIDI}`;

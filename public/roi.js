@@ -67,6 +67,16 @@
       var data = await res.json();
       if (!data || !Array.isArray(data.items) || !data.items.length) return;
 
+      // Ποιος είναι πιο φρέσκος; Το KV το γράφει το GitHub Action, τη
+      // σελίδα το χτίσιμο — δύο δρόμοι που δεν τερματίζουν με σειρά.
+      // Αν το KV έχει μείνει πίσω, τα γραμμένα είναι τα καλά και δεν
+      // τα πειράζουμε. Όταν δεν υπάρχει ημερομηνία να συγκρίνουμε,
+      // προχωράμε: η σύγκριση είναι ασφάλεια, όχι προϋπόθεση.
+      var edo = Date.parse(ul.getAttribute('data-roi') || '');
+      var ekei = Date.parse(data.proto || '');
+
+      if (edo && ekei && ekei < edo) return;
+
       grapse(ul, data.items);
     } catch (err) {
       // Σιωπή. Η σελίδα έχει ήδη ροή· δεν υπάρχει τίποτα να πει στον

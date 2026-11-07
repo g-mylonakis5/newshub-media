@@ -3406,6 +3406,12 @@ ${cards}
 // δίχτυ: το βλέπουν τα ρομπότ των κοινωνικών δικτύων, που δεν εκτελούν
 // JavaScript, και όποιος έχασε τη σύνδεση. Γι' αυτό γράφεται κανονικά
 // και όχι άδειο πλαίσιο που «θα γεμίσει μετά».
+//
+// Μέσα στο data-roi μπαίνει η ώρα της πρώτης είδησης. Είναι η απάντηση
+// στο «ποιος από τους δύο είναι πιο φρέσκος»: το KV γράφεται από το
+// Action και η σελίδα από το χτίσιμο, και δεν προλαβαίνουν πάντα με την
+// ίδια σειρά. Χωρίς τη σύγκριση, ένα KV που έμεινε πίσω θα έσβηνε
+// καινούριες ειδήσεις και θα έβαζε παλιές στη θέση τους.
 function newsTicker(articles){
   if (!articles.length) return '';
 
@@ -3418,7 +3424,7 @@ function newsTicker(articles){
 
   return `    <aside class="ticker">
       <p class="ticker-head">Ροή ειδήσεων</p>
-      <ul class="ticker-list" data-roi>
+      <ul class="ticker-list" data-roi="${esc(articles[0].date || '')}">
 ${rows}
       </ul>
       <a class="ticker-all" href="https://www.newshub.gr/" target="_blank" rel="noopener">Όλες οι ειδήσεις →</a>
