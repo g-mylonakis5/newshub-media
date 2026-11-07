@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "fetch": "node fetch-episodes.js && node fetch-videos.js && node fetch-weather.js",
-    "build": "npm run fetch && node publish.js",
+    "build": "node publish.js",
+    "build:full": "npm run fetch && node publish.js",
     "build:fast": "node build.js",
     "serve": "node serve.js",
     "check:images": "node check-images.js",
