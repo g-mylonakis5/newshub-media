@@ -722,6 +722,10 @@
       trRows = null;
       trNow = -1;
       render();
+      // Η σελίδα άλλαξε χωρίς να φορτώσει. Ό,τι άλλο στήθηκε πάνω στο
+      // παλιό περιεχόμενο πρέπει να το μάθει — το roi.js, π.χ., έχει
+      // μπροστά του καινούριο πλαίσιο ροής και δεν το ξέρει.
+      document.dispatchEvent(new CustomEvent('selida:allaxe'));
     };
 
     if (document.startViewTransition) {
