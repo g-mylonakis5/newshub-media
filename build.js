@@ -2147,17 +2147,6 @@ function episodeShow(ep){
 // έχει δίδυμο επεισόδιο, κρατάμε το επεισόδιο: έχει δική μας σελίδα, οπότε
 // ο επισκέπτης μένει εδώ αντί να φύγει στο YouTube.
 function buildShows(videos, episodes){
-  // Ίδια λογική με το videoTwin, ανάποδα: βίντεο -> επεισόδιο.
-  const byFull = {};
-  const byHead = {};
-  const byId = {};
-  for (const ep of episodes) {
-    byId[ep.id] = ep;
-    const [a, b] = episodeKeys(ep);
-    if (a && !byFull[a]) byFull[a] = ep;
-    if (b && !byHead[b]) byHead[b] = ep;
-  }
-
   const groups = {};
   for (const v of videos) {
     if (!v.show) continue;
@@ -2165,9 +2154,12 @@ function buildShows(videos, episodes){
     if (!key) continue;
     if (!groups[key]) groups[key] = { name: v.show, items: [] };
 
-    const fixed = pairs().byVideo[v.id];
-    const twin = (fixed && byId[fixed])
-      || byFull[matchKey(v.title)] || byHead[headKey(v.title)];
+    // Το ζευγάρωμα γίνεται ΜΟΝΟ από το episodeTwin. Εδώ υπήρχε δεύτερο
+    // αντίγραφο της ίδιας αναζήτησης, και έμεινε πίσω: όταν προστέθηκε
+    // το ταίριασμα με όνομα και ημερομηνία, η λωρίδα της εκπομπής
+    // συνέχισε να δείχνει το βίντεο ενώ η ροή έδειχνε το επεισόδιο.
+    // Ίδιο πράγμα, δύο θέσεις, δύο ημερομηνίες — το είδε το αφεντικό.
+    const twin = episodeTwin(v);
     groups[key].items.push(twin ? itemFromEpisode(twin) : itemFromVideo(v));
   }
 
@@ -2508,7 +2500,20 @@ function videoHasTwin(v){
 //   E  Χρόνης Βάρσος: Αφιέρωμα στη Μικρασιατική Καταστροφή
 //
 // Οι κοινές λέξεις τα κόβουν και τα τρία, χωρίς να χάσουν κανένα σωστό.
-const TWIN_ORES = 48;      // πόσο μακριά επιτρέπεται να είναι οι δύο ημερομηνίες
+// Δέκα μέρες, όχι δύο. Το βίντεο ανεβαίνει στο YouTube την ίδια μέρα,
+// ο ήχος στο Buzzsprout όποτε προλάβει ο μοντέρ — συνήθως τρεις με
+// τέσσερις μέρες μετά. Με παράθυρο δύο ημερών χάναμε ακριβώς αυτά.
+//
+// Μετρημένο στα βίντεο χωρίς δίδυμο, με τον έλεγχο λέξεων ενεργό:
+//
+//    2 μέρες →  42 ζευγάρια, 0 διφορούμενα
+//    5 μέρες →  70 ζευγάρια, 0 διφορούμενα
+//   10 μέρες →  70 ζευγάρια, 0 διφορούμενα
+//   21 μέρες →  71 ζευγάρια, 0 διφορούμενα
+//   60 μέρες →  71 ζευγάρια, 2 ΔΙΦΟΡΟΥΜΕΝΑ
+//
+// Στις 10 είμαστε στο πλατό και πολύ πριν αρχίσουν τα μπερδέματα.
+const TWIN_MERES = 10;     // πόσο μακριά επιτρέπεται να είναι οι δύο ημερομηνίες
 const TWIN_KOINES = 2;     // πόσες λέξεις πρέπει να μοιράζονται τα θέματα
 const TWIN_MIKOS = 5;      // πόσο μεγάλη πρέπει να είναι μια λέξη για να μετρήσει
 
@@ -2550,22 +2555,26 @@ function twinApoOnoma(v){
   const pote = new Date(v.date).getTime();
   if (isNaN(pote)) return null;
 
-  const konta = epsAnaOnoma[onoma].filter(
-    (ep) => Math.abs(new Date(ep.date).getTime() - pote) < TWIN_ORES * 3600000,
-  );
-
-  // Δύο υποψήφιοι σημαίνει ότι δεν ξέρουμε. Καλύτερα διπλή εμφάνιση
-  // παρά να κρύψουμε λάθος βίντεο — το διπλό το βλέπεις και το
-  // διορθώνεις, το κρυμμένο όχι.
-  if (konta.length !== 1) return null;
-
   const dikes = themaLexeis(v.title);
-  const alles = themaLexeis(konta[0].title);
 
-  let koines = 0;
-  for (const w of dikes) if (alles.has(w)) koines++;
+  // Πρώτα η ημερομηνία, μετά το θέμα — και η μέτρηση γίνεται ΠΑΝΩ ΣΕ
+  // ΟΣΑ ΠΕΡΑΣΑΝ και τα δύο. Με δεκαήμερο παράθυρο ένας συχνός
+  // καλεσμένος έχει συχνά δύο επεισόδια μέσα στο διάστημα· αν
+  // κόβαμε στο «δύο υποψήφιοι» πριν κοιτάξουμε θέμα, θα πετούσαμε
+  // ζευγάρια που είναι ολοφάνερα σωστά.
+  const tairiazoun = epsAnaOnoma[onoma].filter((ep) => {
+    if (Math.abs(new Date(ep.date).getTime() - pote) >= TWIN_MERES * 864e5) return false;
 
-  return koines >= TWIN_KOINES ? konta[0] : null;
+    const alles = themaLexeis(ep.title);
+    let koines = 0;
+    for (const w of dikes) if (alles.has(w)) koines++;
+    return koines >= TWIN_KOINES;
+  });
+
+  // Δύο που ταιριάζουν σημαίνει ότι δεν ξέρουμε. Καλύτερα διπλή
+  // εμφάνιση παρά να κρύψουμε λάθος βίντεο — το διπλό το βλέπεις και
+  // το διορθώνεις, το κρυμμένο όχι.
+  return tairiazoun.length === 1 ? tairiazoun[0] : null;
 }
 
 // Το αντίστροφο του videoTwin: από βίντεο βρες το επεισόδιο. Χρειάζεται
