@@ -1,5 +1,27 @@
 [
   {
+    "id": "kina-anthropoeidi-rompot-paizoyn-pingk-pongk-kai-entyposiazoyn-toys-episkeptes-ekthesis-sti-sagkai",
+    "title": "Κίνα: Ανθρωποειδή ρομπότ παίζουν πινγκ πονγκ και εντυπωσιάζουν τους επισκέπτες έκθεσης στη Σαγκάη",
+    "url": "https://www.newshub.gr/el/kosmos/kina-anthropoeidi-rompot-paizoyn-pingk-pongk-kai-entyposiazoyn-toys-episkeptes-ekthesis-sti-sagkai",
+    "date": "2026-11-07T16:38:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/exexe.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/exexe.jpg",
+    "summary": "Δύο ανθρωποειδή ρομπότ σε φυσικό μέγεθος έκλεψαν τις εντυπώσεις στην 9η Διεθνή Έκθεση Εισαγωγών της Κίνας (CIIE), στη Σαγκάη, παίζοντας πινγκ πονγκ με εντυπω...",
+    "featured": false
+  },
+  {
+    "id": "epidoma-thermansis-anoigei-i-platforma-ti-na-prosexete-otan-kanete-tin-aitisi",
+    "title": "Επίδομα θέρμανσης: Ανοίγει η πλατφόρμα - Τι να προσέξετε όταν κάνετε την αίτηση",
+    "url": "https://www.newshub.gr/el/oikonomia/epidoma-thermansis-anoigei-i-platforma-ti-na-prosexete-otan-kanete-tin-aitisi",
+    "date": "2026-11-07T16:29:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/petrelaio-thermanse.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/petrelaio-thermanse.jpg",
+    "summary": "Έως τις 10 Νοεμβρίου αναμένεται να ανοίξει η πλατφόρμα για την υποβολή αιτήσεων για το επίδομα θέρμανσης, ενώ η πρώτη πληρωμή έχει προγραμματιστεί να ολοκλ...",
+    "featured": false
+  },
+  {
     "id": "chania-anatropi-aytokinitoy-stin-anavasi-omaloy-traymatistike-o-odigos",
     "title": "Χανιά: Ανατροπή αυτοκινήτου στην Ανάβαση Ομαλού – Τραυματίστηκε O οδηγός",
     "url": "https://www.newshub.gr/el/kriti/chania-anatropi-aytokinitoy-stin-anavasi-omaloy-traymatistike-o-odigos",
@@ -6575,28 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/opekepe-chremata.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/opekepe-chremata.jpg",
     "summary": "Έξι εγκληματικές οργανώσεις που δραστηριοποιούνταν στην παράνομη είσπραξη αγροτικών επιδοτήσεων έχουν εξαρθρωθεί από την Ελληνική Αστυνομία, ενώ οι έρευνες γ...",
-    "featured": false
-  },
-  {
-    "id": "irakleio-proeidopoiisi-gia-anemoys-eos-8-mpofor-se-etoimotita-to-limenarcheio-epikairopoiithike-to-ektakto-deltio-epikindynon-kairikon-fainomenon",
-    "title": "Ηράκλειο: Προειδοποίηση για ανέμους έως 8 μποφόρ, σε ετοιμότητα το Λιμεναρχείο - Επικαιροποιήθηκε το έκτακτο δελτίο επικίνδυνων καιρικών φαινομένων",
-    "url": "https://www.newshub.gr/el/kriti/irakleio-proeidopoiisi-gia-anemoys-eos-8-mpofor-se-etoimotita-to-limenarcheio-epikairopoiithike-to-ektakto-deltio-epikindynon-kairikon-fainomenon",
-    "date": "2026-11-03T07:00:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/kymata-limani-poly-kale-.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/kymata-limani-poly-kale-.jpg",
-    "summary": "Προειδοποίηση για την επικράτηση ισχυρών ανέμων, έντασης έως και 8 μποφόρ, εξέδωσε το Κεντρικό Λιμεναρχείο Ηρακλείου, βάσει του δελτίου καιρού με αριθμό 449,...",
-    "featured": false
-  },
-  {
-    "id": "ypothesi-mko-simera-oi-apologies-ton-katigoroymenon-i-ereyna-xekinise-meta-apo-dyo-ilektronika-minymata",
-    "title": "Υπόθεση ΜΚΟ: Σήμερα οι απολογίες των κατηγορουμένων - Η έρευνα ξεκίνησε μετά από δύο ηλεκτρονικά μηνύματα",
-    "url": "https://www.newshub.gr/el/ellada/ypothesi-mko-simera-oi-apologies-ton-katigoroymenon-i-ereyna-xekinise-meta-apo-dyo-ilektronika-minymata",
-    "date": "2026-11-03T06:48:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/dikasterio-sema-themidos-laopost.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/dikasterio-sema-themidos-laopost.jpg",
-    "summary": "Συνεχίζονται οι αποκαλύψεις για την υπόθεση της ΜΚΟ που φέρεται να συγκέντρωνε χρήματα για τη στήριξη παιδιών με σοβαρά προβλήματα υγείας, ενώ, σύμφωνα με τα...",
     "featured": false
   }
 ]
