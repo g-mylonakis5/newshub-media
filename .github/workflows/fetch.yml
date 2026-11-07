@@ -112,7 +112,13 @@ jobs:
       # τους ρολόι, ή όταν τα ζητήσει ρητά άνθρωπος.
       - name: Βίντεο και απομαγνητοφωνήσεις
         id: varia
-        if: always() && (github.event.schedule == '40 4,10,16 * * *' || inputs.varia == true)
+        # Το «== true» και το «== 'true'» μαζί δεν είναι αμέλεια: οι
+        # τιμές που στέλνει το API ταξιδεύουν ως κείμενο, ενώ το
+        # κουτάκι της καρτέλας Actions στέλνει αληθινό boolean. Και τα
+        # δύο μένουν ψευδή στο ρολόι, που δεν στέλνει τίποτα.
+        if: >-
+          always() && (github.event.schedule == '40 4,10,16 * * *'
+            || inputs.varia == true || inputs.varia == 'true')
         continue-on-error: true
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}

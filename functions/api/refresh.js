@@ -46,7 +46,13 @@ export async function onRequest(context) {
       'X-GitHub-Api-Version': '2022-11-28',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ ref: branch }),
+    // Εδώ ΝΑΙ στα βαριά, σε αντίθεση με το ρολόι (roloi/src/index.js).
+    // Το κουμπί το πατάει άνθρωπος που μόλις ανέβασε κάτι και το
+    // περιμένει — συχνά βίντεο. Αν δεν τα ζητούσαμε, θα κοίταζε την
+    // οθόνη περιμένοντας κάτι που θα ερχόταν ώρες μετά.
+    //
+    // Σπάνιο και με αφορμή, άρα δεν απειλεί το όριο του YouTube.
+    body: JSON.stringify({ ref: branch, inputs: { varia: 'true' } }),
   });
 
   // Επιτυχία = 204 χωρίς σώμα. Οτιδήποτε άλλο θέλει εξήγηση στα
