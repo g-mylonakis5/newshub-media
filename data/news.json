@@ -1,5 +1,49 @@
 [
   {
+    "id": "proklitiki-anakoinosi-toy-pseydokratoys-to-kalodio-paraviazei-ta-dikaiomata-tis-toyrkias",
+    "title": "Προκλητική ανακοίνωση του Ψευδοκράτους: Το καλώδιο «παραβιάζει τα δικαιώματα» της Τουρκίας",
+    "url": "https://www.newshub.gr/el/geopolitiki/proklitiki-anakoinosi-toy-pseydokratoys-to-kalodio-paraviazei-ta-dikaiomata-tis-toyrkias",
+    "date": "2026-11-07T18:41:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/ypogeio-kalodio-thalassa.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/ypogeio-kalodio-thalassa.jpg",
+    "summary": "Το υπουργείο Εξωτερικών του ψευδοκράτους εξέφρασε τη στήριξή του στην ανακοίνωση του τουρκικού υπουργείου Εξωτερικών, στις 6 Νοεμβρίου 2026, σχετικά με το γα...",
+    "featured": false
+  },
+  {
+    "id": "i-gallia-ereyna-pithani-emploki-xenon-dynameon-stis-apeiles-gia-vomves-se-ptiseis-stin-eyropi",
+    "title": "Η Γαλλία ερευνά πιθανή εμπλοκή ξένων δυνάμεων στις απειλές για βόμβες σε πτήσεις στην Ευρώπη",
+    "url": "https://www.newshub.gr/el/kosmos/i-gallia-ereyna-pithani-emploki-xenon-dynameon-stis-apeiles-gia-vomves-se-ptiseis-stin-eyropi",
+    "date": "2026-11-07T18:32:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/aeroplano-diadromos-brady.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/aeroplano-diadromos-brady.jpg",
+    "summary": "Έρευνα για πιθανή εμπλοκή ξένων δυνάμεων στο μπαράζ ψευδών απειλών για βόμβες σε αεροσκάφη ξεκίνησε η εισαγγελία του Παρισιού, καθώς δεκάδες πτήσεις έχουν ...",
+    "featured": false
+  },
+  {
+    "id": "tilefoniki-epikoinonia-tramp-me-erntogan-sto-epikentro-iran-kai-oykrania",
+    "title": "Τηλεφωνική επικοινωνία Τραμπ με Ερντογάν: Στο επίκεντρο Ιράν και Ουκρανία",
+    "url": "https://www.newshub.gr/el/geopolitiki/tilefoniki-epikoinonia-tramp-me-erntogan-sto-epikentro-iran-kai-oykrania",
+    "date": "2026-11-07T18:23:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/maketa-trump-erdogan.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/maketa-trump-erdogan.jpg",
+    "summary": "Τηλεφωνική επικοινωνία με τον Ντόναλντ Τραμπ είχε ο Ρετζέπ Ταγίπ Ερντογάν, κατά την οποία συζήτησαν μεταξύ άλλων τις διμερείς σχέσεις, την ένταση μεταξύ ΗΠ...",
+    "featured": false
+  },
+  {
+    "id": "isa-provlimatismos-gia-to-neo-systima-axiologisis-ton-giatron-apo-toys-asfalismenoys-toy-eopyy",
+    "title": "ΙΣΑ: Προβληματισμός για το νέο σύστημα αξιολόγησης των γιατρών από τους ασφαλισμένους του ΕΟΠΥΥ",
+    "url": "https://www.newshub.gr/el/ellada/isa-provlimatismos-gia-to-neo-systima-axiologisis-ton-giatron-apo-toys-asfalismenoys-toy-eopyy",
+    "date": "2026-11-07T18:15:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/giatros2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/giatros2.jpg",
+    "summary": "Την ανάγκη επανεξέτασης του νέου συστήματος αξιολόγησης των παρόχων του ΕΟΠΥΥ από τους ασφαλισμένους επισημαίνει ο Ιατρικός Σύλλογος Αθηνών, με επιστολή που ...",
+    "featured": false
+  },
+  {
     "id": "polonia-exi-nekroi-kai-15-traymaties-se-pyrovolismoys-sto-kentro-tis-krakovias-vinteo",
     "title": "Πολωνία: Έξι νεκροί και 15 τραυματίες σε πυροβολισμούς στο κέντρο της Κρακοβίας (βίντεο)",
     "url": "https://www.newshub.gr/el/kosmos/polonia-exi-nekroi-kai-15-traymaties-se-pyrovolismoys-sto-kentro-tis-krakovias-vinteo",
@@ -8,7 +52,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/maketa-krakobia3.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/maketa-krakobia3.jpg",
     "summary": "Έξι νεκροί και 15 τραυματίες μεταξύ των οποίων τρεις αστυνομικοί, είναι το τελευταίος απολογισμός της επίθεσης ενόπλου κοντά στην κεντρική πλατεία αγοράς της...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "friki-stin-ispania-soros-neogennitoy-vrethike-se-katapsykti-meta-apo-20-chronia",
@@ -173,7 +217,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/egedrd.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/egedrd.jpg",
     "summary": "Στη δημιουργία ενός νέου συνδικαλιστικου Οργάνου, μιας νέας ιδιότυπης Ομοσπονδίας, προχωρούν οι αμπελουργοί του Νομού Ηρακλείου.\r\n\r\nΤων Ανδρέα Κριτσωτάκη, Χρ...",
-    "featured": false
+    "featured": true
   },
   {
     "id": "krakovia-pyrovolismoi-me-toylachiston-5-nekroys-kai-10-traymaties-synelifthi-o-drastis-vinteo",
@@ -6553,50 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/sakelllarides.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/sakelllarides.jpg",
     "summary": "Τις συνθήκες που επικρατούν στο «Παλιό Ψυγείο» στο λιμάνι του Ηρακλείου, όπου φιλοξενούνται προσωρινά πρόσφυγες και μετανάστες, είδε από κοντά κλ...",
-    "featured": false
-  },
-  {
-    "id": "mitsotakis-na-apantisei-o-tsipras-giati-kratise-ti-voyli-anoichti-to-2019-meionetai-o-fpa-sta-proionta-periodoy",
-    "title": "Μητσοτάκης: Να απαντήσει ο Τσίπρας γιατί κράτησε τη Βουλή ανοιχτή το 2019 - Μειώνεται ο  ΦΠΑ στα προϊόντα περιόδου",
-    "url": "https://www.newshub.gr/el/politiki/mitsotakis-na-apantisei-o-tsipras-giati-kratise-ti-voyli-anoichti-to-2019-meionetai-o-fpa-sta-proionta-periodoy",
-    "date": "2026-11-03T09:30:00.000Z",
-    "category": "Πολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/metsotakes-intime.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/metsotakes-intime.jpg",
-    "summary": "Διπλό χτύπημα στον Αλέξη Τσίπρα, με αιχμές τόσο για την προσπάθεια πολιτικής επανεμφάνισής του όσο και για τις τελευταίες ημέρες της διακυβέρνησης ...",
-    "featured": false
-  },
-  {
-    "id": "petros-soyretis-o-rolos-tis-gek-terna-stin-epomeni-mera-ton-kataskeyon",
-    "title": "Πέτρος Σουρέτης: Ο ρόλος της ΓΕΚ ΤΕΡΝΑ στην επόμενη μέρα των κατασκευών",
-    "url": "https://www.newshub.gr/el/oikonomia/petros-soyretis-o-rolos-tis-gek-terna-stin-epomeni-mera-ton-kataskeyon",
-    "date": "2026-11-03T09:25:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/greendeal26_.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/greendeal26_.jpg",
-    "summary": "Για την επόμενη μέρα του κατασκευαστικού κλάδου και τη θέση της ΓΕΚ ΤΕΡΝΑ σε αυτήν μίλησε ο Εντεταλμένος Σύμβουλος του Ομίλου Υποδομών, Πέτρος Σουρέτης, στο ...",
-    "featured": false
-  },
-  {
-    "id": "ipa-endiameses-ekloges-oi-ellinoamerikanoi-ypopsifioi-poy-richnontai-sti-machi-tis-kalpis",
-    "title": "ΗΠΑ - Ενδιάμεσες εκλογές: Οι Ελληνοαμερικανοί υποψήφιοι που «ρίχνονται» στη μάχη της κάλπης",
-    "url": "https://www.newshub.gr/el/kosmos/ipa-endiameses-ekloges-oi-ellinoamerikanoi-ypopsifioi-poy-richnontai-sti-machi-tis-kalpis",
-    "date": "2026-11-03T09:20:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/endiameses-ekloges-kalpe-epa-reuters.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/endiameses-ekloges-kalpe-epa-reuters.jpg",
-    "summary": "Με την υποψηφιότητα του Κρις Πάπας για τη Γερουσία στο Νιου Χάμσαϊρ να συγκεντρώνει ιδιαίτερο ενδιαφέρον, οι Ελληνοαμερικανοί συμμετέχουν στις σημερινές ενδι...",
-    "featured": false
-  },
-  {
-    "id": "dimos-tis-kritis-tha-dinei-epidoma-eos-3-000-eyro-gia-kathe-nea-gennisi-poioi-einai-oi-dikaioychoi-toy-voithimatos",
-    "title": "Δήμος της Κρήτης θα δίνει επίδομα έως 3.000 ευρώ για κάθε νέα γέννηση – Ποιοι είναι οι δικαιούχοι του βοηθήματος",
-    "url": "https://www.newshub.gr/el/kriti/dimos-tis-kritis-tha-dinei-epidoma-eos-3-000-eyro-gia-kathe-nea-gennisi-poioi-einai-oi-dikaioychoi-toy-voithimatos",
-    "date": "2026-11-03T09:09:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/moro-ankalia-aspromaure-pexels-okkkk.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/moro-ankalia-aspromaure-pexels-okkkk.jpg",
-    "summary": "Ένα νέο μέτρο οικονομικής ενίσχυσης για τις οικογένειες που αποκτούν παιδί θεσπίζει ο Δήμος Πλατανιά, καθιερώνοντας εφάπαξ χρηματικό βοήθημα που μπορεί να φτ...",
     "featured": false
   }
 ]
