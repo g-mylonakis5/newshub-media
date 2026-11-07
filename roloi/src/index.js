@@ -78,7 +78,24 @@ export default {
   // Και με το χέρι, για δοκιμή: άνοιξε τη διεύθυνση του Worker στον
   // browser. Χωρίς αυτό, ο μόνος τρόπος να δεις αν δουλεύει είναι να
   // περιμένεις το επόμενο χτύπημα.
+  //
+  // ΜΕ ΚΛΕΙΔΙ. Η διεύθυνση .workers.dev είναι δημόσια — δεν υπάρχει
+  // Cloudflare Access από μπροστά, όπως στο διαχειριστικό. Χωρίς
+  // κλειδί, όποιος τη μάθει ξεκινά τρεξίματα Actions όσο θέλει, και τα
+  // λεπτά τα πληρώνουμε εμείς.
+  //
+  //   https://<worker>.workers.dev/?kleidi=<το μυστικό>
+  //
+  // Το κλειδί μπαίνει όπως και το token:  npx wrangler secret put KLEIDI
+  // Αν δεν οριστεί, το κουμπί είναι κλειστό — σιωπηλά ανοιχτή πόρτα
+  // δεν αφήνουμε ποτέ.
   async fetch(request, env) {
+    const dinei = new URL(request.url).searchParams.get('kleidi') || '';
+
+    if (!env.KLEIDI || dinei !== env.KLEIDI) {
+      return new Response('Λάθος ή απόν κλειδί.\n', { status: 403 });
+    }
+
     try {
       await pataToKoumpi(env);
       return new Response('Το πάτησα. Δες το GitHub → Actions.\n');
