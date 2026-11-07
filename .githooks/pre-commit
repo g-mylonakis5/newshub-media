@@ -44,4 +44,37 @@ if [ "$removed" = "1" ] && git diff --cached --quiet; then
   exit 1
 fi
 
+# ---- Οι εικόνες ----
+#
+# Το Cloudflare χτίζει με το push και δεν περιμένει κανέναν έλεγχο. Άρα
+# ο ΜΟΝΟΣ τόπος που μπορεί να σταματήσει μια σπασμένη εικόνα πριν βγει
+# στον αέρα είναι εδώ, πριν γίνει καν το commit.
+#
+# Τρέχει μόνο όταν αλλάζει κάτι που μπορεί να χαλάσει εικόνα — στα
+# υπόλοιπα commits δεν κοστίζει τίποτα. Θέλει ~1,5 λεπτό: χτίζει το
+# site και ανοίγει 21 σελίδες σε δύο πλάτη.
+#
+# Αν βιάζεσαι:  git commit --no-verify
+# Τότε το πιάνει το GitHub Action (.github/workflows/eikones.yml), αλλά
+# αφού έχει ήδη βγει στον αέρα.
+
+TOUCHES_IMAGES=$(git diff --cached --name-only --diff-filter=ACM \
+  -- public/styles.css public/player.js build.js check-images.js)
+
+if [ -n "$TOUCHES_IMAGES" ]; then
+  echo "pre-commit: άλλαξε το CSS/build — μετράω τις εικόνες (~1,5')." >&2
+
+  if ! node build.js > /dev/null 2>&1; then
+    echo "pre-commit: το build.js απέτυχε — δεν μπορώ να ελέγξω εικόνες." >&2
+    exit 1
+  fi
+
+  if ! node check-images.js; then
+    echo "" >&2
+    echo "pre-commit: ΤΟ COMMIT ΣΤΑΜΑΤΗΣΕ. Κάποια εικόνα μπαίνει λάθος." >&2
+    echo "            Διόρθωσε, ή πέρασέ το με:  git commit --no-verify" >&2
+    exit 1
+  fi
+fi
+
 exit 0

@@ -8,6 +8,7 @@
     "build": "npm run fetch && node publish.js",
     "build:fast": "node build.js",
     "serve": "node serve.js",
+    "check:images": "node check-images.js",
     "sync": "git checkout -- data/news.json && git pull --rebase",
     "index": "npx -y pagefind@latest --site public"
   },
