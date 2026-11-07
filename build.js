@@ -85,6 +85,54 @@ function episodeUrl(ep) {
 
 
 const MONTHS=['Ιαν','Φεβ','Μαρ','Απρ','Μαϊ','Ιουν','Ιουλ','Αυγ','Σεπ','Οκτ','Νοε','Δεκ'];
+
+// ---- Η ώρα είναι ΠΑΝΤΑ ελληνική ----
+//
+// Το getHours() και τα αδέλφια του δίνουν την ώρα ΤΟΥ ΜΗΧΑΝΗΜΑΤΟΣ ΠΟΥ
+// ΧΤΙΖΕΙ. Τοπικά αυτό είναι Ελλάδα και όλα δείχνουν σωστά· στο
+// Cloudflare είναι UTC, και κάθε ώρα στο site έβγαινε ΔΥΟ ΩΡΕΣ ΠΙΣΩ.
+// Το είδε το αφεντικό στις 7 Νοεμβρίου 2026, βάζοντας δίπλα-δίπλα το
+// newshub.gr (19:20) και το δικό μας (17:20).
+//
+// Ήταν αθέατο ακριβώς επειδή τοπικά δούλευε. Γι' αυτό καμία ημερομηνία
+// δεν τυπώνεται πια κατευθείαν: όλες περνούν από εδώ.
+//
+// Δεν υπολογίζουμε μόνοι μας UTC+2/+3 — η θερινή ώρα αλλάζει χωρίς να
+// μας ρωτήσει κανείς, και η Node ξέρει ήδη την απάντηση.
+const ATHENS = 'Europe/Athens';
+const athensFmt = new Intl.DateTimeFormat('en-GB', {
+  timeZone: ATHENS,
+  year: 'numeric', month: '2-digit', day: '2-digit',
+  hour: '2-digit', minute: '2-digit',
+  hourCycle: 'h23',          // αλλιώς τα μεσάνυχτα βγαίνουν «24:00»
+  weekday: 'short',
+});
+
+const DAY_INDEX = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+
+// Τα κομμάτια μιας στιγμής, όπως τα βλέπει κάποιος στην Κρήτη.
+function athens(iso){
+  const d = iso instanceof Date ? iso : new Date(iso);
+  if (isNaN(d)) return null;
+
+  const p = {};
+  for (const part of athensFmt.formatToParts(d)) p[part.type] = part.value;
+
+  return {
+    year: +p.year,
+    month: +p.month - 1,        // 0-11, όπως το getMonth()
+    day: +p.day,
+    hour: p.hour,               // κείμενο, ήδη με μηδενικό μπροστά
+    minute: p.minute,
+    weekday: DAY_INDEX[p.weekday] ?? 0,
+  };
+}
+
+// Το έτος του, στην Ελλάδα. Το ζητάμε συχνά και σκέτο.
+function athensYear(iso){
+  const a = athens(iso);
+  return a ? a.year : NaN;
+}
 // Για ό,τι βγήκε σήμερα ή χθες γράφουμε «σήμερα 14:20» αντί για σκέτη
 // ημερομηνία — δείχνει αμέσως τι είναι φρέσκο.
 //
@@ -94,20 +142,22 @@ const MONTHS=['Ιαν','Φεβ','Μαρ','Απρ','Μαϊ','Ιουν','Ιουλ'
 // αν ποτέ αραιώσει αυτό, το «σήμερα» πρέπει να φύγει.
 function formatDate(iso){
   if(!iso) return '';
-  const d = new Date(iso);
-  if (isNaN(d)) return '';
+  const a = athens(iso);
+  if (!a) return '';
 
-  const now = new Date();
-  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const days = Math.floor((midnight - new Date(d.getFullYear(), d.getMonth(), d.getDate())) / 864e5);
+  // Και το «σήμερα» μετριέται με ελληνικά μεσάνυχτα: αλλιώς, ένα
+  // χτίσιμο στη 01:30 ώρα Ελλάδας θα έλεγε «χθες» για κάτι που μόλις
+  // βγήκε, επειδή στο UTC η μέρα δεν έχει αλλάξει ακόμα.
+  const now = athens(new Date());
+  const days = Math.round(
+    (Date.UTC(now.year, now.month, now.day) - Date.UTC(a.year, a.month, a.day)) / 864e5,
+  );
 
   if (days === 0 || days === 1) {
-    const hh = String(d.getHours()).padStart(2, '0');
-    const mm = String(d.getMinutes()).padStart(2, '0');
-    return `${days === 0 ? 'σήμερα' : 'χθες'} ${hh}:${mm}`;
+    return `${days === 0 ? 'σήμερα' : 'χθες'} ${a.hour}:${a.minute}`;
   }
 
-  return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  return `${a.day} ${MONTHS[a.month]} ${a.year}`;
 }
 
 function formatDuration(seconds){
@@ -406,8 +456,8 @@ const MONTHS_FULL = ['Ιανουαρίου', 'Φεβρουαρίου', 'Μαρτ
   'Ιουλίου', 'Αυγούστου', 'Σεπτεμβρίου', 'Οκτωβρίου', 'Νοεμβρίου', 'Δεκεμβρίου'];
 
 function todayLabel(){
-  const d = new Date();
-  return `${DAYS[d.getDay()]}, ${d.getDate()} ${MONTHS_FULL[d.getMonth()]} ${d.getFullYear()}`;
+  const a = athens(new Date());
+  return `${DAYS[a.weekday]}, ${a.day} ${MONTHS_FULL[a.month]} ${a.year}`;
 }
 
 // Το σλόγκαν και η φράση από κάτω. Γράφονται ΕΔΩ και πουθενά αλλού.
@@ -2711,7 +2761,8 @@ const MONTHS_OF = ['Ιανουάριο', 'Φεβρουάριο', 'Μάρτιο',
 
 function monthName(iso){
   const d = new Date(iso);
-  return isNaN(d) ? '' : MONTHS_OF[d.getMonth()];
+  const a = athens(d);
+  return a ? MONTHS_OF[a.month] : '';
 }
 
 // Ονομαστική, για επικεφαλίδες μέσα στο αρχείο: «Οκτώβριος 2026».
@@ -2724,7 +2775,7 @@ const MONTHS_NOM = ['Ιανουάριος', 'Φεβρουάριος', 'Μάρτ�
 function yearJumps(episodes){
   const seen = new Map();
   episodes.forEach((ep, i) => {
-    const y = new Date(ep.date).getFullYear();
+    const y = athensYear(ep.date);
     if (!isNaN(y) && !seen.has(y)) seen.set(y, Math.floor(i / PER_PAGE) + 1);
   });
   return [...seen.entries()].sort((a, b) => b[0] - a[0]);
@@ -2742,12 +2793,13 @@ function episodesPage(episodes, n = 1){
   let lastMonth = '';
   const rows = slice.map((ep) => {
     const d = new Date(ep.date);
-    const key = isNaN(d) ? '' : `${d.getFullYear()}-${d.getMonth()}`;
+    const a = athens(d);
+    const key = a ? `${a.year}-${a.month}` : '';
 
     let head = '';
     if (key && key !== lastMonth) {
       lastMonth = key;
-      head = `      <h2 class="arch-month">${MONTHS_NOM[d.getMonth()]} ${d.getFullYear()}</h2>\n`;
+      head = `      <h2 class="arch-month">${MONTHS_NOM[a.month]} ${a.year}</h2>\n`;
     }
 
     return head + episodeCard(ep);
@@ -2776,7 +2828,7 @@ ${breadcrumb([
     <p class="arch-big" data-countup="${total}">${total.toLocaleString('el')}</p>
     <p class="arch-unit">Επεισόδια</p>
     <h1 class="arch-title">Όλα τα podcasts του ${nhLogo()}</h1>
-    <p class="arch-note">${hours.toLocaleString('el')} ώρες ακρόασης${oldest ? ` · από τον ${monthName(oldest)} ${new Date(oldest).getFullYear()}` : ''}</p>
+    <p class="arch-note">${hours.toLocaleString('el')} ώρες ακρόασης${oldest ? ` · από τον ${monthName(oldest)} ${athensYear(oldest)}` : ''}</p>
   </header>
 
   <main class="arch">
@@ -4216,7 +4268,7 @@ function guestsIndexPage(groups){
   const years = [];
   for (const key of Object.keys(groups)) {
     for (const ep of groups[key].episodes) {
-      const y = new Date(ep.date).getFullYear();
+      const y = athensYear(ep.date);
       if (!Number.isNaN(y)) years.push(y);
     }
   }
@@ -4331,8 +4383,8 @@ function personSpark(dates){
   return `    <div class="life">
       <span class="life-line"></span>
 ${dots}
-      <span class="life-from">${new Date(first).getFullYear()}</span>
-      <span class="life-to">${new Date(last).getFullYear()}</span>
+      <span class="life-from">${athensYear(first)}</span>
+      <span class="life-to">${athensYear(last)}</span>
     </div>`;
 }
 
