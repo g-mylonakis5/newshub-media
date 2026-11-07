@@ -1,5 +1,16 @@
 [
   {
+    "id": "ekdilosi-gia-ti-diacheirisi-ton-edodimon-eisvolikon-thalassion-eidon-apo-tin-perifereia-kai-ti-saek-toyrismoy-kritis",
+    "title": "Εκδήλωση για τη διαχείριση των εδώδιμων εισβολικών θαλάσσιων ειδών από την Περιφέρεια και τη ΣΑΕΚ Τουρισμού Κρήτης",
+    "url": "https://www.newshub.gr/el/kriti/ekdilosi-gia-ti-diacheirisi-ton-edodimon-eisvolikon-thalassion-eidon-apo-tin-perifereia-kai-ti-saek-toyrismoy-kritis",
+    "date": "2026-11-07T13:17:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/dpsbbbbbbbbbbbbbbbbbb.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/dpsbbbbbbbbbbbbbbbbbb.jpg",
+    "summary": "Εκδήλωση με θέμα «Γαστρονομία και Διατήρηση Θαλάσσιων Πόρων» διοργανώνει η Περιφέρεια Κρήτης μαζί με την Πειραματική ΣΑΕΚ Τουρισμο...",
+    "featured": false
+  },
+  {
     "id": "i-eala-lygise-ti-sakkari-se-apisteyti-machi-sto-chongk-kongk",
     "title": "Η Eala λύγισε τη Σάκκαρη σε απίστευτη μάχη στο Χονγκ Κονγκ",
     "url": "https://www.newshub.gr/el/athlitika/i-eala-lygise-ti-sakkari-se-apisteyti-machi-sto-chongk-kongk",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/ekav-ape_2.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/ekav-ape_2.jpg",
     "summary": "Από τύχη δεν εξελίχθηκε σε τραγωδία ένα απίστευτο τροχαίο ατύχημα σημειώθηκε στην Εύβοια το πρωί του Σαββάτου (31.11.2026), με αυτοκίνητο που οδηγούσε ένας 1...",
-    "featured": false
-  },
-  {
-    "id": "ipa-tramp-kata-dimokratikon-oi-ypopsifioi-toys-einai-epikindynoi-giati-einai-yper-ton-tzichantiston",
-    "title": "ΗΠΑ: Τραμπ κατά Δημοκρατικών - «Οι υποψήφιοί τους είναι επικίνδυνοι γιατί είναι υπέρ των τζιχαντιστών»",
-    "url": "https://www.newshub.gr/el/kosmos/ipa-tramp-kata-dimokratikon-oi-ypopsifioi-toys-einai-epikindynoi-giati-einai-yper-ton-tzichantiston",
-    "date": "2026-11-02T20:44:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/trump_omilia_mk.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/trump_omilia_mk.jpg",
-    "summary": "Ένα έργο που ταλαιπωρήθηκε από κακοτεχνίες και αλλαγές σχεδίων από τη στιγμή που ανακοίνωσε την ανακαίνισή του, εγκαινίασε τη Δευτέρα ο Ντόναλντ Τραμπ, στην ...",
     "featured": false
   }
 ]
