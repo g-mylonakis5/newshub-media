@@ -4572,7 +4572,30 @@ function videoTwin(ep){
 
   return videoIndex.full[matchKey(ep.title)]
       || videoIndex.head[headKey(ep.title)]
+      // Το ίδιο ταίριασμα με όνομα και ημερομηνία, ανάποδα. Χωρίς
+      // αυτό, η ημερομηνία προβολής (airDate) δεν έβρισκε το βίντεο
+      // και το επεισόδιο κρατούσε την ώρα που ανέβηκε στο Buzzsprout:
+      // η ΙΔΙΑ συνέντευξη έβγαινε «σήμερα 20:00» στη ροή και «4 Νοε»
+      // στη λωρίδα της εκπομπής.
+      || videoApoOnomaTwin(ep)
       || null;
+}
+
+// Ο ανάποδος δρόμος του twinApoOnoma: από επεισόδιο βρες το βίντεο.
+//
+// Χτίζεται περνώντας ΜΙΑ φορά όλα τα βίντεο από τον ίδιο κανόνα —
+// όχι γράφοντάς τον δεύτερη φορά ανάποδα. Δύο αντίγραφα ενός κανόνα
+// αποκλίνουν πάντα· απλώς δεν ξέρεις πότε.
+let videoApoOnoma;
+function videoApoOnomaTwin(ep){
+  if (!videoApoOnoma) {
+    videoApoOnoma = {};
+    for (const v of loadVideos()) {
+      const match = twinApoOnoma(v);
+      if (match) videoApoOnoma[match.id] = moreSpecific(videoApoOnoma[match.id], v);
+    }
+  }
+  return videoApoOnoma[ep.id] || null;
 }
 
 // Ευρετήρια για τις προτάσεις: ανά εκπομπή και ανά θέμα. Φτιάχνονται
@@ -5015,6 +5038,36 @@ function main(){
   // βγαίνει η λωρίδα-φίλτρο και οι τέσσερις θεματικές λωρίδες.
   const catGroups = buildCategories(videos, episodes, ownArticles);
   indexMenu(showGroups, catGroups);
+
+  // ---- Τι δεν κατατάχθηκε ----
+  //
+  // Και η κατηγορία και η εκπομπή βγαίνουν με μάντεμα: η πρώτη από
+  // λέξεις του τίτλου, η δεύτερη από τη λίστα YouTube του διδύμου
+  // βίντεο. Και τα δύο αστοχούν ΣΙΩΠΗΛΑ — το επεισόδιο απλώς δεν
+  // εμφανίζεται πουθενά, και κανείς δεν ψάχνει κάτι που δεν ξέρει ότι
+  // λείπει. Γι' αυτό μετριούνται δυνατά σε κάθε χτίσιμο.
+  //
+  // Και τα δύο διορθώνονται από το διαχειριστικό, ένα-ένα.
+  const dixosKat = episodes.filter((ep) => !episodeCategories(ep).length);
+  const dixosEkp = episodes.filter((ep) => !videoTwin(ep));
+
+  const pos = (n) => `${n} από ${episodes.length}`
+    + ` (${(n * 100 / episodes.length).toFixed(1)}%)`;
+
+  console.log(`Χωρίς κατηγορία: ${pos(dixosKat.length)}`);
+  console.log(`Χωρίς εκπομπή:   ${pos(dixosEkp.length)}`);
+
+  // Το συνολικό ποσοστό κρύβει το μόνο που μετράει: αν ό,τι ανεβαίνει
+  // ΤΩΡΑ κατατάσσεται σωστά. Τα παλιά κενά διορθώνονται μία φορά
+  // από το διαχειριστικό — ένα καινούριο που χάνεται είναι βλάβη.
+  const edo = Date.now() - 90 * 864e5;
+  const fres = episodes.filter((ep) => new Date(ep.date).getTime() > edo);
+  if (fres.length) {
+    const fk = fres.filter((ep) => !episodeCategories(ep).length).length;
+    const fe = fres.filter((ep) => !videoTwin(ep)).length;
+    console.log(`  στις τελευταίες 90 μέρες (${fres.length}): `
+      + `${fk} χωρίς κατηγορία, ${fe} χωρίς εκπομπή`);
+  }
 
   // Ένα βίντεο μπορεί να υπάρχει σε πολλές λίστες. Κρατάμε μία εγγραφή
   // ανά βίντεο, με την ειδικότερη εκπομπή — αλλιώς η κάρτα θα έγραφε
