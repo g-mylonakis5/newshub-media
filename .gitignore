@@ -15,6 +15,10 @@
 public/*
 !public/styles.css
 !public/player.js
+# Γραμμένο με το χέρι, όπως ο player — δεν το παράγει το build.js.
+# Χωρίς αυτή τη γραμμή το Cloudflare χτίζει σελίδα που ζητά ένα
+# roi.js που δεν ανέβηκε ποτέ, και η ροή μένει παγωμένη στο χτίσιμο.
+!public/roi.js
 !public/favicon.svg
 !public/intro.jpg
 !public/*.jpg
