@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "fetch": "node fetch-episodes.js && node fetch-videos.js && node fetch-weather.js",
-    "build": "node publish.js",
+    "build": "node fetch-weather.js || echo 'Χωρίς καιρό αυτή τη φορά' ; node publish.js",
     "build:full": "npm run fetch && node publish.js",
     "build:fast": "node build.js",
     "serve": "node serve.js",
