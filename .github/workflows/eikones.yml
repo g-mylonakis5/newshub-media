@@ -1,0 +1,79 @@
+# Δικλείδα: μπαίνουν σωστά οι εικόνες;
+#
+# Το check-images.js δεν έχει νόημα αν τρέχει μόνο όταν το θυμηθεί
+# κάποιος — έτσι ακριβώς έζησε αθέατο ένα `object-fit: cover` που έκοβε
+# το 44% κάθε αφίσας σε κάθε κινητό. Εδώ τρέχει μόνο του.
+#
+# ΤΙ ΔΕΝ ΚΑΝΕΙ: δεν σταματά το deployment. Το Cloudflare Pages χτίζει με
+# το push, παράλληλα με αυτό, και δεν περιμένει κανέναν. Άρα αν κάτι
+# σπάσει, θα βγει για λίγο στον αέρα. Αυτό που κερδίζεις είναι ότι θα το
+# μάθεις σε τρία λεπτά, με email και με τη θέση που φταίει — αντί σε έξι
+# μήνες, από τον πρώτο που θα το προσέξει.
+#
+# Το μπλοκάρισμα ΠΡΙΝ το production το κάνει το .githooks/pre-commit,
+# στο μηχάνημά σου. Αυτό εδώ είναι το δίχτυ από κάτω, για όταν το
+# παρακάμψεις με --no-verify ή κομμιτάρεις από αλλού.
+
+name: Έλεγχος εικόνων
+
+# ΜΟΝΟ όταν αλλάζει κάτι που μπορεί να χαλάσει εικόνα.
+#
+# Κρίσιμο για το κόστος: το repo είναι ιδιωτικό και το «Φρέσκο υλικό»
+# τρώει ήδη ~1.530 από τα 2.000 λεπτά του μήνα. Αν αυτό εδώ έτρεχε σε
+# κάθε push, θα χτυπούσε και στα 48 ημερήσια commits του bot — 150
+# λεπτά τη μέρα, τέλος το πακέτο σε τρεις μέρες.
+#
+# Το bot αγγίζει μόνο το data/, οπότε με αυτό το φίλτρο δεν το ξυπνά
+# ποτέ. Μένουν τα δικά μας pushes στο CSS: λίγα δεκάδες τον μήνα.
+on:
+  push:
+    paths:
+      - 'public/styles.css'
+      - 'public/player.js'
+      - 'build.js'
+      - 'check-images.js'
+      - '.github/workflows/eikones.yml'
+  pull_request:
+    paths:
+      - 'public/styles.css'
+      - 'public/player.js'
+      - 'build.js'
+      - 'check-images.js'
+  workflow_dispatch:   # και με το χέρι, από την καρτέλα Actions
+
+concurrency:
+  group: eikones-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  eikones:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # Μόνο το Chromium. Το --with-deps φέρνει τις βιβλιοθήκες που
+      # λείπουν από τον ubuntu runner· χωρίς αυτό ο browser δεν ανοίγει.
+      - name: Chromium
+        run: npx playwright install --with-deps chromium
+
+      # Το public/ δεν είναι στο git — παράγεται. Χωρίς build δεν
+      # υπάρχει σελίδα να μετρηθεί.
+      #
+      # Ο καιρός αποτυγχάνει ήσυχα: είναι εφήμερος, και δεν θέλουμε
+      # έλεγχο εικόνων να κοκκινίζει επειδή δεν απάντησε μια πρόγνωση.
+      - name: Χτίσιμο
+        run: |
+          node fetch-weather.js || echo 'Χωρίς καιρό — δεν πειράζει εδώ.'
+          node build.js
+
+      - name: Μετράμε κάθε εικόνα
+        run: node check-images.js
