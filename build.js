@@ -2431,7 +2431,91 @@ function videoHasTwin(v){
       for (const k of episodeKeys(ep)) if (k) episodeTitles.add(k);
     }
   }
-  return episodeTitles.has(matchKey(v.title)) || episodeTitles.has(headKey(v.title));
+  if (episodeTitles.has(matchKey(v.title)) || episodeTitles.has(headKey(v.title))) {
+    return true;
+  }
+  return !!twinApoOnoma(v);
+}
+
+// ---- Δεύτερη ευκαιρία: ίδιος άνθρωπος, ίδια μέρα, ίδιο θέμα ----
+//
+// Η σύγκριση τίτλων πιάνει μόνο όταν οι δύο συντάκτες έγραψαν τα ίδια
+// λόγια. Συχνά δεν το κάνουν:
+//
+//   YouTube     Γιώργος Αϋφαντής: Έχουμε αποτύχει στη Τουρκική αποτροπή!
+//   Buzzsprout  Γιώργος Αϋφαντής: «Έχουμε αποτύχει στην αποτροπή έναντι
+//               της Τουρκίας – Οδεύουμε σε σύγκρουση...»
+//
+// Ίδια συνέντευξη, δύο τίτλοι. Έβγαινε δύο φορές στην αρχική, και το
+// είδε το αφεντικό πριν από εμάς.
+//
+// ΤΡΕΙΣ ΟΡΟΙ ΜΑΖΙ, και χρειάζονται και οι τρεις. Μετρημένο στα 2.327
+// βίντεο χωρίς δίδυμο: το «ίδιο όνομα + 48 ώρες» βρίσκει 66 ζευγάρια
+// και κανένα διφορούμενο — αλλά τα 3 από αυτά είναι ΛΑΘΟΣ, γιατί ο
+// ίδιος άνθρωπος μίλησε δύο φορές για άλλο πράγμα:
+//
+//   V  Χρόνης Βάρσος: Η Ελλάδα στη «χαραυγή» του 2ου ΠΠ
+//   E  Χρόνης Βάρσος: Αφιέρωμα στη Μικρασιατική Καταστροφή
+//
+// Οι κοινές λέξεις τα κόβουν και τα τρία, χωρίς να χάσουν κανένα σωστό.
+const TWIN_ORES = 48;      // πόσο μακριά επιτρέπεται να είναι οι δύο ημερομηνίες
+const TWIN_KOINES = 2;     // πόσες λέξεις πρέπει να μοιράζονται τα θέματα
+const TWIN_MIKOS = 5;      // πόσο μεγάλη πρέπει να είναι μια λέξη για να μετρήσει
+
+// Το όνομα μπροστά από την άνω τελεία, κανονικοποιημένο.
+function onomaApoTitlo(text){
+  const m = decode(text).match(/^([^:]{3,40}):/);
+  return m ? matchKey(m[1]) : '';
+}
+
+// Οι λέξεις του θέματος — ό,τι είναι ΜΕΤΑ την άνω τελεία. Μόνο οι
+// μεγάλες: τα «στη», «και», «του» τα μοιράζονται όλοι οι τίτλοι του
+// κόσμου και δεν αποδεικνύουν τίποτα.
+function themaLexeis(text){
+  const m = decode(text).match(/^([^:]{3,40}):\s*(.+)$/);
+  return new Set(
+    matchKey(m ? m[2] : text).split(' ').filter((w) => w.length >= TWIN_MIKOS),
+  );
+}
+
+let epsAnaOnoma;
+function twinApoOnoma(v){
+  if (!epsAnaOnoma) {
+    epsAnaOnoma = {};
+    for (const ep of loadEpisodes()) {
+      // Όπου μίλησε άνθρωπος, δεν μαντεύουμε. Το «novideo» σημαίνει
+      // «το έψαξα, δεν υπάρχει» — και το ρητό βίντεο σημαίνει ότι το
+      // επεισόδιο είναι ήδη πιασμένο αλλού.
+      const fix = pairOf(ep);
+      if (fix && (fix.video || fix.novideo)) continue;
+
+      const n = onomaApoTitlo(ep.title);
+      if (n) (epsAnaOnoma[n] = epsAnaOnoma[n] || []).push(ep);
+    }
+  }
+
+  const onoma = onomaApoTitlo(v.title);
+  if (!onoma || !epsAnaOnoma[onoma]) return null;
+
+  const pote = new Date(v.date).getTime();
+  if (isNaN(pote)) return null;
+
+  const konta = epsAnaOnoma[onoma].filter(
+    (ep) => Math.abs(new Date(ep.date).getTime() - pote) < TWIN_ORES * 3600000,
+  );
+
+  // Δύο υποψήφιοι σημαίνει ότι δεν ξέρουμε. Καλύτερα διπλή εμφάνιση
+  // παρά να κρύψουμε λάθος βίντεο — το διπλό το βλέπεις και το
+  // διορθώνεις, το κρυμμένο όχι.
+  if (konta.length !== 1) return null;
+
+  const dikes = themaLexeis(v.title);
+  const alles = themaLexeis(konta[0].title);
+
+  let koines = 0;
+  for (const w of dikes) if (alles.has(w)) koines++;
+
+  return koines >= TWIN_KOINES ? konta[0] : null;
 }
 
 // Το αντίστροφο του videoTwin: από βίντεο βρες το επεισόδιο. Χρειάζεται
@@ -2454,6 +2538,10 @@ function episodeTwin(v){
 
   return episodeByKey.full[matchKey(v.title)]
       || episodeByKey.head[headKey(v.title)]
+      // Ίδιος κανόνας με το videoHasTwin, αλλιώς το βίντεο θα κρυβόταν
+      // από τη ροή ως «έχει δίδυμο» και η σελίδα του δεν θα πρόσφερε
+      // τον ήχο εκείνου του διδύμου.
+      || twinApoOnoma(v)
       || null;
 }
 
