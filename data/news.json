@@ -1,5 +1,38 @@
 [
   {
+    "id": "stis-serres-metavainei-tin-kyriaki-o-prothypoyrgos",
+    "title": "Στις Σέρρες μεταβαίνει την Κυριακή ο πρωθυπουργός",
+    "url": "https://www.newshub.gr/el/ellada/stis-serres-metavainei-tin-kyriaki-o-prothypoyrgos",
+    "date": "2026-11-07T20:17:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/metsotakes.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/metsotakes.jpg",
+    "summary": "Ο πρωθυπουργός Κυριάκος Μητσοτάκης μεταβαίνει στις Σέρρες.\r\n\r\nΑύριο, Κυριακή 8 Νοεμβρίου, ο πρωθυπουργός θα παραστεί στη Θεία Λειτουργία και τη λιτανεία για ...",
+    "featured": false
+  },
+  {
+    "id": "d-vrysalis-i-asfaleia-ton-asthenon-den-mporei-na-stirizetai-stin-exantlisi-ton-nosileyton-kataggelia-gia-tin-ypostelechosi-sto-pagni",
+    "title": "Δ. Βρύσαλης: «Η ασφάλεια των ασθενών δεν μπορεί να στηρίζεται στην εξάντληση των νοσηλευτών» – Καταγγελία για την υποστελέχωση στο ΠΑΓΝΗ",
+    "url": "https://www.newshub.gr/el/kriti/d-vrysalis-i-asfaleia-ton-asthenon-den-mporei-na-stirizetai-stin-exantlisi-ton-nosileyton-kataggelia-gia-tin-ypostelechosi-sto-pagni",
+    "date": "2026-11-07T20:09:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/pagne.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/pagne.jpg",
+    "summary": "Τις σοβαρές επιπτώσεις που έχουν οι ελλείψεις νοσηλευτικού προσωπικού και οι εξαντλητικές συνθήκες εργασίας στην ασφάλεια των ασθενών ανέδειξε ο νοσηλευτής...",
+    "featured": true
+  },
+  {
+    "id": "agrotikes-enischyseis-me-pliromes-eos-tis-30-noemvrioy-ti-prepei-na-kanoyn-oi-dikaioychoi-gia-na-mi-chasoyn-tin-prokatavoli",
+    "title": "Αγροτικές ενισχύσεις με πληρωμές έως τις 30 Νοεμβρίου – Τι πρέπει να κάνουν οι δικαιούχοι για να μη χάσουν την προκαταβολή",
+    "url": "https://www.newshub.gr/el/agronews/agrotikes-enischyseis-me-pliromes-eos-tis-30-noemvrioy-ti-prepei-na-kanoyn-oi-dikaioychoi-gia-na-mi-chasoyn-tin-prokatavoli",
+    "date": "2026-11-07T20:08:00.000Z",
+    "category": "Agronews",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/agrotes.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/agrotes.jpg",
+    "summary": "Στην τελική ευθεία εισέρχεται η διαδικασία υποβολής αιτήσεων για τις αγροτικές ενισχύσεις, με τους παραγωγούς να έχουν περιθώριο έως τις 10 Νοεμβρίου για να ...",
+    "featured": false
+  },
+  {
     "id": "tragodia-ston-saroniko-nekros-52chronos-meta-apo-ptosi-sti-thalassa-apo-istioforo-mia-syllipsi",
     "title": "Τραγωδία στον Σαρωνικό: Νεκρός 52χρονος μετά από πτώση στη θάλασσα από ιστιοφόρο – Μια σύλληψη",
     "url": "https://www.newshub.gr/el/ellada/tragodia-ston-saroniko-nekros-52chronos-meta-apo-ptosi-sti-thalassa-apo-istioforo-mia-syllipsi",
@@ -85,7 +118,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/pheta.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/pheta.jpg",
     "summary": "Τα δεδομένα της γαλακτοπαραγωγής στην Ελλάδα μετά τις τεράστιες απώλειες των αιγοπροβάτων εξαιτίας των ασθενειών έχουν αλλάξει και πλέον έχει έρθει η  σ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "proklitiki-anakoinosi-toy-pseydokratoys-to-kalodio-paraviazei-ta-dikaiomata-tis-toyrkias",
@@ -6564,39 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/bare.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/bare.jpg",
     "summary": "Μία ημέρα μετά την ορκωμοσία του, ο Γιώργος Βαρεμένος ανακοίνωσε την ανεξαρτητοποίησή του από την Κοινοβουλευτική Ομάδα του ΣΥΡΙΖΑ, με επιστολή που απέστειλε...",
-    "featured": false
-  },
-  {
-    "id": "se-argia-archisyntakes-kai-oligoimeri-diakopi-ekpompis-stin-ert-meta-tin-emfanisi-toy-katadikasmenoy-chrysaygiti-iliopoyloy-os-thymatos-tis-mko",
-    "title": "Σε αργία αρχισυντάκες και ολιγοήμερη διακοπή εκπομπής στην ΕΡΤ μετά την εμφάνιση του καταδικασμένου Χρυσαυγίτη Ηλιόπουλου ως θύματος της ΜΚΟ",
-    "url": "https://www.newshub.gr/el/ellada/se-argia-archisyntakes-kai-oligoimeri-diakopi-ekpompis-stin-ert-meta-tin-emfanisi-toy-katadikasmenoy-chrysaygiti-iliopoyloy-os-thymatos-tis-mko",
-    "date": "2026-11-03T11:00:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/ert.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/ert.jpg",
-    "summary": "Με μία σκληρή ανακοίνωση, η ΕΡΤ σήμερα καταδίκασε το απαράδεκτο γεγονός που έλαβε χώρα την Δευτέρα 2 Νοεμβρίου, στην εκπομπή της ΕΡΤNEWS «Newsroom&raqu...",
-    "featured": false
-  },
-  {
-    "id": "tin-episkepsi-zelenski-sto-verolino-anakoinose-o-kagkelarios-merts",
-    "title": "Την επίσκεψη Ζελένσκι στο Βερολίνο ανακοίνωσε ο καγκελάριος Μερτς",
-    "url": "https://www.newshub.gr/el/geopolitiki/tin-episkepsi-zelenski-sto-verolino-anakoinose-o-kagkelarios-merts",
-    "date": "2026-11-03T10:50:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/31df10429e4944ad88240801659df9b5.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/31df10429e4944ad88240801659df9b5.jpg",
-    "summary": "Ο Ουκρανός πρόεδρος Βολοντίμιρ Ζελένσκι πρόκειται να βρεθεί σήμερα το πρωί στο Βερολίνο ενόψει νέων συνομιλιών μεταξύ της Ρωσίας και της Ουκρανίας για τον τε...",
-    "featured": false
-  },
-  {
-    "id": "i-iera-moni-epanosifi-timise-tin-anakomidi-ton-ieron-leipsanon-toy-agioy-georgioy-foto",
-    "title": "Η Ιερά Μονή Επανωσήφη τίμησε την Ανακομιδή των Ιερών Λειψάνων του Αγίου Γεωργίου (Φωτο)",
-    "url": "https://www.newshub.gr/el/kriti/i-iera-moni-epanosifi-timise-tin-anakomidi-ton-ieron-leipsanon-toy-agioy-georgioy-foto",
-    "date": "2026-11-03T10:40:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/eikona_viber_2026-11-02_23-03-44-806.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/eikona_viber_2026-11-02_23-03-44-806.jpg",
-    "summary": "Την ανακομιδή των Ιερών Λειψάνων του Αγίου Ενδόξου Μεγαλομάρτυρος Γεωργίου του Τροπαιοφόρου πανηγυρίζει σήμερα η Ιερά Μονή Επανωσήφη που είναι αφιερωμένη στο...",
     "featured": false
   }
 ]
