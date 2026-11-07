@@ -92,6 +92,25 @@ jobs:
         continue-on-error: true
         run: node fetch-news.js
 
+      # Η ζωντανή ροή, ΠΡΩΤΑ από όλα τα υπόλοιπα.
+      #
+      # Μπαίνει εδώ και όχι στο τέλος επειδή είναι το μόνο βήμα που ο
+      # αναγνώστης το βλέπει μέσα σε δευτερόλεπτα. Το commit, το push
+      # και το χτίσιμο που ακολουθούν θέλουν τέσσερα λεπτά — η ροή δεν
+      # έχει κανέναν λόγο να τα περιμένει.
+      #
+      # Δεν ρίχνει ποτέ το τρέξιμο: αν το KV δεν απαντήσει, το site
+      # δείχνει τη ροή του τελευταίου χτισίματος, όπως πάντα έκανε.
+      - name: Ζωντανή ροή στο KV
+        id: roi
+        if: always()
+        continue-on-error: true
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_KV_NAMESPACE: ${{ secrets.CF_KV_NAMESPACE }}
+          CF_KV_TOKEN: ${{ secrets.CF_KV_TOKEN }}
+        run: node roi-se-kv.js
+
       - name: Επεισόδια
         id: epeisodia
         if: always()
@@ -251,6 +270,7 @@ jobs:
           if [ '${{ steps.eidiseis.outcome }}' = 'failure' ]; then BAD="$BAD ειδήσεις"; fi
           if [ '${{ steps.epeisodia.outcome }}' = 'failure' ]; then BAD="$BAD επεισόδια"; fi
           if [ '${{ steps.varia.outcome }}' = 'failure' ]; then BAD="$BAD βίντεο/απομαγνητοφωνήσεις"; fi
+          if [ '${{ steps.roi.outcome }}' = 'failure' ]; then BAD="$BAD ζωντανή-ροή"; fi
 
           if [ -n "$BAD" ]; then
             echo "Δεν κατέβηκαν:$BAD" >&2
