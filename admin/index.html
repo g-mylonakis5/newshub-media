@@ -44,6 +44,7 @@
 <div class="shell">
   <nav class="side">
     <a class="tab is-on" href="#proto" data-tab="proto">Πρωτοσέλιδο</a>
+    <a class="tab" href="#latest" data-tab="latest">Τελευταία</a>
     <a class="tab" href="#mustread" data-tab="mustread">Must read</a>
     <a class="tab" href="#arthra" data-tab="arthra">Άρθρα</a>
     <a class="tab" href="#fotos" data-tab="fotos">Φωτογραφίες</a>
@@ -104,6 +105,48 @@
 
       <p class="more">
         <button type="button" class="btn btn--ghost" data-more hidden>Δείξε περισσότερα</button>
+      </p>
+    </section>
+
+    <!-- ========== ΤΕΛΕΥΤΑΙΑ ========== -->
+    <section class="panel" data-panel="latest">
+      <header class="panel-head">
+        <div>
+          <h1>Τελευταία</h1>
+          <p class="hint">Η ροή κάτω από το πρωτοσέλιδο. Από μόνη της δείχνει
+            τα πιο πρόσφατα· εδώ καρφιτσώνεις ό,τι θέλεις να μείνει πάνω,
+            με τη σειρά που θες. Όσες θέσεις αφήσεις κενές τις γεμίζει το site.</p>
+        </div>
+        <button type="button" class="btn btn--go" data-save="latest" disabled>Αποθήκευση</button>
+      </header>
+
+      <!-- Οι εννιά θέσεις, με τη σειρά που βγαίνουν στην αρχική. Πρώτα
+           ΤΙ ισχύει, μετά η αλλαγή — ίδια λογική με το πρωτοσέλιδο
+           και το Must read. -->
+      <div class="slots" data-lt-slots></div>
+
+      <p class="hint" data-lt-note></p>
+
+      <h2 class="sub">Καρφίτσωσε κι άλλο</h2>
+
+      <div class="tools">
+        <input type="search" class="find" data-lt-find placeholder="Βρες τίτλο…"
+               aria-label="Αναζήτηση">
+        <span class="chips" data-lt-kind>
+          <button type="button" class="chip is-on" data-kind="">Όλα</button>
+          <button type="button" class="chip" data-kind="podcast">Podcast</button>
+          <button type="button" class="chip" data-kind="video">Βίντεο</button>
+          <button type="button" class="chip" data-kind="news">Ειδήσεις</button>
+          <button type="button" class="chip" data-kind="article">Άρθρα</button>
+        </span>
+      </div>
+
+      <div class="picks" data-lt-picks>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+
+      <p class="more">
+        <button type="button" class="btn btn--ghost" data-lt-more hidden>Δείξε περισσότερα</button>
       </p>
     </section>
 
@@ -265,6 +308,18 @@
       <p class="state state--inline" data-upload hidden></p>
 
       <h2 class="sub">Η βιβλιοθήκη</h2>
+
+      <!-- Η αναζήτηση μπαίνει ΠΑΝΩ από τους φακέλους, όχι μέσα τους.
+           Οι φάκελοι βολεύουν όταν ξέρεις πότε ανέβηκε κάτι· όταν δεν
+           ξέρεις, κρύβουν. Εδώ ψάχνει σε ΟΛΟΥΣ τους μήνες μαζί. -->
+      <div class="tools">
+        <input type="search" class="find" data-shot-find
+               placeholder="Βρες φωτογραφία σε όλους τους φακέλους…"
+               aria-label="Αναζήτηση φωτογραφίας">
+      </div>
+
+      <nav class="crumbs" data-shot-crumbs></nav>
+
       <div class="shots" data-shots>
         <p class="muted">Φόρτωση…</p>
       </div>
@@ -419,6 +474,14 @@
     </div>
 
     <p class="state state--inline" data-pick-state hidden></p>
+
+    <div class="tools">
+      <input type="search" class="find" data-pick-find
+             placeholder="Βρες φωτογραφία σε όλους τους φακέλους…"
+             aria-label="Αναζήτηση φωτογραφίας">
+    </div>
+
+    <nav class="crumbs" data-pick-crumbs></nav>
 
     <div class="shots picker-shots" data-pick-shots>
       <p class="muted">Φόρτωση…</p>

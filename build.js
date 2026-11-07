@@ -1238,6 +1238,39 @@ function curationExpired(curation){
 
 // Τα 4 από κάτω. Όσα όρισε ο συντάκτης πρώτα, μετά γεμίζουμε εναλλάξ
 // είδηση–podcast ώστε να μη βγαίνουν τέσσερα ίδιου τύπου.
+// Τα καρφιτσωμένα της ροής «Τελευταία»: ποια θέλει ο δημοσιογράφος να
+// φαίνονται πρώτα, και με ΠΟΙΑ ΣΕΙΡΑ.
+//
+// Γιατί υπάρχει: η ροή είναι καθαρά χρονολογική, και μια καλή συνέντευξη
+// πέφτει κάτω μέσα σε δύο μέρες. Κάποια αξίζουν να μείνουν πάνω για
+// βδομάδες — αυτό δεν βγαίνει από ημερομηνία, το ξέρει μόνο άνθρωπος.
+//
+// ΔΕΝ βάζουμε ημερομηνία λήξης, σε αντίθεση με το πρωτοσέλιδο. Εκεί η
+// δικλείδα χρειάζεται γιατί μια ξεχασμένη γραμμή παγώνει ΟΛΗ την
+// αρχική. Εδώ το ξεχασμένο καρφίτσωμα πιάνει μία θέση από τις εννιά,
+// και οι υπόλοιπες συνεχίζουν να ανανεώνονται κανονικά — ενώ το «να
+// μείνει πολύ καιρό» είναι ακριβώς ο σκοπός. Το διαχειριστικό δείχνει
+// πόσο παλιό είναι το καθένα, ώστε να φαίνεται τι ξεχάστηκε.
+//
+// Ό,τι δεν βρεθεί αγνοείται σιωπηλά: ένα επεισόδιο μπορεί να έχει βγει
+// από τα 40 πιο πρόσφατα, και δεν θέλουμε να ρίξει το build.
+function pinnedFlow(curation, pools){
+  const want = (curation.latest || []).map((s) => String(s).trim()).filter(Boolean);
+  if (!want.length) return [];
+
+  const out = [];
+  for (const ref of want) {
+    let hit = null;
+    for (const { list, make } of pools) {
+      const found = list.find((row) => sameItem(make(row), ref));
+      if (found) { hit = make(found); break; }
+    }
+    if (hit) out.push(hit);
+    else console.warn(`ΠΡΟΣΟΧΗ: το καρφιτσωμένο «${ref}» δεν βρέθηκε — το προσπερνώ`);
+  }
+  return out;
+}
+
 function pickSecondary(items, curation, featured){
   const ids = curation.secondary || [];
   const chosen = ids.map((id) => items.find((it) => it.id === id)).filter(Boolean);
@@ -2858,6 +2891,10 @@ const TOPIC_ROW = 4;
 // φιλτράρισμα να έχει πάντα τι να δείξει.
 const FLOW_PER_TOPIC = 6;
 
+// Πόσα φαίνονται στη ροή «Τελευταία» πριν το «Όλα τα επεισόδια →».
+// Τα καρφιτσωμένα του διαχειριστικού πιάνουν θέσεις ΜΕΣΑ σε αυτά.
+const FLOW_VISIBLE = 9;
+
 // Λίστες του YouTube που ΔΕΝ μπαίνουν στη ροή της αρχικής όταν δεν
 // έχουν podcast από πίσω.
 //
@@ -3478,7 +3515,7 @@ function notGuest(name){
 let aliasData;
 function aliases(){
   if (!aliasData) {
-    aliasData = { titles: [], map: {}, notPeople: new Set(), roles: {}, nos: [] };
+    aliasData = { titles: [], map: {}, notPeople: new Set(), roles: {}, photos: {}, nos: [] };
     try {
       const raw = JSON.parse(fs.readFileSync(ALIAS_FILE, 'utf8'));
       aliasData.titles = Array.isArray(raw.titles) ? raw.titles : [];
@@ -3497,6 +3534,12 @@ function aliases(){
       // άνθρωπος θα την ήθελε γραμμένη σε κάθε παραλλαγή.
       for (const [name, role] of Object.entries(raw.roles || {})) {
         if (role) aliasData.roles[guestKey(name)] = String(role);
+      }
+      // Το πορτρέτο, με κλειδί το κανονικό όνομα — ίδια λογική με την
+      // ιδιότητα. Το διαλέγει άνθρωπος από το διαχειριστικό· δεν
+      // μπορούμε να το μαντέψουμε από πουθενά.
+      for (const [name, url] of Object.entries(raw.photos || {})) {
+        if (url) aliasData.photos[guestKey(name)] = String(url);
       }
       for (const pair of raw.not_aliases || []) {
         if (Array.isArray(pair) && pair.length === 2) {
@@ -3562,6 +3605,28 @@ function guestOf(ep){
 // όσους δεν την έβαλε κανείς — είναι σχόλιο, όχι απαίτηση.
 function roleOf(name){
   return aliases().roles[guestKey(name)] || '';
+}
+
+// Το πορτρέτο ενός προσώπου, όπως το διάλεξε ο συντάκτης.
+//
+// ΠΡΟΣΟΧΗ στη διαφορά από το ep.image: εκείνο είναι το εξώφυλλο του
+// επεισοδίου — τετράγωνη αφίσα με ψημένο μέσα τον τίτλο και συχνά το
+// λογότυπο. Κομμένο σε κύκλο δείχνει μισό γράμμα, όχι άνθρωπο. Γι' αυτό
+// οι δύο δεν ανακατεύονται πουθενά: όπου θέλουμε πρόσωπο, είτε υπάρχει
+// πορτρέτο είτε πέφτουμε στα αρχικά.
+function photoOf(name){
+  return aliases().photos[guestKey(name)] || '';
+}
+
+// Υπάρχει έστω ένα πορτρέτο; Από αυτό κρίνεται αν η ενότητα «Τα
+// πρόσωπα» στην αρχική δείχνει εικόνες — με μηδέν πορτρέτα θα ήταν 40
+// άδειοι κύκλοι, που είναι χειρότερο από σκέτα ονόματα.
+let facesKnown;
+function haveFaces(){
+  if (facesKnown === undefined) {
+    facesKnown = Object.keys(aliases().photos).length > 0;
+  }
+  return facesKnown;
 }
 
 // Ζεύγη που ο συντάκτης απέρριψε ρητά: «όχι, άλλος άνθρωπος». Μόνο
@@ -3955,10 +4020,11 @@ function firstLetter(name){
 // Πόσα ονόματα δείχνει η ενότητα «Τα πρόσωπα» στην αρχική.
 const NAMES_SHOWN = 40;
 
-// Φωτογραφίες προσώπων δεν έχουμε για κανέναν από τους 382. Όταν
-// αποκτήσουμε, γίνεται true ΕΔΩ και μόνο εδώ: το markup κουβαλάει ήδη
-// τη θέση της φωτογραφίας και το CSS ξέρει να τη δείξει.
-const PEOPLE_FACES = false;
+// Έγινε συνάρτηση: ήταν σταθερό false όσο δεν είχαμε κανένα πορτρέτο.
+// Τώρα το αφεντικό τα βάζει ένα-ένα από το διαχειριστικό, οπότε ανάβει
+// μόνο του με το πρώτο — κανείς δεν χρειάζεται να θυμηθεί να γυρίσει
+// έναν διακόπτη σε αρχείο που δεν ξέρει ότι υπάρχει.
+function peopleFaces(){ return haveFaces(); }
 
 // Η ενότητα «Τα πρόσωπα»: ποιοι μιλούν εδώ, σε μία ματιά.
 //
@@ -3972,16 +4038,34 @@ function namesSection(groups, depth = 0){
   const up = depth === 0 ? '' : '../';
 
   const people = keys
-    .map((key) => ({
-      name: mostCommon(groups[key].names),
-      n: groups[key].episodes.length,
-      face: groups[key].episodes.find((e) => e.image),
-    }))
+    .map((key) => {
+      const name = mostCommon(groups[key].names);
+      return {
+        name,
+        n: groups[key].episodes.length,
+        // Μόνο αληθινό πορτρέτο. Παλιά έμπαινε εδώ το εξώφυλλο του
+        // επεισοδίου — δες photoOf().
+        face: photoOf(name),
+      };
+    })
     .sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, 'el'))
     .slice(0, NAMES_SHOWN);
 
+  const faceOn = peopleFaces();
+
+  // ΧΩΡΙΣ αρχικά εδώ, σε αντίθεση με τη λίστα καλεσμένων.
+  //
+  // Στα 26px τα δύο γράμματα δεν διαβάζονται· γίνονται μουτζούρα, και
+  // σαράντα μουτζούρες στη σειρά τραβούν το μάτι από τα ονόματα, που
+  // είναι το περιεχόμενο της ενότητας. Ο άδειος κύκλος είναι ήσυχος
+  // και κάνει τις λίγες αληθινές φωτογραφίες να ξεχωρίζουν.
+  //
+  // Στη guests.html τα αρχικά μένουν: εκεί ο κύκλος είναι 110px και
+  // το όνομα γράφεται από κάτω, οπότε διαβάζονται κανονικά.
   const chips = people.map((p) => `      <a class="pname" href="${up}guest/${slugify(p.name)}.html">
-        ${PEOPLE_FACES && p.face ? `<span class="pname-face"><img src="${p.face.image}" alt="" loading="lazy"></span>` : ''}
+        ${faceOn ? `<span class="pname-face">${p.face
+          ? `<img src="${esc(p.face)}" alt="" loading="lazy">`
+          : ''}</span>` : ''}
         <span class="pname-text">${esc(p.name)}</span>
         <span class="pname-n">${p.n}</span>
       </a>`).join('\n');
@@ -3989,7 +4073,7 @@ function namesSection(groups, depth = 0){
   return `  <section class="band band--people">
 ${bandMark('Τα', ' πρόσωπα', `      <p class="band-sub">${keys.length} άνθρωποι έχουν μιλήσει στο newshub.gr</p>`)}
 
-    <div class="pnames${PEOPLE_FACES ? ' pnames--faces' : ''}">
+    <div class="pnames${faceOn ? ' pnames--faces' : ''}">
 ${chips}
     </div>
 
@@ -4047,9 +4131,12 @@ function guestsIndexPage(groups){
   // ---- οι πιο συχνοί ----
   const top = [...people].sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, 'el')).slice(0, 20);
 
+  // ΟΧΙ το p.image: εκείνο είναι το εξώφυλλο επεισοδίου, και κομμένο σε
+  // κύκλο έδειχνε μισό ψημένο γράμμα αντί για άνθρωπο. Είτε πορτρέτο
+  // που διάλεξε ο συντάκτης, είτε τα αρχικά του ονόματος.
   const faces = top.map((p) => `      <a class="face" href="guest/${p.slug}.html">
-        <span class="face-pic">${p.image
-          ? `<img src="${p.image}" alt="" loading="lazy">`
+        <span class="face-pic">${photoOf(p.name)
+          ? `<img src="${esc(photoOf(p.name))}" alt="" loading="lazy">`
           : avatar(p.name)}</span>
         <span class="face-name">${esc(p.name)}</span>
         <span class="face-n">${p.n === 1 ? '1 εμφάνιση' : `${p.n} εμφανίσεις`}</span>
@@ -4171,9 +4258,14 @@ function guestPage(name, list){
   // επισκέπτη, και σήμερα η σελίδα απαντά μόνο «πόσες φορές ήρθε».
   const role = roleOf(name);
 
-  // Πορτρέτα δεν έχουμε για κανέναν· το υπόβαθρο βγαίνει από το εξώφυλλο
-  // του πιο πρόσφατου επεισοδίου στο οποίο μίλησε.
+  // Το θολό υπόβαθρο της κορυφής βγαίνει από το εξώφυλλο του πιο
+  // πρόσφατου επεισοδίου — εκεί το ψημένο κείμενο δεν ενοχλεί, γιατί
+  // είναι θολό και σκοτεινιασμένο.
   const pic = episodes.find((ep) => ep.image);
+
+  // Το πορτρέτο είναι άλλο πράγμα: μπαίνει καθαρό, δίπλα στο όνομα, και
+  // υπάρχει μόνο αν το διάλεξε άνθρωπος.
+  const face = photoOf(name);
 
   // ---- η γραμμή με τα στοιχεία ----
   const dates = episodes.map((ep) => new Date(ep.date).getTime())
@@ -4225,9 +4317,10 @@ ${breadcrumb([
   ], 1)}
 
   <main class="bio" data-pagefind-body
-        data-pagefind-meta="image:${pic ? pic.image : ''},type:Πρόσωπο"
+        data-pagefind-meta="image:${face || (pic ? pic.image : '')},type:Πρόσωπο"
         data-pagefind-filter="Είδος:Πρόσωπο">
-    <header class="bio-head">
+    <header class="bio-head${face ? ' bio-head--face' : ''}">
+${face ? `      <span class="bio-face"><img src="${esc(face)}" alt="${safe}" loading="eager"></span>` : ''}
       <p class="page-label">Πρόσωπο</p>
       <h1 class="bio-name">${title ? `<span class="bio-title">${esc(title)}.</span> ` : ''}${safe}</h1>
 ${role ? `      <p class="bio-role">${esc(role)}</p>` : ''}
@@ -4262,7 +4355,9 @@ ${near}
     body,
     depth: 1,
     description: `${name}: ${facts}. Όλες οι συμμετοχές στο ${SITE_NAME}.`,
-    image: pic ? pic.image : '',
+    // Στο μήνυμα που μοιράζεται κάποιος, το πορτρέτο λέει πολύ
+    // περισσότερα από το εξώφυλλο του επεισοδίου.
+    image: face || (pic ? pic.image : ''),
     url: `guest/${slugify(name)}.html`,
   });
 }
@@ -4837,6 +4932,19 @@ function main(){
     flow.push(item);
   };
 
+  // ΠΡΩΤΑ τα καρφιτσωμένα, με τη σειρά που τα έβαλε ο δημοσιογράφος.
+  //
+  // Πριν από οτιδήποτε άλλο: αν έμπαιναν μετά τα δικά μας άρθρα, η
+  // «σειρά» του διαχειριστικού δεν θα ήταν η σειρά της σελίδας, και
+  // αυτό είναι ακριβώς ό,τι ζητήθηκε να ελέγχει.
+  const pinned = pinnedFlow(curation, [
+    { list: episodes, make: (ep) => itemFromEpisode(ep) },
+    { list: uniqueVideos, make: (v) => itemFromVideo(v) },
+    { list: ownArticles, make: (a) => itemFromOwnArticle(a) },
+    { list: articles, make: (a) => itemFromArticle(a) },
+  ]);
+  for (const it of pinned) pushFlow(it);
+
   // Τα δικά μας άρθρα μπαίνουν στη ροή πριν από τα επεισόδια: είναι
   // πρωτότυπο περιεχόμενο που δεν υπάρχει πουθενά αλλού, και αν δεν
   // φαίνεται στην αρχική δεν θα το δει κανείς.
@@ -4861,9 +4969,13 @@ function main(){
     ...soloShows.slice(0, 40).map(itemFromVideo),
   ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
+  // Το αυτόματο γέμισμα. Αν τα καρφιτσωμένα είναι περισσότερα από τις
+  // εννιά θέσεις, τα κρατάμε ΟΛΑ: είναι ρητή επιλογή ανθρώπου, και δεν
+  // κόβουμε σιωπηλά ό,τι ζήτησε να φαίνεται.
+  const room = Math.max(FLOW_VISIBLE, flow.length);
   for (const it of recent) {
     pushFlow(it);
-    if (flow.length >= 9) break;
+    if (flow.length >= room) break;
   }
 
   for (const key of Object.keys(catGroups)) {

@@ -2247,9 +2247,10 @@ h1{
    382· ό,τι θα βάζαμε θα ήταν εξώφυλλο επεισοδίου, δηλαδή αφίσα. Σαράντα
    αφίσες στη σειρά λένε λιγότερα από σαράντα ονόματα.
 
-   Η θέση της φωτογραφίας υπάρχει ήδη στο markup (.pname-face) και σε
-   αυτό το αρχείο. Όταν αποκτήσουμε πορτρέτα, το μόνο που αλλάζει είναι
-   το PEOPLE_FACES στο build.js. */
+   Η θέση της φωτογραφίας (.pname-face) ανάβει μόνη της μόλις μπει το
+   πρώτο πορτρέτο από το διαχειριστικό — δες peopleFaces() στο build.js.
+   Όποιος δεν έχει, κρατάει άδειο κύκλο: στα 26px τα αρχικά γίνονται
+   μουτζούρα και τραβούν το μάτι από τα ονόματα. */
 .band--people{ background: var(--band-people); }
 
 .band--people .mark-word{ color: var(--on-color); }
@@ -4046,6 +4047,64 @@ h1{
 }
 
 .bio-head{ margin-bottom: 3rem; }
+
+/* Το πορτρέτο μπαίνει ΜΟΝΟ όταν υπάρχει, και τότε το κείμενο πηγαίνει
+   δεξιά του. Χωρίς φωτογραφία η κεφαλίδα μένει ακριβώς όπως ήταν —
+   δεν κρατάμε άδεια θέση για κάτι που λείπει σε 380 από τους 382. */
+.bio-head--face{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'face label'
+    'face name'
+    'face role'
+    'face facts'
+    'spark spark';
+  column-gap: 1.6rem;
+  align-items: start;
+}
+
+.bio-head--face .page-label{ grid-area: label; }
+.bio-head--face .bio-name{ grid-area: name; }
+.bio-head--face .bio-role{ grid-area: role; }
+.bio-head--face .bio-facts{ grid-area: facts; }
+.bio-head--face .life{ grid-area: spark; }
+
+.bio-face{
+  grid-area: face;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--line);
+  display: block;
+}
+
+.bio-face img{
+  width: 100%;
+  height: 100%;
+  /* Κόψιμο σκόπιμο: θέλουμε το κεφάλι σε κύκλο, όχι ολόκληρο το κάδρο.
+     Λίγο πάνω από τη μέση, γιατί στα πορτρέτα το πρόσωπο κάθεται ψηλά. */
+  object-fit: cover;
+  object-position: 50% 30%;
+  display: block;
+}
+
+@media (max-width: 640px){
+  /* Στο κινητό από πάνω, όχι δίπλα: στα 390px μια στήλη 150px αφήνει
+     στο όνομα λιγότερο από τη μισή οθόνη. */
+  .bio-head--face{
+    grid-template-columns: 1fr;
+    grid-template-areas: 'face' 'label' 'name' 'role' 'facts' 'spark';
+    row-gap: 0;
+  }
+
+  .bio-face{
+    width: 112px;
+    height: 112px;
+    margin-bottom: 1rem;
+  }
+}
 
 .bio-name{
   font-family: var(--serif);
