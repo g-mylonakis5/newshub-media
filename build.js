@@ -236,7 +236,14 @@ const SUMMARY_LEAD = [
 ];
 
 function stripBoilerplate(text){
-  let t = String(text || '').replace(/\s+/g, ' ').trim();
+  // Τα κενά μαζεύονται ΜΕΣΑ στη γραμμή. Οι αλλαγές γραμμής είναι οι
+  // παράγραφοι του Buzzsprout και πρέπει να φτάσουν ως το summaryHtml —
+  // ένα σκέτο \s+ τις έτρωγε, και η περιγραφή έβγαινε ένα κατεβατό.
+  let t = String(text || '')
+    .split('\n')
+    .map((line) => line.replace(/\s+/g, ' ').trim())
+    .filter(Boolean)
+    .join('\n');
 
   // Σε βρόχο, γιατί έρχονται και με την αντίστροφη σειρά: άλλοτε
   // «🎙️(ημερομηνία) Τα podcasts του Newshub.gr», άλλοτε το ανάποδο.
@@ -258,7 +265,8 @@ function stripBoilerplate(text){
 
 // Κόβει σε καθαρό μήκος για περιγραφή — χωρίς να σπάει λέξη στη μέση.
 function clip(text, max = 160){
-  const t = stripBoilerplate(text);
+  // Μονή γραμμή: πάει σε <meta description> και σε κάρτες.
+  const t = stripBoilerplate(text).replace(/\s+/g, ' ');
   if (t.length <= max) return t;
   return t.slice(0, max).replace(/\s+\S*$/, '') + '…';
 }
@@ -276,6 +284,15 @@ const SUMMARY_POINT = /(?<=[.;!?»])\s+[-–]\s+(?=[Α-ΩΆΈΉΊΌΎΏΪΫA-Z«
 function summaryHtml(text){
   const t = stripBoilerplate(text);
   if (!t) return '';
+
+  // Αληθινές παράγραφοι, όπως τις έγραψε ο συντάκτης στο Buzzsprout.
+  // Όταν υπάρχουν, δεν μαντεύουμε: τις σεβόμαστε όπως είναι.
+  const paras = t.split('\n').map((x) => x.trim()).filter(Boolean);
+  if (paras.length > 1) {
+    return paras
+      .map((x) => `        <p class="episode-summary">${esc(x)}</p>`)
+      .join('\n');
+  }
 
   const bits = t.split(SUMMARY_POINT).map((s) => s.trim()).filter(Boolean);
   const lead = `<p class="episode-summary">${esc(bits[0])}</p>`;
