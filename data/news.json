@@ -1,5 +1,49 @@
 [
   {
+    "id": "soros-andra-entopistike-sti-niso-chrysi",
+    "title": "Σορός άνδρα εντοπίστηκε στη νήσο Χρυσή",
+    "url": "https://www.newshub.gr/el/kriti/soros-andra-entopistike-sti-niso-chrysi",
+    "date": "2026-11-07T14:12:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/limeniko.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/limeniko.jpg",
+    "summary": "Σορός άνδρα, ο οποίος σύμφωνα με πληροφορίες φέρεται να είναι παράτυπος μετανάστης, εντοπίστηκε το μεσημέρι του Σαββάτου σε παραλία της βόρειας πλευράς της ν...",
+    "featured": false
+  },
+  {
+    "id": "megali-entasi-sto-synedrio-tis-kede-meta-tis-kataggelies-doyka-gia-notheia-vinteo",
+    "title": "Μεγάλη ένταση στο συνέδριο της ΚΕΔΕ μετά τις καταγγελίες Δούκα για νοθεία (βίντεο)",
+    "url": "https://www.newshub.gr/el/ellada/megali-entasi-sto-synedrio-tis-kede-meta-tis-kataggelies-doyka-gia-notheia-vinteo",
+    "date": "2026-11-07T14:03:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/doukas-kafantaris.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/doukas-kafantaris.jpg",
+    "summary": "Έντονο επεισόδιο σημειώθηκε στο συνέδριο της Κεντρικής Ένωσης Δήμων Ελλάδας (ΚΕΔΕ), όταν ο δήμαρχος Αθηναίων, Χάρης Δούκας, αμφισβήτησε ανοιχτά τη διαδικασία...",
+    "featured": false
+  },
+  {
+    "id": "peiraias-fotia-se-egkataleleimmeni-diplokatoikia-ypochorise-meros-tis-stegis",
+    "title": "Πειραιάς: Φωτιά σε εγκαταλελειμμένη διπλοκατοικία – Υποχώρησε μέρος της στέγης",
+    "url": "https://www.newshub.gr/el/ellada/peiraias-fotia-se-egkataleleimmeni-diplokatoikia-ypochorise-meros-tis-stegis",
+    "date": "2026-11-07T13:55:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/fotia-kastella__1_.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/fotia-kastella__1_.jpg",
+    "summary": "Πυρκαγιά εκδηλώθηκε το πρωί του Σαββάτου σε εγκαταλελειμμένη διπλοκατοικία στον Πειραιά, σύμφωνα με ενημέρωση από το Πυροσβεστικό Σώμα.\r\n\r\nΣύμφωνα με τις πρώ...",
+    "featured": false
+  },
+  {
+    "id": "chania-ntalika-ntelaparise-ston-dromo-gia-moyzoyra-sto-aerodromio",
+    "title": "Χανιά : Νταλίκα ντελαπάρισε στον δρόμο για Μουζουρά, στο Αεροδρόμιο",
+    "url": "https://www.newshub.gr/el/kriti/chania-ntalika-ntelaparise-ston-dromo-gia-moyzoyra-sto-aerodromio",
+    "date": "2026-11-07T13:44:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/screenshot-2026-11-07-151311.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/screenshot-2026-11-07-151311.jpg",
+    "summary": "Όχημα νταλίκα εξετράπη της πορείας της και ανετράπη το πρωί του Σαββάτου στην περιοχή του Αεροδρομίου Χανίων, στον δρόμο για Μουζουρά.\r\n\r\nΟ οδηγός απεγκλωβίσ...",
+    "featured": false
+  },
+  {
     "id": "tzortz-stefanopoylos-to-asteri-sti-leoforo-tis-doxas-kai-to-asteio-toy-michael-j-fox-gia-tin-ellada",
     "title": "Τζορτζ Στεφανόπουλος: Το αστέρι στη Λεωφόρο της Δόξας και το αστείο του Michael J. Fox για την Ελλάδα",
     "url": "https://www.newshub.gr/el/sugar/tzortz-stefanopoylos-to-asteri-sti-leoforo-tis-doxas-kai-to-asteio-toy-michael-j-fox-gia-tin-ellada",
@@ -8,7 +52,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/tttttt.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/tttttt.jpg",
     "summary": "Μια ξεχωριστή στιγμή στην πολυετή πορεία του στην αμερικανική τηλεόραση έζησε ο George Stephanopoulos, καθώς απέκτησε το δικό του αστέρι στη Λεωφόρο της Δόξα...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "apates-kai-klopes-apo-maimoy-ypalliloys-toy-deddie-leia-ano-ton-565-000-eyro-exi-syllipseis",
@@ -107,7 +151,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/pspspsps.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/pspspsps.jpg",
     "summary": "Πάνω από ένα κιλό κοκαΐνης καθώς και μικρότερη ποσότητα κάνναβης κατείχε και διακινούσε 26χρονος που συνελήφθη στα Χανιά.\r\n\r\nΣτο πλαίσιο των δράσεων που εκπο...",
-    "featured": false
+    "featured": true
   },
   {
     "id": "synechizontai-oi-ergasies-antikatastasis-toy-diktyoy-ydreysis-tis-deyai-stis-odoys-itanoy-chrysostomoy-ch-trikoypi-kai-g-vasilaki",
@@ -6553,50 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/kakopoiese-gynaika.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/kakopoiese-gynaika.jpg",
     "summary": "Ένας άνδρας στη Βρετανία νάρκωνε και βίαζε τη σύζυγό του για περισσότερα από 20 χρόνια και προσκαλούσε αγνώστους να συμμετάσχουν σε μία υπόθεση που θυμίζει έ...",
-    "featured": false
-  },
-  {
-    "id": "netaniachoy-thelei-megalo-synaspismo-me-ton-idio-os-prothypoyrgo-kai-choris-aravika-kommata",
-    "title": "Νετανιάχου: Θέλει  μεγάλο συνασπισμό με τον ίδιο ως πρωθυπουργό και χωρίς αραβικά κόμματα",
-    "url": "https://www.newshub.gr/el/kosmos/netaniachoy-thelei-megalo-synaspismo-me-ton-idio-os-prothypoyrgo-kai-choris-aravika-kommata",
-    "date": "2026-11-02T21:35:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/maketa-netanyahu.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/maketa-netanyahu.jpg",
-    "summary": "Υπέρ της συγκρότησης ενός διευρυμένου κυβερνητικού συνασπισμού χωρίς όμως τη συμμετοχή αραβικών κομμάτων και με τον ίδιο στον πρωθυπουργικό θώκο, τάχθηκε ο α...",
-    "featured": false
-  },
-  {
-    "id": "apates-apo-mko-me-tameio-anergias-dilonan-oti-zoysan-o-egkefalos-kai-i-syntrofos-toy",
-    "title": "Απάτες από ΜΚΟ: Με ταμείο ανεργίας δήλωναν ότι ζούσαν ο «εγκέφαλος» και η σύντροφός του",
-    "url": "https://www.newshub.gr/el/ellada/apates-apo-mko-me-tameio-anergias-dilonan-oti-zoysan-o-egkefalos-kai-i-syntrofos-toy",
-    "date": "2026-11-02T21:30:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/mkodo.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/mkodo.jpg",
-    "summary": "Σοβαρά ερωτήματα για το πώς λειτουργούσε επί χρόνια η ΜΚΟ «Παιδική Χαρά», χωρίς να είναι εγγεγραμμένη στο προβλεπόμενο μητρώο, προκύπτουν από τα ...",
-    "featured": false
-  },
-  {
-    "id": "syntrivi-learjet-sti-florinta-epicheirimatias-me-ti-syzygo-kai-tis-kores-toys-tessera-apo-ta-ennia-thymata",
-    "title": "Συντριβή Learjet στη Φλόριντα: Επιχειρηματίας με τη σύζυγο και τις κόρες τους τέσσερα από τα εννιά θύματα",
-    "url": "https://www.newshub.gr/el/kosmos/syntrivi-learjet-sti-florinta-epicheirimatias-me-ti-syzygo-kai-tis-kores-toys-tessera-apo-ta-ennia-thymata",
-    "date": "2026-11-02T21:20:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/florida_plane_crash_thimarta_mk.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/florida_plane_crash_thimarta_mk.jpg",
-    "summary": "Οι ταυτότητες των εννέα ατόμων που έχασαν τη ζωή τους στη συντριβή του λίαρ τζετ στη Φλόριντα, έγινε γνωστές τη Δευτέρα\r\n\r\nΠρόκειται για διευθυντικό στέλεχος...",
-    "featured": false
-  },
-  {
-    "id": "dyo-ilikiomenes-gynaikes-epesan-thymata-epitideion-chanontas-20-800-eyro",
-    "title": "Δύο ηλικιωμένες γυναίκες έπεσαν θύματα επιτήδειων χάνοντας 20.800 ευρώ",
-    "url": "https://www.newshub.gr/el/ellada/dyo-ilikiomenes-gynaikes-epesan-thymata-epitideion-chanontas-20-800-eyro",
-    "date": "2026-11-02T21:10:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/peripoliko-1068x6001egtph.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/peripoliko-1068x6001egtph.jpg",
-    "summary": "Δύο υποθέσεις κλοπής και απάτης, με θύματα ηλικιωμένες γυναίκες στην Άρτα, εξιχνίασαν οι αστυνομικές αρχές, ταυτοποιώντας έναν άνδρα που φέρεται να εμπλέκετα...",
     "featured": false
   }
 ]
