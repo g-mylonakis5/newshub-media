@@ -145,6 +145,18 @@ body{
 }
 
 .hint{ margin: 0.2rem 0 0; color: var(--muted); font-size: 0.85rem; }
+
+/* Διακόπτης μέσα σε μπλοκ του άρθρου — π.χ. «να ακούγεται εδώ». */
+.blockopt{
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.blockopt input{ width: auto; margin: 0; }
 .muted{ color: var(--muted); }
 .soon{ color: var(--muted); font-style: italic; }
 

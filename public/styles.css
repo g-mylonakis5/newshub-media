@@ -6160,3 +6160,21 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   border-radius: var(--radius);
   background: var(--surface);
 }
+
+/* Κάρτα και player μαζί, ως ΕΝΑ κουτί: η κάρτα λέει τι ακούς, ο player
+   από κάτω το παίζει. Οι εσωτερικές γωνίες ισιώνουν ώστε τα δύο κομμάτια
+   να μη μοιάζουν με δύο ξεχωριστά πλαίσια κολλημένα τυχαία. */
+.art-embed-play{ margin: 2rem 0; }
+.art-embed-play .art-embed-ep{ margin: 0; }
+.art-embed-play .player{ margin: 0; }
+
+.art-embed-play :is(.art-embed-ep, .player):not(:only-child):first-child{
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+}
+
+.art-embed-play :is(.art-embed-ep, .player):not(:only-child):last-child{
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
