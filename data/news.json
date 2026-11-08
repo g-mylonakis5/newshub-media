@@ -1,5 +1,16 @@
 [
   {
+    "id": "irakleio-pagkritios-xesikomos-gia-ti-domi-metanaston-stoys-athanatoys-neo-syllalitirio-simera",
+    "title": "Ηράκλειο: Παγκρήτιος ξεσηκωμός για τη δομή μεταναστών στους Αθανάτους-Νέο συλλαλητήριο σήμερα",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-pagkritios-xesikomos-gia-ti-domi-metanaston-stoys-athanatoys-neo-syllalitirio-simera",
+    "date": "2026-11-08T08:10:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/diam1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/diam1.jpg",
+    "summary": "Ενώ η δομή φιλοξενίας μεταναστών στους Αθανάτους αναμένεται να λειτουργήσει εντός των αμέσως επόμενων ημερών, οι κάτοικοι της περιοχής Ηρακλείου - Μοιρών προ...",
+    "featured": true
+  },
+  {
     "id": "giorgos-papandreoy-prokliseis-kai-prooptikes-gia-tin-ellada-toy-ayrio-to-vinteo-tis-ekdilosis-apo-to-noima-kriti",
     "title": "Γιώργος Παπανδρέου: Προκλήσεις και προοπτικές για την Ελλάδα του αύριο - Το βίντεο της εκδήλωσης από το «ΝΟΗΜΑ - ΚΡΗΤΗ»",
     "url": "https://www.newshub.gr/el/kriti/giorgos-papandreoy-prokliseis-kai-prooptikes-gia-tin-ellada-toy-ayrio-to-vinteo-tis-ekdilosis-apo-to-noima-kriti",
@@ -74,7 +85,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/pyrosvestiki_vradi-1phrik.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/pyrosvestiki_vradi-1phrik.jpg",
     "summary": "Συναγερμός σήμανε στην Πυροσβεστική λίγο από τα μεσάνυχτα του Σαββάτου, για φωτιά που εκδηλώθηκε σε αποθηκευτικό χώρο στον Πλάτανο Ρεθύμνου.\r\n\r\nΣτο σημείο έσ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "thessaloniki-pos-leitoyrgoyse-to-kykloma-me-ti-forodiafygi-mamoyth",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/proionta-periodou.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/proionta-periodou.jpg",
     "summary": "Μείωση του ΦΠΑ στα προϊόντα περιόδου, από το 24% στο 13% με ισχύ από 01/01/2027ανακοίνωσε, μεταξύ άλλων, ο Κυριάκος Μητσοτάκης στην εφ&rsquo;  όλης της ...",
-    "featured": false
-  },
-  {
-    "id": "asfaltostroseis-stis-odoys-odysseias-kai-a-svaitser-ston-xiropotamo",
-    "title": "Ασφαλτοστρώσεις στις οδούς Οδύσσειας και A. Σβάιτσερ στον Ξηροπόταμο",
-    "url": "https://www.newshub.gr/el/kriti/asfaltostroseis-stis-odoys-odysseias-kai-a-svaitser-ston-xiropotamo",
-    "date": "2026-11-03T14:08:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/img_7708.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/img_7708.jpg",
-    "summary": "Συνεχίζεται από το Δήμο Ηρακλείου η υλοποίηση του προγράμματος των ασφαλτοστρώσεων και αποκατάστασης φθορών οδοστρωμάτων, με στόχο τη βελτίωση της οδικής ασφ...",
     "featured": false
   }
 ]
