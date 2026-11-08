@@ -1,5 +1,38 @@
 [
   {
+    "id": "tragodia-stin-thessaloniki-nekri-29chroni-poy-epese-apo-mpalkoni-pemptoy-orofoy",
+    "title": "Τραγωδία στην Θεσσαλονίκη: Νεκρή 29χρονη που έπεσε από μπαλκόνι πέμπτου ορόφου",
+    "url": "https://www.newshub.gr/el/ellada/tragodia-stin-thessaloniki-nekri-29chroni-poy-epese-apo-mpalkoni-pemptoy-orofoy",
+    "date": "2026-11-08T17:14:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/asthenoforo-ekav-eurokinissi1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/asthenoforo-ekav-eurokinissi1.jpg",
+    "summary": "Τραγωδία σημειώθηκε το μεσημέρι της Κυριακής (8/11) στη Θεσσαλονίκη, όπου μία 29χρονη έχασε τη ζωή της μετά από πτώση από μπαλκόνι.\r\n\r\nΤο τραγικό συμβάν έγιν...",
+    "featured": false
+  },
+  {
+    "id": "nikos-dendias-gia-ti-giorti-tis-polemikis-aeroporias-nea-epochi-me-machitika-5is-genias-uav-kai-paroysia-sto-diastima",
+    "title": "Νίκος Δένδιας για τη γιορτή της Πολεμικής Αεροπορίας: Νέα εποχή με μαχητικά 5ης γενιάς, Uav και παρουσία στο διάστημα",
+    "url": "https://www.newshub.gr/el/ellada/nikos-dendias-gia-ti-giorti-tis-polemikis-aeroporias-nea-epochi-me-machitika-5is-genias-uav-kai-paroysia-sto-diastima",
+    "date": "2026-11-08T16:58:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/dendias-new-ena.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/dendias-new-ena.jpg",
+    "summary": "Η Πολεμική Αεροπορία, ισχυρός πυλώνας της εθνικής μας άμυνας, περνά σε μια νέα εποχή, με τα σύγχρονα μαχητικά 5ης γενιάς, τα προηγμένα αντιαεροπορικά και αντ...",
+    "featured": false
+  },
+  {
+    "id": "katanalotika-daneia-antistrofi-metrisi-gia-ta-nea-plafon-ti-allazei",
+    "title": "Καταναλωτικά δάνεια: Αντίστροφη μέτρηση για τα νέα πλαφόν – Τι αλλάζει",
+    "url": "https://www.newshub.gr/el/oikonomia/katanalotika-daneia-antistrofi-metrisi-gia-ta-nea-plafon-ti-allazei",
+    "date": "2026-11-08T16:42:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/kokkina-daneia-euros-1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/kokkina-daneia-euros-1.jpg",
+    "summary": "Από το «πόση είναι η δόση» στο «πόσα θα επιστρέψω συνολικά» μεταφέρεται το βάρος στην καταναλωτική πίστη. Από τις 20 Νοεμβρίου 2026 α...",
+    "featured": false
+  },
+  {
     "id": "gallia-oi-eyropaioi-tha-lavoyn-meros-stis-synomilies-toy-ampoy-ntampi-gia-tin-oykrania",
     "title": "Γαλλία: Οι Ευρωπαίοι θα λάβουν μέρος στις συνομιλίες του Αμπού Ντάμπι για την Ουκρανία",
     "url": "https://www.newshub.gr/el/geopolitiki/gallia-oi-eyropaioi-tha-lavoyn-meros-stis-synomilies-toy-ampoy-ntampi-gia-tin-oykrania",
@@ -8,7 +41,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/ap26293535875008-768x512-1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/ap26293535875008-768x512-1.jpg",
     "summary": "Ο Γάλλος υπουργός των Εξωτερικών Ζαν-Νοέλ Μπαρό δήλωσε ότι οι Ευρωπαίοι θα λάβουν μέρος στις συνομιλίες για την Ουκρανία που θα πραγματοποιηθούν στο Αμπού Ντ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "oi-steges-tis-athinas-mporoyn-na-paragoyn-reyma-axias-117-ekat-eyro-ton-chrono-me-fotovoltaika-ti-apokalyptei-nea-epistimoniki-meleti",
@@ -30,7 +63,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/chania-xania-1280x853.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/chania-xania-1280x853.jpg",
     "summary": "Διαφορετικές ταξιδιωτικές προτιμήσεις και αλλαγές στον χάρτη των δημοφιλέστερων νησιωτικών προορισμών καταγράφονται το φθινόπωρο στην Ελλάδα, με βάση τα στοι...",
-    "featured": false
+    "featured": true
   },
   {
     "id": "israil-elave-kai-episima-entoli-schimatismoy-kyvernisis-o-aizenkot",
@@ -6564,39 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/2618934-scaled-e1793728948826-1024x670.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/2618934-scaled-e1793728948826-1024x670.jpg",
     "summary": "Με τις αιτήσεις χρηματοδότησης να ξεπερνούν κατά σχεδόν 4 εκατ. ευρώ τους διαθέσιμους πόρους ολοκληρώθηκε η διαδικασία υποβολής επενδυτικών σχεδίων για τον ε...",
-    "featured": false
-  },
-  {
-    "id": "endiameses-ekloges-stis-ipa-to-diakyveyma-oi-krisimes-politeies-kai-ta-prognostika-gia-ton-elegcho-toy-kogkresoy",
-    "title": "Eνδιάμεσες εκλογές στις ΗΠΑ: Το διακύβευμα, οι κρίσιμες πολιτείες και τα προγνωστικά για τον έλεγχο του Κογκρέσου",
-    "url": "https://www.newshub.gr/el/geopolitiki/endiameses-ekloges-stis-ipa-to-diakyveyma-oi-krisimes-politeies-kai-ta-prognostika-gia-ton-elegcho-toy-kogkresoy",
-    "date": "2026-11-03T20:16:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/arxeio-lipsis-1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/arxeio-lipsis-1.jpg",
-    "summary": "Εκατομμύρια Αμερικανοί προσέρχονται στις κάλπες των ενδιάμεσων εκλογών σε μία κρίσιμη αναμέτρηση, που θα διαμορφώσει το πολιτικό σκηνικό στις Ηνωμένες Πολιτε...",
-    "featured": false
-  },
-  {
-    "id": "oyggaria-eklechtike-neos-genikos-eisaggeleas-meta-tin-ptosi-toy-ormpan",
-    "title": "Ουγγαρία: Εκλέχτηκε νέος γενικός εισαγγελέας μετά την πτώση του Όρμπαν",
-    "url": "https://www.newshub.gr/el/ellada/oyggaria-eklechtike-neos-genikos-eisaggeleas-meta-tin-ptosi-toy-ormpan",
-    "date": "2026-11-03T20:09:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/fejespeter-xrm.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/fejespeter-xrm.jpg",
-    "summary": "Οι Ούγγροι βουλευτές εξέλεξαν σήμερα νέο γενικό εισαγγελέα στο πλαίσιο της πρωτοβουλίας του πρωθυπουργού Πέτερ Μαγιάρ που έχει στόχο να κάνει να λογοδοτήσει ...",
-    "featured": false
-  },
-  {
-    "id": "serres-exichniastike-i-dolofonia-toy-68chronoy-synelifthi-o-gios-toy-feretai-na-ton-skotose-chtypontas-ton-me-sfyri",
-    "title": "Σέρρες: Εξιχνιάστηκε η δολοφονία του 68χρονου -Συνελήφθη ο γιος του, φέρεται να τον σκότωσε χτυπώντας τον με σφυρί",
-    "url": "https://www.newshub.gr/el/ellada/serres-exichniastike-i-dolofonia-toy-68chronoy-synelifthi-o-gios-toy-feretai-na-ton-skotose-chtypontas-ton-me-sfyri",
-    "date": "2026-11-03T19:58:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/peripoliko-astynomia-eurokinissi.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/peripoliko-astynomia-eurokinissi.jpg",
-    "summary": "Στα χέρια των αστυνομικών βρίσκεται εδώ και λίγη ώρα ο γιος του 68χρονου Γιώργου Χατζίδη ο οποίος κατηγορείται πως δολοφόνησε τον ίδιο του τον πατέρα, προκαλ...",
     "featured": false
   }
 ]
