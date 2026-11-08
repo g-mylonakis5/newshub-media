@@ -1,5 +1,38 @@
 [
   {
+    "id": "dekades-traymaties-apo-seismo-megethoys-5-7-richter-stin-kentriki-iaponia",
+    "title": "Δεκάδες τραυματίες από σεισμό μεγέθους 5,7 Ρίχτερ στην κεντρική Ιαπωνία",
+    "url": "https://www.newshub.gr/el/kosmos/dekades-traymaties-apo-seismo-megethoys-5-7-richter-stin-kentriki-iaponia",
+    "date": "2026-11-08T06:25:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/japan_seismos.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/japan_seismos.jpg",
+    "summary": "Σεισμική δόνηση 5,7 βαθμών είχε αποτέλεσμα να τραυματιστούν πάνω από είκοσι άνθρωποι κατά τη διάρκεια της νύχτας του Σαββάτου προς Κυριακή (σ.σ.: τοπική ώρα)...",
+    "featured": false
+  },
+  {
+    "id": "tromokratiki-epithesi-stin-krakovia-exi-oi-nekroi-toy-akrodexioy-drasti-alloi-treis-stin-katoikia-toy",
+    "title": "Τρομοκρατική επίθεση στην Κρακοβία: Έξι οι νεκροί του ακροδεξιού δράστη, άλλοι τρεις στην κατοικία του",
+    "url": "https://www.newshub.gr/el/kosmos/tromokratiki-epithesi-stin-krakovia-exi-oi-nekroi-toy-akrodexioy-drasti-alloi-treis-stin-katoikia-toy",
+    "date": "2026-11-08T06:20:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/krakow-2-mak.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/krakow-2-mak.jpg",
+    "summary": "Σε σοκ είναι από χθες η Πολωνία μετά την τρομοκρατική επίθεση στο πολυσύχναστο, τουριστικό κέντρο της Κρακοβίας, όταν ένας νεαρός ακροδεξιός άνοιξε πυρ στο π...",
+    "featured": false
+  },
+  {
+    "id": "konstantinos-lagos-to-epos-toy-1940-stoys-aitheres-o-dayid-katanika-ton-goliath-podcast",
+    "title": "Κωνσταντίνος Λαγός: Το Έπος του 1940 στους αιθέρες - Ο Δαυίδ κατανικά τον Γολιάθ! (podcast)",
+    "url": "https://www.newshub.gr/el/istoria-politismos/konstantinos-lagos-to-epos-toy-1940-stoys-aitheres-o-dayid-katanika-ton-goliath-podcast",
+    "date": "2026-11-08T06:15:00.000Z",
+    "category": "Ιστορία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/analyseis-19.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/analyseis-19.jpg",
+    "summary": "Ο Κωνσταντίνος Λαγός, δρ ιστορίας και καθηγητής αεροπορικής ιστορίας στη Σχολή Ικάρων, μίλησε με τον Γιάννη Χαραλαμπίδη στις \"Αναλύσεις\" του N...",
+    "featured": false
+  },
+  {
     "id": "epicheirisi-toy-limeniko-gia-ti-diasosi-28-metanaston-notia-toy-irakleioy-anasyrthike-mia-soros",
     "title": "Επιχείρηση του Λιμενικό για τη διάσωση 28 μεταναστών νότια του Ηρακλείου – Ανασύρθηκε μία σορός",
     "url": "https://www.newshub.gr/el/kriti/epicheirisi-toy-limeniko-gia-ti-diasosi-28-metanaston-notia-toy-irakleioy-anasyrthike-mia-soros",
@@ -8,7 +41,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/limeniko-brady-ta-neah.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/limeniko-brady-ta-neah.jpg",
     "summary": "Υπό δύσκολες καιρικές συνθήκες πραγματοποιήθηκε τα ξημερώματα της Κυριακής,από το Λιμενικό Σώμα, επιχείρηση διάσωσης 28 μεταναστών νότια του Ηρακλείου.\r\n\r\nΣύ...",
-    "featured": false
+    "featured": true
   },
   {
     "id": "mpram-stoker-o-pateras-toy-drakoyla-2",
@@ -96,7 +129,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/asteroysiaori.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/asteroysiaori.jpg",
     "summary": "Ο Μιχάλης Σπυριδάκης, Πρόεδρος του Δικτύου Συλλόγων Μεσσαράς, Π.Ε Χαρτογράφος- Περιβαλλοντολόγος και ειδικός στα γεωχωρικά δεδομένα (GIS) θέτει ερωτήματ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "sali-filnt-sta-80-tis-exakoloythei-na-grafei-istoria-sto-hollywood",
@@ -6564,39 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/iran-1-768x512.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/iran-1-768x512.jpg",
     "summary": "Οι φήμες για χτύπημα των ΗΠΑ στις πυρηνικές εγκαταστάσεις του Ιράν εντείνονται με την Τεχεράνη να δίνει μια σειρά από οδηγίες προς τους πολίτες της.\r\n\r\n...",
-    "featured": false
-  },
-  {
-    "id": "aeroporika-eisitiria-to-rekor-sta-kaysima-ton-aeroplanon-ton-oktovrio-me-alma-114-fernei-akriveia",
-    "title": "Αεροπορικά εισιτήρια: Το ρεκόρ στα καύσιμα των αεροπλάνων τον Οκτώβριο, με άλμα 114%, φέρνει ακρίβεια",
-    "url": "https://www.newshub.gr/el/oikonomia/aeroporika-eisitiria-to-rekor-sta-kaysima-ton-aeroplanon-ton-oktovrio-me-alma-114-fernei-akriveia",
-    "date": "2026-11-03T13:10:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/airport_aeroplano-1280x748.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/airport_aeroplano-1280x748.jpg",
-    "summary": "Το στίγμα για ό,τι αναμένεται να ακολουθήσει με τις τιμές των εισιτηρίων μέσα στο χειμώνα, στη χαμηλή- από άποψη εποχικότητας για την Ευρώπη- σεζόν έδωσε ο Ο...",
-    "featured": false
-  },
-  {
-    "id": "to-iake-fernei-konta-tin-eyropi-kai-tin-topiki-koinonia-mesa-apo-to-eyropaiko-ergo-refulearn",
-    "title": "Το ΙΑΚΕ φέρνει κοντά την Ευρώπη και την τοπική κοινωνία μέσα από το ευρωπαϊκό έργο Refulearn",
-    "url": "https://www.newshub.gr/el/kriti/to-iake-fernei-konta-tin-eyropi-kai-tin-topiki-koinonia-mesa-apo-to-eyropaiko-ergo-refulearn",
-    "date": "2026-11-03T13:05:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/1.jpg",
-    "summary": "Το Ηράκλειο αποτέλεσε σημείο συνάντησης της ευρωπαϊκής συνεργασίας, της εκπαίδευσης και της διαπολιτισμικής επικοινωνίας, φιλοξενώντας τη διήμερη δ...",
-    "featured": false
-  },
-  {
-    "id": "irakleio-paroysiazetai-i-evdomi-poiitiki-syllogi-tis-elenis-moysiadoy-doxastaki",
-    "title": "Ηράκλειο: Παρουσιάζεται η έβδομη ποιητική συλλογή της Ελένης Μωυσιάδου-Δοξαστάκη",
-    "url": "https://www.newshub.gr/el/istoria-politismos/irakleio-paroysiazetai-i-evdomi-poiitiki-syllogi-tis-elenis-moysiadoy-doxastaki",
-    "date": "2026-11-03T13:00:00.000Z",
-    "category": "Ιστορία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/moy.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/moy.jpg",
-    "summary": "Οι Εκδ. Ιωλκός, το βιβλιοπωλείο Ελευθερουδάκης Ηρακλείου και η Λέσχη Ποίησης Ηρακλείου παρουσιάζουν την Έβδομη Ποιητική Συλλογή της Ελένης Μωυσιάδου-Δοξ...",
     "featured": false
   }
 ]
