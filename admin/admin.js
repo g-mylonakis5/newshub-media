@@ -1935,7 +1935,10 @@ function drawBlocks(){
       inner = '<div class="pickline">'
         + '<input type="text" data-bx="id" value="' + esc(b.id || '') + '" placeholder="Buzzsprout-19907711">'
         + '<button type="button" class="btn btn--ghost" data-bfind="' + i + '" data-bkind="podcast">Διάλεξε</button></div>'
-        + '<p class="hint">Διάλεξε από τα επεισόδια — ο κωδικός μπαίνει μόνος του.</p>';
+        + '<label class="blockopt"><input type="checkbox" data-bx="play"'
+        + (b.play ? ' checked' : '') + '> Να ακούγεται μέσα στο άρθρο</label>'
+        + '<p class="hint">Διάλεξε από τα επεισόδια — ο κωδικός μπαίνει μόνος του. '
+        + 'Χωρίς το τσεκ, μπαίνει μόνο κάρτα που οδηγεί στη σελίδα του επεισοδίου.</p>';
     }
 
     return '<div class="block" data-bi="' + i + '">'
@@ -2481,7 +2484,11 @@ function wireArticles(){
     }
 
     var key = field.dataset.bx;
-    b[key] = key === 'id' && blockKind(b) === 'youtube' ? youtubeId(field.value) : field.value;
+    if (field.type === 'checkbox') {
+      b[key] = field.checked;
+    } else {
+      b[key] = key === 'id' && blockKind(b) === 'youtube' ? youtubeId(field.value) : field.value;
+    }
     artDirty(true);
   });
 

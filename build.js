@@ -1746,7 +1746,12 @@ function articleBodyHtml(body){
     // μπει ξένο script στη σελίδα.
     if (p.type === 'embed' && p.id) {
       if (p.kind === 'youtube' && /^[\w-]{6,20}$/.test(p.id)) {
-        return `        <div class="art-embed stage-media" data-embed="${esc(p.id)}">
+        // ΠΛΗΡΗΣ διεύθυνση, όχι σκέτος κωδικός: ο player γράφει
+        // iframe.src = data-embed + '?autoplay=1', όπως ακριβώς κάνει και
+        // στις σελίδες βίντεο, όπου το πεδίο embed είναι ήδη ολόκληρο
+        // το https://www.youtube.com/embed/... Με σκέτο τον κωδικό έβγαινε
+        // σχετικός σύνδεσμος και το βίντεο του άρθρου δεν έπαιζε ποτέ.
+        return `        <div class="art-embed stage-media" data-embed="https://www.youtube.com/embed/${esc(p.id)}">
           <img src="https://i.ytimg.com/vi/${esc(p.id)}/hqdefault.jpg" alt="" loading="lazy">
           <button type="button" class="video-play" aria-label="Αναπαραγωγή">▶</button>
         </div>`;
@@ -1754,13 +1759,45 @@ function articleBodyHtml(body){
       if (p.kind === 'episode') {
         const ep = episodeById(p.id);
         if (ep) {
-          return `        <a class="art-embed-ep queue-row" href="../${episodeUrl(ep)}">
-          ${ep.image ? `<img src="${ep.image}" alt="" loading="lazy">` : '<span class="queue-blank"></span>'}
-          <span class="queue-text">
-            <span class="queue-title">${esc(decode(ep.headline || ep.title))}</span>
-            <span class="queue-meta">Επεισόδιο · ${formatDate(ep.date)}</span>
-          </span>
-        </a>`;
+          const card = `          <a class="art-embed-ep queue-row" href="../${episodeUrl(ep)}">
+            ${ep.image ? `<img src="${ep.image}" alt="" loading="lazy">` : '<span class="queue-blank"></span>'}
+            <span class="queue-text">
+              <span class="queue-title">${esc(decode(ep.headline || ep.title))}</span>
+              <span class="queue-meta">${['Επεισόδιο', formatDate(ep.date), formatDuration(ep.seconds)].filter(Boolean).join(' · ')}</span>
+            </span>
+          </a>`;
+
+          // Με τον διακόπτη του διαχειριστικού το επεισόδιο ΑΚΟΥΓΕΤΑΙ εδώ,
+          // χωρίς ο αναγνώστης να φύγει από το άρθρο. Είναι η ίδια όψη με
+          // τη σελίδα επεισοδίου — το player.js δέχεται ήδη πολλές όψεις
+          // στην ίδια σελίδα και δείχνει σε καθεμία μόνο το δικό της
+          // επεισόδιο, οπότε δύο ενσωματωμένα επεισόδια σε ένα άρθρο δεν
+          // μπερδεύονται. Η κάρτα μένει από πάνω: λέει ΤΙ ακούς, και
+          // οδηγεί στη σελίδα του αν θες περιγραφή και απομαγνητοφώνηση.
+          if (p.play && ep.audio) {
+            const show = episodeShow(ep);
+            return `        <div class="art-embed-play">
+${card}
+          <div class="player" data-player-view
+               data-id="${esc(ep.id)}"
+               data-src="${esc(ep.audio)}"
+               data-title="${esc(decode(ep.headline || ep.title))}"
+               data-show="${esc(show ? showLabel(show) : '')}"
+               data-art="${esc(ep.image || '')}"
+               data-href="../${episodeUrl(ep)}">
+            <button type="button" class="player-skip" data-player="skip" data-by="-15" aria-label="15 δευτερόλεπτα πίσω">−15</button>
+            <button type="button" class="player-play" data-player="toggle" aria-label="Αναπαραγωγή">▶</button>
+            <button type="button" class="player-skip" data-player="skip" data-by="15" aria-label="15 δευτερόλεπτα μπροστά">+15</button>
+            <span class="player-now" data-player-now>0:00</span>
+            <div class="player-bar" data-player="seek" role="slider" tabindex="0" aria-label="Θέση" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="--wave: ${waveMask(ep.id)}">
+              <div class="player-fill"></div>
+            </div>
+            <span class="player-total" data-player-total>--:--</span>
+          </div>
+        </div>`;
+          }
+
+          return `        <div class="art-embed-play">\n${card}\n        </div>`;
         }
         console.warn(`ΠΡΟΣΟΧΗ: ενσωματωμένο επεισόδιο που δεν υπάρχει — ${p.id}`);
       }
