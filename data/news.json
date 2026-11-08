@@ -1,5 +1,16 @@
 [
   {
+    "id": "emvlimatikes-ependyseis-allazoyn-ton-toyristiko-charti-tis-kritis",
+    "title": "Εμβληματικές επενδύσεις αλλάζουν τον τουριστικό χάρτη της Κρήτης",
+    "url": "https://www.newshub.gr/el/kriti/emvlimatikes-ependyseis-allazoyn-ton-toyristiko-charti-tis-kritis",
+    "date": "2026-11-08T14:02:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/kasteli.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/kasteli.jpg",
+    "summary": "Ένα νέο κύμα μεγάλων επενδύσεων, εξαγορών και αναβαθμίσεων αλλάζει τον τουριστικό χάρτη της Κρήτης.\r\n\r\nΑπό την Κίσσαμο και την Τριόπετρα έως την Ελούντα, τη ...",
+    "featured": true
+  },
+  {
     "id": "elas-aparadekti-i-galliki-rimatiki-diakoinosi-stin-toyrkia-gia-to-kalodio",
     "title": "ΕΛΑΣ: «Απαράδεκτη η γαλλική ρηματική διακοίνωση στην Τουρκία για το καλώδιο",
     "url": "https://www.newshub.gr/el/ellada/elas-aparadekti-i-galliki-rimatiki-diakoinosi-stin-toyrkia-gia-to-kalodio",
@@ -107,7 +118,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/shipkalodio-xrm_2ft.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/shipkalodio-xrm_2ft.jpg",
     "summary": "Σε ένα ιδιαίτερα κρίσιμο σημείο εισέρχεται το πολυαναμενόμενο έργο της ηλεκτρικής διασύνδεσης Ελλάδας &ndash; Κύπρου, καθώς οι τεχνικοί σχεδιασμοί καλούνται ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "to-dimofiles-rofima-poy-ta-thorakizei-ta-nefra-ena-flitzani-tin-imera-arkei",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/europeansafety-xrm.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/europeansafety-xrm.jpg",
     "summary": "Η Ευρωπαϊκή Επιτροπή ανακοίνωσε σήμερα (3/11) νέο οδηγό επιβίωσης 72 ωρών για τους Ευρωπαίους σε περίπτωση έκτακτης ανάγκης ή κρίσης.\r\n\r\nΚαθώς η Ευρώπη αντιμ...",
-    "featured": false
-  },
-  {
-    "id": "ekdilosi-gia-tin-papoyra-sto-rethymno-sto-plaisio-toy-14oy-panellinioy-synedrioy-foititon-archaiologias",
-    "title": "Εκδήλωση για την Παπούρα στο Ρέθυμνο, στο πλαίσιο του 14ου Πανελληνίου Συνεδρίου Φοιτητών Αρχαιολογίας",
-    "url": "https://www.newshub.gr/el/kriti/ekdilosi-gia-tin-papoyra-sto-rethymno-sto-plaisio-toy-14oy-panellinioy-synedrioy-foititon-archaiologias",
-    "date": "2026-11-03T18:09:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/mpoumpoulake.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/mpoumpoulake.jpg",
-    "summary": "Με αιχμηρή παρέμβαση για τους χειρισμούς του Υπουργείου Υποδομών και Μεταφορών αλλά και του Υπουργείου Πολιτισμού και σαφές μήνυμα υπέρ της προστασίας του Μν...",
     "featured": false
   }
 ]
