@@ -260,16 +260,40 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  send(file, rel, res);
+});
+
+// Στέλνει το αρχείο — και, αν δεν υπάρχει, ξαναδοκιμάζει με .html.
+//
+// Οι σύνδεσμοι του site δεν γράφουν πια .html: το Cloudflare Pages
+// σερβίρει το /episode/x από το αρχείο x.html μόνο του. Ο τοπικός
+// server δεν το ήξερε αυτό και απαντούσε 404 σε κάθε κλικ, ενώ στον
+// αέρα όλα δούλευαν — το χειρότερο είδος διαφοράς.
+function send(file, rel, res){
   fs.readFile(file, (err, data) => {
-    if (err) {
-      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
-      res.end('<h1>404</h1><p>Δεν βρέθηκε: ' + rel + '</p>');
+    if (!err) {
+      res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream' });
+      res.end(data);
       return;
     }
-    res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream' });
-    res.end(data);
+
+    if (!path.extname(file)) {
+      fs.readFile(file + '.html', (err2, html) => {
+        if (err2) {
+          res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+          res.end('<h1>404</h1><p>Δεν βρέθηκε: ' + rel + '</p>');
+          return;
+        }
+        res.writeHead(200, { 'Content-Type': TYPES['.html'] });
+        res.end(html);
+      });
+      return;
+    }
+
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end('<h1>404</h1><p>Δεν βρέθηκε: ' + rel + '</p>');
   });
-});
+}
 
 server.listen(PORT, () => {
   console.log(`Το site τρέχει στο  http://localhost:${PORT}`);
