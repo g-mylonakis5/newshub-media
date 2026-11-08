@@ -1,5 +1,38 @@
 [
   {
+    "id": "christos-kontis-kaname-ta-panta-sto-gipedo-ektos-apo-to-na-petychoyme-gkol",
+    "title": "Χρήστος Κόντης: «Κάναμε τα πάντα στο γήπεδο εκτός από το να πετύχουμε γκολ»",
+    "url": "https://www.newshub.gr/el/athlitika/christos-kontis-kaname-ta-panta-sto-gipedo-ektos-apo-to-na-petychoyme-gkol",
+    "date": "2026-11-08T19:07:00.000Z",
+    "category": "Αθλητικά",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/7159268.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/7159268.jpg",
+    "summary": "Ικανοποιημένος με την προσπάθεια και τη διάθεση που έβγαλαν οι ποδοσφαιριστές του στο γήπεδο, όχι όμως και με το αποτέλεσμα και τη «λευκή» ισοπαλ...",
+    "featured": false
+  },
+  {
+    "id": "thriler-ston-agio-panteleimona-vrethike-soros-mesa-se-valitsa",
+    "title": "Θρίλερ στον Άγιο Παντελεήμονα: Βρέθηκε σορός μέσα σε βαλίτσα",
+    "url": "https://www.newshub.gr/el/ellada/thriler-ston-agio-panteleimona-vrethike-soros-mesa-se-valitsa",
+    "date": "2026-11-08T19:05:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/maketa-agios-panteleimonas.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/maketa-agios-panteleimonas.jpg",
+    "summary": "Ανθρώπινη σορός μέσα σε βαλίτσα εντοπίστηκε το βράδυ της Κυριακής (8/11) σε πεζοδρόμιο στην περιοχή του Αγίου Παντελεήμονα στο κέντρο της Αθήνας.\r\n\r\nΣύμφωνα ...",
+    "featured": false
+  },
+  {
+    "id": "pano-apo-700-syllipseis-ton-septemvrio-se-oli-tin-kriti-analytika-i-lista-ton-paravaseon",
+    "title": "Πάνω από 700 συλλήψεις τον Σεπτέμβριο σε όλη την Κρήτη - Αναλυτικά η λίστα των παραβάσεων",
+    "url": "https://www.newshub.gr/el/kriti/pano-apo-700-syllipseis-ton-septemvrio-se-oli-tin-kriti-analytika-i-lista-ton-paravaseon",
+    "date": "2026-11-08T19:01:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/astynomia-dias-mkt.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/astynomia-dias-mkt.jpg",
+    "summary": "Περισσότερα από 700 άτομα συνελήφθησαν από την Αστυνομία, σε όλη την Κρήτη, τον περασμένο Σεπτέμβριο.\r\n\r\nΌπως αναφέρεται σε σχετική ανάρτηση στον ιστότοπο τη...",
+    "featured": true
+  },
+  {
     "id": "v-kikilias-oi-polites-evalan-plati-gia-na-orthopodisei-i-chora-stirizoyme-tin-koinonia-den-afinoyme-kanenan-piso",
     "title": "Β. Κικίλιας: «Οι πολίτες έβαλαν πλάτη για να ορθοποδήσει η χώρα – Στηρίζουμε την κοινωνία, δεν αφήνουμε κανέναν πίσω»",
     "url": "https://www.newshub.gr/el/ellada/v-kikilias-oi-polites-evalan-plati-gia-na-orthopodisei-i-chora-stirizoyme-tin-koinonia-den-afinoyme-kanenan-piso",
@@ -74,7 +107,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/img_20261108_170457.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/img_20261108_170457.jpg",
     "summary": "«Δεν έχουμε περιθώριο ούτε για μικρά λάθη» ήταν το σαφές μήνυμα που έστειλε ο Πρόεδρος της Δημοκρατίας, Κωνσταντίνος Τασούλας, από το Ρέθυμ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "tramp-meta-tin-itta-stis-endiameses-ekloges-tha-epistrepsoyme-megalyteroi-kai-ischyroteroi-apo-pote-ti-anaferei-se-anartisi-toy",
@@ -6564,39 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/ladi-biannos.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/ladi-biannos.jpg",
     "summary": "Από 3,40 έως 3,70 ευρώ το κιλό είναι οι τιμές παραγωγού ελαιολάδου στο Ηράκλειο την περίοδο αυτή  στην οξύτητα των τριών γραμμών. Την πληροφορία αυτή έχ...",
-    "featured": false
-  },
-  {
-    "id": "adonis-georgiadis-i-veltiosi-poy-yparchei-sto-esy-einai-orati-se-kathe-dimoskopisi",
-    "title": "Άδωνις Γεωργιάδης: Η βελτίωση που υπάρχει στο ΕΣΥ είναι ορατή σε κάθε δημοσκόπηση",
-    "url": "https://www.newshub.gr/el/ellada/adonis-georgiadis-i-veltiosi-poy-yparchei-sto-esy-einai-orati-se-kathe-dimoskopisi",
-    "date": "2026-11-03T21:59:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/georgiadis.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/georgiadis.jpg",
-    "summary": "Ορατή σε κάθε δημοσκόπηση είναι πλέον η βελτίωση η οποία που υφίσταται στο ΕΣΥ της χώρας μας, δήλωσε πριν από λίγη ώρα ο υπουργός Υγείας, Άδωνις Γεωργιάδης, ...",
-    "featured": false
-  },
-  {
-    "id": "pano-apo-50-ellines-ypopsifioi-stis-amerikanikes-ekloges-o-ypopsifios-geroysiastis-oi-voyleytes-oi-politeiakoi-ypoyrgoi-kai-o-iroas-toy-trenoy",
-    "title": "Πάνω από 50 Έλληνες υποψήφιοι στις αμερικανικές εκλογές: Ο υποψήφιος γερουσιαστής, οι βουλευτές, οι πολιτειακοί υπουργοί και ο «ήρωας του τρένου»",
-    "url": "https://www.newshub.gr/el/geopolitiki/pano-apo-50-ellines-ypopsifioi-stis-amerikanikes-ekloges-o-ypopsifios-geroysiastis-oi-voyleytes-oi-politeiakoi-ypoyrgoi-kai-o-iroas-toy-trenoy",
-    "date": "2026-11-03T21:48:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/amerikanikes-ekloges-endiameses1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/amerikanikes-ekloges-endiameses1.jpg",
-    "summary": "Τη δική τους μάχη στις ενδιάμεσες εκλογές των Ηνωμένων Πολιτειών δίνουν ομογενείς υποψήφιοι για να διατηρήσουν τις θέσεις τους στα δημόσια αξιώματα.\r\n\r\nΠερισ...",
-    "featured": false
-  },
-  {
-    "id": "oykrania-i-proin-ekprosopos-toy-zelenski-katigoreitai-gia-eschati-prodosia",
-    "title": "Ουκρανία: Η πρώην εκπρόσωπος του Ζελένσκι κατηγορείται για «εσχάτη προδοσία»",
-    "url": "https://www.newshub.gr/el/kosmos/oykrania-i-proin-ekprosopos-toy-zelenski-katigoreitai-gia-eschati-prodosia",
-    "date": "2026-11-03T21:37:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/iuliia-mendel-1024x683.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/iuliia-mendel-1024x683.jpg",
-    "summary": "Η πρώην εκπρόσωπος του Βολοντίμιρ Ζελένσκι, η Γιούλια Μέντελ, η οποία έγινε τα τελευταία χρόνια μια από τις πιο επικριτικές φωνές απέναντι στον Ουκρανό πρόεδ...",
     "featured": false
   }
 ]
