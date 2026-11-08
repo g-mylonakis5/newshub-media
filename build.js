@@ -1421,10 +1421,30 @@ function heroBanner(item){
 
 // Τα βίντεο από τις λίστες του YouTube. Κάθε βίντεο ξέρει ήδη σε ποια
 // εκπομπή ανήκει — δεν μαντεύουμε τίποτα, ήρθε μέσα από τη λίστα της.
+//
+// Διαβάζεται ΜΙΑ φορά και μένει στη μνήμη: δέκα σημεία το ζητούν, και
+// κάθε φορά ξαναδιάβαζε και ξαναδιάβαζε 2MB JSON.
+//
+// Το ίδιο βίντεο σε δύο λίστες μένει δύο φορές ΕΠΙΤΗΔΕΣ — έτσι φαίνεται
+// και στις δύο εκπομπές. Φεύγουν μόνο οι πανομοιότυπες εγγραφές (ίδιο
+// βίντεο, ίδια εκπομπή), που έδειχναν το ίδιο βίντεο δύο φορές στη σειρά
+// μέσα στην ίδια λωρίδα. Το ξεκαθάρισμα γίνεται και εδώ και στο
+// fetch-videos.js: το δεύτερο θέλει YOUTUBE_API_KEY για να ξανατρέξει,
+// οπότε το build δεν πρέπει να περιμένει καθαρό αρχείο για να δουλέψει.
+let videoCache;
 function loadVideos(){
+  if (videoCache) return videoCache;
   if (!fs.existsSync(VIDEO_FILE)) return [];
   try {
-    return JSON.parse(fs.readFileSync(VIDEO_FILE, 'utf8'));
+    const all = JSON.parse(fs.readFileSync(VIDEO_FILE, 'utf8'));
+    const seenPairs = new Set();
+    videoCache = all.filter((v) => {
+      const pair = `${v.id}|${v.show}`;
+      if (seenPairs.has(pair)) return false;
+      seenPairs.add(pair);
+      return true;
+    });
+    return videoCache;
   } catch (err) {
     console.warn('ΠΡΟΣΟΧΗ: το data/videos.json δεν διαβάζεται —', err.message);
     return [];

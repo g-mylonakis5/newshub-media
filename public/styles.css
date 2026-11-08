@@ -4706,8 +4706,15 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin: -1rem 0 2rem;
+  margin: 1rem 0 2rem;
 }
+
+/* Το -1rem μαζεύει το κενό ΜΟΝΟ όταν από πάνω κάθεται ο player, που έχει
+   δικό του margin-bottom 1.75rem. Στα βίντεο χωρίς δίδυμο επεισόδιο δεν
+   υπάρχει player: εκεί η λωρίδα ανέβαινε κάτω από τη μικρογραφία και,
+   επειδή το .stage-media είναι position:relative, η εικόνα ζωγραφιζόταν
+   από πάνω της και έκρυβε τα κουμπιά. */
+.player + .strip{ margin-top: -1rem; }
 
 .strip .modes{ margin: 0; }
 
