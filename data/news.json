@@ -1,5 +1,49 @@
 [
   {
+    "id": "ypothesi-mazonaki-sto-mikroskopio-ton-archon-ta-minymata-kai-i-promitheia-anaisthitikon-farmakon",
+    "title": "Υπόθεση Μαζωνάκη: Στο μικροσκόπιο των Αρχών τα μηνύματα και η προμήθεια αναισθητικών φαρμάκων",
+    "url": "https://www.newshub.gr/el/ellada/ypothesi-mazonaki-sto-mikroskopio-ton-archon-ta-minymata-kai-i-promitheia-anaisthitikon-farmakon",
+    "date": "2026-11-08T08:50:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/mazo4.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/mazo4.jpg",
+    "summary": "Τη γυναίκα που φέρεται να προμήθευε φάρμακα αναισθησίας στο ιατρείο όπου κατέρρευσε ο Γιώργος Μαζωνάκης εξετάζουν οι Αρχές, στο πλαίσιο της έρευνας για τον θ...",
+    "featured": false
+  },
+  {
+    "id": "mitsotakis-gia-kalodio-kritis-kyproy-simantiko-vima-i-ekdosi-tis-navtex",
+    "title": "Μητσοτάκης για καλώδιο Κρήτης-Κύπρου: «Σημαντικό βήμα η έκδοση της Navtex»",
+    "url": "https://www.newshub.gr/el/politiki/mitsotakis-gia-kalodio-kritis-kyproy-simantiko-vima-i-ekdosi-tis-navtex",
+    "date": "2026-11-08T08:40:00.000Z",
+    "category": "Πολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/mitsotakis-mak.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/mitsotakis-mak.jpg",
+    "summary": "Στον απόηχο των αμερικανικών ενδιάμεσων εκλογών, αλλά και με αναφορές στην επανεκκίνηση των ερευνών για την ηλεκτρική διασύνδεση Ελλάδας &ndash; Κύπρου, την ...",
+    "featured": false
+  },
+  {
+    "id": "stayros-xarchakos-ektaktoi-logoi-ygeias-ton-kratise-makria-apo-to-festival-thessalonikis",
+    "title": "Σταύρος Ξαρχάκος: Έκτακτοι λόγοι υγείας τον κράτησε μακριά από το Φεστιβάλ Θεσσαλονίκης",
+    "url": "https://www.newshub.gr/el/ellada/stayros-xarchakos-ektaktoi-logoi-ygeias-ton-kratise-makria-apo-to-festival-thessalonikis",
+    "date": "2026-11-08T08:30:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/xarchakos.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/xarchakos.jpg",
+    "summary": "Ένα ξαφνικό πρόβλημα υγείας στάθηκε αιτία ώστε ο Σταύρος Ξαρχάκος να μην μπορέσει να ταξιδέψει στη Θεσσαλονίκη, για να παραλάβει ο ίδιος τον «Χρυσό Αλέ...",
+    "featured": false
+  },
+  {
+    "id": "synantisi-ergasias-gia-zitimata-tis-paraktias-periochis-stomioy-ammoydaron-ierapetras",
+    "title": "Συνάντηση εργασίας για ζητήματα της παράκτιας περιοχής Στομίου – Αμμουδάρων Ιεράπετρας",
+    "url": "https://www.newshub.gr/el/kriti/synantisi-ergasias-gia-zitimata-tis-paraktias-periochis-stomioy-ammoydaron-ierapetras",
+    "date": "2026-11-08T08:20:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/1-59.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/1-59.jpg",
+    "summary": "Συνάντηση εργασίας πραγματοποιήθηκε στο γραφείο του Αντιπεριφερειάρχη Λασιθίου, Γιάννη Ανδρουλάκη, με τη συμμετοχή του Προέδρου της Κοινότητας Νέας Ανατολής,...",
+    "featured": false
+  },
+  {
     "id": "irakleio-pagkritios-xesikomos-gia-ti-domi-metanaston-stoys-athanatoys-neo-syllalitirio-simera",
     "title": "Ηράκλειο: Παγκρήτιος ξεσηκωμός για τη δομή μεταναστών στους Αθανάτους-Νέο συλλαλητήριο σήμερα",
     "url": "https://www.newshub.gr/el/kriti/irakleio-pagkritios-xesikomos-gia-ti-domi-metanaston-stoys-athanatoys-neo-syllalitirio-simera",
@@ -6553,50 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/dome-athanaton-proso.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/dome-athanaton-proso.jpg",
     "summary": "Στην τελική ευθεία εχει μπεί η λειτουργία της Δομής στις αποθήκες Σκουλούδη, στην περιοχή των Αθανάτων, κάτι που πιστοποιεί και η άφιξη του Γενικού...",
-    "featured": false
-  },
-  {
-    "id": "synergasia-dimarchoy-rethymnis-me-ton-presvi-tis-indias-stin-ellada",
-    "title": "Συνεργασία Δημάρχου Ρεθύμνης με τον Πρέσβη της Ινδίας στην Ελλάδα.",
-    "url": "https://www.newshub.gr/el/kriti/synergasia-dimarchoy-rethymnis-me-ton-presvi-tis-indias-stin-ellada",
-    "date": "2026-11-03T14:40:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/presbes-1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/presbes-1.jpg",
-    "summary": "Συνεργασία με τον Πρέσβη της Ινδίας στην Ελλάδα κ.  Ravi Shankar είχε σήμερα ο Δήμαρχος Ρεθύμνης κ. Γιώργης Μαρινάκης, στο πλαίσιο εθιμοτυπικής επίσκεψη...",
-    "featured": false
-  },
-  {
-    "id": "stachti-354-000-stremmata-to-2026-apo-12-megales-foties-to-80-ton-kamenon-metaxy-ayton-kai-toy-rethymnoy",
-    "title": "«Στάχτη» 354.000 στρέμματα το 2026– Από 12 μεγάλες φωτιές το 80% των καμένων- Μεταξύ αυτών και του Ρεθύμνου",
-    "url": "https://www.newshub.gr/el/kriti/stachti-354-000-stremmata-to-2026-apo-12-megales-foties-to-80-ton-kamenon-metaxy-ayton-kai-toy-rethymnoy",
-    "date": "2026-11-03T14:31:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/pyroprostasia.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/pyroprostasia.jpg",
-    "summary": "Στη δημοσιότητα δόθηκε την Τρίτη η ολοκληρωμένη ανασκόπηση της αντιπυρικής περιόδου του 2026, την οποία επιμελήθηκε από κοινού το WWF Ελλάς, η Πυρομετεωρολογ...",
-    "featured": false
-  },
-  {
-    "id": "evdomada-mitrikoy-thilasmoy-sto-rethymno-protovoylies-me-stocho-tin-enimerosi-tis-topikis-koinonias",
-    "title": "Εβδομάδα Μητρικού Θηλασμού στο Ρέθυμνο: Πρωτοβουλίες με στόχο την ενημέρωση της τοπικής κοινωνίας",
-    "url": "https://www.newshub.gr/el/kriti/evdomada-mitrikoy-thilasmoy-sto-rethymno-protovoylies-me-stocho-tin-enimerosi-tis-topikis-koinonias",
-    "date": "2026-11-03T14:23:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/shutterstock_257304877.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/shutterstock_257304877.jpg",
-    "summary": "Η Διεύθυνση Κοινωνικών Υπηρεσιών Δ. Ρεθύμνης και η αρμόδια αντιδήμαρχος Δρ. Άννα Ελευθεριάδου- Γκίκα,  με αφορμή την Παγκόσμια Εβδομάδα Μητρικού Θηλασμο...",
-    "featured": false
-  },
-  {
-    "id": "proionta-periodoy-meionetai-sto-13-o-fpa-exetazetai-dorean-diathesi-se-scholeia",
-    "title": "Προϊόντα περιόδου: Μειώνεται στο 13% ο ΦΠΑ – Εξετάζεται δωρεάν διάθεση σε σχολεία",
-    "url": "https://www.newshub.gr/el/ygeia/proionta-periodoy-meionetai-sto-13-o-fpa-exetazetai-dorean-diathesi-se-scholeia",
-    "date": "2026-11-03T14:16:00.000Z",
-    "category": "Υγεία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/proionta-periodou.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/proionta-periodou.jpg",
-    "summary": "Μείωση του ΦΠΑ στα προϊόντα περιόδου, από το 24% στο 13% με ισχύ από 01/01/2027ανακοίνωσε, μεταξύ άλλων, ο Κυριάκος Μητσοτάκης στην εφ&rsquo;  όλης της ...",
     "featured": false
   }
 ]
