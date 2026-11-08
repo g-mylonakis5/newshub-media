@@ -1,5 +1,16 @@
 [
   {
+    "id": "stena-toy-ormoyz-stis-floges-dyo-tanker-poy-epesan-pano-se-narkes",
+    "title": "Στενά του Ορμούζ: Στις φλόγες δύο τάνκερ που έπεσαν πάνω σε νάρκες",
+    "url": "https://www.newshub.gr/el/geopolitiki/stena-toy-ormoyz-stis-floges-dyo-tanker-poy-epesan-pano-se-narkes",
+    "date": "2026-11-08T07:10:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/hormou.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/hormou.jpg",
+    "summary": "Ακόμη δυο πετρελαιοφόρα δεξαμενόπλοια βρίσκονται πλέον στις φλόγες στα στενά του Ορμούζ, καθώς χτυπήθηκαν από θαλάσσιες νάρκες καθώς προσπαθούσαν να το διασχ...",
+    "featured": false
+  },
+  {
     "id": "rethymno-olonychtia-machi-me-tis-floges-se-apothiki-ston-platano-megali-kinitopoiisi-tis-pyrosvestikis",
     "title": "Ρέθυμνο: Ολονύχτια «μάχη» με τις φλόγες σε αποθήκη στον Πλάτανο-Μεγάλη κινητοποίηση της Πυροσβεστικής",
     "url": "https://www.newshub.gr/el/kriti/rethymno-olonychtia-machi-me-tis-floges-se-apothiki-ston-platano-megali-kinitopoiisi-tis-pyrosvestikis",
@@ -8,7 +19,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/pyrosvestiki_vradi-1phrik.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/pyrosvestiki_vradi-1phrik.jpg",
     "summary": "Συναγερμός σήμανε στην Πυροσβεστική λίγο από τα μεσάνυχτα του Σαββάτου, για φωτιά που εκδηλώθηκε σε αποθηκευτικό χώρο στον Πλάτανο Ρεθύμνου.\r\n\r\nΣτο σημείο έσ...",
-    "featured": false
+    "featured": true
   },
   {
     "id": "thessaloniki-pos-leitoyrgoyse-to-kykloma-me-ti-forodiafygi-mamoyth",
@@ -85,7 +96,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/limeniko-brady-ta-neah.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/limeniko-brady-ta-neah.jpg",
     "summary": "Υπό δύσκολες καιρικές συνθήκες πραγματοποιήθηκε τα ξημερώματα της Κυριακής,από το Λιμενικό Σώμα, επιχείρηση διάσωσης 28 μεταναστών νότια του Ηρακλείου.\r\n\r\nΣύ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "mpram-stoker-o-pateras-toy-drakoyla-2",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/20261103_094614851_ios.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/20261103_094614851_ios.jpg",
     "summary": "Τριήμερη επίσκεψη πραγματοποίησε η Πρόεδρος του Περιφερειακού Συμβουλίου Κρήτης και συντονίστρια της δράσης «Πάμε για χόρτα» Σοφία Μαλανδράκη-Κρα...",
-    "featured": false
-  },
-  {
-    "id": "pierrakakis-epitokio-3-gia-rythmiseis-ston-exodikastiko-michanismo-dekaplasiazontai-ta-prostima-stoys-servicers",
-    "title": "Πιερρακάκης: Επιτόκιο 3% για ρυθμίσεις στον εξωδικαστικό μηχανισμό-Δεκαπλασιάζονται τα πρόστιμα στους Servicers",
-    "url": "https://www.newshub.gr/el/oikonomia/pierrakakis-epitokio-3-gia-rythmiseis-ston-exodikastiko-michanismo-dekaplasiazontai-ta-prostima-stoys-servicers",
-    "date": "2026-11-03T13:35:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/perrakakis-eurogroup-mak2.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/perrakakis-eurogroup-mak2.jpg",
-    "summary": "Τη θέσπιση σταθερού επιτοκίου 3% για ευάλωτους και επιλέξιμους οφειλέτες που ρυθμίζουν τα χρέη τους μέσω του εξωδικαστικού μηχανισμού, καθώς και τον δεκαπλασ...",
     "featured": false
   }
 ]
