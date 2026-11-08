@@ -1,5 +1,16 @@
 [
   {
+    "id": "kalodio-kritis-kyproy-stin-teliki-eytheia-i-epanekkinisi-ton-ereynon-antistrofi-metrisi-gia-ton-apoploy-toy-abeille-marengo",
+    "title": "Καλώδιο Κρήτης-Κύπρου: Στην τελική ευθεία η επανεκκίνηση των ερευνών-Αντίστροφη μέτρηση για τον απόπλου του Abeille Marengo",
+    "url": "https://www.newshub.gr/el/geopolitiki/kalodio-kritis-kyproy-stin-teliki-eytheia-i-epanekkinisi-ton-ereynon-antistrofi-metrisi-gia-ton-apoploy-toy-abeille-marengo",
+    "date": "2026-11-08T12:20:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/shipkalodio-xrm_2ft.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/shipkalodio-xrm_2ft.jpg",
+    "summary": "Σε ένα ιδιαίτερα κρίσιμο σημείο εισέρχεται το πολυαναμενόμενο έργο της ηλεκτρικής διασύνδεσης Ελλάδας &ndash; Κύπρου, καθώς οι τεχνικοί σχεδιασμοί καλούνται ...",
+    "featured": true
+  },
+  {
     "id": "to-dimofiles-rofima-poy-ta-thorakizei-ta-nefra-ena-flitzani-tin-imera-arkei",
     "title": "Το δημοφιλές ρόφημα που τα θωρακίζει τα νεφρά - Ένα φλιτζάνι την ημέρα αρκεί",
     "url": "https://www.newshub.gr/el/ygeia/to-dimofiles-rofima-poy-ta-thorakizei-ta-nefra-ena-flitzani-tin-imera-arkei",
@@ -96,7 +107,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/892207387_1167066082330341_3544324741541678467_n.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/892207387_1167066082330341_3544324741541678467_n.jpg",
     "summary": "Αναβρασμός επικρατεί στην περιοχή των Αθανάτων, για τη δομή μεταναστών που αναμένεται να λειτουργήσει εντός των αμέσως επόμενων ημερών στις πρώην αποθήκες Σκ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "kifisia-15chronos-choris-diploma-odigoyse-me-187-chlm-stin-ethniki-odo",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/agrotes-trakter.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/agrotes-trakter.jpg",
     "summary": "Έως και 22 ευρώ το στρέμμα μπορεί να εξασφαλίσει ένας αγρότης που συμμετέχει στο οικολογικό πρόγραμμα (eco schemes) Π1-31.4 «Επέκταση κυκλικής οικονομί...",
-    "featured": false
-  },
-  {
-    "id": "se-toyristiki-ekthesi-sto-londino-o-dimos-agioy-nikolaoy",
-    "title": "Σε τουριστική έκθεση στο Λονδίνο ο Δήμος Αγίου Νικολάου",
-    "url": "https://www.newshub.gr/el/kriti/se-toyristiki-ekthesi-sto-londino-o-dimos-agioy-nikolaoy",
-    "date": "2026-11-03T17:10:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/1-2.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/1-2.jpg",
-    "summary": "Με στόχο την ενίσχυση της διεθνούς παρουσίας του Αγίου Νικολάου στον τομέα του θαλάσσιου τουρισμού και την ανάδειξη της περιοχής ως προορισμού υψηλών προδιαγ...",
     "featured": false
   }
 ]
