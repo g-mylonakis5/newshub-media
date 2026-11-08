@@ -324,6 +324,47 @@ function assetVersion(name){
   return stamps[name] ? `?v=${stamps[name]}` : '';
 }
 
+// ---- καθαρές διευθύνσεις ----
+//
+// Στον δίσκο τα αρχεία μένουν .html — έτσι τα σερβίρει το Cloudflare
+// Pages. Στους συνδέσμους όμως το .html δεν φαίνεται πουθενά.
+//
+// Δεν είναι καλλωπισμός. Το Pages κάνει 308 κάθε /x.html σε /x, οπότε
+// κάθε κλικ πλήρωνε ένα περιττό ταξίδι. Και το player.js, που πλοηγεί
+// μόνο του για να μη σταματά ο ήχος, έγραφε στη μπάρα διευθύνσεων το
+// href αυτούσιο: ο επισκέπτης έβλεπε «newshubmedia.gr/index.html».
+//
+// Γίνεται σε ΕΝΑ σημείο, πάνω στην έτοιμη σελίδα, αντί σε πενήντα
+// σημεία που φτιάχνουν href. Δύο αντίγραφα ενός κανόνα αποκλίνουν.
+function cleanUrl(u){
+  if (!u) return u;
+  return u
+    .replace(/(^|\/)index\.html(?=$|[#?])/, '$1')
+    .replace(/\.html(?=$|[#?])/, '');
+}
+
+function cleanHref(u){
+  if (!u || u.startsWith('#') || u.startsWith('mailto:')) return u;
+
+  // Ξένοι σύνδεσμοι μένουν ΑΚΡΙΒΩΣ όπως είναι: το .html τους δεν είναι
+  // δικό μας θέμα, και το newshub.gr όντως σερβίρει τέτοιες διευθύνσεις.
+  if (/^(https?:)?\/\//.test(u) && !u.startsWith(SITE_URL)) return u;
+
+  const out = cleanUrl(u);
+
+  // Άδειο href σημαίνει «η τρέχουσα σελίδα» — όχι η αρχική. Το σκέτο
+  // «index.html» γίνεται «./», που από οποιοδήποτε βάθος δείχνει σωστά.
+  return out === '' ? './' : out;
+}
+
+// Περνάει την έτοιμη σελίδα και καθαρίζει ΟΛΟΥΣ τους συνδέσμους. Το
+// data-href μπαίνει κι αυτό: είναι ο σύνδεσμος που κουβαλάει η μόνιμη
+// μπάρα του player όταν αλλάζει σελίδα.
+function cleanLinks(html){
+  return html.replace(/\b(href|data-href)="([^"]*)"/g,
+    (m, attr, u) => `${attr}="${cleanHref(u)}"`);
+}
+
 function page({ title, body, depth = 0, scripts = [], description = '', image = '', url = '', type = 'website', prev = '', next = '', canonical = '' }){
   const up = depth === 0 ? '' : '../';
   // Ο player φορτώνει ΠΑΝΤΟΥ: κρατάει τον ήχο ζωντανό και αναλαμβάνει την
@@ -335,7 +376,7 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   const desc = esc(clip(description || 'Podcasts, βίντεο και συζητήσεις του newshub.gr — από την Κρήτη και τον κόσμο.'));
   // Με κάθετο στο τέλος — ίδια γραφή με τον κατάλογο sitemap.xml, ώστε η
   // Google να μη βλέπει δύο διευθύνσεις για την ίδια αρχική.
-  const full = `${SITE_URL}/${url}`;
+  const full = `${SITE_URL}/${cleanUrl(url)}`;
   const pic = image || `${SITE_URL}/intro.jpg`;
 
   // Το canonical δείχνει κανονικά στη ΔΙΚΗ μας διεύθυνση. Εξαίρεση: οι
@@ -344,7 +385,7 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   // — αυτός είναι όλος ο σκοπός, το SEO του newshub.gr.
   const canon = canonical || full;
 
-  return `<!DOCTYPE html>
+  return cleanLinks(`<!DOCTYPE html>
 <html lang="el">
 <head>
   <meta charset="utf-8">
@@ -388,7 +429,7 @@ ${playerBar()}
 
 </body>
 </html>
-`;
+`);
 }
 
 
@@ -4216,7 +4257,9 @@ function notFoundPage(){
 // Οι μηχανές αναζήτησης χρειάζονται κατάλογο για να φτάσουν και στις
 // 4.500 σελίδες — ακολουθώντας μόνο συνδέσμους θα έχαναν τα περισσότερα.
 function sitemapXml(urls){
-  const rows = urls.map((u) => `  <url><loc>${SITE_URL}/${u.loc}</loc>${u.date ? `<lastmod>${u.date.slice(0, 10)}</lastmod>` : ''}</url>`).join('\n');
+  // Χωρίς .html, όπως και κάθε σύνδεσμος της σελίδας: αλλιώς ο κατάλογος
+  // στέλνει τη Google σε 4.700 διευθύνσεις που όλες ανακατευθύνουν.
+  const rows = urls.map((u) => `  <url><loc>${SITE_URL}/${cleanUrl(u.loc)}</loc>${u.date ? `<lastmod>${u.date.slice(0, 10)}</lastmod>` : ''}</url>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${rows}
