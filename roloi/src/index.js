@@ -67,6 +67,10 @@ const TELEFTAIO_VARIA = 'teleftaio-varia';
 // και θα σταματούσαν όλα μέχρι το επόμενο εικοσιτετράωρο.
 const VARIA_LEPTA = 60;
 
+// Ο παλμός: κάθε πόσα λεπτά πατάμε το κουμπί ΑΚΟΜΑ ΚΙ ΑΝ δεν άλλαξε
+// τίποτα στο sitemap. Δες το σχόλιο στο koitaKaiPata για το γιατί.
+const KARDIA_LEPTA = 5;
+
 // Το πάτωμα: ελάχιστη απόσταση δύο τρεξιμάτων, σε λεπτά.
 //
 // Ήταν 15, και ΔΕΝ ήταν τεχνικός περιορισμός — ήταν λογαριασμός. Το
@@ -180,20 +184,30 @@ async function koitaKaiPata(env, anagkastika = false) {
   const perasanVaria = (Date.now() - poteVaria) / 60000;
   const thelouneVaria = perasanVaria >= VARIA_LEPTA;
 
-  if (!anagkastika && tora === prin && !thelouneVaria) {
-    return 'Τίποτα καινούριο — δεν ξύπνησα κανέναν.';
-  }
-
-  // Το πάτωμα. Μπαίνει ΜΕΤΑ τον έλεγχο αλλαγής, όχι πριν: θέλουμε να
-  // σώσουμε το αποτύπωμα ακόμα κι όταν δεν πατάμε, αλλιώς την επόμενη
-  // φορά θα νομίζαμε ξανά ότι υπάρχει αλλαγή.
-  //
-  // Τα βαριά ΠΡΟΣΠΕΡΝΟΥΝ το πάτωμα: έρχονται μία φορά την ώρα, πολύ πιο
-  // αραιά από αυτό, και δεν έχει νόημα να τα καθυστερήσει.
+  // Πόση ώρα από το τελευταίο πάτημα. Διαβάζεται ΠΡΙΝ από τον έλεγχο
+  // αλλαγής, γιατί το χρειάζεται και ο παλμός παρακάτω.
   const pote = Number(await env.ROI.get(TELEFTAIO)) || 0;
   const perasan = (Date.now() - pote) / 60000;
 
-  if (!anagkastika && !thelouneVaria && perasan < PATOMA_LEPTA) {
+  // Ο παλμός: πάτημα και χωρίς καμία αλλαγή στο sitemap.
+  //
+  // Το sitemap είναι ΜΟΝΟ των ειδήσεων του newshub.gr. Τα επεισόδια του
+  // Buzzsprout κατεβαίνουν σε κάθε τρέξιμο, αλλά έκαναν ωτοστόπ σε μια
+  // είδηση: αν ανέβαινε επεισόδιο και δεν έβγαινε είδηση για δύο ώρες —
+  // τυπικό τη νύχτα — το επεισόδιο περίμενε την επόμενη είδηση.
+  //
+  // Δεν σπαταλάει τίποτα. Το τρέξιμο κάνει commit μόνο αν όντως κατέβηκε
+  // κάτι καινούριο, άρα το site δεν ξαναχτίζεται στο κενό. Και τα λεπτά
+  // του Actions είναι πλέον δωρεάν — το repo έγινε δημόσιο.
+  const kardia = perasan >= KARDIA_LEPTA;
+
+  if (!anagkastika && tora === prin && !thelouneVaria && !kardia) {
+    return 'Τίποτα καινούριο — δεν ξύπνησα κανέναν.';
+  }
+
+  // Το πάτωμα, μόνο για τις ειδήσεις. Τα βαριά και ο παλμός το
+  // ΠΡΟΣΠΕΡΝΟΥΝ: έρχονται ούτως ή άλλως πολύ πιο αραιά από αυτό.
+  if (!anagkastika && !thelouneVaria && !kardia && perasan < PATOMA_LEPTA) {
     const meno = (PATOMA_LEPTA - perasan).toFixed(1);
     return `Υπάρχει καινούριο, αλλά πάτησα πριν ${perasan.toFixed(1)}'`
       + ` — περιμένω άλλα ${meno}'.`;
@@ -208,9 +222,12 @@ async function koitaKaiPata(env, anagkastika = false) {
   await env.ROI.put(TELEFTAIO, String(Date.now()));
   if (thelouneVaria) await env.ROI.put(TELEFTAIO_VARIA, String(Date.now()));
 
-  return thelouneVaria
-    ? `Το πάτησα ΜΕ βίντεο (πέρασαν ${perasanVaria.toFixed(0)}'). Αποτύπωμα: ${tora}`
-    : `Το πάτησα. Αποτύπωμα: ${tora}`;
+  if (thelouneVaria) {
+    return `Το πάτησα ΜΕ βίντεο (πέρασαν ${perasanVaria.toFixed(0)}').`
+      + ` Αποτύπωμα: ${tora}`;
+  }
+  if (tora === prin) return `Παλμός — πάτησα χωρίς αλλαγή στο sitemap.`;
+  return `Το πάτησα. Αποτύπωμα: ${tora}`;
 }
 
 // Η ζωντανή ροή, από το Action στο KV.
