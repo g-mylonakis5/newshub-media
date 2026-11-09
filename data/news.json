@@ -1,5 +1,38 @@
 [
   {
+    "id": "irakleio-anasa-gia-tis-epicheiriseis-pano-apo-1-ekat-eyro-apo-to-kentro-ypostirixis-mikropistoseon-toy-epimelitirioy",
+    "title": "Ηράκλειο: «Ανάσα» για τις επιχειρήσεις - Πάνω από 1 εκατ. ευρώ από το Κέντρο Υποστήριξης Μικροπιστώσεων του Επιμελητηρίου",
+    "url": "https://www.newshub.gr/el/oikonomia/irakleio-anasa-gia-tis-epicheiriseis-pano-apo-1-ekat-eyro-apo-to-kentro-ypostirixis-mikropistoseon-toy-epimelitirioy",
+    "date": "2026-11-09T12:14:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "",
+    "image_thumb": "",
+    "summary": "Ιδιαίτερα αποδοτική για τις επιχειρήσεις  και ωφέλιμη για ολόκληρη την τοπική οικονομία αποδεικνύεται η πρωτοβουλία του Επιμελητήριου Ηρακλείου να δημιο...",
+    "featured": false
+  },
+  {
+    "id": "exi-allages-fernei-to-2027-se-foroys-eisfores-kai-tekmirio-epaggelmation-poioi-vgainoyn-ofelimenoi-kai-poioi-chamenoi",
+    "title": "Έξι αλλαγές φέρνει το 2027 σε φόρους, εισφορές και τεκμήριο επαγγελματιών – Ποιοι βγαίνουν ωφελημένοι και ποιοι χαμένοι",
+    "url": "https://www.newshub.gr/el/oikonomia/exi-allages-fernei-to-2027-se-foroys-eisfores-kai-tekmirio-epaggelmation-poioi-vgainoyn-ofelimenoi-kai-poioi-chamenoi",
+    "date": "2026-11-09T12:13:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/ypologismoi.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/ypologismoi.jpg",
+    "summary": "Το 2027 φέρνει έξι αλλαγές για περισσότερους από ένα εκατομμύριο επιτηδευματίες, οι οποίες συνδυαστικά μοιράζουν τους ενδιαφερόμενους σε «δεξαμενές&r...",
+    "featured": true
+  },
+  {
+    "id": "ekdilosi-i-psychagogia-sta-chania-toy-mesopolemoy",
+    "title": "Εκδήλωση: «Η ψυχαγωγία στα Χανιά του Μεσοπολέμου»",
+    "url": "https://www.newshub.gr/el/exodos/ekdilosi-i-psychagogia-sta-chania-toy-mesopolemoy",
+    "date": "2026-11-09T12:05:00.000Z",
+    "category": "Έξοδος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/philologoi-aphisa.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/philologoi-aphisa.jpg",
+    "summary": "Ο Σύνδεσμος Φιλολόγων Νομού Χανίων (Σ.Φ.Ν.Χ.) σε συνδιοργάνωση με την Περιφέρεια Κρήτης-Περιφερειακή Ενότητα Χανίων και το Πνευματικό Κέντρο Χανίων πραγματοπ...",
+    "featured": false
+  },
+  {
     "id": "panelladiki-kinitopoiisi-somateion-melon-ton-pronoiakon-monadon-tin-tetarti-11-noemvrioy",
     "title": "Πανελλαδική Κινητοποίηση Σωματείων Μελών των Προνοιακών Μονάδων την Τετάρτη 11 Νοεμβρίου",
     "url": "https://www.newshub.gr/el/ellada/panelladiki-kinitopoiisi-somateion-melon-ton-pronoiakon-monadon-tin-tetarti-11-noemvrioy",
@@ -250,7 +283,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/kalodioet.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/kalodioet.jpg",
     "summary": "Αντίστροφα μετρά ο χρόνος για την επανέναρξη των ερευνών σχετικά με τo έργο της ηλεκτρικής διασύνδεσης Ελλάδας &ndash; Κύπρου. \r\n\r\nΕντός των επόμενων ωρ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "epidoma-400-eyro-gia-syntaxioychoys-pote-tha-katavlithei-kai-poioi-einai-oi-dikaioychoi",
@@ -6564,39 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/chakercf.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/chakercf.jpg",
     "summary": "Μειωμένες εμφανίστηκαν οι πωλήσεις του τέταρτου τριμήνου του ολλανδικού ομίλου λιανεμπορίου, Ahold Delhaize, του οποίου τα καταστήματα σε Ολλανδία, Βέλγιο κα...",
-    "featured": false
-  },
-  {
-    "id": "diki-gia-tempi-oi-typseis-toy-epizonta-kai-poy-den-voithisa-me-varainoyn-mechri-tora",
-    "title": "Δίκη για Τέμπη: «Οι τύψεις του επιζώντα και που δεν βοήθησα με βαραίνουν μέχρι τώρα»",
-    "url": "https://www.newshub.gr/el/ellada/diki-gia-tempi-oi-typseis-toy-epizonta-kai-poy-den-voithisa-me-varainoyn-mechri-tora",
-    "date": "2026-11-04T14:53:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/dikasterio-tempe.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/dikasterio-tempe.jpg",
-    "summary": "Τρεις επιζώντες της σιδηροδρομικής τραγωδίας στα Τέμπη κατέθεσαν σήμερα (04.11.2026) στην δίκη, περιγράφοντας τις εφιαλτικές στιγμές που έζησαν τα πρώτα δευτ...",
-    "featured": false
-  },
-  {
-    "id": "tragodia-stin-korintho-nekri-odigos-motopodilatoy-meta-apo-sygkroysi-me-agrotiko",
-    "title": "Τραγωδία στην Κόρινθο: Νεκρή οδηγός μοτοποδηλάτου μετά από σύγκρουση με αγροτικό",
-    "url": "https://www.newshub.gr/el/ellada/tragodia-stin-korintho-nekri-odigos-motopodilatoy-meta-apo-sygkroysi-me-agrotiko",
-    "date": "2026-11-04T14:46:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/ekab2che.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/ekab2che.jpg",
-    "summary": "Κατέληξε η 68χρονη οδηγός μοτοποδηλάτου που νοσηλευόταν στο νοσοκομείο Κορίνθου, μετά από σοβαρό τραυματισμό σε τροχαίο με αγροτικό, στην Παλαιά Εθνική Οδό Κ...",
-    "featured": false
-  },
-  {
-    "id": "georgia-fotia-se-tileoptiko-stathmo-tis-antipoliteysis-egklovismenoi-22-dimosiografoi",
-    "title": "Γεωργία: Φωτιά σε τηλεοπτικό σταθμό της αντιπολίτευσης - Εγκλωβισμένοι 22 δημοσιογράφοι",
-    "url": "https://www.newshub.gr/el/kosmos/georgia-fotia-se-tileoptiko-stathmo-tis-antipoliteysis-egklovismenoi-22-dimosiografoi",
-    "date": "2026-11-04T14:39:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/9409121d-georgia-fire.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/9409121d-georgia-fire.jpg",
-    "summary": "Φωτιά έχει ξεσπάσει σε σταθμό τηλεοπτικού καναλιού της Γεωργίας, εγκλωβίζοντας περίπου 22 μέλη του προσωπικού, μεταξύ των οποίων και δημοσιογράφους.\r\n\r\nΣύμφω...",
     "featured": false
   }
 ]
