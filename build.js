@@ -5082,12 +5082,23 @@ function episodePage(ep){
 
   // Η οθόνη. Όπου υπάρχει βίντεο μπαίνουν και τα δύο — βίντεο και
   // εξώφυλλο — και ο διακόπτης αποφασίζει ποιο φαίνεται.
+  //
+  // ΑΝΟΙΓΕΙ ΣΤΟΝ ΗΧΟ, όχι στο βίντεο. Κάθε σελίδα ανοίγει με το δικό
+  // της μέσο: η σελίδα βίντεο με βίντεο, η σελίδα επεισοδίου με ήχο.
+  // Εδώ ήρθες από τη ροή επεισοδίων, με αφίσα, διάρκεια και
+  // απομαγνητοφώνηση — είναι σελίδα podcast.
+  //
+  // Είχε σημασία πέρα από το ύφος: 891 από τις 1.079 σελίδες
+  // επεισοδίου έχουν δίδυμο βίντεο, και όσο άνοιγαν στο «Βλέπω» το
+  // πάτημα του play ξεκινούσε iframe του YouTube. Ο δικός μας player
+  // δεν έτρεχε καθόλου, άρα δεν κρατιόταν θέση και το «Συνέχισε όπου
+  // έμεινες» δεν έβλεπε ποτέ τίποτα στο 83% του αρχείου.
   const stage = twin
-    ? `        <div class="stage-media" data-embed="${twin.embed}">
+    ? `        <div class="stage-media" data-embed="${twin.embed}" hidden>
           <img src="${twin.image}" alt="" loading="lazy">
           <button type="button" class="video-play" aria-label="Αναπαραγωγή">▶</button>
         </div>
-        <div class="stage-art" hidden>
+        <div class="stage-art">
           ${ep.image ? `<img src="${ep.image}" alt="" loading="lazy">` : ''}
         </div>`
     : `        <div class="stage-art">
@@ -5112,10 +5123,14 @@ function episodePage(ep){
       </a>`).join('\n');
 
   // Ο διακόπτης έχει νόημα μόνο όταν υπάρχουν και τα δύο μέσα.
+  //
+  // Το «Ακούω» κρατάει το is-on, ώστε να συμφωνεί με το stage πιο
+  // πάνω: ο διακόπτης πρέπει να δείχνει τι παίζει ΗΔΗ, αλλιώς το
+  // πρώτο πάτημα δεν αλλάζει τίποτα ορατό.
   const toggle = twin
     ? `      <div class="modes">
-        <button type="button" class="mode is-on" data-mode="video">Βλέπω</button>
-        <button type="button" class="mode" data-mode="audio">Ακούω</button>
+        <button type="button" class="mode" data-mode="video">Βλέπω</button>
+        <button type="button" class="mode is-on" data-mode="audio">Ακούω</button>
       </div>`
     : '';
 
