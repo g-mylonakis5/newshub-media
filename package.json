@@ -11,6 +11,7 @@
     "serve": "node serve.js",
     "check:images": "node check-images.js",
     "sync": "git checkout -- data/news.json && git pull --rebase",
+    "sync:uploads": "node sync-uploads.js",
     "index": "npx -y pagefind@latest --site public"
   },
   "engines": {
