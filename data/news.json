@@ -1,5 +1,27 @@
 [
   {
+    "id": "krisimi-synedriasi-toy-ecofin-gia-tis-ayxiseis-foron-sta-kapnika-poso-mporei-na-fthasei-i-timi-toys",
+    "title": "Κρίσιμη συνεδρίαση του Ecofin για τις αυξήσεις φόρων στα καπνικά, πόσο μπορεί να φθάσει η τιμή τους",
+    "url": "https://www.newshub.gr/el/oikonomia/krisimi-synedriasi-toy-ecofin-gia-tis-ayxiseis-foron-sta-kapnika-poso-mporei-na-fthasei-i-timi-toys",
+    "date": "2026-11-09T11:12:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/kapnika.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/kapnika.jpg",
+    "summary": "Σε σαρωτική αναθεώρηση του πλαισίου φορολόγησης των καπνικών προϊόντων προσανατολίζεται η ΕΕ, με στόχο την αύξηση των ελάχιστων ειδικών φόρων κατανάλωσης στα...",
+    "featured": false
+  },
+  {
+    "id": "dimosio-psifiako-frontistirio-enischymeno-apo-simera",
+    "title": "Δημόσιο Ψηφιακό Φροντιστήριο: Ενισχυμένο από σήμερα",
+    "url": "https://www.newshub.gr/el/ellada/dimosio-psifiako-frontistirio-enischymeno-apo-simera",
+    "date": "2026-11-09T11:05:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/psephiako-phront.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/psephiako-phront.jpg",
+    "summary": "Σε ενισχυμένη λειτουργία για τη σχολική χρονιά 2026-2027 περνά από σήμερα, Δευτέρα 9 Νοεμβρίου, το Δημόσιο Ψηφιακό Φροντιστήριο.\r\n\r\nΜε την ένταξη 9 επιπλέον ...",
+    "featured": false
+  },
+  {
     "id": "aade-eos-tis-13-noemvrioy-i-etisia-apografi-aigoprovaton",
     "title": "ΑΑΔΕ: Έως τις 13 Νοεμβρίου η ετήσια απογραφή αιγοπροβάτων",
     "url": "https://www.newshub.gr/el/agronews/aade-eos-tis-13-noemvrioy-i-etisia-apografi-aigoprovaton",
@@ -6575,28 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/endiameses-ekloges-kalpe-epa-reuters.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/endiameses-ekloges-kalpe-epa-reuters.jpg",
     "summary": "Ένας γερουσιαστής για λογαριασμό των Δημοκρατικών και έξι μέλη της Βουλής των Αντιπροσώπων θα εκπροσωπούν το ελληνοαμερικανικό στοιχείο στο Κογκρέσο των ΗΠΑ,...",
-    "featured": false
-  },
-  {
-    "id": "gallia-exairetika-pithani-i-anametrisi-lepen-melanson-ston-v-gyro-ton-proedrikon-eklogon-ti-deichnei-dimoskopisi",
-    "title": "Γαλλία: Εξαιρετικά πιθανή η αναμέτρηση Λεπέν - Μελανσόν στον β’ γύρο των προεδρικών εκλογών – Τι δείχνει δημοσκόπηση",
-    "url": "https://www.newshub.gr/el/kosmos/gallia-exairetika-pithani-i-anametrisi-lepen-melanson-ston-v-gyro-ton-proedrikon-eklogon-ti-deichnei-dimoskopisi",
-    "date": "2026-11-04T13:37:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/lepen.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/lepen.jpg",
-    "summary": "Σχεδόν έξι μήνες πριν από τις προεδρικές εκλογές στη Γαλλία, το ενδεχόμενο αναμέτρησης Λεπέν-Μελανσόν στον δεύτερο γύρο, στις 2 Μαΐου 2027, εμφανίζεται εξαιρ...",
-    "featured": false
-  },
-  {
-    "id": "etsi-droyse-to-kykloma-ekviaston-me-tis-cheirovomvides-o-egkleistos-archigos-kai-oi-endiamesoi",
-    "title": "Έτσι δρούσε το κύκλωμα εκβιαστών με τις χειροβομβίδες: Ο έγκλειστος αρχηγός και οι ενδιάμεσοι",
-    "url": "https://www.newshub.gr/el/ellada/etsi-droyse-to-kykloma-ekviaston-me-tis-cheirovomvides-o-egkleistos-archigos-kai-oi-endiamesoi",
-    "date": "2026-11-04T13:33:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/fylakes-filakes.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/fylakes-filakes.jpg",
-    "summary": "Σημαντικές λεπτομέρειες για τη δράση της εγκληματικής οργάνωσης που βρίσκεται πίσω από σειρά εκρήξεων και εκβιασμών σε καταστήματα υγειονομικού ενδιαφέροντος...",
     "featured": false
   }
 ]
