@@ -1,5 +1,27 @@
 [
   {
+    "id": "omilia-ston-dimo-platania-me-thema-isotita-ton-fylon-kai-prolipsi-diakriseon",
+    "title": "Ομιλία στον Δήμο Πλατανιά με θέμα «Ισότητα των φύλων και πρόληψη διακρίσεων»",
+    "url": "https://www.newshub.gr/el/kriti/omilia-ston-dimo-platania-me-thema-isotita-ton-fylon-kai-prolipsi-diakriseon",
+    "date": "2026-11-09T12:55:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/screenshot-2026-11-09-132005.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/screenshot-2026-11-09-132005.jpg",
+    "summary": "Το Κέντρο Κοινότητας του Δήμου Πλατανιά διοργανώνει ομιλία με θέμα την «Iσότητα των φύλων και την πρόληψη των διακρίσεων», με στόχο την ενη...",
+    "featured": true
+  },
+  {
+    "id": "pizza-fan-nea-ektakti-syskepsi-ton-ergazomenon-simera-deytera",
+    "title": "Pizza Fan: Νέα έκτακτη σύσκεψη των εργαζομένων σήμερα Δευτέρα",
+    "url": "https://www.newshub.gr/el/ellada/pizza-fan-nea-ektakti-syskepsi-ton-ergazomenon-simera-deytera",
+    "date": "2026-11-09T12:50:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/pitsa-phan.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/pitsa-phan.jpg",
+    "summary": "Σύσκεψη πραγματοποιούν στο Εργατικό Κέντρο Αθήνας, σήμερα Δευτέρα, οι εργαζόμενοι στην Pizza Fan, όπου θα αξιολογηθεί η κατάσταση που έχει διαμορφωθεί και θα...",
+    "featured": false
+  },
+  {
     "id": "tin-idia-mera-tha-plirothoyn-epistrofi-enoikioy-kai-epidoma-400-eyro",
     "title": "Την ίδια μέρα θα πληρωθούν επιστροφή ενοικίου και επίδομα 400 ευρώ",
     "url": "https://www.newshub.gr/el/oikonomia/tin-idia-mera-tha-plirothoyn-epistrofi-enoikioy-kai-epidoma-400-eyro",
@@ -8,7 +30,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/epidomata.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/epidomata.jpg",
     "summary": "Στις 30 Νοεμβρίου αναμένεται, εκτός απροόπτου, να καταβληθούν η επιστροφή ενοικίου και το έκτακτο επίδομα των 400 ευρώ σε εκατοντάδες χιλιάδες συνταξιούχους....",
-    "featured": true
+    "featured": false
   },
   {
     "id": "tin-poreia-ylopoiisis-ton-eyropaikon-programmaton-stin-kriti-syzitisan-st-arnaoytakis-kai-themis-christofidoy",
@@ -6575,28 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/stathis-panagiotopoulos.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/stathis-panagiotopoulos.jpg",
     "summary": "Στα δικαστήρια Θεσσαλονίκης οδηγήθηκε σήμερα, Τετάρτη 4 Νοεμβρίου, ο Στάθης Παναγιωτόπουλος, για την εκδίκαση της υπόθεσης «revenge porn» (εκδικη...",
-    "featured": false
-  },
-  {
-    "id": "alekos-vretos-quartet-mediterranean-echoes-sto-politistiko-synedriako-kentro-irakleioy",
-    "title": "Alekos Vretos Quartet “mediterranean Echoes”, στο Πολιτιστικό Συνεδριακό Κέντρο Ηρακλείου",
-    "url": "https://www.newshub.gr/el/exodos/alekos-vretos-quartet-mediterranean-echoes-sto-politistiko-synedriako-kentro-irakleioy",
-    "date": "2026-11-04T15:48:00.000Z",
-    "category": "Έξοδος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/pski.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/pski.jpg",
-    "summary": "Το καινούργιο πρότζεκτ του Αλέκου Βρέτου, Mediterranean Echoes, δεν περιλαμβάνει κρουστά ή ντραμς. Εδώ ο ρυθμός υπονοείται, αφήνοντας χώρο στους μουσικούς να...",
-    "featured": false
-  },
-  {
-    "id": "toyrkia-anisychia-gia-ta-f-35-meta-tin-itta-tramp-sto-kogkreso",
-    "title": "Τουρκία: Ανησυχία για τα F-35 μετά την ήττα Τραμπ στο Κογκρέσο",
-    "url": "https://www.newshub.gr/el/kosmos/toyrkia-anisychia-gia-ta-f-35-meta-tin-itta-tramp-sto-kogkreso",
-    "date": "2026-11-04T15:41:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/tourkia-efimerides-ekloges-hpa-1121x800.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/tourkia-efimerides-ekloges-hpa-1121x800.jpg",
-    "summary": "Η ενίσχυση των Δημοκρατικών στις ενδιάμεσες αμερικανικές εκλογές προκάλεσε προβληματισμό στην Τουρκία για το μέλλον των σχέσεων 'Αγκυρας-Ουάσιγκτον, καθώ...",
     "featured": false
   }
 ]
