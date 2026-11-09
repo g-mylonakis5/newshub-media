@@ -1,5 +1,38 @@
 [
   {
+    "id": "nea-protovoylia-toy-ite-i-ereyna-synanta-tin-koinonia-kainotomia-choris-apokleismoys",
+    "title": "Νέα πρωτοβουλία του ΙΤΕ: «Η έρευνα συναντά την κοινωνία: καινοτομία χωρίς αποκλεισμούς»",
+    "url": "https://www.newshub.gr/el/kriti/nea-protovoylia-toy-ite-i-ereyna-synanta-tin-koinonia-kainotomia-choris-apokleismoys",
+    "date": "2026-11-09T09:24:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/863186401_1512709304096958_5041207413309219568_n.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/863186401_1512709304096958_5041207413309219568_n.jpg",
+    "summary": "Το Ίδρυμα Τεχνολογίας και Έρευνας (ΙΤΕ) εγκαινιάζει τη νέα πρωτοβουλία «Η έρευνα συναντά την κοινωνία: καινοτομία χωρίς αποκλεισμούς» με στόχο να...",
+    "featured": false
+  },
+  {
+    "id": "chania-aporrimmatoforo-epese-pano-se-kafeteria-sto-enetiko-limani-dyo-traymaties-foto",
+    "title": "Χανιά: Απορριμματοφόρο έπεσε πάνω σε καφετέρια στο Ενετικό Λιμάνι - Δύο τραυματίες (Φωτο)",
+    "url": "https://www.newshub.gr/el/kriti/chania-aporrimmatoforo-epese-pano-se-kafeteria-sto-enetiko-limani-dyo-traymaties-foto",
+    "date": "2026-11-09T09:17:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/chania-pole-limani.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/chania-pole-limani.jpg",
+    "summary": "Δύο άτομα τραυματίστηκαν το πρωί στο Ενετικό Λιμάνι των Χανίων, όταν ένα απορριματοφόρο της ΔΕΔΙΣΑ ακυβέρνητο έπεσε σε τραπέζι καφετέριας εν λειτουργία, τραυ...",
+    "featured": true
+  },
+  {
+    "id": "18chronos-traymatistike-sovara-se-trochaio-ston-tyrnavo",
+    "title": "18χρονος τραυματίστηκε σοβαρά σε τροχαίο στον Τύρναβο",
+    "url": "https://www.newshub.gr/el/ellada/18chronos-traymatistike-sovara-se-trochaio-ston-tyrnavo",
+    "date": "2026-11-09T09:10:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/2-10ch.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/2-10ch.jpg",
+    "summary": "Ένα σοβαρό τροχαίο ατύχημα σημειώθηκε στον Τύρναβο, με αποτέλεσμα 18χρονος να τραυματιστεί σοβαρά.\r\n\r\nΣύμφωνα με το tirnavospress.gr, το περιστατικό σημειώθη...",
+    "featured": false
+  },
+  {
     "id": "i-kinisi-einai-zoi-ekthesi-fotografias-sto-plaisio-tis-eyropaikis-evdomadas-kinitikotitas-2026",
     "title": "«Η Κίνηση είναι Ζωή»: Έκθεση φωτογραφίας στο πλαίσιο της Ευρωπαϊκής Εβδομάδας Κινητικότητας 2026",
     "url": "https://www.newshub.gr/el/kriti/i-kinisi-einai-zoi-ekthesi-fotografias-sto-plaisio-tis-eyropaikis-evdomadas-kinitikotitas-2026",
@@ -184,7 +217,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/grego.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/grego.jpg",
     "summary": "Στους 20 ανέρχεται ο αριθμός των νεκρών μεταναστών που έχουν εντοπιστεί σε δύο διαφορετικά περιστατικά στη θαλάσσια περιοχή νότια της Κρήτης, ενώ συνολικά 13...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "dimosio-ilektronika-oi-aitiseis-apo-simera-gia-syntaxi-logo-thanatoy",
@@ -6564,39 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/giaourti-phrouta-pexels.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/giaourti-phrouta-pexels.jpg",
     "summary": "Στα 152,6 εκατ. στερλίνες η αξία των εξαγωγών του το πρώτο οκτάμηνο του 2026 &ndash; Άνοδος 29% στις συνολικές ελληνικές εξαγωγές προς το Ηνωμένο Βασίλειο\r\n\r...",
-    "featured": false
-  },
-  {
-    "id": "irakleio-oi-syntaxioychoi-stelnoyn-minyma-apo-to-irakleio-me-to-pagkritio-syllalitirio-legontas-ftanei-pia-foto-vinteo",
-    "title": "Οι συνταξιούχοι στέλνουν μήνυμα από το Ηράκλειο με το παγκρήτιο συλλαλητήριο, λέγοντας: «Φτάνει πια»  (Φωτο + Βίντεο)",
-    "url": "https://www.newshub.gr/el/kriti/irakleio-oi-syntaxioychoi-stelnoyn-minyma-apo-to-irakleio-me-to-pagkritio-syllalitirio-legontas-ftanei-pia-foto-vinteo",
-    "date": "2026-11-04T10:50:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/29d08b11-09cb-4ea2-98bf-ac4be2f0fc8b.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/29d08b11-09cb-4ea2-98bf-ac4be2f0fc8b.jpg",
-    "summary": "«Όλοι ενωμένοι στο δρομο του αγώνα για να διεκδικήσουμε όσα δικαούμαστε». Αυτό είναι το μήνυμα που στέλνουν οι συνταξιούχοι της Κρήτης, από το Ηρ...",
-    "featured": false
-  },
-  {
-    "id": "kriti-apo-mia-idea-gia-to-kleisimo-rantevoy-koyrematos-sto-dragons-den-i-symfonia-ton-100-000-eyro-gia-to-ebarber-vinteo",
-    "title": "Κρήτη: Από μια ιδέα για το κλείσιμο ραντεβού κουρέματος... στο Dragons’ Den – Η συμφωνία των 100.000 ευρώ για το Ebarber (βίντεο)",
-    "url": "https://www.newshub.gr/el/sugar/kriti-apo-mia-idea-gia-to-kleisimo-rantevoy-koyrematos-sto-dragons-den-i-symfonia-ton-100-000-eyro-gia-to-ebarber-vinteo",
-    "date": "2026-11-04T10:40:00.000Z",
-    "category": "Sugar",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/dragons-kretikoi-polytechneio-mparmperiko.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/dragons-kretikoi-polytechneio-mparmperiko.jpg",
-    "summary": "Μια επιχειρηματική ιδέα με αφετηρία το Πολυτεχνείο Κρήτης κατάφερε να ξεχωρίσει στο τηλεοπτικό πλατό του Dragons&rsquo; Den Greece, εξασφαλίζοντας συμφωνία ε...",
-    "featured": false
-  },
-  {
-    "id": "thessaloniki-molis-sta-16-toy-kai-synelifthi-gia-7-kila-kannavis",
-    "title": "Θεσσαλονίκη: Μόλις στα 16 του και  συνελήφθη για 7  κιλά κάνναβης",
-    "url": "https://www.newshub.gr/el/ellada/thessaloniki-molis-sta-16-toy-kai-synelifthi-gia-7-kila-kannavis",
-    "date": "2026-11-04T10:30:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/cheiropedes.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/cheiropedes.jpg",
-    "summary": "Διακίνηση κάνναβης μέσω ταχυδρομικών δεμάτων έκανε 16χρονος στη Θεσσαλονίκη με αποτέλεσμα να εντοπιστεί από την αστυνομία χθες (3/11/2026) και να συλληφθεί.\r...",
     "featured": false
   }
 ]
