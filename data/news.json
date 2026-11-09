@@ -1,5 +1,49 @@
 [
   {
+    "id": "larisa-ypallilos-kathariotitas-vrike-kinito-2-000-to-paredose-alla-arnithike-chrimata-kai-timitiki-adeia",
+    "title": "Λάρισα: Υπάλληλος καθαριότητας βρήκε κινητό €2.000, το παρέδωσε αλλά αρνήθηκε χρήματα και τιμητική άδεια",
+    "url": "https://www.newshub.gr/el/ellada/larisa-ypallilos-kathariotitas-vrike-kinito-2-000-to-paredose-alla-arnithike-chrimata-kai-timitiki-adeia",
+    "date": "2026-11-09T10:25:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/larisa-ipallilos.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/larisa-ipallilos.jpg",
+    "summary": "Μια πράξη που συζητήθηκε στη Λάρισα έκανε πριν από μερικά 24ωρα ο υπάλληλος καθαριότητας Γιάννης Δαλανίκας, ο οποίος αφού βρήκε ένα κινητό τηλέφωνο αξίας 2.0...",
+    "featured": false
+  },
+  {
+    "id": "sto-irakleio-stelechi-tis-silversea-cruises-synantisi-ston-oli-me-epikentro-ti-synergasia-kai-tis-prooptikes-tis-kroyazieras",
+    "title": "Στο Ηράκλειο στελέχη της Silversea Cruises: Συνάντηση στον ΟΛΗ με επίκεντρο τη συνεργασία και τις προοπτικές της κρουαζιέρας",
+    "url": "https://www.newshub.gr/el/kriti/sto-irakleio-stelechi-tis-silversea-cruises-synantisi-ston-oli-me-epikentro-ti-synergasia-kai-tis-prooptikes-tis-kroyazieras",
+    "date": "2026-11-09T10:16:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/silversea_heraklion_group_02.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/silversea_heraklion_group_02.jpg",
+    "summary": "Με αφορμή την επιτυχημένη ολοκλήρωση της φετινής περιόδου προσεγγίσεων του πολυτελούς κρουαζιερόπλοιου Silver Nova, το οποίο πραγματοποίησε εννέα προσεγγίσει...",
+    "featured": false
+  },
+  {
+    "id": "nikos-molfetas-politiko-reset-stis-ipa-erchetai-tsoynami-dioxeon-gia-seira-praktikon-toy-tramp-podcast",
+    "title": "Νίκος Μολφέτας: Πολιτικό Reset  στις ΗΠΑ! Ερχεται «τσουνάμι» διώξεων για σειρά πρακτικών του Τραμπ! (podcast)",
+    "url": "https://www.newshub.gr/el/geopolitiki/nikos-molfetas-politiko-reset-stis-ipa-erchetai-tsoynami-dioxeon-gia-seira-praktikon-toy-tramp-podcast",
+    "date": "2026-11-09T10:15:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/21-10/newshub.gr-binteo-7.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/21-10/newshub.gr-binteo-7.jpg",
+    "summary": "Ο αρθρογράφος και αναλυτής Νίκος Μολφέτας, είναι καλεσμένος.μας σήμερα στο newshub.gr και μας αναλύει τα επακόλουθα των ενδιάμεσων εκλογών στις ΗΠΑ, την μεγά...",
+    "featured": false
+  },
+  {
+    "id": "patra-andras-apeilei-na-aytopyrpolithei-kai-na-valei-fotia-sto-spiti-toy",
+    "title": "Πάτρα: Άνδρας απειλεί να αυτοπυρποληθεί και να βάλει φωτιά στο σπίτι του",
+    "url": "https://www.newshub.gr/el/ellada/patra-andras-apeilei-na-aytopyrpolithei-kai-na-valei-fotia-sto-spiti-toy",
+    "date": "2026-11-09T10:12:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/patra5.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/patra5.jpg",
+    "summary": "Συναγερμός έχει σημάνει στην Πάτρα και πιο συγκεκριμένα στην οδό 6ου Συντάγματος, καθώς ένας άνδρας απειλεί να βάλει φωτιά στο σπίτι του και να αυτοπυρπολη...",
+    "featured": false
+  },
+  {
     "id": "pierrakakis-apo-eurogroup-proteraiotita-stis-amyntikes-dapanes-prepei-na-kanoyme-perissotera-me-ligoteroys-poroys",
     "title": "Πιερρακάκης από Eurogroup: Προτεραιότητα στις αμυντικές δαπάνες-«Πρέπει να κάνουμε περισσότερα με λιγότερους πόρους»",
     "url": "https://www.newshub.gr/el/oikonomia/pierrakakis-apo-eurogroup-proteraiotita-stis-amyntikes-dapanes-prepei-na-kanoyme-perissotera-me-ligoteroys-poroys",
@@ -6553,50 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/demarcheio-platania-1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/demarcheio-platania-1.jpg",
     "summary": "Η Κινητή Μονάδα του Κέντρου Ψυχικής Υγείας Νομού Χανίων πραγματοποιεί επισκέψεις σε εβδομαδιαία βάση σε Κέντρα Υγείας και Περιφερειακά Ιατρεία του νομού.&nbs...",
-    "featured": false
-  },
-  {
-    "id": "next-skills-academy-neo-programma-anaptyxis-epaggelmatikon-dexiotiton",
-    "title": "Next Skills Academy: Νέο πρόγραμμα ανάπτυξης επαγγελματικών δεξιοτήτων",
-    "url": "https://www.newshub.gr/el/oikonomia/next-skills-academy-neo-programma-anaptyxis-epaggelmatikon-dexiotiton",
-    "date": "2026-11-04T12:38:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/next_skills_academy.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/next_skills_academy.jpg",
-    "summary": "Ένα νέο πανελλαδικό πρόγραμμα που αποτελεί πρωτοβουλία εταιρικής υπευθυνότητας του ΑΔΜΗΕ και υλοποιείται από τη Wise Greece, συνδέει τις ψηφιακές και πράσινε...",
-    "featured": false
-  },
-  {
-    "id": "oi-apofaseis-tis-dimotikis-epitropis-dimoy-chersonisoy-gia-odiko-diktyo-kai-scholikes-monades",
-    "title": "Οι αποφάσεις της Δημοτικής Επιτροπής Δήμου Χερσονήσου για οδικό δίκτυο και σχολικές Μονάδες",
-    "url": "https://www.newshub.gr/el/kriti/oi-apofaseis-tis-dimotikis-epitropis-dimoy-chersonisoy-gia-odiko-diktyo-kai-scholikes-monades",
-    "date": "2026-11-04T12:30:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/chersonesos-kll.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/chersonesos-kll.jpg",
-    "summary": "Στο Δημαρχείο Χερσονήσου στις Γούρνες πραγματοποιήθηκε η 31η τακτική συνεδρίαση της Δημοτικής Επιτροπής του Δήμου Χερσονήσου, υπό την προεδρία του Δημάρχου Χ...",
-    "featured": false
-  },
-  {
-    "id": "limani-agioy-nikolaoy-dieleyseis-machitikon-aeroskafon-f-16-pano-sto-plaisio-eortasmoy-toy-prostati-polemikis-aeroporias",
-    "title": "Λιμάνι Αγίου Νικολάου: Διελεύσεις μαχητικών αεροσκαφών F-16 πάνω στο πλαίσιο εορτασμού του Προστάτη Πολεμικής Αεροπορίας",
-    "url": "https://www.newshub.gr/el/kriti/limani-agioy-nikolaoy-dieleyseis-machitikon-aeroskafon-f-16-pano-sto-plaisio-eortasmoy-toy-prostati-polemikis-aeroporias",
-    "date": "2026-11-04T12:25:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/aersokaphos-machetiko-polemike-aeroporia-f-16.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/aersokaphos-machetiko-polemike-aeroporia-f-16.jpg",
-    "summary": "Από τον Δήμο Αγίου Νικολάου ανακοινώνεται ότι στο πλαίσιο των εκδηλώσεων για τον εορτασμό των Παμμεγίστων Ταξιαρχών Μιχαήλ και Γαβριήλ, Προστάτη της Πολεμική...",
-    "featured": false
-  },
-  {
-    "id": "ektos-chanion-o-dimarchos-gia-to-smart-city-expo-tis-varkelonis-kai-to-synedrio-tis-kede",
-    "title": "Εκτός Χανίων ο Δήμαρχος για το Smart City Expo της Βαρκελώνης και το Συνέδριο της ΚΕΔΕ",
-    "url": "https://www.newshub.gr/el/ta-en-oiko/ektos-chanion-o-dimarchos-gia-to-smart-city-expo-tis-varkelonis-kai-to-synedrio-tis-kede",
-    "date": "2026-11-04T12:20:00.000Z",
-    "category": "Τα εν οίκω",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/simandirakis_mayor-chania.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/simandirakis_mayor-chania.jpg",
-    "summary": "Στη Βαρκελώνη βρίσκεται από χθες, Τρίτη 3 Νοεμβρίου 2026, ο Δήμαρχος Χανίων, Παναγιώτης Σημανδηράκης, όπου εκπροσωπεί τον Δήμο Χανίων στο Smart City Expo Wor...",
     "featured": false
   }
 ]
