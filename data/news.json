@@ -1,5 +1,16 @@
 [
   {
+    "id": "nektarios-kanakarakis-apo-perysi-oi-megales-alysides-soyper-market-sti-chora-mas-echoyn-thorakisei-tis-tilepikoinonies-toys",
+    "title": "Νεκτάριος Κανακαράκης: «Από πέρυσι οι μεγάλες αλυσίδες σούπερ μάρκετ στη χώρα μας, έχουν θωρακίσει τις τηλεπικοινωνίες τους»",
+    "url": "https://www.newshub.gr/el/kriti/nektarios-kanakarakis-apo-perysi-oi-megales-alysides-soyper-market-sti-chora-mas-echoyn-thorakisei-tis-tilepikoinonies-toys",
+    "date": "2026-11-09T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/souper-market.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/souper-market.jpg",
+    "summary": "Οι μεγάλες αλυσίδες σούπερ μάρκετ είχαν λάβει τα μέτρα τους στη χώρα μας ενάντια στους χάκερς και τις κυβερνοεπιθέσεις. Τώρα ήρθε η ώρα να εκσυγχρονιστούν κα...",
+    "featured": true
+  },
+  {
     "id": "servia-proypologismo-amynas-sto-5-toy-aep-antiaeroporiko-tholo-kai-ayxiseis-misthon-sto-strateyma-schediazei-i-foititiki-lista",
     "title": "Σερβία: Προϋπολογισμό άμυνας στο 5% του ΑΕΠ, αντιαεροπορικό θόλο και αυξήσεις μισθών στο στράτευμα σχεδιάζει η «Φοιτητική Λίστα»",
     "url": "https://www.newshub.gr/el/kosmos/servia-proypologismo-amynas-sto-5-toy-aep-antiaeroporiko-tholo-kai-ayxiseis-misthon-sto-strateyma-schediazei-i-foititiki-lista",
@@ -151,7 +162,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/astynomia-dias-mkt.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/astynomia-dias-mkt.jpg",
     "summary": "Περισσότερα από 700 άτομα συνελήφθησαν από την Αστυνομία, σε όλη την Κρήτη, τον περασμένο Σεπτέμβριο.\r\n\r\nΌπως αναφέρεται σε σχετική ανάρτηση στον ιστότοπο τη...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "v-kikilias-oi-polites-evalan-plati-gia-na-orthopodisei-i-chora-stirizoyme-tin-koinonia-den-afinoyme-kanenan-piso",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/4-10/nicole-malliotakis-3.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/4-10/nicole-malliotakis-3.jpg",
     "summary": "Την παρουσία της στη Βουλή των Αντιπροσώπων των ΗΠΑ διατηρεί η Νικόλ Μαλλιωτάκη, η Ελληνοαμερικανίδα βουλευτής των Ρεπουμπλικανών που εξασφάλισε την επανεκλο...",
-    "featured": false
-  },
-  {
-    "id": "wsj-o-ntonalnt-tramp-deichnei-ton-polemo-sto-iran-gia-ti-syntriptiki-itta-ton-repoymplikanon",
-    "title": "Wsj: Ο Ντόναλντ Τραμπ δείχνει τον πόλεμο στο Ιράν για τη συντριπτική ήττα των Ρεπουμπλικανών",
-    "url": "https://www.newshub.gr/el/kosmos/wsj-o-ntonalnt-tramp-deichnei-ton-polemo-sto-iran-gia-ti-syntriptiki-itta-ton-repoymplikanon",
-    "date": "2026-11-04T06:25:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/4-10/tr.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/4-10/tr.jpg",
-    "summary": "Τον πόλεμο στο Ιράν αλλά και τις συνέπειες αυτού στην παγκόσμια οικονομία, «δείχνει» ο Ντόναλντ Τραμπ για την συντριπτική ήττα που υπέστησαν οι Ρ...",
     "featured": false
   }
 ]
