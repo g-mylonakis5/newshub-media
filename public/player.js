@@ -43,10 +43,76 @@
     try {
       if (audio.currentTime > 5 && audio.currentTime < audio.duration - 10) {
         localStorage.setItem(posKey(), String(Math.floor(audio.currentTime)));
+        synVale(false);
       } else {
         localStorage.removeItem(posKey());
+        synVale(true);
       }
     } catch (e) { /* ιδιωτική περιήγηση */ }
+  }
+
+  // ---------- «Συνέχισε όπου έμεινες»: η μνήμη ----------
+  //
+  // Το pos:<id> κρατάει ΜΟΝΟ δευτερόλεπτα. Αρκεί για να συνεχίσει ένα
+  // επεισόδιο που ξέρει ήδη ποιο είναι — η σελίδα του το διαβάζει μόλις
+  // ανοίξει. Δεν φτάνει όμως για να ζωγραφιστεί κάρτα στην αρχική:
+  // εκεί δεν υπάρχει τίποτα γραμμένο για το επεισόδιο, γιατί η αρχική
+  // είναι ίδια για όλους. Οπότε κρατάμε δεύτερη, πλήρη εγγραφή.
+  //
+  // Μένει ΟΛΗ στον browser. Δεν φεύγει τίποτα από τη συσκευή, δεν
+  // υπάρχει λογαριασμός, και άλλη συσκευή δεν ξέρει τίποτα — γι' αυτό
+  // η ενότητα το γράφει από πάνω της.
+  var SYN_KEY = 'synexeia';
+  var SYN_MAX = 6;            // πόσα θυμόμαστε
+  var SYN_DEIXNE = 4;         // πόσα δείχνει η αρχική
+
+  function synApolyto(href) {
+    try {
+      var u = new URL(href, location.href);
+      return u.pathname + u.search;
+    } catch (e) {
+      return href;
+    }
+  }
+
+  function synDiavase() {
+    try {
+      var l = JSON.parse(localStorage.getItem(SYN_KEY) || '[]');
+      return Array.isArray(l) ? l : [];
+    } catch (e) { return []; }
+  }
+
+  // Το κλειδί είναι ΜΙΚΡΟ επίτηδες (t, s, a, h, p, d, w): ο χώρος του
+  // localStorage είναι λίγα MB και τον μοιράζονται όλα όσα κρατάμε.
+  function synVale(sviseMono) {
+    if (!track) return;
+
+    var list = synDiavase().filter(function (x) {
+      return x && x.id !== track.id;
+    });
+
+    if (!sviseMono) {
+      list.unshift({
+        id: track.id,
+        t: track.title,
+        s: track.show,
+        a: track.art,
+        // ΑΠΟΛΥΤΟΣ σύνδεσμος, πάντα. Το data-href της σελίδας
+        // επεισοδίου είναι σχετικό («10003739-o-stavros-…») και
+        // διαβάζεται σωστά μόνο μέσα στο /episode/. Η κάρτα όμως
+        // ζωγραφίζεται στην ΑΡΧΙΚΗ, όπου το ίδιο κείμενο δείχνει στη
+        // ρίζα και βγάζει 404. Το λύνουμε τη στιγμή που γράφουμε, όχι
+        // τη στιγμή που δείχνουμε: εκεί ξέρουμε ακόμα από πού ήρθε.
+        h: synApolyto(track.href),
+        p: Math.floor(audio.currentTime),
+        d: Math.floor(audio.duration) || 0,
+        w: Date.now()
+      });
+    }
+
+    try {
+      localStorage.setItem(SYN_KEY, JSON.stringify(list.slice(0, SYN_MAX)));
+    } catch (e) { /* γεμάτος χώρος ή ιδιωτική περιήγηση */ }
   }
 
   // ---------- οι όψεις ----------
@@ -758,6 +824,110 @@
 
   window.addEventListener('popstate', function () { go(location.href, false); });
 
+  // ---------- «Συνέχισε όπου έμεινες»: η ζωγραφική ----------
+  //
+  // Η ενότητα είναι γραμμένη ΚΡΥΦΗ μέσα στη σελίδα από το build, και
+  // ανοίγει μόνο αν βρεθεί κάτι να δείξει. Έτσι ο καινούριος
+  // επισκέπτης δεν τη βλέπει ποτέ — δεν υπάρχει άδειο κουτί με
+  // «δεν άκουσες τίποτα ακόμα».
+  //
+  // Οι κάρτες φτιάχνονται με createElement και textContent, ΟΧΙ με
+  // innerHTML: το περιεχόμενο έρχεται από το localStorage, και ό,τι
+  // μπαίνει σε σελίδα χωρίς να περάσει από το build δεν το
+  // εμπιστευόμαστε ως HTML.
+
+  function synLeipoun(sec) {
+    var m = Math.round(sec / 60);
+    if (m < 1) return 'απομένει λιγότερο από 1′';
+    if (m === 1) return 'απομένει 1 λεπτό';
+    return 'απομένουν ' + m + '′';
+  }
+
+  function synKarta(x) {
+    var pct = Math.max(2, Math.min(100, (x.p / x.d) * 100));
+
+    var a = document.createElement('a');
+    a.className = 'syn-card';
+    a.href = x.h;
+
+    var media = document.createElement('span');
+    media.className = 'syn-media';
+
+    if (x.a) {
+      var img = document.createElement('img');
+      img.className = 'syn-art';
+      img.src = x.a;
+      img.alt = '';
+      img.loading = 'lazy';
+      img.width = 300;
+      img.height = 300;
+      media.appendChild(img);
+    } else {
+      var kena = document.createElement('span');
+      kena.className = 'syn-art syn-art--empty';
+      media.appendChild(kena);
+    }
+
+    // Η μπάρα προόδου. Κάθεται ΜΕΣΑ στην αφίσα, στο κάτω χείλος —
+    // το ίδιο σημάδι που ξέρει ο κόσμος από κάθε άλλον player.
+    var bar = document.createElement('span');
+    bar.className = 'syn-bar';
+    var fill = document.createElement('span');
+    fill.className = 'syn-fill';
+    fill.style.width = pct.toFixed(1) + '%';
+    bar.appendChild(fill);
+    media.appendChild(bar);
+
+    a.appendChild(media);
+
+    var text = document.createElement('span');
+    text.className = 'syn-text';
+
+    if (x.s) {
+      var show = document.createElement('span');
+      show.className = 'syn-show';
+      show.textContent = x.s;
+      text.appendChild(show);
+    }
+
+    var tit = document.createElement('span');
+    tit.className = 'syn-name';
+    tit.textContent = x.t || 'Χωρίς τίτλο';
+    text.appendChild(tit);
+
+    var left = document.createElement('span');
+    left.className = 'syn-left';
+    left.textContent = synLeipoun(x.d - x.p);
+    text.appendChild(left);
+
+    a.appendChild(text);
+    return a;
+  }
+
+  function synDeixe() {
+    var box = document.querySelector('[data-synexeia]');
+    if (!box) return;                       // δεν είμαστε στην αρχική
+
+    var grid = box.querySelector('[data-synexeia-grid]');
+    if (!grid) return;
+
+    // Κρατάμε μόνο όσα έχουν ΚΑΙ θέση ΚΑΙ διάρκεια: χωρίς διάρκεια δεν
+    // υπάρχει ποσοστό, άρα δεν υπάρχει γραφικό. Και όσα έφτασαν στο
+    // τέλος δεν είναι «συνέχισε», είναι «τελείωσε».
+    var list = synDiavase().filter(function (x) {
+      return x && x.id && x.h && x.d > 0 && x.p > 0 && x.p < x.d;
+    }).slice(0, SYN_DEIXNE);
+
+    if (!list.length) { box.hidden = true; return; }
+
+    grid.replaceChildren.apply(grid, list.map(synKarta));
+    box.hidden = false;
+  }
+
+  // Και μετά από πλοήγηση χωρίς φόρτωση: η αρχική μπορεί να ξαναέρθει
+  // μπροστά μας με άλλο περιεχόμενο και άλλο (κρυφό) κουτί.
+  document.addEventListener('selida:allaxe', synDeixe);
+
   // ---------- ξεκίνημα ----------
 
   // Αν ο σύνδεσμος κουβαλάει στιγμή (#t=905), ξεκινάμε από εκεί.
@@ -776,6 +946,7 @@
 
   markSaved();
   render();
+  synDeixe();
 
   // ---------- ο αριθμός του αρχείου που ανεβαίνει ----------
   //

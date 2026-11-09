@@ -3662,6 +3662,26 @@ function pickMustRead(articles, curation, taken = new Set()){
   return chosen.slice(0, MUST_COUNT);
 }
 
+// ---- «Συνέχισε όπου έμεινες» ----
+//
+// Το ΜΟΝΟ κομμάτι της αρχικής που δεν το ξέρει το build: τι άκουσε ο
+// καθένας ζει στον browser του και πουθενά αλλού. Οπότε εδώ γράφουμε
+// άδειο και ΚΡΥΦΟ κουτί, και το γεμίζει το player.js αν βρει κάτι.
+//
+// Γιατί hidden από το build αντί για display:none στο CSS: ο
+// καινούριος επισκέπτης — και κάθε ρομπότ — δεν πρέπει να δει καν
+// επικεφαλίδα για ενότητα που δεν έχει περιεχόμενο. Έτσι δεν μπαίνει
+// ποτέ άδειο κουτί στη σελίδα ούτε στο ευρετήριο της αναζήτησης.
+function resumeSection(){
+  return `  <section class="syn" data-synexeia hidden aria-labelledby="syn-head">
+    <div class="syn-head">
+      <h2 class="syn-mark" id="syn-head">Συνέχισε όπου έμεινες</h2>
+      <p class="syn-note">Μόνο σε αυτή τη συσκευή</p>
+    </div>
+    <div class="syn-grid" data-synexeia-grid></div>
+  </section>`;
+}
+
 function mustReadSection(articles, curation, taken){
   const picks = pickMustRead(articles, curation, taken);
 
@@ -5422,6 +5442,12 @@ ${/* Το «Must read» κάθεται ανάμεσα στις εκπομπές 
      κατηγορίες ο αναγνώστης κάνει μια παύση με ειδήσεις πριν μπει στο
      βαθύ μέρος της σελίδας. */ ''}
 ${mustReadSection(articles, curation, onTop)}
+
+${/* Αμέσως μετά το Must read, και πριν τα θέματα: όποιος άφησε κάτι
+     στη μέση το βρίσκει πριν μπει στο βαθύ μέρος της σελίδας. Για
+     όποιον δεν άφησε τίποτα η ενότητα δεν υπάρχει καθόλου, οπότε η
+     εγκεκριμένη διάταξη μένει ανέπαφη για τον καινούριο επισκέπτη. */ ''}
+${resumeSection()}
 
   <div class="page-cols">
     <div class="page-main">
