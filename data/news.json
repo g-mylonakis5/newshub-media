@@ -1,5 +1,38 @@
 [
   {
+    "id": "tin-idia-mera-tha-plirothoyn-epistrofi-enoikioy-kai-epidoma-400-eyro",
+    "title": "Την ίδια μέρα θα πληρωθούν επιστροφή ενοικίου και επίδομα 400 ευρώ",
+    "url": "https://www.newshub.gr/el/oikonomia/tin-idia-mera-tha-plirothoyn-epistrofi-enoikioy-kai-epidoma-400-eyro",
+    "date": "2026-11-09T12:44:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/epidomata.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/epidomata.jpg",
+    "summary": "Στις 30 Νοεμβρίου αναμένεται, εκτός απροόπτου, να καταβληθούν η επιστροφή ενοικίου και το έκτακτο επίδομα των 400 ευρώ σε εκατοντάδες χιλιάδες συνταξιούχους....",
+    "featured": true
+  },
+  {
+    "id": "tin-poreia-ylopoiisis-ton-eyropaikon-programmaton-stin-kriti-syzitisan-st-arnaoytakis-kai-themis-christofidoy",
+    "title": "Την πορεία υλοποίησης των ευρωπαϊκών προγραμμάτων στην Κρήτη, συζήτησαν Στ. Αρναουτάκης και Θέμις Χριστοφίδου",
+    "url": "https://www.newshub.gr/el/kriti/tin-poreia-ylopoiisis-ton-eyropaikon-programmaton-stin-kriti-syzitisan-st-arnaoytakis-kai-themis-christofidoy",
+    "date": "2026-11-09T12:38:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/1-25.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/1-25.jpg",
+    "summary": "Η Γενική Διευθύντρια της Γενικής Διεύθυνσης Περιφερειακής Πολιτικής και Αστικής Ανάπτυξης (DG REGIO) της Ευρωπαϊκής Επιτροπής Θέμις Χριστοφίδου επισκέφθηκε σ...",
+    "featured": false
+  },
+  {
+    "id": "proklitikos-erntogan-yparchoyn-dyo-laoi-kai-dyo-krati-kalei-ti-diethni-koinotita-na-anagnorisei-to-pseydokratos",
+    "title": "Προκλητικός Ερντογάν: Υπάρχουν δύο λαοί και δύο κράτη – Καλεί τη διεθνή κοινότητα να αναγνωρίσει το ψευδοκράτος",
+    "url": "https://www.newshub.gr/el/geopolitiki/proklitikos-erntogan-yparchoyn-dyo-laoi-kai-dyo-krati-kalei-ti-diethni-koinotita-na-anagnorisei-to-pseydokratos",
+    "date": "2026-11-09T12:35:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/erntogan.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/erntogan.jpg",
+    "summary": "Προκλητικότατος εμφανίστηκε ο Τούρκος Πρόεδρος, σήμερα, καλώντας εκ νέου τη διεθνή κοινότητα να «αναγνωρίσει το ψευδοκράτος» κάνοντας λόγο ξανά...",
+    "featured": false
+  },
+  {
     "id": "moysis-mylonas-mia-akomi-timitiki-vradia-afieromeni-ston-exaireto-epistimona",
     "title": "Μωυσής Μυλωνάς; Μια ακόμη τιμητική βραδιά αφιερωμένη στον εξαίρετο επιστήμονα",
     "url": "https://www.newshub.gr/el/kriti/moysis-mylonas-mia-akomi-timitiki-vradia-afieromeni-ston-exaireto-epistimona",
@@ -8,7 +41,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/mylonas_10nhmc.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/mylonas_10nhmc.jpg",
     "summary": "Μια από τις σημαίνουσες επιστημονικές προσωπικοτητες του Ηρακλείου, τον Καθηγητή κ. Μωυσή Μυλωνά, θα βρεθει στο επίκεντρο μιας τιμητικης εκδήλωσης.\r\n\r\nΣυγκεκ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "ta-erga-sto-paraktio-metopo-toy-irakleioy-sto-epikentro-synantisis-sto-dimo-irakleioy",
@@ -6564,39 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/tourkia-efimerides-ekloges-hpa-1121x800.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/tourkia-efimerides-ekloges-hpa-1121x800.jpg",
     "summary": "Η ενίσχυση των Δημοκρατικών στις ενδιάμεσες αμερικανικές εκλογές προκάλεσε προβληματισμό στην Τουρκία για το μέλλον των σχέσεων 'Αγκυρας-Ουάσιγκτον, καθώ...",
-    "featured": false
-  },
-  {
-    "id": "irakleio-stin-anakritria-alloi-tesseris-anilikoi-poy-ferontai-os-diakinites-prosfygon",
-    "title": "Ηράκλειο: Στην ανακρίτρια άλλοι τέσσερις ανήλικοι που φέρονται ως διακινητές προσφύγων",
-    "url": "https://www.newshub.gr/el/kriti/irakleio-stin-anakritria-alloi-tesseris-anilikoi-poy-ferontai-os-diakinites-prosfygon",
-    "date": "2026-11-04T15:34:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/dikasthrio-hrakleioyne.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/dikasthrio-hrakleioyne.jpg",
-    "summary": "Οι καραβιές των προσφύγων που καταφτάνουν το τελευταίο διάστημα από τα παράλια της Λιβύης στις ακτές της νότιας Κρήτης, δεν έχουν τελειωμό.\r\n\r\nΩς εκ τούτου, ...",
-    "featured": false
-  },
-  {
-    "id": "thessaloniki-kathigitis-katigoreitai-oti-chastoykise-16chroni-mathitria-diatachthike-ede",
-    "title": "Θεσσαλονίκη: Καθηγητής κατηγορείται ότι χαστούκισε 16χρονη μαθήτρια - Διατάχθηκε ΕΔΕ",
-    "url": "https://www.newshub.gr/el/ellada/thessaloniki-kathigitis-katigoreitai-oti-chastoykise-16chroni-mathitria-diatachthike-ede",
-    "date": "2026-11-04T15:27:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/sxoleio.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/sxoleio.jpg",
-    "summary": "Συνελήφθη καθηγητής λυκείου στη Θεσσαλονίκη, ο οποίος κατηγορείται ότι χαστούκισε 16χρονη μαθήτρια το πρωί της Τετάρτης.\r\n\r\nΣύμφωνα με πληροφορίες, η ανήλικη...",
-    "featured": false
-  },
-  {
-    "id": "tinto-mpras-efyge-apo-ti-zoi-o-gnostos-italos-skinothetis",
-    "title": "Τίντο Μπρας: Έφυγε από τη ζωή ο γνωστός Ιταλός σκηνοθέτης",
-    "url": "https://www.newshub.gr/el/kosmos/tinto-mpras-efyge-apo-ti-zoi-o-gnostos-italos-skinothetis",
-    "date": "2026-11-04T15:20:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/4-11/5b8a6c2b-tinto-brass.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/4-11/5b8a6c2b-tinto-brass.jpg",
-    "summary": "Ο γνωστός σκηνοθέτης Τίντο Μπρας απεβίωσε στη Ρώμη.\r\n\r\nΤην είδηση ανακοίνωσαν η σύζυγός του Κατερίνα Βάρτσι και τα παιδιά του, ο Μπονιφάτσιο και η Μπεατρίτσε...",
     "featured": false
   }
 ]
