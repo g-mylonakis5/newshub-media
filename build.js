@@ -1012,7 +1012,9 @@ function itemFromArticle(a){
   };
 }
 
-function card(item, depth = 0){
+// Το rank μπαίνει ΜΟΝΟ στη ροή της αρχικής, που είναι η μόνη με φίλτρο
+// θεμάτων. Οι υπόλοιπες σειρές καρτών δεν το περνούν και δεν το γράφουν.
+function card(item, depth = 0, rank = null){
   const up = depth === 0 ? '' : '../';
   const href = item.external ? item.href : `${up}${item.href}`;
   const out = item.external ? ' target="_blank" rel="noopener"' : '';
@@ -1046,7 +1048,7 @@ function card(item, depth = 0){
   //
   // Εδώ η εικόνα μένει ολόκληρη και καθαρή, και το κείμενο διαβάζεται
   // πάντα — ανεξάρτητα από το πόσο μικρή είναι η κάρτα.
-  return `<article class="${cls}"${hide} data-kind="${item.kind}"${topics ? ` data-topics="${topics}"` : ''}>
+  return `<article class="${cls}"${hide} data-kind="${item.kind}"${topics ? ` data-topics="${topics}"` : ''}${rank === null ? '' : ` data-rank="${rank}"`}>
     <a class="card-link" href="${href}"${out}>
     <span class="card-media">
       ${item.image ? `<img class="card-bloom${letterbox ? ' card-bloom--letterbox' : ''}" src="${item.image}" alt="" aria-hidden="true" loading="lazy">
@@ -5368,7 +5370,22 @@ function main(){
     }
   }
 
-  const list = flow.map((it) => card(it)).join('\n');
+  // Η χρονολογική θέση κάθε κάρτας, γραμμένη πάνω της ως data-rank.
+  //
+  // Η σειρά του DOM είναι «καρφιτσωμένα πρώτα, μετά ημερομηνία» — αυτό
+  // θέλουμε στο «Όλα». Μέσα σε μια ΚΑΤΗΓΟΡΙΑ όμως δεν το θέλουμε: όποιος
+  // πατάει «Κρήτη» ζητάει τα πιο πρόσφατα της Κρήτης, και ένα παλιό
+  // καρφιτσωμένο στην κορυφή μοιάζει με σφάλμα, όχι με επιλογή. Το
+  // καρφίτσωμα σημαίνει «κράτα το ψηλά στην αρχική ροή», τίποτα άλλο.
+  //
+  // Το player.js βάζει style.order = data-rank όταν πατηθεί κατηγορία,
+  // και το αφαιρεί στο «Όλα». Η ροή είναι grid, οπότε το order αναδιατάσσει
+  // χωρίς να κουνηθεί τίποτα στο DOM.
+  const seira = flow.slice()
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  const rank = new Map(seira.map((it, i) => [it, i]));
+
+  const list = flow.map((it) => card(it, 0, rank.get(it))).join('\n');
 
   const html = page({
     title: 'NewsHub Media',
