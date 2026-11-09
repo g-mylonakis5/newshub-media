@@ -1,5 +1,16 @@
 [
   {
+    "id": "irakleio-kakoyrgimatiki-dioxi-se-44chrono-gia-listeia-konta-sto-pagni-anaziteitai-30chronos",
+    "title": "Ηράκλειο: Κακουργηματική δίωξη σε 44χρονο για ληστεία κοντά στο ΠΑΓΝΗ - Αναζητείται 30χρονος",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-kakoyrgimatiki-dioxi-se-44chrono-gia-listeia-konta-sto-pagni-anaziteitai-30chronos",
+    "date": "2026-11-09T20:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/dikastiko-megaro-erakleiou-44.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/dikastiko-megaro-erakleiou-44.jpg",
+    "summary": "Έπιτέθηκαν σε συμπολίτη μας και του άρπαξαν με τη βία τα χρήματα που έφερε μαζί του.\r\n\r\nΟ λόγος για έναν 44χρονο κι έναν 30χρονο, οι οποίοι φέροντα...",
+    "featured": true
+  },
+  {
     "id": "ston-tomea-tis-ygeias-ola-ta-prostheta-esoda-apo-tis-ayxiseis-ton-foron-se-tsigara-kai-alkool",
     "title": "Στον τομέα της Υγείας όλα τα πρόσθετα έσοδα από τις αυξήσεις των φόρων σε τσιγάρα και αλκοόλ",
     "url": "https://www.newshub.gr/el/oikonomia/ston-tomea-tis-ygeias-ola-ta-prostheta-esoda-apo-tis-ayxiseis-ton-foron-se-tsigara-kai-alkool",
@@ -162,7 +173,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/898290230_1632662141928667_8990253859723294263_n.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/898290230_1632662141928667_8990253859723294263_n.jpg",
     "summary": "Ένοχοι και στο Εφετείο κρίθηκαν ο πρώην δήμαρχος Φαιστού και η αρμόδια αντιδήμαρχος για την υπόθεση του τραγικού θανάτου τεσσάρων συνανθρώπων μας (συγγενών μ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "alexis-tsipras-apo-tin-ipeiro-i-chora-chreiazetai-mia-strofi-stin-paragogi-kai-stin-entimotita",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/akineta.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/akineta.jpg",
     "summary": "Tην δυνατότητα διορθώσεων σε λάθη και παραλείψεις αναφορικά με την περιουσιακή κατάσταση όπως αποτυπώνεται στο Ε9 από το 2019 και μετά, χωρίς να πληρώσουν αν...",
-    "featured": false
-  },
-  {
-    "id": "irakleio-vlavi-sto-diktyo-optikon-inon-prokalei-provlima-stin-epikoinonia-me-tin-ypiresia-kathariotitas",
-    "title": "Ηράκλειο: Βλάβη στο δίκτυο οπτικών ινών προκαλεί πρόβλημα στην επικοινωνία με την Υπηρεσία Καθαριότητας",
-    "url": "https://www.newshub.gr/el/kriti/irakleio-vlavi-sto-diktyo-optikon-inon-prokalei-provlima-stin-epikoinonia-me-tin-ypiresia-kathariotitas",
-    "date": "2026-11-05T07:35:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/kinhto-thlefono.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/kinhto-thlefono.jpg",
-    "summary": "Χωρίς επικοινωνία (τηλέφωνο και internet) παραμένει η Υπηρεσία Καθαριότητας και το Αμαξοστάσιο του Δήμου Ηρακλείου στη Νέα Αλικαρνασσό, εξαιτίας βλάβης που π...",
     "featured": false
   }
 ]
