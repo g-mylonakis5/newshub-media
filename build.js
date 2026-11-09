@@ -1718,6 +1718,12 @@ ${twin && twin.summary ? `        <p class="episode-summary">${esc(twin.summary)
           ${twin ? `<a href="../${episodeUrl(twin)}">Η σελίδα του επεισοδίου →</a>` : ''}
         </p>
 
+${/* Κάτω από το βίντεο, την περιγραφή και τους συνδέσμους, και πριν
+     το «Επόμενο». Δηλαδή αφού τελειώσει ό,τι ήρθε να δει ο επισκέπτης
+     και πριν του προταθεί το επόμενο — το φυσικό σημείο παύσης.
+     ΠΟΤΕ πιο πάνω: ο player κάθεται στην κορυφή αυτής της στήλης. */ ''}
+${adSlot('video-mid', 'leaderboard')}
+
         ${queue ? `<section class="queue">
           <h2 class="section-head">Επόμενο στις ${esc(showLabel(v.show))}</h2>
 ${queue}
@@ -1772,8 +1778,38 @@ ${showBannerBox(v.show, 1)}
 // Ό,τι δεν αναγνωρίζεται ΠΑΡΑΛΕΙΠΕΤΑΙ σιωπηλά αντί να τυπωθεί ωμό. Το
 // data/articles.json το γράφει το διαχειριστικό, δηλαδή τελικά ένας
 // browser — δεν το εμπιστευόμαστε να βγει αυτούσιο στη σελίδα.
+// Πού μπαίνει η διαφήμιση μέσα στο κείμενο — ή πουθενά.
+//
+// Μετά την τρίτη παράγραφο: ο αναγνώστης έχει ήδη μπει στο θέμα και
+// δεν τον σταματάμε στην πρώτη ανάσα. Και μόνο σε άρθρα με έξι
+// παραγράφους και πάνω — σε τρισέλιδο κείμενο η θέση θα κατέληγε
+// δίπλα σε εκείνη του footer, δύο διαφημίσεις μαζί.
+//
+// ΠΟΤΕ ακριβώς πάνω από player: ρητή απαίτηση του αφεντικού. Αν η
+// επόμενη ενότητα είναι ενσωμάτωση — βίντεο ή επεισόδιο που ακούγεται
+// μέσα στο άρθρο — προσπερνάμε και ψάχνουμε την επόμενη παράγραφο.
+const AD_AFTER_PARAS = 3;
+const AD_MIN_PARAS = 6;
+
+function articleAdAt(body){
+  if (body.filter((p) => p.type === 'p').length < AD_MIN_PARAS) return -1;
+
+  let seen = 0;
+  for (let i = 0; i < body.length; i++) {
+    if (body[i].type !== 'p') continue;
+    if (++seen < AD_AFTER_PARAS) continue;
+
+    const next = body[i + 1];
+    if (next && next.type === 'embed') continue;   // κολλητά στον player, όχι
+    return i + 1;
+  }
+  return -1;
+}
+
 function articleBodyHtml(body){
-  return body.map((p) => {
+  const adAt = articleAdAt(body);
+
+  const parts = body.map((p) => {
     if (p.type === 'h') return `        <h2 class="art-sub">${esc(p.text)}</h2>`;
     if (p.type === 'p') return `        <p>${esc(p.text)}</p>`;
 
@@ -1847,7 +1883,18 @@ ${card}
     }
 
     return '';
-  }).filter(Boolean).join('\n');
+  });
+
+  // Η θέση μετριέται πάνω στις ΑΡΧΙΚΕΣ ενότητες, όχι στο αποτέλεσμα:
+  // όσες δεν βγάζουν HTML (π.χ. ενσωματωμένο επεισόδιο που σβήστηκε)
+  // θα μετατόπιζαν τη διαφήμιση σε άλλο σημείο από αυτό που κρίθηκε.
+  const out = [];
+  parts.forEach((html, i) => {
+    if (html) out.push(html);
+    if (i + 1 === adAt) out.push(adSlot('article-mid', 'leaderboard'));
+  });
+
+  return out.join('\n');
 }
 
 function articlePage(a, body, hasCat = false){
@@ -5470,12 +5517,31 @@ ${topicRows(catGroups)}
 
 ${namesSection(groups)}
 
+${/* Η δεύτερη θέση της αρχικής. Ανάμεσα στα «Πρόσωπα» και στο «Και
+     ακόμα»: εκεί τελειώνει το κυρίως σώμα και αρχίζει η ουρά της
+     σελίδας, δηλαδή σημείο παύσης και όχι διακοπή. Η πρώτη θέση
+     (home-top) κάθεται πολύ ψηλότερα, οπότε οι δύο δεν γειτονεύουν. */ ''}
+${adSlot('home-mid', 'leaderboard')}
+
 ${moreTopics(catGroups)}
 
 ${spotlightSections(catGroups)}
     </div>
 
     <div class="page-side">
+${/* ΠΑΝΩ από τη ροή, επίτηδες, και είναι η μόνη θέση που δουλεύει.
+     Μέχρι τώρα κολλητή ήταν ΟΛΗ η στήλη, δηλαδή ό,τι έμπαινε μέσα
+     της ακολουθούσε το σκρολάρισμα — ακριβώς η διαφήμιση που κυνηγάει
+     τον αναγνώστη, που απαγόρευσε το αφεντικό. Τώρα κολλητή είναι
+     μόνο η ροή (.ticker στο styles.css) και η διαφήμιση μένει στη
+     θέση της.
+
+     Κάτω από τη ροή δεν γίνεται: ένα κολλητό στοιχείο κρατάει τον
+     χώρο του αλλά ζωγραφίζεται μετατοπισμένο, οπότε κατεβαίνοντας θα
+     περνούσε από πάνω της. Πάνω της, η ροή ταξιδεύει προς τα κάτω και
+     δεν τη συναντά ποτέ. */ ''}
+${adSlot('home-side', 'mpu')}
+
 ${newsTicker(articles)}
     </div>
   </div>
