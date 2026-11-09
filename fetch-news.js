@@ -17,7 +17,12 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const SITEMAP = 'https://www.newshub.gr/sitemap_google_news.php';
+// Στις 9 Νοε 2026 η .php έπαψε να σερβίρει XML και άρχισε να κάνει 302
+// στην αρχική τους. Ο fetcher ακολουθούσε την ανακατεύθυνση, έπαιρνε
+// HTML, έβρισκε 0 άρθρα και ξανάγραφε ήσυχα τα ίδια 600 — καμία
+// αλλαγή, κανένα commit, καμία ανανέωση για 4,5 ώρες. Η σωστή πλέον
+// διεύθυνση είναι η .xml, και τη δηλώνει το ίδιο τους το robots.txt.
+const SITEMAP = 'https://www.newshub.gr/sitemap_google_news.xml';
 const HOMEPAGE = 'https://www.newshub.gr/';
 const OUT = path.join(__dirname, 'data', 'news.json');
 const CURATION = path.join(__dirname, 'data', 'curation.json');
@@ -545,7 +550,7 @@ async function main() {
   const hours = newest ? (Date.now() - newest.getTime()) / 36e5 : Infinity;
   if (hours > 24) {
     console.warn(`\nΠΡΟΣΟΧΗ: η πιο πρόσφατη είδηση είναι ${Math.round(hours)} ώρες παλιά.`);
-    console.warn('Μήπως έπαψε να ενημερώνεται το sitemap_google_news.php τους;');
+    console.warn(`Μήπως έπαψε να ενημερώνεται το sitemap τους; ${SITEMAP}`);
   }
 }
 

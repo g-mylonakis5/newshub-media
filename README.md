@@ -11,7 +11,7 @@
 |---|---|---|
 | Buzzsprout RSS | 1.053 επεισόδια, 411 απομαγνητοφωνήσεις | δημόσιο feed |
 | YouTube | 3.027 βίντεο σε 12 εκπομπές | YouTube Data API |
-| newshub.gr | ειδήσεις | `sitemap_google_news.php` |
+| newshub.gr | ειδήσεις | `sitemap_google_news.xml` |
 
 **Καμία πηγή δεν αλλάζει.** Το site μόνο διαβάζει.
 
