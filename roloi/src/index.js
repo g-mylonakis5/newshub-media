@@ -45,6 +45,28 @@ const WORKFLOW = 'fetch.yml';
 const APOTYPOMA = 'sitemap-apotypoma';
 const TELEFTAIO = 'teleftaio-patima';
 
+// Πότε κατεβάσαμε τελευταία φορά βίντεο και απομαγνητοφωνήσεις.
+const TELEFTAIO_VARIA = 'teleftaio-varia';
+
+// Κάθε πόσο κατεβαίνουν τα βαριά, σε λεπτά.
+//
+// Τα βίντεο είχαν δικό τους ρολόι μέσα στο fetch.yml — cron 40 4,10,16.
+// Στα χαρτιά τρεις φορές τη μέρα· στην πράξη ποτέ. Στις 9 Νοεμβρίου
+// 2026 μετρήθηκε: σε 91 τρεξίματα, μόνο 10 ξεκίνησαν από το ρολόι του
+// GitHub, και καμία τους στις ώρες που ζητούσε το cron. Αποτέλεσμα:
+// επεισόδιο ανεβασμένο στο YouTube στις 8/11 18:13 έλειπε ακόμα από
+// το site 18 ώρες μετά.
+//
+// Ο Worker είναι το ρολόι που δουλεύει — χτυπάει κάθε λεπτό. Οπότε
+// αυτός κρατάει και το ρολόι των βαριών, αντί να το εμπιστεύεται στο
+// GitHub. Το fetch.yml δεν άλλαξε: δέχεται ήδη inputs.varia.
+//
+// Γιατί 60' και όχι λιγότερο: το YouTube έχει ΗΜΕΡΗΣΙΟ όριο 10.000
+// μονάδων. Ένα πλήρες πέρασμα των 15 λιστών κοστίζει ~91. Στην ώρα
+// κάνει ~2.200 τη μέρα — άνετα μέσα. Στα δέκα λεπτά θα έφτανε 13.000
+// και θα σταματούσαν όλα μέχρι το επόμενο εικοσιτετράωρο.
+const VARIA_LEPTA = 60;
+
 // Το πάτωμα: ελάχιστη απόσταση δύο τρεξιμάτων, σε λεπτά.
 //
 // Ήταν 15, και ΔΕΝ ήταν τεχνικός περιορισμός — ήταν λογαριασμός. Το
@@ -96,7 +118,7 @@ function apotyposi(xml) {
   return `${plithos}:${(h >>> 0).toString(16)}`;
 }
 
-async function pataToKoumpi(env) {
+async function pataToKoumpi(env, varia = false) {
   if (!env.GITHUB_TOKEN || !env.GITHUB_REPO) {
     throw new Error('Λείπουν ρυθμίσεις: GITHUB_TOKEN, GITHUB_REPO');
   }
@@ -113,14 +135,15 @@ async function pataToKoumpi(env) {
       'X-GitHub-Api-Version': '2022-11-28',
       'Content-Type': 'application/json',
     },
-    // Τα βαριά (YouTube, απομαγνητοφωνήσεις) ΠΟΤΕ από εδώ: έχουν δικό
-    // τους ρολόι τρεις φορές τη μέρα μέσα στο fetch.yml.
+    // ΠΡΟΣΟΧΗ στο «varia: false» — δεν το στέλνουμε ΠΟΤΕ. Οι επιλογές
+    // boolean του GitHub, όταν φτάνουν από API, ταξιδεύουν ως κείμενο,
+    // και το κείμενο «false» μετράει ως αληθές στις συνθήκες του. Η
+    // σιωπή δεν παρερμηνεύεται· το ψεύτικο ψέμα ναι.
     //
-    // Γι' αυτό δεν στέλνουμε «varia: false» — δεν στέλνουμε ΤΙΠΟΤΑ. Οι
-    // επιλογές boolean του GitHub, όταν φτάνουν από API, ταξιδεύουν ως
-    // κείμενο, και το κείμενο «false» μετράει ως αληθές στις συνθήκες
-    // του. Η σιωπή δεν παρερμηνεύεται.
-    body: JSON.stringify({ ref: env.GITHUB_BRANCH || 'main' }),
+    // Οπότε το κλειδί μπαίνει μόνο όταν όντως τα θέλουμε.
+    body: JSON.stringify(varia
+      ? { ref: env.GITHUB_BRANCH || 'main', inputs: { varia: 'true' } }
+      : { ref: env.GITHUB_BRANCH || 'main' }),
   });
 
   // Επιτυχία = 204 χωρίς σώμα.
@@ -148,31 +171,46 @@ async function koitaKaiPata(env, anagkastika = false) {
   const tora = apotyposi(await res.text());
   const prin = await env.ROI.get(APOTYPOMA);
 
-  if (!anagkastika && tora === prin) {
+  // Ώρα για τα βαριά; Υπολογίζεται ΠΡΙΝ από τον έλεγχο αλλαγής, γιατί
+  // τα βίντεο δεν έχουν καμία σχέση με το sitemap του newshub.gr: ένα
+  // επεισόδιο μπορεί να ανέβει στο YouTube μέσα σε μια μέρα χωρίς
+  // καμία καινούρια είδηση. Αν περιμέναμε «αλλαγή στο sitemap», τα
+  // βίντεο θα κρέμονταν από κάτι άσχετο.
+  const poteVaria = Number(await env.ROI.get(TELEFTAIO_VARIA)) || 0;
+  const perasanVaria = (Date.now() - poteVaria) / 60000;
+  const thelouneVaria = perasanVaria >= VARIA_LEPTA;
+
+  if (!anagkastika && tora === prin && !thelouneVaria) {
     return 'Τίποτα καινούριο — δεν ξύπνησα κανέναν.';
   }
 
   // Το πάτωμα. Μπαίνει ΜΕΤΑ τον έλεγχο αλλαγής, όχι πριν: θέλουμε να
   // σώσουμε το αποτύπωμα ακόμα κι όταν δεν πατάμε, αλλιώς την επόμενη
   // φορά θα νομίζαμε ξανά ότι υπάρχει αλλαγή.
+  //
+  // Τα βαριά ΠΡΟΣΠΕΡΝΟΥΝ το πάτωμα: έρχονται μία φορά την ώρα, πολύ πιο
+  // αραιά από αυτό, και δεν έχει νόημα να τα καθυστερήσει.
   const pote = Number(await env.ROI.get(TELEFTAIO)) || 0;
   const perasan = (Date.now() - pote) / 60000;
 
-  if (!anagkastika && perasan < PATOMA_LEPTA) {
+  if (!anagkastika && !thelouneVaria && perasan < PATOMA_LEPTA) {
     const meno = (PATOMA_LEPTA - perasan).toFixed(1);
     return `Υπάρχει καινούριο, αλλά πάτησα πριν ${perasan.toFixed(1)}'`
       + ` — περιμένω άλλα ${meno}'.`;
   }
 
-  await pataToKoumpi(env);
+  await pataToKoumpi(env, thelouneVaria);
 
   // Σώζουμε ΜΟΝΟ μετά από επιτυχημένο πάτημα. Αν το GitHub αρνηθεί, το
   // αποτύπωμα μένει παλιό και ξαναπροσπαθούμε στο επόμενο λεπτό —
   // αλλιώς μια στιγμιαία άρνηση θα έθαβε τα άρθρα για πάντα.
   await env.ROI.put(APOTYPOMA, tora);
   await env.ROI.put(TELEFTAIO, String(Date.now()));
+  if (thelouneVaria) await env.ROI.put(TELEFTAIO_VARIA, String(Date.now()));
 
-  return `Το πάτησα. Αποτύπωμα: ${tora}`;
+  return thelouneVaria
+    ? `Το πάτησα ΜΕ βίντεο (πέρασαν ${perasanVaria.toFixed(0)}'). Αποτύπωμα: ${tora}`
+    : `Το πάτησα. Αποτύπωμα: ${tora}`;
 }
 
 // Η ζωντανή ροή, από το Action στο KV.
