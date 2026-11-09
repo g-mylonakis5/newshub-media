@@ -1,5 +1,16 @@
 [
   {
+    "id": "pos-i-technologia-mporei-na-allaxei-ton-logariasmo-ton-dimon",
+    "title": "Πώς η τεχνολογία μπορεί να αλλάξει τον λογαριασμό των Δήμων",
+    "url": "https://www.newshub.gr/el/oikonomia/pos-i-technologia-mporei-na-allaxei-ton-logariasmo-ton-dimon",
+    "date": "2026-11-09T21:50:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/city-poli-shutterstock.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/city-poli-shutterstock.jpg",
+    "summary": "Μείωση της κατανάλωσης ηλεκτρικής ενέργειας στον δημόσιο φωτισμό κατά περισσότερο από 60%, χαμηλότερες ενεργειακές δαπάνες στα δημοτικά κτίρια και ταχύτερος ...",
+    "featured": false
+  },
+  {
     "id": "times-i-vretania-stinei-stratiotikes-monades-se-eyropi-kai-asia-gia-na-prolavei-mazikes-kyvernoepitheseis",
     "title": "Times: Η Βρετανία στήνει στρατιωτικές μονάδες σε Ευρώπη και Ασία για να προλάβει μαζικές κυβερνοεπιθέσεις",
     "url": "https://www.newshub.gr/el/geopolitiki/times-i-vretania-stinei-stratiotikes-monades-se-eyropi-kai-asia-gia-na-prolavei-mazikes-kyvernoepitheseis",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/w18-124028w05132634w05112820w0811361917153328.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/w18-124028w05132634w05112820w0811361917153328.jpg",
     "summary": "Με απόφαση του πρωθυπουργού και προέδρου της Νέας Δημοκρατίας Κυριάκου Μητσοτάκη, ανακοινώνεται ότι στις επόμενες βουλευτικές εκλογές του 2027 θα συμπεριληφθ...",
-    "featured": false
-  },
-  {
-    "id": "synagermos-gia-vomva-se-ptisi-apo-doyvlino-pros-romi-1",
-    "title": "Συναγερμός για βόμβα σε πτήση από Δουβλίνο προς Ρώμη",
-    "url": "https://www.newshub.gr/el/kosmos/synagermos-gia-vomva-se-ptisi-apo-doyvlino-pros-romi-1",
-    "date": "2026-11-05T09:14:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/aero_252863_185349_type13262.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/aero_252863_185349_type13262.jpg",
-    "summary": "Συναγερμός σήμανε το πρωί της Πέμπτης, όταν επιβατικό αεροσκάφος τύπου Airbus A320, το οποίο εκτελούσε πτήση από το Δουβλίνο με προορισμό τη Ρώμη, αναγκάστηκ...",
     "featured": false
   }
 ]
