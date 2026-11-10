@@ -21,6 +21,7 @@ const PAIRS_FILE = path.join(__dirname, 'data/pairs.json');
 // δανειζόμαστε για να γράψουμε τις προτάσεις στο διαχειριστικό.
 const { suggestFamilies } = require('./find-aliases.js');
 const SHOW_ART_FILE = path.join(__dirname, 'data/show-art.json');
+const ADS_FILE = path.join(__dirname, 'data/ads.json');
 const SHOWS_FILE = path.join(__dirname, 'data/shows.json');
 const SHOW_DIR = path.join(PUBLIC_DIR, 'show');
 const ARTICLE_DIR = path.join(PUBLIC_DIR, 'arthro');
@@ -619,9 +620,66 @@ const LEGAL = [
 //   place  — πού κάθεται· μπαίνει ως data-ad, εκεί θα κρεμάσει το
 //            δίκτυο το δικό του div όταν έρθει η ώρα
 //   size   — ποια κλάση μεγέθους, από το styles.css
+// Οι διαφημίσεις των συνεργατών, από το διαχειριστικό.
+//
+// Στατικές εικόνες με σύνδεσμο, τίποτα άλλο: κανένα ξένο script, άρα
+// καμία καθυστέρηση, κανένα cookie και κανένα κόστος ανά επισκέπτη.
+// Οι απαιτήσεις του αφεντικού μένουν ανέπαφες — η θέση έχει ήδη
+// δεσμευμένο ύψος, δεν σκεπάζει τίποτα και δεν κουνάει τη σελίδα.
+let adsCache;
+function adsAll(){
+  if (adsCache) return adsCache;
+
+  adsCache = [];
+  try {
+    const raw = JSON.parse(fs.readFileSync(ADS_FILE, 'utf8'));
+    if (Array.isArray(raw && raw.ads)) adsCache = raw.ads;
+  } catch (err) {
+    if (err.code !== 'ENOENT') {
+      console.warn('ΠΡΟΣΟΧΗ: το data/ads.json δεν διαβάζεται —', err.message);
+    }
+  }
+  return adsCache;
+}
+
+// Ποια διαφήμιση παίζει σε μια θέση σήμερα.
+//
+// Όταν δύο συνεργάτες μοιράζονται την ίδια θέση, εναλλάσσονται ΑΝΑ
+// ΗΜΕΡΑ. Όχι τυχαία και όχι με JavaScript: η σελίδα είναι στατική και
+// την ίδια ώρα όλοι πρέπει να βλέπουν το ίδιο πράγμα, αλλιώς κανείς
+// δεν μπορεί να ελέγξει τι προβλήθηκε. Μέσα στην ίδια μέρα το build
+// τρέχει δεκάδες φορές και βγάζει πάντα το ίδιο αποτέλεσμα.
+function adFor(place){
+  const today = new Date().toISOString().slice(0, 10);
+
+  const live = adsAll().filter((a) => a
+    && a.status !== 'off'
+    && a.image
+    && Array.isArray(a.places) && a.places.includes(place)
+    && (!a.from || a.from <= today)
+    && (!a.to || a.to >= today));
+
+  if (!live.length) return null;
+
+  const day = Math.floor(Date.parse(`${today}T00:00:00Z`) / 86400000);
+  return live[day % live.length];
+}
+
 function adSlot(place, size){
-  return `  <aside class="ad ad--${size}" data-ad="${place}" aria-label="Διαφήμιση">
-    <span class="ad-note">Διαφήμιση</span>
+  const ad = adFor(place);
+
+  // Κενή θέση: μένει ο δεσμευμένος χώρος και η λέξη. Έτσι η σελίδα
+  // έχει ακριβώς το ίδιο ύψος με ή χωρίς διαφήμιση.
+  const inner = ad
+    ? `    <a class="ad-link" href="${esc(ad.url || '#')}" target="_blank" rel="noopener sponsored"
+       aria-label="Διαφήμιση: ${esc(ad.partner || '')}">
+      <img class="ad-image" src="${esc(ad.image)}" alt="${esc(ad.alt || ad.partner || 'Διαφήμιση')}" loading="lazy">
+    </a>
+    <span class="ad-note ad-note--on">Διαφήμιση</span>`
+    : '    <span class="ad-note">Διαφήμιση</span>';
+
+  return `  <aside class="ad ad--${size}${ad ? ' ad--full' : ''}" data-ad="${place}" aria-label="Διαφήμιση">
+${inner}
   </aside>`;
 }
 

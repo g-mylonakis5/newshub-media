@@ -32,6 +32,7 @@ const WRITABLE = new Set([
   'pairs',           // ποιο βίντεο και ποιος καλεσμένος πάει σε ποιο επεισόδιο
   'photos',          // ποιες φωτογραφίες είναι «στάνταρ»
   'writers',         // τα πορτρέτα των αρθρογράφων του newshub.gr
+  'ads',             // οι διαφημίσεις των συνεργατών
 ]);
 
 // Αρχεία που διαβάζονται αλλά ΔΕΝ γράφονται: τα παράγουν τα fetch-*.js
@@ -133,6 +134,59 @@ function validate(name, data){
         if (typeof url !== 'string' || !/^\/uploads\/[\w.-]+$/.test(url)) {
           return `Η φωτογραφία του «${who}» πρέπει να είναι αρχείο του /uploads/.`;
         }
+      }
+    }
+  }
+
+  // Οι διαφημίσεις. Εδώ ο έλεγχος είναι ΑΥΣΤΗΡΟΣ, πιο αυστηρός από
+  // παντού αλλού: ό,τι γράφεται εδώ γίνεται σύνδεσμος και εικόνα σε
+  // 4.700 σελίδες, και μια διαφήμιση είναι ο ευκολότερος τρόπος να
+  // μπει ξένο περιεχόμενο σε ένα site.
+  if (name === 'ads') {
+    if (Array.isArray(data)) return 'Οι διαφημίσεις πρέπει να είναι αντικείμενο με «ads».';
+    if (!Array.isArray(data.ads)) return 'Λείπει η λίστα «ads».';
+
+    for (const a of data.ads) {
+      if (a === null || typeof a !== 'object' || Array.isArray(a)) {
+        return 'Κάθε διαφήμιση πρέπει να είναι αντικείμενο.';
+      }
+
+      const who = a.partner ? `«${a.partner}»` : 'μιας διαφήμισης';
+
+      if (typeof a.partner !== 'string' || !a.partner.trim()) {
+        return 'Κάθε διαφήμιση χρειάζεται όνομα συνεργάτη.';
+      }
+
+      // Η εικόνα ΜΟΝΟ από το δικό μας /uploads/. Ξένη διεύθυνση θα
+      // σήμαινε ότι ο συνεργάτης αλλάζει το creative χωρίς να το
+      // δούμε, και ότι ο server του μετράει τους αναγνώστες μας.
+      if (typeof a.image !== 'string' || !/^\/uploads\/[\w.-]+$/.test(a.image)) {
+        return `Η εικόνα ${who} πρέπει να είναι αρχείο του /uploads/.`;
+      }
+
+      // Ο σύνδεσμος φεύγει έξω, άρα μόνο http(s) — ποτέ javascript:
+      if (typeof a.url !== 'string' || !/^https?:\/\/[^\s"']+$/.test(a.url)) {
+        return `Ο σύνδεσμος ${who} πρέπει να ξεκινά με http:// ή https://`;
+      }
+
+      if (!Array.isArray(a.places) || !a.places.length) {
+        return `Η διαφήμιση ${who} δεν έχει καμία θέση.`;
+      }
+      if (a.places.some((p) => typeof p !== 'string' || !/^[\w-]+$/.test(p))) {
+        return `Άκυρη θέση στη διαφήμιση ${who}.`;
+      }
+
+      for (const field of ['from', 'to']) {
+        if (a[field] && !/^\d{4}-\d{2}-\d{2}$/.test(a[field])) {
+          return `Η ημερομηνία «${field}» ${who} γράφεται ΕΕΕΕ-ΜΜ-ΗΗ.`;
+        }
+      }
+      if (a.from && a.to && a.from > a.to) {
+        return `Η διαφήμιση ${who} τελειώνει πριν αρχίσει.`;
+      }
+
+      if (a.status && a.status !== 'on' && a.status !== 'off') {
+        return `Άγνωστη κατάσταση στη διαφήμιση ${who}.`;
       }
     }
   }

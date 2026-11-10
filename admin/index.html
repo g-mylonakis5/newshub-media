@@ -48,6 +48,7 @@
     <a class="tab" href="#mustread" data-tab="mustread">Must read</a>
     <a class="tab" href="#apopseis" data-tab="apopseis">Απόψεις</a>
     <a class="tab" href="#arthra" data-tab="arthra">Άρθρα</a>
+    <a class="tab" href="#diafimiseis" data-tab="diafimiseis">Διαφημίσεις</a>
     <a class="tab" href="#fotos" data-tab="fotos">Φωτογραφίες</a>
     <a class="tab" href="#katigories" data-tab="katigories">Κατηγορίες</a>
     <a class="tab" href="#prosopa" data-tab="prosopa">Πρόσωπα</a>
@@ -183,6 +184,38 @@
       <p class="more">
         <button type="button" class="btn btn--ghost" data-mr-more hidden>Δείξε περισσότερα</button>
       </p>
+    </section>
+
+    <!-- ========== ΔΙΑΦΗΜΙΣΕΙΣ ==========
+         Στατικές εικόνες με σύνδεσμο. Καμία τρίτη εταιρεία, κανένα
+         script: οι θέσεις έχουν ήδη δεσμευμένο ύψος, οπότε η σελίδα
+         δεν κουνιέται όταν φορτώσει η εικόνα. -->
+    <section class="panel" data-panel="diafimiseis">
+      <header class="panel-head">
+        <div>
+          <h1>Διαφημίσεις</h1>
+          <p class="hint">Οι συνεργάτες και πού προβάλλονται. Η εικόνα μπαίνει
+            ολόκληρη, χωρίς κόψιμο.<br>
+            Αν δύο διαφημίσεις μοιράζονται θέση, εναλλάσσονται ανά ημέρα.
+            Κενή θέση = μένει ο χώρος, γράφει «Διαφήμιση».</p>
+        </div>
+        <div class="editor-acts">
+          <button type="button" class="btn btn--ghost" data-ad-new>+ Νέα διαφήμιση</button>
+          <button type="button" class="btn btn--go" data-save="ads" disabled>Αποθήκευση</button>
+        </div>
+      </header>
+
+      <p class="state" data-ad-state></p>
+
+      <!-- ΤΙ ΠΑΙΖΕΙ ΠΟΥ. Πρώτα η εικόνα της κατάστασης, μετά η αλλαγή —
+           ίδια λογική με το πρωτοσέλιδο και τα «Τελευταία». -->
+      <h2 class="sub">Οι θέσεις</h2>
+      <div class="adplaces" data-ad-places></div>
+
+      <h2 class="sub">Οι διαφημίσεις</h2>
+      <div class="adlist" data-ad-list>
+        <p class="muted">Φόρτωση…</p>
+      </div>
     </section>
 
     <!-- ========== ΑΠΟΨΕΙΣ ==========

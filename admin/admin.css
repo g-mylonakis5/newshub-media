@@ -373,6 +373,85 @@ body{
   gap: 1rem;
 }
 
+/* ---- Διαφημίσεις ---- */
+
+/* Ο πίνακας των θέσεων: ποια είναι γεμάτη και από ποιον. Πρώτα ΤΙ
+   ισχύει, μετά η αλλαγή — ίδια λογική με το πρωτοσέλιδο. */
+.adplaces{
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 2rem;
+}
+
+.adplace{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+/* Γεμάτη θέση: πράσινη ακμή αριστερά. Με μια ματιά φαίνεται πόσες από
+   τις επτά πουλήθηκαν. */
+.adplace.is-on{ border-left-color: var(--ok, #3F7D58); }
+
+.adplace-name{ margin: 0; font-weight: 600; }
+
+.adplace-meta,
+.adplace-who{ margin: 0.15rem 0 0; font-size: 0.8rem; color: var(--muted); }
+
+.adplace-who{ text-align: right; }
+
+.adlist{ display: grid; gap: 1rem; }
+
+.adcard{
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+/* Ανενεργή ή εκτός ημερομηνιών: σβηστή, αλλά όχι κρυμμένη. */
+.adcard--off{ opacity: 0.6; }
+
+.adcard-head{
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* contain, όχι cover: η μικρογραφία πρέπει να δείχνει ΑΚΡΙΒΩΣ ό,τι θα
+   δει ο αναγνώστης — ένα κομμένο creative εδώ θα έκρυβε το πρόβλημα. */
+.adcard-pic{
+  width: 120px;
+  height: 60px;
+  object-fit: contain;
+  background: var(--bg);
+  border-radius: 4px;
+  display: block;
+}
+
+.adcard-name{ margin: 0; font-weight: 600; }
+.adcard-meta{ margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--muted); }
+.adcard-acts{ display: flex; gap: 0.35rem; align-items: center; }
+
+.adchecks{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.25rem 1rem;
+}
+
+.check--tight{ font-size: 0.85rem; }
+.check--tight small{ color: var(--muted); }
+
 /* ---- Προεπισκόπηση άρθρου ---- */
 
 .preview-box{
