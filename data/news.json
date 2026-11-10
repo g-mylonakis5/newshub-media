@@ -1,5 +1,16 @@
 [
   {
+    "id": "epicheirisi-aposymforisi-gia-tis-fylakes-kai-stin-kriti-i-eikona-sta-sofronistika-katastimata-toy-nisioy",
+    "title": "Επιχείρηση «αποσυμφόρηση» για τις φυλακές και στην Κρήτη - Η εικόνα στα σωφρονιστικά καταστήματα του νησιού",
+    "url": "https://www.newshub.gr/el/kriti/epicheirisi-aposymforisi-gia-tis-fylakes-kai-stin-kriti-i-eikona-sta-sofronistika-katastimata-toy-nisioy",
+    "date": "2026-11-10T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/phylakes-a.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/phylakes-a.jpg",
+    "summary": "Με 14.318 κρατουμένους σε φυλακές που έχουν σχεδιαστεί για να φιλοξενούν 10.722 ανθρώπους, το σωφρονιστικό σύστημα έχει ξεπεράσει προ καιρού τα όριά του...",
+    "featured": true
+  },
+  {
     "id": "ektakti-enimerosi-tramp-vlepei-thetiko-momentoym-gia-symfonia-me-to-iran",
     "title": "Έκτακτη ενημέρωση Τραμπ: «Βλέπει» θετικό μομέντουμ για συμφωνία με το Ιράν",
     "url": "https://www.newshub.gr/el/geopolitiki/ektakti-enimerosi-tramp-vlepei-thetiko-momentoym-gia-symfonia-me-to-iran",
@@ -184,7 +195,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/dikastiko-megaro-erakleiou-44.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/dikastiko-megaro-erakleiou-44.jpg",
     "summary": "Έπιτέθηκαν σε συμπολίτη μας και του άρπαξαν με τη βία τα χρήματα που έφερε μαζί του.\r\n\r\nΟ λόγος για έναν 44χρονο κι έναν 30χρονο, οι οποίοι φέροντα...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "ston-tomea-tis-ygeias-ola-ta-prostheta-esoda-apo-tis-ayxiseis-ton-foron-se-tsigara-kai-alkool",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/moro-baby-paidi-vrefos.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/moro-baby-paidi-vrefos.jpg",
     "summary": "Τις δυσοίωνες προβλέψεις από τις κατά καιρούς εκθέσεις για το δημογραφικό στην Ελλάδα έρχεται να επιβεβαιώσει με τον πιο ανησυχητικό τρόπο η έκθεση της Ευρωπ...",
-    "featured": false
-  },
-  {
-    "id": "programma-episkepseon-kinitis-monadas-kentroy-psychikis-ygeias-chanion-ston-dimo-platania-6",
-    "title": "Πρόγραμμα Επισκέψεων Κινητής Μονάδας Κέντρου Ψυχικής Υγείας Χανίων, στον Δήμο Πλατανιά",
-    "url": "https://www.newshub.gr/el/kriti/programma-episkepseon-kinitis-monadas-kentroy-psychikis-ygeias-chanion-ston-dimo-platania-6",
-    "date": "2026-11-05T09:35:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/demarcheio-platania-1thx.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/demarcheio-platania-1thx.jpg",
-    "summary": "Η Κινητή Μονάδα του Κέντρου Ψυχικής Υγείας Νομού Χανίων πραγματοποιεί επισκέψεις σε εβδομαδιαία βάση σε Κέντρα Υγείας και Περιφερειακά Ιατρεία του νομού.&nbs...",
     "featured": false
   }
 ]
