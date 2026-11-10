@@ -1,5 +1,16 @@
 [
   {
+    "id": "ethelontiki-aimodosia-sta-chania-me-protovoylia-enos-frontistirioy-ekpaideysis",
+    "title": "Εθελοντική αιμοδοσία στα Χανιά με πρωτοβουλία ενός φροντιστηρίου εκπαίδευσης",
+    "url": "https://www.newshub.gr/el/kriti/ethelontiki-aimodosia-sta-chania-me-protovoylia-enos-frontistirioy-ekpaideysis",
+    "date": "2026-11-10T09:20:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/aimodosia-aima.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/aimodosia-aima.jpg",
+    "summary": "Το φροντιστήριο ΘΕΣΜΟΣ διοργανώνει εθελοντική αιμοδοσία την Τρίτη 17 Νοεμβρίου 2026, από τις 9:00 έως τις 14:00, στις εγκαταστάσεις του (Ηρώων Πολυτεχνείου 3...",
+    "featured": false
+  },
+  {
     "id": "dimopsifisma-stin-kalifornia-aporrifthike-o-foros-stoys-disekatommyrioychoys",
     "title": "Δημοψήφισμα στην Καλιφόρνια: Απορρίφθηκε ο φόρος στους δισεκατομμυριούχους",
     "url": "https://www.newshub.gr/el/kosmos/dimopsifisma-stin-kalifornia-aporrifthike-o-foros-stoys-disekatommyrioychoys",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/gal3.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/gal3.jpg",
     "summary": "Μια σεμνή και ιδιαίτερα συγκινητική εκδήλωση προς τιμήν της Νίκης Γαλάνη, ως ελάχιστη ένδειξη αναγνώρισης και ευγνωμοσύνης για την 15ετή εθελοντική προσφορά ...",
-    "featured": false
-  },
-  {
-    "id": "ipa-poso-mporoyn-na-epireasoyn-tin-emporiki-politiki-oi-dimokratikoi",
-    "title": "ΗΠΑ: Πόσο μπορούν να επηρεάσουν την εμπορική πολιτική οι Δημοκρατικοί",
-    "url": "https://www.newshub.gr/el/oikonomia/ipa-poso-mporoyn-na-epireasoyn-tin-emporiki-politiki-oi-dimokratikoi",
-    "date": "2026-11-05T15:12:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/jtyjy.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/jtyjy.jpg",
-    "summary": "Οι Δημοκρατικοί αποκτούν πλέον λόγο και δικαίωμα διεξοδικής έρευνας των εμπορικών πολιτικών που εφαρμόζει ο πρόεδρος των ΗΠΑ, Donald Trump, μετά τη συντριπτι...",
     "featured": false
   }
 ]
