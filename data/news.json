@@ -1,5 +1,38 @@
 [
   {
+    "id": "karystos-entopistike-nekri-gynaika-mesa-se-mantri",
+    "title": "Κάρυστος: Εντοπίστηκε νεκρή γυναίκα μέσα σε μαντρί",
+    "url": "https://www.newshub.gr/el/ellada/karystos-entopistike-nekri-gynaika-mesa-se-mantri",
+    "date": "2026-11-10T11:28:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/ekab2gte.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/ekab2gte.jpg",
+    "summary": "Μια γυναίκα βρέθηκε νεκρή μέσα σε μαντρί στην περιοχή της Καρύστου, στην Εύβοια, με την Αστυνομία να έχει ενημερωθεί για το περιστατικό.\r\n\r\nΣύμφωνα με πληροφ...",
+    "featured": false
+  },
+  {
+    "id": "gallia-ikanopoiisi-makron-gia-tin-ypopsifiotita-riner",
+    "title": "Γαλλία: Ικανοποίηση Μακρόν για την υποψηφιότητα Ρινέρ",
+    "url": "https://www.newshub.gr/el/kosmos/gallia-ikanopoiisi-makron-gia-tin-ypopsifiotita-riner",
+    "date": "2026-11-10T11:21:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/st-8-1200x719.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/st-8-1200x719.jpg",
+    "summary": "Σε συνέντευξη που παραχώρησε στην εκπομπή «C &agrave; vous» χθες, Δευτέρα, ο Γάλλος Πρόεδρος Εμανουέλ Μακρόν χαρακτήρισε την υποψηφιότητα του Τεν...",
+    "featured": false
+  },
+  {
+    "id": "eyaggelos-toyrnas-apo-irakleio-eichame-mia-poly-dyskoli-chronia-erchontai-stin-kriti-60-pyrosvestes",
+    "title": "Ευάγγελος Τουρνάς από Ηράκλειο: «Είχαμε μια πολύ δύσκολη χρονιά» - Έρχονται στην Κρήτη 60 πυροσβέστες",
+    "url": "https://www.newshub.gr/el/kriti/eyaggelos-toyrnas-apo-irakleio-eichame-mia-poly-dyskoli-chronia-erchontai-stin-kriti-60-pyrosvestes",
+    "date": "2026-11-10T11:14:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/tournasherke.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/tournasherke.jpg",
+    "summary": "Παρουσία του Υπουργού Κλιματικής Κρίσης και Πολιτικής Προστασίας, Ευάγγελου Τουρνά, πραγματοποιείται αυτή την ώρα στο Ηράκλειο η σύσκεψη για την προετοιμασία...",
+    "featured": true
+  },
+  {
     "id": "prototypo-seminario-beatbox-kai-aerofonon-ston-agio-nikolao-me-ton-niko-diminaki",
     "title": "Πρωτότυπο Σεμινάριο Beatbox και Αεροφώνων στον Άγιο Νικόλαο με τον Νίκο Δημηνάκη",
     "url": "https://www.newshub.gr/el/kriti/prototypo-seminario-beatbox-kai-aerofonon-ston-agio-nikolao-me-ton-niko-diminaki",
@@ -8,7 +41,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/afisa_seminariou.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/afisa_seminariou.jpg",
     "summary": "Στο πλαίσιο του «Τριημέρου Λόγου και Τέχνης» ο Δήμος Αγίου Νικολάου και το Ωδείο Τέχνης Κρήτης συνδιοργανώνουν ένα πρωτότυπο και δυναμικό σεμινάρ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "m-syntychakis-i-kyvernisi-afinei-tis-domes-pronoias-me-terastia-provlimata",
@@ -6564,39 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/32565536.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/32565536.jpg",
     "summary": "Η σαρωτική ήττα των Ρεπουμπλικανών στις ενδιάμεσες εκλογές των ΗΠΑ δεν επηρεάζει μόνο την πολιτική παρακαταθήκη του Ντόναλντ Τραμπ, αλλά αλλάζει ήδη τις ισορ...",
-    "featured": false
-  },
-  {
-    "id": "ethelontiki-aimodosia-sto-aithrio-tis-lotzia-86",
-    "title": "Εθελοντική αιμοδοσία στο αίθριο της Λότζια",
-    "url": "https://www.newshub.gr/el/kriti/ethelontiki-aimodosia-sto-aithrio-tis-lotzia-86",
-    "date": "2026-11-05T17:38:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/aimodosiaaaaaa.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/aimodosiaaaaaa.jpg",
-    "summary": "Το Σάββατο 7 Νοεμβρίου 2026 θα πραγματοποιηθεί εθελοντική αιμοδοσία στο κέντρο της πόλης του Ηρακλείου και συγκεκριμένα στο αίθριο της Λότζια από τις 09:30 έ...",
-    "featured": false
-  },
-  {
-    "id": "mitsotakis-apo-kede-6-2-protovoylies-gia-tin-topiki-aytodioikisi",
-    "title": "Μητσοτάκης από ΚΕΔΕ: 6+2 πρωτοβουλίες για την Τοπική Αυτοδιοίκηση",
-    "url": "https://www.newshub.gr/el/ellada/mitsotakis-apo-kede-6-2-protovoylies-gia-tin-topiki-aytodioikisi",
-    "date": "2026-11-05T17:34:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/7153346-768x512.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/7153346-768x512.jpg",
-    "summary": "Στο ετήσιο τακτικό συνέδριο της Κεντρικής Ένωσης Δήμων Ελλάδας (ΚΕΔΕ) μίλησε ο Κυριάκος Μητσοτάκης, όπου ανακοίνωσε 6+2 πρωτοβουλίες, οι περισσότερες με άμεσ...",
-    "featured": false
-  },
-  {
-    "id": "o-doyvikas-protos-skorer-sto-champions-league-itan-mia-yperochi-vradia",
-    "title": "Ο Δουβίκας πρώτος σκόρερ στο Champions League – «Ηταν μια υπέροχη βραδιά»",
-    "url": "https://www.newshub.gr/el/athlitika/o-doyvikas-protos-skorer-sto-champions-league-itan-mia-yperochi-vradia",
-    "date": "2026-11-05T17:30:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/xx.jepg_.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/xx.jepg_.jpg",
-    "summary": "Ο Τάσος Δουβίκας συνεχίζει να εντυπωσιάζει με την Κόμο και στο Champions League. Η ιταλική ομάδα πέρασε από τη Γαλλία με το απίστευτο 1-9 (!) επί της Λανς, μ...",
     "featured": false
   }
 ]
