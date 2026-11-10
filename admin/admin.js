@@ -1694,6 +1694,274 @@ function saveMustRead(){
 }
 
 // ---------------------------------------------------------------------
+// ΔΙΑΦΗΜΙΣΕΙΣ — οι συνεργάτες και πού προβάλλονται
+// ---------------------------------------------------------------------
+//
+// Στατική εικόνα με σύνδεσμο, τίποτα άλλο. Καμία τρίτη εταιρεία, άρα
+// μηδέν κόστος ανά επισκέπτη και μηδέν καθυστέρηση — και οι θέσεις
+// έχουν ήδη δεσμευμένο ύψος στο CSS, οπότε τηρείται η απαίτηση
+// «καμία διαφήμιση δεν κουνάει τη σελίδα».
+//
+// Οι θέσεις είναι ΟΣΕΣ υπάρχουν στο build.js· γράφονται εδώ με τα ίδια
+// ονόματα. Αν προστεθεί θέση εκεί, προστίθεται και εδώ — δεν υπάρχει
+// τρόπος να τη μαντέψει το διαχειριστικό από στατικό HTML.
+var AD_PLACES = [
+  { id: 'home-top', name: 'Αρχική — κάτω από τη ροή', size: 'Billboard' },
+  { id: 'home-mid', name: 'Αρχική — ανάμεσα σε Πρόσωπα και «Και ακόμα»', size: 'Leaderboard' },
+  { id: 'home-side', name: 'Αρχική — πλαϊνή στήλη', size: 'MPU 300×250' },
+  { id: 'article-mid', name: 'Μέσα στο άρθρο', size: 'Leaderboard' },
+  { id: 'episode-mid', name: 'Σελίδα επεισοδίου', size: 'Leaderboard' },
+  { id: 'video-mid', name: 'Σελίδα βίντεο', size: 'Leaderboard' },
+  { id: 'footer', name: 'Υποσέλιδο — κάθε σελίδα', size: 'Leaderboard' },
+];
+
+var ad = { list: [], open: -1 };
+
+function adReady(file){
+  ad.list = (file && Array.isArray(file.ads)) ? file.ads : [];
+}
+
+function adDirty(on){
+  state.dirty = on;
+  $('[data-save="ads"]').disabled = !on;
+}
+
+function adSay(text, kind){
+  var el = $('[data-ad-state]');
+  if (!text) { el.hidden = true; return; }
+  el.hidden = false;
+  el.textContent = text;
+  if (kind) el.setAttribute('data-kind', kind); else el.removeAttribute('data-kind');
+}
+
+// Παίζει σήμερα; Ίδιος έλεγχος με την adFor() του build.js — αλλιώς η
+// οθόνη θα έλεγε «ενεργή» για κάτι που το site δεν δείχνει.
+function adLive(a){
+  var today = new Date().toISOString().slice(0, 10);
+  return a.status !== 'off'
+    && !!a.image
+    && (!a.from || a.from <= today)
+    && (!a.to || a.to >= today);
+}
+
+function adDrawPlaces(){
+  var box = $('[data-ad-places]');
+
+  box.innerHTML = AD_PLACES.map(function (p) {
+    var here = ad.list.filter(function (a) {
+      return adLive(a) && (a.places || []).indexOf(p.id) > -1;
+    });
+
+    var who = here.length
+      ? here.map(function (a) { return esc(a.partner); }).join(' · ')
+      : '<span class="muted">κενή — γράφει «Διαφήμιση»</span>';
+
+    return '<div class="adplace' + (here.length ? ' is-on' : '') + '">'
+      + '<div class="adplace-text">'
+      + '<p class="adplace-name">' + esc(p.name) + '</p>'
+      + '<p class="adplace-meta">' + esc(p.size) + ' · <code>' + esc(p.id) + '</code></p>'
+      + '</div>'
+      + '<p class="adplace-who">' + who
+      + (here.length > 1 ? ' <span class="pill pill--draft">εναλλάξ ανά ημέρα</span>' : '')
+      + '</p></div>';
+  }).join('');
+}
+
+function adDrawList(){
+  var box = $('[data-ad-list]');
+
+  if (!ad.list.length) {
+    box.innerHTML = '<p class="muted">Καμία διαφήμιση ακόμα. Πάτησε «Νέα διαφήμιση».</p>';
+    return;
+  }
+
+  box.innerHTML = ad.list.map(function (a, i) {
+    var live = adLive(a);
+    var places = (a.places || []).map(function (id) {
+      var p = null;
+      AD_PLACES.forEach(function (x) { if (x.id === id) p = x; });
+      return p ? p.name : id;
+    });
+
+    var checks = AD_PLACES.map(function (p) {
+      var on = (a.places || []).indexOf(p.id) > -1;
+      return '<label class="check check--tight">'
+        + '<input type="checkbox" data-ad-place="' + esc(p.id) + '"' + (on ? ' checked' : '') + '>'
+        + '<span>' + esc(p.name) + ' <small>' + esc(p.size) + '</small></span>'
+        + '</label>';
+    }).join('');
+
+    return '<article class="adcard' + (live ? '' : ' adcard--off') + '" data-ad-i="' + i + '">'
+      + '<header class="adcard-head">'
+      + (a.image
+        ? '<img class="adcard-pic" src="' + esc(a.image) + '" alt="">'
+        : '<span class="adcard-pic adcard-pic--empty"></span>')
+      + '<div class="adcard-id">'
+      + '<p class="adcard-name">' + esc(a.partner || '(χωρίς όνομα)') + '</p>'
+      + '<p class="adcard-meta">'
+      + (live ? '<span class="pill">παίζει τώρα</span>' : '<span class="pill pill--draft">δεν παίζει</span>')
+      + ' ' + esc(places.join(' · ') || 'καμία θέση')
+      + '</p>'
+      + '</div>'
+      + '<span class="adcard-acts">'
+      + '<button type="button" class="btn btn--tiny" data-ad-up="' + i + '"'
+      + (i === 0 ? ' disabled' : '') + '>↑</button>'
+      + '<button type="button" class="btn btn--tiny" data-ad-del="' + i + '">Διαγραφή</button>'
+      + '</span>'
+      + '</header>'
+
+      + '<div class="row2">'
+      + '<div class="field"><label>Συνεργάτης</label>'
+      + '<input type="text" data-ad="partner" value="' + esc(a.partner || '') + '"'
+      + ' placeholder="Το όνομα της επιχείρησης"></div>'
+      + '<div class="field"><label>Σύνδεσμος</label>'
+      + '<input type="text" data-ad="url" value="' + esc(a.url || '') + '" placeholder="https://…"></div>'
+      + '</div>'
+
+      + '<div class="field">'
+      + '<label>Εικόνα</label>'
+      + '<div class="show-pick">'
+      + '<button type="button" class="btn btn--ghost" data-ad-pic="' + i + '">'
+      + (a.image ? 'Άλλαξε εικόνα' : 'Διάλεξε εικόνα') + '</button>'
+      + (a.image ? '<span class="hint">' + esc(a.image) + '</span>' : '')
+      + '</div></div>'
+
+      + '<div class="row2">'
+      + '<div class="field"><label>Από</label>'
+      + '<input type="date" data-ad="from" value="' + esc(a.from || '') + '"></div>'
+      + '<div class="field"><label>Έως</label>'
+      + '<input type="date" data-ad="to" value="' + esc(a.to || '') + '"></div>'
+      + '</div>'
+
+      + '<label class="check">'
+      + '<input type="checkbox" data-ad="status"' + (a.status === 'off' ? '' : ' checked') + '>'
+      + '<span>Ενεργή</span></label>'
+
+      + '<p class="hint">Θέσεις:</p>'
+      + '<div class="adchecks">' + checks + '</div>'
+      + '</article>';
+  }).join('');
+}
+
+function drawAds(){
+  adDrawPlaces();
+  adDrawList();
+}
+
+function adNew(){
+  ad.list.unshift({
+    partner: '',
+    image: '',
+    url: '',
+    places: [],
+    from: '',
+    to: '',
+    status: 'on',
+  });
+  drawAds();
+  adDirty(true);
+  adSay('Συμπλήρωσε όνομα, εικόνα, σύνδεσμο και τουλάχιστον μία θέση.');
+}
+
+function saveAds(){
+  // Οι ίδιοι έλεγχοι με το API, αλλά ΠΡΙΝ φύγει το αίτημα: έτσι ο
+  // συντάκτης βλέπει ποια γραμμή φταίει αντί για ένα γενικό σφάλμα.
+  for (var i = 0; i < ad.list.length; i++) {
+    var a = ad.list[i];
+    var no = 'Διαφήμιση ' + (i + 1) + ': ';
+    if (!a.partner || !a.partner.trim()) { adSay(no + 'λείπει το όνομα του συνεργάτη.', 'bad'); return; }
+    if (!a.image) { adSay(no + 'λείπει η εικόνα.', 'bad'); return; }
+    if (!/^https?:\/\//.test(a.url || '')) { adSay(no + 'ο σύνδεσμος θέλει http:// ή https://', 'bad'); return; }
+    if (!(a.places || []).length) { adSay(no + 'δεν διάλεξες θέση.', 'bad'); return; }
+    if (a.from && a.to && a.from > a.to) { adSay(no + 'τελειώνει πριν αρχίσει.', 'bad'); return; }
+  }
+
+  adSay('Αποθηκεύεται…');
+  api('ads', 'PUT', { ads: ad.list }).then(function () {
+    adDirty(false);
+    drawAds();
+    adSay('Αποθηκεύτηκε. Φαίνεται στο site μόλις ξαναχτιστεί (~2 λεπτά).', 'ok');
+  }).catch(function (err) {
+    adSay('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+function adSetImage(i, url){
+  if (!ad.list[i]) return;
+  ad.list[i].image = url;
+  drawAds();
+  adDirty(true);
+}
+
+function wireAds(){
+  $('[data-ad-new]').addEventListener('click', adNew);
+  $('[data-save="ads"]').addEventListener('click', saveAds);
+
+  var box = $('[data-ad-list]');
+
+  box.addEventListener('click', function (e) {
+    var pic = e.target.closest('[data-ad-pic]');
+    if (pic) { pickImage({ ad: Number(pic.dataset.adPic) }); return; }
+
+    var up = e.target.closest('[data-ad-up]');
+    if (up) {
+      var i = Number(up.dataset.adUp);
+      if (i <= 0) return;
+      var tmp = ad.list[i]; ad.list[i] = ad.list[i - 1]; ad.list[i - 1] = tmp;
+      drawAds();
+      adDirty(true);
+      return;
+    }
+
+    var del = e.target.closest('[data-ad-del]');
+    if (del) {
+      var at = Number(del.dataset.adDel);
+      var a = ad.list[at];
+      if (!a) return;
+      if (!window.confirm('Να διαγραφεί η διαφήμιση «' + (a.partner || 'χωρίς όνομα') + '»;')) return;
+      ad.list.splice(at, 1);
+      drawAds();
+      adDirty(true);
+    }
+  });
+
+  box.addEventListener('input', function (e) {
+    var card = e.target.closest('[data-ad-i]');
+    if (!card) return;
+    var a = ad.list[Number(card.dataset.adI)];
+    if (!a) return;
+
+    var f = e.target.closest('[data-ad]');
+    if (f && f.dataset.ad !== 'status') {
+      a[f.dataset.ad] = f.value.trim();
+      adDirty(true);
+    }
+  });
+
+  // Τα κουτάκια δεν βγάζουν «input» παντού.
+  box.addEventListener('change', function (e) {
+    var card = e.target.closest('[data-ad-i]');
+    if (!card) return;
+    var a = ad.list[Number(card.dataset.adI)];
+    if (!a) return;
+
+    var st = e.target.closest('[data-ad="status"]');
+    if (st) { a.status = st.checked ? 'on' : 'off'; drawAds(); adDirty(true); return; }
+
+    var pl = e.target.closest('[data-ad-place]');
+    if (pl) {
+      var id = pl.dataset.adPlace;
+      if (!Array.isArray(a.places)) a.places = [];
+      var at = a.places.indexOf(id);
+      if (pl.checked && at < 0) a.places.push(id);
+      if (!pl.checked && at > -1) a.places.splice(at, 1);
+      drawAds();
+      adDirty(true);
+    }
+  });
+}
+
+// ---------------------------------------------------------------------
 // ΑΠΟΨΕΙΣ — τα υπογεγραμμένα κείμενα του newshub.gr
 // ---------------------------------------------------------------------
 //
@@ -2745,6 +3013,13 @@ function applyPick(url){
     ppSetPhoto(t.person, url);
     pickClose();
     drawPeople();
+    return;
+  }
+
+  // Η εικόνα μιας διαφήμισης, από την καρτέλα «Διαφημίσεις».
+  if (t.ad != null) {
+    adSetImage(t.ad, url);
+    pickClose();
     return;
   }
 
@@ -4355,6 +4630,7 @@ function wire(){
   wireLatest();
   wireMustRead();
   wireOpinions();
+  wireAds();
   wireCats();
   wirePeople();
   wirePairs();
@@ -4399,6 +4675,9 @@ function boot(){
     // Τα πορτρέτα των αρθρογράφων. ΑΝΕΚΤΙΚΟ: το αρχείο δεν υπάρχει
     // μέχρι να αλλάξει κανείς την πρώτη φωτογραφία.
     api('writers').catch(function () { return null; }),
+    // Οι διαφημίσεις. ΑΝΕΚΤΙΚΟ: το αρχείο δεν υπάρχει μέχρι να μπει η
+    // πρώτη — και μια καρτέλα διαφημίσεων δεν ρίχνει το διαχειριστικό.
+    api('ads').catch(function () { return null; }),
   ]).then(function (r) {
     // Το αρχείο μπορεί να μην υπάρχει ακόμα — τότε το API δίνει null.
     var photos = r[12] && typeof r[12] === 'object' ? r[12] : {};
@@ -4417,6 +4696,7 @@ function boot(){
     state.items = normalize(r[1], r[2], r[3], art.list);
     state.flow = r[13];
     wrReady(r[14]);
+    adReady(r[15]);
 
     pp.file = ppReady(r[6]);
     var census = r[7] || {};
@@ -4440,6 +4720,7 @@ function boot(){
     drawOpinions();
     drawOpPicks();
     drawWriters();
+    drawAds();
     drawCats();
     drawPeople();
     drawShows();
