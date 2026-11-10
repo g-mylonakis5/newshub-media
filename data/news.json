@@ -1,5 +1,16 @@
 [
   {
+    "id": "i-techni-tis-lyras-stin-kriti-paroysiasi-toy-neoy-ntokimanter-toy-moyseioy-thyrathen",
+    "title": "«Η τέχνη της λύρας στην Κρήτη» - Παρουσίαση του νέου ντοκιμαντέρ του Μουσείου Θύραθεν",
+    "url": "https://www.newshub.gr/el/istoria-politismos/i-techni-tis-lyras-stin-kriti-paroysiasi-toy-neoy-ntokimanter-toy-moyseioy-thyrathen",
+    "date": "2026-11-10T09:55:00.000Z",
+    "category": "Ιστορία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/afisa_ntokimanter_lyra_story.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/afisa_ntokimanter_lyra_story.jpg",
+    "summary": "Το Μουσείο Παραδοσιακής Μουσικής, Οργάνων, Έρευνας και Τεκμηρίωσης «Θύραθεν» και η Περιφέρεια Κρήτης παρουσιάζουν το νέο ντοκιμαντέρ «Η τέχ...",
+    "featured": true
+  },
+  {
     "id": "italia-kleisti-i-agora-sto-palermo-tin-ora-poy-pernoyse-i-nekriki-pompi-nonoy-tis-mafias",
     "title": "Ιταλία: Κλειστή η αγορά στο Παλέρμο την ώρα που περνούσε η νεκρική πομπή νονού της μαφίας",
     "url": "https://www.newshub.gr/el/kosmos/italia-kleisti-i-agora-sto-palermo-tin-ora-poy-pernoyse-i-nekriki-pompi-nonoy-tis-mafias",
@@ -162,7 +173,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/metanastes-ier.gif",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/metanastes-ier.gif",
     "summary": "Δύσκολη αναμένεται η τρέχουσα εβδομάδα, με την πίεση στις Λιμενικές Αρχές και τις αρμόδιες Υπηρεσίες να αυξάνεται. Αιτία σύμφωνα με πηγές ενημέρωσης δεν είνα...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "foitites-toy-elmepa-stin-kina-oi-nees-ekpaideytikes-empeiries-kai-prooptikes-diethnon-synergasion",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/phephxnxg.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/phephxnxg.jpg",
     "summary": "Τα εργαστήρια της Θεσσαλονίκης κατέληξαν στον μηχανισμό θανάτου του Γιώργου Μαζωνάκη.\r\n\r\nΈγινε η ποσοτική εκτίμηση των ουσιών που βρέθηκαν στο αίμα του αγαπη...",
-    "featured": false
-  },
-  {
-    "id": "trapeza-agglias-proti-ayxisi-epitokion-meta-ton-polemo-provlepsi-gia-plithorismo-4-9",
-    "title": "Τράπεζα Αγγλίας: Πρώτη αύξηση επιτοκίων μετά τον πόλεμο – Πρόβλεψη για πληθωρισμό 4,9%",
-    "url": "https://www.newshub.gr/el/oikonomia/trapeza-agglias-proti-ayxisi-epitokion-meta-ton-polemo-provlepsi-gia-plithorismo-4-9",
-    "date": "2026-11-05T16:15:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/bank_of_england_shutterstock_-768x480.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/bank_of_england_shutterstock_-768x480.jpg",
-    "summary": "Η Τράπεζα της Αγγλίας (BoE) ανακοίνωσε την Πέμπτη την πρώτη αύξηση των επιτοκίων της σε διάστημα άνω των τριών ετών, αυξάνοντας το βασικό επιτόκιο κατά 25 μο...",
     "featured": false
   }
 ]
