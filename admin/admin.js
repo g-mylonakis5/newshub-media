@@ -2326,6 +2326,16 @@ function applyPick(url){
     return;
   }
 
+  // Η αφίσα εκπομπής, από την καρτέλα «Εκπομπές». Ίδιος λόγος: δεν
+  // υπάρχει ανοιχτό άρθρο, και ο έλεγχος πιο κάτω θα έκλεινε το
+  // παράθυρο χωρίς να αλλάξει τίποτα.
+  if (t.show) {
+    shSetArt(t.show, url);
+    pickClose();
+    drawShows();
+    return;
+  }
+
   // Το ίδιο και για τη φωτογραφία επεισοδίου, από την καρτέλα
   // «Ζευγάρωμα»: ούτε εκεί υπάρχει ανοιχτό άρθρο.
   if (t.episode) {
@@ -3255,13 +3265,30 @@ function drawShows(){
           + esc(f) + '</option>';
       })).join('');
 
+    // Η αφίσα βγαίνει είτε από ανεβασμένη φωτογραφία (a.url) είτε από
+    // τα έτοιμα webp του public/shows/. Η ανεβασμένη ΠΡΟΗΓΕΙΤΑΙ: αν ο
+    // δημοσιογράφος μόλις ανέβασε κάτι, αυτό θέλει να δει.
+    var thumb = a.url || (file ? '/shows/' + file + '-400.webp' : '');
+
     return '<article class="show" data-show="' + esc(name) + '">'
       + '<header class="show-head">'
       + '<h2 class="show-name">' + esc(name) + '</h2>'
-      + (file
-        ? '<img class="show-art" src="/shows/' + esc(file) + '-400.webp" alt="" loading="lazy">'
+      + (thumb
+        ? '<img class="show-art" src="' + esc(thumb) + '" alt="" loading="lazy">'
         : '<span class="show-noart">χωρίς αφίσα</span>')
       + '</header>'
+
+      + '<div class="field">'
+      + '<label>Φωτογραφία εκπομπής</label>'
+      + '<div class="show-pick">'
+      + '<button type="button" class="btn btn--ghost" data-sh-pick="' + esc(name) + '">'
+      + (a.url ? 'Άλλαξε φωτογραφία' : 'Ανέβασε ή διάλεξε φωτογραφία') + '</button>'
+      + (a.url
+        ? '<button type="button" class="btn btn--ghost" data-sh-clear="' + esc(name) + '">Αφαίρεση</button>'
+        : '')
+      + '</div>'
+      + (a.url ? '<p class="hint">' + esc(a.url) + '</p>' : '')
+      + '</div>'
 
       + '<div class="field">'
       + '<label>Περιγραφή</label>'
@@ -3272,8 +3299,10 @@ function drawShows(){
       + '<div class="pair">'
       + '<div class="field"><label>Playlist YouTube</label>'
       + '<input type="text" data-sh="playlist" value="' + esc(s.playlist || '') + '" placeholder="PL…"></div>'
-      + '<div class="field"><label>Αφίσα</label>'
-      + '<select data-sh="file">' + options + '</select></div>'
+      + '<div class="field"><label>Έτοιμη αφίσα</label>'
+      + '<select data-sh="file"' + (a.url ? ' disabled' : '') + '>' + options + '</select>'
+      + (a.url ? '<p class="hint">Χρησιμοποιείται η φωτογραφία που ανέβασες.</p>' : '')
+      + '</div>'
       + '</div>'
 
       // Η επεξήγηση μπαίνει ΜΙΑ φορά στην κορυφή της καρτέλας: εδώ θα
@@ -3286,8 +3315,38 @@ function drawShows(){
   }).join('');
 }
 
+// Η ανεβασμένη φωτογραφία μιας εκπομπής.
+//
+// Μπαίνει δίπλα στα έτοιμα webp του public/shows/, δεν τα αντικαθιστά:
+// εκείνα είναι φτιαγμένα με το χέρι σε τρία μεγέθη και βγαίνουν πιο
+// ελαφριά. Όποια εκπομπή δεν έχει δικό της αρχείο — ή θέλει αλλαγή
+// σήμερα, χωρίς να περιμένει κανέναν — παίρνει ό,τι ανέβηκε από εδώ.
+function shSetArt(name, url){
+  if (!sh.art.art[name]) sh.art.art[name] = { file: '', titled: false };
+  sh.art.art[name].url = url;
+  shDirty(true);
+}
+
+function shClearArt(name){
+  var a = sh.art.art[name];
+  if (!a) return;
+  delete a.url;
+  // Χωρίς ανεβασμένη ΚΑΙ χωρίς έτοιμη, η εγγραφή δεν λέει τίποτα.
+  if (!a.file) delete sh.art.art[name];
+  shDirty(true);
+  drawShows();
+}
+
 function wireShows(){
   var box = $('[data-showlist]');
+
+  box.addEventListener('click', function (e) {
+    var pick = e.target.closest('[data-sh-pick]');
+    if (pick) { pickImage({ show: pick.dataset.shPick }); return; }
+
+    var clear = e.target.closest('[data-sh-clear]');
+    if (clear) shClearArt(clear.dataset.shClear);
+  });
 
   box.addEventListener('input', function (e) {
     var f = e.target.closest('[data-sh]');
