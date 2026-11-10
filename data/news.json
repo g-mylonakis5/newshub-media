@@ -749,6 +749,22 @@
     "featured": false
   },
   {
+    "id": "i-apeleytherosi-kai-o-apoichos-tis-katochis",
+    "title": "Η Απελευθέρωση και ο απόηχος της Κατοχής",
+    "url": "https://www.newshub.gr/el/apopseis/i-apeleytherosi-kai-o-apoichos-tis-katochis",
+    "date": "2026-11-10T07:30:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/aaa-2-768x576.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/aaa-2-768x576.jpg",
+    "summary": "Στις αρετές μας δεν είναι η σύνθεση. Στα χρόνια της Κατοχής, όταν η πολιτική και η ιστορία ήταν ανοιχτές στα γεγονότα, τότε η συντήρηση στον τόπο μας σήμαινε...",
+    "author": {
+      "name": "Τάσος Σακελλαρόπουλος",
+      "url": "https://www.newshub.gr/el/tasos-sakellaropoylos",
+      "photo": "https://static.newshub.gr/files/2025-fotografies-gia-roh/septembrios/3-9/sakellaropoulos.jpg"
+    },
+    "featured": false
+  },
+  {
     "id": "i-elia-kai-to-elaiolado-sto-pagkosmio-kypello-mageirikis-2026-sto-loyxemvoyrgo-me-tin-stirixi-tis-perifereias-kritis",
     "title": "Η ελιά και το ελαιόλαδο στο Παγκόσμιο Κύπελλο Μαγειρικής 2026 στο Λουξεμβούργο με την στήριξη της Περιφέρειας Κρήτης",
     "url": "https://www.newshub.gr/el/kriti/i-elia-kai-to-elaiolado-sto-pagkosmio-kypello-mageirikis-2026-sto-loyxemvoyrgo-me-tin-stirixi-tis-perifereias-kritis",
@@ -6618,17 +6634,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/maketa-ofi.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/maketa-ofi.jpg",
     "summary": "Με το πόδι πατημένο στο γκάζι συνεχίζει ο ΟΦΗ στο Europa League, με τους Κρητικούς να μην σταματούν να κλέβουν τις εντυπώσεις. Η ομάδα του Χρήστου Κόντη ταξί...",
-    "featured": false
-  },
-  {
-    "id": "ilektroniko-emfyteyma-exafanizei-to-pleonazon-sakcharo-apo-to-aima",
-    "title": "Ηλεκτρονικό εμφύτευμα εξαφανίζει το πλεονάζον σάκχαρο από το αίμα",
-    "url": "https://www.newshub.gr/el/tech-hub/ilektroniko-emfyteyma-exafanizei-to-pleonazon-sakcharo-apo-to-aima",
-    "date": "2026-11-05T21:59:00.000Z",
-    "category": "Tech-Hub",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/zacharo-metrema.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/zacharo-metrema.jpg",
-    "summary": "Ένα ασύρματο ηλεκτρονικό εμφύτευμα το οποίο απομακρύνει την περίσσεια σακχάρου απευθείας από την κυκλοφορία του αίματος θα μπορούσε να προσφέρει έναν τρόπο α...",
     "featured": false
   },
   {
