@@ -1,5 +1,16 @@
 [
   {
+    "id": "irakleio-mpike-mprosta-stis-rodes-ton-aytokiniton-gia-na-mi-fygoyn-oi-ergates-apo-tis-apothikes-skoyloydi",
+    "title": "Ηράκλειο: Μπήκε μπροστά στις ρόδες των αυτοκινήτων για να μη φύγουν οι εργάτες από τις αποθήκες Σκουλούδη",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-mpike-mprosta-stis-rodes-ton-aytokiniton-gia-na-mi-fygoyn-oi-ergates-apo-tis-apothikes-skoyloydi",
+    "date": "2026-11-10T12:29:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/eikona_viber_2026-11-10_14-08-53-224.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/eikona_viber_2026-11-10_14-08-53-224.jpg",
+    "summary": "Ένα νέο επεισόδιο είχαμε σήμερα το μεσημέρι στις αποθήκες Σκουλούδη, εκεί όπου γινονται οι τελευταίες εργασίες προκειμένου να λειτουργήσει η Δομή μεταναστών....",
+    "featured": true
+  },
+  {
     "id": "syskepsi-tis-adedy-irakleioy-enopsei-tis-apergiakis-kinitopoiisis",
     "title": "Συσκεψη της ΑΔΕΔΥ Ηρακλείου ενόψει της απεργιακής κινητοποίησης",
     "url": "https://www.newshub.gr/el/kriti/syskepsi-tis-adedy-irakleioy-enopsei-tis-apergiakis-kinitopoiisis",
@@ -118,7 +129,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/tournasherke.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/tournasherke.jpg",
     "summary": "Παρουσία του Υπουργού Κλιματικής Κρίσης και Πολιτικής Προστασίας, Ευάγγελου Τουρνά, πραγματοποιείται αυτή την ώρα στο Ηράκλειο η σύσκεψη για την προετοιμασία...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "prototypo-seminario-beatbox-kai-aerofonon-ston-agio-nikolao-me-ton-niko-diminaki",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/businessdaily-xirasia_8f22a2.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/businessdaily-xirasia_8f22a2.jpg",
     "summary": "Έκθεση της ΕΑΓΜΕ για το 2025 καταγράφει τις επιπτώσεις της ξηρασίας και της ρύπανσης στα υπόγεια νερά, κυρίως στην ανατολική Ελλάδα. Από τους 2.074 σταθμούς ...",
-    "featured": false
-  },
-  {
-    "id": "chrysos-olympionikis-neon-o-nikolas-papatheodoroy",
-    "title": "Χρυσός Ολυμπιονίκης Νέων ο Νικόλας Παπαθεοδώρου",
-    "url": "https://www.newshub.gr/el/athlitika/chrysos-olympionikis-neon-o-nikolas-papatheodoroy",
-    "date": "2026-11-05T18:53:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/papatheodorou.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/papatheodorou.jpg",
-    "summary": "Μια σπουδαία επιτυχία για τον ελληνικό αθλητισμό πέτυχε ο Νικόλας Παπαθεοδώρου, ο οποίος κατέκτησε το χρυσό μετάλλιο στα 50μ ύπτιο στους Ολυμπιακούς Αγώνες Ν...",
     "featured": false
   }
 ]
