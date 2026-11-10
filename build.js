@@ -3055,6 +3055,27 @@ function onomaApoTitlo(text){
   return m ? matchKey(m[1]) : '';
 }
 
+// Το ίδιο όνομα συντομογραφημένο: «κ λουκοπουλος» από το
+// «κωνσταντινος λουκοπουλος», και από τον εαυτό του.
+//
+// ΓΙΑΤΙ ΧΡΕΙΑΖΕΤΑΙ
+//
+// Το YouTube και το Buzzsprout τα γράφουν αλλιώς. Το επεισόδιο λέει
+// «Κωνσταντίνος Λουκόπουλος:», το βίντεο «Κ. Λουκόπουλος:» — ίδιος
+// άνθρωπος, ίδια μέρα, ίδια κουβέντα, αλλά δύο διαφορετικά κλειδιά.
+// Το βίντεο δεν έβρισκε δίδυμο και έμπαινε ΞΕΧΩΡΙΣΤΑ στη ροή, δίπλα
+// στο επεισόδιό του. Μετρήθηκε στις 10 Νοεμβρίου 2026: 332 βίντεο
+// γράφουν συντομογραφημένο το μικρό όνομα, και 76 από αυτά έχουν
+// επεισόδιο που τους αντιστοιχεί μονοσήμαντα.
+//
+// Επιστρέφει κενό σε ένα και μόνο όνομα: χωρίς επώνυμο το κλειδί θα
+// ήταν ένα γράμμα και θα κόλλαγε τους πάντες μαζί.
+function kleidiArxikou(onoma){
+  const lexeis = String(onoma).split(' ').filter(Boolean);
+  if (lexeis.length < 2) return '';
+  return `${lexeis[0][0]} ${lexeis[lexeis.length - 1]}`;
+}
+
 // Οι λέξεις του θέματος — ό,τι είναι ΜΕΤΑ την άνω τελεία. Μόνο οι
 // μεγάλες: τα «στη», «και», «του» τα μοιράζονται όλοι οι τίτλοι του
 // κόσμου και δεν αποδεικνύουν τίποτα.
@@ -3066,9 +3087,11 @@ function themaLexeis(text){
 }
 
 let epsAnaOnoma;
+let epsAnaArxiko;
 function twinApoOnoma(v){
   if (!epsAnaOnoma) {
     epsAnaOnoma = {};
+    epsAnaArxiko = {};
     for (const ep of loadEpisodes()) {
       // Όπου μίλησε άνθρωπος, δεν μαντεύουμε. Το «novideo» σημαίνει
       // «το έψαξα, δεν υπάρχει» — και το ρητό βίντεο σημαίνει ότι το
@@ -3077,12 +3100,24 @@ function twinApoOnoma(v){
       if (fix && (fix.video || fix.novideo)) continue;
 
       const n = onomaApoTitlo(ep.title);
-      if (n) (epsAnaOnoma[n] = epsAnaOnoma[n] || []).push(ep);
+      if (!n) continue;
+      (epsAnaOnoma[n] = epsAnaOnoma[n] || []).push(ep);
+
+      const s = kleidiArxikou(n);
+      if (s) (epsAnaArxiko[s] = epsAnaArxiko[s] || []).push(ep);
     }
   }
 
   const onoma = onomaApoTitlo(v.title);
-  if (!onoma || !epsAnaOnoma[onoma]) return null;
+  if (!onoma) return null;
+
+  // Πρώτα το ακριβές όνομα. Το αρχικό είναι ΕΦΕΔΡΕΙΑ, όχι ισότιμο:
+  // «Κ. Λουκόπουλος» ταιριάζει με «Κωνσταντίνος Λουκόπουλος» μόνο
+  // όταν δεν υπάρχει κανείς με το ίδιο ακριβώς όνομα.
+  const ypopsifia = epsAnaOnoma[onoma]
+    || epsAnaArxiko[kleidiArxikou(onoma)]
+    || null;
+  if (!ypopsifia) return null;
 
   const pote = new Date(v.date).getTime();
   if (isNaN(pote)) return null;
@@ -3094,7 +3129,7 @@ function twinApoOnoma(v){
   // καλεσμένος έχει συχνά δύο επεισόδια μέσα στο διάστημα· αν
   // κόβαμε στο «δύο υποψήφιοι» πριν κοιτάξουμε θέμα, θα πετούσαμε
   // ζευγάρια που είναι ολοφάνερα σωστά.
-  const tairiazoun = epsAnaOnoma[onoma].filter((ep) => {
+  const tairiazoun = ypopsifia.filter((ep) => {
     if (Math.abs(new Date(ep.date).getTime() - pote) >= TWIN_MERES * 864e5) return false;
 
     const alles = themaLexeis(ep.title);
