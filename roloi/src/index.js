@@ -44,13 +44,32 @@
 const SITEMAP = 'https://www.newshub.gr/sitemap_google_news.xml';
 const WORKFLOW = 'fetch.yml';
 
-// Το σημειωματάριο στο KV: τι είδαμε την προηγούμενη φορά, και πότε
-// πατήσαμε τελευταία φορά το κουμπί.
-const APOTYPOMA = 'sitemap-apotypoma';
-const TELEFTAIO = 'teleftaio-patima';
+// Το σημειωματάριο στο KV: τι είδαμε την προηγούμενη φορά, πότε
+// πατήσαμε τελευταία φορά το κουμπί, και πότε κατέβηκαν τα βαριά.
+//
+// ΓΙΑΤΙ ΕΝΑ ΚΛΕΙΔΙ ΚΑΙ ΟΧΙ ΤΡΙΑ
+//
+// Ήταν τρία ξεχωριστά. Το δωρεάν KV δίνει 100.000 ΔΙΑΒΑΣΜΑΤΑ τη μέρα
+// αλλά μόνο 1.000 ΓΡΑΨΙΜΑΤΑ — και κάθε πάτημα έγραφε δύο ή τρία. Με
+// τον παλμό ανά 5' επί 19 ώρες, μόνο αυτά έβγαζαν ~460 τη μέρα· μαζί
+// με τη ροή φτάναμε ~800 και στις 10 Νοε 2026 η Cloudflare έστειλε
+// προειδοποίηση στο 50%. Το όριο δεν χρεώνει — κόβει: σφάλμα 429 και
+// παγωμένη ροή μέχρι τα μεσάνυχτα, δηλαδή ακριβώς τις ώρες αιχμής.
+//
+// Τρία νούμερα σε ένα JSON γράφονται με ΕΝΑ γράψιμο. Ο ρυθμός δεν
+// άλλαξε πουθενά — το ρολόι χτυπάει κάθε λεπτό όπως πριν.
+const SIMEIOMA = 'simeiomatario';
 
-// Πότε κατεβάσαμε τελευταία φορά βίντεο και απομαγνητοφωνήσεις.
-const TELEFTAIO_VARIA = 'teleftaio-varia';
+// Τα παλιά τρία κλειδιά. Μένουν ΜΟΝΟ για τη μετάβαση: στο πρώτο
+// τρέξιμο μετά το ανέβασμα το καινούριο δεν υπάρχει ακόμα, και χωρίς
+// αυτά ο Worker θα ξυπνούσε χωρίς μνήμη και θα πατούσε το κουμπί
+// τζάμπα. Διαβάσματα είναι — φθηνά. Μόλις γραφτεί το καινούριο μία
+// φορά, δεν ξανακοιτάζονται ποτέ και μπορούν να σβηστούν με το χέρι.
+const PALIA = {
+  apotyposi: 'sitemap-apotypoma',
+  patima: 'teleftaio-patima',
+  varia: 'teleftaio-varia',
+};
 
 // Κάθε πόσο κατεβαίνουν τα βαριά, σε λεπτά.
 //
@@ -126,6 +145,41 @@ function apotyposi(xml) {
   return `${plithos}:${(h >>> 0).toString(16)}`;
 }
 
+// Το σημειωματάριο, με ένα διάβασμα.
+//
+// Αν λείπει ή είναι σκουπίδια, πέφτουμε στα παλιά τρία κλειδιά. Τα
+// τρία διαβάσματα γίνονται μαζί, όχι στη σειρά: ο Worker έχει μετρημένο
+// χρόνο επεξεργαστή και δεν υπάρχει λόγος να περιμένει τρεις φορές.
+async function diavase(env) {
+  const raw = await env.ROI.get(SIMEIOMA);
+
+  if (raw) {
+    try {
+      const s = JSON.parse(raw);
+      return {
+        apotyposi: s.apotyposi || '',
+        patima: Number(s.patima) || 0,
+        varia: Number(s.varia) || 0,
+      };
+    } catch (err) {
+      // Χαλασμένο σημείωμα. Δεν σταματάμε γι' αυτό — συνεχίζουμε στα
+      // παλιά, και το επόμενο πάτημα το ξαναγράφει σωστά.
+    }
+  }
+
+  const [apotyposi, patima, varia] = await Promise.all([
+    env.ROI.get(PALIA.apotyposi),
+    env.ROI.get(PALIA.patima),
+    env.ROI.get(PALIA.varia),
+  ]);
+
+  return {
+    apotyposi: apotyposi || '',
+    patima: Number(patima) || 0,
+    varia: Number(varia) || 0,
+  };
+}
+
 async function pataToKoumpi(env, varia = false) {
   if (!env.GITHUB_TOKEN || !env.GITHUB_REPO) {
     throw new Error('Λείπουν ρυθμίσεις: GITHUB_TOKEN, GITHUB_REPO');
@@ -177,21 +231,22 @@ async function koitaKaiPata(env, anagkastika = false) {
   if (!res.ok) throw new Error(`Το sitemap απάντησε ${res.status}`);
 
   const tora = apotyposi(await res.text());
-  const prin = await env.ROI.get(APOTYPOMA);
+
+  // Ένα διάβασμα για όλα όσα θυμόμαστε.
+  const simeioma = await diavase(env);
+  const prin = simeioma.apotyposi;
 
   // Ώρα για τα βαριά; Υπολογίζεται ΠΡΙΝ από τον έλεγχο αλλαγής, γιατί
   // τα βίντεο δεν έχουν καμία σχέση με το sitemap του newshub.gr: ένα
   // επεισόδιο μπορεί να ανέβει στο YouTube μέσα σε μια μέρα χωρίς
   // καμία καινούρια είδηση. Αν περιμέναμε «αλλαγή στο sitemap», τα
   // βίντεο θα κρέμονταν από κάτι άσχετο.
-  const poteVaria = Number(await env.ROI.get(TELEFTAIO_VARIA)) || 0;
-  const perasanVaria = (Date.now() - poteVaria) / 60000;
+  const perasanVaria = (Date.now() - simeioma.varia) / 60000;
   const thelouneVaria = perasanVaria >= VARIA_LEPTA;
 
   // Πόση ώρα από το τελευταίο πάτημα. Διαβάζεται ΠΡΙΝ από τον έλεγχο
   // αλλαγής, γιατί το χρειάζεται και ο παλμός παρακάτω.
-  const pote = Number(await env.ROI.get(TELEFTAIO)) || 0;
-  const perasan = (Date.now() - pote) / 60000;
+  const perasan = (Date.now() - simeioma.patima) / 60000;
 
   // Ο παλμός: πάτημα και χωρίς καμία αλλαγή στο sitemap.
   //
@@ -222,9 +277,12 @@ async function koitaKaiPata(env, anagkastika = false) {
   // Σώζουμε ΜΟΝΟ μετά από επιτυχημένο πάτημα. Αν το GitHub αρνηθεί, το
   // αποτύπωμα μένει παλιό και ξαναπροσπαθούμε στο επόμενο λεπτό —
   // αλλιώς μια στιγμιαία άρνηση θα έθαβε τα άρθρα για πάντα.
-  await env.ROI.put(APOTYPOMA, tora);
-  await env.ROI.put(TELEFTAIO, String(Date.now()));
-  if (thelouneVaria) await env.ROI.put(TELEFTAIO_VARIA, String(Date.now()));
+  const stigmi = Date.now();
+  await env.ROI.put(SIMEIOMA, JSON.stringify({
+    apotyposi: tora,
+    patima: stigmi,
+    varia: thelouneVaria ? stigmi : simeioma.varia,
+  }));
 
   if (thelouneVaria) {
     return `Το πάτησα ΜΕ βίντεο (πέρασαν ${perasanVaria.toFixed(0)}').`
@@ -270,14 +328,44 @@ async function grapseRoi(request, env) {
     }
   }
 
-  await env.ROI.put('roi', JSON.stringify({
-    pote: new Date().toISOString(),
+  const perioxomeno = {
     proto: typeof data.proto === 'string' ? data.proto : '',
     items: data.items.map((it) => ({
       t: it.t,
       u: it.u,
       k: typeof it.k === 'string' ? it.k : '',
     })),
+  };
+
+  // Ίδιοι τίτλοι — μην ξαναγράφεις.
+  //
+  // Το Action τρέχει πολύ πιο συχνά απ' όσο βγαίνουν ειδήσεις: ο παλμός
+  // το ξεκινά κάθε 5' ακόμα κι όταν το sitemap δεν κουνήθηκε, οπότε τις
+  // περισσότερες φορές στέλνει τους ΙΔΙΟΥΣ δώδεκα τίτλους. Κάθε τέτοιο
+  // γράψιμο έτρωγε από τα 1.000 της ημέρας για να αφήσει το KV ακριβώς
+  // όπως το βρήκε.
+  //
+  // Η σύγκριση δεν κοστίζει: τα διαβάσματα είναι 100.000. Και δεν
+  // καθυστερεί τίποτα — όταν όντως βγει είδηση, οι τίτλοι διαφέρουν και
+  // το γράψιμο γίνεται κανονικά, στο ίδιο αίτημα.
+  //
+  // Το «pote» μένει ΕΞΩ από τη σύγκριση: αλλάζει σε κάθε κλήση εξ
+  // ορισμού, και αν το μετρούσαμε δεν θα ήταν ποτέ τίποτα ίδιο.
+  const palio = await env.ROI.get('roi');
+  if (palio) {
+    try {
+      const p = JSON.parse(palio);
+      if (JSON.stringify({ proto: p.proto, items: p.items }) === JSON.stringify(perioxomeno)) {
+        return new Response('Ίδιοι τίτλοι — δεν ξαναέγραψα.\n');
+      }
+    } catch (err) {
+      // Χαλασμένο· το ξαναγράφουμε από την αρχή.
+    }
+  }
+
+  await env.ROI.put('roi', JSON.stringify({
+    pote: new Date().toISOString(),
+    ...perioxomeno,
   }));
 
   return new Response(`Γράφτηκαν ${data.items.length} τίτλοι.\n`);
