@@ -1,5 +1,16 @@
 [
   {
+    "id": "to-minyma-toy-moyrinio-ston-antseloti-gia-ton-entrik",
+    "title": "Το «μήνυμα» του Μουρίνιο στον Αντσελότι για τον Εντρικ",
+    "url": "https://www.newshub.gr/el/athlitika/to-minyma-toy-moyrinio-ston-antseloti-gia-ton-entrik",
+    "date": "2026-11-10T07:20:00.000Z",
+    "category": "Αθλητικά",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/w09-94525w04231523mou1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/w09-94525w04231523mou1.jpg",
+    "summary": "Ο Έντρικ δυσκολεύεται να βρει θέση στην επίθεση της Ρεάλ Μαδρίτης, καθώς ο Κιλιάν Μπαπέ βρίσκεται σε πολύ καλή κατάσταση, με τον Γάλλο άσο να σκοράρει και πά...",
+    "featured": false
+  },
+  {
     "id": "stegasi-tesseris-stoys-deka-den-mporoyn-na-noikiasoyn-monoi-toys-spiti",
     "title": "Στέγαση: Τέσσερις στους δέκα δεν μπορούν να νοικιάσουν μόνοι τους σπίτι",
     "url": "https://www.newshub.gr/el/oikonomia/stegasi-tesseris-stoys-deka-den-mporoyn-na-noikiasoyn-monoi-toys-spiti",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/limeniko-kallllle.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/limeniko-kallllle.jpg",
     "summary": "Νέα  περιστατικά με μετανάστες καταγράφηκαν τις τελευταίες ημέρες στην Κρήτη, με τις λιμενικές Αρχές να βρίσκονται σε κινητοποίηση. Μεταξύ αυτών σε δύο ...",
-    "featured": false
-  },
-  {
-    "id": "enarxi-dorean-ekpaideytikon-enimeroseon-karpa-kai-proton-voitheion-apo-ton-dimo-agioy-nikolaoy-me-tin-ypostirixi-toy-i-s-lasithioy",
-    "title": "Έναρξη δωρεάν εκπαιδευτικών ενημερώσεων ΚΑΡΠΑ και Πρώτων Βοηθειών από τον Δήμο Αγίου Νικολάου με την υποστήριξη του Ι.Σ Λασιθίου",
-    "url": "https://www.newshub.gr/el/ygeia/enarxi-dorean-ekpaideytikon-enimeroseon-karpa-kai-proton-voitheion-apo-ton-dimo-agioy-nikolaoy-me-tin-ypostirixi-toy-i-s-lasithioy",
-    "date": "2026-11-05T12:40:00.000Z",
-    "category": "Υγεία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/karpa.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/karpa.jpg",
-    "summary": "Το Γραφείο Πρωτοβάθμιας Υγείας του Τμήματος Κοινωνικής Προστασίας & Παιδείας του Δήμου Αγίου Νικολάου με την υποστήριξη του Ιατρικού Συλλόγου Λασιθίου αν...",
     "featured": false
   }
 ]
