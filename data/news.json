@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-enimerotiki-imerida-gia-tin-prolipsi-kai-ti-sosti-diacheirisi-toy-sakcharodi-diaviti",
+    "title": "Ηράκλειο: Ενημερωτική ημερίδα για την πρόληψη και τη σωστή διαχείριση του σακχαρώδη διαβήτη",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-enimerotiki-imerida-gia-tin-prolipsi-kai-ti-sosti-diacheirisi-toy-sakcharodi-diaviti",
+    "date": "2026-11-10T14:04:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/diabetes-pexels.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/diabetes-pexels.jpg",
+    "summary": "Με αφορμή την Παγκόσμια Ημέρα Διαβήτη, το Περιφερειακό Τμήμα Ηρακλείου του Ελληνικού Ερυθρού Σταυρού σας προσκαλεί σε ενημερωτική ημερίδα για την πρόληψη και...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "dimitris-kallivokas-ypo-katastoli-se-michaniki-ypostirixi-kai-se-varia-kliniki-katastasi",
     "title": "Δημήτρης Καλλιβωκάς: Υπό καταστολή, σε μηχανική υποστήριξη και σε βαριά κλινική κατάσταση",
     "url": "https://www.newshub.gr/el/ellada/dimitris-kallivokas-ypo-katastoli-se-michaniki-ypostirixi-kai-se-varia-kliniki-katastasi",
@@ -99,7 +111,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/kyriakos-mitsotakis-larko.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/kyriakos-mitsotakis-larko.jpg",
     "summary": "Για τις αναμενόμενες έρευνες του γαλλικού πλοίο Abeille Marengo για το καλώδιο της ηλεκτρικής διασύνδεσης Ελλάδας &ndash; Κύπρου, τη ρηματική διακοίνωση της ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "mia-geysi-apo-tin-kriti-toy-parelthontos-sto-istoriko-moyseio-irakleioy",
@@ -6609,17 +6621,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/000-d6kn869-768x512.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/000-d6kn869-768x512.jpg",
     "summary": "Σε μαζική πανεθνική κινητοποίηση σε 73 πόλεις συμμετείχαν εκατοντάδες χιλιάδες πολίτες στη Γαλλία, ανταποκρινόμενοι στο κάλεσμα των εργατικών συνδικάτων γι...",
-    "featured": false
-  },
-  {
-    "id": "chatzidakis-pente-axones-gia-tin-enischysi-tis-ellinikis-viomichanias",
-    "title": "Χατζηδάκης: Πέντε άξονες για την ενίσχυση της ελληνικής βιομηχανίας",
-    "url": "https://www.newshub.gr/el/oikonomia/chatzidakis-pente-axones-gia-tin-enischysi-tis-ellinikis-viomichanias",
-    "date": "2026-11-05T20:38:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/screenshot-2026-11-05-214858.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/screenshot-2026-11-05-214858.jpg",
-    "summary": "Πέντε βασικούς άξονες για την ενίσχυση της ανταγωνιστικότητας και της παραγωγικότητας της ελληνικής βιομηχανίας παρουσίασε ο αντιπρόεδρος της κυβέρνησης, Κ...",
     "featured": false
   },
   {
