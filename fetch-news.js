@@ -191,6 +191,54 @@ function decode(s) {
     .trim();
 }
 
+// ---- Ο αρθρογράφος ----
+//
+// Κάθε άρθρο τους γράφει από πάνω ποιος το υπογράφει, σε ένα μπλοκ που
+// έχει ΚΑΙ πορτρέτο ΚΑΙ σύνδεσμο προς τη σελίδα του:
+//
+//   <a href=".../el/eyaggelia-fanoyraki" class="news-author">
+//     <figure><img src="...phpThumb.php?src=..%2F...jpg&w=50" alt="Ευαγγελία Φανουράκη"></figure>
+//   </a>
+//   <a ... class="news-author-title">Της Ευαγγελίας Φανουράκη</a>
+//
+// Το κουβαλάμε μαζί με το άρθρο: οι Απόψεις στο newshubmedia δείχνουν
+// τον άνθρωπο, όχι μόνο τον τίτλο — αυτό ζήτησε το αφεντικό. Το μπλοκ
+// κάθεται ΠΑΝΩ από το news-share-container, δηλαδή μέσα σε ό,τι ήδη
+// κατεβάζουμε: κανένα επιπλέον αίτημα.
+function authorOf(html) {
+  const block = html.match(/<a[^>]*class=["']news-author["'][\s\S]{0,600}?<\/a>/i);
+  if (!block) return null;
+
+  const href = (block[0].match(/href=["']([^"']+)["']/) || [])[1] || '';
+  const img = (block[0].match(/<img[^>]*>/i) || [])[0] || '';
+  const name = decode((img.match(/alt=["']([^"']*)["']/) || [])[1] || '');
+  if (!name) return null;
+
+  return { name, url: href, photo: bigPhoto(img) };
+}
+
+// Η μικρογραφία τους περνάει από phpThumb σε 50×50 — πολύ μικρή για
+// πορτρέτο. Μέσα στη διεύθυνση όμως κρύβεται το πρωτότυπο αρχείο, και
+// εκείνο σερβίρεται κανονικά σε πλήρες μέγεθος.
+//
+//   .../phpThumb.php?src=..%2Ffiles%2F2020%2Farthrografoi%2Fx.jpg&w=50
+//   → https://static.newshub.gr/files/2020/arthrografoi/x.jpg
+//
+// Αν κάποτε αλλάξει η μορφή, κρατάμε τη μικρή: καλύτερα 50 πίξελ παρά
+// σπασμένη εικόνα.
+function bigPhoto(img) {
+  const src = (img.match(/src=["']([^"']*)["']/) || [])[1] || '';
+  if (!src) return '';
+
+  const inner = src.match(/[?&]src=([^&"']+)/);
+  if (!inner) return decode(src);
+
+  const file = decodeURIComponent(inner[1]).replace(/^(\.\.\/)+/, '').replace(/^\/+/, '');
+  if (!/^files\//.test(file)) return decode(src);
+
+  return `https://static.newshub.gr/${file}`;
+}
+
 // Οι διευθύνσεις είναι της μορφής /el/<κατηγορία>/<τίτλος>
 function partsOf(url) {
   const m = url.match(/\/el\/([a-z0-9-]+)\/([^/?#]+)/);
@@ -364,6 +412,9 @@ async function details(item, wantBody = false) {
     image_large: img,
     image_thumb: img.replace('/765x435/', '/400x227/'),
     summary: decode(meta(head, 'og:description')),
+    // Ποιος το υπογράφει. Υπάρχει σχεδόν πάντα· όπου λείπει, μένει null
+    // και το site απλώς δεν δείχνει πρόσωπο.
+    author: authorOf(html),
     featured: false,
   };
 }
@@ -414,6 +465,89 @@ function handPicked() {
 
 // Κατεβάζει τα σώματα που λείπουν, για όσα άρθρα μπορεί να πάρουν δική
 // τους σελίδα. Τρέχει ΜΕΤΑ τη συγχώνευση, όταν ξέρουμε τη σειρά.
+// ---- Οι Απόψεις, από τη δική τους σελίδα ----
+//
+// Το sitemap ειδήσεων είναι κυλιόμενο παράθυρο τριών ημερών, και οι
+// Απόψεις βγαίνουν αραιά: στη ροή βρίσκουμε 3-4 κάθε φορά. Μια ενότητα
+// στην αρχική με τέσσερα κείμενα δεν στέκει.
+//
+// Η σελίδα τους δείχνει τις δεκαπέντε τελευταίες, πολλές παλιότερες από
+// το παράθυρο. Ένα αίτημα, και η ενότητα έχει βάθος από την πρώτη μέρα.
+const OPINIONS = 'https://www.newshub.gr/el/apopseis';
+const OPINIONS_MAX = 15;
+
+async function seedOpinions(have) {
+  let html;
+  try {
+    html = await get(OPINIONS, 'footer');
+  } catch (err) {
+    console.warn('Απόψεις: δεν διαβάστηκε η σελίδα τους —', err.code || err.message);
+    return [];
+  }
+
+  const links = [...new Set(
+    [...html.matchAll(/href=["'](https:\/\/www\.newshub\.gr\/el\/apopseis\/[^"'?#]+)["']/g)]
+      .map((m) => m[1]),
+  )].filter((u) => !have.has(u)).slice(0, OPINIONS_MAX);
+
+  if (!links.length) {
+    console.log('Απόψεις: καμία καινούρια στη σελίδα τους');
+    return [];
+  }
+
+  console.log(`Απόψεις: κατεβάζω ${links.length} από τη σελίδα τους`);
+  const out = [];
+
+  for (const url of links) {
+    const p = partsOf(url);
+    if (!p) continue;
+    try {
+      const one = await details({ id: p.slug, url, title: '', date: '', cat: p.cat });
+      if (one) out.push(one);
+    } catch (err) {
+      console.warn('  παραλείπεται:', p.slug, '—', err.code || err.message);
+    }
+    await new Promise((r) => setTimeout(r, 150));
+  }
+
+  console.log(`  ${out.length} προστέθηκαν`);
+  return out;
+}
+
+// Οι Απόψεις που ήρθαν πριν μάθουμε να διαβάζουμε αρθρογράφο.
+//
+// Τα 600 αποθηκευμένα άρθρα δεν έχουν πεδίο author — κατέβηκαν πριν.
+// Δεν τα ξανακατεβάζουμε όλα: η ενότητα «Απόψεις» χρειάζεται πρόσωπο,
+// η ροή ειδήσεων όχι. Λίγα κάθε φορά, ώστε να μην πέσουν 100 αιτήσεις
+// μαζί σε ένα μικρό site, και η επόμενη λήψη συνεχίζει από εκεί.
+const AUTHORS_PER_RUN = 15;
+
+async function ensureAuthors(all) {
+  const missing = all
+    .filter((a) => a.category === 'Απόψεις' && a.author === undefined)
+    .slice(0, AUTHORS_PER_RUN);
+
+  if (!missing.length) return;
+
+  console.log(`Αρθρογράφοι: συμπληρώνω ${missing.length} παλιές Απόψεις`);
+  let got = 0;
+
+  for (const a of missing) {
+    try {
+      const html = await get(a.url, 'news-share-container');
+      // null, όχι undefined: αλλιώς θα το ξαναζητούσαμε σε κάθε λήψη για
+      // πάντα, σε άρθρο που απλώς δεν έχει υπογραφή.
+      a.author = authorOf(html);
+      if (a.author) got++;
+    } catch (err) {
+      console.warn('  παραλείπεται:', a.id, '—', err.code || err.message);
+    }
+    await new Promise((r) => setTimeout(r, 150));
+  }
+
+  console.log(`  ${got} βρήκαν αρθρογράφο`);
+}
+
 async function ensureBodies(all) {
   const want = new Map();
 
@@ -536,10 +670,23 @@ async function main() {
 
   const added = fresh.length ? await fetchAll(fresh) : [];
 
-  const all = [...old, ...added]
+  // Και οι Απόψεις από τη δική τους σελίδα — δες seedOpinions().
+  for (const a of added) have.add(a.url);
+  const opinions = await seedOpinions(have);
+
+  const sorted = [...old, ...added, ...opinions]
     .filter((a) => a.title && a.url)
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, KEEP);
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // Το όριο των 600 κόβει κατά ημερομηνία — και οι Απόψεις είναι αραιές,
+  // οπότε μια άποψη τριών εβδομάδων θα έπεφτε έξω ενώ η ενότητά της στην
+  // αρχική τη χρειάζεται. Μένουν ΟΛΕΣ, και μετρούν κανονικά μέσα στα 600.
+  const keep = sorted.slice(0, KEEP);
+  const kept = new Set(keep.map((a) => a.url));
+  const all = [
+    ...keep,
+    ...sorted.filter((a) => a.category === 'Απόψεις' && !kept.has(a.url)),
+  ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
   // Το πρωτοσέλιδό τους γίνεται πρωτοσέλιδό μας.
   const pick = await frontPagePick();
@@ -554,6 +701,10 @@ async function main() {
     const first = all.find((a) => a.image_large);
     if (first) { first.featured = true; marked = first.title; }
   }
+
+  // Πριν το γράψιμο: οι Απόψεις θέλουν πρόσωπο, και το θέλουν ΚΑΙ οι
+  // παλιές — αλλιώς η ενότητα της αρχικής θα ήταν μισή για μήνες.
+  await ensureAuthors(all);
 
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(all, null, 2), 'utf8');

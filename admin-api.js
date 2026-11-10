@@ -31,6 +31,7 @@ const WRITABLE = new Set([
   'articles',        // τα δικά μας άρθρα
   'pairs',           // ποιο βίντεο και ποιος καλεσμένος πάει σε ποιο επεισόδιο
   'photos',          // ποιες φωτογραφίες είναι «στάνταρ»
+  'writers',         // τα πορτρέτα των αρθρογράφων του newshub.gr
 ]);
 
 // Αρχεία που διαβάζονται αλλά ΔΕΝ γράφονται: τα παράγουν τα fetch-*.js
@@ -86,6 +87,17 @@ function validate(name, data){
         return 'Κάθε καρφιτσωμένο πρέπει να είναι σύνδεσμος ή κωδικός, σε κείμενο.';
       }
     }
+
+    // Η σειρά των Απόψεων. Ίδιος έλεγχος, ίδιος λόγος: ένα αντικείμενο
+    // εδώ μέσα θα έσκαγε στο sameItem() και θα έριχνε το build.
+    if (data.opinions != null) {
+      if (!Array.isArray(data.opinions)) {
+        return 'Οι απόψεις πρέπει να είναι λίστα.';
+      }
+      if (data.opinions.some((x) => typeof x !== 'string')) {
+        return 'Κάθε άποψη πρέπει να είναι σύνδεσμος, σε κείμενο.';
+      }
+    }
   }
 
   if (name === 'photos') {
@@ -100,6 +112,26 @@ function validate(name, data){
       for (const n of data.standard) {
         if (typeof n !== 'string' || !/^[\w.-]+$/.test(n)) {
           return 'Κάθε στάνταρ φωτογραφία πρέπει να είναι σκέτο όνομα αρχείου.';
+        }
+      }
+    }
+  }
+
+  // Τα πορτρέτα των αρθρογράφων. Ίδιος κανόνας με τις αφίσες εκπομπών:
+  // μόνο αρχεία του δικού μας /uploads/ — η φωτογραφία ενός ανθρώπου
+  // δεν τραβιέται από ξένη διεύθυνση που μπορεί να αλλάξει αύριο.
+  //
+  // Όποιο όνομα ΔΕΝ γράφεται εδώ, κρατάει τη φωτογραφία που κατέβηκε
+  // από το newshub.gr — δες writerPhoto() στο build.js.
+  if (name === 'writers') {
+    if (Array.isArray(data)) return 'Οι αρθρογράφοι πρέπει να είναι αντικείμενο.';
+    if (data.photos != null) {
+      if (typeof data.photos !== 'object' || Array.isArray(data.photos)) {
+        return 'Τα πορτρέτα πρέπει να είναι αντικείμενο «όνομα: διεύθυνση».';
+      }
+      for (const [who, url] of Object.entries(data.photos)) {
+        if (typeof url !== 'string' || !/^\/uploads\/[\w.-]+$/.test(url)) {
+          return `Η φωτογραφία του «${who}» πρέπει να είναι αρχείο του /uploads/.`;
         }
       }
     }

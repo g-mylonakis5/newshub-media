@@ -373,6 +373,80 @@ body{
   gap: 1rem;
 }
 
+/* ---- Προεπισκόπηση άρθρου ---- */
+
+.preview-box{
+  width: min(1180px, 94vw);
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-sizes{ display: flex; gap: 0.4rem; margin-left: auto; margin-right: 1rem; }
+
+/* Το iframe κουβαλάει το styles.css του site, άρα και το δικό του
+   φόντο — δεν του βάζουμε εμείς χρώμα. */
+.preview-frame{
+  flex: 1;
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius);
+  background: #121010;
+}
+
+/* Το «κινητό»: πλάτος τηλεφώνου, κεντραρισμένο. Το iframe είναι
+   πραγματικό παράθυρο, οπότε τα media queries του site ενεργοποιούνται
+   κανονικά — δεν είναι ζουμ. */
+.preview-frame--phone{
+  width: 390px;
+  margin: 0 auto;
+  flex: 1;
+}
+
+/* ---- Αρθρογράφοι (καρτέλα «Απόψεις») ---- */
+
+.writers{
+  display: grid;
+  /* 420px: στα 320 το όνομα έσπαγε στα δύο και το κουμπί έπεφτε πάνω
+     στη γραμμή με το πλήθος. Η κάρτα είναι τρεις στήλες, θέλει χώρο. */
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 0.75rem;
+}
+
+.writer{
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.writer-face{
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 25%;
+  display: block;
+  background: var(--line);
+}
+
+.writer-name{ margin: 0; font-weight: 600; }
+
+.writer-meta{
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* Τα δύο κουμπιά το ένα κάτω από το άλλο: στα 320px η κάρτα δεν
+   χωράει «Άλλαξε» και «Επαναφορά» στη σειρά χωρίς να στριμωχτεί το
+   όνομα, που είναι το σημαντικό. */
+.writer-acts{ display: flex; flex-direction: column; gap: 0.35rem; }
+
 .show{
   display: flex;
   flex-direction: column;
