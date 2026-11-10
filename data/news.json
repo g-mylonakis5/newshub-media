@@ -1,5 +1,17 @@
 [
   {
+    "id": "mia-akomi-timitiki-diakrisi-gia-to-panepistimio-kritis-95-meli-toy-sti-lista-ton-koryfaion-epistimonon-pagkosmios",
+    "title": "Μια ακόμη τιμητική διάκριση για το Πανεπιστήμιο Κρήτης: 95 μέλη του στη λίστα των κορυφαίων επιστημόνων παγκοσμίως",
+    "url": "https://www.newshub.gr/el/kriti/mia-akomi-timitiki-diakrisi-gia-to-panepistimio-kritis-95-meli-toy-sti-lista-ton-koryfaion-epistimonon-pagkosmios",
+    "date": "2026-11-10T13:42:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/panepistemio-boutes.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/panepistemio-boutes.jpg",
+    "summary": "Συνολικά 95 μέλη της ακαδημαϊκής κοινότητας του Πανεπιστημίου Κρήτης (καθηγητές, διδάσκοντες και ερευνητές) περιλαμβάνονται φέτος στη λίστα World's Top 2...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "paraitithike-apo-voyleytis-achaias-o-andreas-panagiotopoylos",
     "title": "Παραιτήθηκε από βουλευτής Αχαΐας ο Ανδρέας Παναγιωτόπουλος",
     "url": "https://www.newshub.gr/el/politiki/paraitithike-apo-voyleytis-achaias-o-andreas-panagiotopoylos",
@@ -756,7 +768,12 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/7241e004-trump-oval.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/7241e004-trump-oval.jpg",
     "summary": "Κάθε φορά που οι Αμερικανοί προσέρχονται στις κάλπες, πολλά δηλώνονται και γράφονται. Συχνά, όμως, απουσιάζει η θέαση της μεγάλης εικόνας και των πολλών ρευσ...",
-    "featured": false
+    "featured": false,
+    "author": {
+      "name": "Παναγιώτης Ηφαιστος",
+      "url": "https://www.newshub.gr/el/panagiotis-ifaistos",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/hfaistos.jpg"
+    }
   },
   {
     "id": "gallia-ayxisi-toy-katotatoy-misthoy-kata-1-6-sta-1-502-eyro",
@@ -4672,7 +4689,12 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/eikona0.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/eikona0.jpg",
     "summary": "«Γιορτάζεται πάντα τη νύχτα της 31ης Οκτωβρίου, κατά την οποία τα μικρά παιδιά μεταμφιέζονται κατά κανόνα σε κάτι «τρομαχτικό»...",
-    "featured": false
+    "featured": false,
+    "author": {
+      "name": "Γιάννης Κουκουφίκης",
+      "url": "https://www.newshub.gr/el/giannis-koykoyfikis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/img_4752.jpg"
+    }
   },
   {
     "id": "chania-fylakisi-6-eton-choris-anastoli-ston-proin-ierea-poy-evale-fotia-sto-spiti-tis-en-diastasei-syzygoy-toy",
@@ -4826,7 +4848,12 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/cms44132.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/cms44132.jpg",
     "summary": "Σε άρθρο μας τον Οκτώβριο του 2025  είχαμε αναλύσει τις δυσμενείς κοινωνικές  επιπτώσεις που θα είχε και για την Ιταλία η συμμόρφωσή της με τις επι...",
-    "featured": false
+    "featured": false,
+    "author": {
+      "name": "Νότης Μαριάς",
+      "url": "https://www.newshub.gr/el/notis-marias",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/sdphert.jpg"
+    }
   },
   {
     "id": "stin-kriti-simera-kai-ayrio-o-konstantinos-tasoylas-tha-episkefthei-to-martyriko-chorio-avdellas",
@@ -5937,7 +5964,12 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/usa_elections_2026.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/usa_elections_2026.jpg",
     "summary": "Με την διεξαγωγή στις 3 Νοεμβρίου 2026 των ενδιάμεσων εκλογών στις Ηνωμένες Πολιτείες της Αμερικής, κρίνονται οι 435 έδρες της Βουλής των Αντιπροσώπων, όπως ...",
-    "featured": false
+    "featured": false,
+    "author": {
+      "name": "Γιώργος Ζερβάκης",
+      "url": "https://www.newshub.gr/el/giorgos-zervakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/zervakis-giorgos.jpg"
+    }
   },
   {
     "id": "novartis-paidia-poy-elavan-ti-gonidiaki-therapeia-gia-ti-notiaia-myiki-atrofia-aneptyxan-ogkoys",
@@ -6589,14 +6621,179 @@
     "featured": false
   },
   {
-    "id": "o-ronalnto-paradidei-ti-fanela-me-to-no7-kai-apochaireta-tin-ethniki-portogalias",
-    "title": "Ο Ρονάλντο παραδίδει τη φανέλα με το Νο7 και αποχαιρετά την Εθνική Πορτογαλίας",
-    "url": "https://www.newshub.gr/el/athlitika/o-ronalnto-paradidei-ti-fanela-me-to-no7-kai-apochaireta-tin-ethniki-portogalias",
-    "date": "2026-11-05T20:12:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/screenshot-2026-11-05-194547.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/screenshot-2026-11-05-194547.jpg",
-    "summary": "Μία από τις πιο σημαντικές σελίδες στην ιστορία του ποδοσφαίρου κλείνει. Ο Κριστιάνο Ρονάλντο ανακοίνωσε την απόφασή του να αποχωρήσει από την Εθνική Πορτογα...",
+    "id": "otan-i-exoysia-xechna-ton-anthropo",
+    "title": "Όταν η εξουσία ξεχνά τον άνθρωπο",
+    "url": "https://www.newshub.gr/el/apopseis/otan-i-exoysia-xechna-ton-anthropo",
+    "date": "2026-11-05T05:27:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/boule-1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/boule-1.jpg",
+    "summary": "Η Ιστορία δεν θυμάται τους πολιτικούς για το πόσο καιρό διατήρησαν την εξουσία τους, αλλά για όσα άλλαξαν στις ζωές των ανθρώπων και για τους θεσμούς που άφη...",
+    "author": {
+      "name": "Ευαγγελία Φανουράκη",
+      "url": "https://www.newshub.gr/el/eyaggelia-fanoyraki",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/php_27661-scaled-e1653562106369.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "i-polemiki-oikonomia-gonatizei-tin-koinonia-tis-gallias-kai-fernei-koinonikes-ekrixeis",
+    "title": "Η «Πολεμική Οικονομία» γονατίζει την κοινωνία της Γαλλίας και φέρνει κοινωνικές εκρήξεις",
+    "url": "https://www.newshub.gr/el/apopseis/i-polemiki-oikonomia-gonatizei-tin-koinonia-tis-gallias-kai-fernei-koinonikes-ekrixeis",
+    "date": "2026-11-03T06:12:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/3-11/261017-france-protest-ch-1055-e33c8b.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/3-11/261017-france-protest-ch-1055-e33c8b.jpg",
+    "summary": "Σε άρθρο μας τον Σεπτέμβριο του 2025 και με τίτλο «Η Οικονομία Πολέμου βγάζει τους Γάλλους στους δρόμους» είχαμε επισημάνει ότι παρά τα χάλια της...",
+    "author": {
+      "name": "Νότης Μαριάς",
+      "url": "https://www.newshub.gr/el/notis-marias",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/sdphert.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "to-diko-moy-orama-gia-to-esy",
+    "title": "Το δικό μου όραμα για το ΕΣΥ",
+    "url": "https://www.newshub.gr/el/apopseis/to-diko-moy-orama-gia-to-esy",
+    "date": "2026-11-03T05:20:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/nosokomeio_esw3.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/nosokomeio_esw3.jpg",
+    "summary": "Ο Υπουργός Υγείας ετοιμάζεται να περιοδεύσει στην Κρήτη, φέρνοντας μαζί του τη γνωστή επικοινωνιακή τακτική των εγκαινίων και των πανηγυρικών διακηρύξεων για...",
+    "author": {
+      "name": "Βαγγέλης Ζάχαρης",
+      "url": "https://www.newshub.gr/el/vaggelis-zacharis",
+      "photo": "https://static.newshub.gr/files/2025-fotografies-gia-roh/maios/13-5/zachares.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "israil-ilthe-i-ora-tis-politikis-anatropis-toy-netaniachoy",
+    "title": "Ισραήλ! Ήλθε η ώρα της πολιτικής ανατροπής του Νετανιάχου;",
+    "url": "https://www.newshub.gr/el/apopseis/israil-ilthe-i-ora-tis-politikis-anatropis-toy-netaniachoy",
+    "date": "2026-11-02T08:00:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/eklogisr.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/eklogisr.jpg",
+    "summary": "Το Ισραήλ βρίσκεται μπροστά σε μία από τις σημαντικότερες πολιτικές καμπές της σύγχρονης ιστορίας του. Οι εκλογές της 27ης Οκτωβρίου  για την 26η Κνεσέτ...",
+    "author": {
+      "name": "Κωνσταντίνος Λουκόπουλος",
+      "url": "https://www.newshub.gr/el/konstantinos-loykopoylos",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/kkkkkkkkkkk.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "i-stegastiki-krisi-kai-oi-politikes-paremvasis-me-stocho-i-katoikia-na-parameinei-dikaioma",
+    "title": "Η στεγαστική κρίση και οι πολιτικές παρέμβασης με στόχο η κατοικία να παραμείνει δικαίωμα",
+    "url": "https://www.newshub.gr/el/apopseis/i-stegastiki-krisi-kai-oi-politikes-paremvasis-me-stocho-i-katoikia-na-parameinei-dikaioma",
+    "date": "2026-11-02T05:20:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/2-11/scholeio-aithousa.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/2-11/scholeio-aithousa.jpg",
+    "summary": "Η στεγαστική κρίση στη χώρα μας έχει εξελιχθεί σε μια από τις πιο οξείες κοινωνικές και οικονομικές προκλήσεις της εποχής μας. Σήμερα, ένα μεγάλο μέρος των ν...",
+    "author": {
+      "name": "Γιώργος Μακρακης",
+      "url": "https://www.newshub.gr/el/giorgos-makrakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/makrakes-ert.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "o-deiktis-chreoys-veltionetai-i-dimosionomiki-asfaleia-omos",
+    "title": "Ο δείκτης χρέους βελτιώνεται, η δημοσιονομική ασφάλεια όμως;",
+    "url": "https://www.newshub.gr/el/apopseis/o-deiktis-chreoys-veltionetai-i-dimosionomiki-asfaleia-omos",
+    "date": "2026-10-31T05:51:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/31-10/gmmm.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/31-10/gmmm.jpg",
+    "summary": "Ηπολιτική αντιπαράθεση για την πρόωρη αποπληρωμή κρατικού χρέους έχει αποκτήσει μία παράδοξη διάσταση. Η μεν κυβέρνηση ανακοίνωσε ότι, χάρη στα «υψηλά ...",
+    "author": {
+      "name": "Κωνσταντίνος Γάτσιος",
+      "url": "https://www.newshub.gr/el/konstantinos-gatsios",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/gatsios.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "ypovathmisi-apaxiosi-dialysi-tis-pronoias",
+    "title": "«Υποβάθμιση, Απαξίωση, Διάλυση της Πρόνοιας»",
+    "url": "https://www.newshub.gr/el/apopseis/ypovathmisi-apaxiosi-dialysi-tis-pronoias",
+    "date": "2026-10-30T05:34:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/30-10/nosokomeio_0.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/30-10/nosokomeio_0.jpg",
+    "summary": "Ένας από τους σημαντικότερους πυλώνες του κοινωνικού κράτους και της κοινωνικής συνοχής είναι η Υγεία, η Πρόνοια, οι Δομές Ψυχικής Υγείας και η Κοινωνική Ασφ...",
+    "author": {
+      "name": "Κυριάκος Θεοδοσάκης",
+      "url": "https://www.newshub.gr/el/kyriakos-theodosakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/theodosakes-kyriakos-2.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "eyropi-2026-apo-tin-eymareia-sti-diolisthisi-ora-na-akoysoyme-to-dromo",
+    "title": "Ευρώπη 2026: Από την Ευμάρεια στη Διολίσθηση – Ώρα να ακούσουμε το δρόμο",
+    "url": "https://www.newshub.gr/el/apopseis/eyropi-2026-apo-tin-eymareia-sti-diolisthisi-ora-na-akoysoyme-to-dromo",
+    "date": "2026-10-29T05:27:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/29-10/eu_parliament.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/29-10/eu_parliament.jpg",
+    "summary": "Η Ευρώπη των τελευταίων ετών μοιάζει με καράβι ακυβέρνητο πολιτικά. Μια σύγχρονη Βαβέλ, όπου οι Βρυξέλλες και η Ευρωβουλή αναλώνονται σε ατέρμονες γραφειοκρα...",
+    "author": {
+      "name": "Μιχάλης Ριζικιανάκης",
+      "url": "https://www.newshub.gr/el/michalis-rizikianakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/rizikianakis.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "lexeis-praxeis-rigmata-oi-antifaseis-toy-dogmatos-tramp",
+    "title": "Λέξεις, πράξεις, ρήγματα – οι αντιφάσεις του «Δόγματος Τραμπ»",
+    "url": "https://www.newshub.gr/el/apopseis/lexeis-praxeis-rigmata-oi-antifaseis-toy-dogmatos-tramp",
+    "date": "2026-10-28T05:43:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/28-10/trump-3-1536x864.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/28-10/trump-3-1536x864.jpg",
+    "summary": "Με δύο &ndash; κυρίως &ndash; συγκριτικούς τρόπους πλαισίωσης μπορεί να αποτιμηθεί αξιολογικά ένα κείμενο˙ οποιοδήποτε κείμενο, αλλά πόσο μάλλον ένα πολιτικό...",
+    "author": {
+      "name": "Σωτήρης Λίβας",
+      "url": "https://www.newshub.gr/el/sotiris-livas",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/images.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "i-diafaneia-os-pylonas-anadianomis-toy-ploytoy",
+    "title": "Η διαφάνεια ως πυλώνας αναδιανομής του πλούτου",
+    "url": "https://www.newshub.gr/el/apopseis/i-diafaneia-os-pylonas-anadianomis-toy-ploytoy",
+    "date": "2026-10-27T05:43:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/27-10/boule-genike.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/27-10/boule-genike.jpg",
+    "summary": "Η διαφάνεια, η εντιμότητα και η χρηστή διαχείριση των οικονομικών αποτελούν βασικό πυλώνα για τη δίκαιη αναδιανομή του πλούτου. Με άλλα λόγια, η διαφθορά και...",
+    "author": {
+      "name": "Γιώργος Μακρακης",
+      "url": "https://www.newshub.gr/el/giorgos-makrakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/makrakes-ert.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "toyrkolivyko-symfono-i-kyvernitiki-apotychia-den-epitrepetai-na-ginei-kai-ethniki-apoleia",
+    "title": "Τουρκολιβυκό σύμφωνο: η κυβερνητική αποτυχία δεν επιτρέπεται να γίνει και εθνική απώλεια!",
+    "url": "https://www.newshub.gr/el/apopseis/toyrkolivyko-symfono-i-kyvernitiki-apotychia-den-epitrepetai-na-ginei-kai-ethniki-apoleia",
+    "date": "2026-10-27T05:20:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/oktwbrios/27-10/turkoliviko-mnimonio.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/oktwbrios/27-10/turkoliviko-mnimonio.jpg",
+    "summary": "Σε μια τόσο κρίσιμη εθνικά περίοδο, οφείλουμε να πούμε τα πράγματα με το όνομά τους:  Η υπογραφή στις 27 Νοεμβρίου του 2019 και η επικύρωση του τουρκολι...",
+    "author": {
+      "name": "Νίκος Σκουλάς",
+      "url": "https://www.newshub.gr/el/nikos-skoylas",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/nikos-skoulas.jpg"
+    },
     "featured": false
   }
 ]
