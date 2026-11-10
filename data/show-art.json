@@ -2,22 +2,64 @@
   "_": "Ποιο εξώφυλλο ανήκει σε ποια εκπομπή. Το κλειδί είναι το όνομα της εκπομπής ΑΚΡΙΒΩΣ όπως έρχεται από το YouTube· η τιμή είναι το όνομα του αρχείου στο public/shows/, χωρίς κατάληξη.",
   "_sizes": "Για κάθε όνομα υπάρχουν τρία αρχεία: <όνομα>.webp, <όνομα>-800.webp και <όνομα>-400.webp. Φτιάχνονται ΜΕ ΤΟ ΧΕΡΙ από τα πρωτότυπα του assets-src/ και μπαίνουν στο public/shows/. Δεν υπάρχει script που να τα παράγει — το make-shows.js που ανέφερε παλιότερα αυτή η γραμμή δεν σώθηκε ποτέ στο git. Ούτε ανεβαίνουν από το διαχειριστικό: εκεί μόνο διαλέγεις ποια υπάρχουσα αφίσα ανήκει σε ποια εκπομπή.",
   "_titled": "titled=true σημαίνει ότι ο τίτλος της εκπομπής είναι ΨΗΜΕΝΟΣ μέσα στην εικόνα: τότε δεν τον ξαναγράφουμε από πάνω και ΠΟΤΕ δεν κόβουμε την εικόνα. titled=false είναι γενικό γραφικό χωρίς όνομα — εκεί ο τίτλος μπαίνει κανονικά από εμάς.",
-
   "art": {
-    "Αναλύσεις στο Newshub.gr":                   { "file": "analyseis",          "titled": true },
-    "Ιστορία στο newshub.gr":                     { "file": "istoria",            "titled": true },
-    "Αφιερώματα":                                 { "file": "afieromata",         "titled": true },
-    "Παρασκήνιο":                                 { "file": "paraskinio",         "titled": true },
-    "Ιστορίες του Ηρακλείου":                     { "file": "istories-irakleiou", "titled": true },
-    "Επίκαιρα στο Newshub.gr":                    { "file": "epikaira",           "titled": true },
-    "Αντίλογος στο Newshub.gr":                   { "file": "antilogos",          "titled": true },
-    "Αγροτική επικαιρότητα":                      { "file": "agrotiki",           "titled": true },
-    "Υγεία και Επιστήμες":                        { "file": "ygeia",              "titled": true },
-    "ΕΠΙΚΑΙΡΟΤΗΤΑ":                               { "file": "epikairotita",       "titled": false },
-    "Συνεντεύξεις και πρόσωπα της επικαιρότητας": { "file": "synentevxeis",       "titled": false }
+    "Αναλύσεις στο Newshub.gr": {
+      "file": "analyseis",
+      "titled": true
+    },
+    "Ιστορία στο newshub.gr": {
+      "file": "istoria",
+      "titled": true
+    },
+    "Αφιερώματα": {
+      "file": "afieromata",
+      "titled": true
+    },
+    "Παρασκήνιο": {
+      "file": "paraskinio",
+      "titled": true
+    },
+    "Ιστορίες του Ηρακλείου": {
+      "file": "istories-irakleiou",
+      "titled": true
+    },
+    "Επίκαιρα στο Newshub.gr": {
+      "file": "epikaira",
+      "titled": true
+    },
+    "Αντίλογος στο Newshub.gr": {
+      "file": "antilogos",
+      "titled": true
+    },
+    "Αγροτική επικαιρότητα": {
+      "file": "agrotiki",
+      "titled": true
+    },
+    "Υγεία και Επιστήμες": {
+      "file": "ygeia",
+      "titled": true
+    },
+    "ΕΠΙΚΑΙΡΟΤΗΤΑ": {
+      "file": "epikairotita",
+      "titled": false,
+      "url": "/uploads/20261110215002-epikairotita-sto-newsroom.jpg"
+    },
+    "Συνεντεύξεις και πρόσωπα της επικαιρότητας": {
+      "file": "synentevxeis",
+      "titled": false,
+      "url": "/uploads/20261110215027-synenteyxeis-kai-prosopa-tis-epikairotit.jpg"
+    },
+    "25 μαθήματα για την ελληνική ιστορία": {
+      "file": "",
+      "titled": false,
+      "url": "/uploads/20261110214908-25-mathimata-gia-tin-elliniki-istoria.jpg"
+    },
+    "Κοινωνία σε 1ο πρόσωπο": {
+      "file": "",
+      "titled": false,
+      "url": "/uploads/20261110214953-foteino-stoyntio-podcast-koinonia-se.jpg"
+    }
   },
-
   "_small": "Οι τέσσερις τελευταίες ήρθαν σε 426px (η synentevxeis σε 480×480, τετράγωνη). Δεν μεγαλώνουν, οπότε στη σελίδα της εκπομπής μπαίνουν σε μικρό πλάτος με θολό υπόβαθρο — όχι σε πλήρες πλάτος, όπου θα φαίνονταν θολές.",
-
   "_missing": "Χωρίς εξώφυλλο ακόμα: Εξ Απορρήτων, Κοινωνία σε 1ο πρόσωπο, 25 μαθήματα για την ελληνική ιστορία, Αθλητικά, Τα μονοπάτια ιστορίας του Newshub.gr. Παίρνουν τη μικρογραφία του τελευταίου βίντεο."
 }
