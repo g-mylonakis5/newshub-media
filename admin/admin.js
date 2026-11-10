@@ -23,6 +23,8 @@ var state = {
   // Οι πηγές όπως ήρθαν. Τις κρατάμε για να ξαναφτιαχτεί η παραπάνω
   // λίστα όταν αλλάξει άρθρο, χωρίς να ξανακατέβουν 5 MB δεδομένων.
   raw: { episodes: [], videos: [], news: [] },
+  // Η ροή της αρχικής όπως τη βρήκε το τελευταίο build — δες ltFlow().
+  flow: null,
   shown: PAGE,
   find: '',
   kind: '',
@@ -159,7 +161,13 @@ function normalize(episodes, videos, news, articles){
     out.push({
       kind: 'video',
       id: v.id,
-      ref: v.url || v.id,
+      // Ο κωδικός, ΟΧΙ η διεύθυνση του YouTube.
+      //
+      // Το «youtube.com/watch?v=XXX» ξεφλουδίζεται σε σκέτο «watch» —
+      // και στο build και εδώ — οπότε ταίριαζε με το ΠΡΩΤΟ βίντεο της
+      // λίστας, όχι με αυτό που διάλεξε ο δημοσιογράφος. Το καρφίτσωμα
+      // βίντεο έδειχνε άλλο βίντεο, χωρίς καμία προειδοποίηση.
+      ref: v.id,
       title: unent(v.title),
       who: unent(v.show),
       image: v.image || '',
@@ -274,11 +282,20 @@ function isChosen(it, want){
   return !!num && (t === num || t.indexOf(num + '-') === 0);
 }
 
+// Το αντίστροφο: ποια εγγραφή κρύβεται πίσω από έναν κωδικό ή σύνδεσμο
+// του curation. Το ίδιο ψάξιμο γινόταν γραμμένο στο χέρι σε τρία σημεία.
+function findItemByRef(ref){
+  for (var i = 0; i < state.items.length; i++) {
+    if (isChosen(state.items[i], ref)) return state.items[i];
+  }
+  return null;
+}
+
 // ---------------------------------------------------------------------
 // Ζωγραφική
 // ---------------------------------------------------------------------
 
-var TAGS = { podcast: 'Podcast', video: 'Βίντεο', news: 'Είδηση', article: 'Άρθρο' };
+var TAGS ={ podcast: 'Podcast', video: 'Βίντεο', news: 'Είδηση', article: 'Άρθρο' };
 
 function drawNow(){
   var box = $('[data-now-body]');
@@ -290,10 +307,7 @@ function drawNow(){
     return;
   }
 
-  var hit = null;
-  for (var i = 0; i < state.items.length; i++) {
-    if (isChosen(state.items[i], want)) { hit = state.items[i]; break; }
-  }
+  var hit = findItemByRef(want);
 
   if (!hit) {
     box.innerHTML = '<p class="muted">Επιλεγμένο: <code>' + esc(want) + '</code><br>'
@@ -1198,6 +1212,11 @@ var lt = {
   shown: PAGE,
   find: '',
   kind: '',
+  // Ό,τι έβγαλε ο δημοσιογράφος με το ✕ μέσα σε αυτή τη συνεδρία. Το
+  // flow.json το δείχνει ακόμα — είναι η ροή του προηγούμενου build —
+  // και χωρίς αυτή τη λίστα θα ξαναεμφανιζόταν αμέσως από κάτω, σαν να
+  // μην πάτησε τίποτα.
+  gone: {},
 };
 
 function ltList(){
@@ -1210,78 +1229,134 @@ function daysOld(iso){
   return Math.floor((Date.now() - d.getTime()) / 86400000);
 }
 
-function drawLatest(){
-  var box = $('[data-lt-slots]');
-  var refs = ltList();
+// Ό,τι βρίσκεται ΟΝΤΩΣ στη ροή τώρα, όπως το έγραψε το τελευταίο build
+// στο flow.json.
+//
+// Δεν το υπολογίζουμε εδώ επίτηδες: η επιλογή του build αγνοεί τα βίντεο
+// που έχουν δίδυμο podcast, βάζει πρώτα τα δικά μας άρθρα και κρατά έξω
+// το πρωτοσέλιδο. Μια πρόβλεψη που πέφτει έξω θα έστελνε τον δημοσιογράφο
+// να ψάχνει γιατί η αρχική «δεν υπακούει».
+function ltFlow(){
+  var f = state.flow;
+  return (f && Array.isArray(f.items)) ? f.items : [];
+}
 
-  var rows = refs.map(function (ref) {
-    var hit = null;
-    for (var i = 0; i < state.items.length; i++) {
-      if (isChosen(state.items[i], ref)) { hit = state.items[i]; break; }
-    }
-    return { ref: ref, item: hit };
+// Το γράφει το build στη ρίζα του site, γι' αυτό απόλυτη διαδρομή: το
+// διαχειριστικό ζει στο /admin/, το flow.json ένα επίπεδο πιο πάνω.
+function loadFlow(){
+  return fetch('/flow.json').then(function (r) {
+    return r.ok ? r.json() : null;
+  }).catch(function () { return null; });
+}
+
+// ΕΝΑ όνομα για το ίδιο πράγμα, όποια μορφή κι αν έχει ο σύνδεσμός του.
+//
+// Το ίδιο επεισόδιο γράφεται «Buzzsprout-20097501» στο curation και
+// «episode/20097501-...html» στο flow.json. Χωρίς κοινό κλειδί, ό,τι
+// βγάζαμε με το ✕ ξαναεμφανιζόταν από την άλλη πηγή.
+function ltKey(ref){
+  var it = findItemByRef(ref);
+  return it ? it.kind + ':' + it.id : ref;
+}
+
+// Μια γραμμή ανά θέση: πρώτα τα καρφιτσωμένα, μετά όσα βάζει μόνο του
+// το site — με το αληθινό τους περιεχόμενο, όχι ως «X θέσεις».
+function ltRows(){
+  var rows = ltList().map(function (ref) {
+    return { ref: ref, item: findItemByRef(ref), auto: false };
   });
 
-  var html = rows.map(function (r, i) {
-    var it = r.item;
+  ltFlow().forEach(function (f) {
+    if (rows.length >= LATEST_SLOTS) return;
+    if (lt.gone[ltKey(f.href)]) return;
+    // Τα καρφιτσωμένα είναι ήδη πάνω — και το flow.json τα περιέχει.
+    var already = rows.some(function (r) {
+      return r.item ? isChosen(r.item, f.href) : r.ref === f.href;
+    });
+    if (already) return;
 
-    if (!it) {
-      return '<div class="slot">'
-        + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
-        + '<img alt=""><div class="slot-text">'
-        + '<p class="slot-title">' + esc(r.ref) + '</p>'
-        + '<p class="slot-meta">Δεν βρέθηκε — μπορεί να είναι παλιό ή σβησμένο. '
-        + 'Το site θα το προσπεράσει.</p></div>'
-        // Τα βελάκια μπαίνουν ΚΑΙ εδώ: μια γραμμή που δεν αναγνωρίστηκε
-        // πρέπει να μπορεί να μετακινηθεί, αλλιώς μπλοκάρει τη σειρά
-        // όλων των από κάτω.
-        + '<span class="slot-acts">'
-        + '<button type="button" data-lt-up="' + i + '" aria-label="Πάνω"'
-        + (i === 0 ? ' disabled' : '') + '>↑</button>'
-        + '<button type="button" data-lt-down="' + i + '" aria-label="Κάτω"'
-        + (i === refs.length - 1 ? ' disabled' : '') + '>↓</button>'
-        + '<button type="button" data-lt-del="' + esc(r.ref) + '" aria-label="Αφαίρεση">✕</button>'
-        + '</span></div>';
-    }
+    // Καρφιτσώνεται ΜΕ ΤΗ ΔΙΕΥΘΥΝΣΗ ΤΗΣ ΣΕΛΙΔΑΣ, όπως τη γράφει το build:
+    // εκεί η sameItem() τη συγκρίνει ίδια-με-ίδια, χωρίς μαντεψιές.
+    var it = findItemByRef(f.href);
+    rows.push({
+      ref: f.href,
+      item: it || {
+        kind: f.kind, title: f.title, who: f.who,
+        image: f.image, date: f.date,
+      },
+      auto: true,
+    });
+  });
 
-    var age = daysOld(it.date);
-    var note = (it.who ? esc(it.who) + ' · ' : '') + when(it.date);
-    if (age !== null && age >= LATEST_STALE_DAYS) {
-      note += ' · <strong>' + age + ' μέρες παλιό</strong>';
-    }
+  return rows;
+}
 
-    // Το πρωτοσέλιδο δεν ξαναμπαίνει στη ροή — θα έβγαινε δύο φορές
-    // στην ίδια οθόνη. Αν δεν το πούμε εδώ, ο δημοσιογράφος θα
-    // καρφιτσώνει κάτι που δεν εμφανίζεται ποτέ και θα νομίζει ότι
-    // χάλασε το διαχειριστικό.
-    var isHero = state.curation.featured && isChosen(it, state.curation.featured);
-    if (isHero) {
-      note += ' · <strong>είναι ήδη το πρωτοσέλιδο, δεν ξαναβγαίνει εδώ</strong>';
-    }
+function ltSlot(r, i, total){
+  var it = r.item;
 
+  if (!it) {
     return '<div class="slot">'
       + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
-      + (it.image ? '<img src="' + esc(it.image) + '" alt="">' : '<img alt="">')
-      + '<div class="slot-text">'
-      + '<p class="slot-title">' + esc(it.title) + '</p>'
-      + '<p class="slot-meta">'
-      + '<span class="tag tag--' + it.kind + '">' + TAGS[it.kind] + '</span>'
-      + note + '</p></div>'
+      + '<img alt=""><div class="slot-text">'
+      + '<p class="slot-title">' + esc(r.ref) + '</p>'
+      + '<p class="slot-meta">Δεν βρέθηκε — μπορεί να είναι παλιό ή σβησμένο. '
+      + 'Το site θα το προσπεράσει.</p></div>'
+      // Τα βελάκια μπαίνουν ΚΑΙ εδώ: μια γραμμή που δεν αναγνωρίστηκε
+      // πρέπει να μπορεί να μετακινηθεί, αλλιώς μπλοκάρει τη σειρά
+      // όλων των από κάτω.
       + '<span class="slot-acts">'
       + '<button type="button" data-lt-up="' + i + '" aria-label="Πάνω"'
       + (i === 0 ? ' disabled' : '') + '>↑</button>'
       + '<button type="button" data-lt-down="' + i + '" aria-label="Κάτω"'
-      + (i === rows.length - 1 ? ' disabled' : '') + '>↓</button>'
-      + '<button type="button" data-lt-del="' + esc(r.ref) + '" aria-label="Αφαίρεση">✕</button>'
+      + (i === total - 1 ? ' disabled' : '') + '>↓</button>'
+      + '<button type="button" data-lt-del="' + i + '" aria-label="Αφαίρεση">✕</button>'
       + '</span></div>';
+  }
+
+  var age = daysOld(it.date);
+  var note = (it.who ? esc(it.who) + ' · ' : '') + when(it.date);
+  if (age !== null && age >= LATEST_STALE_DAYS) {
+    note += ' · <strong>' + age + ' μέρες παλιό</strong>';
+  }
+
+  // Το πρωτοσέλιδο δεν ξαναμπαίνει στη ροή — θα έβγαινε δύο φορές
+  // στην ίδια οθόνη. Αν δεν το πούμε εδώ, ο δημοσιογράφος θα
+  // καρφιτσώνει κάτι που δεν εμφανίζεται ποτέ και θα νομίζει ότι
+  // χάλασε το διαχειριστικό.
+  var isHero = state.curation.featured && isChosen(it, state.curation.featured);
+  if (isHero) {
+    note += ' · <strong>είναι ήδη το πρωτοσέλιδο, δεν ξαναβγαίνει εδώ</strong>';
+  }
+
+  return '<div class="slot' + (r.auto ? ' slot--auto' : '') + '">'
+    + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
+    + (it.image ? '<img src="' + esc(it.image) + '" alt="">' : '<img alt="">')
+    + '<div class="slot-text">'
+    + '<p class="slot-title">' + esc(it.title) + '</p>'
+    + '<p class="slot-meta">'
+    + '<span class="tag tag--' + it.kind + '">' + TAGS[it.kind] + '</span>'
+    + note + '</p></div>'
+    + '<span class="slot-acts">'
+    + (r.auto ? '<span class="pill pill--draft">αυτόματο</span>' : '')
+    + '<button type="button" data-lt-up="' + i + '" aria-label="Πάνω"'
+    + (i === 0 ? ' disabled' : '') + '>↑</button>'
+    + '<button type="button" data-lt-down="' + i + '" aria-label="Κάτω"'
+    + (i === total - 1 ? ' disabled' : '') + '>↓</button>'
+    + '<button type="button" data-lt-del="' + i + '" aria-label="Αφαίρεση">✕</button>'
+    + '</span></div>';
+}
+
+function drawLatest(){
+  var box = $('[data-lt-slots]');
+  var rows = ltRows();
+  var pinned = ltList().length;
+
+  var html = rows.map(function (r, i) {
+    return ltSlot(r, i, rows.length);
   }).join('');
 
-  // Οι αυτόματες θέσεις ΔΕΝ ζωγραφίζονται μία-μία, επίτηδες.
-  //
-  // Θα έπρεπε να μαντέψουμε ποια θα διαλέξει το build — και η επιλογή
-  // του αγνοεί τα βίντεο που έχουν δίδυμο podcast, κάτι που εδώ δεν το
-  // ξέρουμε. Μια πρόβλεψη που πέφτει έξω είναι χειρότερη από καθόλου
-  // πρόβλεψη: ο δημοσιογράφος θα έψαχνε γιατί η αρχική «δεν υπακούει».
+  // Δίχτυ: αν το flow.json δεν υπάρχει ακόμα (δεν έχει τρέξει build
+  // μετά την αλλαγή), δεν αφήνουμε κενές θέσεις χωρίς εξήγηση.
   var free = Math.max(0, LATEST_SLOTS - rows.length);
   if (free) {
     html += '<div class="slot slot--auto">'
@@ -1297,18 +1372,24 @@ function drawLatest(){
 
   box.innerHTML = html;
 
-  var n = rows.length;
   var stale = rows.filter(function (r) {
     var a = r.item && daysOld(r.item.date);
     return a !== null && a >= LATEST_STALE_DAYS;
   }).length;
 
-  var note = n === 0
-    ? 'Κανένα καρφιτσωμένο — η ροή δείχνει τα πιο πρόσφατα, όπως πάντα.'
-    : n + (n === 1 ? ' καρφιτσωμένο' : ' καρφιτσωμένα') + ' στην κορυφή, με αυτή τη σειρά.';
+  var auto = rows.filter(function (r) { return r.auto; }).length;
 
-  if (n > LATEST_SLOTS) {
-    note += ' Είναι περισσότερα από τις ' + LATEST_SLOTS
+  var note = pinned === 0
+    ? 'Αυτά βγαίνουν τώρα στη ροή, με αυτή τη σειρά — όλα αυτόματα.'
+    : pinned + (pinned === 1 ? ' καρφιτσωμένο' : ' καρφιτσωμένα') + ' στην κορυφή'
+      + (auto ? ' και ' + auto + ' αυτόματα από κάτω' : '') + ', με αυτή τη σειρά.';
+
+  if (auto) {
+    note += ' Μόλις μετακινήσεις ή αφαιρέσεις κάτι, κλειδώνουν όλες οι θέσεις '
+      + 'όπως τις βλέπεις.';
+  }
+  if (pinned > LATEST_SLOTS) {
+    note += ' Τα καρφιτσωμένα είναι περισσότερα από τις ' + LATEST_SLOTS
       + ' θέσεις — θα βγουν όλα, η ροή απλώς θα μακρύνει.';
   }
   if (stale) {
@@ -1355,8 +1436,14 @@ function ltToggle(ref){
   var at = -1;
   list.forEach(function (r, i) { if (r === ref) at = i; });
 
-  if (at > -1) list.splice(at, 1);
-  else list.push(ref);
+  if (at > -1) {
+    list.splice(at, 1);
+    lt.gone[ltKey(ref)] = true;      // ίδιος λόγος με το ✕ — δες lt.gone
+  } else {
+    // Ξαναμπαίνει: ό,τι είχε βγει δεν ισχύει πια.
+    delete lt.gone[ltKey(ref)];
+    list.push(ref);
+  }
 
   state.curation.latest = list;
   drawLatest();
@@ -1364,7 +1451,33 @@ function ltToggle(ref){
   ltDirty(true);
 }
 
+// Ό,τι βλέπει ο δημοσιογράφος γίνεται ρητή επιλογή, μόλις πειράξει κάτι.
+//
+// Χωρίς αυτό, θα κούναγε μια αυτόματη θέση και το επόμενο build θα την
+// ξανατοποθετούσε αλλού — η οθόνη θα έλεγε ένα πράγμα και το site άλλο.
+function ltFix(){
+  var rows = ltRows();
+  if (!rows.some(function (r) { return r.auto; })) return;
+  state.curation.latest = rows.map(function (r) { return r.ref; });
+}
+
+function ltRemove(i){
+  ltFix();
+  var list = ltList();
+  if (i < 0 || i >= list.length) return;
+  lt.gone[ltKey(list[i])] = true;
+  list.splice(i, 1);
+  state.curation.latest = list;
+  // Η θέση που άδειασε γεμίζει με το επόμενο πρόσφατο — και κλειδώνει
+  // κι αυτή, ώστε οι εννιά θέσεις να μένουν ακριβώς όπως φαίνονται.
+  ltFix();
+  drawLatest();
+  drawLtPicks();
+  ltDirty(true);
+}
+
 function ltMove(i, step){
+  ltFix();
   var list = ltList();
   var to = i + step;
   if (i < 0 || i >= list.length || to < 0 || to >= list.length) return;
@@ -1394,7 +1507,7 @@ function saveLatest(){
 function wireLatest(){
   $('[data-lt-slots]').addEventListener('click', function (e) {
     var del = e.target.closest('[data-lt-del]');
-    if (del) { ltToggle(del.dataset.ltDel); return; }
+    if (del) { ltRemove(Number(del.dataset.ltDel)); return; }
 
     var up = e.target.closest('[data-lt-up]');
     if (up) { ltMove(Number(up.dataset.ltUp), -1); return; }
@@ -3726,6 +3839,10 @@ function boot(){
     // συνέβη με διακομιστή που δεν είχε ξαναξεκινήσει μετά την
     // προσθήκη του αρχείου. Χωρίς σήμανση δουλεύουμε· χωρίς άρθρα όχι.
     api('photos').catch(function () { return null; }),
+    // Η ροή του τελευταίου build. ΑΝΕΚΤΙΚΟ όπως οι φωτογραφίες: αν δεν
+    // έχει τρέξει build ακόμα, δείχνουμε μόνο τα καρφιτσωμένα — δεν
+    // ρίχνουμε ολόκληρο το διαχειριστικό για μια προεπισκόπηση.
+    loadFlow(),
   ]).then(function (r) {
     // Το αρχείο μπορεί να μην υπάρχει ακόμα — τότε το API δίνει null.
     var photos = r[12] && typeof r[12] === 'object' ? r[12] : {};
@@ -3742,6 +3859,7 @@ function boot(){
     // Μετά τα άρθρα: η λίστα του πρωτοσέλιδου τα περιλαμβάνει.
     state.raw = { episodes: r[1], videos: r[2], news: r[3] };
     state.items = normalize(r[1], r[2], r[3], art.list);
+    state.flow = r[13];
 
     pp.file = ppReady(r[6]);
     var census = r[7] || {};
