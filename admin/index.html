@@ -46,12 +46,13 @@
     <a class="tab is-on" href="#proto" data-tab="proto">Πρωτοσέλιδο</a>
     <a class="tab" href="#latest" data-tab="latest">Τελευταία</a>
     <a class="tab" href="#mustread" data-tab="mustread">Must read</a>
+    <a class="tab" href="#apopseis" data-tab="apopseis">Απόψεις</a>
     <a class="tab" href="#arthra" data-tab="arthra">Άρθρα</a>
     <a class="tab" href="#fotos" data-tab="fotos">Φωτογραφίες</a>
     <a class="tab" href="#katigories" data-tab="katigories">Κατηγορίες</a>
     <a class="tab" href="#prosopa" data-tab="prosopa">Πρόσωπα</a>
     <a class="tab" href="#ekpompes" data-tab="ekpompes">Εκπομπές</a>
-    <a class="tab" href="#elleipseis" data-tab="elleipseis">Ελλείψεις</a>
+    <a class="tab" href="#elleipseis" data-tab="elleipseis">Επεισόδια</a>
   </nav>
 
   <main class="work">
@@ -184,6 +185,49 @@
       </p>
     </section>
 
+    <!-- ========== ΑΠΟΨΕΙΣ ==========
+         Τα υπογεγραμμένα κείμενα του newshub.gr. ΑΝΟΙΓΟΥΝ ΕΚΕΙ — εδώ
+         ορίζεται μόνο ποια φαίνονται στην αρχική και με ποια σειρά.
+         Από κάτω, στον ίδιο χώρο, τα πορτρέτα των αρθρογράφων. -->
+    <section class="panel" data-panel="apopseis">
+      <header class="panel-head">
+        <div>
+          <h1>Απόψεις</h1>
+          <p class="hint">Οι έξι θέσεις της αρχικής, κάτω από το Must read.
+            Ανοίγουν στο newshub.gr, όχι εδώ. Όσες θέσεις αφήσεις κενές
+            τις γεμίζει το site με τις πιο πρόσφατες.</p>
+        </div>
+        <button type="button" class="btn btn--go" data-save="apopseis" disabled>Αποθήκευση</button>
+      </header>
+
+      <div class="slots" data-op-slots></div>
+
+      <p class="hint" data-op-note></p>
+
+      <h2 class="sub">Πρόσθεσε άποψη</h2>
+
+      <div class="tools">
+        <input type="search" class="find" data-op-find placeholder="Βρες τίτλο ή αρθρογράφο…"
+               aria-label="Αναζήτηση άποψης">
+      </div>
+
+      <div class="picks" data-op-picks>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+
+      <p class="more">
+        <button type="button" class="btn btn--ghost" data-op-more hidden>Δείξε περισσότερα</button>
+      </p>
+
+      <h2 class="sub">Αρθρογράφοι</h2>
+      <p class="hint">Η φωτογραφία που κατεβαίνει από το newshub.gr είναι 50 πίξελ.
+        Όποια αλλάξεις εδώ, ισχύει παντού στο newshubmedia.</p>
+
+      <div class="writers" data-writers>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+    </section>
+
     <!-- ========== ΟΙ ΥΠΟΛΟΙΠΕΣ — έρχονται ========== -->
     <section class="panel" data-panel="arthra">
       <header class="panel-head">
@@ -207,6 +251,7 @@
           <span class="editor-state" data-art-state></span>
           <div class="editor-acts">
             <button type="button" class="btn btn--ghost" data-art-delete>Διαγραφή</button>
+            <button type="button" class="btn btn--ghost" data-art-preview>Προεπισκόπηση</button>
             <button type="button" class="btn btn--go" data-art-save>Αποθήκευση</button>
           </div>
         </div>
@@ -218,11 +263,9 @@
             <code data-art-slug>—</code></p>
         </div>
 
-        <div class="field">
-          <label for="art-summary">Περίληψη</label>
-          <textarea id="art-summary" data-art="summary" rows="2"
-                    placeholder="Δύο γραμμές — φαίνονται στην κάρτα και στη Google"></textarea>
-        </div>
+        <!-- Η ΠΕΡΙΛΗΨΗ ΕΦΥΓΕ. Ο συντάκτης έγραφε δύο φορές το ίδιο
+             πράγμα και τη δεύτερη βιαστικά· τώρα τη βγάζει το site από
+             την πρώτη παράγραφο. Δες ownSummary() στο build.js. -->
 
         <div class="row2">
           <div class="field">
@@ -419,11 +462,11 @@
     <section class="panel" data-panel="elleipseis">
       <header class="panel-head">
         <div>
-          <h1>Ελλείψεις</h1>
-          <p class="hint">Επεισόδια που δεν βρήκαν βίντεο ή καλεσμένο.
-            Το site τα δένει μόνο του από τον τίτλο· όταν ο τίτλος διαφέρει
-            ανάμεσα σε Buzzsprout και YouTube, το ζευγάρωμα χάνεται.
-            Εδώ το λες εσύ.</p>
+          <h1>Επεισόδια</h1>
+          <p class="hint">ΟΛΑ τα επεισόδια, από το 2021 μέχρι σήμερα: φωτογραφία,
+            τίτλος, περιγραφή, βίντεο και καλεσμένος αλλάζουν από εδώ.<br>
+            Ανοίγει στα «Θέλουν δουλειά» — όσα δεν βρήκαν βίντεο ή καλεσμένο
+            μόνα τους. Διάλεξε χρονιά ή «Κάθε χρονιά» για τα υπόλοιπα.</p>
         </div>
         <button type="button" class="btn btn--go" data-save="pairs" disabled>Αποθήκευση</button>
       </header>
@@ -439,6 +482,10 @@
           <button type="button" class="chip" data-prf="done">Διορθωμένα</button>
         </div>
       </div>
+
+      <!-- Η χρονιά. Χωρίς αυτήν, για να φτάσεις σε επεισόδιο του 2022
+           έπρεπε να θυμάσαι τον τίτλο του. -->
+      <div class="chips" data-pr-years></div>
 
       <p class="hint" data-pr-count></p>
 
@@ -458,6 +505,27 @@
      ανοίγουν και η κεντρική φωτογραφία και τα μπλοκ μέσα στο κείμενο.
      Πριν υπήρχε μόνο ένα μήνυμα «πήγαινε στις Φωτογραφίες και κόλλησε
      τη διεύθυνση» — ο συντάκτης έχανε τη θέση του μέσα στο άρθρο. -->
+<!-- ΠΡΟΕΠΙΣΚΟΠΗΣΗ ΑΡΘΡΟΥ
+     Το άρθρο όπως θα βγει, μέσα σε iframe με τα ΑΛΗΘΙΝΑ στυλ του site.
+     Δεν περνάει από το build: το build τρέχει κάθε δύο λεπτά και ο
+     συντάκτης θέλει να δει τι γράφει ΤΩΡΑ, πριν το δημοσιεύσει. -->
+<div class="picker" data-preview hidden>
+  <div class="picker-back" data-preview-close></div>
+
+  <div class="picker-box preview-box" role="dialog" aria-modal="true" aria-label="Προεπισκόπηση άρθρου">
+    <header class="picker-head">
+      <h2>Προεπισκόπηση</h2>
+      <div class="preview-sizes">
+        <button type="button" class="chip is-on" data-prev-size="wide">Υπολογιστής</button>
+        <button type="button" class="chip" data-prev-size="phone">Κινητό</button>
+      </div>
+      <button type="button" class="picker-x" data-preview-close aria-label="Κλείσιμο">✕</button>
+    </header>
+
+    <iframe class="preview-frame" data-preview-frame title="Προεπισκόπηση άρθρου"></iframe>
+  </div>
+</div>
+
 <div class="picker" data-picker hidden>
   <div class="picker-back" data-picker-close></div>
 

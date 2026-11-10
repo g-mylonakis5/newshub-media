@@ -2027,6 +2027,111 @@ ${text}
 //   · canonical στη δική μας διεύθυνση (το βάζει μόνο του το page)
 //   · καμία γραμμή προέλευσης, κανένα backlink
 //   · υπογραφή του δημοσιογράφου
+// ---- Ο δημοσιογράφος που υπογράφει ----
+//
+// Κάθε υπογραφή γίνεται σελίδα με όλα τα άρθρα του μέσα στο
+// newshubmedia. Μέχρι τώρα το όνομα ήταν σκέτο κείμενο: ο αναγνώστης
+// που ήθελε «κι άλλο από αυτόν» δεν είχε πού να πατήσει.
+//
+// Ξεχωριστός φάκελος από τους καλεσμένους (/guest/): άλλο πράγμα
+// ποιος μίλησε σε podcast, άλλο ποιος έγραψε άρθρο. Ο ίδιος άνθρωπος
+// μπορεί να είναι και τα δύο, και οι δύο σελίδες λένε άλλη ιστορία.
+function writerUrl(name){
+  return `arthrografos/${slugify(name)}.html`;
+}
+
+// Ποιος έγραψε τι. Μόνο δημοσιευμένα — τα πρόχειρα δεν υπάρχουν.
+function writersFrom(ownArticles){
+  const groups = new Map();
+
+  for (const a of ownArticles) {
+    const name = String(a.author || '').trim();
+    if (!name) continue;
+    if (!groups.has(name)) groups.set(name, []);
+    groups.get(name).push(a);
+  }
+
+  for (const list of groups.values()) {
+    list.sort((x, y) => new Date(y.date) - new Date(x.date));
+  }
+
+  return groups;
+}
+
+function writerPage(name, list){
+  const safe = esc(name);
+  const cards = list.map((a) => card(itemFromOwnArticle(a), 1)).join('\n');
+
+  const dates = list.map((a) => new Date(a.date).getTime()).filter((t) => !Number.isNaN(t));
+  const facts = [
+    list.length === 1 ? '1 άρθρο' : `${list.length} άρθρα`,
+    dates.length ? `τελευταίο ${formatDate(new Date(Math.max(...dates)).toISOString())}` : '',
+  ].filter(Boolean).join(' · ');
+
+  // Η φωτογραφία του, αν είναι και αρθρογράφος του newshub.gr: το
+  // διαχειριστικό κρατάει τα πορτρέτα σε ΕΝΑ σημείο, και δεν υπάρχει
+  // λόγος να ζητηθεί δεύτερη φορά για τον ίδιο άνθρωπο.
+  const face = writersFile()[name] || '';
+
+  const body = `${siteHeader(1)}
+
+${breadcrumb([
+    { label: 'Αρχική', href: 'index.html' },
+    { label: name },
+  ], 1)}
+
+  <main class="bio" data-pagefind-body
+        data-pagefind-meta="image:${esc(face)},type:Δημοσιογράφος"
+        data-pagefind-filter="Είδος:Δημοσιογράφος">
+    <header class="bio-head${face ? ' bio-head--face' : ''}">
+${face ? `      <span class="bio-face"><img src="${esc(face)}" alt="${safe}" loading="eager"></span>` : ''}
+      <p class="page-label">Υπογράφει</p>
+      <h1 class="bio-name">${safe}</h1>
+      <p class="bio-facts">${facts}</p>
+    </header>
+
+    <section class="bio-work">
+      <h2 class="section-head">${list.length === 1 ? 'Το άρθρο' : 'Όλα τα άρθρα'}</h2>
+      <div class="grid bio-grid">
+${cards}
+      </div>
+    </section>
+  </main>`;
+
+  return page({
+    title: `${safe} — ${SITE_NAME}`,
+    body,
+    depth: 1,
+    description: `${name}: ${facts} στο ${SITE_NAME}.`,
+    image: face,
+    url: writerUrl(name),
+  });
+}
+
+// Η περίληψη ενός δικού μας άρθρου.
+//
+// Έφυγε από το διαχειριστικό: ο συντάκτης έγραφε δύο φορές το ίδιο
+// πράγμα, και η δεύτερη φορά ήταν πάντα βιαστική. Τη βγάζουμε από την
+// πρώτη παράγραφο — εκεί ζει ούτως ή άλλως η είδηση.
+//
+// Ό,τι γράφτηκε με το χέρι παλιότερα μένει και κερδίζει: δεν σβήνουμε
+// δουλειά ανθρώπου επειδή αλλάξαμε γνώμη για τη φόρμα.
+const SUMMARY_CHARS = 200;
+
+function ownSummary(a){
+  if (a.summary) return a.summary;
+
+  const first = (a.body || []).find((p) => p && p.type !== 'image' && p.text);
+  if (!first) return '';
+
+  const text = String(first.text).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (text.length <= SUMMARY_CHARS) return text;
+
+  // Κόβουμε σε κενό, όχι στη μέση λέξης.
+  const cut = text.slice(0, SUMMARY_CHARS);
+  return `${cut.slice(0, cut.lastIndexOf(' ')) || cut}…`;
+}
+
 function ownArticlePage(a, hasCat = false){
   const title = esc(a.title);
 
@@ -2034,8 +2139,11 @@ function ownArticlePage(a, hasCat = false){
   // («του Γιώργου Παυλουδή»), και τη γενική δεν τη βγάζουμε από
   // ονομαστική χωρίς να ξέρουμε το όνομα — ούτε το φύλο, που δεν το
   // ρωτάμε. Τα περισσότερα site γράφουν σκέτο το όνομα· το ίδιο.
-  const byline = [a.author ? esc(a.author) : '', formatDate(a.date)]
-    .filter(Boolean).join(' · ');
+  // Το όνομα πατιέται και οδηγεί σε όλα του τα άρθρα — δες writerPage().
+  const byline = [
+    a.author ? `<a class="art-by" href="../${writerUrl(a.author)}">${esc(a.author)}</a>` : '',
+    formatDate(a.date),
+  ].filter(Boolean).join(' · ');
 
   const words = a.body.reduce((n, p) => n + String(p.text || '').split(/\s+/).length, 0);
   const minutes = Math.max(1, Math.round(words / 200));
@@ -2079,7 +2187,7 @@ ${articleBodyHtml(a.body)}
     title: `${title} — ${SITE_NAME}`,
     body: inner,
     depth: 1,
-    description: a.summary || a.title,
+    description: ownSummary(a) || a.title,
     image: a.image || '',
     url: ownArticleUrl(a),
     type: 'article',
@@ -3882,6 +3990,110 @@ function listaSection(){
   </section>`;
 }
 
+// ---- Απόψεις ----
+//
+// Τα υπογεγραμμένα κείμενα του newshub.gr. Ανοίγουν ΕΚΕΙ, όχι εδώ —
+// ρητή οδηγία: η άποψη ανήκει στον αρθρογράφο και στο site που τη
+// φιλοξενεί, εμείς τη δείχνουμε και στέλνουμε κόσμο.
+//
+// Η ενότητα κάθεται αμέσως κάτω από το Must read και μοιάζει μαζί του
+// επίτηδες: ίδιο κουτί, ίδιο σήμα με το λογότυπό τους. Αλλάζει το
+// περιεχόμενο της κάρτας — εδώ το πρόσωπο είναι το θέμα, όχι η
+// φωτογραφία του άρθρου.
+const OPINIONS_SHOWN = 6;
+
+// Το πορτρέτο του αρθρογράφου. Πρώτα ό,τι όρισε το διαχειριστικό, μετά
+// ό,τι κατέβηκε από το newshub.gr.
+//
+// Γιατί υπάρχει η παράκαμψη: οι δικές τους φωτογραφίες είναι παλιές ή
+// κομμένες σε 50 πίξελ, και κάποιοι αρθρογράφοι δεν έχουν καθόλου.
+let writersCache;
+function writersFile(){
+  if (writersCache === undefined) {
+    writersCache = {};
+    try {
+      const raw = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/writers.json'), 'utf8'));
+      if (raw && typeof raw.photos === 'object') writersCache = raw.photos;
+    } catch (err) {
+      if (err.code !== 'ENOENT') {
+        console.warn('ΠΡΟΣΟΧΗ: το data/writers.json δεν διαβάζεται —', err.message);
+      }
+    }
+  }
+  return writersCache;
+}
+
+function writerPhoto(author){
+  if (!author || !author.name) return '';
+  const mine = writersFile()[author.name];
+  return mine || author.photo || '';
+}
+
+// Ποιες απόψεις βγαίνουν και με ποια σειρά: πρώτα όσες όρισε το
+// διαχειριστικό, μετά οι πιο πρόσφατες. Ίδια λογική με το Must read.
+function pickOpinions(articles, curation){
+  const all = articles
+    .filter((a) => a.category === 'Απόψεις')
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const want = (curation.opinions || []).map((s) => String(s).trim()).filter(Boolean);
+
+  const chosen = want
+    .map((w) => all.find((a) => sameItem({ id: a.id, href: a.url }, w)))
+    .filter(Boolean);
+
+  const have = new Set(chosen.map((a) => a.url));
+  for (const a of all) {
+    if (chosen.length >= OPINIONS_SHOWN) break;
+    if (have.has(a.url)) continue;
+    chosen.push(a);
+    have.add(a.url);
+  }
+
+  return chosen.slice(0, OPINIONS_SHOWN);
+}
+
+function opinionsSection(articles, curation){
+  const picks = pickOpinions(articles, curation);
+
+  // Με λιγότερα από τρία δεν στέκει η ζώνη — ίδιος κανόνας με το
+  // Must read, ένα σκέτο κείμενο μέσα σε πλαίσιο μοιάζει με λάθος.
+  if (picks.length < 3) return '';
+
+  const cards = picks.map((a) => {
+    const name = a.author && a.author.name ? a.author.name : '';
+    const face = writerPhoto(a.author);
+
+    return `      <article class="apop-card">
+        <a class="apop-link" href="${esc(a.url)}" target="_blank" rel="noopener">
+          ${face
+            ? `<span class="apop-face"><img class="apop-pic" src="${esc(face)}" alt="${esc(name)}" loading="lazy" width="120" height="120"></span>`
+            : (name ? `<span class="apop-face">${avatar(name, 'avatar--round')}</span>` : '')}
+          <span class="apop-text">
+            ${name ? `<span class="apop-name">${esc(name)}</span>` : ''}
+            <h3 class="apop-title">${esc(a.title)}</h3>
+            <span class="apop-meta">${formatDate(a.date)}<i>↗</i></span>
+          </span>
+        </a>
+      </article>`;
+  }).join('\n');
+
+  return `  <section class="must apop" aria-labelledby="apop-head">
+    <div class="must-head">
+      <p class="must-mark" id="apop-head">
+        <span class="must-word apop-word">Από<em>ψεις</em></span>
+        <span class="must-by">στο</span>
+        <img class="must-logo" src="shows/logo-newshub.png" alt="Newshub.gr" loading="lazy">
+      </p>
+      <a class="must-all" href="https://www.newshub.gr/el/apopseis" target="_blank" rel="noopener">Όλες οι απόψεις →</a>
+    </div>
+
+    <div class="apop-grid">
+${cards}
+    </div>
+  </section>`;
+}
+
 function mustReadSection(articles, curation, taken){
   const picks = pickMustRead(articles, curation, taken);
 
@@ -5650,6 +5862,11 @@ ${/* Το «Must read» κάθεται ανάμεσα στις εκπομπές 
      βαθύ μέρος της σελίδας. */ ''}
 ${mustReadSection(articles, curation, onTop)}
 
+${/* Οι Απόψεις αμέσως από κάτω: ίδια προέλευση, ίδιο κουτί, άλλο
+     είδος ανάγνωσης. Η είδηση λέει τι έγινε, η άποψη ποιος το λέει —
+     γι' αυτό εκεί μετράει η φωτογραφία του άρθρου κι εδώ το πρόσωπο. */ ''}
+${opinionsSection(articles, curation)}
+
 ${/* Αμέσως μετά το Must read, και πριν τα θέματα: όποιος άφησε κάτι
      στη μέση το βρίσκει πριν μπει στο βαθύ μέρος της σελίδας. Για
      όποιον δεν άφησε τίποτα η ενότητα δεν υπάρχει καθόλου, οπότε η
@@ -5927,6 +6144,31 @@ ${intro(episodes[0], videos[0])}`,
     if (writeIfChanged(file, ownArticlePage(a, hasCatPage(a.category)))) ownWritten++;
   }
 
+  // Οι σελίδες των δημοσιογράφων. Μία ανά υπογραφή, και σβήνονται όσες
+  // έμειναν ορφανές — αλλιώς μια σελίδα θα ζούσε για πάντα δείχνοντας
+  // άρθρα που άλλαξαν υπογραφή ή σβήστηκαν.
+  const writerGroups = writersFrom(ownArticles);
+  const WRITER_DIR = path.join(PUBLIC_DIR, 'arthrografos');
+  fs.mkdirSync(WRITER_DIR, { recursive: true });
+
+  let writersWritten = 0;
+  const writersWanted = new Set();
+  for (const [name, list] of writerGroups) {
+    const file = path.basename(writerUrl(name));
+    writersWanted.add(file);
+    if (writeIfChanged(path.join(WRITER_DIR, file), writerPage(name, list))) writersWritten++;
+  }
+
+  let writersRemoved = 0;
+  for (const file of fs.readdirSync(WRITER_DIR)) {
+    if (!file.endsWith('.html') || writersWanted.has(file)) continue;
+    fs.unlinkSync(path.join(WRITER_DIR, file));
+    writersRemoved++;
+  }
+
+  console.log(`Δημοσιογράφοι: ${writersWritten} γράφτηκαν, ${writerGroups.size} συνολικά`
+    + (writersRemoved ? `, ${writersRemoved} σβήστηκαν` : ''));
+
   let artWritten = 0;
   let artSkipped = 0;
   let artClash = 0;
@@ -5999,6 +6241,12 @@ ${intro(episodes[0], videos[0])}`,
     // έξω: δηλώνουν αλλού το πρωτότυπό τους, άρα δεν ζητούν
     // ευρετηρίαση για τον εαυτό τους.
     ...ownArticles.map((a) => ({ loc: ownArticleUrl(a), date: a.date })),
+    // Και οι σελίδες των δημοσιογράφων μας: δικό μας περιεχόμενο, με
+    // σταθερή διεύθυνση, που αξίζει να βρίσκεται από αναζήτηση.
+    ...[...writerGroups.keys()].map((name) => ({
+      loc: writerUrl(name),
+      date: writerGroups.get(name)[0].date,
+    })),
   ];
   writeIfChanged(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapXml(sitemap));
   console.log(`Κατάλογος sitemap.xml: ${sitemap.length} διευθύνσεις`);

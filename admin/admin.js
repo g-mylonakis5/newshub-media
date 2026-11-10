@@ -1693,6 +1693,334 @@ function saveMustRead(){
   });
 }
 
+// ---------------------------------------------------------------------
+// ΑΠΟΨΕΙΣ — τα υπογεγραμμένα κείμενα του newshub.gr
+// ---------------------------------------------------------------------
+//
+// Αντιστοιχεί στο curation.opinions και στην pickOpinions() του build.js.
+//
+// Δεν περνούν από το normalize(): εκείνο κρατάει μόνο τίτλο, κατηγορία
+// και εικόνα, ενώ εδώ το πρόσωπο ΕΙΝΑΙ το περιεχόμενο. Διαβάζουμε
+// κατευθείαν το state.raw.news, όπως ήρθε από το newshub.gr.
+var OPINIONS = 6;
+
+var op = {
+  shown: PAGE,
+  find: '',
+};
+
+function opAll(){
+  return (state.raw.news || [])
+    .filter(function (a) { return a.category === 'Απόψεις'; })
+    .sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+}
+
+function opList(){
+  return (state.curation.opinions || []).slice();
+}
+
+// Το πορτρέτο που θα δει ο κόσμος: πρώτα ό,τι ορίστηκε εδώ, μετά ό,τι
+// κατέβηκε από το newshub.gr. Ίδια σειρά με το writerPhoto() του build.
+function opFace(a){
+  var name = a.author && a.author.name ? a.author.name : '';
+  if (name && wr.photos[name]) return wr.photos[name];
+  return a.author && a.author.photo ? a.author.photo : '';
+}
+
+// Τι θα δείξει η αρχική: πρώτα οι διαλεγμένες, μετά οι πιο πρόσφατες.
+function opPreview(){
+  var all = opAll();
+  var rows = opList().map(function (ref) {
+    var hit = null;
+    all.forEach(function (a) { if (!hit && isChosen({ id: a.id, ref: a.url }, ref)) hit = a; });
+    return { ref: ref, item: hit, auto: false };
+  });
+
+  var taken = {};
+  rows.forEach(function (r) { if (r.item) taken[r.item.url] = true; });
+
+  for (var i = 0; i < all.length && rows.length < OPINIONS; i++) {
+    if (taken[all[i].url]) continue;
+    taken[all[i].url] = true;
+    rows.push({ ref: all[i].url, item: all[i], auto: true });
+  }
+
+  return rows.slice(0, OPINIONS);
+}
+
+function opSlot(r, i, total){
+  var a = r.item;
+
+  var body = a
+    ? (opFace(a)
+      ? '<img src="' + esc(opFace(a)) + '" alt="">'
+      : '<img alt="">')
+      + '<div class="slot-text">'
+      + '<p class="slot-title">' + esc(a.title) + '</p>'
+      + '<p class="slot-meta">'
+      + (a.author && a.author.name ? esc(a.author.name) + ' · ' : 'χωρίς υπογραφή · ')
+      + when(a.date) + '</p></div>'
+    : '<img alt=""><div class="slot-text"><p class="slot-title">' + esc(r.ref) + '</p>'
+      + '<p class="slot-meta">Δεν βρέθηκε — μπορεί να έφυγε από τη ροή. '
+      + 'Το site θα βάλει άλλη.</p></div>';
+
+  return '<div class="slot' + (r.auto ? ' slot--auto' : '') + '">'
+    + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
+    + body
+    + '<span class="slot-acts">'
+    + (r.auto ? '<span class="pill pill--draft">αυτόματο</span>' : '')
+    + '<button type="button" data-op-up="' + i + '" aria-label="Πάνω"'
+    + (i === 0 ? ' disabled' : '') + '>↑</button>'
+    + '<button type="button" data-op-down="' + i + '" aria-label="Κάτω"'
+    + (i === total - 1 ? ' disabled' : '') + '>↓</button>'
+    + '<button type="button" data-op-del="' + i + '" aria-label="Αφαίρεση">✕</button>'
+    + '</span></div>';
+}
+
+function drawOpinions(){
+  var rows = opPreview();
+
+  $('[data-op-slots]').innerHTML = rows.map(function (r, i) {
+    return opSlot(r, i, rows.length);
+  }).join('');
+
+  var n = opList().length;
+  var all = opAll().length;
+
+  var note = n === 0
+    ? 'Καμία χειροκίνητη επιλογή — βγαίνουν οι ' + OPINIONS + ' πιο πρόσφατες.'
+    : n + (n === 1 ? ' διαλεγμένη' : ' διαλεγμένες') + ' με το χέρι, με αυτή τη σειρά.';
+
+  note += ' Συνολικά ' + all + ' απόψεις στο αρχείο μας.';
+  if (rows.length < 3) {
+    note += ' ΠΡΟΣΟΧΗ: κάτω από τρεις, η ενότητα δεν βγαίνει καθόλου στην αρχική.';
+  }
+
+  $('[data-op-note]').textContent = note;
+}
+
+// Ό,τι βλέπει γίνεται ρητή επιλογή μόλις πειράξει κάτι — ίδιος λόγος
+// με τα «Τελευταία», δες ltFix().
+function opFix(){
+  var rows = opPreview();
+  if (!rows.some(function (r) { return r.auto; })) return;
+  state.curation.opinions = rows.map(function (r) { return r.ref; });
+}
+
+function opMove(i, step){
+  opFix();
+  var list = opList();
+  var to = i + step;
+  if (i < 0 || i >= list.length || to < 0 || to >= list.length) return;
+  var tmp = list[i]; list[i] = list[to]; list[to] = tmp;
+  state.curation.opinions = list;
+  drawOpinions();
+  opDirty(true);
+}
+
+function opRemove(i){
+  opFix();
+  var list = opList();
+  if (i < 0 || i >= list.length) return;
+  list.splice(i, 1);
+  state.curation.opinions = list;
+  drawOpinions();
+  drawOpPicks();
+  opDirty(true);
+}
+
+function opToggle(url){
+  var list = opList();
+  var at = list.indexOf(url);
+  if (at > -1) list.splice(at, 1); else list.push(url);
+  state.curation.opinions = list;
+  drawOpinions();
+  drawOpPicks();
+  opDirty(true);
+}
+
+function drawOpPicks(){
+  var box = $('[data-op-picks]');
+  var chosen = opList();
+
+  var hits = opAll().filter(function (a) {
+    if (!op.find) return true;
+    var who = a.author && a.author.name ? a.author.name : '';
+    return flat(a.title + ' ' + who).indexOf(op.find) > -1;
+  });
+
+  if (!hits.length) {
+    box.innerHTML = '<p class="muted">Καμία άποψη δεν ταιριάζει.</p>';
+    $('[data-op-more]').hidden = true;
+    return;
+  }
+
+  box.innerHTML = hits.slice(0, op.shown).map(function (a) {
+    var on = chosen.indexOf(a.url) > -1;
+    var face = opFace(a);
+    return '<button type="button" class="pick' + (on ? ' is-on' : '') + '"'
+      + ' data-op-add="' + esc(a.url) + '">'
+      + (face ? '<img src="' + esc(face) + '" alt="" loading="lazy">' : '<img alt="">')
+      + '<span><span class="pick-title">' + esc(a.title) + '</span>'
+      + '<span class="pick-meta">'
+      + (a.author && a.author.name ? esc(a.author.name) + ' · ' : '')
+      + when(a.date) + '</span></span></button>';
+  }).join('');
+
+  $('[data-op-more]').hidden = hits.length <= op.shown;
+}
+
+function opDirty(on){
+  state.dirty = on;
+  $('[data-save="apopseis"]').disabled = !on;
+}
+
+function saveOpinions(){
+  say('Αποθηκεύεται…');
+  api('curation', 'PUT', state.curation).then(function () {
+    opDirty(false);
+    say('Αποθηκεύτηκε. Φαίνεται στο site μόλις ξαναχτιστεί (~2 λεπτά).', 'ok');
+  }).catch(function (err) {
+    say('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+// ---- Οι αρθρογράφοι ----
+//
+// Ένα όνομα, ένα πορτρέτο. Το αρχείο γράφεται ΑΜΕΣΩΣ μόλις αλλάξει
+// φωτογραφία — δεν υπάρχει δεύτερο κουμπί «Αποθήκευση» στην ίδια
+// καρτέλα, θα μπερδευόταν με εκείνο της σειράς των απόψεων.
+var wr = { photos: {} };
+
+function wrReady(file){
+  wr.photos = (file && typeof file.photos === 'object' && !Array.isArray(file.photos))
+    ? file.photos : {};
+}
+
+// Όλοι όσοι υπογράφουν άποψη, με το πλήθος τους.
+function wrPeople(){
+  var seen = {};
+  opAll().forEach(function (a) {
+    if (!a.author || !a.author.name) return;
+    var name = a.author.name;
+    if (!seen[name]) seen[name] = { name: name, n: 0, photo: a.author.photo || '', url: a.author.url || '' };
+    seen[name].n++;
+  });
+
+  return Object.keys(seen)
+    .sort(function (x, y) { return seen[y].n - seen[x].n || x.localeCompare(y, 'el'); })
+    .map(function (k) { return seen[k]; });
+}
+
+function drawWriters(){
+  var box = $('[data-writers]');
+  var people = wrPeople();
+
+  if (!people.length) {
+    box.innerHTML = '<p class="muted">Καμία άποψη με υπογραφή ακόμα.</p>';
+    return;
+  }
+
+  box.innerHTML = people.map(function (p) {
+    var mine = wr.photos[p.name];
+    var face = mine || p.photo;
+
+    return '<article class="writer" data-writer="' + esc(p.name) + '">'
+      + (face
+        ? '<img class="writer-face" src="' + esc(face) + '" alt="" loading="lazy">'
+        : '<span class="writer-face writer-face--empty"></span>')
+      + '<div class="writer-text">'
+      + '<p class="writer-name">' + esc(p.name) + '</p>'
+      + '<p class="writer-meta">' + p.n + (p.n === 1 ? ' άποψη' : ' απόψεις')
+      + (mine ? ' · δική μας φωτογραφία' : (p.photo ? ' · φωτογραφία του newshub.gr' : ' · χωρίς φωτογραφία'))
+      + '</p>'
+      + '</div>'
+      + '<span class="writer-acts">'
+      + '<button type="button" class="btn btn--ghost" data-wr-pick="' + esc(p.name) + '">'
+      + (mine ? 'Άλλαξε' : 'Βάλε φωτογραφία') + '</button>'
+      + (mine
+        ? '<button type="button" class="btn btn--ghost" data-wr-clear="' + esc(p.name) + '">Επαναφορά</button>'
+        : '')
+      + '</span></article>';
+  }).join('');
+}
+
+function wrSave(){
+  return api('writers', 'PUT', { photos: wr.photos });
+}
+
+function wrSetPhoto(name, url){
+  var was = wr.photos[name];
+  wr.photos[name] = url;
+  drawWriters();
+  drawOpinions();
+  drawOpPicks();
+
+  wrSave().then(function () {
+    say('Η φωτογραφία του «' + name + '» αποθηκεύτηκε.', 'ok');
+  }).catch(function (err) {
+    // Πίσω στην προηγούμενη κατάσταση — αλλιώς η οθόνη λέει ότι σώθηκε
+    // κάτι που δεν σώθηκε. Ίδιος κανόνας με τις στάνταρ φωτογραφίες.
+    if (was) wr.photos[name] = was; else delete wr.photos[name];
+    drawWriters();
+    say('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+function wrClearPhoto(name){
+  var was = wr.photos[name];
+  delete wr.photos[name];
+  drawWriters();
+  drawOpinions();
+
+  wrSave().then(function () {
+    say('Επανήλθε η φωτογραφία του newshub.gr.', 'ok');
+  }).catch(function (err) {
+    if (was) wr.photos[name] = was;
+    drawWriters();
+    say('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+function wireOpinions(){
+  $('[data-op-slots]').addEventListener('click', function (e) {
+    var del = e.target.closest('[data-op-del]');
+    if (del) { opRemove(Number(del.dataset.opDel)); return; }
+
+    var up = e.target.closest('[data-op-up]');
+    if (up) { opMove(Number(up.dataset.opUp), -1); return; }
+
+    var down = e.target.closest('[data-op-down]');
+    if (down) opMove(Number(down.dataset.opDown), 1);
+  });
+
+  $('[data-op-picks]').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-op-add]');
+    if (btn) opToggle(btn.dataset.opAdd);
+  });
+
+  $('[data-op-find]').addEventListener('input', function (e) {
+    op.find = flat(e.target.value);
+    op.shown = PAGE;
+    drawOpPicks();
+  });
+
+  $('[data-op-more]').addEventListener('click', function () {
+    op.shown += PAGE;
+    drawOpPicks();
+  });
+
+  $('[data-save="apopseis"]').addEventListener('click', saveOpinions);
+
+  $('[data-writers]').addEventListener('click', function (e) {
+    var pick = e.target.closest('[data-wr-pick]');
+    if (pick) { pickImage({ writer: pick.dataset.wrPick }); return; }
+
+    var clear = e.target.closest('[data-wr-clear]');
+    if (clear) wrClearPhoto(clear.dataset.wrClear);
+  });
+}
+
 function wireMustRead(){
   $('[data-mr-slots]').addEventListener('click', function (e) {
     var del = e.target.closest('[data-mr-del]');
@@ -1954,7 +2282,6 @@ function openArticle(i){
 // χρειάζεται και η επαναφορά αντιγράφου, που δεν ανοίγει κάτι νέο.
 function fillArticle(){
   $('[data-art="title"]').value = art.open.title || '';
-  $('[data-art="summary"]').value = art.open.summary || '';
   $('[data-art="category"]').value = art.open.category || CATS[0];
   $('[data-art="author"]').value = art.open.author || '';
   $('[data-art="date"]').value = toLocalInput(art.open.date);
@@ -1986,6 +2313,97 @@ function drawSlug(){
   var a = art.open;
   var slug = a.id || slugify(a.title);
   $('[data-art-slug]').textContent = slug ? '/arthro/' + slug + '.html' : '—';
+}
+
+// ---------------------------------------------------------------------
+// ΠΡΟΕΠΙΣΚΟΠΗΣΗ ΑΡΘΡΟΥ
+// ---------------------------------------------------------------------
+//
+// Το άρθρο όπως θα το δει ο αναγνώστης, πριν πατηθεί «Δημοσιευμένο».
+//
+// Μέσα σε iframe με το ΑΛΗΘΙΝΟ styles.css του site, όχι με τα στυλ του
+// διαχειριστικού: μια προεπισκόπηση που δείχνει αλλιώς από το site δεν
+// είναι προεπισκόπηση, είναι δεύτερη γνώμη.
+//
+// Οι κλάσεις αντιγράφουν το ownArticlePage() και το articleBodyHtml()
+// του build.js. Όταν αλλάξει εκεί η δομή, αλλάζει και εδώ — είναι το
+// τίμημα για να μη χρειάζεται να τρέξει build. Ό,τι δεν ξέρουμε να
+// ζωγραφίσουμε (ενσωματωμένο επεισόδιο με player) μπαίνει ως πλαίσιο
+// με το όνομά του, ώστε να φαίνεται η θέση του στη ροή του κειμένου.
+function previewHtml(a){
+  var esc2 = esc;
+
+  var blocks = (a.body || []).map(function (p) {
+    if (p.type === 'h') return '<h2 class="art-sub">' + esc2(p.text || '') + '</h2>';
+    if (p.type === 'p') return '<p>' + esc2(p.text || '') + '</p>';
+
+    if (p.type === 'image' && p.src) {
+      return '<figure class="art-inline"><img src="' + esc2(p.src) + '" alt="' + esc2(p.alt || '') + '">'
+        + (p.caption ? '<figcaption>' + esc2(p.caption) + '</figcaption>' : '')
+        + '</figure>';
+    }
+
+    if (p.type === 'embed' && p.id) {
+      if (p.kind === 'youtube') {
+        return '<figure class="art-inline">'
+          + '<img src="https://i.ytimg.com/vi/' + esc2(p.id) + '/hqdefault.jpg" alt="">'
+          + '<figcaption>Βίντεο YouTube — παίζει στη δημοσιευμένη σελίδα</figcaption>'
+          + '</figure>';
+      }
+      if (p.kind === 'episode') {
+        return '<p class="art-sub">🎧 Επεισόδιο ' + esc2(p.id)
+          + (p.play ? ' — με player' : ' — ως κάρτα') + '</p>';
+      }
+    }
+
+    return '';
+  }).filter(Boolean).join('\n');
+
+  var words = (a.body || []).reduce(function (n, p) {
+    return n + String(p.text || '').split(/\s+/).filter(Boolean).length;
+  }, 0);
+  var minutes = Math.max(1, Math.round(words / 200));
+
+  var byline = [a.author || '', when(a.date)].filter(Boolean).join(' · ');
+
+  return '<!doctype html><html lang="el"><head><meta charset="utf-8">'
+    + '<meta name="viewport" content="width=device-width, initial-scale=1">'
+    + '<link rel="stylesheet" href="/styles.css">'
+    + '<style>body{padding:2rem 0}</style>'
+    + '</head><body>'
+    + '<main class="art"><article class="art-wrap">'
+    + '<header class="art-head">'
+    + (a.category ? '<p class="card-label">' + esc2(a.category) + '</p>' : '')
+    + '<h1 class="art-title">' + esc2(a.title || 'Χωρίς τίτλο') + '</h1>'
+    + '<p class="art-meta">' + esc2(byline) + ' · ' + minutes + '′ ανάγνωση</p>'
+    + '</header>'
+    + (a.image
+      ? '<figure class="art-figure"><img src="' + esc2(a.image) + '" alt="">'
+        + (a.imageCaption ? '<figcaption>' + esc2(a.imageCaption) + '</figcaption>' : '')
+        + '</figure>'
+      : '')
+    + '<div class="art-body">' + blocks + '</div>'
+    + '</article></main>'
+    + '</body></html>';
+}
+
+function openPreview(){
+  // ΠΡΩΤΑ μαζεύουμε ό,τι γράφτηκε: αλλιώς η προεπισκόπηση δείχνει την
+  // προηγούμενη αποθήκευση και ο συντάκτης ψάχνει γιατί «δεν άλλαξε».
+  if (!art.open) return;
+  collect();
+
+  var box = $('[data-preview]');
+  var frame = $('[data-preview-frame]');
+
+  box.hidden = false;
+  frame.srcdoc = previewHtml(art.open);
+}
+
+function closePreview(){
+  $('[data-preview]').hidden = true;
+  // Αδειάζει, ώστε να μη μείνει να παίζει κάτι από μέσα.
+  $('[data-preview-frame]').srcdoc = '';
 }
 
 function drawThumb(){
@@ -2102,7 +2520,9 @@ function collect(){
   var a = art.open;
 
   a.title = $('[data-art="title"]').value.trim();
-  a.summary = $('[data-art="summary"]').value.trim();
+  // Η περίληψη ΔΕΝ γράφεται πια εδώ — τη βγάζει το site από την πρώτη
+  // παράγραφο (ownSummary στο build.js). Ό,τι γράφτηκε παλιότερα με το
+  // χέρι μένει ανέπαφο στο a.summary και εξακολουθεί να κερδίζει.
   a.category = $('[data-art="category"]').value;
   a.author = $('[data-art="author"]').value.trim();
   a.date = fromLocalInput($('[data-art="date"]').value) || new Date().toISOString();
@@ -2202,8 +2622,10 @@ function saveArticle(){
   });
   if (clash) { artSay('Υπάρχει ήδη άρθρο με αυτή τη διεύθυνση. Άλλαξε τον τίτλο.', 'bad'); return; }
 
-  if (a.status === 'published' && !a.summary) {
-    artSay('Βάλε περίληψη πριν δημοσιεύσεις — φαίνεται στην κάρτα και στη Google.', 'bad');
+  // Αντί για περίληψη, ζητάμε ΚΕΙΜΕΝΟ: από εκεί βγαίνει πλέον και η
+  // περίληψη, οπότε άδειο άρθρο σημαίνει και άδειο απόσπασμα στη Google.
+  if (a.status === 'published' && !a.body.some(function (p) { return p.text && p.text.trim(); })) {
+    artSay('Γράψε κείμενο πριν δημοσιεύσεις — από την πρώτη παράγραφο βγαίνει και η περίληψη.', 'bad');
     return;
   }
 
@@ -2323,6 +2745,13 @@ function applyPick(url){
     ppSetPhoto(t.person, url);
     pickClose();
     drawPeople();
+    return;
+  }
+
+  // Το πορτρέτο αρθρογράφου, από την καρτέλα «Απόψεις».
+  if (t.writer) {
+    wrSetPhoto(t.writer, url);
+    pickClose();
     return;
   }
 
@@ -2571,6 +3000,29 @@ function wireArticles(){
   });
 
   $('[data-art-save]').addEventListener('click', saveArticle);
+
+  $('[data-art-preview]').addEventListener('click', openPreview);
+
+  $$('[data-preview-close]').forEach(function (el) {
+    el.addEventListener('click', closePreview);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !$('[data-preview]').hidden) closePreview();
+  });
+
+  // Υπολογιστής ή κινητό. Το κινητό είναι η μισή κίνηση του site, και
+  // ένα άρθρο που διαβάζεται άνετα στα 1.200 πίξελ μπορεί να είναι
+  // τοίχος κειμένου στα 390.
+  $('[data-preview] .preview-sizes').addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    $('[data-preview-frame]').classList.toggle('preview-frame--phone',
+      chip.dataset.prevSize === 'phone');
+    $$('[data-preview] .preview-sizes .chip').forEach(function (c) {
+      c.classList.toggle('is-on', c === chip);
+    });
+  });
   $('[data-art-delete]').addEventListener('click', deleteArticle);
 
   // Τα πεδία της κεφαλίδας — ένας listener για όλα.
@@ -3441,8 +3893,34 @@ var pr = {
   // αυτό που περιμένει δουλειά.
   filter: 'gaps',
   find: '',
+  year: '',      // '' = όλες οι χρονιές
   shown: PR_PAGE,
 };
+
+// Οι χρονιές που υπάρχουν όντως στα επεισόδια, από την πιο πρόσφατη.
+// Δεν τις γράφουμε με το χέρι: του χρόνου θα έλειπε το 2027.
+function prYears(){
+  var seen = {};
+  pr.rows.forEach(function (r) {
+    var y = String(r.date).slice(0, 4);
+    if (/^\d{4}$/.test(y)) seen[y] = (seen[y] || 0) + 1;
+  });
+  return Object.keys(seen).sort().reverse().map(function (y) {
+    return { year: y, n: seen[y] };
+  });
+}
+
+function drawPrYears(){
+  var box = $('[data-pr-years]');
+  if (!box) return;
+
+  box.innerHTML = '<button type="button" class="chip'
+    + (pr.year ? '' : ' is-on') + '" data-pry="">Κάθε χρονιά</button>'
+    + prYears().map(function (y) {
+      return '<button type="button" class="chip' + (pr.year === y.year ? ' is-on' : '')
+        + '" data-pry="' + y.year + '">' + y.year + ' <small>' + y.n + '</small></button>';
+    }).join('');
+}
 
 function prReady(file){
   var f = (file && typeof file === 'object' && !Array.isArray(file)) ? file : {};
@@ -3525,6 +4003,11 @@ function prVideoTitle(id){
 function prHits(){
   return pr.rows.filter(function (r) {
     if (pr.find && flat(r.title).indexOf(pr.find) < 0) return false;
+    // Η χρονιά. Τα παλιά επεισόδια διορθώνονταν ΠΑΝΤΑ από εδώ, αλλά
+    // για να φτάσεις στο 2022 έπρεπε να πατήσεις «Δείξε περισσότερα»
+    // δεκαπέντε φορές ή να θυμάσαι τον τίτλο — δηλαδή πρακτικά δεν
+    // γινόταν.
+    if (pr.year && String(r.date).slice(0, 4) !== pr.year) return false;
 
     var now = prNow(r);
     // «Θέλουν δουλειά»: λείπει βίντεο ή καλεσμένος και δεν έχει
@@ -3555,7 +4038,8 @@ function drawPairs(){
   });
 
   $('[data-pr-count]').textContent = nv + ' χωρίς βίντεο · '
-    + ng + ' χωρίς καλεσμένο · ' + nd + ' διορθωμένα με το χέρι';
+    + ng + ' χωρίς καλεσμένο · ' + nd + ' διορθωμένα με το χέρι · '
+    + hits.length + (pr.year ? ' στο ' + pr.year : ' σε αυτό το φίλτρο');
 
   if (!hits.length) {
     box.innerHTML = '<p class="muted">Τίποτα εδώ. '
@@ -3674,6 +4158,15 @@ function wirePairs(){
     $$('[data-pr-filter] .chip').forEach(function (c) {
       c.classList.toggle('is-on', c === chip);
     });
+    drawPairs();
+  });
+
+  $('[data-pr-years]').addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    pr.year = chip.dataset.pry;
+    pr.shown = PR_PAGE;
+    drawPrYears();
     drawPairs();
   });
 
@@ -3861,6 +4354,7 @@ function wire(){
   wireShows();
   wireLatest();
   wireMustRead();
+  wireOpinions();
   wireCats();
   wirePeople();
   wirePairs();
@@ -3902,6 +4396,9 @@ function boot(){
     // έχει τρέξει build ακόμα, δείχνουμε μόνο τα καρφιτσωμένα — δεν
     // ρίχνουμε ολόκληρο το διαχειριστικό για μια προεπισκόπηση.
     loadFlow(),
+    // Τα πορτρέτα των αρθρογράφων. ΑΝΕΚΤΙΚΟ: το αρχείο δεν υπάρχει
+    // μέχρι να αλλάξει κανείς την πρώτη φωτογραφία.
+    api('writers').catch(function () { return null; }),
   ]).then(function (r) {
     // Το αρχείο μπορεί να μην υπάρχει ακόμα — τότε το API δίνει null.
     var photos = r[12] && typeof r[12] === 'object' ? r[12] : {};
@@ -3919,6 +4416,7 @@ function boot(){
     state.raw = { episodes: r[1], videos: r[2], news: r[3] };
     state.items = normalize(r[1], r[2], r[3], art.list);
     state.flow = r[13];
+    wrReady(r[14]);
 
     pp.file = ppReady(r[6]);
     var census = r[7] || {};
@@ -3939,9 +4437,13 @@ function boot(){
     drawLtPicks();
     drawMustRead();
     drawMrPicks();
+    drawOpinions();
+    drawOpPicks();
+    drawWriters();
     drawCats();
     drawPeople();
     drawShows();
+    drawPrYears();
     drawPairs();
     loadShots();
     say('');

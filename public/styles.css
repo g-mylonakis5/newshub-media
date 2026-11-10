@@ -5858,6 +5858,130 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
 }
 
 
+/* Η υπογραφή του άρθρου είναι σύνδεσμος προς όλα τα άρθρα του
+   δημοσιογράφου. Υπογραμμίζεται διακριτικά: μέσα σε γραμμή με
+   ημερομηνία και χρόνο ανάγνωσης, ένα σκέτο χρώμα δεν διαβάζεται ως
+   «πατιέται». */
+.art-by{
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+.art-by:hover{ color: var(--text); text-decoration-color: currentColor; }
+
+
+/* ---- Απόψεις ----
+ *
+ * Αδελφό κουτί του Must read, όχι αντίγραφο: ίδιο πλαίσιο και ίδιο
+ * σήμα — η προέλευση είναι η ίδια και φεύγει στο ίδιο domain — αλλά
+ * πιο ήσυχο. Η κόκκινη λωρίδα λεπταίνει στο μισό και το κόκκινο φόντο
+ * φεύγει: δύο γεμάτα κόκκινα κουτιά στη σειρά θα μάλωναν μεταξύ τους
+ * και θα φώναζαν πιο δυνατά από το πρωτοσέλιδο.
+ *
+ * Το χρώμα της ενότητας (--t-apopseis) μπαίνει μόνο ως διακριτικό
+ * υπόβαθρο στην κορυφή, ώστε να ξεχωρίζει χωρίς καινούργιο χρώμα στην
+ * παλέτα.
+ */
+.apop{
+  margin-top: -1.5rem;          /* κουμπώνει κάτω από το Must read */
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--t-apopseis) 55%, transparent),
+      rgba(0, 0, 0, 0) 200px),
+    var(--surface);
+}
+
+.apop::before{ height: 2px; }
+
+/* Η λέξη γράφεται ανάποδα από το Must read: εκεί το χρώμα πέφτει στο
+   δεύτερο μισό («read»), εδώ στην κατάληξη («ψεις»). Ίδιο ύφος, άλλος
+   ρυθμός — φαίνεται με μια ματιά ότι είναι άλλη ενότητα. */
+.apop-word em{ color: var(--news); }
+
+.apop-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 1.5rem var(--gap);
+}
+
+.apop-link{
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  color: inherit;
+  text-decoration: none;
+}
+
+.apop-face{
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+  background: var(--line);
+}
+
+.apop-face img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Τα πορτρέτα τους είναι τραβηγμένα σε διαφορετικές εποχές και
+     καδραρίσματα· το πρόσωπο κάθεται σχεδόν πάντα στο πάνω μισό. */
+  object-position: 50% 25%;
+}
+
+.apop-face .avatar{ width: 100%; height: 100%; font-size: 1.4rem; }
+
+.apop-text{ display: block; min-width: 0; }
+
+.apop-name{
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.apop-title{
+  margin: 0 0 0.45rem;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.apop-meta{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* Το βελάκι λέει «φεύγεις από εδώ». Ίδιο σημάδι με τους εξωτερικούς
+   συνδέσμους του μενού, ώστε να σημαίνει παντού το ίδιο. */
+.apop-meta i{ font-style: normal; opacity: 0.7; }
+
+.apop-link:hover .apop-title{ color: var(--news-hover); }
+
+@media (max-width: 700px){
+  .apop{ margin-top: 2rem; }
+}
+
+
 /* ---- «Συνέχισε όπου έμεινες» ----
  *
  * Η μόνη ενότητα που δεν είναι ίδια για όλους: τη γεμίζει ο browser
