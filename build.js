@@ -960,6 +960,10 @@ function itemFromEpisode(ep){
 function itemFromVideo(v){
   return {
     kind: 'video',
+    // Ο κωδικός του YouTube. Χρειάζεται για να πιάνει η sameItem() όταν
+    // ο δημοσιογράφος καρφιτσώνει βίντεο από το διαχειριστικό: χωρίς
+    // αυτόν το it.id ήταν «undefined» και η επιλογή του χανόταν σιωπηλά.
+    id: v.id,
     href: videoUrl(v),
     external: false,                // παίζει στη δική μας σελίδα, με embed
     label: categoriesFor(v.id, v.title)[0] || '',
@@ -5571,6 +5575,43 @@ ${intro(episodes[0], videos[0])}`,
   // Τα λογότυπα ζουν στο public/shows/ — ανεβαίνουν στο git, δεν παράγονται.
 
   writeIfChanged(path.join(PUBLIC_DIR, 'index.html'), html); //writes the generated HTML to the index.html file
+
+  // Ποια είναι ΟΝΤΩΣ τα «Τελευταία» αυτή τη στιγμή — για το διαχειριστικό.
+  //
+  // Το διαχειριστικό δεν μπορεί να το υπολογίσει μόνο του: η επιλογή
+  // εδώ αγνοεί τα βίντεο με δίδυμο podcast, βάζει πρώτα τα δικά μας
+  // άρθρα και κρατά έξω το πρωτοσέλιδο. Μια πρόβλεψη που πέφτει έξω
+  // είναι χειρότερη από καθόλου πρόβλεψη, οπότε γράφουμε την αλήθεια.
+  //
+  // Χωρίς ώρα μέσα: θα άλλαζε σε κάθε build και θα λέρωνε το git χωρίς
+  // να έχει αλλάξει τίποτα στο περιεχόμενο.
+  const pinnedHrefs = new Set(pinned.map((it) => it.href));
+  const shown = flow.filter((it) => !it.extra);
+
+  // Και λίγα ρεφενέ από κάτω: όταν ο δημοσιογράφος βγάλει κάτι με το ✕,
+  // η θέση που αδειάζει πρέπει να γεμίσει με ΑΥΤΟ που θα έβαζε το site —
+  // αλλιώς το διαχειριστικό θα ξαναέλεγε «1 θέση με τα πιο πρόσφατα» και
+  // θα χανόταν η εικόνα των εννιά.
+  const shownHrefs = new Set(shown.map((it) => it.href));
+  const reserve = recent
+    .filter((it) => !shownHrefs.has(it.href) && !onTop.has(it.href))
+    .slice(0, 6);
+
+  const flowRow = (it, extra) => Object.assign({
+    kind: it.kind,
+    href: it.href,
+    title: it.title,
+    who: it.name || it.label || '',
+    image: it.image || '',
+    date: it.date,
+    pinned: pinnedHrefs.has(it.href),
+  }, extra);
+
+  writeIfChanged(path.join(PUBLIC_DIR, 'flow.json'), JSON.stringify({
+    slots: FLOW_VISIBLE,
+    items: shown.map((it) => flowRow(it))
+      .concat(reserve.map((it) => flowRow(it, { reserve: true }))),
+  }, null, 2));
   writeIfChanged(path.join(PUBLIC_DIR, 'guests.html'), guestsIndexPage(groups));
   writeIfChanged(path.join(PUBLIC_DIR, 'search.html'), searchPage(episodes, catGroups));
   writeIfChanged(path.join(PUBLIC_DIR, 'shows.html'), showsIndexPage(showGroups));
