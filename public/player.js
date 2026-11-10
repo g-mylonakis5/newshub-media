@@ -686,13 +686,19 @@
     // ε) Στη λίστα μου
     var save = e.target.closest('.act-save');
     if (save) {
-      var view2 = document.querySelector('[data-player-view]');
-      var id = view2 ? view2.dataset.id : location.pathname;
-      var list = [];
-      try { list = JSON.parse(localStorage.getItem('saved') || '[]'); } catch (e2) {}
-      var at = list.indexOf(id);
-      if (at === -1) list.push(id); else list.splice(at, 1);
-      try { localStorage.setItem('saved', JSON.stringify(list)); } catch (e3) {}
+      listaAllaxe(save);
+      return;
+    }
+
+    // ε2) Το ✕ πάνω σε κάρτα της λίστας. Μέσα σε <a>, οπότε χωρίς
+    // preventDefault το πάτημα θα άνοιγε και το επεισόδιο.
+    var vgale = e.target.closest('[data-lista-vgale]');
+    if (vgale) {
+      e.preventDefault();
+      listaGrapse(listaDiavase().filter(function (x) {
+        return x.id !== vgale.getAttribute('data-lista-vgale');
+      }));
+      listaDeixe();
       markSaved();
       return;
     }
@@ -719,15 +725,153 @@
     }
   });
 
+  // ---------- «Η λίστα μου» ----------
+  //
+  // Ό,τι κρατάει ο επισκέπτης για μετά. Ζει δίπλα στο «synexeia» και με
+  // την ίδια μορφή εγγραφής, γιατί ζωγραφίζεται με τις ίδιες κάρτες.
+  //
+  // Παλιά κρατιόταν ΜΟΝΟ ο κωδικός, στο κλειδί «saved». Από αυτόν δεν
+  // βγαίνει ούτε τίτλος ούτε εξώφυλλο ούτε διεύθυνση, οπότε δεν υπήρχε
+  // τρόπος να φανεί πουθενά — το κουμπί άναβε και τελείωνε εκεί. Το
+  // παλιό κλειδί μένει στον browser όποιου το είχε και δεν διαβάζεται
+  // πια: δεν έχει τίποτα μέσα που να μπορούμε να δείξουμε.
+  var LISTA_KEY = 'lista';
+  var LISTA_MAX = 50;
+
+  function listaDiavase() {
+    try {
+      var l = JSON.parse(localStorage.getItem(LISTA_KEY) || '[]');
+      return Array.isArray(l) ? l.filter(function (x) { return x && x.id; }) : [];
+    } catch (e) { return []; }
+  }
+
+  function listaGrapse(list) {
+    try {
+      localStorage.setItem(LISTA_KEY, JSON.stringify(list.slice(0, LISTA_MAX)));
+    } catch (e) { /* γεμάτος χώρος ή ιδιωτική περιήγηση */ }
+  }
+
+  // Η όψη που αφορά ΑΥΤΟ το κουμπί.
+  //
+  // Σε ένα άρθρο μπορεί να υπάρχουν δύο ενσωματωμένα επεισόδια: με
+  // σκέτο querySelector θα σωζόταν πάντα το πρώτο, όποιο κι αν πάτησε
+  // ο αναγνώστης.
+  function listaOpsi(btn) {
+    var kouti = btn && btn.closest('.episode-main, .art-embed-play, .strip');
+    return (kouti && kouti.querySelector('[data-player-view]'))
+      || (kouti && kouti.parentNode && kouti.parentNode.querySelector('[data-player-view]'))
+      || document.querySelector('[data-player-view]');
+  }
+
+  function listaAllaxe(btn) {
+    var view = listaOpsi(btn);
+    if (!view || !view.dataset.id) return;
+
+    var id = view.dataset.id;
+    var list = listaDiavase();
+    var meta = list.filter(function (x) { return x.id !== id; });
+
+    // Ήταν ήδη μέσα — το πάτημα το βγάζει.
+    if (meta.length !== list.length) {
+      listaGrapse(meta);
+    } else {
+      meta.unshift({
+        id: id,
+        t: view.dataset.title || '',
+        s: view.dataset.show || '',
+        a: view.dataset.art || '',
+        h: synApolyto(view.dataset.href || location.pathname),
+        w: Date.now()
+      });
+      listaGrapse(meta);
+    }
+
+    markSaved();
+    listaDeixe();
+  }
+
+  function listaDeixe() {
+    var box = document.querySelector('[data-lista]');
+    if (!box) return;                       // δεν είμαστε στην αρχική
+
+    var grid = box.querySelector('[data-lista-grid]');
+    if (!grid) return;
+
+    var list = listaDiavase().filter(function (x) { return x.h; });
+    if (!list.length) { box.hidden = true; return; }
+
+    grid.replaceChildren.apply(grid, list.map(listaKarta));
+    box.hidden = false;
+  }
+
+  // Ίδια κάρτα με το «Συνέχισε», χωρίς μπάρα προόδου — εδώ δεν υπάρχει
+  // θέση να δείξουμε — και με ένα ✕ για να βγαίνει από τη λίστα.
+  function listaKarta(x) {
+    var a = document.createElement('a');
+    a.className = 'syn-card';
+    a.href = x.h;
+
+    var media = document.createElement('span');
+    media.className = 'syn-media';
+
+    if (x.a) {
+      var img = document.createElement('img');
+      img.className = 'syn-art';
+      img.src = x.a;
+      img.alt = '';
+      img.loading = 'lazy';
+      img.width = 300;
+      img.height = 300;
+      media.appendChild(img);
+    } else {
+      var kena = document.createElement('span');
+      kena.className = 'syn-art syn-art--empty';
+      media.appendChild(kena);
+    }
+
+    a.appendChild(media);
+
+    var text = document.createElement('span');
+    text.className = 'syn-text';
+
+    if (x.s) {
+      var show = document.createElement('span');
+      show.className = 'syn-show';
+      show.textContent = x.s;
+      text.appendChild(show);
+    }
+
+    var tit = document.createElement('span');
+    tit.className = 'syn-name';
+    tit.textContent = x.t || 'Χωρίς τίτλο';
+    text.appendChild(tit);
+
+    a.appendChild(text);
+
+    var vgale = document.createElement('button');
+    vgale.type = 'button';
+    vgale.className = 'syn-vgale';
+    vgale.setAttribute('data-lista-vgale', x.id);
+    vgale.setAttribute('aria-label', 'Αφαίρεση από τη λίστα μου');
+    vgale.textContent = '✕';
+    a.appendChild(vgale);
+
+    return a;
+  }
+
   function markSaved() {
-    var btn = document.querySelector('.act-save');
-    var view = document.querySelector('[data-player-view]');
-    if (!btn || !view) return;
-    var list = [];
-    try { list = JSON.parse(localStorage.getItem('saved') || '[]'); } catch (e) {}
-    var on = list.indexOf(view.dataset.id) !== -1;
-    btn.classList.toggle('is-on', on);
-    btn.textContent = on ? '✓ Στη λίστα μου' : '+ Στη λίστα μου';
+    var btns = document.querySelectorAll('.act-save');
+    var list = listaDiavase();
+
+    for (var i = 0; i < btns.length; i++) {
+      var view = listaOpsi(btns[i]);
+      if (!view) continue;
+
+      var id = view.dataset.id;
+      var on = list.some(function (x) { return x.id === id; });
+      btns[i].classList.toggle('is-on', on);
+      btns[i].textContent = on ? '✓ Στη λίστα μου' : '+ Στη λίστα μου';
+    }
   }
 
   // ---------- συμβάντα του ήχου ----------
@@ -927,6 +1071,8 @@
   // Και μετά από πλοήγηση χωρίς φόρτωση: η αρχική μπορεί να ξαναέρθει
   // μπροστά μας με άλλο περιεχόμενο και άλλο (κρυφό) κουτί.
   document.addEventListener('selida:allaxe', synDeixe);
+  document.addEventListener('selida:allaxe', listaDeixe);
+  document.addEventListener('selida:allaxe', markSaved);
 
   // Η επιστροφή με το κουμπί «πίσω» του browser.
   //
@@ -939,7 +1085,7 @@
   // Το persisted ξεχωρίζει την επαναφορά από την κανονική φόρτωση,
   // ώστε να μη ζωγραφίζουμε δεύτερη φορά για το τίποτα.
   window.addEventListener('pageshow', function (e) {
-    if (e.persisted) synDeixe();
+    if (e.persisted) { synDeixe(); listaDeixe(); }
   });
 
   // ---------- ξεκίνημα ----------
@@ -961,6 +1107,7 @@
   markSaved();
   render();
   synDeixe();
+  listaDeixe();
 
   // ---------- ο αριθμός του αρχείου που ανεβαίνει ----------
   //

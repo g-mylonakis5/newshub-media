@@ -752,6 +752,56 @@ function waveMask(seed){
   return `url(data:image/svg+xml,${data})`;
 }
 
+// Ο player του επεισοδίου, σε ΜΙΑ θέση.
+//
+// Ήταν γραμμένος τρεις φορές — σελίδα επεισοδίου, σελίδα βίντεο με
+// δίδυμο podcast, ενσωματωμένο επεισόδιο μέσα σε άρθρο — και κάθε
+// αλλαγή έπρεπε να γίνει τρεις φορές σωστά.
+//
+// Η διάταξη ακολουθεί τον player του Buzzsprout: εξώφυλλο αριστερά,
+// από πάνω δεξιά το όνομα της εκπομπής, μετά το στρογγυλό κουμπί δίπλα
+// στον τίτλο, η κυματομορφή σε όλο το πλάτος και οι χρόνοι από κάτω.
+//
+// Το μόνο που ΔΕΝ αντιγράφουμε είναι τα ±15: ο Buzzsprout δεν τα έχει,
+// αλλά εμείς τα είχαμε και αφαιρούνται μόνο αν το ζητήσει κάποιος —
+// μπαίνουν στη γραμμή των χρόνων, όπου δεν ανταγωνίζονται το ▶.
+function playerView({ id, src, title, show, art, href, indent = 8 }){
+  const pad = ' '.repeat(indent);
+  const p = (n, s) => `${' '.repeat(indent + n)}${s}`;
+
+  return `${pad}<div class="player" data-player-view
+${p(5, `data-id="${esc(id)}"`)}
+${p(5, `data-src="${esc(src)}"`)}
+${p(5, `data-title="${esc(title)}"`)}
+${p(5, `data-show="${esc(show || '')}"`)}
+${p(5, `data-art="${esc(art || '')}"`)}
+${p(5, `data-href="${esc(href)}">`)}
+${p(2, art
+    ? `<img class="player-art" src="${esc(art)}" alt="" loading="lazy">`
+    : '<span class="player-art player-art--blank"></span>')}
+${p(2, '<div class="player-body">')}
+${show ? `${p(4, `<p class="player-show">${esc(show)}</p>`)}\n` : ''}${p(4, '<div class="player-top">')}
+${p(6, '<button type="button" class="player-play" data-player="toggle" aria-label="Αναπαραγωγή">▶</button>')}
+${p(6, `<p class="player-title">${esc(title)}</p>`)}
+${p(4, '</div>')}
+${p(4, `<div class="player-bar" data-player="seek" role="slider" tabindex="0" aria-label="Θέση" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="--wave: ${waveMask(id)}">`)}
+${p(6, '<div class="player-fill"></div>')}
+${p(4, '</div>')}
+${p(4, '<div class="player-foot">')}
+${p(6, '<span class="player-time">')}
+${p(8, '<span class="player-now" data-player-now>0:00</span>')}
+${p(8, '<span class="player-sep">|</span>')}
+${p(8, '<span class="player-total" data-player-total>--:--</span>')}
+${p(6, '</span>')}
+${p(6, '<span class="player-jump">')}
+${p(8, '<button type="button" class="player-skip" data-player="skip" data-by="-15" aria-label="15 δευτερόλεπτα πίσω">−15</button>')}
+${p(8, '<button type="button" class="player-skip" data-player="skip" data-by="15" aria-label="15 δευτερόλεπτα μπροστά">+15</button>')}
+${p(6, '</span>')}
+${p(4, '</div>')}
+${p(2, '</div>')}
+${pad}</div>`;
+}
+
 function siteFooter(depth = 0){
   const up = depth === 0 ? '' : '../';
   const year = new Date().getFullYear();
@@ -1664,22 +1714,14 @@ function videoPage(v, category){
   ].filter(Boolean).join(' · ');
 
   const player = twin
-    ? `        <div class="player" data-player-view
-             data-id="${twin.id}"
-             data-src="${twin.audio}"
-             data-title="${esc(decode(twin.headline))}"
-             data-show="${esc(showLabel(v.show))}"
-             data-art="${twin.image || ''}"
-             data-href="../${episodeUrl(twin)}">
-          <button type="button" class="player-skip" data-player="skip" data-by="-15" aria-label="15 δευτερόλεπτα πίσω">−15</button>
-          <button type="button" class="player-play" data-player="toggle" aria-label="Αναπαραγωγή">▶</button>
-          <button type="button" class="player-skip" data-player="skip" data-by="15" aria-label="15 δευτερόλεπτα μπροστά">+15</button>
-          <span class="player-now" data-player-now>0:00</span>
-          <div class="player-bar" data-player="seek" role="slider" tabindex="0" aria-label="Θέση" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="--wave: ${waveMask(twin.id)}">
-            <div class="player-fill"></div>
-          </div>
-          <span class="player-total" data-player-total>--:--</span>
-        </div>`
+    ? playerView({
+      id: twin.id,
+      src: twin.audio,
+      title: decode(twin.headline),
+      show: showLabel(v.show),
+      art: twin.image || '',
+      href: `../${episodeUrl(twin)}`,
+    })
     : '';
 
   const toggle = twin
@@ -1878,22 +1920,15 @@ function articleBodyHtml(body){
             const show = episodeShow(ep);
             return `        <div class="art-embed-play">
 ${card}
-          <div class="player" data-player-view
-               data-id="${esc(ep.id)}"
-               data-src="${esc(ep.audio)}"
-               data-title="${esc(decode(ep.headline || ep.title))}"
-               data-show="${esc(show ? showLabel(show) : '')}"
-               data-art="${esc(ep.image || '')}"
-               data-href="../${episodeUrl(ep)}">
-            <button type="button" class="player-skip" data-player="skip" data-by="-15" aria-label="15 δευτερόλεπτα πίσω">−15</button>
-            <button type="button" class="player-play" data-player="toggle" aria-label="Αναπαραγωγή">▶</button>
-            <button type="button" class="player-skip" data-player="skip" data-by="15" aria-label="15 δευτερόλεπτα μπροστά">+15</button>
-            <span class="player-now" data-player-now>0:00</span>
-            <div class="player-bar" data-player="seek" role="slider" tabindex="0" aria-label="Θέση" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="--wave: ${waveMask(ep.id)}">
-              <div class="player-fill"></div>
-            </div>
-            <span class="player-total" data-player-total>--:--</span>
-          </div>
+${playerView({
+              id: ep.id,
+              src: ep.audio,
+              title: decode(ep.headline || ep.title),
+              show: show ? showLabel(show) : '',
+              art: ep.image || '',
+              href: `../${episodeUrl(ep)}`,
+              indent: 10,
+            })}
         </div>`;
           }
 
@@ -2063,7 +2098,11 @@ ${articleBodyHtml(a.body)}
 // Η σειρά μετράει: από την πιο ειδική προς την πιο γενική. Όταν ένας
 // τίτλος ταιριάζει σε πολλές, κερδίζει η πρώτη.
 const CATEGORIES = [
-  ['Agronews',    ['αγροτ', 'καλλιεργ', 'ελαιολαδ', 'αμπελ', 'κτηνοτροφ', 'γεωργ']],
+  // Το «αμπελ» ΜΟΝΟ σε αρχή λέξης. Μέσα σε λέξη δεν υπάρχει αμπέλι:
+  // υπάρχει «ΚαρΑΜΠΕΛιάς». Δες και το θεμαKeimeno() πιο κάτω — εκεί
+  // φεύγει το όνομα, εδώ κλείνει η ίδια τρύπα και για ό,τι δεν δηλώνει
+  // καλεσμένο, π.χ. ένα βίντεο με το όνομα μέσα στον τίτλο.
+  ['Agronews',    ['αγροτ', 'καλλιεργ', 'ελαιολαδ', ' αμπελ', 'κτηνοτροφ', 'γεωργ']],
   ['Tech-Hub',    ['τεχνολογ', 'ψηφιακ', 'τεχνητη νοημοσυν', 'διαδικτυ', 'λογισμικ']],
   // Το «οφη » χρειάζεται κενό ΚΑΙ μπροστά: χωρίς αυτό έπιανε κάθε λέξη
   // που τελειώνει σε -οφη — «καταστροφή η», «επιστροφή», «διατροφή».
@@ -2117,14 +2156,60 @@ function featuredTopics(){
 // Η «Κρήτη» είναι τόπος, όχι θέμα — ένα επεισόδιο για την υγεία στο ΠΑΓΝΗ
 // είναι και Υγεία και Κρήτη. Με μία μόνο κατηγορία, 331 επεισόδια έχαναν
 // την Κρήτη τους επειδή κέρδιζε κάτι πιο ειδικό.
-function suggestCategories(title){
-  // ΟΧΙ matchKey εδώ: εκείνο κόβει στους 60 χαρακτήρες, γιατί φτιάχτηκε
-  // για να ταυτοποιεί τίτλους. Για κατηγορίες θέλουμε ΟΛΟΝ τον τίτλο —
-  // αλλιώς χάνονται λέξεις που βρίσκονται στο δεύτερο μισό.
-  const hay = ' ' + decode(title).toLowerCase()
+// ΟΧΙ matchKey εδώ: εκείνο κόβει στους 60 χαρακτήρες, γιατί φτιάχτηκε
+// για να ταυτοποιεί τίτλους. Για κατηγορίες θέλουμε ΟΛΟΝ τον τίτλο —
+// αλλιώς χάνονται λέξεις που βρίσκονται στο δεύτερο μισό.
+function katWords(s){
+  return String(s == null ? '' : s).toLowerCase()
     .normalize('NFD').replace(/[̀-ͯ]/g, '')
     .replace(/[^a-zα-ω0-9]+/gi, ' ')
-    .trim() + ' ';
+    .trim()
+    .split(' ')
+    .filter(Boolean);
+}
+
+// Μοιάζει με όνομα ανθρώπου αυτό που γράφτηκε πριν την άνω τελεία;
+//
+// Μόνο για τα βίντεο: εκείνα δεν έχουν πεδίο καλεσμένου, μόνο τίτλο
+// «Όνομα: θέμα». Κριτήρια σφιχτά επίτηδες — λίγες λέξεις, όλες με
+// κεφαλαίο αρχικό ή αρχικό γράμμα με τελεία, χωρίς αριθμούς. Ένας
+// τίτλος σαν «Το πόκερ της Μέσης Ανατολής: οι άσσοι» ΔΕΝ περνάει,
+// οπότε δεν χάνουμε θέμα από το πρώτο μισό.
+function moiazeiOnoma(s){
+  const kommatia = String(s).split(/[\s\-–]+/).filter(Boolean);
+  if (!kommatia.length || kommatia.length > 5) return false;
+  return kommatia.every((w) => /^[Α-ΩΆΈΉΊΌΎΏA-Z][^\s]*$/.test(w));
+}
+
+// Ο τίτλος ΧΩΡΙΣ το όνομα του καλεσμένου.
+//
+// Το όνομα δεν είναι θέμα, και μέσα του κρύβονται ρίζες κατηγοριών:
+// το «Γιώργος ΚαρΑΜΠΕΛιάς» έπιανε το «αμπελ» και 43 συζητήσεις για
+// γεωπολιτική και ιστορία έμπαιναν στο Agronews — η σελίδα του έγραφε
+// «Agronews 26». Ίδιο είδος σφάλματος με το « οφη » στα Αθλητικά:
+// ψάχναμε ρίζες μέσα σε κείμενο που δεν μιλάει για το θέμα.
+function themaKeimeno(title, guest){
+  const words = katWords(decode(title));
+
+  // 1) Ρητό όνομα από το feed — το ξέρουμε, το βγάζουμε.
+  if (guest) {
+    const out = new Set(katWords(guest).filter((w) => w.length >= 4));
+    if (out.size) return words.filter((w) => !out.has(w));
+    return words;
+  }
+
+  // 2) Βίντεο: μόνο «Όνομα: θέμα», και μόνο όταν μοιάζει με όνομα.
+  const raw = decode(title);
+  const at = raw.indexOf(':');
+  if (at > 0 && at <= 45 && moiazeiOnoma(raw.slice(0, at))) {
+    return katWords(raw.slice(at + 1));
+  }
+
+  return words;
+}
+
+function suggestCategories(title, guest){
+  const hay = ' ' + themaKeimeno(title, guest).join(' ') + ' ';
   return CATEGORIES
     .filter(([, words]) => words.some((w) => hay.includes(w)))
     .map(([name]) => name);
@@ -2148,20 +2233,21 @@ function curation(){
 // η συνάρτηση καλείται δεκάδες χιλιάδες φορές αντί για μία ανά επεισόδιο.
 const catCache = new Map();
 
-function categoriesFor(id, title){
+function categoriesFor(id, title, guest){
   if (catCache.has(id)) return catCache.get(id);
 
   const picked = curation().categories && curation().categories[id];
   const result = picked
     ? (Array.isArray(picked) ? picked : [picked])
-    : suggestCategories(title);
+    : suggestCategories(title, guest);
 
   catCache.set(id, result);
   return result;
 }
 
+// Το επεισόδιο ξέρει ποιος μίλησε — δες themaKeimeno().
 function episodeCategories(ep){
-  return categoriesFor(ep.id, ep.title);
+  return categoriesFor(ep.id, ep.title, ep.guest);
 }
 
 // Σύντομα ονόματα ΜΟΝΟ για την ετικέτα της κάρτας. Με κεφαλαία και αραιά
@@ -2425,9 +2511,11 @@ function showArtMap(){
       for (const [show, v] of Object.entries(raw.art || {})) {
         // Δέχεται και σκέτο όνομα αρχείου, για να μη σπάσει αν κάποιος
         // γράψει γρήγορα «"Εκπομπή": "αρχείο"» χωρίς τα υπόλοιπα.
+        // Το url είναι η φωτογραφία που ανέβηκε από το διαχειριστικό·
+        // το file είναι τα έτοιμα webp του public/shows/ σε τρία μεγέθη.
         artMap[matchKey(show)] = typeof v === 'string'
           ? { file: v, titled: true }
-          : { file: v.file, titled: v.titled !== false };
+          : { file: v.file, url: v.url || '', titled: v.titled !== false };
       }
     } catch (err) {
       if (err.code !== 'ENOENT') {
@@ -2443,6 +2531,17 @@ function showArtMap(){
 function showArtOf(name){
   const m = showArtMap();
   return m[matchKey(showName(name))] || m[matchKey(name)] || null;
+}
+
+// Η εικόνα της εκπομπής για το θολό υπόβαθρο της κορυφής. Κενό όταν
+// δεν υπάρχει αφίσα — τότε η σελίδα πέφτει στο εξώφυλλο επεισοδίου.
+function showHeroSrc(name){
+  const art = showArtOf(name);
+  if (!art) return '';
+  // Απόλυτη διαδρομή για την ανεβασμένη: το /uploads/ σερβίρεται από τη
+  // ρίζα και διαβάζεται ίδια από κάθε βάθος.
+  if (art.url) return art.url;
+  return art.file ? `../shows/${art.file}-800.webp` : '';
 }
 
 // Έχει ο τίτλος ψηθεί μέσα στην εικόνα; Τότε δεν τον ξαναγράφουμε.
@@ -2545,6 +2644,18 @@ function showArtImg(name, { depth = 0, sizes, cls = '', eager = false, minWidth 
   if (!art) return '';
 
   const up = depth === 0 ? '' : '../';
+
+  // Ανεβασμένη φωτογραφία: ένα αρχείο, ένα μέγεθος. Δεν φτιάχνουμε
+  // srcset από το πουθενά — θα δηλώναμε πλάτη που δεν υπάρχουν — και
+  // δεν ξέρουμε διαστάσεις, οπότε ούτε width/height. Οι έτοιμες
+  // αφίσες από κάτω κρατούν και τα τρία μεγέθη τους.
+  if (art.url) {
+    return `<img${cls ? ` class="${cls}"` : ''} src="${esc(art.url)}"
+            sizes="${sizes}" alt="${esc(showName(name))}"${eager ? '' : ' loading="lazy"'}>`;
+  }
+
+  if (!art.file) return '';
+
   const src = `${up}shows/${art.file}`;
 
   // Το μεγάλο αρχείο ορίζει σχήμα και αναλογία· τα -800/-400 είναι
@@ -3638,7 +3749,7 @@ function showPage(group, n = 1){
     : sectionHead('Εκπομπή', name, pageCountLine(total, n, pages), base);
 
   const body = `${siteHeader(1)}
-${pageHero(art ? `../shows/${showArtOf(group.name).file}-800.webp` : (pic ? pic.image : ''))}
+${pageHero(showHeroSrc(group.name) || (pic ? pic.image : ''))}
 
 ${breadcrumb([
     { label: 'Αρχική', href: 'index.html' },
@@ -3747,6 +3858,27 @@ function resumeSection(){
       <p class="syn-note">Μόνο σε αυτή τη συσκευή</p>
     </div>
     <div class="syn-grid" data-synexeia-grid></div>
+  </section>`;
+}
+
+// ---- «Η λίστα μου» ----
+//
+// Ίδια λογική με το «Συνέχισε όπου έμεινες», και επίτηδες από κάτω του:
+// το ένα λέει «τι άφησες στη μέση», το άλλο «τι κράτησες για μετά».
+// Κρυφό από το build για τον ίδιο λόγο — κανένας άδειος τίτλος σε
+// καινούριο επισκέπτη ή σε ρομπότ.
+//
+// Το κουμπί «+ Στη λίστα μου» κρατούσε μόνο τον κωδικό του επεισοδίου,
+// χωρίς τίτλο, εξώφυλλο ή διεύθυνση — δηλαδή τίποτα που να μπορεί να
+// ζωγραφιστεί. Γι' αυτό «δεν δούλευε»: ο κόσμος το πατούσε και δεν
+// έβλεπε τίποτα πουθενά.
+function listaSection(){
+  return `  <section class="syn lista" data-lista hidden aria-labelledby="lista-head">
+    <div class="syn-head">
+      <h2 class="syn-mark" id="lista-head">Η λίστα μου</h2>
+      <p class="syn-note">Μόνο σε αυτή τη συσκευή</p>
+    </div>
+    <div class="syn-grid" data-lista-grid></div>
   </section>`;
 }
 
@@ -5218,22 +5350,14 @@ ${breadcrumb([
       <div class="episode-main">
 ${stage}
 
-        <div class="player" data-player-view
-             data-id="${ep.id}"
-             data-src="${ep.audio}"
-             data-title="${title}"
-             data-show="${esc(showLabel(show) || 'Podcast')}"
-             data-art="${ep.image || ''}"
-             data-href="${path.basename(episodeUrl(ep))}">
-          <button type="button" class="player-skip" data-player="skip" data-by="-15" aria-label="15 δευτερόλεπτα πίσω">−15</button>
-          <button type="button" class="player-play" data-player="toggle" aria-label="Αναπαραγωγή">▶</button>
-          <button type="button" class="player-skip" data-player="skip" data-by="15" aria-label="15 δευτερόλεπτα μπροστά">+15</button>
-          <span class="player-now" data-player-now>0:00</span>
-          <div class="player-bar" data-player="seek" role="slider" tabindex="0" aria-label="Θέση" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="--wave: ${waveMask(ep.id)}">
-            <div class="player-fill"></div>
-          </div>
-          <span class="player-total" data-player-total>--:--</span>
-        </div>
+${playerView({
+    id: ep.id,
+    src: ep.audio,
+    title: decode(ep.headline),
+    show: showLabel(show) || 'Podcast',
+    art: ep.image || '',
+    href: path.basename(episodeUrl(ep)),
+  })}
 
         <div class="strip">
 ${toggle}
@@ -5531,6 +5655,11 @@ ${/* Αμέσως μετά το Must read, και πριν τα θέματα: ό
      όποιον δεν άφησε τίποτα η ενότητα δεν υπάρχει καθόλου, οπότε η
      εγκεκριμένη διάταξη μένει ανέπαφη για τον καινούριο επισκέπτη. */ ''}
 ${resumeSection()}
+
+${/* Αμέσως μετά: «τι άφησες στη μέση» και «τι κράτησες για μετά»
+     είναι η ίδια κουβέντα, και οι δύο ενότητες εμφανίζονται μόνο σε
+     όποιον έχει ήδη ιστορικό. */ ''}
+${listaSection()}
 
   <div class="page-cols">
     <div class="page-main">
