@@ -918,6 +918,43 @@
     return true;
   }
 
+  // Η έκδοση των αρχείων της σελίδας, όπως τη γράφει το build:
+  // «styles.css?v=d570d19b». Αλλάζει μόνο όταν αλλάξει το περιεχόμενό
+  // τους.
+  //
+  // ΜΟΝΟ το όνομα και ο κωδικός, χωρίς τη διαδρομή: η αρχική γράφει
+  // «styles.css?v=x» και η σελίδα επεισοδίου «../styles.css?v=x» για
+  // το ίδιο ακριβώς αρχείο. Με ολόκληρη τη διαδρομή κάθε μετάβαση
+  // ανάμεσα σε διαφορετικά βάθη θα φαινόταν αλλαγή έκδοσης, και η
+  // πλοήγηση χωρίς διακοπή δεν θα δούλευε ποτέ — δηλαδή ο ήχος θα
+  // κοβόταν σε κάθε κλικ.
+  function ekdosi(root) {
+    var map = {};
+    var links = root.querySelectorAll('link[rel="stylesheet"], script[src]');
+    for (var i = 0; i < links.length; i++) {
+      var src = links[i].getAttribute('href') || links[i].getAttribute('src') || '';
+      var at = src.indexOf('?v=');
+      if (at < 0) continue;
+      map[src.slice(0, at).split('/').pop()] = src.slice(at + 3);
+    }
+    return map;
+  }
+
+  // Άλλαξε κάποιο αρχείο που έχουν ΚΑΙ ΟΙ ΔΥΟ σελίδες;
+  //
+  // Μόνο τα κοινά: η αρχική φορτώνει και το roi.js, η σελίδα
+  // επεισοδίου όχι. Αν τα συγκρίναμε όλα, κάθε μετάβαση αρχική →
+  // επεισόδιο θα φαινόταν αλλαγή έκδοσης και θα ξαναφόρτωνε πάντα,
+  // δηλαδή θα σκότωνε τον ήχο σε κάθε κλικ.
+  function alliExdosi(a, b) {
+    for (var name in a) {
+      if (Object.prototype.hasOwnProperty.call(a, name)
+        && Object.prototype.hasOwnProperty.call(b, name)
+        && a[name] !== b[name]) return true;
+    }
+    return false;
+  }
+
   async function go(url, push) {
     var res, html;
     try {
@@ -932,6 +969,22 @@
     var doc = new DOMParser().parseFromString(html, 'text/html');
     var next = doc.getElementById('page');
     if (!next) { location.href = url; return; }
+
+    // ΑΛΛΑΞΕ ΤΟ SITE ΟΣΟ ΗΣΟΥΝ ΜΕΣΑ; Τότε κανονική φόρτωση.
+    //
+    // Εδώ αλλάζει ΜΟΝΟ το #page — το <head> μένει αυτό που κατέβηκε την
+    // πρώτη φορά. Μετά από ανέβασμα νέας έκδοσης, ο επισκέπτης που έχει
+    // ανοιχτή καρτέλα συνεχίζει να πλοηγείται με το ΠΑΛΙΟ styles.css
+    // πάνω σε ΝΕΟ περιεχόμενο: ό,τι ενότητα προστέθηκε μετά βγαίνει
+    // εντελώς άστυλη — γυμνοί σύνδεσμοι και εικόνες σε φυσικό μέγεθος.
+    //
+    // Συνέβη με τις «Απόψεις»: η ενότητα ανέβηκε, και όποιος είχε ήδη
+    // ανοιχτό το site την είδε χωρίς καμία μορφοποίηση.
+    //
+    // Χάνεται ο ήχος σε αυτή τη μία μετάβαση — αλλά μόνο την πρώτη
+    // φορά μετά από κάθε ανέβασμα, και η εναλλακτική είναι σπασμένη
+    // σελίδα.
+    if (alliExdosi(ekdosi(doc), ekdosi(document))) { location.href = url; return; }
 
     var swap = function () {
       pageBox.replaceChildren.apply(pageBox, Array.prototype.slice.call(next.childNodes));
