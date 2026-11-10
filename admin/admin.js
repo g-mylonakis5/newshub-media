@@ -2158,11 +2158,79 @@ function saveOpinions(){
 // Ένα όνομα, ένα πορτρέτο. Το αρχείο γράφεται ΑΜΕΣΩΣ μόλις αλλάξει
 // φωτογραφία — δεν υπάρχει δεύτερο κουμπί «Αποθήκευση» στην ίδια
 // καρτέλα, θα μπερδευόταν με εκείνο της σειράς των απόψεων.
-var wr = { photos: {} };
+var wr = { photos: {}, ipografes: {} };
 
 function wrReady(file){
   wr.photos = (file && typeof file.photos === 'object' && !Array.isArray(file.photos))
     ? file.photos : {};
+  wr.ipografes = (file && typeof file.ipografes === 'object' && !Array.isArray(file.ipografes))
+    ? file.ipografes : {};
+}
+
+// ---- Ποιος υπογράφει ----
+//
+// Το email έρχεται από το Cloudflare Access, μέσω του /api/poios. Το
+// όνομα δίπλα του το έγραψε ο ίδιος, μία φορά, την πρώτη φορά που
+// δημοσίευσε. Από εκεί και πέρα η υπογραφή μπαίνει μόνη της.
+//
+// Τοπικά το email είναι κενό και δεν γίνεται τίποτα από αυτά — μένουν
+// τα κουμπάκια με τα γνωστά ονόματα, που δουλεύουν πάντα.
+var me = { email: '' };
+
+function ipografiMou(){
+  return (me.email && wr.ipografes[me.email]) || '';
+}
+
+// Τα ονόματα που κυκλοφορούν ήδη: όσα υπογράφουν δικά μας άρθρα, και
+// όσα έχουν δηλωθεί από λογαριασμούς. Πατιούνται αντί να γράφονται.
+function ipografesGnostes(){
+  var seen = {};
+
+  (art.list || []).forEach(function (a) {
+    var n = (a.author || '').trim();
+    if (n) seen[n] = true;
+  });
+
+  Object.keys(wr.ipografes).forEach(function (email) {
+    var n = (wr.ipografes[email] || '').trim();
+    if (n) seen[n] = true;
+  });
+
+  return Object.keys(seen).sort(function (x, y) { return x.localeCompare(y, 'el'); });
+}
+
+function drawIpografes(){
+  var box = $('[data-art-ipografes]');
+  if (!box) return;
+
+  var names = ipografesGnostes();
+  var tora = ($('[data-art="author"]').value || '').trim();
+
+  box.innerHTML = names.map(function (n) {
+    return '<button type="button" class="chip' + (n === tora ? ' is-on' : '')
+      + '" data-ipografi="' + esc(n) + '">' + esc(n) + '</button>';
+  }).join('');
+}
+
+// Θυμήσου ποιος είναι, αν δεν το ξέρουμε ήδη.
+//
+// Τρέχει στην αποθήκευση, όχι σε κάθε πληκτρολόγηση: αλλιώς θα
+// κρατούσαμε το «Γιω» του ανθρώπου που σταμάτησε να γράψει.
+//
+// Δεν ξαναγράφει ό,τι υπάρχει ήδη με άλλο όνομα — ο αρχισυντάκτης που
+// ανεβάζει άρθρο για λογαριασμό άλλου δεν πρέπει να αλλάξει τη δική
+// του υπογραφή. Η αλλαγή ονόματος γίνεται από την καρτέλα Απόψεις.
+function thimisouIpografi(onoma){
+  var n = (onoma || '').trim();
+  if (!me.email || !n || wr.ipografes[me.email]) return Promise.resolve();
+
+  wr.ipografes[me.email] = n;
+  return wrSave().catch(function (err) {
+    // Δεν χαλάμε την αποθήκευση του άρθρου γι' αυτό. Το άρθρο σώθηκε·
+    // το πολύ να ξαναγράψει το όνομά του την επόμενη φορά.
+    delete wr.ipografes[me.email];
+    console.warn('Η υπογραφή δεν θυμήθηκε:', err.message);
+  });
 }
 
 // Όλοι όσοι υπογράφουν άποψη, με το πλήθος τους.
@@ -2213,8 +2281,10 @@ function drawWriters(){
   }).join('');
 }
 
+// ΚΑΙ ΤΑ ΔΥΟ μαζί. Το αρχείο γράφεται ολόκληρο κάθε φορά, οπότε αν
+// στείλουμε μόνο τα πορτρέτα, σβήνουμε τις υπογραφές — και αντίστροφα.
 function wrSave(){
-  return api('writers', 'PUT', { photos: wr.photos });
+  return api('writers', 'PUT', { photos: wr.photos, ipografes: wr.ipografes });
 }
 
 function wrSetPhoto(name, url){
@@ -2448,7 +2518,9 @@ function drawArtList(){
 
 function blankArticle(){
   return {
-    id: '', title: '', summary: '', category: CATS[0], author: '',
+    // Η υπογραφή έρχεται έτοιμη από τον λογαριασμό. Αλλάζεται
+    // ελεύθερα — ο εξωτερικός συνεργάτης δεν έχει λογαριασμό.
+    id: '', title: '', summary: '', category: CATS[0], author: ipografiMou(),
     date: new Date().toISOString(), image: '', imageCaption: '',
     status: 'draft', body: [{ type: 'p', text: '' }],
   };
@@ -2551,7 +2623,10 @@ function openArticle(i){
 function fillArticle(){
   $('[data-art="title"]').value = art.open.title || '';
   $('[data-art="category"]').value = art.open.category || CATS[0];
-  $('[data-art="author"]').value = art.open.author || '';
+  // Παλιό άρθρο χωρίς υπογραφή το συμπληρώνουμε κι αυτό: τα πρώτα
+  // άρθρα γράφτηκαν πριν υπάρξει το πεδίο, και χωρίς υπογραφή δεν
+  // αποκτούν ποτέ σελίδα δημοσιογράφου.
+  $('[data-art="author"]').value = art.open.author || ipografiMou();
   $('[data-art="date"]').value = toLocalInput(art.open.date);
   $('[data-art="status"]').value = art.open.status || 'draft';
   $('[data-art="image"]').value = art.open.image || '';
@@ -2565,6 +2640,7 @@ function fillArticle(){
   drawThumb();
   drawBlocks();
   drawTop();
+  drawIpografes();
 }
 
 function closeArticle(){
@@ -2919,6 +2995,8 @@ function saveArticle(){
     // Σώθηκε αληθινά — το δίχτυ δεν χρειάζεται πια, και αν μείνει θα
     // προτείνει παλιό κείμενο την επόμενη φορά.
     draftClear();
+    // Και η υπογραφή, ώστε την επόμενη φορά να μην ξαναγραφτεί.
+    thimisouIpografi(a.author).then(drawIpografes);
     drawArtList();
     // Η λίστα του πρωτοσέλιδου ξέρει πια το νέο ή αλλαγμένο άρθρο.
     state.items = normalize(state.raw.episodes, state.raw.videos, state.raw.news, art.list);
@@ -3309,6 +3387,21 @@ function wireArticles(){
     if (f.dataset.art === 'image') { art.open.image = f.value; drawThumb(); }
     // Πρόχειρο δεν μπαίνει στο πρωτοσέλιδο — το κουτάκι κρύβεται.
     if (f.dataset.art === 'status') drawTop();
+    // Ποιο κουμπάκι είναι αναμμένο ακολουθεί ό,τι γράφεται.
+    if (f.dataset.art === 'author') drawIpografes();
+  });
+
+  // Τα κουμπάκια με τα γνωστά ονόματα.
+  $('[data-art-ipografes]').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-ipografi]');
+    if (!b) return;
+
+    var pedio = $('[data-art="author"]');
+    // Δεύτερο πάτημα στο ίδιο το σβήνει: το άρθρο χωρίς υπογραφή είναι
+    // θεμιτό — π.χ. ανακοίνωση — και χωρίς αυτό δεν ξεπατώνεται.
+    pedio.value = pedio.value.trim() === b.dataset.ipografi ? '' : b.dataset.ipografi;
+    artDirty(true);
+    drawIpografes();
   });
 
   $('[data-art-top]').addEventListener('change', function () {
@@ -4678,6 +4771,11 @@ function boot(){
     // Οι διαφημίσεις. ΑΝΕΚΤΙΚΟ: το αρχείο δεν υπάρχει μέχρι να μπει η
     // πρώτη — και μια καρτέλα διαφημίσεων δεν ρίχνει το διαχειριστικό.
     api('ads').catch(function () { return null; }),
+    // Ποιος είναι συνδεδεμένος. ΑΝΕΚΤΙΚΟ: τοπικά δεν υπάρχει Access,
+    // και η υπογραφή γράφεται με το χέρι όπως πάντα.
+    fetch('/api/poios')
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .catch(function () { return null; }),
   ]).then(function (r) {
     // Το αρχείο μπορεί να μην υπάρχει ακόμα — τότε το API δίνει null.
     var photos = r[12] && typeof r[12] === 'object' ? r[12] : {};
@@ -4697,6 +4795,7 @@ function boot(){
     state.flow = r[13];
     wrReady(r[14]);
     adReady(r[15]);
+    me.email = (r[16] && typeof r[16].email === 'string') ? r[16].email : '';
 
     pp.file = ppReady(r[6]);
     var census = r[7] || {};

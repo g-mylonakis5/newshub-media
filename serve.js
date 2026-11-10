@@ -219,6 +219,22 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // Ποιος είναι συνδεδεμένος — δες functions/api/poios.js.
+  //
+  // Τοπικά δεν υπάρχει Cloudflare Access, άρα ούτε email. Γυρίζουμε
+  // κενό, που είναι και η αλήθεια: στο τοπικό το διαχειριστικό το
+  // ανοίγει όποιος κάθεται στο μηχάνημα. Η σελίδα το περιμένει και
+  // δείχνει τη λίστα με τα γνωστά ονόματα.
+  //
+  // Το DOKIMI_EMAIL είναι ΜΟΝΟ για δοκιμή της αυτόματης υπογραφής
+  // τοπικά — δεν υπάρχει στον αέρα, όπου το email το δίνει το Access:
+  //
+  //   DOKIMI_EMAIL=kapoios@newshub.gr node serve.js
+  if (rel === '/api/poios') {
+    sendJson(res, 200, { email: process.env.DOKIMI_EMAIL || '' });
+    return;
+  }
+
   // Οι ανεβασμένες φωτογραφίες. Ζουν ΕΞΩ από το public/ — δες το
   // UPLOADS παραπάνω — οπότε τις σερβίρουμε χωριστά.
   if (rel.startsWith('/uploads/')) {

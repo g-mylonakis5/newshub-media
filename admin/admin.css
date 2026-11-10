@@ -265,7 +265,13 @@ body{
 
 .find:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
 
-.chips{ display: flex; gap: 0.3rem; }
+/* Τυλίγουν: τα ονόματα των δημοσιογράφων μεγαλώνουν με τον καιρό και
+   σε μία σειρά θα έβγαιναν έξω από το πεδίο. */
+.chips{ display: flex; flex-wrap: wrap; gap: 0.3rem; }
+
+/* Κάτω από το πεδίο της υπογραφής, όχι δίπλα σε τίτλο ενότητας. */
+[data-art-ipografes]{ margin-top: 0.45rem; }
+[data-art-ipografes]:empty{ display: none; }
 
 .chip{
   padding: 0.4rem 0.8rem;

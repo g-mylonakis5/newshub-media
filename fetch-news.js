@@ -553,6 +553,19 @@ async function ensureBodies(all) {
 
   for (const a of all.slice(0, BODY_FOR)) want.set(a.id, a);
 
+  // ΟΛΕΣ οι Απόψεις, όσο παλιές κι αν είναι.
+  //
+  // Η ζώνη «Απόψεις» της αρχικής ανοίγει πλέον σε δική μας σελίδα, με
+  // canonical και backlink στο newshub.gr — όπως τα must read. Χωρίς
+  // σώμα όμως δεν υπάρχει σελίδα, και η κάρτα πέφτει πίσω σε εξωτερικό
+  // σύνδεσμο· έτσι η ζώνη θα ήταν μισή μέσα και μισή έξω.
+  //
+  // Δεν είναι ακριβό: τις κρατάμε μετρημένες (δες OPINIONS_MAX) και
+  // κατεβαίνουν μία φορά η καθεμιά, ποτέ ξανά.
+  for (const a of all) {
+    if (a.category === 'Απόψεις') want.set(a.id, a);
+  }
+
   const picks = handPicked();
   if (picks.length) {
     for (const a of all) {
