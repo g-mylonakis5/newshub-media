@@ -1,5 +1,17 @@
 [
   {
+    "id": "ethniki-archi-kyvernoasfaleias-sto-mikroskopio-energeiakes-kai-viomichanikes-egkatastaseis-me-prosvasi-sto-diadiktyo-ti-kategrapse-i-ereyna",
+    "title": "Εθνική Αρχή Κυβερνοασφάλειας: Στο μικροσκόπιο ενεργειακές και βιομηχανικές εγκαταστάσεις με πρόσβαση στο διαδίκτυο - Τι κατέγραψε η έρευνα",
+    "url": "https://www.newshub.gr/el/kosmos/ethniki-archi-kyvernoasfaleias-sto-mikroskopio-energeiakes-kai-viomichanikes-egkatastaseis-me-prosvasi-sto-diadiktyo-ti-kategrapse-i-ereyna",
+    "date": "2026-11-10T17:35:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/xaker.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/xaker.jpg",
+    "summary": "Νέα έρευνα για τη διαδικτυακή έκθεση συστημάτων επιχειρησιακής τεχνολογίας (Operational Technology &ndash; OT), πραγματοποίησε η Εθνική Αρχή Κυβερνοασφάλειας...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "e-efka-pote-plironontai-oi-syntaxeis-gia-ton-dekemvrio",
     "title": "E-ΕΦΚΑ: Πότε πληρώνονται οι συντάξεις για τον Δεκέμβριο",
     "url": "https://www.newshub.gr/el/oikonomia/e-efka-pote-plironontai-oi-syntaxeis-gia-ton-dekemvrio",
@@ -153,7 +165,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/maketa-ploio-limani.jpg",
     "summary": "Λίγο μετά τις 6 το απόγευμα της Τρίτης αναχώρησε το ερευνητικό πλοίο «Abeille Marengo» από το λιμάνι του Ηρακλείου, προκειμένου να κατευθυνθεί στ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "i-ekthesi-eimai-syndeomai-yparcho-erga-apo-ti-syllogi-toy-emst-stin-dimotiki-pinakothiki-chanion",
@@ -6646,17 +6658,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/filaki1-640x426h.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/filaki1-640x426h.jpg",
     "summary": "Δικάστηκε στο Μικτό Ορκωτό Δικαστήριο (ΜΟΔ) της Λάρισας η υπόθεση παιδικής πορνογραφίας και αιμομιξίας που σόκαρε το πανελλήνιο και την τοπική κοινωνία του Β...",
-    "featured": false
-  },
-  {
-    "id": "moysika-taxidia-me-ton-ari-sfakianaki-kai-tin-eirini-chalkiadaki-sto-marina-cafe-restaurant",
-    "title": "«Μουσικά Ταξίδια» με τον Άρη Σφακιανάκη και την Ειρήνη Χαλκιαδάκη στο ΜΑΡΙΝΑ Cafe Restaurant",
-    "url": "https://www.newshub.gr/el/exodos/moysika-taxidia-me-ton-ari-sfakianaki-kai-tin-eirini-chalkiadaki-sto-marina-cafe-restaurant",
-    "date": "2026-11-06T07:50:00.000Z",
-    "category": "Έξοδος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/marina-07.11.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/marina-07.11.jpg",
-    "summary": "Όμορφα «Μουσικά Ταξίδια» υπόσχονται το βράδυ του Σαββάτου 7 Νοεμβρίου στο ΜΑΡΙΝΑ Cafe Restaurant ο Άρης Σφακιανάκης (πιάνο - φωνή) και η Ειρήνη Χ...",
     "featured": false
   },
   {
