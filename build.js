@@ -2056,6 +2056,7 @@ ${breadcrumb([
       <header class="art-head">
         ${a.category ? `<p class="card-label">${esc(a.category)}</p>` : ''}
         <h1 class="art-title">${title}</h1>
+        ${writerLine(a)}
         <p class="art-meta">${formatDate(a.date)} · ${minutes}′ ανάγνωση</p>
 
         <!-- Η προέλευση μπαίνει ΠΡΙΝ το κείμενο. Ο αναγνώστης πρέπει να
@@ -4108,6 +4109,31 @@ function writerPhoto(author){
   return mine || author.photo || '';
 }
 
+// Η υπογραφή του αρθρογράφου, πάνω από το κείμενο της άποψης.
+//
+// Μόνο στις αναδημοσιεύσεις που έχουν υπογραφή — στην πράξη μόνο οι
+// Απόψεις, αφού οι απλές ειδήσεις του newshub.gr δεν υπογράφονται.
+//
+// Το όνομα πάει στη σελίδα ΤΟΥΣ, όχι σε δική μας: ο αρθρογράφος δεν
+// είναι δημοσιογράφος μας, και όλο το υπόλοιπο έργο του ζει εκεί. Μια
+// μισοάδεια δική μας σελίδα με δύο απόψεις θα ήταν χειρότερη από τη
+// σωστή διεύθυνση.
+function writerLine(a){
+  const name = a.author && a.author.name ? a.author.name : '';
+  if (!name) return '';
+
+  const face = writerPhoto(a.author);
+  const url = a.author.url || '';
+
+  const inner = `${face
+    ? `<img class="art-by-pic" src="${esc(face)}" alt="" loading="lazy" width="96" height="96">`
+    : ''}<span class="art-by-name">${esc(name)}</span>`;
+
+  return `<p class="art-by-line">${url
+    ? `<a class="art-by-link" href="${esc(url)}" target="_blank" rel="noopener">${inner}</a>`
+    : inner}</p>`;
+}
+
 // Ποιες απόψεις βγαίνουν και με ποια σειρά: πρώτα όσες όρισε το
 // διαχειριστικό, μετά οι πιο πρόσφατες. Ίδια λογική με το Must read.
 function pickOpinions(articles, curation){
@@ -4122,11 +4148,38 @@ function pickOpinions(articles, curation){
     .filter(Boolean);
 
   const have = new Set(chosen.map((a) => a.url));
+
+  // ΕΝΑ ΠΡΟΣΩΠΟ ΜΙΑ ΦΟΡΑ στο αυτόματο γέμισμα.
+  //
+  // Η ζώνη δείχνει πρόσωπα, όχι μόνο τίτλους. Ένας αρθρογράφος που
+  // έγραψε δύο φορές μέσα στη βδομάδα έπιανε δύο από τις έξι θέσεις
+  // με το ίδιο πορτρέτο — φαινόταν λάθος, και έκλεινε τη θέση ενός
+  // άλλου. Τον Νοέμβριο του 2026 συνέβη με τον Νότη Μαριά.
+  //
+  // Ο κανόνας ΔΕΝ αγγίζει τις χειροκίνητες επιλογές: αν ο συντάκτης
+  // βάλει ο ίδιος δύο κείμενα του ίδιου ανθρώπου, το εννοεί.
+  const onoma = (a) => (a.author && a.author.name) || '';
+  const prosopa = new Set(chosen.map(onoma).filter(Boolean));
+
+  const vale = (a) => {
+    chosen.push(a);
+    have.add(a.url);
+    if (onoma(a)) prosopa.add(onoma(a));
+  };
+
   for (const a of all) {
     if (chosen.length >= OPINIONS_SHOWN) break;
     if (have.has(a.url)) continue;
-    chosen.push(a);
-    have.add(a.url);
+    if (onoma(a) && prosopa.has(onoma(a))) continue;
+    vale(a);
+  }
+
+  // Δεύτερο πέρασμα, χαλαρό: αν οι αρθρογράφοι δεν φτάνουν για έξι
+  // θέσεις, καλύτερα δεύτερο κείμενο του ίδιου παρά τρύπα στη ζώνη.
+  for (const a of all) {
+    if (chosen.length >= OPINIONS_SHOWN) break;
+    if (have.has(a.url)) continue;
+    vale(a);
   }
 
   return chosen.slice(0, OPINIONS_SHOWN);
@@ -4143,15 +4196,23 @@ function opinionsSection(articles, curation){
     const name = a.author && a.author.name ? a.author.name : '';
     const face = writerPhoto(a.author);
 
+    // Ίδιος κανόνας με τα must read: ανοίγει ΕΔΩ όταν έχουμε κατεβάσει
+    // το κείμενο, αλλιώς μένει σύνδεσμος προς το newshub.gr. Ποτέ δική
+    // μας σελίδα χωρίς άρθρο μέσα — το βελάκι λέει στον αναγνώστη πού
+    // πάει, και πρέπει να λέει την αλήθεια.
+    const mine = !!articleBody(a.id);
+    const href = mine ? articleUrl(a) : esc(a.url);
+    const out = mine ? '' : ' target="_blank" rel="noopener"';
+
     return `      <article class="apop-card">
-        <a class="apop-link" href="${esc(a.url)}" target="_blank" rel="noopener">
+        <a class="apop-link" href="${href}"${out}>
           ${face
             ? `<span class="apop-face"><img class="apop-pic" src="${esc(face)}" alt="${esc(name)}" loading="lazy" width="120" height="120"></span>`
             : (name ? `<span class="apop-face">${avatar(name, 'avatar--round')}</span>` : '')}
           <span class="apop-text">
             ${name ? `<span class="apop-name">${esc(name)}</span>` : ''}
             <h3 class="apop-title">${esc(a.title)}</h3>
-            <span class="apop-meta">${formatDate(a.date)}<i>↗</i></span>
+            <span class="apop-meta">${formatDate(a.date)}${mine ? '' : '<i>↗</i>'}</span>
           </span>
         </a>
       </article>`;

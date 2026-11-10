@@ -6551,6 +6551,39 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   margin: 0 0 1rem;
 }
 
+/* Η υπογραφή του αρθρογράφου, στις Απόψεις.
+ *
+ * Πάνω από την ημερομηνία και κάτω από τον τίτλο: σε μια άποψη, ποιος
+ * την έγραψε μετράει όσο και τι λέει. Το πορτρέτο είναι μικρό και
+ * στρογγυλό, ίδια γλώσσα με τις κάρτες της αρχικής. */
+.art-by-line{ margin: 0 0 0.7rem; }
+
+.art-by-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.art-by-pic{
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface);
+}
+
+.art-by-name{
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 3px;
+}
+
+.art-by-link:hover .art-by-name{ text-decoration-color: currentColor; }
+
 /* Η γραμμή προέλευσης. Κόκκινη κάθετη γραμμή στο πλάι — το χρώμα
    των ειδήσεων — ώστε να διαβάζεται ως σήμανση και όχι ως εισαγωγή. */
 .art-origin{
