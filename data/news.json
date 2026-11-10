@@ -1,5 +1,16 @@
 [
   {
+    "id": "kykloma-forodiafygis-sti-thessaloniki-den-echo-kamia-schesi-eipe-stin-apologia-toy-enas-apo-toys-logistes",
+    "title": "Κύκλωμα φοροδιαφυγής στη Θεσσαλονίκη: «Δεν έχω καμία σχέση», είπε στην απολογία του ένας από τους «λογιστές»",
+    "url": "https://www.newshub.gr/el/ellada/kykloma-forodiafygis-sti-thessaloniki-den-echo-kamia-schesi-eipe-stin-apologia-toy-enas-apo-toys-logistes",
+    "date": "2026-11-10T13:21:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/348a81bd-1794314210081-83651589-5436381.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/348a81bd-1794314210081-83651589-5436381.jpg",
+    "summary": "Στο Δικαστικό Μέγαρο Θεσσαλονίκης συνεχίζονται σήμερα οι απολογίες των κατηγορουμένων στην υπόθεση με τους «αχυρανθρώπους» στα νυχτερινά κέντρα τ...",
+    "featured": false
+  },
+  {
     "id": "orkomosia-neon-melon-d-e-p-toy-panepistimioy-kritis",
     "title": "Ορκωμοσία νέων μελών Δ.Ε.Π. του Πανεπιστημίου Κρήτης",
     "url": "https://www.newshub.gr/el/kriti/orkomosia-neon-melon-d-e-p-toy-panepistimioy-kritis",
@@ -30,7 +41,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/kyriakos-mitsotakis-larko.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/kyriakos-mitsotakis-larko.jpg",
     "summary": "Για τις αναμενόμενες έρευνες του γαλλικού πλοίο Abeille Marengo για το καλώδιο της ηλεκτρικής διασύνδεσης Ελλάδας &ndash; Κύπρου, τη ρηματική διακοίνωση της ...",
-    "featured": false
+    "featured": true
   },
   {
     "id": "mia-geysi-apo-tin-kriti-toy-parelthontos-sto-istoriko-moyseio-irakleioy",
@@ -74,7 +85,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/eikona_viber_2026-11-10_14-08-53-224.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/eikona_viber_2026-11-10_14-08-53-224.jpg",
     "summary": "Ένα νέο επεισόδιο είχαμε σήμερα το μεσημέρι στις αποθήκες Σκουλούδη, εκεί όπου γινονται οι τελευταίες εργασίες προκειμένου να λειτουργήσει η Δομή μεταναστών....",
-    "featured": true
+    "featured": false
   },
   {
     "id": "syskepsi-tis-adedy-irakleioy-enopsei-tis-apergiakis-kinitopoiisis",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/screenshot-2026-11-05-182348.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/screenshot-2026-11-05-182348.jpg",
     "summary": "Θετικά είναι τα νέα για τη Μάγδα Τσαγγάνη, η οποία τους τελευταίους μήνες περνά μία σοβαρή περιπέτεια με την υγεία της. Η ηθοποιός που ήταν σε κώμα για 4 σχε...",
-    "featured": false
-  },
-  {
-    "id": "g-papandreoy-i-dimokratia-echei-aichmalotistei-pyra-stin-kyvernisi-kai-minyma-nikis-gia-to-pasok-i-anafora-stin-kriti",
-    "title": "Γ. Παπανδρέου: «Η Δημοκρατία έχει αιχμαλωτιστεί» – Πυρά στην κυβέρνηση και μήνυμα νίκης για το ΠΑΣΟΚ- Η αναφορά στην Κρήτη",
-    "url": "https://www.newshub.gr/el/kriti/g-papandreoy-i-dimokratia-echei-aichmalotistei-pyra-stin-kyvernisi-kai-minyma-nikis-gia-to-pasok-i-anafora-stin-kriti",
-    "date": "2026-11-05T19:52:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/phphnph.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/phphnph.jpg",
-    "summary": "Με αιχμή την κρίση των θεσμών, τις ανισότητες, την ακρίβεια και την απογοήτευση της νέας γενιάς, ο πρώην πρωθυπουργός άσκησε σκληρή κριτική στην κυβερνητική ...",
     "featured": false
   }
 ]
