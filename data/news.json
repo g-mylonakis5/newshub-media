@@ -1,5 +1,16 @@
 [
   {
+    "id": "i-prognosi-toy-kairoy-simera-poy-tha-vrexei-1",
+    "title": "Η πρόγνωση του καιρού σήμερα – Πού θα βρέξει",
+    "url": "https://www.newshub.gr/el/ellada/i-prognosi-toy-kairoy-simera-poy-tha-vrexei-1",
+    "date": "2026-11-10T08:53:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/kairos-1-1200x696.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/kairos-1-1200x696.jpg",
+    "summary": "Νεφώσεις καθ&rsquo; όλη τη διάρκεια της ημέρας θα επικρατήσουν στα περισσότερα τμήματα της χώρας, ενώ τοπικές βροχές αναμένονται κυρίως στα ορεινά ηπειρωτικά...",
+    "featured": false
+  },
+  {
     "id": "ioannis-choyntis-soyez-1956-oi-meres-poy-allaxan-tin-pagkosmia-katanomi-ischyos-podcast",
     "title": "Ιωάννης Χουντής: Σουέζ 1956, οι μέρες που άλλαξαν την παγκόσμια κατανομή ισχύος! (podcast)",
     "url": "https://www.newshub.gr/el/istoria-politismos/ioannis-choyntis-soyez-1956-oi-meres-poy-allaxan-tin-pagkosmia-katanomi-ischyos-podcast",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/tntnt.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/tntnt.jpg",
     "summary": "Δύο άνθρωποι, οι οποίοι αγνοούνταν μετά την έκρηξη και την πυρκαγιά που εκδηλώθηκε χθες, Τετάρτη σε εργοστάσιο στην Ταϊβάν, ιδιοκτησίας θυγατρικής του ιαπωνι...",
-    "featured": false
-  },
-  {
-    "id": "oloklirothike-i-epicheirisi-apegklovismoy-ton-52-metanaston-sti-gaydo-anamesa-toys-treis-egkyes-kai-exi-mora",
-    "title": "Ολοκληρώθηκε η επιχείρηση απεγκλωβισμού των 52 μεταναστών στη Γαύδο – Ανάμεσά τους τρεις έγκυες και έξι μωρά",
-    "url": "https://www.newshub.gr/el/kriti/oloklirothike-i-epicheirisi-apegklovismoy-ton-52-metanaston-sti-gaydo-anamesa-toys-treis-egkyes-kai-exi-mora",
-    "date": "2026-11-05T14:47:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/d70e3cf5-812e-42c8-85c3-7c9b1b51407d-1-768x432.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/d70e3cf5-812e-42c8-85c3-7c9b1b51407d-1-768x432.jpg",
-    "summary": "Τέλος στην περιπέτεια των 52 μεταναστών που παρέμεναν εγκλωβισμένοι επί δύο ημέρες σε δύσβατη ακτή της Γαύδου δόθηκε σήμερα, Πέμπτη, καθώς ολοκληρώθηκε η επι...",
     "featured": false
   }
 ]
