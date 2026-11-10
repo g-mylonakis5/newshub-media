@@ -1,5 +1,17 @@
 [
   {
+    "id": "me-epitychia-i-imerida-enischyontas-tin-koyltoyra-akeraiotitas-stin-topiki-aytodioikisi-tis-kritis",
+    "title": "Με επιτυχία η ημερίδα «Ενισχύοντας την Κουλτούρα Ακεραιότητας στην Τοπική Αυτοδιοίκηση της Κρήτης»",
+    "url": "https://www.newshub.gr/el/kriti/me-epitychia-i-imerida-enischyontas-tin-koyltoyra-akeraiotitas-stin-topiki-aytodioikisi-tis-kritis",
+    "date": "2026-11-10T14:50:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/001.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/001.jpg",
+    "summary": "Με επιτυχία πραγματοποιήθηκε σήμερα, η ενημερωτική ημερίδα με θέμα «Ενισχύοντας την Κουλτούρα Ακεραιότητας στην Τοπική Αυτοδιοίκηση της Κρήτης». ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "toyrnas-apo-irakleio-o-kairos-den-mas-charizetai-epta-meteorologika-rantar-gia-egkairi-proeidopoiisi-entonon-fainomenon",
     "title": "Τουρνάς από Ηράκλειο: «Ο καιρός δεν μας χαρίζεται»-Επτά μετεωρολογικά ραντάρ για έγκαιρη προειδοποίηση έντονων φαινομένων",
     "url": "https://www.newshub.gr/el/kriti/toyrnas-apo-irakleio-o-kairos-den-mas-charizetai-epta-meteorologika-rantar-gia-egkairi-proeidopoiisi-entonon-fainomenon",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/tournasher.jpg",
     "summary": "Η πρόληψη και η αντιμετώπιση κινδύνων και έκτακτων αναγκών κατά τους χειμερινούς μήνες, εξαιτίας των έντονων καιρικών φαινομένων, βρέθηκαν στο επίκεντρο...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "kriti-nea-diakopi-sti-diki-gia-to-kykloma-emporias-vrefon-pote-tha-ginei",
@@ -21,7 +33,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/844772575-1436588255066880-8416437698352742803-n-1024x768.jpg",
     "summary": "Νέα διακοπή για τις 8 Δεκεμβρίου πήρε η δίκη για το κύκλωμα εμπορίας βρεφών μέσω ιδιωτικής κλινικής υποβοηθούμενης αναπαραγωγής στα Χανιά.\r\n\r\nΗ ακροαματική δ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "kykloma-forodiafygis-eleytheros-me-oroys-to-gnosto-montelo-meta-tin-apologia-toy-ston-anakriti-thessalonikis",
@@ -6617,17 +6629,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/zacharo-metrema.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/zacharo-metrema.jpg",
     "summary": "Ένα ασύρματο ηλεκτρονικό εμφύτευμα το οποίο απομακρύνει την περίσσεια σακχάρου απευθείας από την κυκλοφορία του αίματος θα μπορούσε να προσφέρει έναν τρόπο α...",
-    "featured": false
-  },
-  {
-    "id": "euro-2028-chantmpol-andron-lygise-me-33-24-stin-anoterotita-tis-soyidias-i-ellada",
-    "title": "Euro 2028 χάντμπολ ανδρών: «Λύγισε» με 33-24 στην ανωτερότητα της Σουηδίας η Ελλάδα",
-    "url": "https://www.newshub.gr/el/athlitika/euro-2028-chantmpol-andron-lygise-me-33-24-stin-anoterotita-tis-soyidias-i-ellada",
-    "date": "2026-11-05T21:52:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/handball-ethniki-2026-768x481.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/handball-ethniki-2026-768x481.jpg",
-    "summary": "Η Εθνική ανδρών δεν κατάφερε να προβάλει μεγάλη αντίσταση στη Σουηδία, γνωρίζοντας την ήττα με 33-24 στο Βακχό, στο πλαίσιο της 1ης αγωνιστικής του 8ου ομίλο...",
     "featured": false
   },
   {
