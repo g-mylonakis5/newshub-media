@@ -5017,7 +5017,7 @@ ${bandMark('Τα', ' πρόσωπα', `      <p class="band-sub">${keys.length} 
 ${chips}
     </div>
 
-    <p class="band-open"><a href="${up}guests.html">Όλα τα πρόσωπα →</a></p>
+    <p class="pnames-all"><a href="${up}guests.html">Όλα τα πρόσωπα <i>→</i></a></p>
   </section>`;
 }
 

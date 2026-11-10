@@ -2330,6 +2330,52 @@ h1{
 
 .pname:hover .pname-text{ color: var(--sky); }
 
+/* Το κουμπί «Όλα τα πρόσωπα».
+ *
+ * Έβγαινε άστυλο — μπλε υπογραμμισμένο, η προεπιλογή του browser —
+ * επειδή κουβαλούσε την .band-open, που είναι το κουτί της ενότητας
+ * «Και ακόμα» και δεν λέει τίποτα για συνδέσμους μέσα της.
+ *
+ * Δανείζεται τη φόρμα των ονομάτων από πάνω: ίδιο στρογγυλό πλαίσιο,
+ * ίδιο ύψος, ίδια συμπεριφορά στο hover. Είναι το ίδιο πράγμα με τα
+ * υπόλοιπα κουμπάκια — απλώς οδηγεί σε όλα αντί σε έναν. */
+.pnames-all{
+  display: flex;
+  justify-content: center;
+  margin: 1.75rem 0 0;
+}
+
+.pnames-all a{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--read);
+  text-decoration: none;
+  transition: border-color var(--ease-time) var(--ease),
+              background var(--ease-time) var(--ease),
+              color var(--ease-time) var(--ease);
+}
+
+/* Το βέλος κουνιέται, το κουμπί όχι: η κίνηση δείχνει τη φορά χωρίς
+   να μετακινεί το ίδιο το κουμπί κάτω από το δάχτυλο. */
+.pnames-all i{
+  font-style: normal;
+  transition: transform var(--ease-time) var(--ease);
+}
+
+.pnames-all a:hover{
+  border-color: var(--sky);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.pnames-all a:hover i{ transform: translateX(3px); }
+
 .pname-n{
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.5);
