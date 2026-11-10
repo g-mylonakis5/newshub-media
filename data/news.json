@@ -22,6 +22,17 @@
     "featured": false
   },
   {
+    "id": "epidoma-thermansis-anoigei-simera-i-platforma-i-epipleon-diadikasia-gia-tis-polykatoikies",
+    "title": "Επίδομα θέρμανσης: Ανοίγει σήμερα η πλατφόρμα – Η επιπλέον διαδικασία για τις πολυκατοικίες",
+    "url": "https://www.newshub.gr/el/oikonomia/epidoma-thermansis-anoigei-simera-i-platforma-i-epipleon-diadikasia-gia-tis-polykatoikies",
+    "date": "2026-11-10T06:14:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/epidoma-thermanses---petrelaio.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/epidoma-thermanses---petrelaio.jpg",
+    "summary": "Μια επιπλέον διαδικασία, απολύτως απαραίτητη για να λάβουν οι δικαιούχοι την ενίσχυση, σηματοδοτεί για τις πολυκατοικίες που θερμαίνονται με πετρέλαιο η ενερ...",
+    "featured": false
+  },
+  {
     "id": "ipa-o-tzo-mpainten-anakoinose-pos-prepei-na-periorisei-tin-proothisi-toy-vivlioy-toy-exaitias-toy-karkinoy-toy",
     "title": "ΗΠΑ: Ο Τζο Μπάιντεν ανακοίνωσε πως πρέπει να περιορίσει την προώθηση του βιβλίου του εξαιτίας του καρκίνου του",
     "url": "https://www.newshub.gr/el/kosmos/ipa-o-tzo-mpainten-anakoinose-pos-prepei-na-periorisei-tin-proothisi-toy-vivlioy-toy-exaitias-toy-karkinoy-toy",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/astynomiaphe.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/astynomiaphe.jpg",
     "summary": "Ληστεία με λεία 1 εκατομμυρίου ευρώ σημειώθηκε σε κατασκευαστική εταιρεία στην περιοχή Χαριλάου στη Θεσσαλονίκη.\r\n\r\nΟι δράστες, όπως φαίνεται, μπήκαν με το κ...",
-    "featured": false
-  },
-  {
-    "id": "3o-foroym-toy-kentroy-oosa-gia-tis-plithysmiakes-dynamikes-sta-chania",
-    "title": "3ο Φόρουμ του Κέντρου ΟΟΣΑ για τις Πληθυσμιακές Δυναμικές στα Χανιά",
-    "url": "https://www.newshub.gr/el/kriti/3o-foroym-toy-kentroy-oosa-gia-tis-plithysmiakes-dynamikes-sta-chania",
-    "date": "2026-11-05T11:24:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/138292e1c8a4a00322081e3f3818fcd02e33b801.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/138292e1c8a4a00322081e3f3818fcd02e33b801.jpg",
-    "summary": "Τα Χανιά φιλοξενούν για τρίτη χρονιά το Φόρουμ του Κέντρου του ΟΟΣΑ στην Κρήτη για τις Πληθυσμιακές Δυναμικές. Το Φόρουμ θα πραγματοποιηθεί τη Δευτέρα 9 και ...",
     "featured": false
   }
 ]
