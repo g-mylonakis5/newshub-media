@@ -1,5 +1,16 @@
 [
   {
+    "id": "toyrismos-kleinoyn-kai-ta-teleytaia-xenodocheia-stin-kriti-oi-perissoteres-afixeis-den-simainoyn-kai-perissotera-esoda",
+    "title": "Τουρισμός: Κλείνουν και τα τελευταία ξενοδοχεία στην Κρήτη - Οι περισσότερες αφίξεις δεν σημαίνουν και περισσότερα έσοδα",
+    "url": "https://www.newshub.gr/el/kriti/toyrismos-kleinoyn-kai-ta-teleytaia-xenodocheia-stin-kriti-oi-perissoteres-afixeis-den-simainoyn-kai-perissotera-esoda",
+    "date": "2026-11-10T08:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/touristas-balitsa.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/touristas-balitsa.jpg",
+    "summary": "Καθώς η τουριστική σεζόν στην Κρήτη οδεύει προς την ολοκλήρωσή της, τα περισσότερα ξενοδοχεία να έχουν ήδη κατεβάσει ρολά από τα τέλη Οκτωβρίου, ενώ λίγες ακ...",
+    "featured": true
+  },
+  {
     "id": "ischyri-toyristiki-zitisi-kai-ton-cheimona-oi-eykairies-gia-tin-agnosti-ellada",
     "title": "Ισχυρή τουριστική ζήτηση και τον χειμώνα – Οι ευκαιρίες για την «άγνωστη Ελλάδα»",
     "url": "https://www.newshub.gr/el/ellada/ischyri-toyristiki-zitisi-kai-ton-cheimona-oi-eykairies-gia-tin-agnosti-ellada",
@@ -96,7 +107,7 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/4783654-scaled.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/4783654-scaled.jpg",
     "summary": "Στο Ηράκλειο μεταβαίνει σημερα ο ο υπουργός Κλιματικής Κρίσης και Πολιτικής Προστασίας, Ευάγγελος Τουρνάς, προκειμένου να συμμετάσχει σε σύσκεψη που θα ...",
-    "featured": true
+    "featured": false
   },
   {
     "id": "boeing-meionei-kata-5-to-prosopiko-tis-stin-kataskeyi-emporikon-aeroskafon",
@@ -6586,17 +6597,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/embassy-9-767x432.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/embassy-9-767x432.jpg",
     "summary": "Τη Δευτέρα 12 Οκτωβρίου, ο Καθηγητής Χρήστος Τσατσάνης, Διευθυντής του Διεθνούς Προγράμματος Ιατρικής (International Program in Medicine &ndash; iMed), εκπρο...",
-    "featured": false
-  },
-  {
-    "id": "irakleio-dorean-symvoyleytiki-ypostirixi-gia-zeygaria-sto-plaisio-toy-programmatos-dia-dimoy-mathisi",
-    "title": "Ηράκλειο: Δωρεάν συμβουλευτική υποστήριξη για ζευγάρια στο πλαίσιο του προγράμματος «Δια… Δήμου Μάθηση»",
-    "url": "https://www.newshub.gr/el/kriti/irakleio-dorean-symvoyleytiki-ypostirixi-gia-zeygaria-sto-plaisio-toy-programmatos-dia-dimoy-mathisi",
-    "date": "2026-11-05T13:35:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/5-11/zeugari-kaphes-pota.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/5-11/zeugari-kaphes-pota.jpg",
-    "summary": "Η Αντιδημαρχία Εθελοντισμού του Δήμου Ηρακλείου, στο πλαίσιο της δράσης «Διά Δήμου Μάθηση», αναλαμβάνει μια σημαντική πρωτοβουλία με επίκεντρο τη...",
     "featured": false
   }
 ]
