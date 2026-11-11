@@ -1,5 +1,17 @@
 [
   {
+    "id": "prokalei-i-toyrkia-meso-diarroon-gia-tin-ilektriki-diasyndesi-kritis-kyproy-apotrepsame-ellinika-tetelesmena-stin-anatoliki-mesogeio",
+    "title": "Προκαλεί η Τουρκία μέσω διαρροών για την ηλεκτρική διασύνδεση Κρήτης-Κύπρου: «Αποτρέψαμε ελληνικά τετελεσμένα στην Ανατολική Μεσόγειο»",
+    "url": "https://www.newshub.gr/el/geopolitiki/prokalei-i-toyrkia-meso-diarroon-gia-tin-ilektriki-diasyndesi-kritis-kyproy-apotrepsame-ellinika-tetelesmena-stin-anatoliki-mesogeio",
+    "date": "2026-11-11T15:41:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/-ploio-limani.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/-ploio-limani.jpg",
+    "summary": "Μέσω διαρροών στον τουρκικό Τύπο, η Άγκυρα υποστηρίζει ότι έδωσε τη συγκατάθεσή της στη Γαλλία για τη διεξαγωγή ερευνών στο πλαίσιο του έργου ηλεκτρικής διασ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "peiramatiki-gonidiaki-therapeia-meionei-tis-epiliptikes-kriseis-kata-90",
     "title": "Πειραματική γονιδιακή θεραπεία μειώνει τις επιληπτικές κρίσεις κατά 90%",
     "url": "https://www.newshub.gr/el/ygeia/peiramatiki-gonidiaki-therapeia-meionei-tis-epiliptikes-kriseis-kata-90",
@@ -8,6 +20,18 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/pexels-cottonbro-5723883-1024x682.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/pexels-cottonbro-5723883-1024x682.jpg",
     "summary": "Μια πειραματική γονιδιακή θεραπεία μείωσε κατά 90% τις επιληπτικές κρίσεις σε άτομα με φαρμακοανθεκτική επιληψία. Η πρωτοποριακή κλινική δοκιμή, τα αποτελέσμ...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "sygkroysi-ich-me-dikyklo-sto-rethymno-me-dyo-traymaties-sto-pagni-metaferthike-mia-gynaika",
+    "title": "Σύγκρουση ΙΧ με δίκυκλο στο Ρέθυμνο με δύο τραυματίες – Στο ΠΑΓΝΗ μεταφέρθηκε μια γυναίκα",
+    "url": "https://www.newshub.gr/el/kriti/sygkroysi-ich-me-dikyklo-sto-rethymno-me-dyo-traymaties-sto-pagni-metaferthike-mia-gynaika",
+    "date": "2026-11-11T15:35:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/nosokomeio.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/nosokomeio.jpg",
+    "summary": "Νέο τροχαίο ατύχημα σημειώθηκε στους δρόμους της Κρήτης με δύο άτομα να μεταφέρονται στο νοσοκομείο.\r\n\r\nΣύμφωνα με πληροφορίες το περιστατικό σημειώθηκε σήμε...",
     "author": null,
     "featured": false
   },
@@ -93,7 +117,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/aeroplano1.jpg",
     "summary": "Διαφορετικές ταχύτητες καταγράφουν οι ελληνικοί προορισμοί ενόψει της χειμερινής τουριστικής περιόδου 2026-2027, με τη Θεσσαλονίκη και τα Χανιά να εμφανίζουν...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "kaisaris-gia-tis-anathymiaseis-chimikon-stin-pisina-toy-scholeioy-ypirxe-osmi-akoloythithike-to-protokollo-den-yparchei-thema",
@@ -6758,28 +6782,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/ddd.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/ddd.jpg",
     "summary": "Νέα πτώση της θερμοκρασίας θα σημειώσει ο καιρός αύριο Σάββατο 7 Νοεμβρίου σύμφωνα με το meteo, με βροχές και χιόνια στα ορεινά.\r\n\r\nΑναλυτικότερα σύμφωνα με ...",
-    "featured": false
-  },
-  {
-    "id": "gallia-mia-apo-tis-cheiroteres-chronies-gia-tin-paragogi-krasioy",
-    "title": "Γαλλία: Μία από τις χειρότερες χρονιές για την παραγωγή κρασιού",
-    "url": "https://www.newshub.gr/el/agronews/gallia-mia-apo-tis-cheiroteres-chronies-gia-tin-paragogi-krasioy",
-    "date": "2026-11-07T06:00:00.000Z",
-    "category": "Agronews",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/krasi.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/krasi.jpg",
-    "summary": "Αυξημένη σε σχέση με τις αρχικές εκτιμήσεις, αλλά παραμένει σε ιστορικά χαμηλά επίπεδα η φετινή παραγωγή κρασιού στη Γαλλία, καθώς η ξηρασία, οι υψηλές θερμο...",
-    "featured": false
-  },
-  {
-    "id": "ipa-165-000-nees-theseis-ergasias-ton-oktovrio-ptosi-tis-anergias-sto-4-1",
-    "title": "ΗΠΑ: 165.000 νέες θέσεις εργασίας τον Οκτώβριο – Πτώση της ανεργίας στο 4,1%",
-    "url": "https://www.newshub.gr/el/oikonomia/ipa-165-000-nees-theseis-ergasias-ton-oktovrio-ptosi-tis-anergias-sto-4-1",
-    "date": "2026-11-07T05:51:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/gjgfjy.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/gjgfjy.jpg",
-    "summary": "Σημαντική επιτάχυνση κατέγραψε ο ρυθμός δημιουργίας νέων θέσεων εργασίας στις Ηνωμένες Πολιτείες τον Οκτώβριο, ενώ το ποσοστό ανεργίας υποχώρησε οριακά.\r\n\r\nΣ...",
     "featured": false
   },
   {
