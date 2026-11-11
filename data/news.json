@@ -1,5 +1,21 @@
 [
   {
+    "id": "pos-i-ellada-mporei-na-akyrosei-ti-galazia-patrida",
+    "title": "Πώς η Ελλάδα μπορεί να ακυρώσει τη “Γαλάζια Πατρίδα”",
+    "url": "https://www.newshub.gr/el/apopseis/pos-i-ellada-mporei-na-akyrosei-ti-galazia-patrida",
+    "date": "2026-11-11T06:24:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/tjjfjt.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/tjjfjt.jpg",
+    "summary": "Με την πρόσφατη επικύρωση του τουρκολιβυκού Μνημονίου του 2019 από το Κοινοβούλιο στην Βεγγάζη, σε συνδυασμό με τις ευθείες πολεμικές απειλές που εκτοξεύοντα...",
+    "author": {
+      "name": "Κωνσταντίνος Γριβας",
+      "url": "https://www.newshub.gr/el/konstantinos-grivas",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/grivas-kwn.jpg"
+    },
+    "featured": false
+  },
+  {
     "id": "ispania-epimnimosyni-deisi-sto-toledo-gia-ta-thymata-tis-sidirodromikis-tragodias-paroysia-toy-vasilikoy-zeygoys",
     "title": "Ισπανία: Επιμνημόσυνη δέηση στο Τολέδο για τα θύματα της σιδηροδρομικής τραγωδίας, παρουσία του βασιλικού ζεύγους",
     "url": "https://www.newshub.gr/el/kosmos/ispania-epimnimosyni-deisi-sto-toledo-gia-ta-thymata-tis-sidirodromikis-tragodias-paroysia-toy-vasilikoy-zeygoys",
@@ -6692,17 +6708,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/kalokairinos_synedrio_kede_1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/kalokairinos_synedrio_kede_1.jpg",
     "summary": "Με αναφορές στο υπέρογκο ενεργειακό κόστος που επωμίζονται οι Δήμοι, στις καθυστερήσεις των Τοπικών Πολεοδομικών Σχεδίων και στο σοβαρό στεγαστικό ...",
-    "featured": false
-  },
-  {
-    "id": "nea-meleti-ta-energeiaka-pota-schetizontai-me-tin-kardiaki-anakopi-kai-to-emfragma",
-    "title": "Νέα μελέτη: Τα ενεργειακά ποτά σχετίζονται με την καρδιακή ανακοπή και το έμφραγμα",
-    "url": "https://www.newshub.gr/el/ygeia/nea-meleti-ta-energeiaka-pota-schetizontai-me-tin-kardiaki-anakopi-kai-to-emfragma",
-    "date": "2026-11-06T12:40:00.000Z",
-    "category": "Υγεία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/eeee.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/eeee.jpg",
-    "summary": "Τα ενεργειακά ποτά με καφεΐνη και τα συμπληρώματα με διεγερτικές ουσίες εμφανίζονται δυσανάλογα συχνά σε αναφορές για σοβαρά καρδιαγγειακά συμβάντα, όπως η κ...",
     "featured": false
   },
   {
