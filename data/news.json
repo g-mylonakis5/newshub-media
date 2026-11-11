@@ -1,5 +1,17 @@
 [
   {
+    "id": "xekinise-i-ypovoli-aitimaton-pliromis-gia-ependyseis-sti-metapoiisi-agrotikon-proionton",
+    "title": "Ξεκίνησε η υποβολή αιτημάτων πληρωμής για επενδύσεις στη μεταποίηση αγροτικών προϊόντων",
+    "url": "https://www.newshub.gr/el/ellada/xekinise-i-ypovoli-aitimaton-pliromis-gia-ependyseis-sti-metapoiisi-agrotikon-proionton",
+    "date": "2026-11-11T17:40:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/agrotes.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/agrotes.jpg",
+    "summary": "Ξεκίνησε από σήμερα η δυνατότητα υποβολής αιτημάτων πληρωμής για τους δικαιούχους επενδύσεων στη μεταποίηση, εμπορία και ανάπτυξη γεωργικών προϊόντων, μέσω τ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "to-iran-apeilei-me-pligmata-akoma-kai-se-amerikanikes-vaseis-stin-eyropi",
     "title": "Το Ιράν απειλεί με πλήγματα ακόμα και σε αμερικανικές βάσεις στην Ευρώπη",
     "url": "https://www.newshub.gr/el/geopolitiki/to-iran-apeilei-me-pligmata-akoma-kai-se-amerikanikes-vaseis-stin-eyropi",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/iran_pyrinika.jpg",
     "summary": "Με επιθέσεις εναντίον αμερικανικών στρατιωτικών βάσεων ακόμη και στην Ευρώπη απειλεί το Ιράν, σε περίπτωση που οι Ηνωμένες Πολιτείες εξαπολύσουν νέα πλήγματα...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "synelifthi-o-idioktitis-tis-etaireias-poy-ekane-tin-syntirisi-sta-ekpaideytiria-kaisari-prokalontas-anathymiaseis-eleytheroi-oi-alloi-dyo",
@@ -6780,17 +6792,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/telos.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/telos.jpg",
     "summary": "Αντιδράσεις προκαλεί η νέα φορολογική επιβάρυνση για την ελληνική ξενοδοχία που εξήγγειλε η κυβέρνηση, ως πηγή πρόσθετων εσόδων για τη χρηματοδότηση της Τοπι...",
-    "featured": false
-  },
-  {
-    "id": "el-ninio-pos-mporei-na-epireasei-ton-fetino-cheimona-stin-ellada",
-    "title": "Ελ Νίνιο: Πώς μπορεί να επηρεάσει τον φετινό χειμώνα στην Ελλάδα",
-    "url": "https://www.newshub.gr/el/ellada/el-ninio-pos-mporei-na-epireasei-ton-fetino-cheimona-stin-ellada",
-    "date": "2026-11-07T08:30:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/maketa-el-ninio.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/maketa-el-ninio.jpg",
-    "summary": "«Η επίδραση του φαινομένου Ελ Νίνιο στην Ευρώπη και στη Μεσόγειο είναι έμμεση. Μέσω αλλαγών στην ατμοσφαιρική κυκλοφορία μπορεί να επηρεαστούν η θέση κ...",
     "featured": false
   },
   {
