@@ -5711,7 +5711,25 @@ function transcriptFile(ep){
 // Αν κάποτε βελτιωθεί η ποιότητα και θέλουμε να μπει σε Google και
 // αναζήτηση, τα δεδομένα είναι ήδη εδώ: αρκεί να γραφτούν οι γραμμές
 // μέσα στο HTML, όπως στην πρώτη εκδοχή.
+// ΚΑΤΕΒΑΣΜΕΝΕΣ ΜΕΧΡΙ ΝΕΩΤΕΡΑΣ — 11 Νοεμβρίου 2026.
+//
+// Η ποιότητα της αυτόματης μεταγραφής δεν είναι δημοσιεύσιμη: χαλασμένα
+// ελληνικά και, κυρίως, κύρια ονόματα λάθος. Αποδίδει σε κατονομαζόμενους
+// ανθρώπους λόγια που δεν είπαν, έστω και με την ένδειξη «μπορεί να έχει
+// λάθη» από πάνω.
+//
+// Ο διακόπτης κρύβει ΚΑΙ την ενότητα στη σελίδα επεισοδίου ΚΑΙ τον
+// σύνδεσμο προς το Buzzsprout — αλλιώς οι ίδιες λέξεις θα φαίνονταν
+// απλώς αλλού. Τα 438 αρχεία του public/transcript/ σβήνονται στο
+// επόμενο χτίσιμο.
+//
+// Τα δεδομένα ΜΕΝΟΥΝ στο data/transcripts/ και το fetch-transcripts.js
+// συνεχίζει να τα κατεβάζει. Μία γραμμή σε true τα ξαναφέρνει όλα.
+const TRANSCRIPTS_ON = false;
+
 function transcriptSection(ep){
+  if (!TRANSCRIPTS_ON) return '';
+
   const data = transcriptData(ep);
   if (!data) return '';
 
@@ -5847,10 +5865,20 @@ ${guestLine(ep, 1)}
         <p class="episode-meta">${meta}</p>
 ${summaryHtml(ep.summary)}
 
-        <p class="episode-links">
-          ${twin ? `<a href="${twin.url}" target="_blank" rel="noopener">Άνοιγμα στο YouTube ↗</a>` : ''}
-          ${ep.transcript && !transcriptOf(ep) ? `<a href="${ep.transcript}" target="_blank" rel="noopener">Απομαγνητοφώνηση ↗</a>` : ''}
-        </p>
+${/* Η γραμμή υπάρχει ΜΟΝΟ αν έχει σύνδεσμο μέσα. Με τις
+     απομαγνητοφωνήσεις κατεβασμένες, άδεια θα έβγαινε σε 438
+     σελίδες — και η .episode-links κρατάει κενό από μόνη της. */ ''}
+${(() => {
+  const links = [
+    twin ? `<a href="${twin.url}" target="_blank" rel="noopener">Άνοιγμα στο YouTube ↗</a>` : '',
+    TRANSCRIPTS_ON && ep.transcript && !transcriptOf(ep)
+      ? `<a href="${ep.transcript}" target="_blank" rel="noopener">Απομαγνητοφώνηση ↗</a>` : '',
+  ].filter(Boolean);
+
+  return links.length
+    ? `        <p class="episode-links">\n          ${links.join('\n          ')}\n        </p>`
+    : '';
+})()}
 
 ${transcriptSection(ep)}
 
@@ -6262,7 +6290,7 @@ ${intro(episodes[0], videos[0])}`,
   fs.mkdirSync(TRANSCRIPT_OUT, { recursive: true });
   const expectedTr = new Set();
   let trWritten = 0;
-  for (const ep of episodes) {
+  for (const ep of TRANSCRIPTS_ON ? episodes : []) {
     const data = transcriptData(ep);
     if (!data) continue;
     const name = path.basename(transcriptFile(ep));
@@ -6521,7 +6549,9 @@ ${intro(episodes[0], videos[0])}`,
   console.log(`Σελίδες εκπομπών: ${showsWritten} γράφτηκαν, ${showsRemoved} σβήστηκαν`);
   
 console.log(`Σελίδες επεισοδίου: ${written} γράφτηκαν, ${episodes.length - written} ήταν ήδη ενημερωμένες, ${removed} σβήστηκαν`);
-  console.log(`Απομαγνητοφωνήσεις: ${expectedTr.size} συνολικά, ${trWritten} γράφτηκαν, ${trRemoved} σβήστηκαν`);
+  console.log(TRANSCRIPTS_ON
+    ? `Απομαγνητοφωνήσεις: ${expectedTr.size} συνολικά, ${trWritten} γράφτηκαν, ${trRemoved} σβήστηκαν`
+    : `Απομαγνητοφωνήσεις: ΚΑΤΕΒΑΣΜΕΝΕΣ μέχρι νεωτέρας${trRemoved ? ` — ${trRemoved} σβήστηκαν τώρα` : ''}`);
 console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτηκαν, ${guestsRemoved} σβήστηκαν`);
 
   // ---- το διαχειριστικό ----
