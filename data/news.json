@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/mati2.jpg",
     "summary": "Νέα δικαστική διαδικασία για την τραγωδία στο Μάτι ξεκινά στο Μονομελές Εφετείο Κακουργημάτων Αθηνών, με αντικείμενο τη διερεύνηση πιθανών ποινικών ευθυνών π...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "i-kriti-stin-oinotika-athinas-2026-30-oinopoieia-dekades-etiketes-krasioy-kai-dyo-masterclasses",
@@ -277,7 +277,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/abeille_marengo.jpg",
     "summary": "Άκυρη και ανίσχυρη χαρακτηρίζει η Αθήνα την τουρκική NAVTEX για τις έρευνες του «Abeille Marengo» στο πλαίσιο της ηλεκτρικής διασύνδεσης Κρήτης...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "to-irakleio-tima-ton-polioycho-toy-agio-mina-i-zoi-kai-ta-thaymata-toy",
