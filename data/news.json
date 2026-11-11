@@ -1,5 +1,17 @@
 [
   {
+    "id": "oie-pano-apo-ena-ekatommyrio-anthropoi-antimetopizoyn-oxeia-episitistiki-anasfaleia-ston-livano",
+    "title": "ΟΗΕ: Πάνω από ένα εκατομμύριο άνθρωποι αντιμετωπίζουν οξεία επισιτιστική ανασφάλεια στον Λίβανο",
+    "url": "https://www.newshub.gr/el/kosmos/oie-pano-apo-ena-ekatommyrio-anthropoi-antimetopizoyn-oxeia-episitistiki-anasfaleia-ston-livano",
+    "date": "2026-11-11T17:07:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/maketa-lebanon.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/maketa-lebanon.jpg",
+    "summary": "Περισσότεροι από ένα εκατομμύριο άνθρωποι αντιμετωπίζουν οξεία επισιτιστική ανασφάλεια στον Λίβανο, προειδοποίησαν σήμερα υπηρεσίες του ΟΗΕ, ζητώντας «...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "nea-epochi-gia-to-gov-gr-telos-sta-psifiaka-pistopoiitika-erchetai-aplopoiisi-diadikasion-ti-allazei-se-kameres-kai-social-media",
     "title": "Νέα εποχή για το Gov.gr: Τέλος στα ψηφιακά πιστοποιητικά, έρχεται απλοποίηση διαδικασιών  - Τι αλλάζει σε κάμερες και Social Media",
     "url": "https://www.newshub.gr/el/ellada/nea-epochi-gia-to-gov-gr-telos-sta-psifiaka-pistopoiitika-erchetai-aplopoiisi-diadikasion-ti-allazei-se-kameres-kai-social-media",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/psifiakos-metasximatsismos-gov1.jpg",
     "summary": "Ο Δημήτρης Παπαστεργίου αναφέρθηκε στη νέα εποχή του gov.gr, που θα επιτρέπει την ολοκλήρωση διοικητικών διαδικασιών χωρίς οι πολίτες να χρειάζεται να αναζητ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "ektos-programmatos-scholika-geymata-to-seismoplikto-1o-d-s-arkalochorioy-epistoli-diamartyrias-ton-goneon",
