@@ -1,5 +1,17 @@
 [
   {
+    "id": "giati-ta-tsip-tis-nvidia-vriskontai-sto-epikentro-tis-pagkosmias-diamachis-gia-tin-techniti-noimosyni",
+    "title": "Γιατί τα τσιπ της Nvidia βρίσκονται στο επίκεντρο της παγκόσμιας διαμάχης για την τεχνητή νοημοσύνη",
+    "url": "https://www.newshub.gr/el/kosmos/giati-ta-tsip-tis-nvidia-vriskontai-sto-epikentro-tis-pagkosmias-diamachis-gia-tin-techniti-noimosyni",
+    "date": "2026-11-11T21:00:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/noid.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/noid.jpg",
+    "summary": "Η υπόθεση κατασκοπείας που συνδέεται με την «ερωτική παγίδα» που φέρεται να στήθηκε στον διευθύνοντα σύμβουλο της Nvidia, φέρνει στο προσκήνιο τη...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "i-germania-vazei-stop-sta-kinezika-drones-ypo-ton-fovo-kataskopeias-sto-mikroskopio-kai-ta-kinezika-exypna-aytokinita",
     "title": "Η Γερμανία βάζει «stop» στα κινέζικα Drones υπό τον φόβο κατασκοπείας-Στο μικροσκόπιο και τα κινεζικά «έξυπνα» αυτοκίνητα",
     "url": "https://www.newshub.gr/el/kosmos/i-germania-vazei-stop-sta-kinezika-drones-ypo-ton-fovo-kataskopeias-sto-mikroskopio-kai-ta-kinezika-exypna-aytokinita",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/drone.jpg",
     "summary": "Μετά τον σάλο που έχει προκληθεί με τις υποθέσεις κατασκοπείας για λογαριασμό της Κίνας και υπό τον φόβο διαρροή πληροφοριών τους, οι ένοπλες δυνάμεις της Γε...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "magnisia-andras-katadikastike-se-katheixi-epta-chronon-gia-ton-viasmo-tis-anipsias-toy",
@@ -6808,17 +6820,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/b418b18ae25c40a2ade28bd0aa5975cf.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/b418b18ae25c40a2ade28bd0aa5975cf.jpg",
     "summary": "Την ανάγκη να τερματιστεί η \"αποικιοκρατική κληρονομιά\" των βρετανικών κυρίαρχων βάσεων στην Κύπρο υπογραμμίζει ο Πρόεδρος της Κύπρου, Νίκος Χριστο...",
-    "featured": false
-  },
-  {
-    "id": "minyma-toy-iranikoy-stratoy-stis-ipa-eimaste-pio-ischyroi-ap-o-ti-otan-archize-o-polemos",
-    "title": "Μήνυμα του ιρανικού στρατού στις ΗΠΑ: Είμαστε πιο ισχυροί  απ’ ό,τι όταν άρχιζε ο πόλεμος",
-    "url": "https://www.newshub.gr/el/geopolitiki/minyma-toy-iranikoy-stratoy-stis-ipa-eimaste-pio-ischyroi-ap-o-ti-otan-archize-o-polemos",
-    "date": "2026-11-07T11:50:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/iran.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/iran.jpg",
-    "summary": "Ο στρατός του Ιράν διαβεβαίωσε ότι είναι ακόμη «πιο ισχυρός» απ&rsquo; ό,τι όταν ξέσπασε ο πόλεμος στη Μέση Ανατολή κι έτοιμος να ανταποδώσει οπο...",
     "featured": false
   },
   {
