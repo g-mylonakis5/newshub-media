@@ -1,5 +1,17 @@
 [
   {
+    "id": "sto-doyvlino-o-kyriakos-mitsotakis-gia-tin-atypi-synodo-toy-eyropaikoy-symvoylioy",
+    "title": "Στο Δουβλίνο ο Κυριάκος Μητσοτάκης για την άτυπη Σύνοδο του Ευρωπαϊκού Συμβουλίου",
+    "url": "https://www.newshub.gr/el/ellada/sto-doyvlino-o-kyriakos-mitsotakis-gia-tin-atypi-synodo-toy-eyropaikoy-symvoylioy",
+    "date": "2026-11-11T16:45:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/mitsotakis-vryxelles-dilwseis-eisodos.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/mitsotakis-vryxelles-dilwseis-eisodos.jpg",
+    "summary": "Ο Κυριάκος Μητσοτάκης θα μεταβεί στo Δουβλίνο εν όψει της Συνόδου Κορυφής της Ευρωπαϊκής Πολιτικής Κοινότητας.\r\n\r\nΗ Σύνοδος θα πραγματοποιηθεί αύριο, Πέμπτη,...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "agios-panteleimonas-ayti-einai-i-24chroni-poy-vrethike-nekri-mesa-se-valitsa-ti-ereynoyn-oi-arches",
     "title": "Άγιος Παντελεήμονας: Αυτή είναι η 24χρονη που βρέθηκε νεκρή μέσα σε βαλίτσα - Τι ερευνούν οι αρχές",
     "url": "https://www.newshub.gr/el/ellada/agios-panteleimonas-ayti-einai-i-24chroni-poy-vrethike-nekri-mesa-se-valitsa-ti-ereynoyn-oi-arches",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/aramata-valitsa-agios.panteleimonas1.jpg",
     "summary": "Νέα στοιχεία έρχονται στη δημοσιότητα σε σχέση με την 24χρονη από την Μπουρκίνα Φάσο, η σορός της οποίας εντοπίστηκε μέσα σε βαλίτσα στον Άγιο Παντελεήμονα κ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "portogalia-saronei-i-kataigida-tsarls-pano-apo-200-ptiseis-akyrothikan-kleista-scholeia-kai-katastimata",
@@ -6776,17 +6788,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/phit.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/phit.jpg",
     "summary": "Στη διατήρηση της πιστοληπτικής αξιολόγησης της Ελλάδας στη βαθμίδα BBB, με σταθερές προοπτικές (outlook), προχώρησε ο διεθνής οίκος αξιολόγησης Fitch Rating...",
-    "featured": false
-  },
-  {
-    "id": "o-stiven-miler-architektonas-tis-antimetanasteytikis-politikis-toy-tramp-neos-prosoparchis-toy-leykoy-oikoy",
-    "title": "Ο Στίβεν Μίλερ, αρχιτέκτονας της αντιμεταναστευτικής πολιτικής του Τραμπ, νέος προσωπάρχης του Λευκού Οίκου",
-    "url": "https://www.newshub.gr/el/kosmos/o-stiven-miler-architektonas-tis-antimetanasteytikis-politikis-toy-tramp-neos-prosoparchis-toy-leykoy-oikoy",
-    "date": "2026-11-07T07:00:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/stephen_miller.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/stephen_miller.jpg",
-    "summary": "Ο άνθρωπος που βρίσκεται πίσω από τη σκληρή μεταναστευτική πολιτική του Ντόναλντ Τραμπ, ο 41χρονος Στίβεν Μίλερ, αναλαμβάνει τα ηνία του προσωπικού του Λευκο...",
     "featured": false
   },
   {
