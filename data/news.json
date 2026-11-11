@@ -1,5 +1,17 @@
 [
   {
+    "id": "to-iran-proeidopoiei-oti-ta-stena-toy-ormoyz-den-tha-epistrepsoyn-sto-propolemiko-kathestos",
+    "title": "Το Ιράν προειδοποιεί ότι τα Στενά του Ορμούζ δεν θα επιστρέψουν στο προπολεμικό καθεστώς",
+    "url": "https://www.newshub.gr/el/geopolitiki/to-iran-proeidopoiei-oti-ta-stena-toy-ormoyz-den-tha-epistrepsoyn-sto-propolemiko-kathestos",
+    "date": "2026-11-11T21:10:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/orm.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/orm.jpg",
+    "summary": "Τα Στενά του Ορμούζ δεν πρόκειται να επιστρέψουν στο προπολεμικό καθεστώς, υπογράμμισε την Τετάρτη (11/11) ο πρόεδρος του κοινοβουλίου του Ιράν, Μοχαμάντ Μπα...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "giati-ta-tsip-tis-nvidia-vriskontai-sto-epikentro-tis-pagkosmias-diamachis-gia-tin-techniti-noimosyni",
     "title": "Γιατί τα τσιπ της Nvidia βρίσκονται στο επίκεντρο της παγκόσμιας διαμάχης για την τεχνητή νοημοσύνη",
     "url": "https://www.newshub.gr/el/kosmos/giati-ta-tsip-tis-nvidia-vriskontai-sto-epikentro-tis-pagkosmias-diamachis-gia-tin-techniti-noimosyni",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/noid.jpg",
     "summary": "Η υπόθεση κατασκοπείας που συνδέεται με την «ερωτική παγίδα» που φέρεται να στήθηκε στον διευθύνοντα σύμβουλο της Nvidia, φέρνει στο προσκήνιο τη...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "i-germania-vazei-stop-sta-kinezika-drones-ypo-ton-fovo-kataskopeias-sto-mikroskopio-kai-ta-kinezika-exypna-aytokinita",
@@ -6809,17 +6821,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/39f53770602e44598b7feb7694025571.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/39f53770602e44598b7feb7694025571.jpg",
     "summary": "Αντί να φθίνει, το κύμα των απειλών για βόμβες σε πτήσεις εντείνεται, σύμφωνα με την αντιπρόεδρο της Ένωσης Ελεγκτών Εναέριας Κυκλοφορίας, Όλγα Τόκη, η οποία...",
-    "featured": false
-  },
-  {
-    "id": "n-christodoylidis-na-termatistei-i-apoikiokratiki-klironomia-ton-vretanikon-vaseon-stin-kypro",
-    "title": "Ν. Χριστοδουλίδης: Να τερματιστεί η αποικιοκρατική κληρονομιά των βρετανικών βάσεων στην Κύπρο",
-    "url": "https://www.newshub.gr/el/kosmos/n-christodoylidis-na-termatistei-i-apoikiokratiki-klironomia-ton-vretanikon-vaseon-stin-kypro",
-    "date": "2026-11-07T12:00:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/b418b18ae25c40a2ade28bd0aa5975cf.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/b418b18ae25c40a2ade28bd0aa5975cf.jpg",
-    "summary": "Την ανάγκη να τερματιστεί η \"αποικιοκρατική κληρονομιά\" των βρετανικών κυρίαρχων βάσεων στην Κύπρο υπογραμμίζει ο Πρόεδρος της Κύπρου, Νίκος Χριστο...",
     "featured": false
   },
   {
