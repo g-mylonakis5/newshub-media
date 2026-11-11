@@ -16,8 +16,28 @@ const { main: build } = require('./build.js');
 
 const INDEX_DIR = path.join(__dirname, 'public/pagefind');
 
+// Κάθε πόσο, το πολύ, ξαναφτιάχνεται το ευρετήριο αναζήτησης.
+//
+// Το χτίσιμο των σελίδων θέλει 14 δευτερόλεπτα· το ευρετήριο 100. Όταν
+// ανεβαίνουν 160 φορές τη μέρα, το ευρετήριο είναι ΟΛΟΣ ο χρόνος
+// αναμονής — και ξαναχτίζεται ολόκληρο για ένα άρθρο.
+//
+// Με το φρένο, η σελίδα ενός άρθρου ανεβαίνει αμέσως· μόνο η ΑΝΑΖΗΤΗΣΗ
+// μπορεί να μην το βρίσκει για λίγα λεπτά. Κανείς δεν ψάχνει κάτι που
+// μόλις βγήκε — το διαβάζει από την αρχική.
+//
+// Μηδέν ή κενό = χωρίς φρένο, όπως πριν. Το ορίζει το Action.
+const FRENO_LEPTA = Number(process.env.EVRETIRIO_LEPTA || 0);
+
 function hasIndex() {
   return fs.existsSync(path.join(INDEX_DIR, 'pagefind.js'));
+}
+
+// Πόσα λεπτά έχει το σημερινό ευρετήριο; Άπειρο αν δεν υπάρχει.
+function indexAgeMin() {
+  const stamp = path.join(INDEX_DIR, 'pagefind.js');
+  if (!fs.existsSync(stamp)) return Infinity;
+  return (Date.now() - fs.statSync(stamp).mtimeMs) / 60000;
 }
 
 // Υπάρχει σελίδα νεότερη από το ευρετήριο;
@@ -94,9 +114,17 @@ function main() {
 
   console.log('');
 
+  // Το φρένο μπαίνει ΠΡΙΝ από κάθε άλλον έλεγχο, αλλά ΠΟΤΕ όταν λείπει
+  // ευρετήριο: χωρίς αυτό η αναζήτηση δεν δουλεύει καθόλου, και αυτό
+  // δεν είναι καθυστέρηση, είναι βλάβη.
+  const ilikia = indexAgeMin();
+
   if (!hasIndex()) {
     console.log('Δεν υπάρχει ευρετήριο αναζήτησης — το φτιάχνω από την αρχή.');
     reindex();
+  } else if (FRENO_LEPTA > 0 && ilikia < FRENO_LEPTA) {
+    console.log(`Το ευρετήριο είναι ${Math.round(ilikia)}' — το φρένο είναι στα ${FRENO_LEPTA}'.`);
+    console.log('Οι σελίδες ανεβαίνουν τώρα· η αναζήτηση θα τις πιάσει στο επόμενο.');
   } else if (changed > 0) {
     console.log(`Άλλαξαν ${changed} αρχεία — ξαναφτιάχνω το ευρετήριο αναζήτησης.`);
     reindex();
