@@ -1,5 +1,17 @@
 [
   {
+    "id": "treis-prosagoges-gia-tis-anathymiaseis-sta-ekpaideytiria-kaisari",
+    "title": "Τρεις προσαγωγές για τις αναθυμιάσεις στα Εκπαιδευτήρια Καίσαρη",
+    "url": "https://www.newshub.gr/el/ellada/treis-prosagoges-gia-tis-anathymiaseis-sta-ekpaideytiria-kaisari",
+    "date": "2026-11-11T16:01:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/maketa-kaisari_2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/maketa-kaisari_2.jpg",
+    "summary": "Σε τρεις προσαγωγές προχώρησε η Αστυνομία μετά τη διαρροή χημικών που είχε ως αποτέλεσμα να καταλήξουν στο νοσοκομείο μαθητές και εργαζόμενοι στα Εκπαιδευτήρ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "kykloma-forodiafygis-stin-thessaloniki-nea-prothesmia-gia-ton-48chrono-dikigoro-eleytheros-me-oroys-o-39chronos-katigoroymenos",
     "title": "Κύκλωμα φοροδιαφυγής στην Θεσσαλονίκη: Νέα προθεσμία για τον 48χρονο δικηγόρο, ελεύθερος με όρους ο 39χρονος κατηγορούμενος",
     "url": "https://www.newshub.gr/el/ellada/kykloma-forodiafygis-stin-thessaloniki-nea-prothesmia-gia-ton-48chrono-dikigoro-eleytheros-me-oroys-o-39chronos-katigoroymenos",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/dikastirio-4-3-768x480-2.jpg",
     "summary": "Νέα 24ωρη προθεσμία για να απολογηθεί ενώπιον της 3ης ειδικής ανακρίτριας έλαβε ο 48χρονος δικηγόρος, που φέρεται να είχε ηγετικό ρόλο στο κύκλωμα φοροδιαφυγ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "prokalei-i-toyrkia-meso-diarroon-gia-tin-ilektriki-diasyndesi-kritis-kyproy-apotrepsame-ellinika-tetelesmena-stin-anatoliki-mesogeio",
@@ -6772,17 +6784,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/xrwma-abeille-marengo-1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/xrwma-abeille-marengo-1.jpg",
     "summary": "Η ηλεκτρική διασύνδεση Ελλάδας &ndash; Κύπρου (Great Sea Interconnector &ndash; GSI) αντιμετωπίζει το πρώτο και καθοριστικό κρας τεστ από τη στιγμή που το πλ...",
-    "featured": false
-  },
-  {
-    "id": "merts-moysoylmanoi-poy-den-anagnorizoyn-oti-i-germania-eythynetai-gia-to-olokaytoma-na-fygoyn-apo-ti-chora",
-    "title": "Μερτς: Μουσουλμάνοι που δεν αναγνωρίζουν ότι η Γερμανία ευθύνεται για το Ολοκαύτωμα να φύγουν από τη χώρα",
-    "url": "https://www.newshub.gr/el/kosmos/merts-moysoylmanoi-poy-den-anagnorizoyn-oti-i-germania-eythynetai-gia-to-olokaytoma-na-fygoyn-apo-ti-chora",
-    "date": "2026-11-07T06:20:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/maketa-merz-1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/maketa-merz-1.jpg",
-    "summary": "Ο καγκελάριος Φρίντριχ Μερτς κάλεσε τους μουσουλμάνους μετανάστες που αρνούνται να αναγνωρίσουν την ιστορική ευθύνη της Γερμανίας για το Ολοκαύτωμα να εγκατα...",
     "featured": false
   },
   {
