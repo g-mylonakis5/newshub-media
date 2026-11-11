@@ -1,5 +1,17 @@
 [
   {
+    "id": "to-irakleio-tima-ton-polioycho-toy-agio-mina-i-zoi-kai-ta-thaymata-toy",
+    "title": "Το Ηράκλειο τιμά τον πολιούχο του Άγιο Μηνά - Η ζωή και τα θαύματά του!",
+    "url": "https://www.newshub.gr/el/kriti/to-irakleio-tima-ton-polioycho-toy-agio-mina-i-zoi-kai-ta-thaymata-toy",
+    "date": "2026-11-11T05:06:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/a-211.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/a-211.jpg",
+    "summary": "Τον πολιούχο του Άγιο Μηνά γιορτάζει το Ηράκλειο σημερα με το μικρό ναό του Αγίου Μηνά να δέχεται απο χθες τους πιστούς που συρρεύσουν για να ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "i-epikoinoniaki-taktiki-tis-toyrkias-meta-ton-apoploy-toy-abeille-marengo-exedose-nea-navtex",
     "title": "Η επικοινωνιακή τακτική της Τουρκίας μετά τον απόπλου του Abeille Marengo – Εξέδωσε νέα Navtex",
     "url": "https://www.newshub.gr/el/geopolitiki/i-epikoinoniaki-taktiki-tis-toyrkias-meta-ton-apoploy-toy-abeille-marengo-exedose-nea-navtex",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/greecefranceelectricity-abeille_marengo-photo.width-1200.jpg",
     "summary": "Νέα NAVTEX για το γαλλικό ερευνητικό πλοίο «Abeille Marengo» εξέδωσε το βράδυ της Τρίτης (10/11) η Τουρκία, λίγες ώρες μετά τον απόπλου του πλοίο...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "mpili-tzoel-anakoinose-tin-proti-episimi-synaylia-toy-meta-tin-epemvasi-ston-egkefalo",
@@ -6680,17 +6692,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/nnt.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/nnt.jpg",
     "summary": "Η Γενική Συνομοσπονδία Εργατών Ελλάδος (ΓΣΕΕ), σε συνεργασία με την Ένωση Εργαζομένων Καταναλωτών Ελλάδας (ΕΕΚΕ), εκφράζει την έντονη ανησυχία της ...",
-    "featured": false
-  },
-  {
-    "id": "nees-apeiles-gia-vomves-se-ptiseis-kai-aerodromia-tis-eyropis",
-    "title": "Nέες απειλές για βόμβες σε πτήσεις και αεροδρόμια της Ευρώπης",
-    "url": "https://www.newshub.gr/el/kosmos/nees-apeiles-gia-vomves-se-ptiseis-kai-aerodromia-tis-eyropis",
-    "date": "2026-11-06T11:40:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/2026-11-05t121717z_1378175007_rc2nhoaf52so_rtrmadp_3_europe-flights-belgium-scaled-1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/2026-11-05t121717z_1378175007_rc2nhoaf52so_rtrmadp_3_europe-flights-belgium-scaled-1.jpg",
-    "summary": "Συνεχίζεται το μπαράζ απειλών για βόμβες σε ευρωπαϊκές πτήσεις, με νέα περιστατικά στην Τσεχία, την Ιταλία και τη Γαλλία να θέτουν σε συναγερμό τις αρχές την...",
     "featured": false
   },
   {
