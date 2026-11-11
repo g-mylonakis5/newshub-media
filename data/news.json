@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/orm.jpg",
     "summary": "Τα Στενά του Ορμούζ δεν πρόκειται να επιστρέψουν στο προπολεμικό καθεστώς, υπογράμμισε την Τετάρτη (11/11) ο πρόεδρος του κοινοβουλίου του Ιράν, Μοχαμάντ Μπα...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "ierapetra-peripeteia-gia-koritsaki-3-5-eton-poy-chathike-mesa-sti-nychta-sti-makrylia",
+    "title": "Ιεράπετρα: Περιπέτεια για κοριτσάκι 3,5 ετών που χάθηκε μέσα στη νύχτα στη Μακρυλιά",
+    "url": "https://www.newshub.gr/el/kriti/ierapetra-peripeteia-gia-koritsaki-3-5-eton-poy-chathike-mesa-sti-nychta-sti-makrylia",
+    "date": "2026-11-11T21:05:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/peripoliko-4.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/peripoliko-4.jpg",
+    "summary": "Περιπέτεια για ένα κοριτσάκι 3,5 ετών στην Μακρυλιά Ιεράπετρας, καθώς- κάτω από συνθήκες που δεν έχουν διευκρινιστεί-απομακρύνθηκε από το σπίτι του και εντοπ...",
+    "author": null,
     "featured": true
   },
   {
@@ -6810,17 +6822,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/maketa-ormouz.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/maketa-ormouz.jpg",
     "summary": "Αντιμέτωπη με μια παρατεταμένη ενεργειακή και ναυτιλιακή κρίση βρίσκεται η διεθνής αγορά, καθώς η συνεχιζόμενη σύγκρουση ΗΠΑ-Ιράν στα Στενά του Ορμούζ αυξάνε...",
-    "featured": false
-  },
-  {
-    "id": "apeiles-gia-vomves-se-ptiseis-enteinetai-to-fainomeno-ti-einai-to-plausible-deniability",
-    "title": "Απειλές για βόμβες σε πτήσεις: Εντείνεται το φαινόμενο-Τι είναι το \"plausible Deniability\"",
-    "url": "https://www.newshub.gr/el/kosmos/apeiles-gia-vomves-se-ptiseis-enteinetai-to-fainomeno-ti-einai-to-plausible-deniability",
-    "date": "2026-11-07T12:10:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/39f53770602e44598b7feb7694025571.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/39f53770602e44598b7feb7694025571.jpg",
-    "summary": "Αντί να φθίνει, το κύμα των απειλών για βόμβες σε πτήσεις εντείνεται, σύμφωνα με την αντιπρόεδρο της Ένωσης Ελεγκτών Εναέριας Κυκλοφορίας, Όλγα Τόκη, η οποία...",
     "featured": false
   },
   {
