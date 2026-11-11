@@ -378,7 +378,20 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   // Με κάθετο στο τέλος — ίδια γραφή με τον κατάλογο sitemap.xml, ώστε η
   // Google να μη βλέπει δύο διευθύνσεις για την ίδια αρχική.
   const full = `${SITE_URL}/${cleanUrl(url)}`;
-  const pic = image || `${SITE_URL}/intro.jpg`;
+  // Η εικόνα που δείχνουν Messenger, Viber και Facebook όταν κολλήσει
+  // κανείς τον σύνδεσμο. Όπου υπάρχει δική της — εξώφυλλο επεισοδίου,
+  // φωτογραφία άρθρου — μπαίνει εκείνη. Αλλιώς το λογότυπο, σε 1200x630
+  // όπως το θέλουν οι πλατφόρμες. Το φτιάχνει το make-share.js.
+  //
+  // Ήταν το intro.jpg: μια φωτογραφία στούντιο που δεν λέει ποιοι είμαστε.
+  // Στην αρχική, που μοιράζεται περισσότερο από κάθε άλλη σελίδα, ο
+  // παραλήπτης έβλεπε ένα μικρόφωνο και από κάτω «NewsHub Media».
+  //
+  // Οι διαστάσεις γράφονται παρακάτω ΜΟΝΟ γι' αυτήν, που την ξέρουμε: με
+  // αυτές το Facebook δείχνει τη μεγάλη κάρτα ήδη από την πρώτη φορά. Για
+  // τα εξώφυλλα του Buzzsprout δεν τις ξέρουμε, και μια λάθος διάσταση
+  // είναι χειρότερη από καμία.
+  const pic = image || `${SITE_URL}/share.jpg`;
 
   // Το canonical δείχνει κανονικά στη ΔΙΚΗ μας διεύθυνση. Εξαίρεση: οι
   // σελίδες άρθρων του newshub.gr, που δηλώνουν πρωτότυπο το δικό τους.
@@ -405,7 +418,9 @@ ${prev ? `  <link rel="prev" href="${SITE_URL}/${prev}">\n` : ''}${next ? `  <li
   <meta property="og:description" content="${desc}">
   <meta property="og:url" content="${full}">
   <meta property="og:image" content="${pic}">
-  <meta name="twitter:card" content="summary_large_image">
+${image ? '' : `  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+`}  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${desc}">
   <meta name="twitter:image" content="${pic}">
