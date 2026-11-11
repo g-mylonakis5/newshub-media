@@ -1,5 +1,17 @@
 [
   {
+    "id": "agios-panteleimonas-ayti-einai-i-24chroni-poy-vrethike-nekri-mesa-se-valitsa-ti-ereynoyn-oi-arches",
+    "title": "Άγιος Παντελεήμονας: Αυτή είναι η 24χρονη που βρέθηκε νεκρή μέσα σε βαλίτσα - Τι ερευνούν οι αρχές",
+    "url": "https://www.newshub.gr/el/ellada/agios-panteleimonas-ayti-einai-i-24chroni-poy-vrethike-nekri-mesa-se-valitsa-ti-ereynoyn-oi-arches",
+    "date": "2026-11-11T16:34:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/aramata-valitsa-agios.panteleimonas1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/aramata-valitsa-agios.panteleimonas1.jpg",
+    "summary": "Νέα στοιχεία έρχονται στη δημοσιότητα σε σχέση με την 24χρονη από την Μπουρκίνα Φάσο, η σορός της οποίας εντοπίστηκε μέσα σε βαλίτσα στον Άγιο Παντελεήμονα κ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "portogalia-saronei-i-kataigida-tsarls-pano-apo-200-ptiseis-akyrothikan-kleista-scholeia-kai-katastimata",
     "title": "Πορτογαλία: Σαρώνει η καταιγίδα «Τσαρλς», πάνω από 200 πτήσεις ακυρώθηκαν - Κλειστά σχολεία και καταστήματα",
     "url": "https://www.newshub.gr/el/kosmos/portogalia-saronei-i-kataigida-tsarls-pano-apo-200-ptiseis-akyrothikan-kleista-scholeia-kai-katastimata",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/000-d76l3ke-1024x683.jpg",
     "summary": "Πάνω από 200 πτήσεις ακυρώθηκαν, σχολεία, εκατοντάδες σούπερ μάρκετ και επιχειρήσεις παρέμειναν κλειστά σήμερα, καθώς η καταιγίδα «Τσαρλς» έπληξε...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "enimerotiki-omilia-me-thema-i-via-kata-ton-gynaikon-sto-k-a-p-i-neapolis",
@@ -6775,17 +6787,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/stephen_miller.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/stephen_miller.jpg",
     "summary": "Ο άνθρωπος που βρίσκεται πίσω από τη σκληρή μεταναστευτική πολιτική του Ντόναλντ Τραμπ, ο 41χρονος Στίβεν Μίλερ, αναλαμβάνει τα ηνία του προσωπικού του Λευκο...",
-    "featured": false
-  },
-  {
-    "id": "michalis-karamalakis-sto-synedrio-tis-k-e-d-e-ischyros-dimos-simainei-ischyro-dimotiko-symvoylio",
-    "title": "Μιχάλης Καραμαλάκης στο Συνέδριο της Κ.Ε.Δ.Ε: «Ισχυρός δήμος σημαίνει ισχυρό δημοτικό συμβούλιο»",
-    "url": "https://www.newshub.gr/el/kriti/michalis-karamalakis-sto-synedrio-tis-k-e-d-e-ischyros-dimos-simainei-ischyro-dimotiko-symvoylio",
-    "date": "2026-11-07T06:50:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/dsc_5283.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/dsc_5283.jpg",
-    "summary": "Στο Ετήσιο Τακτικό Συνέδριο της Κεντρικής Ένωσης Δήμων Ελλάδας, στην Καλαμάτα, μίλησε ο επικεφαλής της μείζονος αντιπολίτευσης του Δήμου Ηρακλείου,...",
     "featured": false
   },
   {
