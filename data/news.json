@@ -1,5 +1,17 @@
 [
   {
+    "id": "nea-epochi-gia-to-gov-gr-telos-sta-psifiaka-pistopoiitika-erchetai-aplopoiisi-diadikasion-ti-allazei-se-kameres-kai-social-media",
+    "title": "Νέα εποχή για το Gov.gr: Τέλος στα ψηφιακά πιστοποιητικά, έρχεται απλοποίηση διαδικασιών  - Τι αλλάζει σε κάμερες και Social Media",
+    "url": "https://www.newshub.gr/el/ellada/nea-epochi-gia-to-gov-gr-telos-sta-psifiaka-pistopoiitika-erchetai-aplopoiisi-diadikasion-ti-allazei-se-kameres-kai-social-media",
+    "date": "2026-11-11T16:56:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/psifiakos-metasximatsismos-gov1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/psifiakos-metasximatsismos-gov1.jpg",
+    "summary": "Ο Δημήτρης Παπαστεργίου αναφέρθηκε στη νέα εποχή του gov.gr, που θα επιτρέπει την ολοκλήρωση διοικητικών διαδικασιών χωρίς οι πολίτες να χρειάζεται να αναζητ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "sto-doyvlino-o-kyriakos-mitsotakis-gia-tin-atypi-synodo-toy-eyropaikoy-symvoylioy",
     "title": "Στο Δουβλίνο ο Κυριάκος Μητσοτάκης για την άτυπη Σύνοδο του Ευρωπαϊκού Συμβουλίου",
     "url": "https://www.newshub.gr/el/ellada/sto-doyvlino-o-kyriakos-mitsotakis-gia-tin-atypi-synodo-toy-eyropaikoy-symvoylioy",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/mitsotakis-vryxelles-dilwseis-eisodos.jpg",
     "summary": "Ο Κυριάκος Μητσοτάκης θα μεταβεί στo Δουβλίνο εν όψει της Συνόδου Κορυφής της Ευρωπαϊκής Πολιτικής Κοινότητας.\r\n\r\nΗ Σύνοδος θα πραγματοποιηθεί αύριο, Πέμπτη,...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "agios-panteleimonas-ayti-einai-i-24chroni-poy-vrethike-nekri-mesa-se-valitsa-ti-ereynoyn-oi-arches",
@@ -6777,17 +6789,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/dikastiria-xanion.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/dikastiria-xanion.jpg",
     "summary": "Με δική του ευθύνη και όχι καθ&rsquo;υποβολή από κάποιον Αρχάγγελο ο 70χρονος πρώην ιερέας έβαλε φωτιά και έκαψε το σπίτι της εν διαστάσει συζύγου ...",
-    "featured": false
-  },
-  {
-    "id": "fitch-ametavlito-sto-bbb-to-elliniko-axiochreo-statheres-oi-prooptikes-tis-oikonomias",
-    "title": "Fitch: Αμετάβλητο στο Bbb το ελληνικό αξιόχρεο-Σταθερές οι προοπτικές της οικονομίας",
-    "url": "https://www.newshub.gr/el/oikonomia/fitch-ametavlito-sto-bbb-to-elliniko-axiochreo-statheres-oi-prooptikes-tis-oikonomias",
-    "date": "2026-11-07T07:10:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/phit.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/phit.jpg",
-    "summary": "Στη διατήρηση της πιστοληπτικής αξιολόγησης της Ελλάδας στη βαθμίδα BBB, με σταθερές προοπτικές (outlook), προχώρησε ο διεθνής οίκος αξιολόγησης Fitch Rating...",
     "featured": false
   },
   {
