@@ -51,6 +51,7 @@
     <a class="tab" href="#diafimiseis" data-tab="diafimiseis">Διαφημίσεις</a>
     <a class="tab" href="#fotos" data-tab="fotos">Φωτογραφίες</a>
     <a class="tab" href="#katigories" data-tab="katigories">Κατηγορίες</a>
+    <a class="tab" href="#themata" data-tab="themata">Θέματα αρχικής</a>
     <a class="tab" href="#prosopa" data-tab="prosopa">Πρόσωπα</a>
     <a class="tab" href="#ekpompes" data-tab="ekpompes">Εκπομπές</a>
     <a class="tab" href="#elleipseis" data-tab="elleipseis">Επεισόδια</a>
@@ -435,6 +436,41 @@
       <p class="more">
         <button type="button" class="btn btn--ghost" data-cat-more hidden>Δείξε περισσότερα</button>
       </p>
+    </section>
+
+    <!-- ========== ΘΕΜΑΤΑ ΑΡΧΙΚΗΣ ==========
+         Η καρτέλα «Κατηγορίες» λέει ΤΙ είναι το κάθε κομμάτι. Αυτή εδώ
+         λέει ΠΟΙΑ θέματα παίρνουν θέση στην αρχική και με ποια σειρά.
+         Δύο διαφορετικές δουλειές, δύο καρτέλες. -->
+    <section class="panel" data-panel="themata">
+      <header class="panel-head">
+        <div>
+          <h1>Θέματα αρχικής</h1>
+          <p class="hint">Ποια θέματα παίρνουν δική τους θέση στην αρχική.
+            Όσα δεν διαλέξεις πέφτουν μόνα τους στο «Και ακόμα», με σειρά
+            το πλήθος τους.</p>
+        </div>
+        <button type="button" class="btn btn--go" data-save="themata" disabled>Αποθήκευση</button>
+      </header>
+
+      <h2 class="sub">Οι τέσσερις μεγάλες λωρίδες</h2>
+      <p class="hint">Με τη σειρά που βγαίνουν στη σελίδα. Η καθεμία δείχνει
+        μία μεγάλη κάρτα και τρεις μικρές.</p>
+
+      <div class="slots" data-th-rows></div>
+      <p class="hint" data-th-note></p>
+
+      <div class="thpick" data-th-pick-row></div>
+
+      <h2 class="sub">Οι δύο ενότητες σε πλαίσιο</h2>
+      <p class="hint">Στο τέλος της αρχικής, με χρώμα και εικονίδιο.
+        Η πρώτη βγαίνει πράσινη, η δεύτερη μπλε — το χρώμα ακολουθεί τη
+        θέση, όχι το θέμα.</p>
+
+      <div class="slots" data-th-spots></div>
+      <p class="hint" data-th-spot-note></p>
+
+      <div class="thpick" data-th-pick-spot></div>
     </section>
 
     <section class="panel" data-panel="prosopa">
