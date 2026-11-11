@@ -1,5 +1,17 @@
 [
   {
+    "id": "portogalia-saronei-i-kataigida-tsarls-pano-apo-200-ptiseis-akyrothikan-kleista-scholeia-kai-katastimata",
+    "title": "Πορτογαλία: Σαρώνει η καταιγίδα «Τσαρλς», πάνω από 200 πτήσεις ακυρώθηκαν - Κλειστά σχολεία και καταστήματα",
+    "url": "https://www.newshub.gr/el/kosmos/portogalia-saronei-i-kataigida-tsarls-pano-apo-200-ptiseis-akyrothikan-kleista-scholeia-kai-katastimata",
+    "date": "2026-11-11T16:23:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/000-d76l3ke-1024x683.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/000-d76l3ke-1024x683.jpg",
+    "summary": "Πάνω από 200 πτήσεις ακυρώθηκαν, σχολεία, εκατοντάδες σούπερ μάρκετ και επιχειρήσεις παρέμειναν κλειστά σήμερα, καθώς η καταιγίδα «Τσαρλς» έπληξε...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "enimerotiki-omilia-me-thema-i-via-kata-ton-gynaikon-sto-k-a-p-i-neapolis",
     "title": "Ενημερωτική ομιλία με θέμα «Η βία κατά των Γυναικών» στο Κ.Α.Π.Η. Νεάπολης",
     "url": "https://www.newshub.gr/el/exodos/enimerotiki-omilia-me-thema-i-via-kata-ton-gynaikon-sto-k-a-p-i-neapolis",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/kapi_neapoli_01.jpg",
     "summary": "Το Τμήμα Κοινωνικής Προστασίας & Παιδείας του Δήμου Αγίου Νικολάου ενημερώνει τα μέλη του Κ.Α.Π.Η. Νεάπολης ότι την Παρασκευή 13 Νοεμβρίου 2026 και ώρα 1...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "treis-prosagoges-gia-tis-anathymiaseis-sta-ekpaideytiria-kaisari",
@@ -6774,17 +6786,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/dsc_5283.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/dsc_5283.jpg",
     "summary": "Στο Ετήσιο Τακτικό Συνέδριο της Κεντρικής Ένωσης Δήμων Ελλάδας, στην Καλαμάτα, μίλησε ο επικεφαλής της μείζονος αντιπολίτευσης του Δήμου Ηρακλείου,...",
-    "featured": false
-  },
-  {
-    "id": "stayros-arnaoytakis-aionios-anexitilos-faros-ethnikis-axioprepeias-kai-antistasis-o-martyrikos-avdellas",
-    "title": "Σταύρος Αρναουτάκης: «Αιώνιος, ανεξίτηλος φάρος εθνικής αξιοπρέπειας και αντίστασης ο Μαρτυρικός Αβδελλάς»",
-    "url": "https://www.newshub.gr/el/kriti/stayros-arnaoytakis-aionios-anexitilos-faros-ethnikis-axioprepeias-kai-antistasis-o-martyrikos-avdellas",
-    "date": "2026-11-07T06:40:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/77777.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/77777.jpg",
-    "summary": "Ο Μαρτυρικός Αβδελλάς τιμά τη μνήμη των ανθρώπων που εκτελέστηκαν από τα γερμανικά στρατεύματα Κατοχής στον Γουρνόλακκο, τον Σεπτέμβριο του 1943.\r\n...",
     "featured": false
   },
   {
