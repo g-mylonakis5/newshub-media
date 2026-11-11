@@ -1,5 +1,17 @@
 [
   {
+    "id": "stoys-35-000-oi-thanatoi-kathe-chrono-stin-ee-apo-anthektika-vaktiria",
+    "title": "Στους 35.000 οι θάνατοι κάθε χρόνο στην ΕΕ από ανθεκτικά βακτήρια",
+    "url": "https://www.newshub.gr/el/ygeia/stoys-35-000-oi-thanatoi-kathe-chrono-stin-ee-apo-anthektika-vaktiria",
+    "date": "2026-11-11T11:49:00.000Z",
+    "category": "Υγεία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/pharmaka.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/pharmaka.jpg",
+    "summary": "Κάθε χρόνο, περίπου 35.000 άνθρωποι στην Ευρωπαϊκή Ένωση χάνουν τη ζωή τους από λοιμώξεις που τα αντιβιοτικά δεν μπορούν πλέον να θεραπεύσουν. Σύμφωνα με εκτ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "naypaktos-dyo-syllipseis-gia-ti-diarrixi-kosmimatopoleioy-me-leia-60-000-eyro",
     "title": "Ναύπακτος: Δύο συλλήψεις για τη διάρρηξη κοσμηματοπωλείου με λεία 60.000 ευρώ",
     "url": "https://www.newshub.gr/el/ellada/naypaktos-dyo-syllipseis-gia-ti-diarrixi-kosmimatopoleioy-me-leia-60-000-eyro",
@@ -6745,17 +6757,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/dddd.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/dddd.jpg",
     "summary": "Συνεχίζονται οι επιχειρήσεις κατά της αφισορύπανσης από τον Δήμο Ηρακλείου, με καθαιρέσεις πανό και αφισών που έχουν παράνομα τοποθετηθεί σε διάφορα σημεία τ...",
-    "featured": false
-  },
-  {
-    "id": "metanasteytiko-lemvos-me-40-metanastes-notia-ton-kalon-limenon",
-    "title": "Μεταναστευτικό: Λέμβος με 40 μετανάστες νότια των Καλών Λιμένων",
-    "url": "https://www.newshub.gr/el/kriti/metanasteytiko-lemvos-me-40-metanastes-notia-ton-kalon-limenon",
-    "date": "2026-11-06T18:44:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/metanastes-barka-phrontex.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/metanastes-barka-phrontex.jpg",
-    "summary": "Επιχείρηση περισυλλογής περίπου 40 μεταναστών πραγματοποιήθηκε στη θαλάσσια περιοχή νότια της Κρήτης, όταν εναέριο μέσο της δύναμης Frontex εντόπισε λέμβο πε...",
     "featured": false
   },
   {
