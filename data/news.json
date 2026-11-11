@@ -1,5 +1,29 @@
 [
   {
+    "id": "to-iran-apeilei-me-pligmata-akoma-kai-se-amerikanikes-vaseis-stin-eyropi",
+    "title": "Το Ιράν απειλεί με πλήγματα ακόμα και σε αμερικανικές βάσεις στην Ευρώπη",
+    "url": "https://www.newshub.gr/el/geopolitiki/to-iran-apeilei-me-pligmata-akoma-kai-se-amerikanikes-vaseis-stin-eyropi",
+    "date": "2026-11-11T17:29:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/iran_pyrinika.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/iran_pyrinika.jpg",
+    "summary": "Με επιθέσεις εναντίον αμερικανικών στρατιωτικών βάσεων ακόμη και στην Ευρώπη απειλεί το Ιράν, σε περίπτωση που οι Ηνωμένες Πολιτείες εξαπολύσουν νέα πλήγματα...",
+    "author": null,
+    "featured": true
+  },
+  {
+    "id": "synelifthi-o-idioktitis-tis-etaireias-poy-ekane-tin-syntirisi-sta-ekpaideytiria-kaisari-prokalontas-anathymiaseis-eleytheroi-oi-alloi-dyo",
+    "title": "Συνελήφθη ο ιδιοκτήτης της εταιρείας που έκανε την συντήρηση στα Εκπαιδευτήρια Καίσαρη, προκαλώντας αναθυμιάσεις -Ελεύθεροι οι άλλοι δύο",
+    "url": "https://www.newshub.gr/el/ellada/synelifthi-o-idioktitis-tis-etaireias-poy-ekane-tin-syntirisi-sta-ekpaideytiria-kaisari-prokalontas-anathymiaseis-eleytheroi-oi-alloi-dyo",
+    "date": "2026-11-11T17:22:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/koropi-ximiko1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/koropi-ximiko1.jpg",
+    "summary": "Ο ιδιοκτήτης της εταιρείας καθαρισμού από τις εργασίες της οποίας προκλήθηκαν οι αναθυμιάσεις στα εκπαιδευτήρια Καίσαρη στο Κορωπί συνελήφθη.\r\n\r\nΩστόσο, με π...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "o-giorgos-gerapetritis-enimeronei-toys-politikoys-archigoys-to-savvato-gia-tin-ilektriki-diasyndesi-kritis-kyproy",
     "title": "Ο Γιώργος Γεραπετρίτης ενημερώνει τους πολιτικούς αρχηγούς το Σάββατο για την ηλεκτρική διασύνδεση Κρήτης-Κύπρου",
     "url": "https://www.newshub.gr/el/kriti/o-giorgos-gerapetritis-enimeronei-toys-politikoys-archigoys-to-savvato-gia-tin-ilektriki-diasyndesi-kritis-kyproy",
@@ -9,7 +33,31 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/gerapetritis.jpg",
     "summary": "Τους αρχηγούς των πολιτικών κομμάτων αναμένεται να ενημερώσει το Σάββατο 14 Νοεμβρίου ο Γιώργος Γεραπετρίτης.\r\n\r\nΣύμφωνα με ανακοίνωση του υπουργείου, ο κ. Γ...",
     "author": null,
-    "featured": true
+    "featured": false
+  },
+  {
+    "id": "triimero-logoy-kai-technis-ston-agio-nikolao-diakekrimenoi-anthropoi-tis-technis-ton-grammaton-kai-tis-epistimis-synomiloyn-gia-ton-chrono",
+    "title": "«Τριήμερο Λόγου και Τέχνης» στον Άγιο Νικόλαο-Διακεκριμένοι άνθρωποι της τέχνης, των γραμμάτων και της επιστήμης συνομιλούν για τον «Χρόνο»",
+    "url": "https://www.newshub.gr/el/exodos/triimero-logoy-kai-technis-ston-agio-nikolao-diakekrimenoi-anthropoi-tis-technis-ton-grammaton-kai-tis-epistimis-synomiloyn-gia-ton-chrono",
+    "date": "2026-11-11T17:17:00.000Z",
+    "category": "Έξοδος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/aphisa_othones_daean.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/aphisa_othones_daean.jpg",
+    "summary": "Από τις 13 έως τις 15 Νοεμβρίου 2026 το Κινηματοθέατρο ΡΕΞ στον Άγιο Νικόλαο μετατρέπεται σε έναν ανοιχτό χώρο διαλόγου φιλοξενώντας το Τριήμερο Λόγου και Τέ...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "metanastes-vrethikan-oi-diakinites-ton-105-metanaston-se-gaydo-kai-gortyna",
+    "title": "Μετανάστες: Βρέθηκαν οι διακινητές των 105 μεταναστών σε Γαύδο και Γόρτυνα",
+    "url": "https://www.newshub.gr/el/kriti/metanastes-vrethikan-oi-diakinites-ton-105-metanaston-se-gaydo-kai-gortyna",
+    "date": "2026-11-11T17:15:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/xeiropedes-1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/xeiropedes-1.jpg",
+    "summary": "Στη σύλληψη δύο ατόμων ως τους διακινητές των δύο χθεσινών καραβανιών&hellip; μεταναστών ανοιχτά της Κρήτης προχώρησαν οι λιμενικές αρχές.\r\n\r\nΑναλυτικά:\r\n\r\n-...",
+    "author": null,
+    "featured": false
   },
   {
     "id": "oie-pano-apo-ena-ekatommyrio-anthropoi-antimetopizoyn-oxeia-episitistiki-anasfaleia-ston-livano",
@@ -6743,50 +6791,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/maketa-el-ninio.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/maketa-el-ninio.jpg",
     "summary": "«Η επίδραση του φαινομένου Ελ Νίνιο στην Ευρώπη και στη Μεσόγειο είναι έμμεση. Μέσω αλλαγών στην ατμοσφαιρική κυκλοφορία μπορεί να επηρεαστούν η θέση κ...",
-    "featured": false
-  },
-  {
-    "id": "ta-mystika-gia-ton-koympara-neas-genias-xekina-apo-1-200-eyro-kai-ayxanetai-10-kathe-5etia",
-    "title": "Τα «μυστικά» για τον «κουμπαρά» νέας γενιάς: Ξεκινά από 1.200 ευρώ και αυξάνεται 10% κάθε 5ετία",
-    "url": "https://www.newshub.gr/el/oikonomia/ta-mystika-gia-ton-koympara-neas-genias-xekina-apo-1-200-eyro-kai-ayxanetai-10-kathe-5etia",
-    "date": "2026-11-07T08:10:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/gb.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/gb.jpg",
-    "summary": "Στις αρχές του 2027 αναμένεται να ενεργοποιηθεί ο «κουμπαράς» της νέας γενιάς και σε πρώτη φάση θα αφορά τα παιδιά που έχουν γεννηθεί από το 2025...",
-    "featured": false
-  },
-  {
-    "id": "ekdilosi-irakleio-dialogoi-tis-neas-genias-diacheirisi-ydaton-stin-kriti",
-    "title": "Εκδήλωση-Ηράκλειο: Διάλογοι της Νέας Γενιάς-«Διαχείριση Υδάτων στην Κρήτη»",
-    "url": "https://www.newshub.gr/el/kriti/ekdilosi-irakleio-dialogoi-tis-neas-genias-diacheirisi-ydaton-stin-kriti",
-    "date": "2026-11-07T08:00:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/diall.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/diall.jpg",
-    "summary": "Οι «Διάλογοι της Νέας Γενιάς» αποτελούν μια πρωτοβουλία της Περιφέρειας Κρήτης που φιλοδοξεί να φέρει τους νέους πιο κοντά στα σύγχρονα...",
-    "featured": false
-  },
-  {
-    "id": "oi-ipa-epikiryxan-me-20-ekat-dolaria-plirofories-gia-to-pyriniko-programma-toy-iran",
-    "title": "Οι ΗΠΑ «επικήρυξαν» με 20 εκατ. δολάρια πληροφορίες για το πυρηνικό πρόγραμμα του Ιράν",
-    "url": "https://www.newshub.gr/el/geopolitiki/oi-ipa-epikiryxan-me-20-ekat-dolaria-plirofories-gia-to-pyriniko-programma-toy-iran",
-    "date": "2026-11-07T07:50:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/doo.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/doo.jpg",
-    "summary": "Η κυβέρνηση των ΗΠΑ προσφέρει αμοιβή ως και 20 εκατομμυρίων δολαρίων «και πιθανή μετεγκατάσταση» σε οποιοδήποτε πρόσωπο δώσει «πληροφορίες&...",
-    "featured": false
-  },
-  {
-    "id": "deyai-synechizontai-me-entatikoys-rythmoys-oi-ergasies-gia-tin-apokatastasi-tis-vlavis-toy-agogoy-ton-malion",
-    "title": "ΔΕΥΑΗ: Συνεχίζονται με εντατικούς ρυθμούς οι εργασίες για την αποκατάσταση της βλάβης του αγωγού των Μαλίων",
-    "url": "https://www.newshub.gr/el/kriti/deyai-synechizontai-me-entatikoys-rythmoys-oi-ergasies-gia-tin-apokatastasi-tis-vlavis-toy-agogoy-ton-malion",
-    "date": "2026-11-07T07:40:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/deuae-3.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/deuae-3.jpg",
-    "summary": "Με εντατικούς ρυθμούς συνεχίζονται από τη ΔΕΥΑΗ οι εργασίες για την αποκατάσταση της σοβαρής βλάβης που προκλήθηκε αργά το βράδυ της Παρασκευής 6/1...",
     "featured": false
   },
   {
