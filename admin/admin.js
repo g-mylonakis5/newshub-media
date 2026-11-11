@@ -1177,6 +1177,241 @@ function loadAutoCats(){
 }
 
 // ---------------------------------------------------------------------
+// Θέματα αρχικής — ποια παίρνουν θέση και με ποια σειρά
+// ---------------------------------------------------------------------
+//
+// Η προηγούμενη καρτέλα λέει ΤΙ είναι το κάθε κομμάτι. Αυτή λέει ποια
+// θέματα βγαίνουν μεγάλα στην αρχική.
+//
+// Η αρχική έχει τρία επίπεδα: τέσσερις μεγάλες λωρίδες, μετά το «Και
+// ακόμα» με ό,τι περισσεύει, και στο τέλος δύο ενότητες σε χρωματιστό
+// πλαίσιο. Τα δύο άκρα διαλέγονται εδώ· το «Και ακόμα» γεμίζει μόνο
+// του με ό,τι έμεινε, οπότε δεν έχει ρύθμιση.
+//
+// Η λίστα των θεμάτων και το πλήθος τους έρχονται από το build
+// (topics.json) — ίδιος λόγος με το auto-categories.json: τα ξέρει
+// εκείνο, και αντίγραφο εδώ θα απέκλινε.
+
+var TH_ROWS = 4;      // όσες λωρίδες δείχνει η αρχική
+var TH_SPOTS = 2;     // όσες ενότητες σε πλαίσιο
+
+var th = {
+  list: [],                                  // [{name, key, n}] φθίνουσα
+  defaults: { featured: [], spotlight: [] }, // οι προεπιλογές του κώδικα
+};
+
+function thReady(file){
+  var f = file && typeof file === 'object' ? file : {};
+  th.list = Array.isArray(f.list) ? f.list : [];
+  var d = f.defaults && typeof f.defaults === 'object' ? f.defaults : {};
+  th.defaults = {
+    featured: Array.isArray(d.featured) ? d.featured : [],
+    spotlight: Array.isArray(d.spotlight) ? d.spotlight : [],
+  };
+}
+
+// Διάλεξε κανείς, ή ισχύει ακόμα η προεπιλογή του κώδικα;
+function thChosen(key){
+  var v = state.curation[key];
+  return Array.isArray(v) && v.length ? v : null;
+}
+
+// Τι βγαίνει ΤΩΡΑ στο site — είτε το διάλεξε άνθρωπος είτε όχι.
+function thNow(key, fallback, max){
+  return (thChosen(key) || fallback).slice(0, max);
+}
+
+function thRows(){ return thNow('featuredTopics', th.defaults.featured, TH_ROWS); }
+
+// Ό,τι έχει ήδη λωρίδα δεν ξαναμπαίνει σε πλαίσιο — θα έβγαινε δύο
+// φορές στην ίδια σελίδα. Ίδιος κανόνας με το spotlightTopics() του build.
+function thSpots(){
+  var pano = thRows();
+  return thNow('spotlightTopics', th.defaults.spotlight, TH_SPOTS)
+    .filter(function (name) { return pano.indexOf(name) < 0; });
+}
+
+function thCount(name){
+  var hit = null;
+  th.list.forEach(function (t) { if (!hit && t.name === name) hit = t; });
+  return hit ? hit.n : 0;
+}
+
+// Μία θέση. Χωρίς εικόνα: το θέμα δεν έχει δική του φωτογραφία, και
+// ένα άδειο πλαίσιο δίπλα σε κάθε γραμμή θα ήταν σκέτος θόρυβος.
+function thSlot(name, i, total, auto, up, del){
+  var n = thCount(name);
+
+  return '<div class="slot' + (auto ? ' slot--auto' : '') + '">'
+    + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
+    + '<div class="slot-text">'
+    + '<p class="slot-title">' + esc(name) + '</p>'
+    + '<p class="slot-meta">' + (n ? n.toLocaleString('el') + ' κομμάτια' : 'άδειο — δεν θα βγει καθόλου') + '</p>'
+    + '</div>'
+    + '<span class="slot-acts">'
+    + (auto
+      ? '<span class="pill pill--draft">προεπιλογή</span>'
+      : '<button type="button" data-th-' + up + '="' + i + '" aria-label="Πάνω"'
+        + (i === 0 ? ' disabled' : '') + '>↑</button>'
+        + '<button type="button" data-th-' + up + 'down="' + i + '" aria-label="Κάτω"'
+        + (i === total - 1 ? ' disabled' : '') + '>↓</button>'
+        + '<button type="button" data-th-' + del + '="' + i + '" aria-label="Αφαίρεση">✕</button>')
+    + '</span></div>';
+}
+
+// Οι ετικέτες επιλογής. Ίδιο σχήμα με τα κουτάκια της καρτέλας
+// «Κατηγορίες» — ο συντάκτης τα έχει ήδη δει.
+function thPicker(box, chosen, attr, full){
+  box.innerHTML = th.list.map(function (t) {
+    var on = chosen.indexOf(t.name) > -1;
+    return '<button type="button" class="catopt' + (on ? ' is-on' : '') + '"'
+      + (!on && full ? ' disabled' : '')
+      + ' data-' + attr + '="' + esc(t.name) + '">'
+      + esc(t.name) + ' <span class="thnum">' + t.n.toLocaleString('el') + '</span>'
+      + '</button>';
+  }).join('');
+}
+
+function drawThemata(){
+  var rows = thRows();
+  var autoRows = !thChosen('featuredTopics');
+
+  $('[data-th-rows]').innerHTML = rows.length
+    ? rows.map(function (name, i) {
+      return thSlot(name, i, rows.length, autoRows, 'up', 'del');
+    }).join('')
+    : '<p class="muted">Καμία λωρίδα — η αρχική πάει κατευθείαν στο «Και ακόμα».</p>';
+
+  $('[data-th-note]').textContent = autoRows
+    ? 'Ισχύει η προεπιλογή του site. Μόλις αλλάξεις κάτι, κλειδώνει όπως το βλέπεις.'
+    : rows.length + ' από ' + TH_ROWS + ' θέσεις.';
+
+  var spots = thSpots();
+  var autoSpots = !thChosen('spotlightTopics');
+
+  $('[data-th-spots]').innerHTML = spots.length
+    ? spots.map(function (name, i) {
+      return thSlot(name, i, spots.length, autoSpots, 'sup', 'sdel');
+    }).join('')
+    : '<p class="muted">Καμία ενότητα σε πλαίσιο — η αρχική τελειώνει στο «Και ακόμα».</p>';
+
+  $('[data-th-spot-note]').textContent = autoSpots
+    ? 'Ισχύει η προεπιλογή του site.'
+    : spots.length + ' από ' + TH_SPOTS + ' θέσεις.';
+
+  thPicker($('[data-th-pick-row]'), rows, 'th-add', rows.length >= TH_ROWS);
+  thPicker($('[data-th-pick-spot]'), spots, 'th-sadd', spots.length >= TH_SPOTS);
+}
+
+// Γράφει μια λίστα στο curation. Η ΠΡΩΤΗ αλλαγή ξεκινά από ό,τι βγαίνει
+// τώρα στο site, όχι από το μηδέν — αλλιώς ο συντάκτης που προσθέτει
+// ένα θέμα θα έσβηνε άθελά του τα τέσσερα που ίσχυαν.
+function thSave(key, list){
+  state.curation[key] = list;
+  drawThemata();
+  thDirty(true);
+}
+
+function thToggle(key, now, max, name){
+  var list = now.slice();
+  var at = list.indexOf(name);
+
+  if (at > -1) {
+    list.splice(at, 1);
+  } else {
+    if (list.length >= max) {
+      say('Οι θέσεις είναι γεμάτες. Αφαίρεσε μία πρώτα.', 'bad');
+      return;
+    }
+    list.push(name);
+  }
+
+  thSave(key, list);
+}
+
+function thMove(key, now, i, step){
+  var list = now.slice();
+  var to = i + step;
+  if (to < 0 || to >= list.length) return;
+  var moved = list.splice(i, 1)[0];
+  list.splice(to, 0, moved);
+  thSave(key, list);
+}
+
+function thRemove(key, now, i){
+  var list = now.slice();
+  list.splice(i, 1);
+  thSave(key, list);
+}
+
+function thDirty(on){
+  state.dirty = on;
+  $('[data-save="themata"]').disabled = !on;
+}
+
+function saveThemata(){
+  say('Αποθηκεύεται…');
+  api('curation', 'PUT', state.curation).then(function () {
+    thDirty(false);
+    say('Αποθηκεύτηκε. Φαίνεται στο site μόλις ξαναχτιστεί (~2 λεπτά).', 'ok');
+  }).catch(function (err) {
+    say('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
+  });
+}
+
+function wireThemata(){
+  // Οι τέσσερις λωρίδες: μετακίνηση και αφαίρεση.
+  $('[data-th-rows]').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.thUp !== undefined) thMove('featuredTopics', thRows(), +b.dataset.thUp, -1);
+    else if (b.dataset.thUpdown !== undefined) thMove('featuredTopics', thRows(), +b.dataset.thUpdown, 1);
+    else if (b.dataset.thDel !== undefined) thRemove('featuredTopics', thRows(), +b.dataset.thDel);
+  });
+
+  $('[data-th-spots]').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.thSup !== undefined) thMove('spotlightTopics', thSpots(), +b.dataset.thSup, -1);
+    else if (b.dataset.thSupdown !== undefined) thMove('spotlightTopics', thSpots(), +b.dataset.thSupdown, 1);
+    else if (b.dataset.thSdel !== undefined) thRemove('spotlightTopics', thSpots(), +b.dataset.thSdel);
+  });
+
+  $('[data-th-pick-row]').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-th-add]');
+    if (!b) return;
+    var name = b.dataset.thAdd;
+    // Το ίδιο θέμα δεν γίνεται να είναι και λωρίδα και πλαίσιο.
+    if (thSpots().indexOf(name) > -1) {
+      say('Το «' + name + '» είναι ήδη ενότητα σε πλαίσιο. Βγάλ\' το από εκεί πρώτα.', 'bad');
+      return;
+    }
+    thToggle('featuredTopics', thRows(), TH_ROWS, name);
+  });
+
+  $('[data-th-pick-spot]').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-th-sadd]');
+    if (!b) return;
+    var name = b.dataset.thSadd;
+    if (thRows().indexOf(name) > -1) {
+      say('Το «' + name + '» έχει ήδη δική του λωρίδα. Βγάλ\' το από εκεί πρώτα.', 'bad');
+      return;
+    }
+    thToggle('spotlightTopics', thSpots(), TH_SPOTS, name);
+  });
+
+  $('[data-save="themata"]').addEventListener('click', saveThemata);
+}
+
+// Η απογραφή των θεμάτων. ΑΝΕΚΤΙΚΟ: αν δεν έχει τρέξει build ακόμα, η
+// καρτέλα δείχνει άδεια λίστα αντί να ρίξει όλο το διαχειριστικό.
+function loadTopics(){
+  return fetch('topics.json').then(function (r) {
+    return r.ok ? r.json() : null;
+  }).catch(function () { return null; });
+}
+
+// ---------------------------------------------------------------------
 // Must read — ποια άρθρα του newshub.gr ανοίγουν ΕΔΩ
 // ---------------------------------------------------------------------
 //
@@ -4725,6 +4960,7 @@ function wire(){
   wireOpinions();
   wireAds();
   wireCats();
+  wireThemata();
   wirePeople();
   wirePairs();
 
@@ -4776,6 +5012,10 @@ function boot(){
     fetch('/api/poios')
       .then(function (res) { return res.ok ? res.json() : null; })
       .catch(function () { return null; }),
+    // Τα θέματα με το πλήθος τους, για την καρτέλα «Θέματα αρχικής».
+    // ΑΝΕΚΤΙΚΟ: το αρχείο το γράφει το build — πριν το πρώτο τρέξιμο
+    // δεν υπάρχει.
+    loadTopics(),
   ]).then(function (r) {
     // Το αρχείο μπορεί να μην υπάρχει ακόμα — τότε το API δίνει null.
     var photos = r[12] && typeof r[12] === 'object' ? r[12] : {};
@@ -4796,6 +5036,7 @@ function boot(){
     wrReady(r[14]);
     adReady(r[15]);
     me.email = (r[16] && typeof r[16].email === 'string') ? r[16].email : '';
+    thReady(r[17]);
 
     pp.file = ppReady(r[6]);
     var census = r[7] || {};
@@ -4821,6 +5062,7 @@ function boot(){
     drawWriters();
     drawAds();
     drawCats();
+    drawThemata();
     drawPeople();
     drawShows();
     drawPrYears();

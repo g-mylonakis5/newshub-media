@@ -2383,9 +2383,45 @@ const SPOTLIGHT_TOPICS = [
   ['Tech-Hub', 'tech', 'Τεχνολογία, ψηφιακά και τεχνητή νοημοσύνη'],
 ];
 
+// Πόσες θέσεις υπάρχουν. Και οι δύο είναι όρια σχεδίασης, όχι τεχνικά:
+// πέντε λωρίδες κάνουν την αρχική κατάλογο, τρίτη ενότητα σε πλαίσιο
+// κάνει την ουρά της σελίδας μακρύτερη από το κυρίως σώμα της.
+const FEATURED_MAX = 4;
+const SPOTLIGHT_MAX = 2;
+
+// Ο υπότιτλος κάθε ενότητας σε πλαίσιο. Όποιο θέμα δεν γράφεται εδώ
+// βγαίνει χωρίς υπότιτλο — καλύτερα τίποτα παρά λάθος λόγια.
+const SPOTLIGHT_BLURB = Object.fromEntries(
+  SPOTLIGHT_TOPICS.map(([name, , blurb]) => [name, blurb]),
+);
+
+// Τα 4 θέματα με λωρίδα. Ό,τι διάλεξε το διαχειριστικό, αλλιώς η λίστα
+// του κώδικα.
 function featuredTopics(){
   const picked = curation().featuredTopics;
-  return Array.isArray(picked) && picked.length ? picked : FEATURED_TOPICS;
+  const names = Array.isArray(picked) && picked.length ? picked : FEATURED_TOPICS;
+  return names.slice(0, FEATURED_MAX);
+}
+
+// Τα θέματα σε πλαίσιο. Η παραλλαγή του γραφικού ΔΕΝ ακολουθεί το θέμα
+// αλλά τη ΘΕΣΗ: η πρώτη ενότητα βγαίνει πράσινη, η δεύτερη μπλε. Έτσι
+// ο συντάκτης μπορεί να βάλει όποιο θέμα θέλει χωρίς να γραφτεί χρώμα
+// και εικονίδιο γι' αυτό.
+//
+// Ό,τι έχει ήδη λωρίδα δεν ξαναμπαίνει εδώ: θα έβγαινε δύο φορές στην
+// ίδια σελίδα, μία μεγάλη και μία σε πλαίσιο.
+function spotlightTopics(){
+  const picked = curation().spotlightTopics;
+  const names = Array.isArray(picked) && picked.length
+    ? picked
+    : SPOTLIGHT_TOPICS.map(([name]) => name);
+
+  const pano = new Set(featuredTopics().map(slugify));
+
+  return names
+    .filter((name) => !pano.has(slugify(name)))
+    .slice(0, SPOTLIGHT_MAX)
+    .map((name, i) => [name, i === 0 ? 'agro' : 'tech', SPOTLIGHT_BLURB[name] || '']);
 }
 
 // Ψάχνουμε ΜΟΝΟ στον τίτλο. Η περιγραφή είναι βιογραφικό του καλεσμένου
@@ -3713,7 +3749,7 @@ function topicRows(groups){
 // Tech-Hub — και δικό της γραφικό: το «agro» βάζει το εικονίδιο μεγάλο
 // στο πλάι, το «tech» το βάζει πάνω με κεφαλαία γράμματα.
 function spotlightSections(groups){
-  return SPOTLIGHT_TOPICS
+  return spotlightTopics()
     .map(([name, variant, blurb]) => ({ g: groups[slugify(name)], variant, blurb, key: slugify(name) }))
     .filter((x) => x.g && x.g.items.length)
     .map(({ g, variant, blurb, key }) => {
@@ -3726,7 +3762,7 @@ function spotlightSections(groups){
       <span class="spot-icon">${topicIcon(key)}</span>
       <div class="spot-text">
         <h2 class="spot-title">${esc(g.name)}</h2>
-        <p class="spot-sub">${esc(blurb)}</p>
+${blurb ? `        <p class="spot-sub">${esc(blurb)}</p>` : ''}
       </div>
       <a class="spot-all" href="${categoryUrl(g.name)}">Όλα τα ${total.toLocaleString('el')} →</a>
     </header>
@@ -3779,7 +3815,7 @@ const MORE_CARDS = 2;
 function moreTopics(groups){
   const used = new Set([
     ...featuredTopics().map(slugify),
-    ...SPOTLIGHT_TOPICS.map(([name]) => slugify(name)),
+    ...spotlightTopics().map(([name]) => slugify(name)),
   ]);
 
   const rest = Object.keys(groups)
@@ -6526,6 +6562,28 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
     const peopleText = JSON.stringify(peopleForAdmin(episodes));
     if (!fs.existsSync(peopleFile) || fs.readFileSync(peopleFile, 'utf8') !== peopleText) {
       fs.writeFileSync(peopleFile, peopleText, 'utf8');
+    }
+
+    // Τα θέματα με το πλήθος τους, για την καρτέλα «Θέματα αρχικής».
+    //
+    // Ίδιος λόγος με τα παραπάνω: ποιες κατηγορίες υπάρχουν ΣΗΜΕΡΑ και
+    // πόσα κομμάτια έχει η καθεμία το ξέρει μόνο αυτό το αρχείο, αφού
+    // ενώσει επεισόδια, βίντεο και δικά μας άρθρα. Μαζί πάνε και οι
+    // προεπιλογές του κώδικα, ώστε το διαχειριστικό να δείχνει τι
+    // ισχύει όσο δεν έχει διαλέξει κανείς τίποτα — χωρίς να τις
+    // αντιγράψει και να αποκλίνει.
+    const topicsFile = path.join(ADMIN_SRC, 'topics.json');
+    const topicsText = JSON.stringify({
+      defaults: {
+        featured: FEATURED_TOPICS,
+        spotlight: SPOTLIGHT_TOPICS.map(([name]) => name),
+      },
+      list: Object.keys(catGroups)
+        .map((key) => ({ name: catGroups[key].name, key, n: catGroups[key].items.length }))
+        .sort((a, b) => b.n - a.n),
+    });
+    if (!fs.existsSync(topicsFile) || fs.readFileSync(topicsFile, 'utf8') !== topicsText) {
+      fs.writeFileSync(topicsFile, topicsText, 'utf8');
     }
 
     // Και η απογραφή του ζευγαρώματος: ποια επεισόδια δεν βρήκαν βίντεο

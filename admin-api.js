@@ -99,6 +99,17 @@ function validate(name, data){
         return 'Κάθε άποψη πρέπει να είναι σύνδεσμος, σε κείμενο.';
       }
     }
+
+    // Τα θέματα της αρχικής: ονόματα κατηγοριών, σε κείμενο. Ένα
+    // αντικείμενο εδώ μέσα θα περνούσε από το slugify() του build και
+    // θα έβγαζε λωρίδα με τίτλο «[object Object]».
+    for (const key of ['featuredTopics', 'spotlightTopics']) {
+      if (data[key] == null) continue;
+      if (!Array.isArray(data[key])) return `Το ${key} πρέπει να είναι λίστα.`;
+      if (data[key].some((x) => typeof x !== 'string' || !x.trim())) {
+        return `Κάθε θέμα στο ${key} πρέπει να είναι όνομα κατηγορίας, σε κείμενο.`;
+      }
+    }
   }
 
   if (name === 'photos') {
