@@ -1,5 +1,21 @@
 [
   {
+    "id": "s-arnaoytakis-etoimo-gia-dimopratisi-to-ergo-toy-venizeleioy-nosokomeioy-ti-eipe-gia-tin-poreia-ton-ergon-stin-kriti",
+    "title": "Σ. Αρναουτάκης: Έτοιμο για δημοπράτηση το έργο του Βενιζελείου νοσοκομείου - Τι είπε για την πορεία των έργων στην Κρήτη",
+    "url": "https://www.newshub.gr/el/kriti/s-arnaoytakis-etoimo-gia-dimopratisi-to-ergo-toy-venizeleioy-nosokomeioy-ti-eipe-gia-tin-poreia-ton-ergon-stin-kriti",
+    "date": "2026-11-11T17:51:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/arnaoutakes-gelastos.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/arnaoutakes-gelastos.jpg",
+    "summary": "Πολύ σημαντικές ειδήσεις βγήκαν από την συνάντηση που είχε ο Περιφερειάρχης Κρήτης Σταύρος Αρναουτάκης με τον Νίκο Παπαθανάση, τον Αναπληρωτή Υπουργό Εθνικής...",
+    "author": {
+      "name": "Ανδρέας Κριτσωτάκης",
+      "url": "https://www.newshub.gr/el/andreas-kritsotakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "xekinise-i-ypovoli-aitimaton-pliromis-gia-ependyseis-sti-metapoiisi-agrotikon-proionton",
     "title": "Ξεκίνησε η υποβολή αιτημάτων πληρωμής για επενδύσεις στη μεταποίηση αγροτικών προϊόντων",
     "url": "https://www.newshub.gr/el/ellada/xekinise-i-ypovoli-aitimaton-pliromis-gia-ependyseis-sti-metapoiisi-agrotikon-proionton",
@@ -9,7 +25,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/agrotes.jpg",
     "summary": "Ξεκίνησε από σήμερα η δυνατότητα υποβολής αιτημάτων πληρωμής για τους δικαιούχους επενδύσεων στη μεταποίηση, εμπορία και ανάπτυξη γεωργικών προϊόντων, μέσω τ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "tragodia-notia-tis-kritis-nekropsies-kai-exetaseis-dna-gia-14-soroys-se-exelixi-i-ereyna-ton-archon",
@@ -6782,17 +6798,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/analyseis-18.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/analyseis-18.jpg",
     "summary": "Ο Μηνάς Λυριστής, διεθνολόγος και επίκουρος καθηγητής διεθνούς ασφάλειας στο Αμερικανικό Πανεπιστήμιο των Εμιράτων, μίλησε με τον Γιάννη Χαραλαμπίδη στις &qu...",
-    "featured": false
-  },
-  {
-    "id": "otan-to-5-1-doro-kostizei-105-akrivotera-ti-apokalyptoyn-treis-sygkriseis-timon-se-anapsyktika-kafe-kai-zymarika",
-    "title": "Όταν το \"5+1 δώρο\" κοστίζει 105% ακριβότερα-Τι αποκαλύπτουν τρεις συγκρίσεις τιμών σε αναψυκτικά, καφέ και ζυμαρικά",
-    "url": "https://www.newshub.gr/el/oikonomia/otan-to-5-1-doro-kostizei-105-akrivotera-ti-apokalyptoyn-treis-sygkriseis-timon-se-anapsyktika-kafe-kai-zymarika",
-    "date": "2026-11-07T08:50:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/super-market-prth-4.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/super-market-prth-4.jpg",
-    "summary": "Μια προσφορά \"5+1 δώρο\" που αποδεικνύεται 105% ακριβότερη ανά λίτρο, μια μεγαλύτερη συσκευασία καφέ που κοστίζει 44% περισσότερο ανά κιλό και μια π...",
     "featured": false
   },
   {
