@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/lena-stamataki_2.jpg",
     "summary": "Μια συνολική εμπειρία τέχνης όπου η ζωγραφική, η ποίηση και η μουσική συναντιούνται στη Δημοτική Πινακοθήκη Ηρακλείου.\r\n\r\nΑύριο βράδυ στις 19:00, η Δημοτική ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "spiti-moy-3-me-dieyrymena-kritiria-gia-akinita-eos-300-000-eyro",
@@ -157,7 +157,7 @@
       "url": "https://www.newshub.gr/el/andreas-kritsotakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "xekinise-i-ypovoli-aitimaton-pliromis-gia-ependyseis-sti-metapoiisi-agrotikon-proionton",
