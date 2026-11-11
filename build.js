@@ -5243,31 +5243,9 @@ ${rows.join('\n')}
   });
 }
 
-// Η γραμμή χρόνου: μία κουκκίδα ανά επεισόδιο, από την πρώτη ως την
-// τελευταία εμφάνιση. Δείχνει με μια ματιά αν κάποιος είναι σταθερός
-// συνομιλητής ή πέρασε μια φορά — κάτι που ο αριθμός «12 εμφανίσεις»
-// δεν λέει: δώδεκα μέσα σε έναν μήνα και δώδεκα σε τέσσερα χρόνια
-// είναι εντελώς διαφορετικά πράγματα.
-function personSpark(dates){
-  if (dates.length < 2) return '';
-
-  const first = dates[dates.length - 1];
-  const last = dates[0];
-  const span = last - first;
-  if (!span) return '';
-
-  const dots = dates.map((d) => {
-    const at = ((d - first) / span) * 100;
-    return `      <span class="life-dot" style="left:${at.toFixed(2)}%"></span>`;
-  }).join('\n');
-
-  return `    <div class="life">
-      <span class="life-line"></span>
-${dots}
-      <span class="life-from">${athensYear(first)}</span>
-      <span class="life-to">${athensYear(last)}</span>
-    </div>`;
-}
+// Η γραμμή χρόνου με τις κουκκίδες ΒΓΗΚΕ στις 11 Νοεμβρίου 2026.
+// Οι ημερομηνίες της πρώτης και της τελευταίας εμφάνισης λένε ήδη ό,τι
+// χρειάζεται, στη γραμμή με τα στοιχεία από πάνω.
 
 function guestPage(name, list){
   const safe = esc(name);
@@ -5352,7 +5330,6 @@ ${face ? `      <span class="bio-face"><img src="${esc(face)}" alt="${safe}" loa
       <h1 class="bio-name">${title ? `<span class="bio-title">${esc(title)}.</span> ` : ''}${safe}</h1>
 ${role ? `      <p class="bio-role">${esc(role)}</p>` : ''}
       <p class="bio-facts">${facts}</p>
-${personSpark(dates)}
     </header>
 
 ${topicTags ? `    <section class="bio-topics">

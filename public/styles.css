@@ -4140,8 +4140,7 @@ h1{
     'face label'
     'face name'
     'face role'
-    'face facts'
-    'spark spark';
+    'face facts';
   column-gap: 1.6rem;
   align-items: start;
 }
@@ -4150,7 +4149,6 @@ h1{
 .bio-head--face .bio-name{ grid-area: name; }
 .bio-head--face .bio-role{ grid-area: role; }
 .bio-head--face .bio-facts{ grid-area: facts; }
-.bio-head--face .life{ grid-area: spark; }
 
 .bio-face{
   grid-area: face;
@@ -4224,50 +4222,6 @@ h1{
   color: var(--muted);
   margin: 0;
 }
-
-/* ---- η γραμμή χρόνου ----
-   Μία κουκκίδα ανά επεισόδιο. Πυκνές κουκκίδες = σταθερός συνομιλητής,
-   δύο στις άκρες = πέρασε δύο φορές με χρόνια ανάμεσα. */
-.life{
-  position: relative;
-  height: 34px;
-  margin-top: 1.5rem;
-  max-width: 620px;
-}
-
-.life-line{
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 11px;
-  height: 1px;
-  background: var(--line);
-}
-
-.life-dot{
-  position: absolute;
-  top: 7px;
-  width: 9px;
-  height: 9px;
-  margin-left: -4px;
-  border-radius: 50%;
-  background: var(--audio);
-  /* Οι κουκκίδες πέφτουν συχνά η μία πάνω στην άλλη — δύο επεισόδια
-     την ίδια βδομάδα. Το φόντο τις ξεχωρίζει χωρίς να τις χωρίζει. */
-  box-shadow: 0 0 0 2px var(--bg);
-}
-
-.life-from,
-.life-to{
-  position: absolute;
-  top: 20px;
-  font-size: 0.68rem;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
-.life-from{ left: 0; }
-.life-to{ right: 0; }
 
 /* ---- μιλάει για ---- */
 
