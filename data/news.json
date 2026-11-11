@@ -1,5 +1,17 @@
 [
   {
+    "id": "arrikta-syndedemena-ta-pop-proionta-me-tin-istoria-mas-ti-eipan-arnaoytakis-kai-tzedakis-apo-to-foroym-stis-archanes",
+    "title": "«Άρρηκτα συνδεδεμένα τα ΠΟΠ προϊόντα με την ιστορία μας» - Τι είπαν Αρναουτάκης και Τζεδάκης από το Φόρουμ στις Αρχάνες",
+    "url": "https://www.newshub.gr/el/kriti/arrikta-syndedemena-ta-pop-proionta-me-tin-istoria-mas-ti-eipan-arnaoytakis-kai-tzedakis-apo-to-foroym-stis-archanes",
+    "date": "2026-11-11T12:26:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/archanes9.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/archanes9.jpg",
+    "summary": "Το μέλλον των αγροτικών προϊόντων ΠΟΠ και ΠΓΕ, με ορίζοντα τη Νέα ΚΓΠ 2028-2034, βρίσκονται στο επίκεντρο του διήμερου Φόρουμ πραγματοποιείται στις Αρχάνες, ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "irlandia-symfonia-gia-ayxiseis-misthon-sto-dimosio-eos-18-3-vazei-telos-stis-apergies",
     "title": "Ιρλανδία: Συμφωνία για αυξήσεις μισθών στο Δημόσιο έως 18,3% βάζει τέλος στις απεργίες",
     "url": "https://www.newshub.gr/el/kosmos/irlandia-symfonia-gia-ayxiseis-misthon-sto-dimosio-eos-18-3-vazei-telos-stis-apergies",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/dublin_nn.jpg",
     "summary": "Η κυβέρνηση της Ιρλανδίας κατέληξε σε προσχέδιο συμφωνίας με τα συνδικάτα για την αύξηση των μισθών των δημόσιων υπαλλήλων που προβλέπει μέση σωρευτική αύξησ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "thessaloniki-synelifthi-toyrkos-poy-kataziteitai-stin-elvetia-gia-emploki-sti-metafora-21-tonon-kokainis",
@@ -6750,17 +6762,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/pleromes.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/pleromes.jpg",
     "summary": "Κατά την περίοδο 9 Νοεμβρίου έως 13 Νοεμβρίου, θα καταβληθούν 64.500.000 ευρώ σε 59.600 δικαιούχους, στο πλαίσιο των προγραμματισμένων καταβολών του e- ΕΦΚΑ ...",
-    "featured": false
-  },
-  {
-    "id": "protofanis-paremvasi-stin-agora-elaioladoy-apo-tin-ispania-anagkastiki-apothikeysi-gia-to-12-tis-paragogis",
-    "title": "Πρωτοφανής παρέμβαση στην αγορά ελαιολάδου από την Ισπανία: Αναγκαστική αποθήκευση για το 12% της παραγωγής",
-    "url": "https://www.newshub.gr/el/agronews/protofanis-paremvasi-stin-agora-elaioladoy-apo-tin-ispania-anagkastiki-apothikeysi-gia-to-12-tis-paragogis",
-    "date": "2026-11-06T19:28:00.000Z",
-    "category": "Agronews",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/6-11/elaiolado2.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/6-11/elaiolado2.jpg",
-    "summary": "Σε μια πρωτοφανή εντολή προς τους Ισπανούς ελαιοπαραγωγούς -να αποσύρουν τμήμα της σοδειάς τους από την αγορά προκειμένου να αποτρέψουν την κατακόρυφη πτώση ...",
     "featured": false
   },
   {
