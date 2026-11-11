@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/giannis-antetokounmpo-maiami-heat-jazz.jpg",
     "summary": "Ο Γιάννης Αντετοκούνμπο ήταν ξανά σε μεγάλα κέφια και με ένα ακόμη double-double πήρε από το χέρι τους Μαϊάμι Χιτ και τους οδήγησε στη νίκη με 115-109 κόντρα...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "kostas-melas-meta-ti-meta-epochi-ti-poio-einai-to-epomeno-stadio-tis-istorias-podcast",
@@ -141,7 +141,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/agiosminas.jpg",
     "summary": "Το Ηράκλειο τιμά σήμερα, Τετάρτη 11 Νοεμβρίου, τον προστάτη και πολιούχο του, Άγιο Μηνά.\r\n\r\nΟι θρησκευτικές εκδηλώσεις για τη μεγάλη γιορτή της πόλης κορυφών...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "mati-nea-dikastiki-diadikasia-8-chronia-meta",
