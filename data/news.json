@@ -1,5 +1,17 @@
 [
   {
+    "id": "enimerotiki-omilia-me-thema-i-via-kata-ton-gynaikon-sto-k-a-p-i-neapolis",
+    "title": "Ενημερωτική ομιλία με θέμα «Η βία κατά των Γυναικών» στο Κ.Α.Π.Η. Νεάπολης",
+    "url": "https://www.newshub.gr/el/exodos/enimerotiki-omilia-me-thema-i-via-kata-ton-gynaikon-sto-k-a-p-i-neapolis",
+    "date": "2026-11-11T16:12:00.000Z",
+    "category": "Έξοδος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/kapi_neapoli_01.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/kapi_neapoli_01.jpg",
+    "summary": "Το Τμήμα Κοινωνικής Προστασίας & Παιδείας του Δήμου Αγίου Νικολάου ενημερώνει τα μέλη του Κ.Α.Π.Η. Νεάπολης ότι την Παρασκευή 13 Νοεμβρίου 2026 και ώρα 1...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "treis-prosagoges-gia-tis-anathymiaseis-sta-ekpaideytiria-kaisari",
     "title": "Τρεις προσαγωγές για τις αναθυμιάσεις στα Εκπαιδευτήρια Καίσαρη",
     "url": "https://www.newshub.gr/el/ellada/treis-prosagoges-gia-tis-anathymiaseis-sta-ekpaideytiria-kaisari",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/maketa-kaisari_2.jpg",
     "summary": "Σε τρεις προσαγωγές προχώρησε η Αστυνομία μετά τη διαρροή χημικών που είχε ως αποτέλεσμα να καταλήξουν στο νοσοκομείο μαθητές και εργαζόμενοι στα Εκπαιδευτήρ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "kykloma-forodiafygis-stin-thessaloniki-nea-prothesmia-gia-ton-48chrono-dikigoro-eleytheros-me-oroys-o-39chronos-katigoroymenos",
@@ -6773,17 +6785,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/77777.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/77777.jpg",
     "summary": "Ο Μαρτυρικός Αβδελλάς τιμά τη μνήμη των ανθρώπων που εκτελέστηκαν από τα γερμανικά στρατεύματα Κατοχής στον Γουρνόλακκο, τον Σεπτέμβριο του 1943.\r\n...",
-    "featured": false
-  },
-  {
-    "id": "kalodio-se-thola-nera-oi-navtech-ta-toyrkika-uav-kai-to-krisimo-perasma-apo-to-kavo-sidero",
-    "title": "Καλώδιο σε θολά νερά: Οι NavteΧ, τα τουρκικά Uav και το κρίσιμο πέρασμα από το Κάβο Σίδερο",
-    "url": "https://www.newshub.gr/el/geopolitiki/kalodio-se-thola-nera-oi-navtech-ta-toyrkika-uav-kai-to-krisimo-perasma-apo-to-kavo-sidero",
-    "date": "2026-11-07T06:30:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/xrwma-abeille-marengo-1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/xrwma-abeille-marengo-1.jpg",
-    "summary": "Η ηλεκτρική διασύνδεση Ελλάδας &ndash; Κύπρου (Great Sea Interconnector &ndash; GSI) αντιμετωπίζει το πρώτο και καθοριστικό κρας τεστ από τη στιγμή που το πλ...",
     "featured": false
   },
   {
