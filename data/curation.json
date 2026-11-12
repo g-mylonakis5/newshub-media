@@ -102,6 +102,10 @@
       "https://www.newshub.gr/el/apopseis/i-krisi-einai-vathyteri-apo-ton-tramp-oi-esoterikes-diaireseis-kai-oi-pagkosmioi-kindynoi": "2026-11-12T22:39:55.505Z",
       "https://www.newshub.gr/el/apopseis/israil-ilthe-i-ora-tis-politikis-anatropis-toy-netaniachoy": "2026-11-12T22:39:55.505Z",
       "https://www.newshub.gr/el/apopseis/stoys-dromoys-ergazomenoi-kai-neolaia-tis-italias-enantia-ston-polemo-kai-tin-akriveia": "2026-11-12T22:39:55.505Z"
+    },
+    "cat:kriti": {
+      "4clF6NWNtso": "2026-11-12T22:46:09.499Z",
+      "3CZp2A-sKeM": "2026-11-12T22:46:09.499Z"
     }
   },
   "opinions": [
@@ -110,5 +114,11 @@
     "https://www.newshub.gr/el/apopseis/i-krisi-einai-vathyteri-apo-ton-tramp-oi-esoterikes-diaireseis-kai-oi-pagkosmioi-kindynoi",
     "https://www.newshub.gr/el/apopseis/israil-ilthe-i-ora-tis-politikis-anatropis-toy-netaniachoy",
     "https://www.newshub.gr/el/apopseis/stoys-dromoys-ergazomenoi-kai-neolaia-tis-italias-enantia-ston-polemo-kai-tin-akriveia"
-  ]
+  ],
+  "categoryPicks": {
+    "kriti": [
+      "4clF6NWNtso",
+      "3CZp2A-sKeM"
+    ]
+  }
 }
