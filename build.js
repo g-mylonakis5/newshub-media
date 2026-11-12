@@ -39,6 +39,32 @@ const CATEGORY_DIR = path.join(PUBLIC_DIR, 'category');
 const SITE_URL = 'https://newshubmedia.gr';
 const SITE_NAME = 'Newshub Media';
 
+// ---- μετρήσεις και επαλήθευση ----
+//
+// ΟΛΑ κενά σημαίνει «τίποτα δεν μπαίνει στις σελίδες». Γεμίζεις μόνο
+// ό,τι χρειάζεσαι, και το επόμενο χτίσιμο το περνάει σε 4.700 σελίδες.
+//
+// 1) CF_ANALYTICS — Cloudflare Web Analytics.
+//    Επισκέπτες και σελίδες, ΧΩΡΙΣ cookies: δεν χρειάζεται μπάνερ
+//    συγκατάθεσης, σε αντίθεση με το Google Analytics. Δοκίμασε πρώτα
+//    από το dashboard (Analytics & Logs -> Web Analytics): για site
+//    που ήδη περνάει από Cloudflare μπαίνει χωρίς καμία γραμμή κώδικα.
+//    Αν σου δώσει «token», κόλλησέ το εδώ.
+//
+// 2) GOOGLE_VERIFY — Google Search Console.
+//    Δεν είναι μετρήσεις επισκεψιμότητας: δείχνει τι ψάχνει ο κόσμος
+//    στο Google και μας βρίσκει, και ποιες σελίδες μπήκαν στο
+//    ευρετήριο. Χωρίς cookies. Εναλλακτικά επαληθεύεται με εγγραφή DNS,
+//    που δεν αγγίζει καθόλου τις σελίδες — προτίμησέ το αν μπορείς.
+//
+// 3) GA4 — Google Analytics.
+//    ΜΟΝΟ αν το ζητήσει ρητά το αφεντικό: βάζει cookies, άρα χρειάζεται
+//    μπάνερ συγκατάθεσης που σήμερα ΔΕΝ υπάρχει. Μην το γεμίσεις πριν
+//    μπει το μπάνερ.
+const CF_ANALYTICS = '';
+const GOOGLE_VERIFY = '';
+const GA4 = '';
+
 const GREEK = {
   'α':'a','β':'v','γ':'g','δ':'d','ε':'e','ζ':'z','η':'i','θ':'th',
   'ι':'i','κ':'k','λ':'l','μ':'m','ν':'n','ξ':'x','ο':'o','π':'p',
@@ -366,6 +392,31 @@ function cleanLinks(html){
     (m, attr, u) => `${attr}="${cleanHref(u)}"`);
 }
 
+// Τα σενάρια μέτρησης, στο τέλος του <head>.
+//
+// ΠΑΝΤΑ defer ή async: η μέτρηση δεν έχει καμία δουλειά να καθυστερεί
+// το φόρτωμα της σελίδας — αυτό είναι το ίδιο σκεπτικό με τις
+// διαφημίσεις, «φορτώνουν τελευταίες, ποτέ πριν το περιεχόμενο».
+//
+// Κενό όταν δεν έχει οριστεί τίποτα: ούτε ένα byte παραπάνω σε 4.700
+// σελίδες για μετρήσεις που δεν υπάρχουν.
+function metriseis(){
+  const out = [];
+
+  if (CF_ANALYTICS) {
+    out.push('  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"'
+      + ` data-cf-beacon='{"token": "${esc(CF_ANALYTICS)}"}'></script>`);
+  }
+
+  if (GA4) {
+    out.push(`  <script async src="https://www.googletagmanager.com/gtag/js?id=${esc(GA4)}"></script>`);
+    out.push('  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}'
+      + `gtag('js',new Date());gtag('config','${esc(GA4)}');</script>`);
+  }
+
+  return out.length ? out.join('\n') + '\n' : '';
+}
+
 function page({ title, body, depth = 0, scripts = [], description = '', image = '', url = '', type = 'website', prev = '', next = '', canonical = '' }){
   const up = depth === 0 ? '' : '../';
   // Ο player φορτώνει ΠΑΝΤΟΥ: κρατάει τον ήχο ζωντανό και αναλαμβάνει την
@@ -425,13 +476,13 @@ ${image ? '' : `  <meta property="og:image:width" content="1200">
   <meta name="twitter:description" content="${desc}">
   <meta name="twitter:image" content="${pic}">
 
-  <link rel="icon" href="${up}shows/logo-icon.png" type="image/png" sizes="512x512">
+${GOOGLE_VERIFY ? `  <meta name="google-site-verification" content="${esc(GOOGLE_VERIFY)}">\n` : ''}  <link rel="icon" href="${up}shows/logo-icon.png" type="image/png" sizes="512x512">
   <link rel="apple-touch-icon" href="${up}shows/logo-icon.png">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400..900&family=Source+Serif+4:wght@400..600&display=swap">
   <link rel="stylesheet" href="${up}styles.css${assetVersion('styles.css')}">
 ${tags}
-</head>
+${metriseis()}</head>
 <body>
 <div id="page">
 ${body}
