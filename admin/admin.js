@@ -297,6 +297,13 @@ function findItemByRef(ref){
 
 var TAGS ={ podcast: 'Podcast', video: 'Βίντεο', news: 'Είδηση', article: 'Άρθρο' };
 
+// Το κουμπί που ακυρώνει τη χειροκίνητη επιλογή.
+//
+// Υπήρχε τρόπος και πριν — βάζεις χθεσινή ημερομηνία λήξης — αλλά
+// κανένας δημοσιογράφος δεν θα το σκεφτεί ποτέ. Θα ψάξει κουμπί.
+var NOW_AUTO = '<button type="button" class="btn btn--ghost now-auto" data-auto>'
+  + 'Πίσω στο αυτόματο</button>';
+
 function drawNow(){
   var box = $('[data-now-body]');
   var want = state.curation && state.curation.featured;
@@ -310,9 +317,12 @@ function drawNow(){
   var hit = findItemByRef(want);
 
   if (!hit) {
+    // Εδώ το κουμπί χρειάζεται ΠΙΟ πολύ από οπουδήποτε: η επιλογή
+    // δείχνει σε κάτι που δεν υπάρχει, και χωρίς αυτό ο συντάκτης
+    // δεν έχει πώς να καθαρίσει μια γραμμή που δεν βλέπει.
     box.innerHTML = '<p class="muted">Επιλεγμένο: <code>' + esc(want) + '</code><br>'
       + 'Δεν το βρήκα στη λίστα — μπορεί να είναι παλιό ή σβησμένο. '
-      + 'Το site θα γυρίσει στην αυτόματη επιλογή.</p>';
+      + 'Το site θα γυρίσει στην αυτόματη επιλογή.</p>' + NOW_AUTO;
     return;
   }
 
@@ -323,7 +333,7 @@ function drawNow(){
     + '<p class="now-meta">'
     + '<span class="tag tag--' + hit.kind + '">' + TAGS[hit.kind] + '</span>'
     + (hit.who ? esc(hit.who) + ' · ' : '') + when(hit.date)
-    + '</p></div>';
+    + '</p></div>' + NOW_AUTO;
 }
 
 function drawPicks(){
@@ -384,6 +394,24 @@ function choose(ref){
   drawNow();
   drawPicks();
   markDirty(true);
+}
+
+// Πίσω στο αυτόματο: το site ξαναβάζει μόνο του το πιο πρόσφατο με
+// εικόνα, μέχρι να διαλέξει κάποιος ξανά.
+//
+// Καθαρίζονται ΚΑΙ τα τρία. Η ημερομηνία λήξης χωρίς επιλογή δεν
+// σημαίνει τίποτα, και η χειροκίνητη εικόνα ανήκε στην επιλογή που
+// μόλις έφυγε — αν μείνει, η επόμενη θα βγει με ξένη φωτογραφία.
+function autoAgain(){
+  state.curation.featured = '';
+  state.curation.featuredUntil = '';
+  state.curation.featuredHero = '';
+  $('[data-until]').value = '';
+
+  drawNow();
+  drawPicks();
+  markDirty(true);
+  say('Γύρισε στο αυτόματο. Πάτα Αποθήκευση για να ισχύσει.');
 }
 
 function save(){
@@ -5285,6 +5313,12 @@ function wire(){
   $('[data-picks]').addEventListener('click', function (e) {
     var pick = e.target.closest('.pick');
     if (pick) choose(pick.dataset.ref);
+  });
+
+  // Ένας listener στο κουτί, όχι στο κουμπί: το κουμπί ξαναγράφεται
+  // σε κάθε drawNow() και θα έχανε τον δικό του.
+  $('[data-now-featured]').addEventListener('click', function (e) {
+    if (e.target.closest('[data-auto]')) autoAgain();
   });
 
   $('[data-find]').addEventListener('input', function (e) {

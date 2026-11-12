@@ -213,6 +213,10 @@ body{
   background: var(--raise);
 }
 
+/* Δεξιά άκρη του κουτιού, μακριά από τον τίτλο: ακυρώνει, δεν είναι
+   η κύρια ενέργεια. */
+.now-auto{ margin-left: auto; flex: none; align-self: center; }
+
 .now-title{ margin: 0 0 0.25rem; font-family: var(--serif); font-size: 1.05rem; font-weight: 600; }
 .now-meta{ margin: 0; font-size: 0.8rem; color: var(--muted); }
 
