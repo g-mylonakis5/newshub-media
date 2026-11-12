@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/b_anemoi.jpg",
     "summary": "Ο καιρός σήμερα Πέμπτη (12.11.2026) αναμένεται πρόσκαιρη βελτίωση με τοπικές βροχές να αναμένονται κυρίως στα δυτικά τμήματα της χώρας. Άνεμοι τοπικά ισχυροί...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "mproyklin-dyo-nekroi-kai-19-traymaties-apo-tin-katarreysi-ktirioy-synechizontai-oi-ereynes-gia-epizontes",
@@ -133,7 +133,7 @@
       "url": "https://www.newshub.gr/el/andreas-kritsotakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "i-mpritnei-spiars-etoimazetai-na-apokalypsei-ena-mystiko-epicheirimatiko-protzekt",
