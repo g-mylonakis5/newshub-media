@@ -40,6 +40,14 @@
     "  Κενό = Agronews, Tech-Hub. Το χρώμα ακολουθεί τη θέση:",
     "  η πρώτη ενότητα πράσινη, η δεύτερη μπλε.",
     "",
+    "pinnedAt: πότε μπήκε κάθε χειροκίνητη επιλογή. Το γράφει μόνο του το",
+    "  διαχειριστικό. Μετά από λίγες μέρες η επιλογή παύει να ισχύει και",
+    "  η θέση γυρίζει στο αυτόματο — αλλιώς ένα «Must read» της Τρίτης",
+    "  έμενε εκεί για μήνες. Μέρες: Must read 3, Τελευταία 7, Απόψεις 7,",
+    "  Θέματα 30. Ορίζονται στο build.js (PIN_ZOI).",
+    "  Η ληγμένη ΔΕΝ σβήνεται: φαίνεται σβηστή στο διαχειριστικό, με",
+    "  κουμπί «Ξανακράτα το».",
+    "",
     "categoryPicks: τι βγαίνει σε κάθε θέμα ΤΗΣ ΑΡΧΙΚΗΣ, και με ποια σειρά.",
     "  { \"ygeia\": [\"Buzzsprout-12345\", \"arthro/kati.html\"] }",
     "  Κλειδί = το slug του θέματος, ίδιο με τη διεύθυνσή του.",
@@ -69,5 +77,13 @@
   },
   "featuredTopics": [],
   "spotlightTopics": [],
-  "featuredHero": ""
+  "featuredHero": "",
+  "pinnedAt": {
+    "mustRead": {
+      "https://www.newshub.gr/el/kriti/toyrismos-kleinoyn-kai-ta-teleytaia-xenodocheia-stin-kriti-oi-perissoteres-afixeis-den-simainoyn-kai-perissotera-esoda": "2026-11-12T13:37:05.799Z",
+      "https://www.newshub.gr/el/kriti/irakleio-nea-peristatika-me-tin-eleysi-metanaston-sta-paralia-me-to-kalimera-anamesa-toys-gynaikes-kai-paidia": "2026-11-12T13:37:05.799Z",
+      "https://www.newshub.gr/el/kriti/epicheirisi-aposymforisi-gia-tis-fylakes-kai-stin-kriti-i-eikona-sta-sofronistika-katastimata-toy-nisioy": "2026-11-12T13:37:05.799Z",
+      "https://www.newshub.gr/el/kriti/kriti-oi-ellinikes-perifereies-enonoyn-ti-foni-toys-gia-ta-proionta-proeleysis-kai-ti-nea-kgp-2028-2034": "2026-11-12T13:37:05.799Z"
+    }
+  }
 }

@@ -1289,6 +1289,33 @@ body{
 .slot--extra{ opacity: 0.45; }
 .slot--extra .slot-no{ color: var(--muted); }
 
+/* ---- πότε λήγει μια χειροκίνητη επιλογή ----
+   Μικρό και διακριτικό όσο όλα πάνε καλά· όταν λήξει, γίνεται κόκκινο
+   και δίπλα του εμφανίζεται το κουμπί της επαναφοράς. */
+.pinok,
+.pinx{
+  font-size: 0.7rem;
+  white-space: nowrap;
+  margin-right: 0.4rem;
+}
+
+.pinok{ color: var(--muted); }
+.pinx{ color: var(--news); font-weight: 600; }
+
+.pinagain{
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  margin-right: 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pinagain:hover{ border-color: var(--sky); color: var(--sky); }
+
 
 /* =====================================================================
    ΠΡΟΣΩΠΑ

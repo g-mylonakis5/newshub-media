@@ -1512,6 +1512,43 @@ function curationExpired(curation){
   return !isNaN(until) && until < new Date();
 }
 
+// ---- πόσο ζει μια χειροκίνητη επιλογή ----
+//
+// Το πρωτοσέλιδο είχε από την αρχή ημερομηνία λήξης. Οι υπόλοιπες
+// λίστες δεν είχαν τίποτα, και αυτό φάνηκε στην πράξη: τα τέσσερα
+// «Must read» έμειναν κολλημένα δύο μέρες, ενώ είναι ειδήσεις.
+//
+// Δεν λήγουν όλα το ίδιο, γιατί δεν είναι το ίδιο πράγμα:
+//
+//   Must read  — ειδήσεις της ημέρας. Μπαγιατεύουν αμέσως.
+//   Τελευταία  — μια καλή συνέντευξη αξίζει να μείνει πάνω μια βδομάδα.
+//   Απόψεις    — ίδιος ρυθμός με τα Τελευταία.
+//   Θέματα     — εκεί καρφιτσώνεις κλασικές συζητήσεις, όχι επικαιρότητα.
+//
+// Η ημερομηνία κάθε επιλογής γράφεται από το διαχειριστικό στο
+// curation.pinnedAt. Επιλογή ΧΩΡΙΣ ημερομηνία θεωρείται φρέσκια: δεν
+// πετάμε τη δουλειά κανενός επειδή έγινε πριν μπει αυτός ο μηχανισμός.
+const PIN_ZOI = {
+  mustRead: 3,
+  latest: 7,
+  opinions: 7,
+  topics: 30,
+};
+
+// Ποιες από τις επιλογές μιας λίστας ισχύουν ακόμα.
+function freshPins(lista, refs, kleidi){
+  const life = PIN_ZOI[lista];
+  if (!life) return refs;
+
+  const stamps = ((curation().pinnedAt || {})[kleidi || lista]) || {};
+  const orio = Date.now() - life * 864e5;
+
+  return refs.filter((ref) => {
+    const t = Date.parse(stamps[ref] || '');
+    return isNaN(t) ? true : t >= orio;
+  });
+}
+
 // Τα 4 από κάτω. Όσα όρισε ο συντάκτης πρώτα, μετά γεμίζουμε εναλλάξ
 // είδηση–podcast ώστε να μη βγαίνουν τέσσερα ίδιου τύπου.
 // Τα καρφιτσωμένα της ροής «Τελευταία»: ποια θέλει ο δημοσιογράφος να
@@ -1531,7 +1568,7 @@ function curationExpired(curation){
 // Ό,τι δεν βρεθεί αγνοείται σιωπηλά: ένα επεισόδιο μπορεί να έχει βγει
 // από τα 40 πιο πρόσφατα, και δεν θέλουμε να ρίξει το build.
 function pinnedFlow(curation, pools){
-  const want = (curation.latest || []).map((s) => String(s).trim()).filter(Boolean);
+  const want = freshPins('latest', (curation.latest || []).map((s) => String(s).trim()).filter(Boolean));
   if (!want.length) return [];
 
   const out = [];
@@ -3740,7 +3777,8 @@ function homeItems(group){
   const key = slugify(group.name);
   if (homeCache.has(key)) return homeCache.get(key);
 
-  const picks = (curation().categoryPicks || {})[key];
+  const all = (curation().categoryPicks || {})[key];
+  const picks = Array.isArray(all) ? freshPins('topics', all, `cat:${key}`) : null;
   let out = group.items;
 
   if (Array.isArray(picks) && picks.length) {
@@ -4185,7 +4223,7 @@ const PLATFORMS = [
 const MUST_COUNT = 4;
 
 function pickMustRead(articles, curation, taken = new Set()){
-  const want = (curation.mustRead || []).map((s) => String(s).trim()).filter(Boolean);
+  const want = freshPins('mustRead', (curation.mustRead || []).map((s) => String(s).trim()).filter(Boolean));
 
   const chosen = want
     .map((w) => articles.find((a) => sameItem({ id: a.id, href: a.url }, w)))
@@ -4322,7 +4360,7 @@ function pickOpinions(articles, curation){
     .filter((a) => a.category === 'Απόψεις')
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  const want = (curation.opinions || []).map((s) => String(s).trim()).filter(Boolean);
+  const want = freshPins('opinions', (curation.opinions || []).map((s) => String(s).trim()).filter(Boolean));
 
   const chosen = want
     .map((w) => all.find((a) => sameItem({ id: a.id, href: a.url }, w)))
@@ -6644,6 +6682,10 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
         featured: FEATURED_TOPICS,
         spotlight: SPOTLIGHT_TOPICS.map(([name]) => name),
       },
+      // Πόσες μέρες ζει μια χειροκίνητη επιλογή, ανά λίστα. Το ξέρει το
+      // build (PIN_ZOI) και το στέλνει εδώ, ώστε το διαχειριστικό να
+      // δείχνει ΤΗΝ ΑΛΗΘΕΙΑ και όχι ένα δεύτερο αντίγραφο που αποκλίνει.
+      pinLife: PIN_ZOI,
       list: Object.keys(catGroups)
         .map((key) => ({ name: catGroups[key].name, key, n: catGroups[key].items.length }))
         .sort((a, b) => b.n - a.n),
