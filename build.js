@@ -6322,6 +6322,26 @@ ${intro(episodes[0], videos[0])}`,
     items: shown.map((it) => flowRow(it))
       .concat(reserve.map((it) => flowRow(it, { reserve: true }))),
   }, null, 2));
+  // Το αποτύπωμα του χτισίματος: πότε έγινε, και ποιο είναι το νεότερο
+  // κομμάτι που ξέρει.
+  //
+  // Υπάρχει για ΕΝΑΝ λόγο: να μπορεί κάποιος απ' έξω να ρωτήσει το
+  // ζωντανό site «πόσο παλιός είσαι;». Το check-fresh.js κοιτάζει τα
+  // ΔΙΚΑ ΜΑΣ δεδομένα και απαντά «μπαίνουν ειδήσεις;» — άλλο ερώτημα.
+  // Αν σπάσει το ανέβασμα, τα δεδομένα συνεχίζουν να μπαίνουν και ο
+  // έλεγχος μένει πράσινος ενώ το site έχει παγώσει. Δες check-live.js.
+  //
+  // ΔΕΝ περνάει από writeIfChanged: η ώρα αλλάζει εξ ορισμού σε κάθε
+  // χτίσιμο, και αυτό ακριβώς θέλουμε να μετράμε.
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'build.json'), JSON.stringify({
+    pote: new Date().toISOString(),
+    neotero: [...episodes, ...articles]
+      .map((x) => x.date)
+      .filter(Boolean)
+      .sort()
+      .pop() || null,
+  }), 'utf8');
+
   writeIfChanged(path.join(PUBLIC_DIR, 'guests.html'), guestsIndexPage(groups));
   writeIfChanged(path.join(PUBLIC_DIR, 'search.html'), searchPage(episodes, catGroups));
   writeIfChanged(path.join(PUBLIC_DIR, 'shows.html'), showsIndexPage(showGroups));
