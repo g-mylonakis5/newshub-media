@@ -1,0 +1,141 @@
+# Φύλακας — οι έλεγχοι που δεν χωράνε στη διαδρομή της δημοσίευσης.
+#
+# ΓΙΑΤΙ ΞΕΧΩΡΙΣΤΑ
+#
+# Το «Ανέβασμα» τρέχει ~160 φορές τη μέρα και πρέπει να μένει κάτω από
+# ένα λεπτό: κάθε δευτερόλεπτο εκεί είναι καθυστέρηση στην είδηση. Ο
+# έλεγχος εικόνων θέλει Chromium και ~1,5 λεπτό — θα τριπλασίαζε τον
+# χρόνο δημοσίευσης για κάτι που δεν αλλάζει από είδηση σε είδηση.
+#
+# Οπότε τρέχει εδώ, κάθε τρεις ώρες, μακριά από τον δρόμο.
+#
+# ΤΙ ΕΛΕΓΧΕΙ
+#
+#   1. Ανανεώνεται το ΖΩΝΤΑΝΟ site;  (check-live.js)
+#      Το check-fresh.js στο «Φρέσκο υλικό» ρωτάει «μπαίνουν ειδήσεις
+#      στα δεδομένα μας;». Αν σπάσει το ανέβασμα, τα δεδομένα μπαίνουν
+#      κανονικά και εκείνο μένει πράσινο ενώ το site έχει παγώσει.
+#
+#   2. Κόβεται καμιά εικόνα;  (check-images.js)
+#      Έτρεχε μόνο στο pre-commit και όταν άλλαζε CSS/build. Μια
+#      εικόνα όμως σπάει και από ΔΕΔΟΜΕΝΑ — ένα εξώφυλλο με άλλες
+#      αναλογίες φτάνει. Αυτό δεν το έπιανε κανείς.
+#
+# Όταν κάτι πέσει, ανοίγει issue. Ένα ανά είδος, και σχολιάζεται αντί
+# να ξαναδημιουργείται — ίδια λογική με τη δικλείδα της ροής.
+
+name: Φύλακας
+
+on:
+  schedule:
+    - cron: '20 5-22/3 * * *'   # κάθε 3 ώρες, μέσα στη μέρα
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: fylakas
+  cancel-in-progress: false
+
+jobs:
+  fylakas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # ---- 1. ζωντανό site ----
+      #
+      # Πρώτο και χωρίς Chromium: αν το site έχει παγώσει, το θέλουμε
+      # γνωστό μέσα σε δευτερόλεπτα, όχι αφού κατέβει browser.
+      - name: Ανανεώνεται το site;
+        id: zontano
+        continue-on-error: true
+        run: node check-live.js
+
+      # ---- 2. εικόνες ----
+      #
+      # Χτίζουμε εδώ αντί να διαβάσουμε το ζωντανό site: το
+      # check-images.js ανοίγει τοπικά αρχεία, και έτσι μετράει ακριβώς
+      # ό,τι θα ανέβαινε — με τα ίδια δεδομένα.
+      - name: Το προηγούμενο public/
+        uses: actions/cache/restore@v4
+        with:
+          path: public
+          key: public-
+          restore-keys: public-
+
+      - name: Χτίσιμο
+        env:
+          ADMIN_PUBLIC: '1'
+          # Το ευρετήριο δεν μας νοιάζει εδώ — μετράμε εικόνες.
+          EVRETIRIO_LEPTA: '10000'
+        run: npm run build
+
+      # Το χτίσιμο δεν έχει εξαρτήσεις· ο έλεγχος εικόνων όμως θέλει
+      # playwright, και μπαίνει ΜΕΤΑ το χτίσιμο ώστε μια αποτυχία στο
+      # npm να μη στερήσει τον έλεγχο του ζωντανού site, που έχει ήδη
+      # τρέξει πρώτος.
+      - name: Εξαρτήσεις
+        run: npm ci
+
+      - name: Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Μετράμε κάθε εικόνα
+        id: eikones
+        continue-on-error: true
+        run: node check-images.js
+
+      # ---- η ειδοποίηση ----
+      - name: Ειδοποίηση αν κάτι έπεσε
+        if: steps.zontano.outcome == 'failure' || steps.eikones.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ '${{ steps.zontano.outcome }}' = 'failure' ]; then
+            ETIKETA='pagoma-site'
+            TITLE='Το site δεν ανανεώνεται'
+            PERIGRAFI='Το ζωντανό site έχει παγώσει'
+          else
+            ETIKETA='kommenes-eikones'
+            TITLE='Κόβονται εικόνες στο site'
+            PERIGRAFI='Κάποια εικόνα μπαίνει κομμένη'
+          fi
+
+          gh label create "$ETIKETA" --repo "$REPO" --color B60205 \
+            --description "$PERIGRAFI" 2>/dev/null || true
+
+          OPEN=$(gh issue list --repo "$REPO" --state open --label "$ETIKETA" \
+                   --json number --jq '.[0].number // empty' 2>/dev/null || true)
+
+          if [ -z "$OPEN" ]; then
+            gh issue create --repo "$REPO" --title "$TITLE" --label "$ETIKETA" \
+              --body "Ο φύλακας βρήκε πρόβλημα. Το τρέξιμο με τις λεπτομέρειες: $RUN"
+          else
+            SINCE=$(date -u '+%Y-%m-%d %H:%M UTC')
+            gh issue comment "$OPEN" --repo "$REPO" \
+              --body "$SINCE — συνεχίζεται. Τελευταίο τρέξιμο: $RUN"
+          fi
+
+      # Το τρέξιμο κοκκινίζει στο τέλος, αφού γραφτεί το issue. Πράσινο
+      # τρέξιμο πάνω σε αληθινή βλάβη είναι χειρότερο από καθόλου έλεγχο.
+      - name: Το αποτέλεσμα
+        if: always()
+        run: |
+          BAD=''
+          if [ '${{ steps.zontano.outcome }}' = 'failure' ]; then BAD="$BAD ζωντανό-site"; fi
+          if [ '${{ steps.eikones.outcome }}' = 'failure' ]; then BAD="$BAD εικόνες"; fi
+
+          if [ -n "$BAD" ]; then
+            echo "Έπεσαν:$BAD" >&2
+            exit 1
+          fi
+          echo 'Όλα καλά: το site ανανεώνεται και καμία εικόνα δεν κόβεται.'
