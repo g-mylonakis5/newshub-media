@@ -61,7 +61,14 @@ const SITE_NAME = 'Newshub Media';
 //    ΜΟΝΟ αν το ζητήσει ρητά το αφεντικό: βάζει cookies, άρα χρειάζεται
 //    μπάνερ συγκατάθεσης που σήμερα ΔΕΝ υπάρχει. Μην το γεμίσεις πριν
 //    μπει το μπάνερ.
-const CF_ANALYTICS = '';
+// Το token είναι ΔΗΜΟΣΙΟ — φαίνεται στον κώδικα κάθε σελίδας. Γι' αυτό
+// μπαίνει εδώ και όχι στα μυστικά.
+//
+// Το «Automatic setup» του Cloudflare δεν δούλεψε: στήθηκε στις 31
+// Οκτωβρίου και μετρούσε μηδέν για 12 μέρες, γιατί το domain δεν
+// περνάει ως proxied zone από αυτόν τον λογαριασμό. Οπότε το βάζουμε
+// εμείς στις σελίδες.
+const CF_ANALYTICS = '1c6e9c91e5cd4c0ebdbeb09703c977fe';
 const GOOGLE_VERIFY = '';
 const GA4 = '';
 
@@ -404,7 +411,11 @@ function metriseis(){
   const out = [];
 
   if (CF_ANALYTICS) {
-    out.push('  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"'
+    // Ακριβώς η μορφή που δίνει σήμερα το dashboard του Cloudflare.
+    // Το type="module" δεν είναι ιδιοτροπία: τα modules καθυστερούν από
+    // μόνα τους, άρα δεν μπλοκάρει τίποτα, και δεν τρέχει καθόλου σε
+    // παλιούς browser που δεν θα το κατάφερναν ούτως ή άλλως.
+    out.push('  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"'
       + ` data-cf-beacon='{"token": "${esc(CF_ANALYTICS)}"}'></script>`);
   }
 
