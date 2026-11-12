@@ -1,5 +1,21 @@
 [
   {
+    "id": "o-vaggelis-koytantos-sto-newshub-gr-chrysi-eykairia-gia-tis-idiotikes-ependyseis-toy-irakleioy-to-neo-programma-leader",
+    "title": "Ο Βαγγέλης Κουτάντος στο Newshub.gr: «Χρυσή» ευκαιρία για τις ιδιωτικές επενδύσεις του Ηρακλείου το νέο πρόγραμμα Leader",
+    "url": "https://www.newshub.gr/el/kriti/o-vaggelis-koytantos-sto-newshub-gr-chrysi-eykairia-gia-tis-idiotikes-ependyseis-toy-irakleioy-to-neo-programma-leader",
+    "date": "2026-11-12T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/bangeles-koutantos-anaptyxiake.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/bangeles-koutantos-anaptyxiake.jpg",
+    "summary": "Μια ακόμη ευκαιρία για την οικονομική ενίσχυση ιδιωτών, ώστε να κάνουν το επαγγελματικό τους σχέδιο πραγματικότητα αποτελεί το νέο Leader.\r\n\r\nΟπως αναφέρει μ...",
+    "author": {
+      "name": "Ανδρέας Κριτσωτάκης",
+      "url": "https://www.newshub.gr/el/andreas-kritsotakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "i-mpritnei-spiars-etoimazetai-na-apokalypsei-ena-mystiko-epicheirimatiko-protzekt",
     "title": "Η Μπρίτνεϊ Σπίαρς ετοιμάζεται να αποκαλύψει ένα «μυστικό επιχειρηματικό πρότζεκτ»",
     "url": "https://www.newshub.gr/el/sugar/i-mpritnei-spiars-etoimazetai-na-apokalypsei-ena-mystiko-epicheirimatiko-protzekt",
@@ -81,7 +97,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/peripoliko-4.jpg",
     "summary": "Περιπέτεια για ένα κοριτσάκι 3,5 ετών στην Μακρυλιά Ιεράπετρας, καθώς- κάτω από συνθήκες που δεν έχουν διευκρινιστεί-απομακρύνθηκε από το σπίτι του και εντοπ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "giati-ta-tsip-tis-nvidia-vriskontai-sto-epikentro-tis-pagkosmias-diamachis-gia-tin-techniti-noimosyni",
@@ -6816,17 +6832,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/ophphphph.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/ophphphph.jpg",
     "summary": "Μία δίαιτα υψηλής, και όχι χαμηλής, περιεκτικότητας σε πρωτεΐνες και μειωμένη σε θερμίδες οδήγησε σε μείωση του συσσωρευμένου λίπους στο ήπαρ κατά 40%, βάσει...",
-    "featured": false
-  },
-  {
-    "id": "kalodio-kritis-kyproy-i-ellada-einai-i-moni-adeiodotoysa-chora-apanta-ston-fintan-i-athina-o-gallikos-paragontas-kai-oi-diethneis-pieseis",
-    "title": "Καλώδιο Κρήτης-Κύπρου: Η Ελλάδα είναι η μόνη αδειοδοτούσα χώρα, απαντά στον Φιντάν η Αθήνα-Ο γαλλικός παράγοντας και οι διεθνείς πιέσεις",
-    "url": "https://www.newshub.gr/el/geopolitiki/kalodio-kritis-kyproy-i-ellada-einai-i-moni-adeiodotoysa-chora-apanta-ston-fintan-i-athina-o-gallikos-paragontas-kai-oi-diethneis-pieseis",
-    "date": "2026-11-07T12:45:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/7-11/kalodio.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/7-11/kalodio.jpg",
-    "summary": "Με νέα ενημέρωση της Γαλλίας προς τα «παράκτια» κράτη χθες το βράδυ, σχετικά με τις έρευνες του γαλλικού πλοίου Abeille Marengo, βάσει της NAVTEX...",
     "featured": false
   },
   {
