@@ -1079,6 +1079,11 @@ function itemFromEpisode(ep){
   const vt = videoTwin(ep);
   return {
     kind: 'podcast',
+    // Ο κωδικός του Buzzsprout. Ίδιος λόγος με το itemFromVideo από
+    // κάτω: χωρίς αυτόν η sameItem() δεν αναγνώριζε το επεισόδιο όταν
+    // το διαχειριστικό το καρφιτσώνει με τον κωδικό του, και η επιλογή
+    // χανόταν χωρίς μήνυμα. Το βρήκαμε στα θέματα της αρχικής.
+    id: ep.id,
     href: episodeUrl(ep),
     external: false,
     // Η ταμπέλα γράφει ΤΟ ΘΕΜΑ, όχι την εκπομπή. Όλα εδώ είναι podcast,
@@ -3718,6 +3723,45 @@ const FLOW_VISIBLE = 9;
 // κανονικά. Εδώ μιλάμε ΜΟΝΟ για τις εννιά κάρτες της αρχικής.
 const FLOW_SKIP_SHOWS = new Set(['ΕΠΙΚΑΙΡΟΤΗΤΑ']);
 
+// Τα κομμάτια ενός θέματος, με τη σειρά που θα βγουν ΣΤΗΝ ΑΡΧΙΚΗ.
+//
+// Πρώτα όσα καρφίτσωσε ο συντάκτης από το διαχειριστικό, με τη δική
+// του σειρά· από κάτω όλα τα υπόλοιπα με ημερομηνία, όπως πάντα. Έτσι
+// μια κενή επιλογή δεν αδειάζει ποτέ τη λωρίδα: το αυτόματο είναι από
+// κάτω και περιμένει.
+//
+// ΜΟΝΟ η αρχική. Η σελίδα του θέματος (/category/…) μένει χρονολογική:
+// εκεί ο κόσμος ψάχνει «όλα όσα έχετε», όχι επιμέλεια.
+//
+// Το κλειδί είναι το ίδιο slug με τη διεύθυνση της κατηγορίας, για να
+// διαβάζεται το curation.json με το μάτι.
+const homeCache = new Map();
+function homeItems(group){
+  const key = slugify(group.name);
+  if (homeCache.has(key)) return homeCache.get(key);
+
+  const picks = (curation().categoryPicks || {})[key];
+  let out = group.items;
+
+  if (Array.isArray(picks) && picks.length) {
+    // Ό,τι δεν βρέθηκε αγνοείται σιωπηλά: ένα καρφιτσωμένο επεισόδιο
+    // μπορεί να άλλαξε κατηγορία ή να σβήστηκε, και δεν είναι λόγος να
+    // μείνει κενή η θέση — τη γεμίζει το επόμενο αυτόματο.
+    const taken = new Set();
+    const first = [];
+
+    for (const ref of picks) {
+      const hit = group.items.find((it) => !taken.has(it) && sameItem(it, ref));
+      if (hit) { taken.add(hit); first.push(hit); }
+    }
+
+    out = first.concat(group.items.filter((it) => !taken.has(it)));
+  }
+
+  homeCache.set(key, out);
+  return out;
+}
+
 // Μία λωρίδα για ένα θέμα: όνομα, οι πιο πρόσφατες κάρτες του, και ο
 // δρόμος προς όλα τα υπόλοιπα.
 function topicRow(group){
@@ -3727,7 +3771,7 @@ function topicRow(group){
   // Μία μεγάλη και τρεις μικρές, αντί για τέσσερις ίδιες στη σειρά: το
   // πιο πρόσφατο του θέματος παίρνει πραγματικό χώρο, και η ενότητα
   // αποκτά ιεραρχία αντί να είναι τέσσερα πανομοιότυπα κουτιά.
-  const items = group.items.slice(0, TOPIC_ROW);
+  const items = homeItems(group).slice(0, TOPIC_ROW);
   const lead = items[0];
   const rest = items.slice(1);
 
@@ -3769,7 +3813,7 @@ function spotlightSections(groups){
     .filter((x) => x.g && x.g.items.length)
     .map(({ g, variant, blurb, key }) => {
       const total = g.items.length;
-      const cards = g.items.slice(0, SPOTLIGHT_CARDS).map((it) => card(inTopic(it, g.name))).join('\n');
+      const cards = homeItems(g).slice(0, SPOTLIGHT_CARDS).map((it) => card(inTopic(it, g.name))).join('\n');
 
 
       return `  <section class="spot spot--${variant}" data-topic="${key}">
@@ -3843,7 +3887,7 @@ function moreTopics(groups){
   // μεγάλες λωρίδες, απλώς σε μικρότερο μέγεθος, και δικές της κάρτες.
   const blocks = rest.map((key) => {
     const g = groups[key];
-    const cards = g.items.slice(0, MORE_CARDS).map((it) => card(inTopic(it, g.name))).join('\n');
+    const cards = homeItems(g).slice(0, MORE_CARDS).map((it) => card(inTopic(it, g.name))).join('\n');
 
     return `      <section class="more-topic" data-topic="${key}">
         <a class="topic-bar topic-bar--sm" href="${categoryUrl(g.name)}">
