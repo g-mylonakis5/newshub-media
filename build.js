@@ -428,7 +428,135 @@ function metriseis(){
   return out.length ? out.join('\n') + '\n' : '';
 }
 
-function page({ title, body, depth = 0, scripts = [], description = '', image = '', url = '', type = 'website', prev = '', next = '', canonical = '' }){
+// ---- Δομημένα δεδομένα (JSON-LD) ----
+//
+// Ό,τι λέει η σελίδα στον άνθρωπο, εδώ το ξαναλέμε στη μηχανή — με
+// ονόματα που η Google αναγνωρίζει. Δεν αλλάζει ΤΙΠΟΤΑ ορατό: είναι
+// ένα <script> στο <head> που κανείς δεν βλέπει.
+//
+// Γιατί έχει σημασία για ΕΜΑΣ συγκεκριμένα:
+//   · NewsArticle -> προϋπόθεση για τα «Top stories» και το Google News
+//   · PodcastEpisode -> η Google μαθαίνει ότι υπάρχει ήχος, πόσης διάρκειας
+//   · VideoObject -> μικρογραφία βίντεο μέσα στα αποτελέσματα
+//   · BreadcrumbList -> διαδρομή αντί για γυμνή διεύθυνση κάτω από τον τίτλο
+//
+// ΚΑΝΟΝΑΣ: εδώ μπαίνει μόνο ό,τι υπάρχει και στη σελίδα. Δομημένα
+// δεδομένα που λένε κάτι άλλο από το ορατό κείμενο είναι παράβαση και
+// τιμωρούνται — δεν γράφουμε ποτέ τίποτα «για τη μηχανή».
+const LOGO_URL = `${SITE_URL}/shows/logo-icon.png`;
+
+// Ο εκδότης, μικρός. Μπαίνει μέσα σε κάθε άρθρο, επεισόδιο και βίντεο,
+// άρα πληρώνεται 4.700 φορές — γι' αυτό κρατάει μόνο τα υποχρεωτικά.
+// Η πλήρης μορφή, με τα σόσιαλ, υπάρχει μία φορά στην αρχική.
+const LD_PUB = {
+  '@type': 'NewsMediaOrganization',
+  '@id': `${SITE_URL}/#org`,
+  name: SITE_NAME,
+  url: `${SITE_URL}/`,
+  logo: { '@type': 'ImageObject', url: LOGO_URL, width: 512, height: 512 },
+};
+
+function ldOrg(){
+  return Object.assign({}, LD_PUB, {
+    // Τα ίδια σόσιαλ που δείχνει το υποσέλιδο. Λένε στη Google «αυτό το
+    // site και αυτοί οι λογαριασμοί είναι ο ίδιος οργανισμός».
+    sameAs: SOCIAL.map(([, link]) => link),
+    description: 'Podcasts, βίντεο και συζητήσεις του newshub.gr — από την Κρήτη και τον κόσμο.',
+  });
+}
+
+// Σχετική διεύθυνση σελίδας -> πλήρης, στη ΜΙΑ γραφή που χρησιμοποιούμε
+// παντού (canonical, sitemap, og:url): χωρίς .html, χωρίς index.
+function absUrl(url){
+  return `${SITE_URL}/${cleanUrl(url || '')}`;
+}
+
+// Διεύθυνση εικόνας, πάντα πλήρης.
+//
+// Τα εξώφυλλα του Buzzsprout και του YouTube έρχονται ήδη πλήρη. Οι
+// φωτογραφίες που ανεβάζει ο δημοσιογράφος από το διαχειριστικό όμως
+// έρχονται ως «/uploads/...» — σωστό μέσα στη σελίδα, ΑΚΥΡΟ στο
+// og:image και στα δομημένα δεδομένα: το Facebook και η Google
+// απαιτούν πλήρη διεύθυνση και αλλιώς δεν δείχνουν τίποτα.
+//
+// Αυτό ήταν παλιό σφάλμα, όχι καινούριο: κάθε δικό μας άρθρο
+// μοιραζόταν χωρίς φωτογραφία.
+function absAsset(u){
+  const s = String(u || '').trim();
+  if (!s) return '';
+  if (/^https?:\/\//i.test(s) || s.startsWith('//') || s.startsWith('data:')) return s;
+  return `${SITE_URL}/${s.replace(/^(\.\.?\/)+/, '').replace(/^\//, '')}`;
+}
+
+// Η ημερομηνία θέλει μορφή ISO με ζώνη ώρας. Ό,τι δεν διαβάζεται
+// φεύγει τελείως: λάθος ημερομηνία είναι χειρότερη από καμία.
+function ldDate(d){
+  const t = Date.parse(d);
+  return Number.isNaN(t) ? '' : new Date(t).toISOString();
+}
+
+// Διάρκεια σε ISO 8601 — «PT23M27S». Έτσι τη θέλει το schema.org.
+function ldDuration(seconds){
+  const s = Math.round(Number(seconds) || 0);
+  if (!s) return '';
+  return `PT${Math.floor(s / 60)}M${s % 60}S`;
+}
+
+// Σκέτο κείμενο, χωρίς σήμανση. Δύο παγίδες μαζεμένες:
+//   · ΟΧΙ esc() — το JSON.stringify κάνει τη δική του δουλειά, και ένα
+//     &quot; μέσα σε JSON-LD φτάνει αυτολεξεί στα αποτελέσματα
+//   · τα 110 σημεία είναι το όριο που κόβει η Google στο headline
+function ldText(text, max = 110){
+  const t = decode(String(text || '')).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (t.length <= max) return t;
+  return t.slice(0, max).replace(/\s+\S*$/, '') + '…';
+}
+
+// Οι ίδιες ψίχες που δείχνει η σελίδα, στη γλώσσα της μηχανής.
+// Δέχεται ακριβώς τη λίστα που δίνουμε στο breadcrumb() — ένα σημείο
+// αλήθειας, όχι δύο που θα ξεσυγχρονιστούν.
+function ldCrumbs(parts){
+  const items = (parts || []).filter(Boolean);
+  if (items.length < 2) return null;
+
+  return {
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((p, i) => Object.assign(
+      { '@type': 'ListItem', position: i + 1, name: ldText(p.label, 160) },
+      // Το τελευταίο σκαλί είναι η τρέχουσα σελίδα και δεν έχει σύνδεσμο.
+      p.href ? { item: absUrl(p.href) } : {},
+    )),
+  };
+}
+
+// Πετάει τα κενά κλειδιά. Το schema.org δέχεται ελλείψεις· δεν δέχεται
+// άδειες τιμές — ένα datePublished: "" είναι σφάλμα, η απουσία όχι.
+function ldClean(node){
+  if (!node) return null;
+  const out = {};
+  for (const [k, v] of Object.entries(node)) {
+    if (v === '' || v === null || v === undefined) continue;
+    if (Array.isArray(v) && !v.length) continue;
+    out[k] = v && typeof v === 'object' && !Array.isArray(v) ? ldClean(v) : v;
+  }
+  return out;
+}
+
+function ldBlock(nodes){
+  const list = (Array.isArray(nodes) ? nodes : [nodes]).map(ldClean).filter(Boolean);
+  if (!list.length) return '';
+
+  const data = list.length === 1
+    ? Object.assign({ '@context': 'https://schema.org' }, list[0])
+    : { '@context': 'https://schema.org', '@graph': list };
+
+  // Το « < » γίνεται \u003c επίτηδες. Αν ένας τίτλος περιέχει κάποτε
+  // «</script>», χωρίς αυτό θα έκλεινε τη σελίδα στη μέση. Το JSON
+  // παραμένει έγκυρο — είναι απλώς άλλη γραφή του ίδιου χαρακτήρα.
+  return `  <script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>\n`;
+}
+
+function page({ title, body, depth = 0, scripts = [], description = '', image = '', url = '', type = 'website', prev = '', next = '', canonical = '', jsonld = null }){
   const up = depth === 0 ? '' : '../';
   // Ο player φορτώνει ΠΑΝΤΟΥ: κρατάει τον ήχο ζωντανό και αναλαμβάνει την
   // πλοήγηση, οπότε πρέπει να υπάρχει και στις σελίδες που δεν παίζουν ήχο.
@@ -453,7 +581,7 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   // αυτές το Facebook δείχνει τη μεγάλη κάρτα ήδη από την πρώτη φορά. Για
   // τα εξώφυλλα του Buzzsprout δεν τις ξέρουμε, και μια λάθος διάσταση
   // είναι χειρότερη από καμία.
-  const pic = image || `${SITE_URL}/share.jpg`;
+  const pic = absAsset(image) || `${SITE_URL}/share.jpg`;
 
   // Το canonical δείχνει κανονικά στη ΔΙΚΗ μας διεύθυνση. Εξαίρεση: οι
   // σελίδες άρθρων του newshub.gr, που δηλώνουν πρωτότυπο το δικό τους.
@@ -487,7 +615,7 @@ ${image ? '' : `  <meta property="og:image:width" content="1200">
   <meta name="twitter:description" content="${desc}">
   <meta name="twitter:image" content="${pic}">
 
-${GOOGLE_VERIFY ? `  <meta name="google-site-verification" content="${esc(GOOGLE_VERIFY)}">\n` : ''}  <link rel="icon" href="${up}shows/logo-icon.png" type="image/png" sizes="512x512">
+${ldBlock(jsonld)}${GOOGLE_VERIFY ? `  <meta name="google-site-verification" content="${esc(GOOGLE_VERIFY)}">\n` : ''}  <link rel="icon" href="${up}shows/logo-icon.png" type="image/png" sizes="512x512">
   <link rel="apple-touch-icon" href="${up}shows/logo-icon.png">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400..900&family=Source+Serif+4:wght@400..600&display=swap">
@@ -1946,14 +2074,16 @@ function videoPage(v, category){
         </span>
       </a>`).join('\n');
 
-  const body = `${siteHeader(1)}
-
-${breadcrumb([
+  const crumbs = [
     { label: 'Αρχική', href: 'index.html' },
     { label: showName(v.show), href: showUrl(v.show) },
     category ? { label: category, href: '' } : null,
     { label: decode(v.title) },
-  ], 1)}
+  ];
+
+  const body = `${siteHeader(1)}
+
+${breadcrumb(crumbs, 1)}
 
   <main class="episode" data-pagefind-body
         data-pagefind-meta="image:${v.image || ''},type:Βίντεο,date:${formatDate(v.date)}"
@@ -2022,6 +2152,26 @@ ${showBannerBox(v.show, 1)}
     image: v.image,
     url: videoUrl(v),
     type: 'article',
+    // Το embedUrl είναι το YouTube, γιατί εκεί ζει το βίντεο — δεν το
+    // φιλοξενούμε. Η διάρκεια έρχεται από το δίδυμο επεισόδιο όταν
+    // υπάρχει: ίδια συζήτηση, ίδια διάρκεια.
+    jsonld: [
+      {
+        '@type': 'VideoObject',
+        '@id': `${absUrl(videoUrl(v))}#video`,
+        url: absUrl(videoUrl(v)),
+        name: ldText(v.title),
+        description: ldText(twin && twin.summary ? twin.summary : v.title, 300),
+        uploadDate: ldDate(v.date),
+        thumbnailUrl: absAsset(v.image),
+        embedUrl: v.embed || '',
+        duration: twin ? ldDuration(twin.seconds) : '',
+        inLanguage: 'el',
+        keywords: cats.join(', '),
+        publisher: LD_PUB,
+      },
+      ldCrumbs(crumbs),
+    ],
   });
 }
 
@@ -2169,13 +2319,15 @@ function articlePage(a, body, hasCat = false){
   const words = body.reduce((n, p) => n + p.text.split(/\s+/).length, 0);
   const minutes = Math.max(1, Math.round(words / 200));
 
-  const inner = `${siteHeader(1)}
-
-${breadcrumb([
+  const crumbs = [
     { label: 'Αρχική', href: 'index.html' },
     a.category ? { label: a.category, href: hasCat ? categoryUrl(a.category) : '' } : null,
     { label: a.title },
-  ], 1)}
+  ];
+
+  const inner = `${siteHeader(1)}
+
+${breadcrumb(crumbs, 1)}
 
   <main class="art" data-pagefind-body
         data-pagefind-meta="image:${img},type:Είδηση,date:${formatDate(a.date)}"
@@ -2313,6 +2465,20 @@ ${cards}
     description: `${name}: ${facts} στο ${SITE_NAME}.`,
     image: face,
     url: writerUrl(name),
+    // Η σελίδα ΕΙΝΑΙ προφίλ προσώπου, και το λέει. Το ίδιο @id που
+    // αναφέρουν τα άρθρα του: ένα πρόσωπο, μία ταυτότητα.
+    jsonld: {
+      '@type': 'ProfilePage',
+      mainEntity: {
+        '@type': 'Person',
+        '@id': absUrl(writerUrl(name)),
+        name,
+        url: absUrl(writerUrl(name)),
+        image: absAsset(face),
+        jobTitle: 'Δημοσιογράφος',
+        worksFor: LD_PUB,
+      },
+    },
   });
 }
 
@@ -2356,13 +2522,15 @@ function ownArticlePage(a, hasCat = false){
   const words = a.body.reduce((n, p) => n + String(p.text || '').split(/\s+/).length, 0);
   const minutes = Math.max(1, Math.round(words / 200));
 
-  const inner = `${siteHeader(1)}
-
-${breadcrumb([
+  const crumbs = [
     { label: 'Αρχική', href: 'index.html' },
     a.category ? { label: a.category, href: hasCat ? categoryUrl(a.category) : '' } : null,
     { label: a.title },
-  ], 1)}
+  ];
+
+  const inner = `${siteHeader(1)}
+
+${breadcrumb(crumbs, 1)}
 
   <main class="art" data-pagefind-body
         data-pagefind-meta="image:${a.image || ''},type:Άρθρο,date:${formatDate(a.date)}"
@@ -2399,6 +2567,34 @@ ${articleBodyHtml(a.body)}
     image: a.image || '',
     url: ownArticleUrl(a),
     type: 'article',
+    // ΜΟΝΟ εδώ μπαίνει NewsArticle, και μόνο επειδή το άρθρο είναι
+    // δικό μας. Στις αναδημοσιεύσεις του newshub.gr δεν μπαίνει: εκεί
+    // το canonical δηλώνει ότι το πρωτότυπο είναι αλλού, και δομημένα
+    // δεδομένα εδώ θα διεκδικούσαν ξένη δουλειά.
+    //
+    // Το dateModified λείπει επίτηδες — δεν κρατάμε ώρα διόρθωσης, και
+    // δεν γράφουμε ημερομηνία που δεν ξέρουμε.
+    jsonld: [
+      {
+        '@type': 'NewsArticle',
+        mainEntityOfPage: { '@type': 'WebPage', '@id': absUrl(ownArticleUrl(a)) },
+        headline: ldText(a.title),
+        description: ldText(ownSummary(a) || a.title, 300),
+        image: a.image ? [absAsset(a.image)] : [],
+        datePublished: ldDate(a.date),
+        articleSection: a.category || '',
+        inLanguage: 'el',
+        // Ο συντάκτης με τη ΔΙΚΗ του σελίδα: έτσι η Google δένει τα
+        // άρθρα του μεταξύ τους αντί να βλέπει ένα όνομα-κείμενο.
+        author: a.author ? {
+          '@type': 'Person',
+          name: a.author,
+          url: absUrl(writerUrl(a.author)),
+        } : null,
+        publisher: LD_PUB,
+      },
+      ldCrumbs(crumbs),
+    ],
   });
 }
 
@@ -5253,7 +5449,7 @@ ${latest}
   <script src="pagefind/pagefind-ui.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', function () {
-      new PagefindUI({
+      var ui = new PagefindUI({
         element: '#search',
         showSubResults: true,
         showImages: true,
@@ -5270,6 +5466,17 @@ ${latest}
           searching: 'Αναζήτηση για [SEARCH_TERM]...'
         }
       });
+
+      // Αναζήτηση από τη διεύθυνση: /search?q=κρήτη ψάχνει μόνη της.
+      //
+      // Δύο πράγματα κερδίζουμε: ο σύνδεσμος μιας αναζήτησης γίνεται
+      // να μοιραστεί, και η Google μπορεί να δείξει πλαίσιο αναζήτησης
+      // στα αποτελέσματά μας (SearchAction στην αρχική) — το οποίο
+      // στέλνει ακριβώς σε αυτή τη διεύθυνση.
+      try {
+        var q = new URLSearchParams(location.search).get('q');
+        if (q) ui.triggerSearch(q);
+      } catch (e) {}
     });
   </script>`;
 
@@ -6047,14 +6254,19 @@ function episodePage(ep){
       </div>`
     : '';
 
-  const body = `${siteHeader(1)}
-${pageHero(ep.image || '')}
-
-${breadcrumb([
+  // Μία λίστα, δύο αναγνώστες: οι ψίχες που βλέπει ο επισκέπτης και η
+  // BreadcrumbList που διαβάζει η Google. Αν αλλάξει η διαδρομή,
+  // αλλάζουν μαζί.
+  const crumbs = [
     { label: 'Αρχική', href: 'index.html' },
     show ? { label: showName(show), href: showUrl(show) } : null,
     { label: decode(ep.headline) },
-  ], 1)}
+  ];
+
+  const body = `${siteHeader(1)}
+${pageHero(ep.image || '')}
+
+${breadcrumb(crumbs, 1)}
 
   <main class="episode" data-pagefind-body
         data-pagefind-meta="image:${ep.image || ''},type:Podcast,date:${formatDate(ep.date)},duration:${formatDuration(ep.seconds)}"
@@ -6138,6 +6350,36 @@ ${showBannerBox(show, 1)}
     image: ep.image,
     url: episodeUrl(ep),
     type: 'article',
+    // Επεισόδιο podcast, όχι άρθρο: έχει ήχο, διάρκεια και σειρά.
+    // Το associatedMedia δείχνει στο πραγματικό mp3 του Buzzsprout —
+    // την ίδια διεύθυνση που παίζει ο player μας.
+    jsonld: [
+      {
+        '@type': 'PodcastEpisode',
+        '@id': `${absUrl(episodeUrl(ep))}#episode`,
+        url: absUrl(episodeUrl(ep)),
+        name: ldText(ep.headline),
+        description: ldText(ep.summary, 300),
+        datePublished: ldDate(ep.date),
+        image: absAsset(ep.image),
+        inLanguage: 'el',
+        timeRequired: ldDuration(ep.seconds),
+        associatedMedia: {
+          '@type': 'AudioObject',
+          contentUrl: ep.audio || '',
+          encodingFormat: 'audio/mpeg',
+          duration: ldDuration(ep.seconds),
+        },
+        partOfSeries: show ? {
+          '@type': 'PodcastSeries',
+          name: showName(show),
+          url: absUrl(showUrl(show)),
+        } : null,
+        keywords: cats.join(', '),
+        publisher: LD_PUB,
+      },
+      ldCrumbs(crumbs),
+    ],
   });
 }
 
@@ -6425,6 +6667,32 @@ ${newsTicker(articles)}
   </div>
 
 ${intro(episodes[0], videos[0])}`,
+    // Η ταυτότητα του site, μία φορά, εδώ. Όλες οι άλλες σελίδες
+    // αναφέρουν τον ίδιο οργανισμό με το ίδιο @id.
+    //
+    // Το SearchAction λέει στη Google «έχω δική μου αναζήτηση, εδώ
+    // είναι» — στα αποτελέσματα μπορεί να εμφανιστεί πλαίσιο
+    // αναζήτησης κάτω από το όνομά μας. Δουλεύει ΜΟΝΟ επειδή η
+    // search.html διαβάζει πλέον το ?q= (δες searchPage).
+    jsonld: [
+      ldOrg(),
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#site`,
+        url: `${SITE_URL}/`,
+        name: SITE_NAME,
+        inLanguage: 'el',
+        publisher: { '@id': `${SITE_URL}/#org` },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
+          },
+          'query-input': 'required name=search_term_string',
+        },
+      },
+    ],
   });
 
   fs.mkdirSync(PUBLIC_DIR, { recursive: true }); //creation of the public directory if it doesn't exist
