@@ -1024,6 +1024,14 @@ function pinMeres(lista, key, ref){
   return (t + meres * 864e5 - Date.now()) / 864e5;
 }
 
+// Έληξε; Τότε το site ΔΕΝ τη δείχνει πια, και η θέση της στο
+// διαχειριστικό πρέπει να φαίνεται σβηστή — αλλιώς η αρίθμηση «01»
+// λέει ότι είναι πρώτη στην αρχική, ενώ εκεί κάθεται κάτι άλλο.
+function pinLixe(lista, key, ref){
+  var left = pinMeres(lista, key, ref);
+  return left !== null && left <= 0;
+}
+
 // Η ετικέτα δίπλα στη θέση. Γράφει πόσο μένει, ή ότι έληξε.
 function pinSima(lista, key, ref){
   var left = pinMeres(lista, key, ref);
@@ -1568,7 +1576,8 @@ function drawThCat(){
       : '<img alt=""><div class="slot-text"><p class="slot-title">' + esc(r.ref) + '</p>'
         + '<p class="slot-meta">Δεν βρέθηκε — ίσως άλλαξε θέμα. Το site θα βάλει άλλο.</p></div>';
 
-    return '<div class="slot' + (r.auto ? ' slot--auto' : '') + (i >= theseis ? ' slot--extra' : '') + '">'
+    return '<div class="slot' + (r.auto ? ' slot--auto' : '') + (i >= theseis ? ' slot--extra' : '')
+      + (!r.auto && pinLixe('topics', pinKey('topics', name), r.ref) ? ' slot--lixe' : '') + '">'
       + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
       + body
       + '<span class="slot-acts">'
@@ -1913,7 +1922,8 @@ function ltSlot(r, i, total){
     note += ' · <strong>είναι ήδη το πρωτοσέλιδο, δεν ξαναβγαίνει εδώ</strong>';
   }
 
-  return '<div class="slot' + (r.auto ? ' slot--auto' : '') + '">'
+  return '<div class="slot' + (r.auto ? ' slot--auto' : '')
+    + (!r.auto && pinLixe('latest', 'latest', r.ref) ? ' slot--lixe' : '') + '">'
     + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
     + (it.image ? '<img src="' + esc(it.image) + '" alt="">' : '<img alt="">')
     + '<div class="slot-text">'
@@ -2196,7 +2206,8 @@ function drawMustRead(){
       : '<img alt=""><div class="slot-text"><p class="slot-title">' + esc(r.ref) + '</p>'
         + '<p class="slot-meta">Δεν βρέθηκε — μπορεί να είναι παλιό. Το site θα βάλει άλλο.</p></div>';
 
-    return '<div class="slot' + (r.auto ? ' slot--auto' : '') + '">'
+    return '<div class="slot' + (r.auto ? ' slot--auto' : '')
+      + (!r.auto && pinLixe('mustRead', 'mustRead', r.ref) ? ' slot--lixe' : '') + '">'
       + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
       + body
       + '<span class="slot-acts">'
@@ -2622,7 +2633,8 @@ function opSlot(r, i, total){
       + '<p class="slot-meta">Δεν βρέθηκε — μπορεί να έφυγε από τη ροή. '
       + 'Το site θα βάλει άλλη.</p></div>';
 
-  return '<div class="slot' + (r.auto ? ' slot--auto' : '') + '">'
+  return '<div class="slot' + (r.auto ? ' slot--auto' : '')
+    + (!r.auto && pinLixe('opinions', 'opinions', r.ref) ? ' slot--lixe' : '') + '">'
     + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
     + body
     + '<span class="slot-acts">'
