@@ -20,5 +20,45 @@
         "id": "VE-A8Bu5aog"
       }
     ]
+  },
+  {
+    "id": "dokimastiko-arthro-newshub-gr",
+    "title": "Δοκιμαστικό άρθρο newshub.gr",
+    "summary": "",
+    "category": "Tech-Hub",
+    "author": "Γιάννης Μυλωνάκης",
+    "date": "2026-11-12T22:40:00.000Z",
+    "image": "/uploads/20261110214953-foteino-stoyntio-podcast-koinonia-se.jpg",
+    "imageCaption": "",
+    "status": "draft",
+    "body": [
+      {
+        "type": "p",
+        "text": "Δοκιμαστικό άρθρο 1"
+      },
+      {
+        "type": "p",
+        "text": "Δοκιμαστικό άρθρο 2 "
+      },
+      {
+        "type": "image",
+        "src": "/uploads/20261110215002-epikairotita-sto-newsroom.jpg",
+        "caption": "Λεζάντα 1 "
+      },
+      {
+        "type": "p",
+        "text": "Δοκιμαστικό άρθρο 3 "
+      },
+      {
+        "type": "embed",
+        "kind": "youtube",
+        "id": "F-7IoinHE0c"
+      },
+      {
+        "type": "embed",
+        "kind": "episode",
+        "id": "Buzzsprout-20075876"
+      }
+    ]
   }
 ]
