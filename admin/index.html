@@ -471,6 +471,32 @@
       <p class="hint" data-th-spot-note></p>
 
       <div class="thpick" data-th-pick-spot></div>
+
+      <!-- ========== ΤΙ ΒΓΑΙΝΕΙ ΣΕ ΚΑΘΕ ΘΕΜΑ ==========
+           Μέχρι τώρα κάθε θέμα γέμιζε μόνο του, με ημερομηνία. Εδώ
+           ορίζεται ΠΟΙΑ κομμάτια μπαίνουν και με ποια σειρά. Ό,τι δεν
+           καρφιτσωθεί, το γεμίζει το site με το πιο πρόσφατο. -->
+      <h2 class="sub">Τι βγαίνει σε κάθε θέμα</h2>
+      <p class="hint">Μόνο στην αρχική. Η σελίδα του θέματος δείχνει πάντα
+        τα πάντα, με ημερομηνία.</p>
+
+      <div class="thpick" data-th-pick-cat></div>
+
+      <div data-th-cat-box hidden>
+        <div class="slots" data-th-cat-slots></div>
+        <p class="hint" data-th-cat-note></p>
+
+        <div class="tools">
+          <input type="search" class="find" data-th-cat-find
+                 placeholder="Βρες τίτλο μέσα στο θέμα…" aria-label="Αναζήτηση">
+        </div>
+
+        <div class="picks" data-th-cat-picks></div>
+
+        <p class="more">
+          <button type="button" class="btn btn--ghost" data-th-cat-more hidden>Δείξε περισσότερα</button>
+        </p>
+      </div>
     </section>
 
     <section class="panel" data-panel="prosopa">

@@ -1198,6 +1198,9 @@ var TH_SPOTS = 2;     // όσες ενότητες σε πλαίσιο
 var th = {
   list: [],                                  // [{name, key, n}] φθίνουσα
   defaults: { featured: [], spotlight: [] }, // οι προεπιλογές του κώδικα
+  open: '',                                  // ποιο θέμα είναι ανοιχτό για καρφίτσωμα
+  find: '',
+  shown: PAGE,
 };
 
 function thReady(file){
@@ -1301,6 +1304,10 @@ function drawThemata(){
 
   thPicker($('[data-th-pick-row]'), rows, 'th-add', rows.length >= TH_ROWS);
   thPicker($('[data-th-pick-spot]'), spots, 'th-sadd', spots.length >= TH_SPOTS);
+
+  // Το κάτω μέρος ξαναζωγραφίζεται μαζί: αν αλλάξει το πού κάθεται ένα
+  // θέμα, αλλάζει και το πόσες θέσεις έχει.
+  drawThCat();
 }
 
 // Γράφει μια λίστα στο curation. Η ΠΡΩΤΗ αλλαγή ξεκινά από ό,τι βγαίνει
@@ -1342,6 +1349,204 @@ function thRemove(key, now, i){
   var list = now.slice();
   list.splice(i, 1);
   thSave(key, list);
+}
+
+// ---- Τι βγαίνει σε κάθε θέμα ----
+//
+// Το site γέμιζε κάθε θέμα μόνο του, με ημερομηνία. Εδώ ο συντάκτης
+// καρφιτσώνει ό,τι θέλει, με τη σειρά του· οι υπόλοιπες θέσεις
+// γεμίζουν αυτόματα όπως πριν. Ίδια λογική με τα «Τελευταία».
+//
+// Κρατιέται στο curation.categoryPicks, με κλειδί το slug του θέματος —
+// το ίδιο που έχει και η διεύθυνσή του. Δες homeItems() στο build.js.
+
+// Πόσες θέσεις δείχνει η αρχική για ένα θέμα. Εξαρτάται από το ΠΟΥ
+// κάθεται: λωρίδα, πλαίσιο, ή «Και ακόμα». Οι αριθμοί είναι του
+// build.js — TOPIC_ROW, SPOTLIGHT_CARDS, MORE_CARDS.
+function thPosesTheseis(name){
+  if (thRows().indexOf(name) > -1) return 4;
+  if (thSpots().indexOf(name) > -1) return 3;
+  return 2;
+}
+
+function thPouVgainei(name){
+  if (thRows().indexOf(name) > -1) return 'μεγάλη λωρίδα';
+  if (thSpots().indexOf(name) > -1) return 'ενότητα σε πλαίσιο';
+  return '«Και ακόμα»';
+}
+
+// Οι κατηγορίες ενός κομματιού. Τα δικά μας άρθρα κουβαλούν τη δική
+// τους — δεν περνούν από το auto-categories.json, που το γράφει το
+// build μόνο για επεισόδια και βίντεο.
+function thKatigoriesTou(it){
+  if (it.kind === 'article') return it.who ? [it.who] : [];
+  return catsOf(it.id).list;
+}
+
+function thTouThematos(name){
+  return catItems().filter(function (it) {
+    return thKatigoriesTou(it).indexOf(name) > -1;
+  });
+}
+
+function thPicks(name){
+  var all = state.curation.categoryPicks || {};
+  var list = all[slugify(name)];
+  return Array.isArray(list) ? list : [];
+}
+
+function thSetPicks(name, list){
+  if (!state.curation.categoryPicks) state.curation.categoryPicks = {};
+
+  // Άδεια λίστα = καμία χειροκίνητη επιλογή. Τη σβήνουμε εντελώς αντί
+  // να αφήσουμε άδειο κουτί στο αρχείο — το curation.json διαβάζεται
+  // και με το μάτι.
+  if (list.length) state.curation.categoryPicks[slugify(name)] = list;
+  else delete state.curation.categoryPicks[slugify(name)];
+
+  drawThCat();
+  thDirty(true);
+}
+
+// Τι θα δείξει η αρχική: πρώτα τα καρφιτσωμένα, μετά το αυτόματο
+// γέμισμα. Αντιγράφει το homeItems() του build.js.
+function thProvoli(name){
+  var pinned = thPicks(name);
+  var pool = thTouThematos(name);
+  var rows = [];
+  var taken = {};
+
+  pinned.forEach(function (ref) {
+    var hit = null;
+    pool.forEach(function (it) { if (!hit && !taken[it.ref] && isChosen(it, ref)) hit = it; });
+    if (hit) { taken[hit.ref] = true; rows.push({ item: hit, ref: ref, auto: false }); }
+    else rows.push({ item: null, ref: ref, auto: false });
+  });
+
+  for (var i = 0; i < pool.length && rows.length < thPosesTheseis(name); i++) {
+    if (taken[pool[i].ref]) continue;
+    taken[pool[i].ref] = true;
+    rows.push({ item: pool[i], ref: pool[i].ref, auto: true });
+  }
+
+  return rows;
+}
+
+function drawThCat(){
+  var box = $('[data-th-cat-box]');
+  var name = th.open;
+
+  // Οι ετικέτες των θεμάτων, πάντα ορατές.
+  var chips = $('[data-th-pick-cat]');
+  chips.innerHTML = th.list.map(function (t) {
+    var n = thPicks(t.name).length;
+    return '<button type="button" class="catopt' + (t.name === name ? ' is-on' : '') + '"'
+      + ' data-th-cat="' + esc(t.name) + '">'
+      + esc(t.name)
+      + (n ? ' <span class="thnum">' + n + ' καρφιτσωμένα</span>'
+           : ' <span class="thnum">αυτόματο</span>')
+      + '</button>';
+  }).join('');
+
+  if (!name) { box.hidden = true; return; }
+  box.hidden = false;
+
+  var theseis = thPosesTheseis(name);
+  var rows = thProvoli(name);
+
+  $('[data-th-cat-slots]').innerHTML = rows.map(function (r, i) {
+    var it = r.item;
+
+    var body = it
+      ? (it.image ? '<img src="' + esc(it.image) + '" alt="">' : '<img alt="">')
+        + '<div class="slot-text">'
+        + '<p class="slot-title">' + esc(it.title) + '</p>'
+        + '<p class="slot-meta">' + (it.who ? esc(it.who) + ' · ' : '') + when(it.date) + '</p>'
+        + '</div>'
+      : '<img alt=""><div class="slot-text"><p class="slot-title">' + esc(r.ref) + '</p>'
+        + '<p class="slot-meta">Δεν βρέθηκε — ίσως άλλαξε θέμα. Το site θα βάλει άλλο.</p></div>';
+
+    return '<div class="slot' + (r.auto ? ' slot--auto' : '') + (i >= theseis ? ' slot--extra' : '') + '">'
+      + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
+      + body
+      + '<span class="slot-acts">'
+      + (r.auto
+        ? '<span class="pill pill--draft">αυτόματο</span>'
+        : '<button type="button" data-thc-up="' + i + '" aria-label="Πάνω"'
+          + (i === 0 ? ' disabled' : '') + '>↑</button>'
+          + '<button type="button" data-thc-down="' + i + '" aria-label="Κάτω"'
+          + (i === thPicks(name).length - 1 ? ' disabled' : '') + '>↓</button>'
+          + '<button type="button" data-thc-del="' + i + '" aria-label="Αφαίρεση">✕</button>')
+      + '</span></div>';
+  }).join('');
+
+  var n = thPicks(name).length;
+  $('[data-th-cat-note]').textContent = 'Το «' + name + '» βγαίνει ως ' + thPouVgainei(name)
+    + ' με ' + theseis + (theseis === 1 ? ' θέση' : ' θέσεις') + '. '
+    + (n === 0
+      ? 'Καμία χειροκίνητη επιλογή — μπαίνουν τα πιο πρόσφατα.'
+      : n + (n === 1 ? ' καρφιτσωμένο' : ' καρφιτσωμένα')
+        + (n > theseis ? ' — τα πέρα από τη ' + theseis + 'η θέση δεν θα φανούν.' : '.'));
+
+  drawThCatPicks();
+}
+
+function drawThCatPicks(){
+  var name = th.open;
+  var box = $('[data-th-cat-picks]');
+  var pinned = thPicks(name);
+
+  var hits = thTouThematos(name).filter(function (it) {
+    if (!th.find) return true;
+    return it.key.indexOf(th.find) > -1;
+  });
+
+  if (!hits.length) {
+    box.innerHTML = '<p class="muted">Τίποτα δεν ταιριάζει σε αυτό το θέμα.</p>';
+    $('[data-th-cat-more]').hidden = true;
+    return;
+  }
+
+  box.innerHTML = hits.slice(0, th.shown).map(function (it) {
+    var on = pinned.some(function (ref) { return isChosen(it, ref); });
+    return '<button type="button" class="pick' + (on ? ' is-on' : '') + '"'
+      + ' data-thc-add="' + esc(it.ref) + '">'
+      + (it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy">' : '<img alt="">')
+      + '<span><span class="pick-title">' + esc(it.title) + '</span>'
+      + '<span class="pick-meta">'
+      + '<span class="tag tag--' + it.kind + '">' + TAGS[it.kind] + '</span>'
+      + (it.who ? esc(it.who) + ' · ' : '') + when(it.date)
+      + '</span></span></button>';
+  }).join('');
+
+  $('[data-th-cat-more]').hidden = hits.length <= th.shown;
+}
+
+function thcToggle(ref){
+  var name = th.open;
+  var list = thPicks(name).slice();
+  var at = -1;
+
+  list.forEach(function (r, i) { if (r === ref) at = i; });
+
+  if (at > -1) list.splice(at, 1);
+  else list.push(ref);
+
+  thSetPicks(name, list);
+}
+
+function thcMove(i, step){
+  var list = thPicks(th.open).slice();
+  var to = i + step;
+  if (to < 0 || to >= list.length) return;
+  list.splice(to, 0, list.splice(i, 1)[0]);
+  thSetPicks(th.open, list);
+}
+
+function thcRemove(i){
+  var list = thPicks(th.open).slice();
+  list.splice(i, 1);
+  thSetPicks(th.open, list);
 }
 
 function thDirty(on){
@@ -1398,6 +1603,43 @@ function wireThemata(){
       return;
     }
     thToggle('spotlightTopics', thSpots(), TH_SPOTS, name);
+  });
+
+  // ---- τι βγαίνει σε κάθε θέμα ----
+
+  $('[data-th-pick-cat]').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-th-cat]');
+    if (!b) return;
+    // Δεύτερο κλικ στο ίδιο θέμα το κλείνει.
+    th.open = th.open === b.dataset.thCat ? '' : b.dataset.thCat;
+    th.find = '';
+    th.shown = PAGE;
+    $('[data-th-cat-find]').value = '';
+    drawThCat();
+  });
+
+  $('[data-th-cat-slots]').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.thcUp !== undefined) thcMove(+b.dataset.thcUp, -1);
+    else if (b.dataset.thcDown !== undefined) thcMove(+b.dataset.thcDown, 1);
+    else if (b.dataset.thcDel !== undefined) thcRemove(+b.dataset.thcDel);
+  });
+
+  $('[data-th-cat-picks]').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-thc-add]');
+    if (b) thcToggle(b.dataset.thcAdd);
+  });
+
+  $('[data-th-cat-find]').addEventListener('input', function (e) {
+    th.find = flat(e.target.value);
+    th.shown = PAGE;
+    drawThCatPicks();
+  });
+
+  $('[data-th-cat-more]').addEventListener('click', function () {
+    th.shown += PAGE;
+    drawThCatPicks();
   });
 
   $('[data-save="themata"]').addEventListener('click', saveThemata);

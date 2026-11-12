@@ -110,6 +110,21 @@ function validate(name, data){
         return `Κάθε θέμα στο ${key} πρέπει να είναι όνομα κατηγορίας, σε κείμενο.`;
       }
     }
+
+    // Τι καρφιτσώθηκε σε κάθε θέμα: «slug θέματος» -> λίστα κωδικών.
+    // Ίδιος έλεγχος με τα καρφιτσωμένα της ροής — ένα αντικείμενο εδώ
+    // μέσα θα έσκαγε στο sameItem() και θα έριχνε ολόκληρο το build.
+    if (data.categoryPicks != null) {
+      if (typeof data.categoryPicks !== 'object' || Array.isArray(data.categoryPicks)) {
+        return 'Το categoryPicks πρέπει να είναι αντικείμενο «θέμα: λίστα».';
+      }
+      for (const [thema, list] of Object.entries(data.categoryPicks)) {
+        if (!Array.isArray(list)) return `Το θέμα «${thema}» πρέπει να έχει λίστα.`;
+        if (list.some((x) => typeof x !== 'string' || !x.trim())) {
+          return `Κάθε επιλογή στο «${thema}» πρέπει να είναι κωδικός ή σύνδεσμος, σε κείμενο.`;
+        }
+      }
+    }
   }
 
   if (name === 'photos') {
