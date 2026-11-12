@@ -982,6 +982,105 @@ function wireShots(){
 }
 
 // ---------------------------------------------------------------------
+// Πότε λήγει μια χειροκίνητη επιλογή
+// ---------------------------------------------------------------------
+//
+// Το πρωτοσέλιδο είχε πάντα ημερομηνία λήξης. Οι υπόλοιπες λίστες δεν
+// είχαν, και φάνηκε στην πράξη: τα «Must read» έμειναν κολλημένα δύο
+// μέρες σε ειδήσεις που είχαν ήδη παλιώσει.
+//
+// Τώρα κάθε επιλογή κρατάει την ώρα που μπήκε, στο curation.pinnedAt.
+// Το build αγνοεί όσες γέρασαν (freshPins) και η θέση γυρίζει στο
+// αυτόματο. Εδώ φαίνεται πόσος χρόνος μένει, και η ληγμένη ΔΕΝ σβήνεται
+// μόνη της: μένει σβηστή με κουμπί «Ξανακράτα το», ώστε ο συντάκτης να
+// βλέπει τι είχε διαλέξει και γιατί έφυγε από το site.
+//
+// Οι μέρες έρχονται από το build (topics.json). Οι τιμές εδώ είναι
+// μόνο δίχτυ για το πρώτο τρέξιμο, πριν γραφτεί το αρχείο.
+var pin = {
+  life: { mustRead: 3, latest: 7, opinions: 7, topics: 30 },
+};
+
+// Μετά από πόσες μέρες φεύγει από το αρχείο μια ληγμένη. Αρκετά μακριά
+// ώστε να προλάβει να τη δει και να την ξανακρατήσει κάποιος.
+var PIN_KATHARISMA = 60;
+
+function pinKey(lista, onoma){
+  return lista === 'topics' ? 'cat:' + slugify(onoma) : lista;
+}
+
+function pinStamps(key){
+  var all = state.curation.pinnedAt || {};
+  return all[key] || {};
+}
+
+// Πόσες μέρες μένουν. null = δεν έχει ημερομηνία (παλιά επιλογή, πριν
+// μπει ο μηχανισμός) — το build τη θεωρεί φρέσκια.
+function pinMeres(lista, key, ref){
+  var t = Date.parse(pinStamps(key)[ref] || '');
+  if (isNaN(t)) return null;
+  var meres = pin.life[lista];
+  if (!meres) return null;
+  return (t + meres * 864e5 - Date.now()) / 864e5;
+}
+
+// Η ετικέτα δίπλα στη θέση. Γράφει πόσο μένει, ή ότι έληξε.
+function pinSima(lista, key, ref){
+  var left = pinMeres(lista, key, ref);
+  if (left === null) return '';
+
+  if (left <= 0) {
+    return '<span class="pinx">έληξε</span>'
+      + '<button type="button" class="pinagain" data-pin-again="' + esc(ref) + '"'
+      + ' data-pin-key="' + esc(key) + '">Ξανακράτα το</button>';
+  }
+
+  var t = left < 1
+    ? 'λήγει σήμερα'
+    : 'λήγει σε ' + Math.ceil(left) + (Math.ceil(left) === 1 ? ' μέρα' : ' μέρες');
+
+  return '<span class="pinok">' + t + '</span>';
+}
+
+// Σφραγίζει τη λίστα πριν την αποθήκευση: ό,τι μπήκε τώρα παίρνει την
+// ώρα του, ό,τι βγήκε χάνει τη δική του, και ό,τι γέρασε πολύ φεύγει.
+function pinSfragida(key, refs){
+  if (!state.curation.pinnedAt) state.curation.pinnedAt = {};
+
+  var tora = new Date().toISOString();
+  var palia = state.curation.pinnedAt[key] || {};
+  var nea = {};
+
+  refs.forEach(function (ref) {
+    nea[ref] = palia[ref] || tora;
+  });
+
+  // Οι ληγμένες που έμειναν στη λίστα κρατούν την παλιά τους ώρα — έτσι
+  // φαίνονται ως ληγμένες. Φεύγουν εντελώς μόνο όταν περάσει ο καιρός.
+  Object.keys(nea).forEach(function (ref) {
+    var t = Date.parse(nea[ref]);
+    if (!isNaN(t) && Date.now() - t > PIN_KATHARISMA * 864e5) delete nea[ref];
+  });
+
+  if (Object.keys(nea).length) state.curation.pinnedAt[key] = nea;
+  else delete state.curation.pinnedAt[key];
+}
+
+// «Ξανακράτα το»: η επιλογή ξαναρχίζει από σήμερα.
+function pinAgain(key, ref){
+  if (!state.curation.pinnedAt) state.curation.pinnedAt = {};
+  if (!state.curation.pinnedAt[key]) state.curation.pinnedAt[key] = {};
+  state.curation.pinnedAt[key][ref] = new Date().toISOString();
+
+  drawMustRead();
+  drawLatest();
+  drawOpinions();
+  drawThCat();
+  state.dirty = true;
+  $$('[data-save]').forEach(function (b) { b.disabled = false; });
+}
+
+// ---------------------------------------------------------------------
 // Κατηγορίες — διόρθωση εκεί που η αυτόματη πέφτει έξω
 // ---------------------------------------------------------------------
 //
@@ -1206,6 +1305,9 @@ var th = {
 function thReady(file){
   var f = file && typeof file === 'object' ? file : {};
   th.list = Array.isArray(f.list) ? f.list : [];
+  // Οι μέρες ζωής κάθε λίστας, όπως τις ξέρει το build.
+  if (f.pinLife && typeof f.pinLife === 'object') pin.life = f.pinLife;
+
   var d = f.defaults && typeof f.defaults === 'object' ? f.defaults : {};
   th.defaults = {
     featured: Array.isArray(d.featured) ? d.featured : [],
@@ -1470,6 +1572,7 @@ function drawThCat(){
       + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
       + body
       + '<span class="slot-acts">'
+      + (r.auto ? '' : pinSima('topics', pinKey('topics', name), r.ref))
       + (r.auto
         ? '<span class="pill pill--draft">αυτόματο</span>'
         : '<button type="button" data-thc-up="' + i + '" aria-label="Πάνω"'
@@ -1555,6 +1658,11 @@ function thDirty(on){
 }
 
 function saveThemata(){
+  // Κάθε καρφιτσωμένο παίρνει ώρα, για να ξέρει το build πότε λήγει.
+  th.list.forEach(function (t) {
+    pinSfragida(pinKey('topics', t.name), thPicks(t.name));
+  });
+
   say('Αποθηκεύεται…');
   api('curation', 'PUT', state.curation).then(function () {
     thDirty(false);
@@ -1814,7 +1922,7 @@ function ltSlot(r, i, total){
     + '<span class="tag tag--' + it.kind + '">' + TAGS[it.kind] + '</span>'
     + note + '</p></div>'
     + '<span class="slot-acts">'
-    + (r.auto ? '<span class="pill pill--draft">αυτόματο</span>' : '')
+    + (r.auto ? '<span class="pill pill--draft">αυτόματο</span>' : pinSima('latest', 'latest', r.ref))
     + '<button type="button" data-lt-up="' + i + '" aria-label="Πάνω"'
     + (i === 0 ? ' disabled' : '') + '>↑</button>'
     + '<button type="button" data-lt-down="' + i + '" aria-label="Κάτω"'
@@ -1972,6 +2080,8 @@ function ltDirty(on){
 }
 
 function saveLatest(){
+  pinSfragida('latest', state.curation.latest || []);
+
   say('Αποθηκεύεται…');
   api('curation', 'PUT', state.curation).then(function () {
     ltDirty(false);
@@ -2090,6 +2200,7 @@ function drawMustRead(){
       + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
       + body
       + '<span class="slot-acts">'
+      + (r.auto ? '' : pinSima('mustRead', 'mustRead', r.ref))
       + (r.auto
         ? '<span class="pill pill--draft">αυτόματο</span>'
         : '<button type="button" data-mr-up="' + i + '" aria-label="Πάνω"'
@@ -2161,6 +2272,8 @@ function mrDirty(on){
 }
 
 function saveMustRead(){
+  pinSfragida('mustRead', state.curation.mustRead || []);
+
   say('Αποθηκεύεται…');
   api('curation', 'PUT', state.curation).then(function () {
     mrDirty(false);
@@ -2513,7 +2626,7 @@ function opSlot(r, i, total){
     + '<span class="slot-no">' + String(i + 1).padStart(2, '0') + '</span>'
     + body
     + '<span class="slot-acts">'
-    + (r.auto ? '<span class="pill pill--draft">αυτόματο</span>' : '')
+    + (r.auto ? '<span class="pill pill--draft">αυτόματο</span>' : pinSima('opinions', 'opinions', r.ref))
     + '<button type="button" data-op-up="' + i + '" aria-label="Πάνω"'
     + (i === 0 ? ' disabled' : '') + '>↑</button>'
     + '<button type="button" data-op-down="' + i + '" aria-label="Κάτω"'
@@ -2621,6 +2734,8 @@ function opDirty(on){
 }
 
 function saveOpinions(){
+  pinSfragida('opinions', state.curation.opinions || []);
+
   say('Αποθηκεύεται…');
   api('curation', 'PUT', state.curation).then(function () {
     opDirty(false);
@@ -5201,6 +5316,13 @@ function wire(){
   wireMustRead();
   wireOpinions();
   wireAds();
+  // «Ξανακράτα το» — ένας ακροατής για όλη τη σελίδα, γιατί το κουμπί
+  // εμφανίζεται σε τέσσερις διαφορετικές καρτέλες.
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-pin-again]');
+    if (b) pinAgain(b.dataset.pinKey, b.dataset.pinAgain);
+  });
+
   wireCats();
   wireThemata();
   wirePeople();
