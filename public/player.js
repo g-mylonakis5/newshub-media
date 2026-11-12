@@ -538,7 +538,9 @@
     flow.setAttribute('data-topic', key);
 
     // Ποια ετικέτα είναι αναμμένη, και τι λέει ο τίτλος από πάνω.
-    var name = 'Τελευταία επεισόδια';
+    // Ίδιο κείμενο με το build (η λωρίδα «Latest»): η ροή έχει και
+    // άρθρα και βίντεο, όχι μόνο επεισόδια.
+    var name = 'Τελευταία';
     var href = 'episodes.html';
     var count = '';
     var chips = document.querySelectorAll('.topic');
