@@ -1645,7 +1645,7 @@ function pickFeatured(items, curation){
     if (curationExpired(curation)) {
       console.log(`Πρωτοσέλιδο: η χειροκίνητη επιλογή έληξε στις ${curation.featuredUntil} — γυρίζω στην αυτόματη`);
     } else {
-      const chosen = items.find((it) => sameItem(it, want));
+      const chosen = items.find((it) => sameOrTwin(it, refsDidimou(want)));
       if (chosen) {
         if (curation.featuredHero) {
           chosen.hero = curation.featuredHero;
@@ -1701,6 +1701,42 @@ function sameItem(it, want){
   // «arthro/x.html» και «el/kriti/x» είναι το ίδιο πράγμα.
   const tail = (s) => s.split('/').pop().replace(/\.html?$/, '');
   return tail(mine) === tail(target);
+}
+
+// Το καρφίτσωμα πιάνει και τις ΔΥΟ μορφές της ίδιας συζήτησης.
+//
+// Ίδιο πρόβλημα με την katigoriaApoDidimo, άλλη όψη του: ο συντάκτης
+// καρφιτσώνει στο διαχειριστικό το βίντεο που βλέπει, και η αρχική
+// κρατάει το επεισόδιο. Το καρφίτσωμα δεν έβρισκε ποτέ τίποτα και
+// σβηνόταν σιωπηλά — η θέση γέμιζε αυτόματα, σαν να μην πάτησε
+// κανείς τίποτα.
+//
+// Βρέθηκε δοκιμάζοντας: δύο καρφιτσωμένα στο θέμα «Κρήτη», κανένα
+// από τα δύο δεν έβγαινε στην αρχική.
+//
+// Επιστρέφει όλες τις γραφές που σημαίνουν το ίδιο πράγμα, ώστε να
+// δοκιμαστούν με τη σειρά.
+function refsDidimou(ref){
+  const refs = [ref];
+
+  const v = loadVideos().find((x) => sameItem({ id: x.id, href: videoUrl(x) }, ref));
+  if (v) {
+    const ep = episodeTwin(v);
+    if (ep) refs.push(ep.id, episodeUrl(ep));
+  }
+
+  const ep = loadEpisodes().find((x) => sameItem({ id: x.id, href: episodeUrl(x) }, ref));
+  if (ep) {
+    const vid = videoTwin(ep);
+    if (vid) refs.push(vid.id, videoUrl(vid));
+  }
+
+  return refs;
+}
+
+// Ταιριάζει με ό,τι ζήτησε ο συντάκτης — ή με το δίδυμό του.
+function sameOrTwin(it, refs){
+  return refs.some((r) => sameItem(it, r));
 }
 
 // Η χειροκίνητη επιλογή λήγει, αν έχει οριστεί ημερομηνία. Χωρίς αυτό,
@@ -1772,9 +1808,10 @@ function pinnedFlow(curation, pools){
 
   const out = [];
   for (const ref of want) {
+    const refs = refsDidimou(ref);
     let hit = null;
     for (const { list, make } of pools) {
-      const found = list.find((row) => sameItem(make(row), ref));
+      const found = list.find((row) => sameOrTwin(make(row), refs));
       if (found) { hit = make(found); break; }
     }
     if (hit) out.push(hit);
@@ -2844,8 +2881,46 @@ function categoriesFor(id, title, guest){
   return result;
 }
 
+// Η χειροκίνητη κατηγορία ταξιδεύει στο δίδυμο.
+//
+// Μια συνέντευξη υπάρχει δύο φορές: ως podcast στο Buzzsprout και ως
+// βίντεο στο YouTube. Στο διαχειριστικό ο συντάκτης βλέπει και τις
+// δύο εγγραφές και διορθώνει όποια βρει πρώτη.
+//
+// Η αρχική όμως κρατάει ΜΙΑ: όπου υπάρχουν και τα δύο μένει το
+// επεισόδιο, γιατί έχει δική μας σελίδα (δες buildCategories).
+//
+// Μέχρι τις 13 Νοεμβρίου 2026 η διόρθωση πάνω στο ΒΙΝΤΕΟ δεν έφτανε
+// ποτέ στο επεισόδιο. Μετρημένο παράδειγμα: το «Κ. Βαρδαβάς:
+// Ερωτήματα για Καθαριότητα, ΔΕΠΑΝΑΛ» πήρε χειροκίνητα «Κρήτη» στο
+// βίντεο 3CZp2A-sKeM, και το επεισόδιο Buzzsprout-20090505 — αυτό
+// που βγαίνει στο site — έμεινε χωρίς καμία κατηγορία.
+//
+// Υπολογίζεται ΜΙΑ φορά: οι χειροκίνητες διορθώσεις είναι λίγες, τα
+// επεισόδια χιλιάδες, και η episodeCategories καλείται δεκάδες
+// χιλιάδες φορές.
+let didimoKatigories;
+function katigoriaApoDidimo(epId){
+  if (!didimoKatigories) {
+    didimoKatigories = {};
+    const manual = curation().categories || {};
+
+    for (const key of Object.keys(manual)) {
+      const v = loadVideos().find((x) => x.id === key);
+      if (!v) continue;                    // δεν είναι βίντεο· είναι επεισόδιο
+      const ep = episodeTwin(v);
+      // Η δική του διόρθωση, αν υπάρχει, κερδίζει πάντα.
+      if (ep && !manual[ep.id]) didimoKatigories[ep.id] = manual[key];
+    }
+  }
+  return didimoKatigories[epId];
+}
+
 // Το επεισόδιο ξέρει ποιος μίλησε — δες themaKeimeno().
 function episodeCategories(ep){
+  const apoDidimo = katigoriaApoDidimo(ep.id);
+  if (apoDidimo) return Array.isArray(apoDidimo) ? apoDidimo : [apoDidimo];
+
   return categoriesFor(ep.id, ep.title, ep.guest);
 }
 
@@ -4056,8 +4131,10 @@ function homeItems(group){
     const first = [];
 
     for (const ref of picks) {
-      const hit = group.items.find((it) => !taken.has(it) && sameItem(it, ref));
+      const refs = refsDidimou(ref);
+      const hit = group.items.find((it) => !taken.has(it) && sameOrTwin(it, refs));
       if (hit) { taken.add(hit); first.push(hit); }
+      else console.warn(`ΠΡΟΣΟΧΗ: το καρφιτσωμένο «${ref}» δεν είναι στο θέμα «${group.name}»`);
     }
 
     out = first.concat(group.items.filter((it) => !taken.has(it)));
