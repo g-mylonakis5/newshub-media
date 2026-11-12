@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/pyrovolismoi-1024x576.jpg",
     "summary": "Νεκρός φαίνεται πως είναι ο ύποπτος για την αιματηρή επίθεση που έγινε νωρίς το πρωί στην Ουάσιγκτον, περίπου ενάμισι χιλιόμετρο από τον Λευκό Οίκο.\r\n\r\nΣύμφω...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "allages-sto-systima-moriodotisis-athliton-sta-aei-ti-provlepei-to-neo-plaisio-kai-apo-pote-tha-ischysei",
@@ -165,7 +165,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/euangelismos.jpg",
     "summary": "Καθοριστικό βήμα για την αποκατάσταση και αξιοποίηση του ιστορικού κτηρίου του «Ευαγγελισμού», στην καρδιά του Ηρακλείου, πραγματοποιείται με τη ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "i-xenia-kalogeropoyloy-timithike-gia-tin-prosfora-tis-sto-paidiko-theatro",
