@@ -1,5 +1,17 @@
 [
   {
+    "id": "agrarian-pos-drones-kai-ai-mporoyn-na-voithisoyn-toys-ktinotrofoys-tis-kritis-deite-to-vinteo",
+    "title": "Agrarian: Πώς Drones και ΑΙ μπορούν να βοηθήσουν τους κτηνοτρόφους της Κρήτης – Δείτε το βίντεο",
+    "url": "https://www.newshub.gr/el/kriti/agrarian-pos-drones-kai-ai-mporoyn-na-voithisoyn-toys-ktinotrofoys-tis-kritis-deite-to-vinteo",
+    "date": "2026-11-12T18:37:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/maketa-drone-probata.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/maketa-drone-probata.jpg",
+    "summary": "Οι πραγματικές ανάγκες των κτηνοτρόφων μπορούν να αποτελέσουν αφετηρία για την ανάπτυξη νέων ψηφιακών εργαλείων. Η συνεργασία του ΜΑΙΧ με το Πολυτεχνείο Κρήτ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "pyrovolismoi-stin-oyasingkton-enas-nekros-kai-4-traymaties-nekros-kai-o-drastis",
     "title": "Πυροβολισμοί στην Ουάσινγκτον: Ένας νεκρός και 4 τραυματίες – Νεκρός και ο δράστης",
     "url": "https://www.newshub.gr/el/kosmos/pyrovolismoi-stin-oyasingkton-enas-nekros-kai-4-traymaties-nekros-kai-o-drastis",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/pyrovolismoi-1024x576.jpg",
     "summary": "Νεκρός φαίνεται πως είναι ο ύποπτος για την αιματηρή επίθεση που έγινε νωρίς το πρωί στην Ουάσιγκτον, περίπου ενάμισι χιλιόμετρο από τον Λευκό Οίκο.\r\n\r\nΣύμφω...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "allages-sto-systima-moriodotisis-athliton-sta-aei-ti-provlepei-to-neo-plaisio-kai-apo-pote-tha-ischysei",
@@ -6928,17 +6940,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/aade-forodiafigi2-1200x675.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/aade-forodiafigi2-1200x675.jpg",
     "summary": "Συγκλονιστικές είναι οι αποκαλύψεις για το κύκλωμα φοροδιαφυγής που αποκαλύφθηκε από την ΑΑΔΕ στη Θεσσαλονίκη στο πλαίσιο της επιχείρησης «Αχυράνθρωποι...",
-    "featured": false
-  },
-  {
-    "id": "amerikaniko-aeroskafos-eplixe-emporiko-ploio-ston-kolpo-toy-oman",
-    "title": "Αμερικανικό αεροσκάφος έπληξε εμπορικό πλοίο στον Κόλπο του Ομάν",
-    "url": "https://www.newshub.gr/el/geopolitiki/amerikaniko-aeroskafos-eplixe-emporiko-ploio-ston-kolpo-toy-oman",
-    "date": "2026-11-08T11:10:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/oman.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/oman.jpg",
-    "summary": "Αμερικανικό στρατιωτικό αεροσκάφος έπληξε το φορτηγό πλοίο M/V Huda στον Κόλπο του Ομάν το Σάββατο 7 Νοεμβρίου. Σύμφωνα με την Κεντρική Διοίκηση των ΗΠΑ (CEN...",
     "featured": false
   },
   {
