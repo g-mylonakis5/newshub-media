@@ -60,15 +60,15 @@
   "featuredUntil": "2026-11-14",
   "secondary": [],
   "latest": [
-    "QerHMe2cYJs",
-    "2AhqWaKGh7Y",
-    "arthro/dokimastiko-arthro-newshub-gr.html",
+    "video/9dkJTdFlqJo-panagiotis-tsakonas-o-tramp-echei-perithorio-dyo-mines.html",
     "episode/20117014-aplisto-kratos-i-tourkia-poies-oi-pithanes-synepeies.html",
     "episode/20116912-i-kyvernisi-leei-psemata-gia-to-kalodio-na-paremvei.html",
     "episode/20111437-adokimi-i-methodevsi-gia-to-kalodio-makari-na-mi-ti.html",
     "episode/20110711-meta-ti-meta-epochi-ti-poio-einai-to-epomeno-stadio.html",
     "episode/20108211-i-tourkia-epivallei-parousia-se-aigaio-kai-na-mesogeio.html",
-    "episode/20107917-o-rolos-tis-fysikotherapeias-stin-psychiki-ygeia-otan.html"
+    "episode/20107917-o-rolos-tis-fysikotherapeias-stin-psychiki-ygeia-otan.html",
+    "episode/20092054-to-ekriktiko-migma-katachreomenis-amerikanikis.html",
+    "episode/20088959-to-poker-tis-mesis-anatolis-kai-oi-assoi-ton-chouthi.html"
   ],
   "mustRead": [
     "https://www.newshub.gr/el/ellada/marc-stis-14-7-monades-to-provadisma-tis-nd-i-elas-3-3-monades-mprosta-apo-to-pasok",
@@ -100,15 +100,15 @@
       "https://www.newshub.gr/el/kriti/epicheirisi-aposymforisi-gia-tis-fylakes-kai-stin-kriti-i-eikona-sta-sofronistika-katastimata-toy-nisioy": "2026-11-12T13:37:05.799Z"
     },
     "latest": {
-      "QerHMe2cYJs": "2026-11-12T22:38:24.542Z",
-      "2AhqWaKGh7Y": "2026-11-12T22:38:24.542Z",
-      "arthro/dokimastiko-arthro-newshub-gr.html": "2026-11-12T22:52:21.861Z",
+      "video/9dkJTdFlqJo-panagiotis-tsakonas-o-tramp-echei-perithorio-dyo-mines.html": "2026-11-13T10:25:14.140Z",
       "episode/20117014-aplisto-kratos-i-tourkia-poies-oi-pithanes-synepeies.html": "2026-11-12T22:52:21.861Z",
       "episode/20116912-i-kyvernisi-leei-psemata-gia-to-kalodio-na-paremvei.html": "2026-11-12T22:52:21.861Z",
       "episode/20111437-adokimi-i-methodevsi-gia-to-kalodio-makari-na-mi-ti.html": "2026-11-12T22:52:21.861Z",
       "episode/20110711-meta-ti-meta-epochi-ti-poio-einai-to-epomeno-stadio.html": "2026-11-12T22:52:21.861Z",
       "episode/20108211-i-tourkia-epivallei-parousia-se-aigaio-kai-na-mesogeio.html": "2026-11-12T22:52:21.861Z",
-      "episode/20107917-o-rolos-tis-fysikotherapeias-stin-psychiki-ygeia-otan.html": "2026-11-12T22:52:21.861Z"
+      "episode/20107917-o-rolos-tis-fysikotherapeias-stin-psychiki-ygeia-otan.html": "2026-11-12T22:52:21.861Z",
+      "episode/20092054-to-ekriktiko-migma-katachreomenis-amerikanikis.html": "2026-11-13T10:25:14.140Z",
+      "episode/20088959-to-poker-tis-mesis-anatolis-kai-oi-assoi-ton-chouthi.html": "2026-11-13T10:25:14.140Z"
     },
     "opinions": {
       "https://www.newshub.gr/el/apopseis/pos-i-ellada-mporei-na-akyrosei-ti-galazia-patrida": "2026-11-12T22:39:55.505Z",
@@ -127,7 +127,8 @@
     "https://www.newshub.gr/el/apopseis/i-apeleytherosi-kai-o-apoichos-tis-katochis",
     "https://www.newshub.gr/el/apopseis/i-krisi-einai-vathyteri-apo-ton-tramp-oi-esoterikes-diaireseis-kai-oi-pagkosmioi-kindynoi",
     "https://www.newshub.gr/el/apopseis/israil-ilthe-i-ora-tis-politikis-anatropis-toy-netaniachoy",
-    "https://www.newshub.gr/el/apopseis/stoys-dromoys-ergazomenoi-kai-neolaia-tis-italias-enantia-ston-polemo-kai-tin-akriveia"
+    "https://www.newshub.gr/el/apopseis/stoys-dromoys-ergazomenoi-kai-neolaia-tis-italias-enantia-ston-polemo-kai-tin-akriveia",
+    "https://www.newshub.gr/el/apopseis/31-oktovrioy-giorti-toy-chalooyin"
   ],
   "categoryPicks": {
     "kriti": [
