@@ -420,12 +420,67 @@ function metriseis(){
   }
 
   if (GA4) {
-    out.push(`  <script async src="https://www.googletagmanager.com/gtag/js?id=${esc(GA4)}"></script>`);
+    // ---- Google Analytics με Consent Mode v2 ----
+    //
+    // Η ΣΕΙΡΑ ΕΙΝΑΙ ΤΟ ΠΑΝ. Η δήλωση συγκατάθεσης πρέπει να έχει ήδη
+    // τρέξει όταν φτάνει το gtag.js — αλλιώς η πρώτη μέτρηση φεύγει με
+    // cookie πριν απαντήσει ο επισκέπτης, και το μπάνερ γίνεται
+    // διακοσμητικό. Γι' αυτό αυτό το κομμάτι είναι ΜΕΣΑ στη σελίδα και
+    // όχι σε αρχείο: ένα εξωτερικό αρχείο, όσο γρήγορο κι αν είναι,
+    // μπορεί να φτάσει δεύτερο.
+    //
+    // «denied» παντού στην αρχή. Το Google εξακολουθεί να δέχεται
+    // σήματα χωρίς cookies και συμπληρώνει με εκτιμήσεις όσους δεν
+    // απάντησαν — γι' αυτό διαλέξαμε Consent Mode αντί για «τίποτα
+    // πριν το ναι».
+    //
+    // Το wait_for_update δίνει μισό δευτερόλεπτο στο synainesi.js να
+    // πει «αυτός είχε ήδη δεχτεί», ώστε η πρώτη προβολή του να μην
+    // χαθεί.
+    //
+    // ΤΟ localStorage ΜΠΟΡΕΙ ΝΑ ΣΚΑΣΕΙ: σε ιδιωτικό παράθυρο ή με
+    // μπλοκαρισμένα δεδομένα site, η ανάγνωση πετάει σφάλμα. Χωρίς το
+    // try/catch θα έσπαγε ΟΛΟ το script του head, δηλαδή και η μέτρηση
+    // και το μπάνερ.
     out.push('  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}'
+      + "var _s='denied';try{if(localStorage.getItem('synainesi')==='nai')_s='granted'}catch(e){}"
+      + "gtag('consent','default',{ad_storage:_s,ad_user_data:_s,ad_personalization:_s,"
+      + "analytics_storage:_s,functionality_storage:'granted',security_storage:'granted',"
+      + 'wait_for_update:500});'
       + `gtag('js',new Date());gtag('config','${esc(GA4)}');</script>`);
+    out.push(`  <script async src="https://www.googletagmanager.com/gtag/js?id=${esc(GA4)}"></script>`);
   }
 
   return out.length ? out.join('\n') + '\n' : '';
+}
+
+// Η λωρίδα της συγκατάθεσης.
+//
+// Υπάρχει ΜΟΝΟ όταν υπάρχει Google Analytics. Όσο μετράμε μόνο με
+// Cloudflare — χωρίς cookies — δεν χρειάζεται συγκατάθεση για τίποτα,
+// και ένα μπάνερ που ρωτάει χωρίς λόγο είναι απλώς ένα εμπόδιο.
+//
+// Λωρίδα στο κάτω μέρος, όχι κουτί στη μέση: ο κανόνας του αφεντικού
+// λέει ότι τίποτα δεν σκεπάζει το περιεχόμενο. Το κουτί στη μέση
+// φέρνει περισσότερες αποδοχές — και διώχνει περισσότερο κόσμο.
+//
+// Τα δύο κουμπιά έχουν ΙΔΙΟ βάρος. Ένα γκρίζο «Όχι» δίπλα σε ένα
+// φωτεινό «Αποδοχή» δεν είναι ελεύθερη επιλογή, και οι αρχές
+// προστασίας δεδομένων το λένε ρητά.
+function consentBar(depth = 0){
+  if (!GA4) return '';
+
+  const up = depth === 0 ? '' : '../';
+
+  return `<div class="synainesi" data-synainesi hidden>
+  <p class="synainesi-txt">Μετράμε πόσος κόσμος μας διαβάζει με το Google Analytics,
+    που χρειάζεται cookies. Χωρίς τη συγκατάθεσή σου δεν μπαίνει κανένα.
+    <a href="${up}aporrito.html">Τι κρατάμε και τι όχι</a></p>
+  <div class="synainesi-btns">
+    <button type="button" class="synainesi-btn" data-syn="oxi">Όχι</button>
+    <button type="button" class="synainesi-btn" data-syn="nai">Αποδοχή</button>
+  </div>
+</div>`;
 }
 
 // ---- Δομημένα δεδομένα (JSON-LD) ----
@@ -560,7 +615,11 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   const up = depth === 0 ? '' : '../';
   // Ο player φορτώνει ΠΑΝΤΟΥ: κρατάει τον ήχο ζωντανό και αναλαμβάνει την
   // πλοήγηση, οπότε πρέπει να υπάρχει και στις σελίδες που δεν παίζουν ήχο.
-  const tags = ['player.js'].concat(scripts.filter((s) => s !== 'player.js'))
+  // Το synainesi.js μόνο όταν υπάρχει τι να συγκατατεθεί — δες
+  // consentBar(). Χωρίς Google Analytics δεν μπαίνει ούτε byte.
+  const vasika = GA4 ? ['player.js', 'synainesi.js'] : ['player.js'];
+
+  const tags = vasika.concat(scripts.filter((s) => vasika.indexOf(s) === -1))
     .map((s) => `  <script src="${up}${s}${assetVersion(s)}" defer></script>`)
     .join('\n');
 
@@ -632,7 +691,7 @@ ${siteFooter(depth)}
 </div>
 
 ${playerBar()}
-
+${consentBar(depth)}
 </body>
 </html>
 `);
@@ -5717,16 +5776,39 @@ function privacyPage(){
 
     <section class="bio-topics">
       <h2 class="bio-sub">Με δυο λόγια</h2>
-      <p>Αυτό το site <strong>δεν βάζει cookies</strong>. Δεν σου ζητάει
+      ${GA4
+    ? `<p>Αυτό το site <strong>δεν βάζει καμία cookie μέχρι να το δεχτείς</strong>.
+      Δεν σου ζητάει λογαριασμό και δεν δίνει στοιχεία σου σε διαφημιστικές
+      εταιρείες — γιατί δεν υπάρχει καμία διαφημιστική εδώ.</p>`
+    : `<p>Αυτό το site <strong>δεν βάζει cookies</strong>. Δεν σου ζητάει
       λογαριασμό, δεν σε παρακολουθεί από σελίδα σε σελίδα, και δεν δίνει
-      στοιχεία σου σε διαφημιστικές εταιρείες — γιατί δεν υπάρχει καμία.</p>
+      στοιχεία σου σε διαφημιστικές εταιρείες — γιατί δεν υπάρχει καμία.</p>`}
 
       <h2 class="bio-sub">Πόσος κόσμος μας διαβάζει</h2>
       <p>Μετράμε επισκέψεις με το Cloudflare Web Analytics. Δεν βάζει
       cookies και δεν φτιάχνει προφίλ: κρατάει συγκεντρωτικά νούμερα —
       πόσες προβολές είχε μια σελίδα, από ποια χώρα, από τι συσκευή.
       Δεν μπορούμε να δούμε τι διάβασε ένας συγκεκριμένος άνθρωπος.</p>
+${GA4 ? `
+      <h2 class="bio-sub">Το Google Analytics, και η επιλογή σου</h2>
+      <p>Χρησιμοποιούμε και το Google Analytics, που χρειάζεται cookies
+      για να ξεχωρίσει αν δύο προβολές είναι ο ίδιος άνθρωπος. Αυτές
+      <strong>δεν μπαίνουν αν δεν πεις ναι</strong>: μέχρι να απαντήσεις,
+      και αν απαντήσεις «Όχι», το Google δέχεται από εμάς μόνο ένα
+      ανώνυμο σήμα χωρίς τίποτα αποθηκευμένο στη συσκευή σου.</p>
+      <p>Αν δεχτείς, μπαίνουν cookies της Google που κρατούν έναν τυχαίο
+      κωδικό — όχι το όνομά σου — για δύο χρόνια, και τα στοιχεία
+      επεξεργάζεται η Google ως δική μας εκτελούσα. Η απάντησή σου
+      φυλάσσεται στη συσκευή σου και δεν ξαναρωτιέσαι.</p>
 
+      <div class="syn-allagi" data-syn-allagi>
+        <p data-syn-tora>Δεν έχεις απαντήσει ακόμα.</p>
+        <div class="synainesi-btns">
+          <button type="button" class="synainesi-btn" data-syn="oxi">Όχι, καμία cookie</button>
+          <button type="button" class="synainesi-btn" data-syn="nai">Δέχομαι</button>
+        </div>
+      </div>
+` : ''}
       <h2 class="bio-sub">Τι μένει στη δική σου συσκευή</h2>
       <p>Ο player κρατάει τρία πράγματα στον browser σου, ώστε να
       συνεχίζεις εκεί που έμεινες:</p>
@@ -5750,7 +5832,8 @@ function privacyPage(){
         <strong>μόνο αν πατήσεις play</strong></li>
         <li><strong>newshub.gr</strong> — οι φωτογραφίες των ειδήσεων</li>
         <li><strong>Google Fonts</strong> — οι γραμματοσειρές</li>
-        <li><strong>Cloudflare</strong> — η φιλοξενία του site</li>
+        <li><strong>Cloudflare</strong> — η φιλοξενία του site</li>${GA4 ? `
+        <li><strong>Google Analytics</strong> — οι μετρήσεις, με την άδειά σου</li>` : ''}
       </ul>
 
       <h2 class="bio-sub">Διαφημίσεις</h2>

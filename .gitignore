@@ -19,6 +19,10 @@ public/*
 # Χωρίς αυτή τη γραμμή το Cloudflare χτίζει σελίδα που ζητά ένα
 # roi.js που δεν ανέβηκε ποτέ, και η ροή μένει παγωμένη στο χτίσιμο.
 !public/roi.js
+# Η λωρίδα της συγκατάθεσης — γραμμένη με το χέρι, όπως ο player.
+# Χωρίς αυτή τη γραμμή το Cloudflare χτίζει σελίδες που ζητούν ένα
+# synainesi.js που δεν ανέβηκε ποτέ.
+!public/synainesi.js
 !public/favicon.svg
 !public/intro.jpg
 !public/*.jpg
