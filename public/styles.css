@@ -6735,3 +6735,88 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+/* ---------------------------------------------------------------------
+   Η ΛΩΡΙΔΑ ΤΗΣ ΣΥΓΚΑΤΑΘΕΣΗΣ
+   ---------------------------------------------------------------------
+   Υπάρχει μόνο όταν υπάρχει Google Analytics — δες consentBar() στο
+   build.js. Όσο μετράμε μόνο με Cloudflare, χωρίς cookies, δεν
+   εμφανίζεται ποτέ.
+
+   Λωρίδα κάτω, όχι κουτί στη μέση: ο κανόνας λέει ότι τίποτα δεν
+   σκεπάζει το περιεχόμενο. Σκεπάζει μια λεπτή λωρίδα στο τέλος της
+   οθόνης, και φεύγει με ένα πάτημα.
+
+   Τα δύο κουμπιά έχουν ΙΔΙΟ βάρος επίτηδες. Ένα σβηστό «Όχι» δίπλα σε
+   ένα φωτεινό «Αποδοχή» δεν είναι ελεύθερη επιλογή. */
+
+.synainesi{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  padding: 0.85rem var(--edge);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.synainesi[hidden]{ display: none; }
+
+/* Πάνω από τη μπάρα του player, ποτέ πάνω της: αν παίζει ήχος, τα
+   κουμπιά του πρέπει να μένουν πατήσιμα. */
+body:has(.bar:not([hidden])) .synainesi{ bottom: 4.6rem; }
+
+/* Ώστε να μην κρύβει το τέλος της σελίδας όσο είναι ανοιχτή. */
+body:has(.synainesi:not([hidden])) #page{ padding-bottom: 7rem; }
+
+.synainesi-txt{
+  margin: 0;
+  max-width: 62ch;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--read);
+}
+
+.synainesi-txt a{ color: var(--text); }
+
+.synainesi-btns{ display: flex; gap: 0.6rem; flex: none; }
+
+.synainesi-btn{
+  padding: 0.5rem 1.4rem;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.synainesi-btn:hover{ border-color: var(--text); }
+
+/* --- το κουτί «άλλαξε την επιλογή σου», στη σελίδα Απόρρητο --- */
+.syn-allagi{
+  margin: 1rem 0 0;
+  padding: 1rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.syn-allagi p{ margin: 0 0 0.75rem; }
+
+.syn-allagi .synainesi-btns{ justify-content: flex-start; }
+
+@media (max-width: 620px){
+  .synainesi{ justify-content: flex-start; }
+  .synainesi-txt{ font-size: 0.82rem; }
+  .synainesi-btns{ width: 100%; }
+  .synainesi-btn{ flex: 1; }
+}
