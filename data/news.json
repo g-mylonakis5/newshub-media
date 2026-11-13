@@ -57,7 +57,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/usa_airport_mk.jpg",
     "summary": "Η Ομοσπονδιακή Υπηρεσία Πολιτικής Αεροπορίας των ΗΠΑ (FAA) ανακοίνωσε την Παρασκευή την αναστολή όλων των πτήσεων σε εθνικό επίπεδο, λόγω σοβαρών προβλη...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "koryfaios-meletitis-apanta-poso-sychna-trone-kreas-oi-makrovioteroi-anthropoi",
@@ -129,7 +129,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/skone-2.jpg",
     "summary": "Θα συνεχιστούν και το Σάββατο οι υψηλές θερμοκρασίες σε ανατολικά και νότια (Θεσσαλία, Βοιωτία, ανατολική-βορειοανατολική Πελοπόννησος, Αττική, Κυκλάδες...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "pasok-to-syntagma-kai-o-kanonismos-tis-voylis-den-tha-ginoyn-koyrelocharto-sta-cheria-tis-nd",
