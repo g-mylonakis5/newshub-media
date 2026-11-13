@@ -1,5 +1,17 @@
 [
   {
+    "id": "eythymios-lekkas-gia-ton-seismo-4-8-richter-notia-tis-kritis-omali-i-metaseismiki-akoloythia-pos-exigeitai-to-estiako-vathos",
+    "title": "Ευθύμιος Λέκκας για τον σεισμό 4,8 Ρίχτερ νότια της Κρήτης: Ομαλή η μετασεισμική ακολουθία – Πώς εξηγείται το εστιακό βάθος",
+    "url": "https://www.newshub.gr/el/kriti/eythymios-lekkas-gia-ton-seismo-4-8-richter-notia-tis-kritis-omali-i-metaseismiki-akoloythia-pos-exigeitai-to-estiako-vathos",
+    "date": "2026-11-13T09:12:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/seismos-2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/seismos-2.jpg",
+    "summary": "Καθησυχαστικός εμφανίστηκε ο πρόεδρος του ΟΑΣΠ και καθηγητής Διαχείρισης Φυσικών Καταστροφών, Ευθύμιος Λέκκας, αναφορικά με τον σεισμό των 4,8 Ρίχτερ που σημ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "nvidia-sto-kogkreso-o-tzensen-choyangk-gia-katathesi-plirofories-kai-gia-triti-exosyzygiki-schesi-apoleies-550-dis-dolarion",
     "title": "Nvidia: Στο Κογκρέσο ο Τζένσεν Χουάνγκ για κατάθεση – Πληροφορίες και για τρίτη εξωσυζυγική σχέση, απώλειες 550 δισ. δολαρίων",
     "url": "https://www.newshub.gr/el/kosmos/nvidia-sto-kogkreso-o-tzensen-choyangk-gia-katathesi-plirofories-kai-gia-triti-exosyzygiki-schesi-apoleies-550-dis-dolarion",
@@ -45,7 +57,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/ereunetiko-skaphos-abeille_marengo.jpg",
     "summary": "Με σαφείς εντολές να αποτραπεί οποιαδήποτε προσέγγιση πλοίου στο γαλλικό ερευνητικό «Abeille Marengo», εφόσον αυτή θα μπορούσε να δυσχεράνει την ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "simera-i-orkomosia-spanaki-liakoy-kai-vartzopoyloy-sto-proedriko-megaro-meta-tin-paraitisi-tsavdaridi",
@@ -6976,17 +6988,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/apati-ceo.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/apati-ceo.jpg",
     "summary": "Συνελήφθησαν τρεις άνδρες που κατηγορούνται ότι χρησιμοποίησαν την τεχνητή νοημοσύνη για να υποδυθούν υψηλόβαθμα στελέχη επιχειρήσεων και δικηγόρους, αποσπών...",
-    "featured": false
-  },
-  {
-    "id": "thessaloniki-olo-to-paraskinio-ton-syllipseon-toy-kyklomatos-forodiafygis-pos-o-koronoios-kai-o-logistis-enosan-toys-epicheirimaties",
-    "title": "Θεσσαλονίκη: Όλο το παρασκήνιο των συλλήψεων του κυκλώματος φοροδιαφυγής– Πώς ο κορωνοϊός και ο λογιστής «ένωσαν» τους επιχειρηματίες",
-    "url": "https://www.newshub.gr/el/ellada/thessaloniki-olo-to-paraskinio-ton-syllipseon-toy-kyklomatos-forodiafygis-pos-o-koronoios-kai-o-logistis-enosan-toys-epicheirimaties",
-    "date": "2026-11-08T20:41:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/aade1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/aade1.jpg",
-    "summary": "Μεγάλη έρευνα για ένα εκτεταμένο κύκλωμα φοροδιαφυγής στον χώρο της εστίασης και της διασκέδασης στη Θεσσαλονίκη και τη Χαλκιδική βρίσκεται σε εξέλιξη τα τελ...",
     "featured": false
   },
   {
