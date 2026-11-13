@@ -4539,14 +4539,32 @@ function ppMerge(from, into){
 }
 
 // Ξεχωρίζει μία γραφή από τον άνθρωπο στον οποίο έχει ενωθεί.
+//
+// Δύο δρόμοι, γιατί οι ενώσεις έρχονται από δύο μεριές: όσες έγραψε ο
+// συντάκτης ζουν στο aliases και σβήνονται· όσες έκανε μόνο του το
+// build — «Γ. Καραμπελιάς» πάνω στον «Γιώργο Καραμπελιά» — δεν
+// γράφτηκαν πουθενά, οπότε το σβήσιμο δεν έχει τι να πιάσει. Εκεί η
+// άρνηση γράφεται ρητά στο not_aliases, και το build σταματά.
 function ppSplit(canonical, variant){
+  var itan = false;
+
   Object.keys(pp.file.aliases).forEach(function (k) {
     if (!ppSame(k, canonical)) return;
+    var before = (pp.file.aliases[k] || []).length;
     pp.file.aliases[k] = (pp.file.aliases[k] || []).filter(function (v) {
       return !ppSame(v, variant);
     });
+    if (pp.file.aliases[k].length !== before) itan = true;
     if (!pp.file.aliases[k].length) delete pp.file.aliases[k];
   });
+
+  if (!itan) {
+    var ipirxe = pp.file.not_aliases.some(function (pair) {
+      return pair && ppSame(pair[0], canonical) && ppSame(pair[1], variant);
+    });
+    if (!ipirxe) pp.file.not_aliases.push([canonical, variant]);
+  }
+
   ppDirty(true);
   drawPeople();
 }
