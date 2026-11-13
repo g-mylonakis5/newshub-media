@@ -1,5 +1,17 @@
 [
   {
+    "id": "athlites-kai-somateia-metakomizoyn-sto-arkalochori-ti-symvainei-me-to-kolymvitirio-sto-irakleio",
+    "title": "Αθλητές και σωματεία μετακομίζουν στο… Αρκαλοχώρι - Τι συμβαίνει με το κολυμβητήριο στο Ηράκλειο;",
+    "url": "https://www.newshub.gr/el/kriti/athlites-kai-somateia-metakomizoyn-sto-arkalochori-ti-symvainei-me-to-kolymvitirio-sto-irakleio",
+    "date": "2026-11-13T07:11:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/kolymbese-pisina-athletes-pexels-photo-863988.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/kolymbese-pisina-athletes-pexels-photo-863988.jpg",
+    "summary": "Τα ατελείωτα προβλήματα που έχουν δημιουργηθεί με αποκορύφωμα την προπόνηση σε πολικές θερμοκρασίες ωθούν αθλητές και σωματεία να μετακομίζουν στο Αρκαλοχώρι...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "nvidia-telos-epochis-meta-tin-paraitisi-tzensen-choyangk-to-ntomino-apokalypseon-oi-kindynoi-gia-ton-kolosso-kai-o-ponokefalos-tramp",
     "title": "Nvidia: Τέλος εποχής μετά την παραίτηση Τζένσεν Χουάνγκ - Το ντόμινο αποκαλύψεων, οι κίνδυνοι για τον κολοσσό και ο πονοκέφαλος Τραμπ",
     "url": "https://www.newshub.gr/el/kosmos/nvidia-telos-epochis-meta-tin-paraitisi-tzensen-choyangk-to-ntomino-apokalypseon-oi-kindynoi-gia-ton-kolosso-kai-o-ponokefalos-tramp",
@@ -57,7 +69,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/seismographos.jpg",
     "summary": "Σεισμική δόνηση μεγέθους 4,8 Ρίχτερ σημειώθηκε στις 02:05 τα ξημερώματα της Παρασκευής 13 Νοεμβρίου, στη θαλάσσια περιοχή νότια της Κρήτης.\r\n\r\n\r\n\r\nΣύμφωνα με...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "irakleio-simera-to-teleytaio-antio-sti-giatro-eirini-stefanaki",
@@ -6965,17 +6977,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/krakovia-epithesi.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/krakovia-epithesi.jpg",
     "summary": "Καθοριστική για την επιβίωση αρκετών τραυματιών φαίνεται πως ήταν η παρέμβαση δύο χειρουργών που βρέθηκαν τυχαία κοντά στο σημείο της τρομοκρατικής επίθεσης ...",
-    "featured": false
-  },
-  {
-    "id": "stoiximan-super-league-ofi-kai-atromitos-kollisan-stin-isopalia-0-0-stin-kriti",
-    "title": "Stoiximan Super League: ΟΦΗ και Ατρόμητος κόλλησαν στην ισοπαλία, 0-0 στην Κρήτη",
-    "url": "https://www.newshub.gr/el/athlitika/stoiximan-super-league-ofi-kai-atromitos-kollisan-stin-isopalia-0-0-stin-kriti",
-    "date": "2026-11-08T18:32:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/5434480-scaled-e1794162345699.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/5434480-scaled-e1794162345699.jpg",
-    "summary": "Ο ΟΦΗ και ο Ατρόμητος έμειναν στη \"λευκή\" ισοπαλία (0-0) στο Παγκρήτιο Στάδιο και πήραν από έναν βαθμό από την αναμέτρηση της 10ης αγωνιστικής της ...",
     "featured": false
   },
   {
