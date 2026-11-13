@@ -414,6 +414,97 @@ function autoAgain(){
   say('Γύρισε στο αυτόματο. Πάτα Αποθήκευση για να ισχύσει.');
 }
 
+// ---------------------------------------------------------------------
+// ΚΑΘΑΡΙΣΜΑ ΟΛΩΝ — μία λίστα ξαναγίνεται αυτόματη
+// ---------------------------------------------------------------------
+//
+// Το «Πίσω στο αυτόματο» του πρωτοσέλιδου λύνει ΜΙΑ θέση. Οι άλλες
+// τέσσερις καρτέλες ταξινομούνται με το χέρι και μαζεύουν δέκα και
+// είκοσι καρφιτσωμένα — εκεί το ✕ ένα-ένα δεν είναι λύση.
+//
+// Κάθε εγγραφή λέει τρία πράγματα: πόσα είναι, πώς λέγεται η λίστα
+// (μπαίνει μέσα στην ερώτηση), και τι κάνει το σβήσιμο.
+//
+// Οι σφραγίδες του pinnedAt ΔΕΝ χρειάζονται καθάρισμα εδώ: κάθε
+// Αποθήκευση περνάει από την pinSfragida(), που κρατάει ώρα μόνο για
+// όσα refs υπάρχουν ακόμα — με άδεια λίστα σβήνει το κλειδί μόνη της.
+var KATHARISMA = {
+  latest: {
+    poso: function (){ return ltList().length; },
+    ti: function (){ return 'τη ροή «Τελευταία»'; },
+    svise: function (){
+      state.curation.latest = [];
+      // Ό,τι είχε βγει με το ✕ ξαναμπαίνει στο παιχνίδι — αλλιώς η ροή
+      // θα γύριζε στο αυτόματο με τρύπες που κανείς δεν θυμάται.
+      lt.gone = {};
+      drawLatest();
+      drawLtPicks();
+      ltDirty(true);
+    },
+  },
+
+  mustread: {
+    poso: function (){ return mrList().length; },
+    ti: function (){ return 'το Must read'; },
+    svise: function (){
+      state.curation.mustRead = [];
+      drawMustRead();
+      drawMrPicks();
+      mrDirty(true);
+    },
+  },
+
+  apopseis: {
+    poso: function (){ return opList().length; },
+    ti: function (){ return 'τις Απόψεις'; },
+    svise: function (){
+      state.curation.opinions = [];
+      drawOpinions();
+      drawOpPicks();
+      opDirty(true);
+    },
+  },
+
+  // Μόνο το θέμα που είναι ανοιχτό. Καθάρισμα και των δεκαπέντε μαζί
+  // δεν το ζήτησε κανείς, και θα ήταν το πιο ακριβό λάθος της οθόνης.
+  themata: {
+    poso: function (){ return th.open ? thPicks(th.open).length : 0; },
+    ti: function (){ return 'το θέμα «' + th.open + '»'; },
+    svise: function (){ thSetPicks(th.open, []); },
+  },
+};
+
+function autoAll(what){
+  var k = KATHARISMA[what];
+  if (!k) return;
+
+  var n = k.poso();
+  if (!n) return;
+
+  // Η ερώτηση λέει ΠΟΣΑ και ΑΠΟ ΠΟΥ. Ένα σκέτο «Είσαι σίγουρος;» δεν
+  // βοηθάει κανέναν να καταλάβει τι πάει να χάσει.
+  var ok = confirm(
+    (n === 1 ? 'Θα αφαιρεθεί το 1 καρφιτσωμένο' : 'Θα αφαιρεθούν και τα ' + n + ' καρφιτσωμένα')
+    + ' από ' + k.ti() + ', και θα ξαναδιαλέγει το site μόνο του.\n\n'
+    + 'Σίγουρα;'
+  );
+  if (!ok) return;
+
+  k.svise();
+  say('Καθαρίστηκε. Πάτα Αποθήκευση για να ισχύσει.');
+}
+
+// Το κουμπί υπάρχει πάντα στο HTML και απλώς κρύβεται όταν δεν υπάρχει
+// τίποτα να καθαριστεί. Το label το γράφει εδώ μόνο όποιος χρειάζεται
+// όνομα μέσα του — δηλαδή τα θέματα.
+function autoAllButton(what, label){
+  var btn = $('[data-auto-all="' + what + '"]');
+  if (!btn) return;
+  var n = KATHARISMA[what].poso();
+  btn.hidden = !n;
+  if (label) btn.textContent = label;
+}
+
 function save(){
   var btn = $('[data-save="curation"]');
   btn.disabled = true;
@@ -1639,6 +1730,8 @@ function drawThCat(){
       : n + (n === 1 ? ' καρφιτσωμένο' : ' καρφιτσωμένα')
         + (n > theseis ? ' — τα πέρα από τη ' + theseis + 'η θέση δεν θα φανούν.' : '.'));
 
+  autoAllButton('themata', 'Καθάρισε το «' + name + '» — πίσω στο αυτόματο');
+
   drawThCatPicks();
 }
 
@@ -2032,6 +2125,7 @@ function drawLatest(){
   }
 
   $('[data-lt-note]').textContent = note;
+  autoAllButton('latest');
 }
 
 function drawLtPicks(){
@@ -2263,6 +2357,8 @@ function drawMustRead(){
   $('[data-mr-note]').textContent = n === 0
     ? 'Καμία χειροκίνητη επιλογή — το site βάζει μόνο του τα 4 πιο πρόσφατα, ένα από κάθε κατηγορία.'
     : n + ' από 4 διαλεγμένα με το χέρι· τις υπόλοιπες θέσεις τις γεμίζει το site.';
+
+  autoAllButton('mustread');
 }
 
 function drawMrPicks(){
@@ -2706,6 +2802,7 @@ function drawOpinions(){
   }
 
   $('[data-op-note]').textContent = note;
+  autoAllButton('apopseis');
 }
 
 // Ό,τι βλέπει γίνεται ρητή επιλογή μόλις πειράξει κάτι — ίδιος λόγος
@@ -5330,6 +5427,14 @@ function wire(){
   // σε κάθε drawNow() και θα έχανε τον δικό του.
   $('[data-now-featured]').addEventListener('click', function (e) {
     if (e.target.closest('[data-auto]')) autoAgain();
+  });
+
+  // Τα «Καθάρισε όλα» των τεσσάρων καρτελών, με έναν listener στο
+  // έγγραφο: τα κουμπιά είναι σταθερά στο HTML, αλλά κάθονται σε
+  // τέσσερα διαφορετικά panel και δεν αξίζουν τέσσερις listeners.
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-auto-all]');
+    if (btn) autoAll(btn.dataset.autoAll);
   });
 
   $('[data-find]').addEventListener('input', function (e) {

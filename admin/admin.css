@@ -217,6 +217,15 @@ body{
    η κύρια ενέργεια. */
 .now-auto{ margin-left: auto; flex: none; align-self: center; }
 
+/* Το «Καθάρισε όλα» των τεσσάρων λιστών. Κάθεται κάτω από τη σημείωση,
+   όχι δίπλα στην Αποθήκευση: ακυρώνει δουλειά, και δεν θέλουμε να
+   πατιέται κατά λάθος αντί για εκείνη. */
+.auto-back{ margin: 0 0 1.25rem; }
+
+/* Κρυμμένο κουμπί = κρυμμένη γραμμή. Χωρίς αυτό έμενε το κενό της
+   παραγράφου και η σημείωση φαινόταν να κρέμεται. */
+.auto-back:has(button[hidden]){ display: none; }
+
 .now-title{ margin: 0 0 0.25rem; font-family: var(--serif); font-size: 1.05rem; font-weight: 600; }
 .now-meta{ margin: 0; font-size: 0.8rem; color: var(--muted); }
 

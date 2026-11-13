@@ -130,6 +130,14 @@
 
       <p class="hint" data-lt-note></p>
 
+      <!-- Το κουμπί φαίνεται ΜΟΝΟ όταν υπάρχει κάτι να καθαριστεί. Το
+           κρύβει και το δείχνει η drawLatest(), όπως και στις άλλες
+           τρεις καρτέλες. -->
+      <p class="auto-back">
+        <button type="button" class="btn btn--ghost" data-auto-all="latest" hidden>
+          Καθάρισε όλα — πίσω στο αυτόματο</button>
+      </p>
+
       <h2 class="sub">Καρφίτσωσε κι άλλο</h2>
 
       <div class="tools">
@@ -170,6 +178,11 @@
       <div class="slots" data-mr-slots></div>
 
       <p class="hint" data-mr-note></p>
+
+      <p class="auto-back">
+        <button type="button" class="btn btn--ghost" data-auto-all="mustread" hidden>
+          Καθάρισε όλα — πίσω στο αυτόματο</button>
+      </p>
 
       <h2 class="sub">Πρόσθεσε άρθρο</h2>
 
@@ -237,6 +250,11 @@
       <div class="slots" data-op-slots></div>
 
       <p class="hint" data-op-note></p>
+
+      <p class="auto-back">
+        <button type="button" class="btn btn--ghost" data-auto-all="apopseis" hidden>
+          Καθάρισε όλα — πίσω στο αυτόματο</button>
+      </p>
 
       <h2 class="sub">Πρόσθεσε άποψη</h2>
 
@@ -485,6 +503,13 @@
       <div data-th-cat-box hidden>
         <div class="slots" data-th-cat-slots></div>
         <p class="hint" data-th-cat-note></p>
+
+        <!-- Καθαρίζει ΜΟΝΟ το θέμα που είναι ανοιχτό — όχι και τα
+             δεκαπέντε. Το όνομά του μπαίνει μέσα στο κουμπί από τη
+             drawThCat(), για να μην υπάρχει αμφιβολία τι θα φύγει. -->
+        <p class="auto-back">
+          <button type="button" class="btn btn--ghost" data-auto-all="themata" hidden></button>
+        </p>
 
         <div class="tools">
           <input type="search" class="find" data-th-cat-find
