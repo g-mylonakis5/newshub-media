@@ -1,5 +1,17 @@
 [
   {
+    "id": "seismos-4-8-richter-notia-tis-kritis-egine-aisthitos-kai-sto-irakleio",
+    "title": "Σεισμός 4,8 Ρίχτερ νότια της Κρήτης – Έγινε αισθητός και στο Ηράκλειο",
+    "url": "https://www.newshub.gr/el/kriti/seismos-4-8-richter-notia-tis-kritis-egine-aisthitos-kai-sto-irakleio",
+    "date": "2026-11-13T06:02:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/seismographos.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/seismographos.jpg",
+    "summary": "Σεισμική δόνηση μεγέθους 4,8 Ρίχτερ σημειώθηκε στις 02:05 τα ξημερώματα της Παρασκευής 13 Νοεμβρίου, στη θαλάσσια περιοχή νότια της Κρήτης.\r\n\r\n\r\n\r\nΣύμφωνα με...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "irakleio-simera-to-teleytaio-antio-sti-giatro-eirini-stefanaki",
     "title": "Ηράκλειο: Σήμερα το τελευταίο αντίο στη γιατρό Ειρήνη Στεφανάκη",
     "url": "https://www.newshub.gr/el/kriti/irakleio-simera-to-teleytaio-antio-sti-giatro-eirini-stefanaki",
@@ -105,7 +117,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/politistiko-kentro-plagia.jpg",
     "summary": "Ημέρα... συγχώνευσης της ΔΕΠΑΝΑΛ Α.Ε. και της \"Ανάπτυξης Αθλητισμού Ηρακλείου Α.Ε.-ΟΤΑ\" σε έναν ενιαίο Αναπτυξιακό Οργανισμό, είναι η σημερινή.&nbs...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "nea-dieythyntria-tis-ogkologikis-klinikis-toy-pagni-i-sofia-aggelaki",
@@ -6960,17 +6972,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/img_20261108_170457.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/img_20261108_170457.jpg",
     "summary": "«Δεν έχουμε περιθώριο ούτε για μικρά λάθη» ήταν το σαφές μήνυμα που έστειλε ο Πρόεδρος της Δημοκρατίας, Κωνσταντίνος Τασούλας, από το Ρέθυμ...",
-    "featured": false
-  },
-  {
-    "id": "tramp-meta-tin-itta-stis-endiameses-ekloges-tha-epistrepsoyme-megalyteroi-kai-ischyroteroi-apo-pote-ti-anaferei-se-anartisi-toy",
-    "title": "Τραμπ μετά την ήττα στις ενδιάμεσες εκλογές: «Θα επιστρέψουμε μεγαλύτεροι και ισχυρότεροι από ποτέ» - Τι αναφέρει σε ανάρτησή του",
-    "url": "https://www.newshub.gr/el/geopolitiki/tramp-meta-tin-itta-stis-endiameses-ekloges-tha-epistrepsoyme-megalyteroi-kai-ischyroteroi-apo-pote-ti-anaferei-se-anartisi-toy",
-    "date": "2026-11-08T17:30:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/8-11/ap26308798380817-1024x683.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/8-11/ap26308798380817-1024x683.jpg",
-    "summary": "Με ανάρτησή του, ο Ντόναλντ Τραμπ σχολίασε το αποτέλεσμα των ενδιάμεσων εκλογών στις ΗΠΑ, κάνοντας λόγο για «ένα τεράστιο βήμα προς τα πίσω στην Ιστορί...",
     "featured": false
   },
   {
