@@ -217,6 +217,34 @@ body{
    η κύρια ενέργεια. */
 .now-auto{ margin-left: auto; flex: none; align-self: center; }
 
+/* Οι ενέργειες ακύρωσης του πρωτοσέλιδου, σε στήλη: δύο κουμπιά και η
+   γραμμή που λέει ποιο είναι το προηγούμενο. Σε σειρά δεν χωρούσαν
+   δίπλα στην εικόνα και στον τίτλο. */
+.now-acts{
+  margin-left: auto;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+}
+
+.now-acts .now-auto{ margin-left: 0; align-self: stretch; }
+
+.now-prev{
+  margin: 0;
+  max-width: 20rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: right;
+}
+
+@media (max-width: 700px){
+  .now-body{ flex-wrap: wrap; }
+  .now-acts{ margin-left: 0; align-items: stretch; }
+  .now-prev{ text-align: left; }
+}
+
 /* Το «Καθάρισε όλα» των τεσσάρων λιστών. Κάθεται κάτω από τη σημείωση,
    όχι δίπλα στην Αποθήκευση: ακυρώνει δουλειά, και δεν θέλουμε να
    πατιέται κατά λάθος αντί για εκείνη. */

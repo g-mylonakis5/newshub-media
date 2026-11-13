@@ -72,6 +72,27 @@ function validate(name, data){
     if (data.featuredUntil && !/^\d{4}-\d{2}-\d{2}$/.test(data.featuredUntil)) {
       return 'Η ημερομηνία λήξης γράφεται ΕΕΕΕ-ΜΜ-ΗΗ.';
     }
+    // Το ιστορικό του πρωτοσέλιδου: τι ίσχυε πριν, ώστε όταν βγει η
+    // τρέχουσα επιλογή να γυρίσει εκεί — όχι στο πιο πρόσφατο. Λίστα
+    // από { ref, hero }, το πιο πρόσφατο πρώτο.
+    //
+    // Το build ΔΕΝ το διαβάζει: είναι καθαρά η μνήμη του διαχειριστικού.
+    // Ελέγχουμε όμως τη μορφή, αλλιώς ένα σκέτο κείμενο εδώ μέσα θα
+    // έσκαγε στο heroRestore() και το κουμπί δεν θα έκανε τίποτα.
+    if (data.featuredPrev != null) {
+      if (!Array.isArray(data.featuredPrev)) {
+        return 'Το ιστορικό του πρωτοσέλιδου πρέπει να είναι λίστα.';
+      }
+      const kakia = data.featuredPrev.some((x) => (
+        !x || typeof x !== 'object' || Array.isArray(x)
+        || typeof x.ref !== 'string' || !x.ref.trim()
+        || (x.hero != null && typeof x.hero !== 'string')
+      ));
+      if (kakia) {
+        return 'Κάθε εγγραφή στο ιστορικό πρωτοσέλιδου θέλει ref σε κείμενο.';
+      }
+    }
+
     if (data.secondary && !Array.isArray(data.secondary)) {
       return 'Τα δευτερεύοντα πρέπει να είναι λίστα.';
     }
