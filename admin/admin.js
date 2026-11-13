@@ -297,12 +297,116 @@ function findItemByRef(ref){
 
 var TAGS ={ podcast: 'Podcast', video: 'Βίντεο', news: 'Είδηση', article: 'Άρθρο' };
 
-// Το κουμπί που ακυρώνει τη χειροκίνητη επιλογή.
+// ---------------------------------------------------------------------
+// Το ιστορικό του πρωτοσέλιδου
+// ---------------------------------------------------------------------
+//
+// Όταν έβγαινε η χειροκίνητη επιλογή, το πρωτοσέλιδο γύριζε στο «πιο
+// πρόσφατο με εικόνα». Στην πράξη αυτό είναι σχεδόν πάντα λάθος: ο
+// συντάκτης έβαλε κάτι για δύο ώρες, το έβγαλε, και η αρχική δεν
+// γύρισε εκεί που ήταν — πήγε στο τελευταίο που ανέβηκε.
+//
+// Άρα κρατάμε στοίβα: ό,τι ΑΝΤΙΚΑΤΑΣΤΑΘΗΚΕ μπαίνει στο featuredPrev,
+// και το «βγάλε το» γυρίζει εκεί. Το «πιο πρόσφατο» μένει, αλλά ως
+// ξεχωριστό κουμπί — επιλογή, όχι προεπιλογή.
+//
+// Πέντε βάθος: πιο πίσω κανείς δεν θυμάται τι ήταν, και το curation.json
+// δεν είναι αρχείο ιστορικού.
+var PROTO_VATHOS = 5;
+
+function heroIstoria(){
+  if (!Array.isArray(state.curation.featuredPrev)) state.curation.featuredPrev = [];
+  return state.curation.featuredPrev;
+}
+
+function metaApo(meres){
+  var d = new Date();
+  d.setDate(d.getDate() + meres);
+  return d.toISOString().slice(0, 10);
+}
+
+// Μπαίνει στο ιστορικό μόνο ό,τι φεύγει επειδή το έσπρωξε κάτι άλλο.
+// Ό,τι βγάζει ο συντάκτης με το χέρι ΔΕΝ μπαίνει: αν μπήκε, το δεύτερο
+// πάτημα θα το έφερνε πίσω και το κουμπί θα γινόταν διακόπτης.
+//
+// Μαζί του φεύγει και η χειροκίνητη εικόνα του, αλλιώς το επαναφέρουμε
+// αργότερα με τη φωτογραφία κάποιου άλλου.
+function heroPush(ref, hero){
+  if (!ref) return;
+  var ist = heroIstoria().filter(function (p) { return p && p.ref !== ref; });
+  ist.unshift({ ref: ref, hero: hero || '' });
+  state.curation.featuredPrev = ist.slice(0, PROTO_VATHOS);
+}
+
+// Το πιο πρόσφατο του ιστορικού που ΥΠΑΡΧΕΙ ακόμα. Ένα άρθρο που έγινε
+// πρόχειρο ή σβήστηκε δεν είναι υποψήφιο: θα γυρνούσαμε την αρχική σε
+// σελίδα που δεν υπάρχει.
+function heroPrevIndex(){
+  var ist = heroIstoria();
+  for (var i = 0; i < ist.length; i++) {
+    if (ist[i] && ist[i].ref && findItemByRef(ist[i].ref)) return i;
+  }
+  return -1;
+}
+
+function heroPrev(){
+  var i = heroPrevIndex();
+  return i === -1 ? null : heroIstoria()[i];
+}
+
+// Το βγάζει από το ιστορικό και το ξαναβάζει στο πρωτοσέλιδο. Νέα
+// ημερομηνία λήξης: η παλιά του είχε περάσει ή δεν ίσχυε πια, και
+// χωρίς αυτήν το admin-api.js απορρίπτει την αποθήκευση.
+//
+// Ό,τι ήταν πιο πρόσφατο από αυτό που επαναφέρουμε δείχνει σε σβησμένο
+// — φεύγει μαζί, για να μην ξαναδοκιμάζεται σε κάθε πάτημα.
+function heroRestore(){
+  var i = heroPrevIndex();
+  if (i === -1) return null;
+
+  var prev = heroIstoria()[i];
+  state.curation.featuredPrev = heroIstoria().slice(i + 1);
+  state.curation.featured = prev.ref;
+  state.curation.featuredHero = prev.hero || '';
+  state.curation.featuredUntil = metaApo(7);
+  return prev;
+}
+
+function heroTitlos(prev){
+  if (!prev) return '';
+  var it = findItemByRef(prev.ref);
+  return it ? it.title : prev.ref;
+}
+
+// Τα κουμπιά ακύρωσης του πρωτοσέλιδου.
 //
 // Υπήρχε τρόπος και πριν — βάζεις χθεσινή ημερομηνία λήξης — αλλά
 // κανένας δημοσιογράφος δεν θα το σκεφτεί ποτέ. Θα ψάξει κουμπί.
-var NOW_AUTO = '<button type="button" class="btn btn--ghost now-auto" data-auto>'
-  + 'Πίσω στο αυτόματο</button>';
+//
+// Η σειρά είναι η προτεραιότητα: πρώτο το «πίσω στο προηγούμενο», που
+// είναι σχεδόν πάντα το σωστό, και μετά το «πιο πρόσφατο».
+function nowActs(){
+  var prev = heroPrev();
+  var out = '';
+
+  if (state.curation.featured) {
+    out += '<button type="button" class="btn btn--ghost now-auto" data-auto>'
+      + (prev ? 'Βγάλε το — πίσω στο προηγούμενο' : 'Πίσω στο αυτόματο') + '</button>'
+      + '<button type="button" class="btn btn--ghost now-auto" data-newest>'
+      + 'Βάλε το πιο πρόσφατο</button>';
+  } else if (prev) {
+    out += '<button type="button" class="btn btn--ghost now-auto" data-auto>'
+      + 'Βάλε πίσω το προηγούμενο</button>';
+  }
+
+  if (!out) return '';
+
+  // Το όνομα ΜΕΣΑ στην οθόνη, όχι μόνο στο μήνυμα μετά το πάτημα: αν
+  // δεν φαίνεται τι θα γυρίσει, το κουμπί είναι λαχείο.
+  if (prev) out += '<p class="now-prev">Προηγούμενο: ' + esc(heroTitlos(prev)) + '</p>';
+
+  return '<div class="now-acts">' + out + '</div>';
+}
 
 function drawNow(){
   var box = $('[data-now-body]');
@@ -310,7 +414,7 @@ function drawNow(){
 
   if (!want) {
     box.innerHTML = '<p class="muted">Καμία χειροκίνητη επιλογή — το site βάζει μόνο του '
-      + 'το πιο πρόσφατο με εικόνα.</p>';
+      + 'το πιο πρόσφατο με εικόνα.</p>' + nowActs();
     return;
   }
 
@@ -322,7 +426,7 @@ function drawNow(){
     // δεν έχει πώς να καθαρίσει μια γραμμή που δεν βλέπει.
     box.innerHTML = '<p class="muted">Επιλεγμένο: <code>' + esc(want) + '</code><br>'
       + 'Δεν το βρήκα στη λίστα — μπορεί να είναι παλιό ή σβησμένο. '
-      + 'Το site θα γυρίσει στην αυτόματη επιλογή.</p>' + NOW_AUTO;
+      + 'Το site θα γυρίσει στην αυτόματη επιλογή.</p>' + nowActs();
     return;
   }
 
@@ -333,7 +437,7 @@ function drawNow(){
     + '<p class="now-meta">'
     + '<span class="tag tag--' + hit.kind + '">' + TAGS[hit.kind] + '</span>'
     + (hit.who ? esc(hit.who) + ' · ' : '') + when(hit.date)
-    + '</p></div>' + NOW_AUTO;
+    + '</p></div>' + nowActs();
 }
 
 function drawPicks(){
@@ -375,15 +479,20 @@ function markDirty(on){
 // ---------------------------------------------------------------------
 
 function choose(ref){
+  // Ό,τι έσπρωξε η νέα επιλογή πάει στο ιστορικό — εκεί θα γυρίσει το
+  // πρωτοσέλιδο όταν βγει αυτή. Μαζί του και η εικόνα του, πριν τη
+  // σβήσουμε παρακάτω.
+  if (state.curation.featured && state.curation.featured !== ref) {
+    heroPush(state.curation.featured, state.curation.featuredHero);
+  }
+
   state.curation.featured = ref;
 
   // Αν δεν υπάρχει ημερομηνία λήξης, βάζουμε μία εβδομάδα μπροστά.
   // Ο έλεγχος στο admin-api.js θα απέρριπτε την αποθήκευση χωρίς αυτήν,
   // και ο συντάκτης δεν έχει λόγο να μάθει γιατί.
   if (!state.curation.featuredUntil || new Date(state.curation.featuredUntil) < new Date()) {
-    var d = new Date();
-    d.setDate(d.getDate() + 7);
-    state.curation.featuredUntil = d.toISOString().slice(0, 10);
+    state.curation.featuredUntil = metaApo(7);
     $('[data-until]').value = state.curation.featuredUntil;
   }
 
@@ -396,13 +505,40 @@ function choose(ref){
   markDirty(true);
 }
 
-// Πίσω στο αυτόματο: το site ξαναβάζει μόνο του το πιο πρόσφατο με
-// εικόνα, μέχρι να διαλέξει κάποιος ξανά.
+// Βγάζει την τρέχουσα επιλογή και γυρίζει στο ΠΡΟΗΓΟΥΜΕΝΟ πρωτοσέλιδο.
+//
+// Αυτή είναι η προεπιλογή, και είναι η σωστή: μια επιλογή που μπαίνει
+// για δύο ώρες δεν ακυρώνει αυτό που ίσχυε πριν — το διακόπτει.
+// Αν δεν υπάρχει προηγούμενο που να στέκει ακόμα, πάμε στο αυτόματο.
+function autoAgain(){
+  var prev = heroRestore();
+
+  if (!prev) { autoNewest(); return; }
+
+  $('[data-until]').value = state.curation.featuredUntil;
+  drawNow();
+  drawPicks();
+  markDirty(true);
+  say('Γύρισε το προηγούμενο πρωτοσέλιδο: «' + heroTitlos(prev)
+    + '». Πάτα Αποθήκευση για να ισχύσει.');
+}
+
+// Το παλιό «πίσω στο αυτόματο»: το site ξαναβάζει μόνο του το πιο
+// πρόσφατο με εικόνα, μέχρι να διαλέξει κάποιος ξανά.
+//
+// Έμεινε ως ΕΠΙΛΟΓΗ, με δικό του κουμπί, γιατί κάποιες φορές είναι
+// πράγματι αυτό που θέλει ο συντάκτης. Δεν είναι όμως προεπιλογή: το
+// «πιο πρόσφατο» είναι ό,τι ανέβηκε τελευταίο, όχι ό,τι αξίζει μεγάλο.
 //
 // Καθαρίζονται ΚΑΙ τα τρία. Η ημερομηνία λήξης χωρίς επιλογή δεν
 // σημαίνει τίποτα, και η χειροκίνητη εικόνα ανήκε στην επιλογή που
 // μόλις έφυγε — αν μείνει, η επόμενη θα βγει με ξένη φωτογραφία.
-function autoAgain(){
+//
+// Η τρέχουσα μπαίνει στο ιστορικό: το «πιο πρόσφατο» είναι εύκολο να
+// πατηθεί κατά λάθος, και θέλουμε δρόμο πίσω.
+function autoNewest(){
+  heroPush(state.curation.featured, state.curation.featuredHero);
+
   state.curation.featured = '';
   state.curation.featuredUntil = '';
   state.curation.featuredHero = '';
@@ -411,7 +547,8 @@ function autoAgain(){
   drawNow();
   drawPicks();
   markDirty(true);
-  say('Γύρισε στο αυτόματο. Πάτα Αποθήκευση για να ισχύσει.');
+  say('Γύρισε στο αυτόματο — μπαίνει το πιο πρόσφατο με εικόνα. '
+    + 'Πάτα Αποθήκευση για να ισχύσει.');
 }
 
 // ---------------------------------------------------------------------
@@ -3673,23 +3810,34 @@ function syncFeatured(a, want){
 
   if (should === isNow) return Promise.resolve('');
 
-  if (should) {
-    state.curation.featured = ref;
-    var d = new Date();
-    d.setDate(d.getDate() + 7);
-    state.curation.featuredUntil = d.toISOString().slice(0, 10);
-  } else {
-    state.curation.featured = '';
-  }
+  var back = null;
 
-  // Η χειροκίνητη εικόνα ανήκει στην προηγούμενη επιλογή — δες choose().
-  state.curation.featuredHero = '';
+  if (should) {
+    // Ό,τι έσπρωξε το άρθρο πάει στο ιστορικό — δες choose().
+    if (state.curation.featured) {
+      heroPush(state.curation.featured, state.curation.featuredHero);
+    }
+    state.curation.featured = ref;
+    state.curation.featuredUntil = metaApo(7);
+    // Η χειροκίνητη εικόνα ανήκει στην προηγούμενη επιλογή — δες choose().
+    state.curation.featuredHero = '';
+  } else {
+    // Βγαίνει — άρα γυρίζουμε στο προηγούμενο, όχι στο πιο πρόσφατο.
+    // Ίδιος κανόνας με το κουμπί: δες autoAgain().
+    state.curation.featured = '';
+    state.curation.featuredHero = '';
+    back = heroRestore();
+    if (!back) state.curation.featuredUntil = '';
+  }
 
   return api('curation', 'PUT', state.curation).then(function () {
     $('[data-until]').value = state.curation.featuredUntil || '';
     drawNow();
     drawPicks();
-    return should ? ' Μπήκε και στο πρωτοσέλιδο.' : ' Βγήκε από το πρωτοσέλιδο.';
+    if (should) return ' Μπήκε και στο πρωτοσέλιδο.';
+    return back
+      ? ' Βγήκε από το πρωτοσέλιδο — γύρισε το προηγούμενο: «' + heroTitlos(back) + '».'
+      : ' Βγήκε από το πρωτοσέλιδο.';
   });
 }
 
@@ -5427,6 +5575,7 @@ function wire(){
   // σε κάθε drawNow() και θα έχανε τον δικό του.
   $('[data-now-featured]').addEventListener('click', function (e) {
     if (e.target.closest('[data-auto]')) autoAgain();
+    else if (e.target.closest('[data-newest]')) autoNewest();
   });
 
   // Τα «Καθάρισε όλα» των τεσσάρων καρτελών, με έναν listener στο
