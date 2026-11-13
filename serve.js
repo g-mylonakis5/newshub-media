@@ -15,8 +15,30 @@ const path = require('path');
 const { execFile } = require('child_process');
 
 const admin = require('./admin-api.js');
+const { stats } = require('./stats-api.js');
 
 const ROOT = path.join(__dirname, 'public');
+const ENV_FILE = path.join(__dirname, '.env');
+
+// Διαβάζει το .env χωρίς βιβλιοθήκη: κάθε γραμμή ΟΝΟΜΑ=τιμή. Ίδιο με
+// το fetch-videos.js.
+//
+// Στον αέρα δεν υπάρχει .env — τα μυστικά ζουν στις ρυθμίσεις του
+// Cloudflare Pages και τα δίνει εκείνο στη Function. Εδώ είναι ο
+// τοπικός αντικαταστάτης, ώστε η δοκιμή να μοιάζει με την πραγματικότητα.
+function readEnv() {
+  if (!fs.existsSync(ENV_FILE)) return {};
+  const out = {};
+  for (const line of fs.readFileSync(ENV_FILE, 'utf8').split('\n')) {
+    const clean = line.trim();
+    if (!clean || clean.startsWith('#')) continue;
+    const at = clean.indexOf('=');
+    if (at === -1) continue;
+    out[clean.slice(0, at).trim()] = clean.slice(at + 1).trim();
+  }
+  return out;
+}
+
 // Αλλάζει με PORT=8090 node serve.js — χρήσιμο για να τρέχουν δύο
 // αντίγραφα μαζί, π.χ. το site που κοιτάς κι ένα για δοκιμή.
 const PORT = Number(process.env.PORT) || 8080;
@@ -216,6 +238,19 @@ const server = http.createServer((req, res) => {
 
   if (rel === '/api/refresh') {
     handleRefresh(req, res).catch((err) => sendJson(res, 500, { error: String(err.message) }));
+    return;
+  }
+
+  // Οι μετρήσεις — δες functions/api/stats.js.
+  //
+  // Τοπικά το κλειδί έρχεται από το .env, στον αέρα από τις ρυθμίσεις
+  // του Cloudflare Pages. Η λογική είναι η ίδια και στα δύο, οπότε ό,τι
+  // βλέπεις εδώ είναι ακριβώς ό,τι θα δει και ο συντάκτης.
+  if (rel === '/api/stats') {
+    const period = (req.url.split('?')[1] || '').match(/period=([\w]+)/);
+    stats({ ...readEnv(), ...process.env }, period ? period[1] : '7d')
+      .then((r) => sendJson(res, r.status, r.body))
+      .catch((err) => sendJson(res, 500, { error: String(err.message) }));
     return;
   }
 
