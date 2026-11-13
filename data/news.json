@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/maketa-microsoftnrph.jpg",
     "summary": "«Αβοήθητοι» έμειναν σήμερα (13/11/2026) εκατομμύρια άνθρωποι στον κόσμο μετά την πολύωρη διακοπή λειτουργίας του Outlook της Microsoft. Πολλοί βρ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "disco-stin-kriti-o-dialogos-gia-tin-axiopoiisi-tis-thermotitas-kai-ti-meiosi-toy-energeiakoy-kostoys",
@@ -177,7 +177,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/kairooooos.jpg",
     "summary": "Με θερμοκρασίες που θύμισαν καλοκαίρι κύλησε η Παρασκευή 13 Νοεμβρίου στην Κρήτη.\r\n\r\nΣύμφωνα με το meteo.gr, σήμερα σημειώθηκε άνοδος της θερμοκρασίας κυρίως...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "irakleio-kinitopoiisi-enantia-stin-afixi-toy-crown-iris-tin-triti-17-noemvrioy",
