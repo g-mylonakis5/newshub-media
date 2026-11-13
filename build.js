@@ -70,7 +70,7 @@ const SITE_NAME = 'Newshub Media';
 // εμείς στις σελίδες.
 const CF_ANALYTICS = '1c6e9c91e5cd4c0ebdbeb09703c977fe';
 const GOOGLE_VERIFY = '';
-const GA4 = '';
+const GA4 = 'G-VSQD1S3PN5';
 
 const GREEK = {
   'α':'a','β':'v','γ':'g','δ':'d','ε':'e','ζ':'z','η':'i','θ':'th',
