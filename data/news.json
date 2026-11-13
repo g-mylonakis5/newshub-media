@@ -1,5 +1,17 @@
 [
   {
+    "id": "klimatiki-allagi-o-thermoteros-oktovrios-mechri-stigmis-stin-istoria-analysi-apo-ton-dr-kosta-lagoyvardo-kai-ton-dr-giorgo-fragkoylidi",
+    "title": "Κλιματική αλλαγή: Ο θερμότερος Οκτώβριος μέχρι στιγμής στην ιστορία - Ανάλυση από τον Δρ. Κώστα Λαγουβάρδο και τον Δρ. Γιώργο Φραγκουλίδη",
+    "url": "https://www.newshub.gr/el/perivallon/klimatiki-allagi-o-thermoteros-oktovrios-mechri-stigmis-stin-istoria-analysi-apo-ton-dr-kosta-lagoyvardo-kai-ton-dr-giorgo-fragkoylidi",
+    "date": "2026-11-13T12:25:00.000Z",
+    "category": "Περιβάλλον",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/xerasia2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/xerasia2.jpg",
+    "summary": "Το καμπανάκι του κινδύνου για τις επιπτώσεις της κλιματικής αλλαγής χτυπά για άλλη μια φορά δυνατά μέσα από τα κρίσιμα στοιχεία που αποκαλύπτει η κλιματική...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "poiniki-dioxi-gia-ena-kakoyrgima-kai-ena-plimmelima-ston-proponiti-arsis-varon-odyssea-dima-eiche-chorigisei-anavolika-ston-10chrono-gio-toy",
     "title": "Ποινική δίωξη για ένα κακούργημα και ένα πλημμέλημα στον προπονητή άρσης βαρών, Οδυσσέα Δήμα – Είχε χορηγήσει αναβολικά στον 10χρονο γιο του",
     "url": "https://www.newshub.gr/el/ellada/poiniki-dioxi-gia-ena-kakoyrgima-kai-ena-plimmelima-ston-proponiti-arsis-varon-odyssea-dima-eiche-chorigisei-anavolika-ston-10chrono-gio-toy",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/odisseas-dimas.jpg",
     "summary": "Ακόμα και στον ανήλικο γιο του, ηλικίας 10 ετών φέρεται σύμφωνα με πληροφορίες του ΕΡΤnews να είχε χορηγήσει αναβολικά o 58χρονος προπονητής της άρσης βαρών,...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "orkistikan-oi-treis-neoi-yfypoyrgoi-spanakis-liakos-kai-vartzopoylos-meta-tis-allages-stin-kyvernisi",
@@ -7001,17 +7013,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/abeille-marengo-mak.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/abeille-marengo-mak.jpg",
     "summary": "Μετά από ένα έντονο διπλωματικό παρασκήνιο, προκειμένου να επιβεβαιωθεί η όποια συνεννόηση είχε επιτευχθεί το προηγούμενο διάστημα με την παρέμβαση της Γαλλί...",
-    "featured": false
-  },
-  {
-    "id": "tragikos-apologismos-notia-tis-kritis-stoys-20-oi-nekroi-metanastes-dyo-agnooymenoi",
-    "title": "Τραγικός απολογισμός νότια της Κρήτης: Στους 20 οι νεκροί μετανάστες - Δύο αγνοούμενοι",
-    "url": "https://www.newshub.gr/el/kriti/tragikos-apologismos-notia-tis-kritis-stoys-20-oi-nekroi-metanastes-dyo-agnooymenoi",
-    "date": "2026-11-09T07:19:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/grego.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/grego.jpg",
-    "summary": "Στους 20 ανέρχεται ο αριθμός των νεκρών μεταναστών που έχουν εντοπιστεί σε δύο διαφορετικά περιστατικά στη θαλάσσια περιοχή νότια της Κρήτης, ενώ συνολικά 13...",
     "featured": false
   },
   {
