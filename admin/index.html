@@ -55,6 +55,7 @@
     <a class="tab" href="#prosopa" data-tab="prosopa">Πρόσωπα</a>
     <a class="tab" href="#ekpompes" data-tab="ekpompes">Εκπομπές</a>
     <a class="tab" href="#elleipseis" data-tab="elleipseis">Επεισόδια</a>
+    <a class="tab" href="#metriseis" data-tab="metriseis">Μετρήσεις</a>
   </nav>
 
   <main class="work">
@@ -619,6 +620,57 @@
       <p class="more">
         <button type="button" class="btn btn--ghost" data-pr-more hidden>Δείξε περισσότερα</button>
       </p>
+    </section>
+
+    <!-- ========== ΜΕΤΡΗΣΕΙΣ ==========
+         Πόσοι μπαίνουν και τι διαβάζουν. Τα νούμερα έρχονται από το
+         Cloudflare Web Analytics, που μετράει ΧΩΡΙΣ cookies — γι' αυτό
+         το site δεν έχει μπάνερ συγκατάθεσης.
+
+         Δεν υπάρχει κουμπί Αποθήκευσης: εδώ δεν αλλάζει τίποτα, μόνο
+         διαβάζεται. -->
+    <section class="panel" data-panel="metriseis">
+      <header class="panel-head">
+        <div>
+          <h1>Μετρήσεις</h1>
+          <p class="hint">Πόσοι μπήκαν στο site και τι διάβασαν.<br>
+            Μετρώνται χωρίς cookies, οπότε τα νούμερα είναι στρογγυλεμένα —
+            δείχνουν την τάση, όχι ακριβή απογραφή.</p>
+        </div>
+        <button type="button" class="btn btn--ghost" data-st-reload>Ανανέωση</button>
+      </header>
+
+      <div class="chips" data-st-period>
+        <button type="button" class="chip" data-stp="24h">24 ώρες</button>
+        <button type="button" class="chip is-on" data-stp="7d">7 μέρες</button>
+        <button type="button" class="chip" data-stp="30d">30 μέρες</button>
+      </div>
+
+      <p class="state" data-st-state hidden></p>
+
+      <div class="stnums" data-st-nums></div>
+
+      <h2 class="sub">Ανά μέρα</h2>
+      <div class="stdays" data-st-days></div>
+
+      <div class="stcols">
+        <div>
+          <h2 class="sub">Τι διάβασαν</h2>
+          <div data-st-pages></div>
+        </div>
+        <div>
+          <h2 class="sub">Από πού ήρθαν</h2>
+          <div data-st-from></div>
+        </div>
+        <div>
+          <h2 class="sub">Από ποια χώρα</h2>
+          <div data-st-geo></div>
+        </div>
+        <div>
+          <h2 class="sub">Με τι</h2>
+          <div data-st-dev></div>
+        </div>
+      </div>
     </section>
 
   </main>

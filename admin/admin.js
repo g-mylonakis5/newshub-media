@@ -5564,6 +5564,146 @@ function loadPairsTodo(){
 }
 
 // ---------------------------------------------------------------------
+// ΜΕΤΡΗΣΕΙΣ — πόσοι μπαίνουν και τι διαβάζουν
+// ---------------------------------------------------------------------
+//
+// Τα νούμερα έρχονται από το /api/stats, που με τη σειρά του ρωτάει το
+// Cloudflare. Το κλειδί μένει στον διακομιστή: εδώ φτάνουν μόνο νούμερα.
+//
+// ΦΟΡΤΩΝΕΙ ΟΤΑΝ ΑΝΟΙΞΕΙ Η ΚΑΡΤΕΛΑ, όχι στο boot. Το διαχειριστικό
+// κατεβάζει ήδη 5 MB στο άνοιγμα· ένα ακόμα αίτημα για οθόνη που
+// μπορεί να μην ανοίξει κανείς δεν έχει λόγο να μπει στην ουρά.
+var st = { period: '7d', loaded: false, busy: false };
+
+function stSay(text, kind){
+  var el = $('[data-st-state]');
+  if (!text) { el.hidden = true; return; }
+  el.hidden = false;
+  el.textContent = text;
+  if (kind) el.setAttribute('data-kind', kind); else el.removeAttribute('data-kind');
+}
+
+function stLoad(){
+  if (st.busy) return;
+  st.busy = true;
+  stSay('Φόρτωση…');
+
+  fetch('/api/stats?period=' + encodeURIComponent(st.period), { headers: { Accept: 'application/json' } })
+    .then(readJson, netFail)
+    .then(function (data) {
+      st.busy = false;
+      st.loaded = true;
+      stSay('');
+      drawStats(data);
+    })
+    .catch(function (err) {
+      st.busy = false;
+      stSay(err.message, 'bad');
+    });
+}
+
+// Μια λίστα «όνομα — πόσα», με μπάρα που δείχνει τη σχέση.
+// Τα νούμερα μόνα τους δεν λένε τίποτα σε κανέναν: το «60» είναι πολύ ή
+// λίγο; Η μπάρα απαντάει χωρίς λέξεις.
+function stBars(list, kenoTitlos){
+  if (!list || !list.length) return '<p class="muted">' + kenoTitlos + '</p>';
+
+  var max = list.reduce(function (m, r) { return Math.max(m, r.n); }, 0) || 1;
+
+  return '<ul class="stbars">' + list.map(function (r) {
+    return '<li>'
+      + '<span class="stbar-name" title="' + esc(r.name) + '">' + esc(r.name) + '</span>'
+      + '<span class="stbar-track"><span class="stbar-fill" style="width:'
+      + Math.round((r.n / max) * 100) + '%"></span></span>'
+      + '<span class="stbar-n">' + r.n.toLocaleString('el') + '</span>'
+      + '</li>';
+  }).join('') + '</ul>';
+}
+
+function drawStats(d){
+  $('[data-st-nums]').innerHTML =
+    '<div class="stnum"><span class="stnum-n">' + (d.episkepseis || 0).toLocaleString('el') + '</span>'
+    + '<span class="stnum-t">επισκέψεις</span></div>'
+    + '<div class="stnum"><span class="stnum-n">' + (d.provoles || 0).toLocaleString('el') + '</span>'
+    + '<span class="stnum-t">προβολές σελίδων</span></div>'
+    + '<div class="stnum stnum--soft"><span class="stnum-n">' + esc(d.titlos || '') + '</span>'
+    + '<span class="stnum-t">περίοδος</span></div>';
+
+  // Οι μέρες ως στήλες. Μία μέρα χωρίς επισκέψεις ΔΕΝ λείπει από το
+  // Cloudflare — απλώς δεν υπάρχει γραμμή. Τη γεμίζουμε εμείς, αλλιώς
+  // το γράφημα συμπιέζεται και δείχνει συνεχή κίνηση εκεί που υπήρχαν
+  // κενά.
+  var meres = stFill(d.meres || [], d.period);
+  var max = meres.reduce(function (m, r) { return Math.max(m, r.episkepseis); }, 0) || 1;
+
+  $('[data-st-days]').innerHTML = meres.length
+    ? meres.map(function (r) {
+      var h = Math.round((r.episkepseis / max) * 100);
+      return '<div class="stday" title="' + esc(r.date) + ': ' + r.episkepseis + ' επισκέψεις">'
+        + '<span class="stday-bar" style="height:' + Math.max(h, 2) + '%"></span>'
+        + '<span class="stday-t">' + esc(stMera(r.date)) + '</span>'
+        + '</div>';
+    }).join('')
+    : '<p class="muted">Καμία μέρα με κίνηση σε αυτή την περίοδο.</p>';
+
+  $('[data-st-pages]').innerHTML = stBars(stLabel(d.selides, stSelida), 'Καμία σελίδα ακόμα.');
+  $('[data-st-from]').innerHTML = stBars(d.apo, 'Άγνωστο από πού.');
+  $('[data-st-geo]').innerHTML = stBars(stLabel(d.xores, stXora), 'Άγνωστη χώρα.');
+  $('[data-st-dev]').innerHTML = stBars(stLabel(d.syskeves, stSyskevi), 'Άγνωστη συσκευή.');
+}
+
+// Τα ονόματα όπως τα λέει ο άνθρωπος, όχι όπως τα λέει το API. Ο
+// συντάκτης δεν διαβάζει «GR» και «desktop», και το σκέτο «/» δεν
+// λέει σε κανέναν ότι είναι η αρχική σελίδα.
+function stLabel(list, fn){
+  return (list || []).map(function (r) { return { name: fn(r.name), n: r.n }; });
+}
+
+function stSelida(path){
+  if (path === '/' || path === '') return 'Αρχική';
+  return path;
+}
+
+var SYSKEVES = { desktop: 'Υπολογιστής', mobile: 'Κινητό', tablet: 'Τάμπλετ' };
+function stSyskevi(s){ return SYSKEVES[s] || s || 'Άγνωστη'; }
+
+// Τα ονόματα χωρών τα ξέρει ο ίδιος ο browser — δεν τα γράφουμε με το
+// χέρι, θα λείπει πάντα η επόμενη. Αν δεν τα υποστηρίζει, μένει ο
+// κωδικός, που είναι κατανοητός έτσι κι αλλιώς.
+var xoresNames;
+function stXora(code){
+  if (!code) return 'Άγνωστη';
+  try {
+    if (!xoresNames) xoresNames = new Intl.DisplayNames(['el'], { type: 'region' });
+    return xoresNames.of(code) || code;
+  } catch (err) {
+    return code;
+  }
+}
+
+// Οι μέρες που λείπουν, με μηδέν.
+function stFill(meres, period){
+  var poses = period === '24h' ? 1 : (period === '30d' ? 30 : 7);
+  if (poses === 1) return meres;
+
+  var vres = {};
+  meres.forEach(function (r) { if (r.date) vres[r.date] = r; });
+
+  var out = [];
+  for (var i = poses - 1; i >= 0; i--) {
+    var d = new Date(Date.now() - i * 864e5).toISOString().slice(0, 10);
+    out.push(vres[d] || { date: d, provoles: 0, episkepseis: 0 });
+  }
+  return out;
+}
+
+function stMera(iso){
+  var d = new Date(iso);
+  if (isNaN(d)) return iso || '';
+  return d.toLocaleDateString('el-GR', { day: 'numeric', month: 'short' });
+}
+
+// ---------------------------------------------------------------------
 // Σύνδεση
 // ---------------------------------------------------------------------
 
@@ -5580,8 +5720,21 @@ function wire(){
       // σκάει μόλις ανοίξει η σελίδα, σε όποια καρτέλα κι αν πήγαινε
       // ο συντάκτης, είναι ενοχλητική.
       if (name === 'arthra') draftOffer();
+      // Οι μετρήσεις κατεβαίνουν την πρώτη φορά που ανοίγει η καρτέλα.
+      if (name === 'metriseis' && !st.loaded) stLoad();
     });
   });
+
+  // Οι περίοδοι και η ανανέωση των μετρήσεων.
+  $('[data-st-period]').addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    $$('[data-st-period] .chip').forEach(function (c) { c.classList.toggle('is-on', c === chip); });
+    st.period = chip.dataset.stp;
+    stLoad();
+  });
+
+  $('[data-st-reload]').addEventListener('click', stLoad);
 
   // Επιλογή — ένας listener για όλη τη λίστα, όχι ένας ανά κάρτα.
   $('[data-picks]').addEventListener('click', function (e) {
