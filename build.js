@@ -2148,7 +2148,12 @@ ${twin ? '          <span class="strip-note">Η θέση σου κρατιέτα
         ${cats[0] ? `<p class="card-label">${esc(cats[0])}</p>` : ''}
         <h1 class="episode-title">${title}</h1>
         <p class="episode-meta">${meta}</p>
-${twin && twin.summary ? `        <p class="episode-summary">${esc(twin.summary)}</p>` : ''}
+${/* ΜΕΣΑ από το summaryHtml, ποτέ ωμό. Με σκέτο esc() έφταναν εδώ οι
+     hashtags και όλοι οι σύνδεσμοι Apple/Spotify/YouTube/facebook/
+     twitter/instagram/TikTok της ουράς του Buzzsprout — και μάλιστα
+     σαν ένα κατεβατό, γιατί χάνονταν και οι παράγραφοι. Η σελίδα
+     επεισοδίου το έκανε σωστά από την αρχή· η σελίδα βίντεο όχι. */ ''}
+${twin && twin.summary ? summaryHtml(twin.summary) : ''}
 
         <p class="episode-links">
           <a href="${v.url}" target="_blank" rel="noopener">Άνοιγμα στο YouTube ↗</a>
@@ -2198,7 +2203,9 @@ ${showBannerBox(v.show, 1)}
         '@id': `${absUrl(videoUrl(v))}#video`,
         url: absUrl(videoUrl(v)),
         name: ldText(v.title),
-        description: ldText(twin && twin.summary ? twin.summary : v.title, 300),
+        // stripBoilerplate και εδώ: χωρίς αυτό η Google διάβαζε
+        // «🎙️(12/11/2026) Τα podcasts του Newshub.gr …» ως περιγραφή.
+        description: ldText(twin && twin.summary ? stripBoilerplate(twin.summary) : v.title, 300),
         uploadDate: ldDate(v.date),
         thumbnailUrl: absAsset(v.image),
         embedUrl: v.embed || '',
@@ -6436,7 +6443,7 @@ ${showBannerBox(show, 1)}
         '@id': `${absUrl(episodeUrl(ep))}#episode`,
         url: absUrl(episodeUrl(ep)),
         name: ldText(ep.headline),
-        description: ldText(ep.summary, 300),
+        description: ldText(stripBoilerplate(ep.summary), 300),
         datePublished: ldDate(ep.date),
         image: absAsset(ep.image),
         inLanguage: 'el',
