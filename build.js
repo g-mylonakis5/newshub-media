@@ -2041,6 +2041,11 @@ function loadEpisodes(){
     if (fix.image) ep.image = String(fix.image);
   }
 
+  // Ποιος μιλάει. ΜΕΤΑ τις διορθώσεις του συντάκτη, γιατί διαβάζει τον
+  // διορθωμένο τίτλο, και πάνω σε ΟΛΗ τη λίστα μαζί: το λεξικό και η
+  // ένωση των γραφών χρειάζονται να ξέρουν τι βγήκε στα άλλα επεισόδια.
+  valeProsopa(list);
+
   for (const ep of list) {
     const when = airDate(ep);
     if (when === ep.date) continue;
@@ -4888,6 +4893,269 @@ ${rows}
 }
 
 
+// ---------------------------------------------------------------------
+// ΠΟΙΟΣ ΜΙΛΑΕΙ — τα πρόσωπα βγαίνουν από τον τίτλο
+// ---------------------------------------------------------------------
+//
+// Ο αρχικός κανόνας ήταν ένας: «Όνομα Επώνυμο: θέμα», 2-4 λέξεις πριν
+// την άνω τελεία. Καθαρός, και πιάνει τα 897 από τα 1.087. Τα υπόλοιπα
+// 190 τα έχανε όλα, και πάντα για τυπογραφικό λόγο:
+//
+//   76  «Ο Χ Ψ στο newshub.gr: …»        πέντε λέξεις, κόβεται
+//   38  χωρίς άνω τελεία                 «Η Μαρία Χ μιλά για…»
+//   10  μόνο επώνυμο ή αρχικό            «Ατσαλάκης:», «Λ.Καμπουρίδης:»
+//    6  κόμμα αντί για άνω τελεία        «Γ. Καραμπελιάς, «25 μαθήματα»…»
+//    6  δύο πρόσωπα ή εκπομπή μπροστά    «Α. Συρίγος - Γ. Καραμπελιάς:»
+//
+// Το αποτέλεσμα φαινόταν στη σελίδα του ανθρώπου: ο Καραμπελιάς έβγαζε
+// 26 συζητήσεις ενώ είχε 44, και ολόκληρη η σειρά «25 μαθήματα
+// ελληνικής ιστορίας» έλειπε — επειδή ο τίτλος της βάζει κόμμα.
+//
+// Τρία περάσματα, με αυτή τη σειρά:
+//
+//   1. ο τίτλος, με καθαρισμό πριν το μέτρημα των λέξεων
+//   2. λεξικό: ονόματα που ξέρουμε από ΑΛΛΑ επεισόδια, μέσα στον τίτλο
+//   3. ένωση γραφών και αρχικών: «Γ. Καραμπελιάς» -> «Γιώργος Καραμπελιάς»
+//
+// Το 3ο αγγίζει ΤΑΥΤΟΤΗΤΕΣ, οπότε ενώνει μόνο όταν η απάντηση είναι
+// μοναδική, και σταματά σε ό,τι έχει απορριφθεί στο not_aliases του
+// data/people-aliases.json. Η σελίδα «Πρόσωπα» του διαχειριστικού
+// δείχνει κάθε ένωση ως «γραφή», με × δίπλα της.
+//
+// ΤΙΠΟΤΑ από εδώ δεν αγγίζει το ep.headline: από εκείνο βγαίνει η
+// διεύθυνση της σελίδας, και 1.087 μοιρασμένοι σύνδεσμοι δεν αλλάζουν
+// για να φανεί ένα όνομα πιο όμορφα.
+
+// Οι λέξεις που τελειώνουν το όνομα και αρχίζουν τη φράση.
+//
+// ΟΧΙ \b στο τέλος: στη JavaScript ορίζεται πάνω στο [A-Za-z0-9_], άρα
+// δίπλα σε ελληνικό γράμμα δεν βρίσκει ποτέ όριο λέξης και ο κανόνας
+// δεν πιάνει τίποτα — το ίδιο λάθος με το looksLikePerson παρακάτω.
+const ONOMA_STOP = /\s+(για|μιλ[άαεί]\S*|αναλύει|εξηγεί|σχολιάζει|απαντά|περιγράφει|αποκαλύπτει|προειδοποιεί|αφιέρωμα|ρίχνει|ανοίγει|στο|στον|στη|στην|σε)(?=\s|$|[,:«"'])/i;
+
+// Αρχικό και επώνυμο, με ή χωρίς κενό: «Δ.Δερβής-Μπουρνιάς», «Τρ.Καρατράντος».
+const ARXIKO = /^[Α-ΩΆΈΉΊΌΎΏA-Z][α-ωά-ώa-z]?\.\s*[Α-ΩΆΈΉΊΌΎΏA-Z][α-ωά-ώa-z]+(-[Α-ΩΆΈΉΊΌΎΏA-Z][α-ωά-ώa-z]+)?$/;
+
+// Κεφαλαίο αρχικό και μετά πεζά — μικρό όνομα, όχι ΟΛΟΚΕΦΑΛΑΙΑ εκπομπή.
+const KEFALAIO = /^[Α-ΩΆΈΉΊΌΎΏA-Z][α-ωά-ώa-z]/;
+
+// Ό,τι κολλάει η σύνταξη μπροστά από το όνομα και δεν είναι όνομα.
+function tidyGuest(s){
+  return cleanGuestName(String(s == null ? '' : s)
+    .replace(/^\s*(μόνο|αποκλειστικά)\s+στο\s+new(s)?h(s)?ub\.?\s*(gr)?\s*[-–:]?\s*/i, '')
+    .replace(/^\s*θέμα\s+new(s)?h(s)?ub\.?\s*(gr)?\s*[-–:]?\s*/i, '')
+    .trim())
+    // «Γ.Καραμπελιάς» και «Γ. Καραμπελιάς» είναι η ίδια γραφή. Χωρίς το
+    // κενό γίνονταν δύο σελίδες, και καμία από τις δύο δεν ενωνόταν με
+    // το πλήρες όνομα.
+    .replace(/^([Α-ΩΆΈΉΊΌΎΏA-Z][α-ωά-ώa-z]?\.)\s*(?=[Α-ΩΆΈΉΊΌΎΏA-Z])/, '$1 ');
+}
+
+// Ένα όνομα, ή κενό. Δέχεται και τη μορφή «αρχικό + επώνυμο», που ο
+// looksLikePerson τη δέχεται κι αυτός, αλλά όχι όταν λείπει το κενό.
+function enaOnoma(s){
+  const n = tidyGuest(s);
+  if (!n) return '';
+  if (looksLikePerson(n)) return n;
+  if (ARXIKO.test(n)) return n;
+  return '';
+}
+
+// Τα ονόματα που κρύβονται ΜΠΡΟΣΤΑ από την άνω τελεία (ή το κόμμα).
+function onomataApoProthema(prefix){
+  let p = tidyGuest(prefix);
+  if (!p) return [];
+
+  // «Όνομα Επώνυμο για το κάτι» -> κόψε στη λέξη που αρχίζει τη φράση.
+  const cut = p.search(ONOMA_STOP);
+  if (cut > 0) p = p.slice(0, cut).trim();
+
+  // Δύο πρόσωπα — «Α - Β», «Α και Β». Κρατάμε ό,τι είναι άνθρωπος:
+  // αριστερά κάθεται συχνά το όνομα της εκπομπής («ΘΕΜΑ NEWSHUB.GR -»,
+  // «Ιστορίες του Ηρακλείου -»), που δεν περνάει τον έλεγχο.
+  const parts = p.split(/\s+(?:[-–]|και)\s+/).map(enaOnoma).filter(Boolean);
+  if (parts.length) return [...new Set(parts)];
+
+  const one = enaOnoma(p);
+  return one ? [one] : [];
+}
+
+// Πέρασμα 1: όσα βγαίνουν από τον ίδιο τον τίτλο.
+function onomataApoTitlo(title){
+  const t = decode(title);
+
+  const m = t.match(/^([^:]{3,80}):\s*(.+)$/);
+  if (m) {
+    const got = onomataApoProthema(m[1]);
+    if (got.length) return got;
+  }
+
+  // «Γιώργος Καραμπελιάς, «25 μαθήματα ελληνικής ιστορίας» Μέρος 8ο: …»
+  // Εδώ η άνω τελεία έρχεται πολύ αργότερα, μέσα στον τίτλο της σειράς.
+  const c = t.match(/^([^,«»:]{3,45}),?\s*[«"]/);
+  if (c) {
+    const got = onomataApoProthema(c[1]);
+    if (got.length) return got;
+  }
+
+  // «Ελένη Αϊβαλιώτη - Θεραπεία ζεύγους - Γιατί οι σχέσεις δυσκολεύουν»:
+  // παύλα στη θέση της άνω τελείας. Ο έλεγχος looksLikePerson κρατάει
+  // έξω τα «Πνευμονική ίνωση - Οι νέες θεραπείες»: δεύτερη λέξη πεζή.
+  const d = t.match(/^([^-–:]{3,45})\s[-–]\s/);
+  if (d) {
+    const got = onomataApoProthema(d[1]);
+    if (got.length) return got;
+  }
+
+  // Το όνομα ΜΕΣΑ στη φράση, μπροστά από ρήμα ομιλίας:
+  // «80 χρόνια μετά τον «Ζορμπά»: Η Μαριλένα Μηλαθιανάκη μιλά στο…»
+  // Δύο λέξεις, κεφαλαίο και μετά πεζά, και αμέσως μετά το ρήμα — ένα
+  // «Η Ελλάδα αναλύει» δεν υπάρχει, αλλά αν προκύψει, σβήνεται από την
+  // καρτέλα «Πρόσωπα» όπως κάθε άλλο σκουπίδι.
+  const v = t.match(/(?:^|[\s«"(])(?:[ΟΗ]\s+)?([Α-ΩΆΈΉΊΌΎΏ][α-ωά-ώ]{2,}\s+[Α-ΩΆΈΉΊΌΎΏ][α-ωά-ώ]{3,})\s+(?:μιλ[άαεί]\S*|αναλύει|εξηγεί|σχολιάζει|απαντά|περιγράφει|αποκαλύπτει|συμμετέχει|ανοίγει)(?=\s|$)/);
+  if (v) {
+    const one = enaOnoma(v[1]);
+    if (one) return [one];
+  }
+
+  return [];
+}
+
+function onomaKleidi(s){
+  return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
+// ---- το λεξικό και η ένωση ----
+//
+// Γίνονται ΜΙΑ φορά, πάνω σε όλα τα επεισόδια μαζί: και τα δύο
+// χρειάζονται να ξέρουν τι βγήκε αλλού. Το αποτέλεσμα κάθεται στο
+// ep.guests, και το ep.guestRaw κρατάει τη γραφή ΠΡΙΝ την ένωση —
+// από εκείνη βγαίνουν οι «γραφές» στην καρτέλα «Πρόσωπα».
+function valeProsopa(list){
+  const vrethika = new Map();
+
+  for (const ep of list) {
+    const fix = pairOf(ep) || {};
+    if (fix.noguest) { vrethika.set(ep, []); continue; }
+    if (fix.guest) { vrethika.set(ep, [String(fix.guest).trim()]); continue; }
+
+    let names = onomataApoTitlo(ep.title);
+    // Δίχτυ: ό,τι είχε βγάλει το feed.js και δεν το ξαναβρήκαμε εδώ.
+    if (!names.length && ep.guest) {
+      const n = enaOnoma(decode(ep.guest));
+      if (n) names = [n];
+    }
+    vrethika.set(ep, names);
+  }
+
+  // ---- πέρασμα 2: λεξικό ----
+  const gnosta = new Map();     // κλειδί ονόματος -> όνομα
+  const epitheta = new Map();   // κλειδί επωνύμου -> σύνολο ονομάτων
+
+  for (const names of vrethika.values()) {
+    for (const n of names) {
+      gnosta.set(onomaKleidi(n), n);
+      const w = n.split(/\s+/);
+      const last = w[w.length - 1];
+      if (last.length < 4) continue;
+      const k = onomaKleidi(last);
+      if (!epitheta.has(k)) epitheta.set(k, new Set());
+      epitheta.get(k).add(n);
+    }
+  }
+
+  function apoLexiko(title){
+    const words = decode(title).split(/[\s,.:;!?«»"()\-–]+/).filter(Boolean);
+
+    // Ολόκληρο όνομα που ξέρουμε ήδη.
+    for (let i = 0; i < words.length - 1; i++) {
+      const hit = gnosta.get(onomaKleidi(words[i] + ' ' + words[i + 1]));
+      if (hit) return [hit];
+    }
+
+    // Γνωστό ΕΠΩΝΥΜΟ μέσα στον τίτλο. Αν μπροστά του κάθεται μικρό
+    // όνομα, κρατάμε αυτό που γράφει ο τίτλος και ΟΧΙ το όνομα του
+    // λεξικού: ο «Βασίλης Λαμπρινός» δεν είναι ο «Φραγκίσκος Λαμπρινός».
+    for (let i = 0; i < words.length; i++) {
+      const hit = epitheta.get(onomaKleidi(words[i]));
+      if (!hit) continue;
+      const prev = words[i - 1] || '';
+      if (prev.length >= 3 && KEFALAIO.test(prev) && !ONOMA_STOP.test(' ' + prev)) {
+        return [prev + ' ' + words[i]];
+      }
+      if (hit.size === 1) return [[...hit][0]];
+    }
+
+    return [];
+  }
+
+  for (const [ep, names] of vrethika) {
+    if (names.length) continue;
+    const fix = pairOf(ep) || {};
+    if (fix.noguest) continue;
+    vrethika.set(ep, apoLexiko(ep.title));
+  }
+
+  // ---- πέρασμα 3α: μία γραφή ανά όνομα ----
+  // «Αγγελος Συρίγος» και «Άγγελος Συρίγος» είναι ο ίδιος άνθρωπος:
+  // κερδίζει η γραφή που εμφανίζεται πιο συχνά.
+  const grafes = new Map();
+  for (const names of vrethika.values()) {
+    for (const n of names) {
+      const k = onomaKleidi(n);
+      if (!grafes.has(k)) grafes.set(k, new Map());
+      const m = grafes.get(k);
+      m.set(n, (m.get(n) || 0) + 1);
+    }
+  }
+  const kiria = new Map();
+  for (const [k, m] of grafes) {
+    kiria.set(k, [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'el'))[0][0]);
+  }
+
+  // ---- πέρασμα 3β: αρχικό -> πλήρες όνομα ----
+  // Μόνο όταν η απάντηση είναι ΜΟΝΑΔΙΚΗ: ίδιο επώνυμο, ίδιο αρχικό,
+  // ένα μόνο πλήρες όνομα. Αλλιώς δύο αδέρφια γίνονται ένας άνθρωπος.
+  const plires = new Map();
+  for (const names of vrethika.values()) {
+    for (const raw of names) {
+      const n = kiria.get(onomaKleidi(raw)) || raw;
+      const w = n.split(/\s+/);
+      if (w.length < 2) continue;
+      if (/\.$/.test(w[0]) || w[0].length <= 2) continue;   // αρχικό, όχι όνομα
+      const k = onomaKleidi(w[w.length - 1]);
+      if (!plires.has(k)) plires.set(k, new Set());
+      plires.get(k).add(n);
+    }
+  }
+
+  const veto = new Set(aliasNos());
+  function enose(name){
+    const w = name.split(/\s+/);
+    if (w.length < 2) return name;
+    if (!/\.$/.test(w[0]) && w[0].length > 2) return name;   // ήδη πλήρες
+
+    const hit = plires.get(onomaKleidi(w[w.length - 1]));
+    if (!hit || hit.size !== 1) return name;
+
+    const full = [...hit][0];
+    // Το αρχικό πρέπει να ταιριάζει: «Α. Συρίγος» δεν γίνεται
+    // «Βασίλης Συρίγος».
+    if (onomaKleidi(full[0]) !== onomaKleidi(name[0])) return name;
+    // Και ο άνθρωπος έχει τον τελευταίο λόγο.
+    if (veto.has(`${guestKey(full)}|${guestKey(name)}`)) return name;
+    if (veto.has(`${guestKey(name)}|${guestKey(full)}`)) return name;
+    return full;
+  }
+
+  for (const [ep, names] of vrethika) {
+    const mia = names.map((n) => kiria.get(onomaKleidi(n)) || n);
+    ep.guestRaw = mia[0] || '';
+    ep.guests = [...new Set(mia.map(enose))];
+    ep.guest = ep.guests[0] || '';
+  }
+}
+
 // Πολλοί τίτλοι γράφονται «Όνομα Επώνυμο στο newshub.gr: ...», οπότε ο
 // διαχωρισμός παίρνει και τον ιστότοπο για μέρος του ονόματος. 64 ονόματα
 // το έχουν, και 26 από αυτά είναι άνθρωποι που υπάρχουν ήδη και καθαροί —
@@ -5053,14 +5321,34 @@ function guestOf(ep){
     return aliases().map[guestKey(typed)] || typed;
   }
 
-  if (!ep.guest) return '';
-  const { name } = splitTitle(cleanGuestName(decode(ep.guest)));
-  if (!looksLikePerson(name) || notGuest(name)) return '';
-  const canonical = aliases().map[guestKey(name)] || name;
-  // Το σβήσιμο γίνεται και στο κανονικό όνομα: ο συντάκτης σβήνει αυτό
-  // που βλέπει στην καρτέλα, κι εκείνο είναι το ενωμένο.
-  if (notGuest(canonical)) return '';
-  return canonical;
+  return guestsOf(ep)[0] || '';
+}
+
+// ΟΛΑ τα πρόσωπα ενός επεισοδίου. Σχεδόν πάντα ένα — αλλά «Α. Συρίγος -
+// Γ. Καραμπελιάς» είναι δύο άνθρωποι, και το επεισόδιο ανήκει και στους
+// δύο. Μέχρι τώρα ο δεύτερος δεν υπήρχε πουθενά.
+//
+// Η κάρτα και το πρωτοσέλιδο δείχνουν τον πρώτο (guestOf): δεν χωράνε
+// δύο ονόματα σε μία γραμμή. Οι σελίδες προσώπων τα θέλουν και τα δύο.
+function guestsOf(ep){
+  const fix = pairOf(ep);
+  if (fix && fix.noguest) return [];
+  if (fix && fix.guest) {
+    const typed = String(fix.guest).trim();
+    return [aliases().map[guestKey(typed)] || typed];
+  }
+
+  const out = [];
+  for (const raw of (ep.guests && ep.guests.length ? ep.guests : [ep.guest].filter(Boolean))) {
+    const { name } = splitTitle(cleanGuestName(decode(raw)));
+    if (!name || !looksLikePerson(name) || notGuest(name)) continue;
+    const canonical = aliases().map[guestKey(name)] || name;
+    // Το σβήσιμο γίνεται και στο κανονικό όνομα: ο συντάκτης σβήνει
+    // αυτό που βλέπει στην καρτέλα, κι εκείνο είναι το ενωμένο.
+    if (notGuest(canonical)) continue;
+    if (!out.some((n) => guestKey(n) === guestKey(canonical))) out.push(canonical);
+  }
+  return out;
 }
 
 // Η ιδιότητα ενός προσώπου («καθηγητής διεθνών σχέσεων»). Κενό για
@@ -5116,13 +5404,15 @@ function groupByGuest(episodes){
     // ΟΧΙ «if (!ep.guest) continue» εδώ: ένα επεισόδιο χωρίς άνω τελεία
     // δεν έχει ep.guest, αλλά μπορεί να έχει καλεσμένο γραμμένο με το
     // χέρι στο data/pairs.json. Μόνο το guestOf τα ξέρει και τα δύο.
-    const name = guestOf(ep);
-    const key = guestKey(name);
-    if (!key) continue;
-    if(!groups[key]) groups[key] = {names: [], episodes:[]};
-    groups[key].names.push(name);
-    groups[key].episodes.push(ep);
-
+    // ΟΛΑ τα πρόσωπα, όχι μόνο το πρώτο: ένα επεισόδιο με δύο
+    // καλεσμένους ανήκει και στις δύο σελίδες.
+    for (const name of guestsOf(ep)) {
+      const key = guestKey(name);
+      if (!key) continue;
+      if(!groups[key]) groups[key] = {names: [], episodes:[]};
+      groups[key].names.push(name);
+      groups[key].episodes.push(ep);
+    }
   }
   return groups;
 }
@@ -5173,6 +5463,7 @@ function peopleForAdmin(episodes){
   // Πρώτα η ωμή απογραφή: κάθε γραφή ονόματος όπως βγαίνει από τον
   // τίτλο, ΠΡΙΝ την ένωση. Χωρίς αυτό δεν φαίνεται τι ενώθηκε με τι.
   const raw = {};
+  const katelixe = {};   // γραφή -> ο άνθρωπος στον οποίο ενώθηκε
   for (const ep of episodes) {
     const fix = pairOf(ep);
     if (fix && fix.noguest) continue;
@@ -5183,18 +5474,27 @@ function peopleForAdmin(episodes){
       // κρίνει ΜΑΝΤΕΜΑ από τίτλο — εδώ κρίνει άνθρωπος.
       name = String(fix.guest).trim();
     } else {
-      if (!ep.guest) continue;
-      name = splitTitle(cleanGuestName(decode(ep.guest))).name;
+      // Η γραφή ΠΡΙΝ την αυτόματη ένωση: «Γ. Καραμπελιάς», όχι
+      // «Γιώργος Καραμπελιάς». Αλλιώς η καρτέλα δεν θα έδειχνε ποτέ τι
+      // ενώθηκε με τι, και το × δίπλα στη γραφή δεν θα είχε τι να λύσει.
+      name = ep.guestRaw || ep.guest;
+      if (!name) continue;
+      name = splitTitle(cleanGuestName(decode(name))).name;
       if (!name || !looksLikePerson(name)) continue;
     }
     raw[name] = (raw[name] || 0) + 1;
+
+    // Πού κατέληξε αυτή η γραφή μετά την ένωση. Το κρατάμε από το ίδιο
+    // το επεισόδιο: η αυτόματη ένωση δεν περνάει από το aliases().map.
+    const final = guestsOf(ep)[0];
+    if (final) katelixe[name] = final;
   }
 
   // Ποιες γραφές κατέληξαν σε ποιον άνθρωπο, και ποιες σβήστηκαν.
   const writings = {};   // κλειδί ανθρώπου -> [{ name, n }]
   const rejected = [];
   for (const [name, n] of Object.entries(raw)) {
-    const canonical = aliases().map[guestKey(name)] || name;
+    const canonical = katelixe[name] || aliases().map[guestKey(name)] || name;
     if (notGuest(name) || notGuest(canonical)) {
       rejected.push({ name, n });
       continue;
