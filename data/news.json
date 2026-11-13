@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/xerasia2.jpg",
     "summary": "Το καμπανάκι του κινδύνου για τις επιπτώσεις της κλιματικής αλλαγής χτυπά για άλλη μια φορά δυνατά μέσα από τα κρίσιμα στοιχεία που αποκαλύπτει η κλιματική...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "moires-agria-epithesi-skyloy-se-andra",
+    "title": "Μοίρες: Άγρια επίθεση σκύλου σε άνδρα",
+    "url": "https://www.newshub.gr/el/kriti/moires-agria-epithesi-skyloy-se-andra",
+    "date": "2026-11-13T12:20:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/epithese-skylou.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/epithese-skylou.jpg",
+    "summary": "Τρόμος και αναστάτωση επικράτησε νωρίς το μεσημέρι της Παρασκευής στις Μοίρες, όταν σκύλος που κυκλοφορούσε ελεύθερος, πιθανόν αδέσποτος, επιτέθηκε και δάγκω...",
+    "author": null,
     "featured": true
   },
   {
@@ -7002,17 +7014,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/5230351128014423-nosokomeio-rethymnou-rete.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/5230351128014423-nosokomeio-rethymnou-rete.jpg",
     "summary": "Νέο περιστατικό μέθης ανηλίκου καταγράφηκε τα ξημερώματα της Κυριακής στο Ρέθυμνο, με έναν 16χρονο να μεταφέρεται στο νοσοκομείο με συμπτώματα οξείας μέθης.&...",
-    "featured": false
-  },
-  {
-    "id": "kalodio-paremvasi-ipa-ligo-prin-xekinisoyn-oi-ereynes-se-tetoia-erga-den-dikaiologeitai-enstasi-i-antirrisi-apo-kamia-pleyra",
-    "title": "Καλώδιο: Παρέμβαση ΗΠΑ λίγο πριν ξεκινήσουν οι έρευνες-«Σε τέτοια έργα δεν δικαιολογείται ένσταση ή αντίρρηση από καμία πλευρά»",
-    "url": "https://www.newshub.gr/el/geopolitiki/kalodio-paremvasi-ipa-ligo-prin-xekinisoyn-oi-ereynes-se-tetoia-erga-den-dikaiologeitai-enstasi-i-antirrisi-apo-kamia-pleyra",
-    "date": "2026-11-09T07:26:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/abeille-marengo-mak.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/abeille-marengo-mak.jpg",
-    "summary": "Μετά από ένα έντονο διπλωματικό παρασκήνιο, προκειμένου να επιβεβαιωθεί η όποια συνεννόηση είχε επιτευχθεί το προηγούμενο διάστημα με την παρέμβαση της Γαλλί...",
     "featured": false
   },
   {
