@@ -1,5 +1,21 @@
 [
   {
+    "id": "o-vasilias-einai-gymnos",
+    "title": "Ο βασιλιάς είναι γυμνός",
+    "url": "https://www.newshub.gr/el/apopseis/o-vasilias-einai-gymnos",
+    "date": "2026-11-14T05:43:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/2026-11-11t171249z_711019293_.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/2026-11-11t171249z_711019293_.jpg",
+    "summary": "H ήττα Τραμπ και το &ldquo;μπλε τσουνάμι}, εξέλιξη για την οποία υπήρχαν πολλές ενδείξεις τον τελευταίο καιρό, θυμίζει το παραμύθι με τα ρούχα του βασιλιά: τ...",
+    "author": {
+      "name": "Γιώργος Ρακκάς",
+      "url": "https://www.newshub.gr/el/giorgos-rakkas",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/rakas-1.jpg"
+    },
+    "featured": false
+  },
+  {
     "id": "ergasies-anypsosis-freation-stin-odo-orakion-sti-nea-alikarnasso",
     "title": "Εργασίες ανύψωσης φρεατίων στην οδό Ορακίων στη Νέα Αλικαρνασσό",
     "url": "https://www.newshub.gr/el/kriti/ergasies-anypsosis-freation-stin-odo-orakion-sti-nea-alikarnasso",
@@ -7089,17 +7105,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/xristodoylidis-erxiourman-mkt.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/xristodoylidis-erxiourman-mkt.jpg",
     "summary": "Με συμφωνία για δύο νέα οδοφράγματα και σειρά μέτρων οικοδόμησης εμπιστοσύνης ολοκληρώθηκε η τρίωρη συνάντηση του Προέδρου της Κύπρου, Νίκου Χριστοδουλίδη, μ...",
-    "featured": false
-  },
-  {
-    "id": "ipa-se-lockdown-o-leykos-oikos-aytokinito-karfothike-stin-perifraxi-vinteo",
-    "title": "ΗΠΑ: Σε Lockdown ο Λευκός Οίκος – Αυτοκίνητο «καρφώθηκε» στην περίφραξη (βίντεο)",
-    "url": "https://www.newshub.gr/el/geopolitiki/ipa-se-lockdown-o-leykos-oikos-aytokinito-karfothike-stin-perifraxi-vinteo",
-    "date": "2026-11-09T15:49:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/leukos-oikos1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/leukos-oikos1.jpg",
-    "summary": "Συναγερμός σήμανε το απόγευμα της Δευτέρας στον Λευκό Οίκο, καθώς ένα αυτοκίνητο καρφώθηκε στην περίφραξη του κτιρίου.\r\n\r\nΣύμφωνα με τα αμερικανικά μέσα ενημ...",
     "featured": false
   },
   {
