@@ -70,6 +70,13 @@ jobs:
           key: public-
           restore-keys: public-
 
+      # Ίδιος λόγος με το anevasma.yml: η μνήμη σκεπάζει το styles.css
+      # και τον player.js, που είναι πηγαία και όχι παραγόμενα. Εδώ δεν
+      # ανεβαίνει τίποτα, αλλά ο έλεγχος θα μετρούσε εικόνες πάνω σε
+      # παλιό CSS — δηλαδή άλλο site από αυτό που θα βγει.
+      - name: Τα πηγαία του public/ πίσω στην έκδοση του git
+        run: git checkout -- public/
+
       - name: Χτίσιμο
         env:
           ADMIN_PUBLIC: '1'
