@@ -67,17 +67,7 @@
   "featuredUntil": "2026-11-20",
   "featuredPrev": [],
   "secondary": [],
-  "latest": [
-    "video/9dkJTdFlqJo-panagiotis-tsakonas-o-tramp-echei-perithorio-dyo-mines.html",
-    "episode/20117014-aplisto-kratos-i-tourkia-poies-oi-pithanes-synepeies.html",
-    "episode/20116912-i-kyvernisi-leei-psemata-gia-to-kalodio-na-paremvei.html",
-    "episode/20111437-adokimi-i-methodevsi-gia-to-kalodio-makari-na-mi-ti.html",
-    "episode/20110711-meta-ti-meta-epochi-ti-poio-einai-to-epomeno-stadio.html",
-    "episode/20108211-i-tourkia-epivallei-parousia-se-aigaio-kai-na-mesogeio.html",
-    "episode/20107917-o-rolos-tis-fysikotherapeias-stin-psychiki-ygeia-otan.html",
-    "episode/20092054-to-ekriktiko-migma-katachreomenis-amerikanikis.html",
-    "episode/20088959-to-poker-tis-mesis-anatolis-kai-oi-assoi-ton-chouthi.html"
-  ],
+  "latest": [],
   "mustRead": [
     "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-paraskeyis-146",
     "https://www.newshub.gr/el/ellada/marc-stis-14-7-monades-to-provadisma-tis-nd-i-elas-3-3-monades-mprosta-apo-to-pasok",
@@ -113,17 +103,6 @@
       "https://www.newshub.gr/el/ellada/marc-stis-14-7-monades-to-provadisma-tis-nd-i-elas-3-3-monades-mprosta-apo-to-pasok": "2026-11-12T22:39:24.539Z",
       "https://www.newshub.gr/el/kriti/kriti-oi-ellinikes-perifereies-enonoyn-ti-foni-toys-gia-ta-proionta-proeleysis-kai-ti-nea-kgp-2028-2034": "2026-11-12T13:37:05.799Z",
       "https://www.newshub.gr/el/kriti/epicheirisi-aposymforisi-gia-tis-fylakes-kai-stin-kriti-i-eikona-sta-sofronistika-katastimata-toy-nisioy": "2026-11-12T13:37:05.799Z"
-    },
-    "latest": {
-      "video/9dkJTdFlqJo-panagiotis-tsakonas-o-tramp-echei-perithorio-dyo-mines.html": "2026-11-13T10:25:14.140Z",
-      "episode/20117014-aplisto-kratos-i-tourkia-poies-oi-pithanes-synepeies.html": "2026-11-12T22:52:21.861Z",
-      "episode/20116912-i-kyvernisi-leei-psemata-gia-to-kalodio-na-paremvei.html": "2026-11-12T22:52:21.861Z",
-      "episode/20111437-adokimi-i-methodevsi-gia-to-kalodio-makari-na-mi-ti.html": "2026-11-12T22:52:21.861Z",
-      "episode/20110711-meta-ti-meta-epochi-ti-poio-einai-to-epomeno-stadio.html": "2026-11-12T22:52:21.861Z",
-      "episode/20108211-i-tourkia-epivallei-parousia-se-aigaio-kai-na-mesogeio.html": "2026-11-12T22:52:21.861Z",
-      "episode/20107917-o-rolos-tis-fysikotherapeias-stin-psychiki-ygeia-otan.html": "2026-11-12T22:52:21.861Z",
-      "episode/20092054-to-ekriktiko-migma-katachreomenis-amerikanikis.html": "2026-11-13T10:25:14.140Z",
-      "episode/20088959-to-poker-tis-mesis-anatolis-kai-oi-assoi-ton-chouthi.html": "2026-11-13T10:25:14.140Z"
     },
     "opinions": {
       "https://www.newshub.gr/el/apopseis/pos-i-ellada-mporei-na-akyrosei-ti-galazia-patrida": "2026-11-12T22:39:55.505Z",
