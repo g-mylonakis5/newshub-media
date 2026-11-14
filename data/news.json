@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/analyseis-25.jpg",
     "summary": "Ο Θανάσης Δαβαλάς, διδάσκων και ερευνητής στο Τμήμα Μηχανικών Πληροφοριακών & Επικοινωνιακών Συστημάτων της Πολυτεχνικής Σχολής του Πανεπιστημίου Αι...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "irakleio-anoixe-to-programma-gia-tin-oikonomiki-enischysi-idioton-ola-ta-enimerotika-rantevoy",
@@ -37,7 +37,7 @@
       "url": "https://www.newshub.gr/el/andreas-kritsotakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "arnolnt-svartsenegker-oi-skines-drasis-den-einai-pia-toso-eykoles-oso-itan-prin-apo-40-chronia",
