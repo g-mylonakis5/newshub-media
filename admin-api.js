@@ -146,6 +146,26 @@ function validate(name, data){
         }
       }
     }
+
+    // Ό,τι βγήκε με το ✕: «λίστα» -> { κωδικός: πότε }. Η ημερομηνία
+    // είναι ο λόγος που υπάρχει το πεδίο — χωρίς αυτή το «όχι αυτό»
+    // θα κρατούσε για πάντα. Δες kryfa() στο build.js.
+    if (data.hidden != null) {
+      if (typeof data.hidden !== 'object' || Array.isArray(data.hidden)) {
+        return 'Το hidden πρέπει να είναι αντικείμενο «λίστα: κρυμμένα».';
+      }
+      for (const [lista, map] of Object.entries(data.hidden)) {
+        if (!map || typeof map !== 'object' || Array.isArray(map)) {
+          return `Τα κρυμμένα του «${lista}» πρέπει να είναι αντικείμενο «κωδικός: ημερομηνία».`;
+        }
+        for (const [ref, pote] of Object.entries(map)) {
+          if (!ref.trim()) return `Κρυμμένο χωρίς κωδικό στο «${lista}».`;
+          if (typeof pote !== 'string' || isNaN(Date.parse(pote))) {
+            return `Το κρυμμένο «${ref}» θέλει ημερομηνία σε κείμενο ISO.`;
+          }
+        }
+      }
+    }
   }
 
   if (name === 'photos') {
