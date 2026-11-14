@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-istoriko-rekor-gia-to-aerodromio-nikos-kazantzakis-espase-to-fragma-ton-10-ekat-epivaton",
+    "title": "Ηράκλειο: Ιστορικό ρεκόρ για το αεροδρόμιο «Νίκος Καζαντζάκης» – Έσπασε το φράγμα των 10 εκατ. επιβατών",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-istoriko-rekor-gia-to-aerodromio-nikos-kazantzakis-espase-to-fragma-ton-10-ekat-epivaton",
+    "date": "2026-11-14T12:54:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/aerodromio-erakleiou-me-ydatographema.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/aerodromio-erakleiou-me-ydatographema.jpg",
+    "summary": "Χρονιά-ορόσημο εξελίσσεται το 2026 για το αεροδρόμιο Ηρακλείου «Νίκος Καζαντζάκης», καθώς η επιβατική κίνηση ξεπέρασε ήδη από τα τέλη Οκτωβρίου τ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "voak-kykloforiakes-allages-logo-asfaltikon-ergasion-ti-na-gnorizoyn-oi-odigoi-pos-tha-ginetai-i-ektropi-ton-ochimaton",
     "title": "ΒΟΑΚ: Κυκλοφοριακές αλλαγές λόγω ασφαλτικών εργασιών  -Τι να γνωρίζουν οι οδηγοί πως θα γίνεται η εκτροπή των οχημάτων",
     "url": "https://www.newshub.gr/el/kriti/voak-kykloforiakes-allages-logo-asfaltikon-ergasion-ti-na-gnorizoyn-oi-odigoi-pos-tha-ginetai-i-ektropi-ton-ochimaton",
@@ -93,7 +105,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/chrema-ape.jpg",
     "summary": "Αφορολόγητο έως 20.000 ευρώ για τρίτεκνους και αγρότες, ετήσια ενίσχυση 400 ευρώ για συνταξιούχους και ευάλωτες ομάδες, αλλά και σημαντικές φοροελαφρύνσεις γ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "xekinise-prospatheia-syllogis-ypografon-gia-tis-epicheiriseis-poy-vionoyn-tin-katastrofi-se-keratokampo-kai-kastri",
@@ -7135,17 +7147,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/petrelaio_apothikeusi-1280x853.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/petrelaio_apothikeusi-1280x853.jpg",
     "summary": "Ο πόλεμος στο Ιράν έχει μειώσει τα παγκόσμια αποθέματα πετρελαίου στα χαμηλότερα επίπεδα των τελευταίων ετών. Τώρα βρίσκεται σε εξέλιξη ένας αγώνας δρόμου γι...",
-    "featured": false
-  },
-  {
-    "id": "i-gallia-katigorei-to-iran-gia-tin-kyvernoepithesi-sta-psygeia-ton-soyper-market",
-    "title": "Η Γαλλία κατηγορεί το Ιράν για την κυβερνοεπίθεση στα ψυγεία των σούπερ μάρκετ",
-    "url": "https://www.newshub.gr/el/kosmos/i-gallia-katigorei-to-iran-gia-tin-kyvernoepithesi-sta-psygeia-ton-soyper-market",
-    "date": "2026-11-09T20:40:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/supermarketfridge-xrm.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/supermarketfridge-xrm.jpg",
-    "summary": "Η Εισαγγελία του Παρισιού ανακοίνωσε αρχίζει δικαστική έρευνα με κύριο στόχο τον επικεφαλής της ιρανικής ομάδας Shahid Kaveh, για την οποία υποψιάζεται ότι β...",
     "featured": false
   },
   {
