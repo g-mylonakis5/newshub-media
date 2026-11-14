@@ -1,5 +1,17 @@
 [
   {
+    "id": "kriti-eos-kai-29-vathmoys-i-thermokrasia-simera-me-afrikaniki-skoni-ypsiles-sygkentroseis-chthes-sto-rethymno-allagi-toy-kairoy-tin-kyriaki",
+    "title": "Κρήτη: Έως και 29 βαθμούς η θερμοκρασία σήμερα με αφρικανική σκόνη - Υψηλές συγκεντρώσεις χθες στο Ρέθυμνο, αλλαγή του καιρού την Κυριακή",
+    "url": "https://www.newshub.gr/el/kriti/kriti-eos-kai-29-vathmoys-i-thermokrasia-simera-me-afrikaniki-skoni-ypsiles-sygkentroseis-chthes-sto-rethymno-allagi-toy-kairoy-tin-kyriaki",
+    "date": "2026-11-14T07:07:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/anemoi-koules.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/anemoi-koules.jpg",
+    "summary": "Με σχετικά υψηλές θερμοκρασίες για την εποχή θα κυλήσει το Σάββατο 14 Νοεμβρίου στην Κρήτη, ενώ αυξημένες συγκεντρώσεις αφρικανικής σκόνης αναμένονται κυρίως...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "christoygenna-protochronia-pote-kleinoyn-ta-scholeia-kai-pote-epistrefoyn-oi-mathites-sta-thrania",
     "title": "Χριστούγεννα - Πρωτοχρονιά: Πότε κλείνουν τα σχολεία και πότε επιστρέφουν οι μαθητές στα θρανία",
     "url": "https://www.newshub.gr/el/ellada/christoygenna-protochronia-pote-kleinoyn-ta-scholeia-kai-pote-epistrefoyn-oi-mathites-sta-thrania",
@@ -133,7 +145,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/aeroplana-epa-apagoreuse.jpg",
     "summary": "Δεν υπάρχουν ενδείξεις ότι η εκτεταμένη βλάβη στις επικοινωνίες της Ομοσπονδιακής Υπηρεσίας Αεροπορίας των ΗΠΑ (FAA) συνδέεται με κυβερνοεπίθεση ή άλλη κακόβ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "thanasis-davalas-den-ginetai-na-afisoyme-tin-axiologisi-ton-ergazomenon-sto-eleos-tis-ai-podcast",
@@ -7101,17 +7113,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/trump54-xrm.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/trump54-xrm.jpg",
     "summary": "Την διαφάνεια των ενδιάμεσων εκλογών που έγιναν την περασμένη εβδομάδα στις ΗΠΑ αμφισβητεί ο Ντόναλντ Τραμπ και ειδικότερα τα αποτελέσματα την πρόωρη ψηφοφορ...",
-    "featured": false
-  },
-  {
-    "id": "irakleio-eleytheroi-me-oroys-o-16chronos-ki-o-19chronos-poy-anoigan-amaxia-kai-kylikeia",
-    "title": "Ηράκλειο: Ελεύθεροι με όρους ο 16χρονος κι ο 19χρονος  που «άνοιγαν» αμάξια και κυλικεία",
-    "url": "https://www.newshub.gr/el/kriti/irakleio-eleytheroi-me-oroys-o-16chronos-ki-o-19chronos-poy-anoigan-amaxia-kai-kylikeia",
-    "date": "2026-11-09T16:56:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/kloph-aytokinhtoy.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/kloph-aytokinhtoy.jpg",
-    "summary": "Ελεύθεροι με περιοριστικούς όρους αφέθηκαν σήμερα οι δύο νεαροί (ό ένας εκ των οποίων ανήλικος), οι οποίοι εμπλέκονται στην υπόθεση με τις συνολικά 38 περιπτ...",
     "featured": false
   },
   {
