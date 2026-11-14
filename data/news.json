@@ -1,5 +1,21 @@
 [
   {
+    "id": "s-arnaoytakis-erga-ano-ton-320-ekat-eyro-diekdikei-i-kriti-gia-tin-enischysi-toy-protogenoys-tomea",
+    "title": "Σ. Αρναουτάκης: Έργα άνω των 320 εκατ. ευρώ διεκδικεί η Κρήτη για την ενίσχυση του πρωτογενούς τομέα",
+    "url": "https://www.newshub.gr/el/kriti/s-arnaoytakis-erga-ano-ton-320-ekat-eyro-diekdikei-i-kriti-gia-tin-enischysi-toy-protogenoys-tomea",
+    "date": "2026-11-14T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/periphereia-2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/periphereia-2.jpg",
+    "summary": "Στα έργα και τις παρεμβάσεις που σχεδιάζονται και διεκδικούνται για την ενίσχυση του πρωτογενούς τομέα στην Κρήτη αναφέρθηκε ο περιφερειάρχης Σταύρος Α...",
+    "author": {
+      "name": "Ανδρέας Κριτσωτάκης",
+      "url": "https://www.newshub.gr/el/andreas-kritsotakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "arnolnt-svartsenegker-oi-skines-drasis-den-einai-pia-toso-eykoles-oso-itan-prin-apo-40-chronia",
     "title": "Άρνολντ Σβαρτσενέγκερ: Οι σκηνές δράσης δεν είναι πια τόσο εύκολες όσο ήταν πριν από 40 χρόνια",
     "url": "https://www.newshub.gr/el/sugar/arnolnt-svartsenegker-oi-skines-drasis-den-einai-pia-toso-eykoles-oso-itan-prin-apo-40-chronia",
@@ -93,7 +109,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/usa_airport_mk.jpg",
     "summary": "Η Ομοσπονδιακή Υπηρεσία Πολιτικής Αεροπορίας των ΗΠΑ (FAA) ανακοίνωσε την Παρασκευή την αναστολή όλων των πτήσεων σε εθνικό επίπεδο, λόγω σοβαρών προβλη...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "koryfaios-meletitis-apanta-poso-sychna-trone-kreas-oi-makrovioteroi-anthropoi",
@@ -7078,17 +7094,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/kladema.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/kladema.jpg",
     "summary": "Από το Τμήμα Περιβάλλοντος και Πρασίνου του Δήμου Χανίων γνωστοποιείται ότι αύριο, Τρίτη 10 Νοεμβρίου 2026, από τις 08:00, έχει προγραμματιστεί η συνέχιση τω...",
-    "featured": false
-  },
-  {
-    "id": "mati-tin-tetarti-xekina-i-nea-dikastiki-diadikasia-gia-syggeneis-thanonton-kai-egkaymation",
-    "title": "Μάτι: Την Τετάρτη ξεκινά η νέα δικαστική διαδικασία για συγγενείς θανόντων και εγκαυματιών",
-    "url": "https://www.newshub.gr/el/ellada/mati-tin-tetarti-xekina-i-nea-dikastiki-diadikasia-gia-syggeneis-thanonton-kai-egkaymation",
-    "date": "2026-11-09T14:46:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/9-11/mati-fotia-staxtes-aftokinita1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/9-11/mati-fotia-staxtes-aftokinita1.jpg",
-    "summary": "Συνεχίζεται η μάχη για δικαίωση των συγγενών θανόντων και εγκαυματιών στο Μάτι.\r\n\r\nΣε ανακοίνωσή τους σχετικά με τον νέο γύρο δικών που ξεκινά την Τετάρτη το...",
     "featured": false
   },
   {
