@@ -1,5 +1,17 @@
 [
   {
+    "id": "aade-anoigei-o-exodikastikos-kai-gia-chrei-apo-5-000-eyro",
+    "title": "ΑΑΔΕ: Aνοίγει ο Εξωδικαστικός και για χρέη από 5.000 ευρώ",
+    "url": "https://www.newshub.gr/el/oikonomia/aade-anoigei-o-exodikastikos-kai-gia-chrei-apo-5-000-eyro",
+    "date": "2026-11-14T15:01:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/chremata-portopholi.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/chremata-portopholi.jpg",
+    "summary": "Οφειλέτες με χρέη από 5.000 ευρώ και άνω μπορούν πλέον να υποβάλουν αίτηση για εξωδικαστική ρύθμιση, καθώς το ελάχιστο όριο μειώθηκε από 10.000 σε 5.000 ευ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "meta-prostimo-mamoyth-805-ekat-eyro-apo-tin-italia-gia-prosvasi-se-prosopikes-fotografies-kai-vinteo",
     "title": "Meta: Πρόστιμο-μαμούθ 805 εκατ. ευρώ από την Ιταλία για πρόσβαση σε προσωπικές φωτογραφίες και βίντεο",
     "url": "https://www.newshub.gr/el/kosmos/meta-prostimo-mamoyth-805-ekat-eyro-apo-tin-italia-gia-prosvasi-se-prosopikes-fotografies-kai-vinteo",
@@ -177,7 +189,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/aerodromio-erakleiou-me-ydatographema.jpg",
     "summary": "Χρονιά-ορόσημο εξελίσσεται το 2026 για το αεροδρόμιο Ηρακλείου «Νίκος Καζαντζάκης», καθώς η επιβατική κίνηση ξεπέρασε ήδη από τα τέλη Οκτωβρίου τ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "voak-kykloforiakes-allages-logo-asfaltikon-ergasion-ti-na-gnorizoyn-oi-odigoi-pos-tha-ginetai-i-ektropi-ton-ochimaton",
@@ -7150,17 +7162,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/katanowntasemfylhvia-f-768x513.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/katanowntasemfylhvia-f-768x513.jpg",
     "summary": "Νέο κύκλο επιμορφωτικών συναντήσεων με τίτλο «Μύθοι και Στερεότυπα για την Έμφυλη Βία και τους Έμφυλους Ρόλους» ξεκινά το Τμήμα Κοινωνικής Πολιτι...",
-    "featured": false
-  },
-  {
-    "id": "reyma-alma-68-sti-chondriki-sta-350-eyro-i-megavatora-xypnoyn-mnimes-energeiakis-krisis",
-    "title": "Ρεύμα: Αλμα 68% στη χονδρική – Στα 350 ευρώ η μεγαβατώρα, ξυπνούν μνήμες ενεργειακής κρίσης",
-    "url": "https://www.newshub.gr/el/ellada/reyma-alma-68-sti-chondriki-sta-350-eyro-i-megavatora-xypnoyn-mnimes-energeiakis-krisis",
-    "date": "2026-11-10T05:20:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/reuma-timologi.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/reuma-timologi.jpg",
-    "summary": "Στις ακριβότερες αγορές ηλεκτρικής ενέργειας της Ευρώπης βρίσκεται η Ελλάδα, με τη χονδρεμπορική τιμή να καταγράφει ημερήσια αύξηση σχεδόν 68% και να διαμορφ...",
     "featured": false
   },
   {
