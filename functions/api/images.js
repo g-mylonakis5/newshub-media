@@ -37,8 +37,12 @@ export async function onRequest(context) {
     // κακόβουλο αίτημα θα μας έβαζε να κατεβάσουμε γιγαμπάιτ πριν καν
     // ελέγξουμε το μέγεθος.
     const len = Number(request.headers.get('content-length') || 0);
-    if (len > admin.MAX_IMAGE) {
-      return json(400, { error: 'Η φωτογραφία είναι πολύ μεγάλη.' });
+    if (len > admin.maxFor(type)) {
+      return json(400, {
+        error: admin.VIDEO_TYPES[type]
+          ? 'Το βίντεο είναι πολύ μεγάλο.'
+          : 'Η φωτογραφία είναι πολύ μεγάλη.',
+      });
     }
 
     const bytes = new Uint8Array(await request.arrayBuffer());

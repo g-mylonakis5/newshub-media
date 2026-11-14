@@ -973,6 +973,15 @@ function adsAll(){
 // σχήμα το αρχείο.
 const AD_SLIDES_MAX = 6;
 
+// Βίντεο ή εικόνα; Η απάντηση βγαίνει από την κατάληξη και μόνο.
+//
+// Το GIF ΔΕΝ είναι εδώ μέσα επίτηδες: είναι εικόνα, μπαίνει σε <img>
+// και κινείται μόνο του. Δεν χρειάζεται τίποτα ξεχωριστό από εμάς —
+// ούτε στο build, ούτε στο CSS, ούτε στο slideshow.
+function isAdVideo(src){
+  return /\.mp4$/i.test(String(src || ''));
+}
+
 function adPics(a){
   const many = Array.isArray(a && a.images) ? a.images.filter(Boolean) : [];
   if (many.length) return many.slice(0, AD_SLIDES_MAX);
@@ -1031,6 +1040,29 @@ function adFor(place, offset = 0){
 function adInner(ad){
   const pics = adPics(ad);
   const alt = esc(ad.alt || ad.partner || 'Διαφήμιση');
+
+  // Βίντεο: μόνο του, ποτέ μέσα σε slideshow — το επιβάλλει και ο
+  // έλεγχος του admin-api.js.
+  //
+  // Συμπεριφέρεται σαν GIF, και αυτό είναι σκόπιμο: ΧΩΡΙΣ ΗΧΟ, χωρίς
+  // κουμπιά, σε επανάληψη. Ένα banner που αρχίζει να μιλάει μόνο του
+  // είναι ακριβώς το είδος διαφήμισης που απαγόρευσε το αφεντικό.
+  //
+  // Το «playsinline» δεν είναι λεπτομέρεια: χωρίς αυτό το iPhone ανοίγει
+  // το βίντεο σε ΟΛΗ την οθόνη μόλις ξεκινήσει — δηλαδή η διαφήμιση
+  // σκεπάζει το περιεχόμενο, που είναι ο ένας κανόνας που δεν σπάει.
+  //
+  // «metadata» και όχι «auto»: κατεβαίνει μόνο το πρώτο καρέ μέχρι να
+  // χρειαστεί, ώστε η διαφήμιση να μη ανταγωνίζεται το περιεχόμενο.
+  if (pics.length === 1 && isAdVideo(pics[0])) {
+    return `    <a class="ad-link" href="${esc(ad.url || '#')}" target="_blank" rel="noopener sponsored"
+       aria-label="Διαφήμιση: ${esc(ad.partner || '')}">
+      <video class="ad-image ad-video" src="${esc(pics[0])}"
+             autoplay muted loop playsinline preload="metadata"
+             aria-label="${alt}"></video>
+    </a>
+    <span class="ad-note ad-note--on">Διαφήμιση</span>`;
+  }
 
   const media = pics.length > 1
     ? `      <span class="ad-slides" data-n="${pics.length}"

@@ -516,6 +516,12 @@ body{
   flex: none;
 }
 
+/* Η μικρογραφία μπορεί να είναι και βίντεο — ίδιο κουτί, ίδιο
+   contain, ώστε ο συντάκτης να βλέπει ΑΚΡΙΒΩΣ ό,τι θα δει ο
+   αναγνώστης. */
+video.adcard-pic,
+video.adpic-thumb{ background: var(--bg); }
+
 .adpic-name{
   font-size: 0.75rem;
   color: var(--muted);
@@ -719,7 +725,8 @@ body{
   background: var(--surface);
 }
 
-.shot img{
+.shot img,
+.shot video{
   display: block;
   width: 100%;
   aspect-ratio: 4/3;

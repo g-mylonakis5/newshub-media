@@ -271,6 +271,18 @@ function validate(name, data){
         }
       }
 
+      // Το βίντεο παίζει ΜΟΝΟ του.
+      //
+      // Σε slideshow θα έπρεπε κάποιος να το σταματάει και να το
+      // ξεκινάει στη σειρά του — δηλαδή JavaScript, χρονόμετρα και
+      // καθάρισμα σε κάθε αλλαγή σελίδας. Ένα βίντεο που παίζει αόρατο
+      // πίσω από τις άλλες εικόνες κατεβάζει δεδομένα του αναγνώστη
+      // χωρίς να το βλέπει κανείς.
+      const videos = pics.filter((p) => /\.mp4$/i.test(p));
+      if (videos.length && pics.length > 1) {
+        return `Η διαφήμιση ${who} έχει βίντεο μαζί με εικόνες — το βίντεο μπαίνει μόνο του.`;
+      }
+
       // Ο ρυθμός εναλλαγής. Κάτω από 3 δευτερόλεπτα δεν προλαβαίνει να
       // διαβαστεί τηλέφωνο ή διεύθυνση· πάνω από 20 δεν είναι πια
       // slideshow.
@@ -543,15 +555,43 @@ async function writeData(store, name, data, who){
 
 // Τι δεχόμαστε. Ο browser στέλνει ήδη συμπιεσμένο JPEG ή WebP — δες
 // τη shrink() στο admin.js — οπότε ό,τι άλλο φτάνει εδώ είναι λάθος.
+// Το GIF είναι εξαίρεση: δεν περνάει από τη shrink(), γιατί εκείνη θα
+// κρατούσε μόνο το πρώτο καρέ. Έρχεται ωμό, όπως το έστειλε ο
+// συνεργάτης — γι' αυτό και το όριο μεγέθους παρακάτω το αφορά σοβαρά.
 const IMAGE_TYPES = {
   'image/jpeg': 'jpg',
   'image/webp': 'webp',
   'image/png': 'png',
+  'image/gif': 'gif',
+};
+
+// Βίντεο διαφήμισης. ΜΟΝΟ mp4 με H.264 — είναι το ένα και μοναδικό
+// που παίζει παντού χωρίς ερωτήσεις. Το webm δεν μπαίνει: θα σήμαινε
+// ότι πρέπει να εξηγούμε σε κάθε συνεργάτη γιατί το δικό του αρχείο
+// δεν φαίνεται σε παλιό iPhone.
+const VIDEO_TYPES = {
+  'video/mp4': 'mp4',
 };
 
 // 4MB μετά τη συμπίεση. Μια φωτογραφία ρεπορτάζ βγαίνει 150-400KB·
 // οτιδήποτε δεκαπλάσιο σημαίνει ότι κάτι δεν δούλεψε.
 const MAX_IMAGE = 4 * 1024 * 1024;
+
+// Το βίντεο σηκώνει περισσότερο, αλλά όχι πολύ περισσότερο: ένα banner
+// 10 δευτερολέπτων σε λογική ποιότητα βγαίνει 1-3MB. Τα 8MB είναι το
+// σημείο όπου ο αναγνώστης με κινητό αρχίζει να πληρώνει τη διαφήμιση
+// από τα δικά του δεδομένα.
+const MAX_VIDEO = 8 * 1024 * 1024;
+
+// Το όριο που ισχύει για έναν τύπο.
+//
+// Υπάρχει επειδή το όριο ελέγχεται ΔΥΟ φορές: μια στην πόρτα, πριν καν
+// διαβαστεί το σώμα του αιτήματος, και μια μέσα στη saveImage(). Αν τα
+// δύο σημεία κρατούσαν δικό τους νούμερο, ένα βίντεο 6MB θα περνούσε
+// τον έναν έλεγχο και θα κοβόταν στον άλλο.
+function maxFor(type){
+  return VIDEO_TYPES[type] ? MAX_VIDEO : MAX_IMAGE;
+}
 
 // Καθαρό όνομα αρχείου από αυτό που έδωσε ο χρήστης.
 //
@@ -583,15 +623,27 @@ function imageName(original, stamp){
 }
 
 async function saveImage(store, { bytes, type, name }){
-  const ext = IMAGE_TYPES[type];
+  const ext = IMAGE_TYPES[type] || VIDEO_TYPES[type];
   if (!ext) {
-    return { status: 400, body: { error: 'Δεκτές μόνο φωτογραφίες JPG, PNG ή WebP.' } };
+    return { status: 400, body: { error: 'Δεκτά μόνο JPG, PNG, WebP, GIF ή βίντεο MP4.' } };
   }
   if (!bytes || !bytes.length) {
     return { status: 400, body: { error: 'Άδειο αρχείο.' } };
   }
-  if (bytes.length > MAX_IMAGE) {
-    return { status: 400, body: { error: 'Η φωτογραφία είναι πολύ μεγάλη.' } };
+
+  const video = !!VIDEO_TYPES[type];
+  const max = video ? MAX_VIDEO : MAX_IMAGE;
+
+  if (bytes.length > max) {
+    const mb = Math.round(max / (1024 * 1024));
+    return {
+      status: 400,
+      body: {
+        error: video
+          ? `Το βίντεο ξεπερνά τα ${mb}MB. Ζήτησε από τον συνεργάτη μικρότερο αρχείο.`
+          : 'Η φωτογραφία είναι πολύ μεγάλη.',
+      },
+    };
   }
 
   // Η χρονοσφραγίδα μπροστά κρατάει τη βιβλιοθήκη ταξινομημένη και
@@ -645,5 +697,5 @@ async function deleteImage(store, name){
 module.exports = {
   readData, writeData, saveImage, listImages, deleteImage,
   isReadable, isWritable, validate,
-  WRITABLE, IMAGE_TYPES, MAX_IMAGE, imageName,
+  WRITABLE, IMAGE_TYPES, VIDEO_TYPES, MAX_IMAGE, MAX_VIDEO, maxFor, imageName,
 };

@@ -168,10 +168,11 @@ async function handleImages(req, res){
     // Το όνομα και ο τύπος έρχονται σε κεφαλίδες, το αρχείο ωμό στο
     // σώμα. Απλούστερο από multipart, και ο browser το στέλνει έτσι
     // χωρίς βιβλιοθήκη — δες το send() στο admin.js.
-    const bytes = await readBytes(req, admin.MAX_IMAGE + 1024);
+    const type = (req.headers['content-type'] || '').split(';')[0];
+    const bytes = await readBytes(req, admin.maxFor(type) + 1024);
     const r = await admin.saveImage(localStore, {
       bytes,
-      type: (req.headers['content-type'] || '').split(';')[0],
+      type,
       name: decodeURIComponent(req.headers['x-file-name'] || ''),
     });
     return sendJson(res, r.status, r.body);

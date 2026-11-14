@@ -766,11 +766,19 @@ function upload(files, ctx){
     var file = list[i];
     say('Ανεβαίνει ' + (i + 1) + ' από ' + list.length + '…');
 
-    shrink(file).then(function (blob) {
+    // ΤΟ GIF ΚΑΙ ΤΟ ΒΙΝΤΕΟ ΔΕΝ ΣΜΙΚΡΥΝΟΝΤΑΙ.
+    //
+    // Η shrink() ζωγραφίζει σε canvas και βγάζει JPEG: από ένα κινούμενο
+    // GIF θα κρατούσε ΜΟΝΟ το πρώτο καρέ, και ένα mp4 δεν θα το
+    // διάβαζε καθόλου. Περνούν ωμά, και το όριο μεγέθους τα πιάνει στον
+    // server.
+    var raw = /^(image\/gif|video\/)/.test(file.type);
+
+    (raw ? Promise.resolve(file) : shrink(file)).then(function (blob) {
       return fetch('/api/images', {
         method: 'POST',
         headers: {
-          'Content-Type': 'image/jpeg',
+          'Content-Type': raw ? file.type : 'image/jpeg',
           'X-File-Name': encodeURIComponent(file.name),
         },
         body: blob,
@@ -886,9 +894,13 @@ function shotHTML(f, mode){
   var pick = mode === 'pick';
   var on = isStandard(f.name);
 
+  // Το βίντεο της βιβλιοθήκης θέλει <video>: με <img> θα έδειχνε
+  // σπασμένη εικόνα και ο συντάκτης θα νόμιζε ότι χάλασε το ανέβασμα.
   return '<figure class="shot"'
     + (pick ? ' tabindex="0" role="button" data-take="' + esc(f.url) + '"' : '') + '>'
-    + '<img src="' + esc(f.url) + '" alt="" loading="lazy">'
+    + (adIsVideo(f.url)
+      ? '<video src="' + esc(f.url) + '" muted loop playsinline preload="metadata"></video>'
+      : '<img src="' + esc(f.url) + '" alt="" loading="lazy">')
     // Το αστεράκι μπαίνει ΚΑΙ στον επιλογέα: η στιγμή που καταλαβαίνεις
     // ότι μια φωτογραφία θα τη χρειάζεσαι ξανά είναι όταν τη βάζεις σε
     // άρθρο, όχι όταν περνάς από τη βιβλιοθήκη.
@@ -2884,6 +2896,23 @@ var ad = { list: [], open: -1 };
 var AD_SLIDES_MAX = 6;
 var AD_EVERY_DEF = 5;
 
+// Βίντεο ή εικόνα; Από την κατάληξη, όπως και στο build.js. Το GIF
+// μετράει ως εικόνα — μπαίνει σε <img> και κινείται μόνο του.
+function adIsVideo(src){
+  return /\.mp4$/i.test(String(src || ''));
+}
+
+// Η μικρογραφία μιας δημιουργικής. Το βίντεο θέλει <video>: ένα <img>
+// με πηγή mp4 δείχνει σπασμένη εικόνα, και ο συντάκτης θα νόμιζε ότι
+// χάλασε το ανέβασμα.
+function adThumb(src, cls){
+  if (adIsVideo(src)) {
+    return '<video class="' + cls + '" src="' + esc(src) + '"'
+      + ' muted loop playsinline autoplay preload="metadata"></video>';
+  }
+  return '<img class="' + cls + '" src="' + esc(src) + '" alt="">';
+}
+
 // Οι εικόνες μιας διαφήμισης, πάντα ως λίστα. Το παλιό «image»
 // διαβάζεται ακόμα, για όσες γράφτηκαν πριν μπει το slideshow.
 function adPics(a){
@@ -2987,7 +3016,7 @@ function adDrawList(){
     return '<article class="adcard' + (live ? '' : ' adcard--off') + '" data-ad-i="' + i + '">'
       + '<header class="adcard-head">'
       + (pics.length
-        ? '<img class="adcard-pic" src="' + esc(pics[0]) + '" alt="">'
+        ? adThumb(pics[0], 'adcard-pic')
         : '<span class="adcard-pic adcard-pic--empty"></span>')
       + '<div class="adcard-id">'
       + '<p class="adcard-name">' + esc(a.partner || '(χωρίς όνομα)') + '</p>'
@@ -3017,8 +3046,9 @@ function adDrawList(){
       + '<div class="adpics">'
       + pics.map(function (src, k) {
         return '<div class="adpic">'
-          + '<img class="adpic-thumb" src="' + esc(src) + '" alt="">'
-          + '<span class="adpic-name">' + esc(src) + '</span>'
+          + adThumb(src, 'adpic-thumb')
+          + '<span class="adpic-name">' + esc(src)
+          + (adIsVideo(src) ? ' <strong>βίντεο</strong>' : '') + '</span>'
           + '<span class="adpic-acts">'
           + '<button type="button" class="btn btn--tiny" data-ad-slide-up="' + i + '"'
           + ' data-k="' + k + '"' + (k === 0 ? ' disabled' : '') + '>↑</button>'
@@ -3030,16 +3060,23 @@ function adDrawList(){
       }).join('')
       + '</div>'
       + '<div class="show-pick">'
-      + '<button type="button" class="btn btn--ghost" data-ad-pic="' + i + '" data-k="-1">'
-      + (pics.length ? 'Πρόσθεσε εικόνα' : 'Διάλεξε εικόνα') + '</button>'
-      + (pics.length >= AD_SLIDES_MAX
-        ? '<span class="hint">Έφτασες τις ' + AD_SLIDES_MAX + ' — το όριο.</span>'
-        : '<span class="hint">Δύο ή περισσότερες εναλλάσσονται μόνες τους.</span>')
+      + (pics.some(adIsVideo)
+        ? ''
+        : '<button type="button" class="btn btn--ghost" data-ad-pic="' + i + '" data-k="-1">'
+          + (pics.length ? 'Πρόσθεσε εικόνα' : 'Διάλεξε εικόνα') + '</button>')
+      + (pics.some(adIsVideo)
+        ? '<span class="hint">Βίντεο: παίζει μόνο του, χωρίς ήχο, σε επανάληψη. '
+          + 'Για να γίνει slideshow, σβήσε πρώτα το βίντεο.</span>'
+        : pics.length >= AD_SLIDES_MAX
+          ? '<span class="hint">Έφτασες τις ' + AD_SLIDES_MAX + ' — το όριο.</span>'
+          : '<span class="hint">Δύο ή περισσότερες εναλλάσσονται μόνες τους. '
+            + 'Δεκτά: JPG, PNG, WebP, GIF ή ένα βίντεο MP4.</span>')
       + '</div></div>'
 
       // Ο ρυθμός φαίνεται ΜΟΝΟ όταν υπάρχει κάτι να εναλλαχθεί. Ένα
-      // πεδίο που δεν κάνει τίποτα είναι ερώτηση χωρίς νόημα.
-      + (pics.length > 1
+      // πεδίο που δεν κάνει τίποτα είναι ερώτηση χωρίς νόημα — και το
+      // βίντεο έχει δικό του ρυθμό, τον δικό του χρόνο.
+      + (pics.length > 1 && !pics.some(adIsVideo)
         ? '<div class="field"><label>Κάθε πόσα δευτερόλεπτα αλλάζει</label>'
           + '<input type="number" min="3" max="20" step="1" data-ad="every"'
           + ' value="' + esc(String(a.every || AD_EVERY_DEF)) + '"></div>'
@@ -3095,6 +3132,9 @@ function saveAds(){
     }
     if (a.every !== undefined && !(Number(a.every) >= 3 && Number(a.every) <= 20)) {
       adSay(no + 'ο ρυθμός εναλλαγής θέλει 3 έως 20 δευτερόλεπτα.', 'bad'); return;
+    }
+    if (adPics(a).some(adIsVideo) && adPics(a).length > 1) {
+      adSay(no + 'το βίντεο μπαίνει μόνο του, όχι μαζί με εικόνες.', 'bad'); return;
     }
     if (!/^https?:\/\//.test(a.url || '')) { adSay(no + 'ο σύνδεσμος θέλει http:// ή https://', 'bad'); return; }
     if (!(a.places || []).length) { adSay(no + 'δεν διάλεξες θέση.', 'bad'); return; }

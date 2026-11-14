@@ -68,11 +68,13 @@ async function kateva(file) {
   const bytes = Buffer.from(await res.arrayBuffer());
   if (!bytes.length) throw new Error('άδειο αρχείο');
 
-  // Γράφουμε ΜΟΝΟ αν είναι όντως εικόνα. Αν κάποτε το site απαντήσει
-  // με σελίδα σφάλματος και κωδικό 200, δεν θέλουμε να σωθεί ως .jpg
-  // και να ψάχνουμε μετά γιατί δεν ανοίγει.
+  // Γράφουμε ΜΟΝΟ αν είναι όντως εικόνα ή βίντεο. Αν κάποτε το site
+  // απαντήσει με σελίδα σφάλματος και κωδικό 200, δεν θέλουμε να σωθεί
+  // ως .jpg και να ψάχνουμε μετά γιατί δεν ανοίγει.
   const type = res.headers.get('content-type') || '';
-  if (!type.startsWith('image/')) throw new Error(`δεν είναι εικόνα (${type})`);
+  if (!type.startsWith('image/') && !type.startsWith('video/')) {
+    throw new Error(`δεν είναι εικόνα ούτε βίντεο (${type})`);
+  }
 
   await fs.promises.writeFile(path.join(UPLOADS, file), bytes);
   return bytes.length;
