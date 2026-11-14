@@ -490,6 +490,43 @@ body{
 .adcard-meta{ margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--muted); }
 .adcard-acts{ display: flex; gap: 0.35rem; align-items: center; }
 
+/* Η σειρά των εικόνων ενός slideshow. Με τη σειρά που φαίνονται εδώ
+   εναλλάσσονται και στο site — γι' αυτό υπάρχει το βελάκι. */
+.adpics{
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.adpic{
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem;
+  background: var(--bg);
+  border-radius: 4px;
+}
+
+.adpic-thumb{
+  width: 80px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 3px;
+  flex: none;
+}
+
+.adpic-name{
+  font-size: 0.75rem;
+  color: var(--muted);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.adpic-acts{ display: flex; gap: 0.3rem; flex: none; }
+
 .adchecks{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

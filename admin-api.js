@@ -251,8 +251,34 @@ function validate(name, data){
       // Η εικόνα ΜΟΝΟ από το δικό μας /uploads/. Ξένη διεύθυνση θα
       // σήμαινε ότι ο συνεργάτης αλλάζει το creative χωρίς να το
       // δούμε, και ότι ο server του μετράει τους αναγνώστες μας.
-      if (typeof a.image !== 'string' || !/^\/uploads\/[\w.-]+$/.test(a.image)) {
-        return `Η εικόνα ${who} πρέπει να είναι αρχείο του /uploads/.`;
+      //
+      // Μία εικόνα ή πολλές (slideshow): ο κανόνας είναι ο ίδιος για
+      // καθεμία. Το «images» έχει προτεραιότητα· το «image» μένει για
+      // όσες γράφτηκαν πριν μπει το slideshow.
+      const pics = Array.isArray(a.images) && a.images.length
+        ? a.images
+        : (a.image === undefined ? [] : [a.image]);
+
+      if (!pics.length) {
+        return `Η διαφήμιση ${who} δεν έχει καμία εικόνα.`;
+      }
+      if (pics.length > 6) {
+        return `Η διαφήμιση ${who} έχει πάνω από 6 εικόνες.`;
+      }
+      for (const pic of pics) {
+        if (typeof pic !== 'string' || !/^\/uploads\/[\w.-]+$/.test(pic)) {
+          return `Η εικόνα ${who} πρέπει να είναι αρχείο του /uploads/.`;
+        }
+      }
+
+      // Ο ρυθμός εναλλαγής. Κάτω από 3 δευτερόλεπτα δεν προλαβαίνει να
+      // διαβαστεί τηλέφωνο ή διεύθυνση· πάνω από 20 δεν είναι πια
+      // slideshow.
+      if (a.every !== undefined) {
+        const every = Number(a.every);
+        if (!Number.isFinite(every) || every < 3 || every > 20) {
+          return `Ο ρυθμός εναλλαγής ${who} θέλει 3 έως 20 δευτερόλεπτα.`;
+        }
       }
 
       // Ο σύνδεσμος φεύγει έξω, άρα μόνο http(s) — ποτέ javascript:

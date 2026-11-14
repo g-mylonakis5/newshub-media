@@ -962,12 +962,48 @@ function adsAll(){
 // την ίδια ώρα όλοι πρέπει να βλέπουν το ίδιο πράγμα, αλλιώς κανείς
 // δεν μπορεί να ελέγξει τι προβλήθηκε. Μέσα στην ίδια μέρα το build
 // τρέχει δεκάδες φορές και βγάζει πάντα το ίδιο αποτέλεσμα.
-function adFor(place){
+// Οι εικόνες μιας διαφήμισης, πάντα ως λίστα.
+//
+// Μία εικόνα ή πολλές είναι το ΙΔΙΟ πράγμα για όλον τον υπόλοιπο
+// κώδικα — αλλάζει μόνο το πλήθος. Έτσι ο έλεγχος «παίζει;», η
+// εναλλαγή ανά ημέρα και το κουτί μένουν ένα σημείο το καθένα.
+//
+// Το παλιό «image» διαβάζεται ακόμα: υπάρχουν διαφημίσεις γραμμένες
+// πριν μπει το slideshow, και δεν τις ξαναγράφουμε για να αλλάξει
+// σχήμα το αρχείο.
+const AD_SLIDES_MAX = 6;
+
+function adPics(a){
+  const many = Array.isArray(a && a.images) ? a.images.filter(Boolean) : [];
+  if (many.length) return many.slice(0, AD_SLIDES_MAX);
+  return a && a.image ? [a.image] : [];
+}
+
+// Πόσο κρατάει κάθε εικόνα. Κάτω από 3 δευτερόλεπτα δεν προλαβαίνει
+// να διαβαστεί τηλέφωνο ή διεύθυνση — που είναι όλο το νόημα μιας
+// τοπικής διαφήμισης.
+const AD_EVERY_MIN = 3;
+const AD_EVERY_MAX = 20;
+const AD_EVERY_DEF = 5;
+
+function adEvery(a){
+  const n = Number(a && a.every);
+  if (!Number.isFinite(n)) return AD_EVERY_DEF;
+  return Math.min(AD_EVERY_MAX, Math.max(AD_EVERY_MIN, Math.round(n)));
+}
+
+// Το «offset» υπάρχει για τις λίστες.
+//
+// Μια σελίδα με 60 κάρτες έχει δύο θέσεις. Χωρίς αυτό θα έδειχναν την
+// ΙΔΙΑ διαφήμιση δύο φορές στην ίδια οθόνη — που μοιάζει με βλάβη, όχι
+// με καμπάνια. Με το offset η δεύτερη θέση παίρνει τον επόμενο
+// συνεργάτη, και μόνο αν υπάρχει ένας μόνο επαναλαμβάνεται.
+function adFor(place, offset = 0){
   const today = new Date().toISOString().slice(0, 10);
 
   const live = adsAll().filter((a) => a
     && a.status !== 'off'
-    && a.image
+    && adPics(a).length
     && Array.isArray(a.places) && a.places.includes(place)
     && (!a.from || a.from <= today)
     && (!a.to || a.to >= today));
@@ -975,20 +1011,57 @@ function adFor(place){
   if (!live.length) return null;
 
   const day = Math.floor(Date.parse(`${today}T00:00:00Z`) / 86400000);
-  return live[day % live.length];
+  return live[(day + offset) % live.length];
 }
 
-function adSlot(place, size){
-  const ad = adFor(place);
+// Το περιεχόμενο μιας γεμάτης θέσης.
+//
+// Μία εικόνα βγαίνει όπως πάντα. Δύο ή περισσότερες γίνονται slideshow
+// — και η εναλλαγή είναι ΚΑΘΑΡΟ CSS, ούτε ένα byte JavaScript.
+//
+// Γιατί όχι JavaScript: ο μόνιμος player αλλάζει σελίδες με View
+// Transitions χωρίς να ξαναφορτώνει τίποτα, οπότε κάθε χρονόμετρο θα
+// έπρεπε να το σταματάει και να το ξαναστήνει κάποιος. Μια animation
+// του CSS δεν χρειάζεται κανέναν: ζει και πεθαίνει με το στοιχείο.
+//
+// Όλες οι εικόνες φορτώνουν μαζί — είναι ήδη μέσα στο δεσμευμένο
+// κουτί, άρα καμία δεν κουνάει τη σελίδα όταν έρθει. Η πρώτη είναι
+// lazy όπως πριν· οι υπόλοιπες επίσης, γιατί μια θέση που δεν την
+// είδε ποτέ κανείς δεν έχει λόγο να κατεβάσει έξι αρχεία.
+function adInner(ad){
+  const pics = adPics(ad);
+  const alt = esc(ad.alt || ad.partner || 'Διαφήμιση');
+
+  const media = pics.length > 1
+    ? `      <span class="ad-slides" data-n="${pics.length}"
+            style="--ad-n:${pics.length};--ad-every:${adEvery(ad)}s">
+${pics.map((src, i) => `        <img class="ad-image ad-slide" src="${esc(src)}" alt="${i === 0 ? alt : ''}"
+             style="--i:${i}" loading="lazy">`).join('\n')}
+      </span>`
+    : `      <img class="ad-image" src="${esc(pics[0])}" alt="${alt}" loading="lazy">`;
+
+  return `    <a class="ad-link" href="${esc(ad.url || '#')}" target="_blank" rel="noopener sponsored"
+       aria-label="Διαφήμιση: ${esc(ad.partner || '')}">
+${media}
+    </a>
+    <span class="ad-note ad-note--on">Διαφήμιση</span>`;
+}
+
+// place — το όνομα που γράφεται ως data-ad, μοναδικό μέσα στη σελίδα
+// key   — ποια θέση ΠΟΥΛΗΘΗΚΕ· όταν λείπει, είναι το ίδιο το place
+//
+// Τα δύο χωρίζουν εξαιτίας των λιστών: εκεί οι θέσεις λέγονται
+// «archive-list-1», «archive-list-2» κ.ο.κ., αλλά ο συνεργάτης αγοράζει
+// «τις λίστες του αρχείου», όχι την τρίτη θέση της δεύτερης σελίδας.
+// Χωρίς αυτόν τον χωρισμό το διαχειριστικό θα έπρεπε να δείχνει
+// εκατοντάδες ονόματα που αλλάζουν μόνα τους όταν μπαίνει περιεχόμενο.
+function adSlot(place, size, key = place, offset = 0){
+  const ad = adFor(key, offset);
 
   // Κενή θέση: μένει ο δεσμευμένος χώρος και η λέξη. Έτσι η σελίδα
   // έχει ακριβώς το ίδιο ύψος με ή χωρίς διαφήμιση.
   const inner = ad
-    ? `    <a class="ad-link" href="${esc(ad.url || '#')}" target="_blank" rel="noopener sponsored"
-       aria-label="Διαφήμιση: ${esc(ad.partner || '')}">
-      <img class="ad-image" src="${esc(ad.image)}" alt="${esc(ad.alt || ad.partner || 'Διαφήμιση')}" loading="lazy">
-    </a>
-    <span class="ad-note ad-note--on">Διαφήμιση</span>`
+    ? adInner(ad)
     : '    <span class="ad-note">Διαφήμιση</span>';
 
   return `  <aside class="ad ad--${size}${ad ? ' ad--full' : ''}" data-ad="${place}" aria-label="Διαφήμιση">
@@ -1028,7 +1101,10 @@ function cardsWithAds(cards, place){
 
   cards.forEach((html, i) => {
     if (i > 0 && i % CARDS_PER_AD === 0) {
-      out.push(adSlot(`${place}-${i / CARDS_PER_AD}`, 'leaderboard'));
+      const nth = i / CARDS_PER_AD;
+      // Το «place» είναι αυτό που αγοράζεται· ο αριθμός μένει μόνο στο
+      // data-ad, για να ξεχωρίζουν οι θέσεις μέσα στη σελίδα.
+      out.push(adSlot(`${place}-${nth}`, 'leaderboard', place, nth - 1));
     }
     out.push(html);
   });
@@ -2556,6 +2632,11 @@ ${text}
         </p>` : ''}
       </footer>
     </article>
+
+${/* Στο τέλος του άρθρου, έξω από τη στήλη ανάγνωσης: όποιος έφτασε ως
+     εδώ διάβασε ό,τι ήρθε να διαβάσει. Είναι η δεύτερη θέση της
+     σελίδας — η πρώτη μπαίνει μέσα στο κείμενο, πολύ πιο πάνω. */ ''}
+${adSlot('article-end', 'leaderboard')}
   </main>`;
 
   return page({
@@ -2748,6 +2829,11 @@ ${articleBodyHtml(a.body)}
         </p>` : ''}
       </footer>
     </article>
+
+${/* Στο τέλος του άρθρου, έξω από τη στήλη ανάγνωσης: όποιος έφτασε ως
+     εδώ διάβασε ό,τι ήρθε να διαβάσει. Είναι η δεύτερη θέση της
+     σελίδας — η πρώτη μπαίνει μέσα στο κείμενο, πολύ πιο πάνω. */ ''}
+${adSlot('article-end', 'leaderboard')}
   </main>`;
 
   return page({
@@ -6420,6 +6506,10 @@ ${lead}${rest ? `\n${rest}` : ''}
       </div>
     </section>
 
+${/* Μετά τις συζητήσεις του προσώπου, πριν τους «άλλους». Ίδια λογική
+     με τη σελίδα επεισοδίου: πρώτα αυτό που ήρθε να δει ο αναγνώστης. */ ''}
+${adSlot('guest-mid', 'leaderboard')}
+
 ${near ? `    <section class="bio-near">
       <h2 class="section-head">Άλλοι στις ίδιες ενότητες</h2>
       <div class="pnear-row">
@@ -6944,6 +7034,12 @@ ${/* Η μόνη θέση της σελίδας επεισοδίου, και μ�
      διαφήμιση μέσα ή πάνω από τον player». */ ''}
 ${adSlot('episode-mid', 'leaderboard')}
 
+${/* Και μια δεύτερη, σε σχήμα MPU. Κάθεται κάτω από την πρώτη, όχι
+     πλάι της: η σελίδα επεισοδίου δεν έχει πλαϊνή στήλη σε κινητό,
+     και δύο διατάξεις για την ίδια θέση θα σήμαιναν δύο δεσμευμένα
+     ύψη να συντηρούμε. */ ''}
+${adSlot('episode-side', 'mpu')}
+
         ${queue ? `<section class="queue">
           <h2 class="section-head">${queueHead}</h2>
 ${queue}
@@ -7218,6 +7314,12 @@ function main(){
     body: `${siteHeader()}
 
 ${heroBanner(featured)}
+
+${/* Αμέσως μετά την κύρια είδηση, πριν τη ροή. Η ακριβότερη θέση του
+     site — αλλά ΚΑΤΩ από το hero, ποτέ πάνω: η απαίτηση του αφεντικού
+     είναι ότι η αρχική ανοίγει με μία είδηση σε όλο το πλάτος, και μια
+     διαφήμιση από πάνω θα την έκανε δεύτερη. */ ''}
+${adSlot('home-hero', 'leaderboard')}
 
   <section class="band band--latest">
 ${/* Σκέτο «Τελευταία», όχι «Τελευταία επεισόδια»: στη ροή μπαίνουν

@@ -2855,17 +2855,58 @@ function saveMustRead(){
 // Οι θέσεις είναι ΟΣΕΣ υπάρχουν στο build.js· γράφονται εδώ με τα ίδια
 // ονόματα. Αν προστεθεί θέση εκεί, προστίθεται και εδώ — δεν υπάρχει
 // τρόπος να τη μαντέψει το διαχειριστικό από στατικό HTML.
+// Οι θέσεις των λιστών («…-list») είναι ΟΜΑΔΕΣ, όχι μία θέση: κάθε
+// σελίδα βάζει μία ανά 20 κάρτες, άρα το πλήθος τους αλλάζει μόνο του
+// καθώς μπαίνει περιεχόμενο. Ο συνεργάτης αγοράζει «τις λίστες του
+// αρχείου» και η διαφήμιση βγαίνει σε όλες — δες adSlot() στο build.js.
 var AD_PLACES = [
+  { id: 'home-hero', name: 'Αρχική — κάτω από την κύρια είδηση', size: 'Leaderboard' },
   { id: 'home-top', name: 'Αρχική — κάτω από τη ροή', size: 'Billboard' },
   { id: 'home-mid', name: 'Αρχική — ανάμεσα σε Πρόσωπα και «Και ακόμα»', size: 'Leaderboard' },
   { id: 'home-side', name: 'Αρχική — πλαϊνή στήλη', size: 'MPU 300×250' },
   { id: 'article-mid', name: 'Μέσα στο άρθρο', size: 'Leaderboard' },
+  { id: 'article-end', name: 'Τέλος άρθρου', size: 'Leaderboard' },
   { id: 'episode-mid', name: 'Σελίδα επεισοδίου', size: 'Leaderboard' },
+  { id: 'episode-side', name: 'Σελίδα επεισοδίου — δεύτερη', size: 'MPU 300×250' },
+  { id: 'guest-mid', name: 'Σελίδα προσώπου', size: 'Leaderboard' },
   { id: 'video-mid', name: 'Σελίδα βίντεο', size: 'Leaderboard' },
+  { id: 'category-list', name: 'Λίστες ενοτήτων — ανά 20 κάρτες', size: 'Leaderboard' },
+  { id: 'archive-list', name: 'Αρχείο επεισοδίων — ανά 20 κάρτες', size: 'Leaderboard' },
+  { id: 'show-list', name: 'Λίστες εκπομπών — ανά 20 κάρτες', size: 'Leaderboard' },
   { id: 'footer', name: 'Υποσέλιδο — κάθε σελίδα', size: 'Leaderboard' },
 ];
 
 var ad = { list: [], open: -1 };
+
+// Πόσες εικόνες δέχεται ένα slideshow, και πόσο κρατάει καθεμία.
+// ΤΑ ΙΔΙΑ νούμερα με το build.js και το admin-api.js — αν αλλάξουν εδώ
+// μόνο, το διαχειριστικό θα δέχεται κάτι που ο server θα απορρίπτει.
+var AD_SLIDES_MAX = 6;
+var AD_EVERY_DEF = 5;
+
+// Οι εικόνες μιας διαφήμισης, πάντα ως λίστα. Το παλιό «image»
+// διαβάζεται ακόμα, για όσες γράφτηκαν πριν μπει το slideshow.
+function adPics(a){
+  if (Array.isArray(a.images) && a.images.length) return a.images.slice();
+  return a.image ? [a.image] : [];
+}
+
+// Και η αντίστροφη. ΜΙΑ εικόνα γράφεται ως «image» και όχι ως λίστα
+// ενός στοιχείου: έτσι οι παλιές διαφημίσεις μένουν ακριβώς όπως ήταν
+// και το αρχείο δεν γεμίζει σχήματα που δεν χρειάζονται.
+function adPutPics(a, pics){
+  var clean = pics.filter(Boolean).slice(0, AD_SLIDES_MAX);
+
+  if (clean.length > 1) {
+    a.images = clean;
+    delete a.image;
+    if (!a.every) a.every = AD_EVERY_DEF;
+  } else {
+    a.image = clean[0] || '';
+    delete a.images;
+    delete a.every;
+  }
+}
 
 function adReady(file){
   ad.list = (file && Array.isArray(file.ads)) ? file.ads : [];
@@ -2889,7 +2930,7 @@ function adSay(text, kind){
 function adLive(a){
   var today = new Date().toISOString().slice(0, 10);
   return a.status !== 'off'
-    && !!a.image
+    && adPics(a).length > 0
     && (!a.from || a.from <= today)
     && (!a.to || a.to >= today);
 }
@@ -2941,15 +2982,18 @@ function adDrawList(){
         + '</label>';
     }).join('');
 
+    var pics = adPics(a);
+
     return '<article class="adcard' + (live ? '' : ' adcard--off') + '" data-ad-i="' + i + '">'
       + '<header class="adcard-head">'
-      + (a.image
-        ? '<img class="adcard-pic" src="' + esc(a.image) + '" alt="">'
+      + (pics.length
+        ? '<img class="adcard-pic" src="' + esc(pics[0]) + '" alt="">'
         : '<span class="adcard-pic adcard-pic--empty"></span>')
       + '<div class="adcard-id">'
       + '<p class="adcard-name">' + esc(a.partner || '(χωρίς όνομα)') + '</p>'
       + '<p class="adcard-meta">'
       + (live ? '<span class="pill">παίζει τώρα</span>' : '<span class="pill pill--draft">δεν παίζει</span>')
+      + (pics.length > 1 ? ' <span class="pill pill--draft">' + pics.length + ' εικόνες</span>' : '')
       + ' ' + esc(places.join(' · ') || 'καμία θέση')
       + '</p>'
       + '</div>'
@@ -2969,12 +3013,37 @@ function adDrawList(){
       + '</div>'
 
       + '<div class="field">'
-      + '<label>Εικόνα</label>'
+      + '<label>Εικόνες</label>'
+      + '<div class="adpics">'
+      + pics.map(function (src, k) {
+        return '<div class="adpic">'
+          + '<img class="adpic-thumb" src="' + esc(src) + '" alt="">'
+          + '<span class="adpic-name">' + esc(src) + '</span>'
+          + '<span class="adpic-acts">'
+          + '<button type="button" class="btn btn--tiny" data-ad-slide-up="' + i + '"'
+          + ' data-k="' + k + '"' + (k === 0 ? ' disabled' : '') + '>↑</button>'
+          + '<button type="button" class="btn btn--tiny" data-ad-pic="' + i + '"'
+          + ' data-k="' + k + '">Άλλαξε</button>'
+          + '<button type="button" class="btn btn--tiny" data-ad-slide-del="' + i + '"'
+          + ' data-k="' + k + '">✕</button>'
+          + '</span></div>';
+      }).join('')
+      + '</div>'
       + '<div class="show-pick">'
-      + '<button type="button" class="btn btn--ghost" data-ad-pic="' + i + '">'
-      + (a.image ? 'Άλλαξε εικόνα' : 'Διάλεξε εικόνα') + '</button>'
-      + (a.image ? '<span class="hint">' + esc(a.image) + '</span>' : '')
+      + '<button type="button" class="btn btn--ghost" data-ad-pic="' + i + '" data-k="-1">'
+      + (pics.length ? 'Πρόσθεσε εικόνα' : 'Διάλεξε εικόνα') + '</button>'
+      + (pics.length >= AD_SLIDES_MAX
+        ? '<span class="hint">Έφτασες τις ' + AD_SLIDES_MAX + ' — το όριο.</span>'
+        : '<span class="hint">Δύο ή περισσότερες εναλλάσσονται μόνες τους.</span>')
       + '</div></div>'
+
+      // Ο ρυθμός φαίνεται ΜΟΝΟ όταν υπάρχει κάτι να εναλλαχθεί. Ένα
+      // πεδίο που δεν κάνει τίποτα είναι ερώτηση χωρίς νόημα.
+      + (pics.length > 1
+        ? '<div class="field"><label>Κάθε πόσα δευτερόλεπτα αλλάζει</label>'
+          + '<input type="number" min="3" max="20" step="1" data-ad="every"'
+          + ' value="' + esc(String(a.every || AD_EVERY_DEF)) + '"></div>'
+        : '')
 
       + '<div class="row2">'
       + '<div class="field"><label>Από</label>'
@@ -3020,7 +3089,13 @@ function saveAds(){
     var a = ad.list[i];
     var no = 'Διαφήμιση ' + (i + 1) + ': ';
     if (!a.partner || !a.partner.trim()) { adSay(no + 'λείπει το όνομα του συνεργάτη.', 'bad'); return; }
-    if (!a.image) { adSay(no + 'λείπει η εικόνα.', 'bad'); return; }
+    if (!adPics(a).length) { adSay(no + 'λείπει η εικόνα.', 'bad'); return; }
+    if (adPics(a).length > AD_SLIDES_MAX) {
+      adSay(no + 'πάνω από ' + AD_SLIDES_MAX + ' εικόνες.', 'bad'); return;
+    }
+    if (a.every !== undefined && !(Number(a.every) >= 3 && Number(a.every) <= 20)) {
+      adSay(no + 'ο ρυθμός εναλλαγής θέλει 3 έως 20 δευτερόλεπτα.', 'bad'); return;
+    }
     if (!/^https?:\/\//.test(a.url || '')) { adSay(no + 'ο σύνδεσμος θέλει http:// ή https://', 'bad'); return; }
     if (!(a.places || []).length) { adSay(no + 'δεν διάλεξες θέση.', 'bad'); return; }
     if (a.from && a.to && a.from > a.to) { adSay(no + 'τελειώνει πριν αρχίσει.', 'bad'); return; }
@@ -3036,9 +3111,17 @@ function saveAds(){
   });
 }
 
-function adSetImage(i, url){
-  if (!ad.list[i]) return;
-  ad.list[i].image = url;
+// Η εικόνα που γύρισε ο επιλογέας. Το «slide» λέει ποια θέση της
+// σειράς: αριθμός = αντικατάσταση, -1 = προσθήκη στο τέλος.
+function adSetImage(i, url, slide){
+  var a = ad.list[i];
+  if (!a) return;
+
+  var pics = adPics(a);
+  if (slide == null || slide < 0) pics.push(url);
+  else pics[slide] = url;
+
+  adPutPics(a, pics);
   drawAds();
   adDirty(true);
 }
@@ -3051,7 +3134,35 @@ function wireAds(){
 
   box.addEventListener('click', function (e) {
     var pic = e.target.closest('[data-ad-pic]');
-    if (pic) { pickImage({ ad: Number(pic.dataset.adPic) }); return; }
+    if (pic) {
+      pickImage({ ad: Number(pic.dataset.adPic), slide: Number(pic.dataset.k) });
+      return;
+    }
+
+    var sUp = e.target.closest('[data-ad-slide-up]');
+    if (sUp) {
+      var sa = ad.list[Number(sUp.dataset.adSlideUp)];
+      var sk = Number(sUp.dataset.k);
+      if (!sa || sk <= 0) return;
+      var sp = adPics(sa);
+      var keep = sp[sk]; sp[sk] = sp[sk - 1]; sp[sk - 1] = keep;
+      adPutPics(sa, sp);
+      drawAds();
+      adDirty(true);
+      return;
+    }
+
+    var sDel = e.target.closest('[data-ad-slide-del]');
+    if (sDel) {
+      var da = ad.list[Number(sDel.dataset.adSlideDel)];
+      if (!da) return;
+      var dp = adPics(da);
+      dp.splice(Number(sDel.dataset.k), 1);
+      adPutPics(da, dp);
+      drawAds();
+      adDirty(true);
+      return;
+    }
 
     var up = e.target.closest('[data-ad-up]');
     if (up) {
@@ -3083,7 +3194,11 @@ function wireAds(){
 
     var f = e.target.closest('[data-ad]');
     if (f && f.dataset.ad !== 'status') {
-      a[f.dataset.ad] = f.value.trim();
+      // Ο ρυθμός είναι αριθμός, όχι κείμενο: ένα «5» σε εισαγωγικά
+      // περνάει τον έλεγχο σήμερα, αλλά είναι λάθος μέσα στο αρχείο.
+      a[f.dataset.ad] = f.dataset.ad === 'every'
+        ? Number(f.value)
+        : f.value.trim();
       adDirty(true);
     }
   });
@@ -4283,7 +4398,7 @@ function applyPick(url){
 
   // Η εικόνα μιας διαφήμισης, από την καρτέλα «Διαφημίσεις».
   if (t.ad != null) {
-    adSetImage(t.ad, url);
+    adSetImage(t.ad, url, t.slide);
     pickClose();
     return;
   }

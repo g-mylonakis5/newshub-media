@@ -6336,6 +6336,60 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   display: block;
 }
 
+/* ---- Slideshow: πολλές εικόνες στην ίδια θέση ----
+ *
+ * Όλες οι εικόνες κάθονται ΜΙΑ ΠΑΝΩ ΣΤΗΝ ΑΛΛΗ μέσα στο ίδιο κουτί, που
+ * έχει ήδη κλειδωμένο ύψος. Άρα το slideshow δεν μπορεί να κουνήσει τη
+ * σελίδα όσες εικόνες κι αν έχει — ούτε όταν φορτώνει, ούτε όταν αλλάζει.
+ *
+ * Η εναλλαγή είναι animation του CSS, όχι χρονόμετρο JavaScript: ο
+ * browser τη σταματάει μόνος του όταν η καρτέλα είναι κρυφή, και δεν
+ * υπάρχει τίποτα να καθαρίσει ο player όταν αλλάζει σελίδα.
+ */
+.ad-slides{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ad-slide{
+  position: absolute;
+  inset: 0;
+  margin: auto;
+
+  /* Αόρατη ΕΚΤΟΣ από τη σειρά της. Η πρώτη ξεκινά αμέσως (καθυστέρηση
+     μηδέν), οι υπόλοιπες περιμένουν τη σειρά τους — και όσο περιμένουν
+     ισχύει αυτό εδώ το opacity, όχι το πρώτο καρέ της animation. */
+  opacity: 0;
+  animation-duration: calc(var(--ad-n) * var(--ad-every));
+  animation-delay: calc(var(--i) * var(--ad-every));
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Κάθε πλήθος θέλει δικό του καρέ: η εικόνα μένει ορατή το 1/N του
+   κύκλου, και το σβήσιμο είναι ~5% για να μη «χτυπάει» η αλλαγή. */
+.ad-slides[data-n="2"] .ad-slide{ animation-name: ad-fade-2; }
+.ad-slides[data-n="3"] .ad-slide{ animation-name: ad-fade-3; }
+.ad-slides[data-n="4"] .ad-slide{ animation-name: ad-fade-4; }
+.ad-slides[data-n="5"] .ad-slide{ animation-name: ad-fade-5; }
+.ad-slides[data-n="6"] .ad-slide{ animation-name: ad-fade-6; }
+
+@keyframes ad-fade-2{ 0%,45%{opacity:1} 50%,95%{opacity:0} 100%{opacity:1} }
+@keyframes ad-fade-3{ 0%,28.3%{opacity:1} 33.3%,95%{opacity:0} 100%{opacity:1} }
+@keyframes ad-fade-4{ 0%,20%{opacity:1} 25%,95%{opacity:0} 100%{opacity:1} }
+@keyframes ad-fade-5{ 0%,15%{opacity:1} 20%,95%{opacity:0} 100%{opacity:1} }
+@keyframes ad-fade-6{ 0%,11.6%{opacity:1} 16.6%,95%{opacity:0} 100%{opacity:1} }
+
+/* Όποιος έχει ζητήσει από το σύστημά του «λιγότερη κίνηση» βλέπει μόνο
+   την πρώτη εικόνα, ακίνητη. Δεν είναι ευγένεια: για κάποιους η κίνηση
+   στην άκρη του ματιού φέρνει ζάλη ή ημικρανία. */
+@media (prefers-reduced-motion: reduce){
+  .ad-slide{ animation: none; }
+  .ad-slide[style*="--i:0"]{ opacity: 1; }
+}
+
 /* Πάνω σε γεμάτη θέση η λέξη φεύγει από το κέντρο και κάθεται στη
    γωνία: σήμανση, όχι περιεχόμενο. Μένει όμως ΠΑΝΤΑ — ο αναγνώστης
    έχει δικαίωμα να ξέρει τι είναι διαφήμιση. */
