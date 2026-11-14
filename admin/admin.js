@@ -565,15 +565,17 @@ function autoNewest(){
 // Οι σφραγίδες του pinnedAt ΔΕΝ χρειάζονται καθάρισμα εδώ: κάθε
 // Αποθήκευση περνάει από την pinSfragida(), που κρατάει ώρα μόνο για
 // όσα refs υπάρχουν ακόμα — με άδεια λίστα σβήνει το κλειδί μόνη της.
+//
+// «Όλα αυτόματα» σημαίνει ΟΛΑ: φεύγουν και τα κρυμμένα του ✕, αλλιώς η
+// λίστα θα γύριζε στο αυτόματο με τρύπες που κανείς δεν θυμάται γιατί
+// είναι εκεί.
 var KATHARISMA = {
   latest: {
-    poso: function (){ return ltList().length; },
+    poso: function (){ return ltList().length + kryRefs('latest', 'latest').length; },
     ti: function (){ return 'τη ροή «Τελευταία»'; },
     svise: function (){
       state.curation.latest = [];
-      // Ό,τι είχε βγει με το ✕ ξαναμπαίνει στο παιχνίδι — αλλιώς η ροή
-      // θα γύριζε στο αυτόματο με τρύπες που κανείς δεν θυμάται.
-      lt.gone = {};
+      kryOla('latest');
       drawLatest();
       drawLtPicks();
       ltDirty(true);
@@ -581,10 +583,11 @@ var KATHARISMA = {
   },
 
   mustread: {
-    poso: function (){ return mrList().length; },
+    poso: function (){ return mrList().length + kryRefs('mustRead', 'mustRead').length; },
     ti: function (){ return 'το Must read'; },
     svise: function (){
       state.curation.mustRead = [];
+      kryOla('mustRead');
       drawMustRead();
       drawMrPicks();
       mrDirty(true);
@@ -592,10 +595,11 @@ var KATHARISMA = {
   },
 
   apopseis: {
-    poso: function (){ return opList().length; },
+    poso: function (){ return opList().length + kryRefs('opinions', 'opinions').length; },
     ti: function (){ return 'τις Απόψεις'; },
     svise: function (){
       state.curation.opinions = [];
+      kryOla('opinions');
       drawOpinions();
       drawOpPicks();
       opDirty(true);
@@ -605,9 +609,16 @@ var KATHARISMA = {
   // Μόνο το θέμα που είναι ανοιχτό. Καθάρισμα και των δεκαπέντε μαζί
   // δεν το ζήτησε κανείς, και θα ήταν το πιο ακριβό λάθος της οθόνης.
   themata: {
-    poso: function (){ return th.open ? thPicks(th.open).length : 0; },
+    poso: function (){
+      if (!th.open) return 0;
+      return thPicks(th.open).length
+        + kryRefs('topics', pinKey('topics', th.open)).length;
+    },
     ti: function (){ return 'το θέμα «' + th.open + '»'; },
-    svise: function (){ thSetPicks(th.open, []); },
+    svise: function (){
+      kryOla(pinKey('topics', th.open));
+      thSetPicks(th.open, []);
+    },
   },
 };
 
@@ -1345,6 +1356,141 @@ function pinAgain(key, ref){
 }
 
 // ---------------------------------------------------------------------
+// Τι βγήκε με το ✕
+// ---------------------------------------------------------------------
+//
+// Το ✕ έσβηνε μόνο το καρφίτσωμα. Επειδή όμως το αυτόματο γέμισμα είναι
+// χρονολογικό, το ίδιο πράγμα ξαναέμπαινε αμέσως από κάτω — ή το
+// ξανάβαζε το επόμενο build. Ο μόνος τρόπος να κρατήσει ήταν να
+// κλειδωθούν ΟΛΕΣ οι θέσεις ως καρφιτσωμένα, που πάγωνε τη ροή: τίποτα
+// φρέσκο δεν ανέβαινε, και η αρχική κουβαλούσε ό,τι έτυχε να είναι
+// ορατό τη στιγμή που πατήθηκε το ✕.
+//
+// Άρα το «όχι αυτό» γράφεται ρητά, στο curation.hidden, με την ώρα του.
+// Το build το τιμά (kryfa()) και ζει όσο και ένα καρφίτσωμα της ίδιας
+// λίστας — μετά η επικαιρότητα έχει προχωρήσει και το πράγμα δεν
+// ξαναβγαίνει μόνο του από ημερομηνία.
+
+function kryMap(key){
+  return (state.curation.hidden || {})[key] || {};
+}
+
+// Μόνο όσα ισχύουν ακόμα. Τα ληγμένα μένουν στο αρχείο μέχρι την
+// επόμενη αποθήκευση — τα καθαρίζει το kryKatharise().
+function kryRefs(lista, key){
+  var map = kryMap(key);
+  var meres = pin.life[lista];
+  var orio = meres ? Date.now() - meres * 864e5 : null;
+
+  return Object.keys(map).filter(function (ref) {
+    var t = Date.parse(map[ref] || '');
+    if (orio === null || isNaN(t)) return true;
+    return t >= orio;
+  });
+}
+
+function kryvo(key, ref){
+  if (!state.curation.hidden) state.curation.hidden = {};
+  if (!state.curation.hidden[key]) state.curation.hidden[key] = {};
+  state.curation.hidden[key][ref] = new Date().toISOString();
+}
+
+function kryXana(key, ref){
+  var map = (state.curation.hidden || {})[key];
+  if (!map) return;
+  delete map[ref];
+  if (!Object.keys(map).length) delete state.curation.hidden[key];
+  if (!Object.keys(state.curation.hidden).length) delete state.curation.hidden;
+}
+
+// Ξανακαρφιτσώνεται με το χέρι: φεύγει ΚΑΘΕ μορφή του ίδιου πράγματος
+// από τα κρυμμένα. Το ίδιο επεισόδιο μπορεί να κρύφτηκε ως διεύθυνση
+// σελίδας και να ξαναμπαίνει ως κωδικός — αλλιώς θα έμενε κρυμμένο και
+// το καρφίτσωμα θα φαινόταν να μην πιάνει.
+function kryXanaOles(key, ref){
+  var map = (state.curation.hidden || {})[key];
+  if (!map) return;
+
+  var it = findItemByRef(ref);
+  Object.keys(map).forEach(function (k) {
+    if (k === ref || (it && isChosen(it, k))) delete map[k];
+  });
+
+  if (!Object.keys(map).length) kryXana(key, '');
+}
+
+function kryOla(key){
+  if (state.curation.hidden) delete state.curation.hidden[key];
+}
+
+// Κρυμμένο; Περνάει από isChosen, γιατί το ίδιο πράγμα γράφεται άλλοτε
+// ως κωδικός και άλλοτε ως διεύθυνση σελίδας.
+function kryfoIt(lista, key, it, ref){
+  return kryRefs(lista, key).some(function (k) {
+    if (it) return isChosen(it, k);
+    return ref ? isChosen({ id: '', ref: ref }, k) : false;
+  });
+}
+
+// Τα ληγμένα φεύγουν στην αποθήκευση: δεν έχουν καμία επίδραση πια, και
+// δεν θέλουμε το curation.json να γεμίσει μαύρες λίστες του Ιουνίου.
+function kryKatharise(lista, key){
+  var map = (state.curation.hidden || {})[key];
+  if (!map) return;
+  var zonta = kryRefs(lista, key);
+  Object.keys(map).forEach(function (ref) {
+    if (zonta.indexOf(ref) < 0) delete map[ref];
+  });
+  if (!Object.keys(map).length) kryXana(key, '');
+}
+
+// Η γραμμή «κρυμμένα: 3 — επαναφορά». Υπάρχει ώστε να μη χάνεται τίποτα
+// στα κρυφά: ό,τι βγήκε με το ✕ φαίνεται, και γυρίζει με ένα πάτημα.
+function kryGrammi(lista, key, poio){
+  var refs = kryRefs(lista, key);
+  if (!refs.length) return '';
+
+  return '<p class="krynote">Κρυμμένα με το ✕: <strong>' + refs.length + '</strong>'
+    + ' — δεν τα ξαναβάζει το site μόνο του. '
+    + refs.map(function (ref) {
+      var it = findItemByRef(ref);
+      return '<button type="button" class="pinagain" data-kry-back="' + esc(ref) + '"'
+        + ' data-kry-poio="' + esc(poio) + '">↩ '
+        + esc(it ? it.title.slice(0, 40) : ref) + '</button>';
+    }).join(' ')
+    + '</p>';
+}
+
+// Η γραμμή μπαίνει ΚΑΤΩ από τις θέσεις, σαν υποσέλιδο της λίστας: δεν
+// είναι θέση της αρχικής, είναι ο λογαριασμός του τι βγήκε.
+function kryfaMeta(box, lista, key, poio){
+  var old = box.parentNode.querySelector('.krynote');
+  if (old) old.remove();
+
+  var html = kryGrammi(lista, key, poio);
+  if (html) box.insertAdjacentHTML('afterend', html);
+}
+
+// Η επαναφορά. Το «poio» λέει σε ποια λίστα ανήκει το κουμπί — για τα
+// θέματα κουβαλά και το όνομα του θέματος, γιατί κάθε θέμα έχει δικά του.
+function kryEpanafora(poio, ref){
+  var p = String(poio || '');
+
+  if (p.indexOf('topics:') === 0) {
+    kryXana(pinKey('topics', p.slice(7)), ref);
+    drawThCat();
+    thDirty(true);
+    return;
+  }
+
+  kryXana(p, ref);
+
+  if (p === 'latest') { drawLatest(); drawLtPicks(); ltDirty(true); }
+  else if (p === 'mustRead') { drawMustRead(); drawMrPicks(); mrDirty(true); }
+  else if (p === 'opinions') { drawOpinions(); drawOpPicks(); opDirty(true); }
+}
+
+// ---------------------------------------------------------------------
 // Κατηγορίες — διόρθωση εκεί που η αυτόματη πέφτει έξω
 // ---------------------------------------------------------------------
 //
@@ -1800,8 +1946,11 @@ function thProvoli(name){
     else rows.push({ item: null, ref: ref, auto: false });
   });
 
+  var key = pinKey('topics', name);
   for (var i = 0; i < pool.length && rows.length < thPosesTheseis(name); i++) {
     if (taken[pool[i].ref]) continue;
+    // Ό,τι βγήκε με το ✕ από ΑΥΤΟ το θέμα δεν ξαναμπαίνει μόνο του.
+    if (kryfoIt('topics', key, pool[i])) continue;
     taken[pool[i].ref] = true;
     rows.push({ item: pool[i], ref: pool[i].ref, auto: true });
   }
@@ -1854,8 +2003,10 @@ function drawThCat(){
         : '<button type="button" data-thc-up="' + i + '" aria-label="Πάνω"'
           + (i === 0 ? ' disabled' : '') + '>↑</button>'
           + '<button type="button" data-thc-down="' + i + '" aria-label="Κάτω"'
-          + (i === thPicks(name).length - 1 ? ' disabled' : '') + '>↓</button>'
-          + '<button type="button" data-thc-del="' + i + '" aria-label="Αφαίρεση">✕</button>')
+          + (i === thPicks(name).length - 1 ? ' disabled' : '') + '>↓</button>')
+      // Το ✕ ΚΑΙ στις αυτόματες: «αυτό όχι σε αυτό το θέμα» είναι ο
+      // λόγος που ανοίγει κανείς την καρτέλα.
+      + '<button type="button" data-thc-del="' + i + '" aria-label="Αφαίρεση">✕</button>'
       + '</span></div>';
   }).join('');
 
@@ -1867,6 +2018,7 @@ function drawThCat(){
       : n + (n === 1 ? ' καρφιτσωμένο' : ' καρφιτσωμένα')
         + (n > theseis ? ' — τα πέρα από τη ' + theseis + 'η θέση δεν θα φανούν.' : '.'));
 
+  kryfaMeta($('[data-th-cat-slots]'), 'topics', pinKey('topics', name), 'topics:' + name);
   autoAllButton('themata', 'Καθάρισε το «' + name + '» — πίσω στο αυτόματο');
 
   drawThCatPicks();
@@ -1905,13 +2057,19 @@ function drawThCatPicks(){
 
 function thcToggle(ref){
   var name = th.open;
+  var key = pinKey('topics', name);
   var list = thPicks(name).slice();
   var at = -1;
 
   list.forEach(function (r, i) { if (r === ref) at = i; });
 
-  if (at > -1) list.splice(at, 1);
-  else list.push(ref);
+  if (at > -1) {
+    list.splice(at, 1);
+    kryvo(key, ref);
+  } else {
+    kryXanaOles(key, ref);              // το διάλεξε ο ίδιος, το εννοεί
+    list.push(ref);
+  }
 
   thSetPicks(name, list);
 }
@@ -1924,10 +2082,22 @@ function thcMove(i, step){
   thSetPicks(th.open, list);
 }
 
+// Το ✕ σε θέση θέματος — καρφιτσωμένη ή αυτόματη. Ο δείκτης μετράει
+// ΓΡΑΜΜΕΣ της οθόνης, όχι θέσεις της λίστας: πρέπει να περάσει από το
+// thProvoli() για να βρει τι δείχνει πραγματικά εκείνη η γραμμή.
 function thcRemove(i){
-  var list = thPicks(th.open).slice();
-  list.splice(i, 1);
-  thSetPicks(th.open, list);
+  var name = th.open;
+  var r = thProvoli(name)[i];
+  if (!r) return;
+
+  kryvo(pinKey('topics', name), r.ref);
+
+  var list = thPicks(name).slice();
+  var at = -1;
+  list.forEach(function (ref, n) { if (ref === r.ref) at = n; });
+  if (at > -1) list.splice(at, 1);
+
+  thSetPicks(name, list);
 }
 
 function thDirty(on){
@@ -1939,6 +2109,7 @@ function saveThemata(){
   // Κάθε καρφιτσωμένο παίρνει ώρα, για να ξέρει το build πότε λήγει.
   th.list.forEach(function (t) {
     pinSfragida(pinKey('topics', t.name), thPicks(t.name));
+    kryKatharise('topics', pinKey('topics', t.name));
   });
 
   say('Αποθηκεύεται…');
@@ -2075,11 +2246,6 @@ var lt = {
   shown: PAGE,
   find: '',
   kind: '',
-  // Ό,τι έβγαλε ο δημοσιογράφος με το ✕ μέσα σε αυτή τη συνεδρία. Το
-  // flow.json το δείχνει ακόμα — είναι η ροή του προηγούμενου build —
-  // και χωρίς αυτή τη λίστα θα ξαναεμφανιζόταν αμέσως από κάτω, σαν να
-  // μην πάτησε τίποτα.
-  gone: {},
 };
 
 function ltList(){
@@ -2112,14 +2278,75 @@ function loadFlow(){
   }).catch(function () { return null; });
 }
 
-// ΕΝΑ όνομα για το ίδιο πράγμα, όποια μορφή κι αν έχει ο σύνδεσμός του.
+// Οι υποψήφιες για το αυτόματο γέμισμα, με σειρά ημερομηνίας.
 //
-// Το ίδιο επεισόδιο γράφεται «Buzzsprout-20097501» στο curation και
-// «episode/20097501-...html» στο flow.json. Χωρίς κοινό κλειδί, ό,τι
-// βγάζαμε με το ✕ ξαναεμφανιζόταν από την άλλη πηγή.
-function ltKey(ref){
-  var it = findItemByRef(ref);
-  return it ? it.kind + ':' + it.id : ref;
+// ΔΥΟ πηγές, και η σειρά τους έχει λόγο:
+//
+//   1. Το flow.json, μόνο οι ΜΗ καρφιτσωμένες γραμμές του. Αυτές τις
+//      διάλεξε το build, άρα ξέρουν ό,τι ξέρει εκείνο: πετάνε τα βίντεο
+//      με δίδυμο podcast, κρατούν έξω το πρωτοσέλιδο, αγνοούν την
+//      ΕΠΙΚΑΙΡΟΤΗΤΑ. Οι καρφιτσωμένες γραμμές του μένουν έξω επίτηδες:
+//      βρίσκονται εκεί ΜΟΝΟ γιατί κάποιος τις είχε καρφιτσώσει, και
+//      όταν ξεκαρφιτσώνονταν γύριζαν ως «αυτόματο» στην παλιά ψηλή τους
+//      θέση — ακριβώς αυτό που έμοιαζε με χαλασμένο διαχειριστικό.
+//
+//   2. Τα ζωντανά δεδομένα. Το flow.json είναι η ροή του ΠΡΟΗΓΟΥΜΕΝΟΥ
+//      build: ό,τι ανέβηκε από τότε δεν υπάρχει μέσα, και το απόθεμά
+//      του είναι έξι γραμμές. Χωρίς δεύτερη πηγή, βγάζοντας κάτι
+//      έμπαινε ό,τι είχε μείνει από προχθές αντί για το σημερινό.
+//
+// Οι ειδήσεις του newshub.gr μένουν έξω: η ροή δεν τις παίρνει ποτέ
+// (δες flowSection στο build.js) — θα προτείναμε κάτι που δεν βγαίνει.
+function ltAuto(){
+  var out = [];
+  var seen = {};
+
+  var vale = function (ref, item){
+    var key = item ? item.kind + ':' + item.id : ref;
+    if (seen[key]) return;
+    seen[key] = true;
+    out.push({ ref: ref, item: item, auto: true });
+  };
+
+  ltFlow().forEach(function (f) {
+    if (f.pinned) return;
+    // Καρφιτσώνεται ΜΕ ΤΗ ΔΙΕΥΘΥΝΣΗ ΤΗΣ ΣΕΛΙΔΑΣ, όπως τη γράφει το build:
+    // εκεί η sameItem() τη συγκρίνει ίδια-με-ίδια, χωρίς μαντεψιές.
+    vale(f.href, findItemByRef(f.href) || {
+      kind: f.kind, title: f.title, who: f.who,
+      image: f.image, date: f.date,
+    });
+  });
+
+  var epi = ltEpisodeTitles();
+  state.items.forEach(function (it) {
+    if (it.kind === 'news') return;
+    if (it.kind === 'video' && epi[ltTitleKey(it.title)]) return;   // έχει δίδυμο
+    vale(it.ref, it);
+  });
+
+  return out.sort(function (a, b) {
+    return new Date(b.item.date) - new Date(a.item.date);
+  });
+}
+
+// Πρόχειρη εκδοχή του videoHasTwin() του build: το ίδιο θέμα βγαίνει
+// συχνά και ως βίντεο και ως επεισόδιο, και η ροή κρατά το επεισόδιο.
+// Εδώ αρκεί η σύγκριση τίτλων — αν ξεφύγει ένα, χάνεται μια πρόταση,
+// δεν χαλάει το site.
+function ltTitleKey(t){
+  var s = String(t == null ? '' : t);
+  var at = s.indexOf(':');
+  if (at > 0 && at < 40) s = s.slice(at + 1);   // πετάμε το όνομα μπροστά
+  return flat(s).slice(0, 60);
+}
+
+function ltEpisodeTitles(){
+  var map = {};
+  state.items.forEach(function (it) {
+    if (it.kind === 'podcast') map[ltTitleKey(it.title)] = true;
+  });
+  return map;
 }
 
 // Μια γραμμή ανά θέση: πρώτα τα καρφιτσωμένα, μετά όσα βάζει μόνο του
@@ -2129,26 +2356,32 @@ function ltRows(){
     return { ref: ref, item: findItemByRef(ref), auto: false };
   });
 
-  ltFlow().forEach(function (f) {
+  // Το πρωτοσέλιδο και τα τέσσερα από κάτω δεν ξαναμπαίνουν στη ροή —
+  // το build τα κρατά έξω (onTop). Προτείνοντάς τα, ο δημοσιογράφος θα
+  // έβλεπε στη θέση 03 κάτι που δεν βγαίνει ποτέ εκεί.
+  var panw = [state.curation.featured]
+    .concat(state.curation.secondary || [])
+    .filter(Boolean);
+
+  // Η γραμμή του flow.json δεν έχει πάντα κωδικό — τότε κρίνεται από τη
+  // διεύθυνσή της, που είναι το μόνο που ξέρουμε για αυτή.
+  var tairiazei = function (c, ref){
+    return c.item && c.item.id
+      ? isChosen(c.item, ref)
+      : isChosen({ id: '', ref: c.ref }, ref);
+  };
+
+  ltAuto().forEach(function (c) {
     if (rows.length >= LATEST_SLOTS) return;
-    if (lt.gone[ltKey(f.href)]) return;
-    // Τα καρφιτσωμένα είναι ήδη πάνω — και το flow.json τα περιέχει.
+    if (kryfoIt('latest', 'latest', c.item && c.item.id ? c.item : null, c.ref)) return;
+    if (panw.some(function (ref) { return tairiazei(c, ref); })) return;
+
     var already = rows.some(function (r) {
-      return r.item ? isChosen(r.item, f.href) : r.ref === f.href;
+      return r.item ? isChosen(r.item, c.ref) : r.ref === c.ref;
     });
     if (already) return;
 
-    // Καρφιτσώνεται ΜΕ ΤΗ ΔΙΕΥΘΥΝΣΗ ΤΗΣ ΣΕΛΙΔΑΣ, όπως τη γράφει το build:
-    // εκεί η sameItem() τη συγκρίνει ίδια-με-ίδια, χωρίς μαντεψιές.
-    var it = findItemByRef(f.href);
-    rows.push({
-      ref: f.href,
-      item: it || {
-        kind: f.kind, title: f.title, who: f.who,
-        image: f.image, date: f.date,
-      },
-      auto: true,
-    });
+    rows.push(c);
   });
 
   return rows;
@@ -2249,8 +2482,9 @@ function drawLatest(){
       + (auto ? ' και ' + auto + ' αυτόματα από κάτω' : '') + ', με αυτή τη σειρά.';
 
   if (auto) {
-    note += ' Μόλις μετακινήσεις ή αφαιρέσεις κάτι, κλειδώνουν όλες οι θέσεις '
-      + 'όπως τις βλέπεις.';
+    note += ' Μόλις μετακινήσεις κάτι, κλειδώνουν όλες οι θέσεις όπως τις '
+      + 'βλέπεις. Το ✕ όχι: βγάζει μόνο εκείνο, και η θέση γεμίζει με το '
+      + 'επόμενο πιο πρόσφατο.';
   }
   if (pinned > LATEST_SLOTS) {
     note += ' Τα καρφιτσωμένα είναι περισσότερα από τις ' + LATEST_SLOTS
@@ -2262,6 +2496,7 @@ function drawLatest(){
   }
 
   $('[data-lt-note]').textContent = note;
+  kryfaMeta(box, 'latest', 'latest', 'latest');
   autoAllButton('latest');
 }
 
@@ -2303,10 +2538,10 @@ function ltToggle(ref){
 
   if (at > -1) {
     list.splice(at, 1);
-    lt.gone[ltKey(ref)] = true;      // ίδιος λόγος με το ✕ — δες lt.gone
+    kryvo('latest', ref);            // ίδιος λόγος με το ✕ — δες kryvo()
   } else {
-    // Ξαναμπαίνει: ό,τι είχε βγει δεν ισχύει πια.
-    delete lt.gone[ltKey(ref)];
+    // Ξαναμπαίνει με το χέρι: το «όχι αυτό» δεν ισχύει πια.
+    kryXanaOles('latest', ref);
     list.push(ref);
   }
 
@@ -2326,16 +2561,30 @@ function ltFix(){
   state.curation.latest = rows.map(function (r) { return r.ref; });
 }
 
+// Το ✕ βγάζει ΕΝΑ πράγμα, και τίποτα άλλο.
+//
+// Μέχρι τις 14 Νοεμβρίου 2026 κλείδωνε και τις εννιά θέσεις ως
+// καρφιτσωμένα (δύο φορές ltFix), ώστε να κρατήσει η αφαίρεση μετά το
+// build. Το αποτέλεσμα ήταν ότι ένα ✕ πάγωνε όλη τη ροή: η θέση που
+// άδειαζε γέμιζε με ό,τι είχε μείνει στο flow.json του προηγούμενου
+// build — συχνά παλιότερο από τα καρφιτσωμένα — και τα φρέσκα δεν
+// ανέβαιναν ποτέ. Τώρα η αφαίρεση κρατάει μόνη της, μέσα από το
+// curation.hidden, και οι υπόλοιπες θέσεις μένουν αυτόματες.
 function ltRemove(i){
-  ltFix();
+  var rows = ltRows();
+  var r = rows[i];
+  if (!r) return;
+
+  // Το «όχι αυτό» γράφεται για ΟΛΕΣ τις περιπτώσεις — και για αυτόματη
+  // θέση. Αλλιώς το επόμενο build θα το ξανάβαζε στην ίδια θέση.
+  kryvo('latest', r.ref);
+
   var list = ltList();
-  if (i < 0 || i >= list.length) return;
-  lt.gone[ltKey(list[i])] = true;
-  list.splice(i, 1);
+  var at = -1;
+  list.forEach(function (ref, n) { if (ref === r.ref) at = n; });
+  if (at > -1) list.splice(at, 1);
   state.curation.latest = list;
-  // Η θέση που άδειασε γεμίζει με το επόμενο πρόσφατο — και κλειδώνει
-  // κι αυτή, ώστε οι εννιά θέσεις να μένουν ακριβώς όπως φαίνονται.
-  ltFix();
+
   drawLatest();
   drawLtPicks();
   ltDirty(true);
@@ -2361,6 +2610,7 @@ function ltDirty(on){
 
 function saveLatest(){
   pinSfragida('latest', state.curation.latest || []);
+  kryKatharise('latest', 'latest');
 
   say('Αποθηκεύεται…');
   api('curation', 'PUT', state.curation).then(function () {
@@ -2450,6 +2700,8 @@ function mrPreview(){
     for (var i = 0; i < pool.length && chosen.length < MUST; i++) {
       var it = pool[i];
       if (taken[it.ref]) continue;
+      // Ό,τι βγήκε με το ✕ δεν ξαναμπαίνει μόνο του — δες kryvo().
+      if (kryfoIt('mustRead', 'mustRead', it)) continue;
       if (pass === 0 && cats[it.who]) continue;   // πρώτο πέρασμα: μία ανά κατηγορία
       taken[it.ref] = true;
       cats[it.who] = true;
@@ -2485,8 +2737,10 @@ function drawMustRead(){
       + (r.auto
         ? '<span class="pill pill--draft">αυτόματο</span>'
         : '<button type="button" data-mr-up="' + i + '" aria-label="Πάνω"'
-          + (i === 0 ? ' disabled' : '') + '>↑</button>'
-          + '<button type="button" data-mr-del="' + esc(r.ref) + '" aria-label="Αφαίρεση">✕</button>')
+          + (i === 0 ? ' disabled' : '') + '>↑</button>')
+      // Το ✕ ΚΑΙ στις αυτόματες: «αυτή όχι» είναι η πιο συχνή κίνηση,
+      // και πριν χρειαζόταν πρώτα να καρφιτσωθούν οι άλλες τρεις.
+      + '<button type="button" data-mr-del="' + esc(r.ref) + '" aria-label="Αφαίρεση">✕</button>'
       + '</span></div>';
   }).join('');
 
@@ -2495,6 +2749,7 @@ function drawMustRead(){
     ? 'Καμία χειροκίνητη επιλογή — το site βάζει μόνο του τα 4 πιο πρόσφατα, ένα από κάθε κατηγορία.'
     : n + ' από 4 διαλεγμένα με το χέρι· τις υπόλοιπες θέσεις τις γεμίζει το site.';
 
+  kryfaMeta(box, 'mustRead', 'mustRead', 'mustRead');
   autoAllButton('mustread');
 }
 
@@ -2535,15 +2790,36 @@ function mrToggle(ref){
 
   if (at > -1) {
     list.splice(at, 1);                 // ήταν μέσα — βγαίνει
+    kryvo('mustRead', ref);
   } else {
     if (list.length >= MUST) {
       say('Οι τέσσερις θέσεις είναι γεμάτες. Αφαίρεσε μία πρώτα.', 'bad');
       return;
     }
+    kryXanaOles('mustRead', ref);       // το διάλεξε ο ίδιος, το εννοεί
     list.push(ref);
   }
 
   state.curation.mustRead = list;
+  drawMustRead();
+  drawMrPicks();
+  mrDirty(true);
+}
+
+// Το ✕ σε θέση του Must read — καρφιτσωμένη ή αυτόματη.
+//
+// Χωρίς το κρυμμένο, βγάζοντας μια είδηση το γέμισμα έβαζε αμέσως την
+// ΙΔΙΑ από κάτω: οι υποψήφιες είναι οι πιο πρόσφατες ειδήσεις, και
+// εκείνη ήταν ακριβώς μία από αυτές.
+function mrRemove(ref){
+  kryvo('mustRead', ref);
+
+  var list = (state.curation.mustRead || []).slice();
+  var at = -1;
+  list.forEach(function (r, i) { if (r === ref) at = i; });
+  if (at > -1) list.splice(at, 1);
+  state.curation.mustRead = list;
+
   drawMustRead();
   drawMrPicks();
   mrDirty(true);
@@ -2556,6 +2832,7 @@ function mrDirty(on){
 
 function saveMustRead(){
   pinSfragida('mustRead', state.curation.mustRead || []);
+  kryKatharise('mustRead', 'mustRead');
 
   say('Αποθηκεύεται…');
   api('curation', 'PUT', state.curation).then(function () {
@@ -2882,6 +3159,8 @@ function opPreview(){
 
   for (var i = 0; i < all.length && rows.length < OPINIONS; i++) {
     if (taken[all[i].url]) continue;
+    // Ό,τι βγήκε με το ✕ δεν ξαναμπαίνει μόνο του — δες kryvo().
+    if (kryfoIt('opinions', 'opinions', { id: all[i].id, ref: all[i].url })) continue;
     taken[all[i].url] = true;
     rows.push({ ref: all[i].url, item: all[i], auto: true });
   }
@@ -2939,6 +3218,7 @@ function drawOpinions(){
   }
 
   $('[data-op-note]').textContent = note;
+  kryfaMeta($('[data-op-slots]'), 'opinions', 'opinions', 'opinions');
   autoAllButton('apopseis');
 }
 
@@ -2961,12 +3241,24 @@ function opMove(i, step){
   opDirty(true);
 }
 
+// Το ✕ βγάζει μόνο αυτό που δείχνει — και κρατάει.
+//
+// Πριν, το opFix() κλείδωνε πρώτα και τις έξι θέσεις ως χειροκίνητες και
+// μετά έσβηνε μία. Η θέση γέμιζε με την επόμενη πιο πρόσφατη, αλλά οι
+// άλλες πέντε έμεναν παγωμένες — και, χωρίς κρυμμένο, η άποψη που
+// έβγαλες ήταν συχνά αυτή που ξαναέμπαινε αμέσως από κάτω.
 function opRemove(i){
-  opFix();
+  var rows = opPreview();
+  var r = rows[i];
+  if (!r) return;
+
+  kryvo('opinions', r.ref);
+
   var list = opList();
-  if (i < 0 || i >= list.length) return;
-  list.splice(i, 1);
+  var at = list.indexOf(r.ref);
+  if (at > -1) list.splice(at, 1);
   state.curation.opinions = list;
+
   drawOpinions();
   drawOpPicks();
   opDirty(true);
@@ -2975,7 +3267,13 @@ function opRemove(i){
 function opToggle(url){
   var list = opList();
   var at = list.indexOf(url);
-  if (at > -1) list.splice(at, 1); else list.push(url);
+  if (at > -1) {
+    list.splice(at, 1);
+    kryvo('opinions', url);
+  } else {
+    kryXanaOles('opinions', url);       // το διάλεξε ο ίδιος, το εννοεί
+    list.push(url);
+  }
   state.curation.opinions = list;
   drawOpinions();
   drawOpPicks();
@@ -3020,6 +3318,7 @@ function opDirty(on){
 
 function saveOpinions(){
   pinSfragida('opinions', state.curation.opinions || []);
+  kryKatharise('opinions', 'opinions');
 
   say('Αποθηκεύεται…');
   api('curation', 'PUT', state.curation).then(function () {
@@ -3239,7 +3538,7 @@ function wireOpinions(){
 function wireMustRead(){
   $('[data-mr-slots]').addEventListener('click', function (e) {
     var del = e.target.closest('[data-mr-del]');
-    if (del) { mrToggle(del.dataset.mrDel); return; }
+    if (del) { mrRemove(del.dataset.mrDel); return; }
 
     var up = e.target.closest('[data-mr-up]');
     if (up) {
@@ -5802,7 +6101,12 @@ function wire(){
   // εμφανίζεται σε τέσσερις διαφορετικές καρτέλες.
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-pin-again]');
-    if (b) pinAgain(b.dataset.pinKey, b.dataset.pinAgain);
+    if (b) { pinAgain(b.dataset.pinKey, b.dataset.pinAgain); return; }
+
+    // «↩ επαναφορά»: ό,τι είχε βγει με το ✕ ξαναμπαίνει στο αυτόματο.
+    // Ίδιος λόγος για έναν ακροατή — το κουμπί ζει σε τέσσερις καρτέλες.
+    var k = e.target.closest('[data-kry-back]');
+    if (k) kryEpanafora(k.dataset.kryPoio, k.dataset.kryBack);
   });
 
   wireCats();

@@ -1843,6 +1843,45 @@ function freshPins(lista, refs, kleidi){
   });
 }
 
+// ---- τι έβγαλε ρητά ο δημοσιογράφος με το ✕ ----
+//
+// Το ✕ δεν αρκεί να σβήσει ένα καρφίτσωμα: το αυτόματο γέμισμα είναι
+// χρονολογικό, οπότε στο επόμενο build το ίδιο πράγμα ξαναέμπαινε μόνο
+// του, συχνά στην ίδια θέση. Μέχρι τις 14 Νοεμβρίου 2026 ο μόνος τρόπος
+// να κρατήσει το ✕ ήταν να καρφιτσωθούν ΟΛΕΣ οι θέσεις — που πάγωνε τη
+// ροή: τίποτα φρέσκο δεν ανέβαινε ποτέ, και η αρχική κουβαλούσε για
+// βδομάδες ό,τι έτυχε να είναι ορατό τη στιγμή που πατήθηκε το ✕.
+//
+// Άρα το «όχι αυτό» γράφεται ρητά, στο curation.hidden, με ημερομηνία:
+//
+//   "hidden": { "latest": { "episode/2011....html": "2026-11-14T09:00:00Z" } }
+//
+// Ζει όσο και ένα καρφίτσωμα της ίδιας λίστας (PIN_ZOI) — μετά η
+// επικαιρότητα έχει προχωρήσει, το πράγμα δεν θα ξαναβγεί μόνο του
+// από ημερομηνία, και δεν κρατάμε αιώνιες μαύρες λίστες.
+//
+// Πιάνει ΚΑΙ το δίδυμο: βγάζεις το βίντεο, δεν σου γυρίζει το podcast.
+//
+// Τα καρφιτσωμένα ΔΕΝ περνούν από εδώ. Αν κάποιος βγάλει κάτι και μετά
+// το καρφιτσώσει ο ίδιος, το εννοεί — το χέρι υπερισχύει.
+function kryfa(lista, kleidi){
+  const stamps = (curation().hidden || {})[kleidi || lista] || {};
+  const life = PIN_ZOI[lista];
+  const orio = life ? Date.now() - life * 864e5 : null;
+
+  const zonta = [];
+  for (const [ref, pote] of Object.entries(stamps)) {
+    if (typeof ref !== 'string' || !ref.trim()) continue;
+    const t = Date.parse(pote || '');
+    // Χωρίς ημερομηνία θεωρείται φρέσκο — ίδιος λόγος με το freshPins().
+    if (orio !== null && !isNaN(t) && t < orio) continue;
+    zonta.push(refsDidimou(ref.trim()));
+  }
+
+  if (!zonta.length) return () => false;
+  return (it) => zonta.some((refs) => sameOrTwin(it, refs));
+}
+
 // Τα 4 από κάτω. Όσα όρισε ο συντάκτης πρώτα, μετά γεμίζουμε εναλλάξ
 // είδηση–podcast ώστε να μη βγαίνουν τέσσερα ίδιου τύπου.
 // Τα καρφιτσωμένα της ροής «Τελευταία»: ποια θέλει ο δημοσιογράφος να
@@ -4192,7 +4231,12 @@ function homeItems(group){
 
   const all = (curation().categoryPicks || {})[key];
   const picks = Array.isArray(all) ? freshPins('topics', all, `cat:${key}`) : null;
-  let out = group.items;
+
+  // Ό,τι βγήκε με το ✕ από ΑΥΤΟ το θέμα. Ξεχωριστό κλειδί ανά θέμα, όπως
+  // και τα καρφιτσωμένα: το ίδιο επεισόδιο μπορεί να μη χωράει στην
+  // «Κρήτη» και να έχει θέση στην «Οικονομία».
+  const kryfoTh = kryfa('topics', `cat:${key}`);
+  let out = group.items.filter((it) => !kryfoTh(it));
 
   if (Array.isArray(picks) && picks.length) {
     // Ό,τι δεν βρέθηκε αγνοείται σιωπηλά: ένα καρφιτσωμένο επεισόδιο
@@ -4201,6 +4245,8 @@ function homeItems(group){
     const taken = new Set();
     const first = [];
 
+    // Το καρφιτσωμένο ψάχνεται σε ΟΛΟ το θέμα, όχι στο φιλτραρισμένο:
+    // αν κάποιος το έβγαλε και μετά το καρφίτσωσε, το εννοεί.
     for (const ref of picks) {
       const refs = refsDidimou(ref);
       const hit = group.items.find((it) => !taken.has(it) && sameOrTwin(it, refs));
@@ -4208,7 +4254,7 @@ function homeItems(group){
       else console.warn(`ΠΡΟΣΟΧΗ: το καρφιτσωμένο «${ref}» δεν είναι στο θέμα «${group.name}»`);
     }
 
-    out = first.concat(group.items.filter((it) => !taken.has(it)));
+    out = first.concat(out.filter((it) => !taken.has(it)));
   }
 
   homeCache.set(key, out);
@@ -4647,12 +4693,15 @@ function pickMustRead(articles, curation, taken = new Set()){
   const have = new Set(chosen.map((a) => a.url));
   const seenCat = new Set(chosen.map((a) => a.category));
 
+  const kryfoMr = kryfa('mustRead');
+
   // Δύο περάσματα: πρώτα ένα ανά κατηγορία, μετά ό,τι μένει — αλλιώς με
   // λίγες κατηγορίες στο feed η ζώνη θα έβγαινε μισοάδεια.
   for (const strict of [true, false]) {
     for (const a of articles) {
       if (chosen.length >= MUST_COUNT) break;
       if (have.has(a.url) || taken.has(a.url)) continue;
+      if (kryfoMr({ id: a.id, href: a.url, source: a.url })) continue;
       if (strict && seenCat.has(a.category)) continue;
       chosen.push(a);
       have.add(a.url);
@@ -4801,9 +4850,12 @@ function pickOpinions(articles, curation){
     if (onoma(a)) prosopa.add(onoma(a));
   };
 
+  const kryfoOp = kryfa('opinions');
+
   for (const a of all) {
     if (chosen.length >= OPINIONS_SHOWN) break;
     if (have.has(a.url)) continue;
+    if (kryfoOp({ id: a.id, href: a.url, source: a.url })) continue;
     if (onoma(a) && prosopa.has(onoma(a))) continue;
     vale(a);
   }
@@ -4813,6 +4865,7 @@ function pickOpinions(articles, curation){
   for (const a of all) {
     if (chosen.length >= OPINIONS_SHOWN) break;
     if (have.has(a.url)) continue;
+    if (kryfoOp({ id: a.id, href: a.url, source: a.url })) continue;
     vale(a);
   }
 
@@ -7024,7 +7077,9 @@ function main(){
   // εννιά θέσεις, τα κρατάμε ΟΛΑ: είναι ρητή επιλογή ανθρώπου, και δεν
   // κόβουμε σιωπηλά ό,τι ζήτησε να φαίνεται.
   const room = Math.max(FLOW_VISIBLE, flow.length);
+  const kryfoFlow = kryfa('latest');
   for (const it of recent) {
+    if (kryfoFlow(it)) continue;        // το έβγαλε άνθρωπος με το ✕
     pushFlow(it);
     if (flow.length >= room) break;
   }
@@ -7193,9 +7248,12 @@ ${intro(episodes[0], videos[0])}`,
   // η θέση που αδειάζει πρέπει να γεμίσει με ΑΥΤΟ που θα έβαζε το site —
   // αλλιώς το διαχειριστικό θα ξαναέλεγε «1 θέση με τα πιο πρόσφατα» και
   // θα χανόταν η εικόνα των εννιά.
+  //
+  // Τα κρυμμένα μένουν έξω κι από εδώ: το απόθεμα είναι ακριβώς «τι θα
+  // έβαζε το site», και το site δεν τα βάζει.
   const shownHrefs = new Set(shown.map((it) => it.href));
   const reserve = recent
-    .filter((it) => !shownHrefs.has(it.href) && !onTop.has(it.href))
+    .filter((it) => !shownHrefs.has(it.href) && !onTop.has(it.href) && !kryfoFlow(it))
     .slice(0, 6);
 
   const flowRow = (it, extra) => Object.assign({
