@@ -212,6 +212,17 @@ async function main(){
 
   for (const width of WIDTHS) {
     const ctx = await browser.newContext({ viewport: { width, height: 900 } });
+
+    // Το script του AdSense κόβεται εδώ, και δεν είναι ιδιοτροπία.
+    //
+    // Οι σελίδες ανοίγουν με «file://», όπου το pagead2 δεν απαντάει ποτέ.
+    // Τα async scripts ΚΑΘΥΣΤΕΡΟΥΝ το συμβάν load, άρα το goto περίμενε
+    // 30 δευτερόλεπτα ανά σελίδα και μετά τα παρατούσε όλα αμέτρητα.
+    //
+    // Δεν χάνουμε τίποτα: εδώ μετράμε αναλογίες εικόνων, και το AdSense
+    // δεν βάζει καμία εικόνα που να μετριέται από αυτόν τον έλεγχο.
+    await ctx.route('**/pagead2.googlesyndication.com/**', (r) => r.abort());
+
     for (const file of list) {
       const page = await ctx.newPage();
       try {

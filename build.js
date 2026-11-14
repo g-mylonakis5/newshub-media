@@ -72,6 +72,22 @@ const CF_ANALYTICS = '1c6e9c91e5cd4c0ebdbeb09703c977fe';
 const GOOGLE_VERIFY = '';
 const GA4 = 'G-VSQD1S3PN5';
 
+// 4) ADSENSE — ο εκδοτικός κωδικός του Google AdSense, «ca-pub-...».
+//
+//    ΚΕΝΟ = το site βγαίνει ακριβώς όπως πριν: κανένα ξένο script,
+//    καμία cookie διαφημιστικού δικτύου, και η σελίδα απορρήτου λέει
+//    «δεν υπάρχει καμία διαφημιστική εδώ». Γεμάτο = μπαίνει το script
+//    και αλλάζει ΜΟΝΟ του και το κείμενο του απορρήτου. Ένας διακόπτης,
+//    όχι δύο αλήθειες.
+//
+//    ΤΙ ΔΕΝ ΚΑΝΕΙ ΑΥΤΟ ΕΔΩ: δεν βάζει καμία θέση διαφήμισης. Είναι μόνο
+//    η ταυτοποίηση του site, αυτό που ζητάει το AdSense πριν εγκρίνει.
+//    Οι θέσεις μπαίνουν χωριστά, αφού εγκριθεί — και ΜΟΝΟ ως χειροκίνητα
+//    units σταθερού ύψους. Τα Auto ads μένουν κλειστά από το πάνελ:
+//    anchor και vignette σκεπάζουν το περιεχόμενο, που το απαγορεύει
+//    ρητά το αφεντικό.
+const ADSENSE = 'ca-pub-6446657266547680';
+
 const GREEK = {
   'α':'a','β':'v','γ':'g','δ':'d','ε':'e','ζ':'z','η':'i','θ':'th',
   'ι':'i','κ':'k','λ':'l','μ':'m','ν':'n','ξ':'x','ο':'o','π':'p',
@@ -454,6 +470,23 @@ function metriseis(){
   return out.length ? out.join('\n') + '\n' : '';
 }
 
+// Το script του AdSense.
+//
+// Μπαίνει ΜΕΤΑ το metriseis() και αυτό δεν είναι θέμα αισθητικής: εκεί
+// μέσα δηλώνεται το Consent Mode με ad_storage και ad_personalization
+// σε «denied». Αν το adsbygoogle.js φτάσει πρώτο, η πρώτη προβολή
+// φεύγει με διαφημιστικό cookie πριν απαντήσει ο επισκέπτης.
+//
+// async και τελευταίο στο <head>: η Google το θέλει στο head για να
+// ταυτοποιήσει το site, αλλά async σημαίνει ότι δεν μπλοκάρει τίποτα —
+// το περιεχόμενο ζωγραφίζεται πρώτο, όπως ζήτησε το αφεντικό.
+function adsenseTag(){
+  if (!ADSENSE) return '';
+
+  return `  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ADSENSE)}"
+     crossorigin="anonymous"></script>\n`;
+}
+
 // Η λωρίδα της συγκατάθεσης.
 //
 // Υπάρχει ΜΟΝΟ όταν υπάρχει Google Analytics. Όσο μετράμε μόνο με
@@ -468,13 +501,24 @@ function metriseis(){
 // φωτεινό «Αποδοχή» δεν είναι ελεύθερη επιλογή, και οι αρχές
 // προστασίας δεδομένων το λένε ρητά.
 function consentBar(depth = 0){
-  if (!GA4) return '';
+  if (!GA4 && !ADSENSE) return '';
 
   const up = depth === 0 ? '' : '../';
 
+  // Το κείμενο λέει ΟΛΟΥΣ τους λόγους. Μπάνερ που ζητάει άδεια για
+  // μετρήσεις και στην πράξη ανοίγει και διαφημιστικό δίκτυο δεν είναι
+  // έγκυρη συγκατάθεση.
+  const logos = GA4 && ADSENSE
+    ? 'Το Google Analytics μετράει πόσος κόσμος μας διαβάζει και το Google AdSense '
+      + 'φέρνει τις διαφημίσεις. Και τα δύο χρειάζονται cookies'
+    : ADSENSE
+      ? 'Οι διαφημίσεις έρχονται από το Google AdSense, που χρειάζεται cookies '
+        + 'για να σου δείξει εξατομικευμένες'
+      : 'Μετράμε πόσος κόσμος μας διαβάζει με το Google Analytics, '
+        + 'που χρειάζεται cookies';
+
   return `<div class="synainesi" data-synainesi hidden>
-  <p class="synainesi-txt">Μετράμε πόσος κόσμος μας διαβάζει με το Google Analytics,
-    που χρειάζεται cookies. Χωρίς τη συγκατάθεσή σου δεν μπαίνει κανένα.
+  <p class="synainesi-txt">${logos}. Χωρίς τη συγκατάθεσή σου δεν μπαίνει κανένα.
     <a href="${up}aporrito.html">Τι κρατάμε και τι όχι</a></p>
   <div class="synainesi-btns">
     <button type="button" class="synainesi-btn" data-syn="oxi">Όχι</button>
@@ -617,7 +661,7 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   // πλοήγηση, οπότε πρέπει να υπάρχει και στις σελίδες που δεν παίζουν ήχο.
   // Το synainesi.js μόνο όταν υπάρχει τι να συγκατατεθεί — δες
   // consentBar(). Χωρίς Google Analytics δεν μπαίνει ούτε byte.
-  const vasika = GA4 ? ['player.js', 'synainesi.js'] : ['player.js'];
+  const vasika = (GA4 || ADSENSE) ? ['player.js', 'synainesi.js'] : ['player.js'];
 
   const tags = vasika.concat(scripts.filter((s) => vasika.indexOf(s) === -1))
     .map((s) => `  <script src="${up}${s}${assetVersion(s)}" defer></script>`)
@@ -680,7 +724,7 @@ ${ldBlock(jsonld)}${GOOGLE_VERIFY ? `  <meta name="google-site-verification" con
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400..900&family=Source+Serif+4:wght@400..600&display=swap">
   <link rel="stylesheet" href="${up}styles.css${assetVersion('styles.css')}">
 ${tags}
-${metriseis()}</head>
+${metriseis()}${adsenseTag()}</head>
 <body>
 <div id="page">
 ${body}
@@ -5864,11 +5908,17 @@ function privacyPage(){
   <main class="guest">
     <p class="page-label">Απόρρητο</p>
     <h1 class="guest-name">Τι κρατάμε, και τι όχι</h1>
-    <p class="guest-count">Ενημερώθηκε στις 12 Νοεμβρίου 2026</p>
+    <p class="guest-count">Ενημερώθηκε στις ${ADSENSE ? '15' : '12'} Νοεμβρίου 2026</p>
 
     <section class="bio-topics">
       <h2 class="bio-sub">Με δυο λόγια</h2>
-      ${GA4
+      ${ADSENSE
+    ? `<p>Αυτό το site <strong>δεν βάζει καμία cookie μέχρι να το δεχτείς</strong>.
+      Δεν σου ζητάει λογαριασμό. Οι διαφημίσεις έρχονται από το Google
+      AdSense, και χωρίς τη συγκατάθεσή σου είναι
+      <strong>μη εξατομικευμένες</strong>: δεν φτιάχνεται προφίλ σου και δεν
+      αποθηκεύεται τίποτα στη συσκευή σου για διαφημιστικό σκοπό.</p>`
+    : GA4
     ? `<p>Αυτό το site <strong>δεν βάζει καμία cookie μέχρι να το δεχτείς</strong>.
       Δεν σου ζητάει λογαριασμό και δεν δίνει στοιχεία σου σε διαφημιστικές
       εταιρείες — γιατί δεν υπάρχει καμία διαφημιστική εδώ.</p>`
@@ -5925,15 +5975,29 @@ ${GA4 ? `
         <li><strong>newshub.gr</strong> — οι φωτογραφίες των ειδήσεων</li>
         <li><strong>Google Fonts</strong> — οι γραμματοσειρές</li>
         <li><strong>Cloudflare</strong> — η φιλοξενία του site</li>${GA4 ? `
-        <li><strong>Google Analytics</strong> — οι μετρήσεις, με την άδειά σου</li>` : ''}
+        <li><strong>Google Analytics</strong> — οι μετρήσεις, με την άδειά σου</li>` : ''}${ADSENSE ? `
+        <li><strong>Google AdSense</strong> — οι διαφημίσεις</li>` : ''}
       </ul>
 
       <h2 class="bio-sub">Διαφημίσεις</h2>
-      <p>Όσες διαφημίσεις βλέπεις είναι στατικές εικόνες που φιλοξενούμε
+${ADSENSE ? `      <p>Οι διαφημίσεις εδώ είναι δύο ειδών. Οι <strong>δικές μας</strong>,
+      των τοπικών συνεργατών, είναι στατικές εικόνες που φιλοξενούμε εμείς:
+      δεν σε ακολουθεί τίποτα και δεν μπαίνει καμία cookie. Οι υπόλοιπες
+      έρχονται από το <strong>Google AdSense</strong>, που είναι διαφημιστικό
+      δίκτυο και μπορεί να βάλει cookies στη συσκευή σου.</p>
+      <p>Αυτές <strong>δεν μπαίνουν αν δεν πεις ναι</strong>. Μέχρι να
+      απαντήσεις, και αν απαντήσεις «Όχι», οι διαφημίσεις που βλέπεις είναι
+      μη εξατομικευμένες: διαλέγονται από το περιεχόμενο της σελίδας, όχι
+      από εσένα, και δεν αποθηκεύεται τίποτα για διαφημιστικό σκοπό.</p>
+      <p>Ό,τι κι αν διαλέξεις, <strong>καμία διαφήμιση δεν σκεπάζει το
+      περιεχόμενο</strong> και καμία δεν κουνάει τη σελίδα καθώς φορτώνει:
+      κάθε θέση έχει δεσμευμένο χώρο από την αρχή. Δεν υπάρχουν αναδυόμενα,
+      δεν υπάρχουν λωρίδες που κολλάνε στην οθόνη, και δεν υπάρχει καμία
+      διαφήμιση μέσα ή πάνω από τον player.</p>` : `      <p>Όσες διαφημίσεις βλέπεις είναι στατικές εικόνες που φιλοξενούμε
       εμείς. Δεν υπάρχει διαφημιστικό δίκτυο, δεν σε ακολουθεί τίποτα, και
       καμία διαφήμιση δεν σκεπάζει το περιεχόμενο. Αν αυτό αλλάξει κάποτε,
       θα αλλάξει και αυτή η σελίδα — και θα μπει μήνυμα συγκατάθεσης πριν
-      φορτώσει οτιδήποτε τρίτο.</p>
+      φορτώσει οτιδήποτε τρίτο.</p>`}
 
       <h2 class="bio-sub">Επικοινωνία</h2>
       <p>Για οτιδήποτε αφορά τα δεδομένα σου, γράψε μας μέσα από τη
@@ -7594,6 +7658,17 @@ ${intro(episodes[0], videos[0])}`,
   // αναζήτησης με λόγια που δεν είπε κανείς.
   writeIfChanged(path.join(PUBLIC_DIR, 'robots.txt'),
     `User-agent: *\nAllow: /\nDisallow: /transcript/\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
+
+  // Το ads.txt δηλώνει ποιος έχει δικαίωμα να πουλήσει χώρο εδώ. Χωρίς
+  // αυτό πολλοί αγοραστές δεν δίνουν προσφορά καθόλου. Το «f08c47...»
+  // είναι ο σταθερός κωδικός της Google, ίδιος για όλους.
+  //
+  // Μπαίνει μόνο με διακόπτη ανοιχτό: ένα ads.txt που δηλώνει δίκτυο
+  // χωρίς να υπάρχει δίκτυο είναι σκέτο ψέμα προς τους αγοραστές.
+  if (ADSENSE) {
+    writeIfChanged(path.join(PUBLIC_DIR, 'ads.txt'),
+      `google.com, ${ADSENSE.replace(/^ca-/, '')}, DIRECT, f08c47fec0942fa0\n`);
+  }
 
   // Κάθε σελίδα με περιεχόμενο μπαίνει στον κατάλογο. Η σελίδα αναζήτησης
   // μένει έξω: δεν έχει τίποτα δικό της να δείξει στη Google.
