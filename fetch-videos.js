@@ -66,7 +66,79 @@ function attr(block, name, key) {
   return m ? m[1] : '';
 }
 
-function makeVideo(id, show, playlist, title, date, image) {
+// ---- η περιγραφή του βίντεο ----
+//
+// Δύο στις τρεις σελίδες βίντεο δεν είχαν ΟΥΤΕ ΜΙΑ γραμμή κειμένου:
+// η περιγραφή έμπαινε μόνο όταν το βίντεο έβρισκε το δίδυμο επεισόδιό
+// του στο podcast (931 από 3.126). Το κείμενο όμως υπάρχει — το γράφει
+// η σύνταξη στο YouTube και έρχεται ΔΩΡΕΑΝ μέσα στο playlistItems, στο
+// ίδιο ερώτημα που φέρνει τον τίτλο. Δεν κοστίζει καμία επιπλέον κλήση.
+//
+// Γύρω από το κείμενο κάθονται τα ίδια σε όλα τα βίντεο: μπροστά το
+// «Κάντε εγγραφή στο …», πίσω σύνδεσμοι, hashtags και 👉 playlists.
+// Τα κόβουμε ΕΔΩ και όχι στο build, ώστε στο αρχείο να μπει μόνο ό,τι
+// θα διαβαστεί — αλλιώς το data/videos.json θα φούσκωνε με σκουπίδια.
+const MAX_PERIGRAFI = 2000;
+
+const SKOUPIDIA = [
+  /^κάντε\s+εγγραφή/i,
+  /^εγγραφείτε/i,
+  /^subscribe/i,
+  /^[@#]/,
+  /^(ακολουθήστε|βρείτε)\s+μας/i,
+  /^μας\s+τιμάτε/i,
+  /^support the show/i,
+  /^(?:[TΤ][oο]\s+)?(?:κανάλι|σελίδα)\s+μας\s+στ/i,
+  /^🎙/u,
+];
+
+// Τα 👉 ▶ 🔴 • στην αρχή της γραμμής είναι στολίδι, όχι κείμενο — και
+// κρύβουν από τον έλεγχο τον σύνδεσμο που ακολουθεί.
+function xeguma(line) {
+  return line.replace(/^[\s\p{Extended_Pictographic} -⯿️•·▪]+/u, '').trim();
+}
+
+function skoupidi(line) {
+  if (/https?:\/\//i.test(line)) return true;
+  return SKOUPIDIA.some((re) => re.test(line));
+}
+
+function perigrafi(text) {
+  const lines = String(text || '').replace(/\r/g, '').split('\n')
+    .map((l) => xeguma(l.replace(/[ \t]+/g, ' ')));
+
+  // Μπροστά: πετάμε όσες γραμμές είναι σκουπίδι ή κενές.
+  let a = 0;
+  while (a < lines.length && (!lines[a] || skoupidi(lines[a]))) a++;
+
+  // Από εκεί και κάτω: κόβουμε στην ΠΡΩΤΗ γραμμή-σκουπίδι. Ό,τι
+  // ακολουθεί την ουρά είναι πάντα κι άλλη ουρά.
+  const keep = [];
+  for (let i = a; i < lines.length; i++) {
+    if (skoupidi(lines[i])) break;
+    if (lines[i]) keep.push(lines[i]);
+  }
+
+  // Υπογραφή συντάκτη στο τέλος: «Β.Β.», «Μ.Κ.».
+  while (keep.length && keep[keep.length - 1].length <= 8
+    && /^[Α-ΩA-Z][.\s]/.test(keep[keep.length - 1])) keep.pop();
+
+  // Το όριο μετριέται σε ΟΛΟΚΛΗΡΕΣ παραγράφους: μισή παράγραφος με
+  // αποσιωπητικά διαβάζεται σαν χαλασμένο κείμενο.
+  const out = [];
+  let len = 0;
+  for (const p of keep) {
+    if (out.length && len + p.length > MAX_PERIGRAFI) break;
+    out.push(p);
+    len += p.length + 1;
+  }
+
+  // Οι αλλαγές γραμμής ΜΕΝΟΥΝ: είναι οι παράγραφοι, και το summaryHtml
+  // του build.js τις σέβεται όπως και στα επεισόδια.
+  return out.join('\n');
+}
+
+function makeVideo(id, show, playlist, title, date, image, summary) {
   return {
     id,
     show,
@@ -76,6 +148,7 @@ function makeVideo(id, show, playlist, title, date, image) {
     url: `https://www.youtube.com/watch?v=${id}&list=${playlist}`,
     embed: `https://www.youtube.com/embed/${id}`,
     image,
+    ...(summary ? { summary } : {}),
   };
 }
 
@@ -98,6 +171,7 @@ async function viaRss(playlistId) {
       tag(block, 'title'),
       tag(block, 'published'),
       attr(block, 'media:thumbnail', 'url'),
+      perigrafi(tag(block, 'media:description')),
     );
   });
 
@@ -163,6 +237,7 @@ async function viaApi(playlistId, key) {
         s.title,
         (item.contentDetails && item.contentDetails.videoPublishedAt) || s.publishedAt,
         best ? best.url : '',
+        perigrafi(s.description),
       ));
     }
 
@@ -359,8 +434,12 @@ async function main() {
     console.log(`Σώθηκαν ${names.length} εκπομπές στο data/shows.json (${withText} με περιγραφή)`);
   }
 
+  const meKeimeno = new Set(all.filter((v) => v.summary).map((v) => v.id)).size;
+  const mona = new Set(all.map((v) => v.id)).size;
+
   console.log('');
   console.log(`Σώθηκαν ${all.length} βίντεο στο data/videos.json`);
+  console.log(`${meKeimeno} από ${mona} μοναδικά βίντεο έχουν περιγραφή.`);
 }
 
 main();

@@ -2187,6 +2187,32 @@ function loadVideos(){
   }
 }
 
+// Το ίδιο βίντεο ΜΙΑ φορά, όποιες λίστες κι αν το έχουν.
+//
+// Το loadVideos() κρατάει επίτηδες και τις δύο εγγραφές ενός βίντεο που
+// ανήκει σε δύο εκπομπές — έτσι φαίνεται και στις δύο λωρίδες. Όπου
+// όμως μετράμε ανθρώπους, το διπλό θα μετρούσε δύο εμφανίσεις για μία
+// συνέντευξη, και η σελίδα του προσώπου θα έδειχνε την ίδια κάρτα δυο
+// και τρεις φορές.
+let videosOnceCache;
+function videosOnce(){
+  if (videosOnceCache) return videosOnceCache;
+  const seen = new Set();
+  videosOnceCache = loadVideos().filter((v) => {
+    if (seen.has(v.id)) return false;
+    seen.add(v.id);
+    return true;
+  });
+  return videosOnceCache;
+}
+
+// Βίντεο ή επεισόδιο; Τα δύο κυκλοφορούν πλέον μαζί στις ομάδες των
+// προσώπων, και κάπου πρέπει να ξεχωρίζουν: το βίντεο έχει embed, το
+// επεισόδιο έχει ήχο.
+function einaiVideo(x){
+  return !!(x && x.embed);
+}
+
 // ---- τα επεισόδια, με διορθωμένη ημερομηνία ----
 //
 // Το Buzzsprout δίνει «πότε ανέβηκε το podcast», όχι «πότε έγινε η
@@ -2294,7 +2320,18 @@ function loadEpisodes(){
   // Ποιος μιλάει. ΜΕΤΑ τις διορθώσεις του συντάκτη, γιατί διαβάζει τον
   // διορθωμένο τίτλο, και πάνω σε ΟΛΗ τη λίστα μαζί: το λεξικό και η
   // ένωση των γραφών χρειάζονται να ξέρουν τι βγήκε στα άλλα επεισόδια.
-  valeProsopa(list);
+  // ΚΑΙ ΤΑ ΒΙΝΤΕΟ ΜΑΖΙ, στο ίδιο πέρασμα.
+  //
+  // Ως τις 15 Νοεμβρίου 2026 τα πρόσωπα έβγαιναν ΜΟΝΟ από τα επεισόδια
+  // του podcast. Ένα βίντεο που δεν είχε δίδυμο επεισόδιο δεν έφτιαχνε
+  // ποτέ πρόσωπο, και το πάνελ «Καλεσμένος» έμενε άδειο ακόμα κι όταν
+  // ο τίτλος φώναζε το όνομα.
+  //
+  // Μαζί στο ίδιο πέρασμα και ΟΧΙ σε δεύτερο, επειδή η ένωση των γραφών
+  // χρειάζεται να τα βλέπει όλα: το YouTube γράφει «Κ. Λουκόπουλος» και
+  // το Buzzsprout «Κωνσταντίνος Λουκόπουλος». Σε δύο χωριστά περάσματα
+  // θα έβγαιναν δύο άνθρωποι με μοιρασμένες εμφανίσεις.
+  valeProsopa([...list, ...videosOnce()]);
 
   for (const ep of list) {
     const when = airDate(ep);
@@ -2333,6 +2370,12 @@ function videoPage(v, category){
   // ΚΑΙ ήχο — ίδιος player, ίδιος διακόπτης «Βλέπω / Ακούω», ίδια
   // συμπεριφορά με τη σελίδα επεισοδίου. Αυτό ήταν που διέφερε.
   const twin = episodeTwin(v);
+
+  // Το κείμενο της σελίδας. Προηγείται ΠΑΝΤΑ το επεισόδιο: εκεί γράφει
+  // η σύνταξη την κανονική περιγραφή, με παραγράφους και σημεία. Η
+  // περιγραφή του YouTube είναι η εφεδρεία για τα 2.195 βίντεο που δεν
+  // έχουν δίδυμο — αυτά έβγαιναν ως τώρα με σκέτο τίτλο και τίποτα άλλο.
+  const keimeno = (twin && twin.summary) || v.summary || '';
 
   const meta = [
     formatDate(v.date),
@@ -2408,7 +2451,7 @@ ${/* ΜΕΣΑ από το summaryHtml, ποτέ ωμό. Με σκέτο esc() έ
      twitter/instagram/TikTok της ουράς του Buzzsprout — και μάλιστα
      σαν ένα κατεβατό, γιατί χάνονταν και οι παράγραφοι. Η σελίδα
      επεισοδίου το έκανε σωστά από την αρχή· η σελίδα βίντεο όχι. */ ''}
-${twin && twin.summary ? summaryHtml(twin.summary) : ''}
+${keimeno ? summaryHtml(keimeno) : ''}
 
         <p class="episode-links">
           <a href="${v.url}" target="_blank" rel="noopener">Άνοιγμα στο YouTube ↗</a>
@@ -2445,7 +2488,7 @@ ${showBannerBox(v.show, 1)}
     title: `${title} — ${SITE_NAME}`,
     body,
     depth: 1,
-    description: `${decode(v.title)} — ${v.show}`,
+    description: keimeno ? clip(keimeno) : `${decode(v.title)} — ${v.show}`,
     image: v.image,
     url: videoUrl(v),
     type: 'article',
@@ -2460,7 +2503,7 @@ ${showBannerBox(v.show, 1)}
         name: ldText(v.title),
         // stripBoilerplate και εδώ: χωρίς αυτό η Google διάβαζε
         // «🎙️(12/11/2026) Τα podcasts του Newshub.gr …» ως περιγραφή.
-        description: ldText(twin && twin.summary ? stripBoilerplate(twin.summary) : v.title, 300),
+        description: ldText(keimeno ? stripBoilerplate(keimeno) : v.title, 300),
         uploadDate: ldDate(v.date),
         thumbnailUrl: absAsset(v.image),
         embedUrl: v.embed || '',
@@ -5365,7 +5408,18 @@ function valeProsopa(list){
   const gnosta = new Map();     // κλειδί ονόματος -> όνομα
   const epitheta = new Map();   // κλειδί επωνύμου -> σύνολο ονομάτων
 
-  for (const names of vrethika.values()) {
+  // ΜΟΝΟ από τα επεισόδια.
+  //
+  // Μάθημα της 15ης Νοεμβρίου 2026: μόλις μπήκαν και τα βίντεο, ένας
+  // τίτλος ειδήσεων — «Σε Ηράκλειο και πάλι η Λίνα Μενδώνη…» — έδωσε
+  // «πρόσωπο» με επώνυμο «Ηράκλειο». Το λεξικό το δέχτηκε, και μετά
+  // κόλλησε αυτόν τον «άνθρωπο» σε 484 τίτλους που γράφουν Ηράκλειο.
+  //
+  // Οι τίτλοι των επεισοδίων είναι «Όνομα: θέμα» σχεδόν πάντα· των
+  // βίντεο ειδήσεων σχεδόν ποτέ. Ένα σκουπίδι στο λεξικό δεν μένει
+  // ένα: πολλαπλασιάζεται σε όλη τη ροή.
+  for (const [ep, names] of vrethika) {
+    if (einaiVideo(ep)) continue;
     for (const n of names) {
       gnosta.set(onomaKleidi(n), n);
       const w = n.split(/\s+/);
@@ -5404,6 +5458,12 @@ function valeProsopa(list){
 
   for (const [ep, names] of vrethika) {
     if (names.length) continue;
+    // Και το ΜΑΝΤΕΜΑ με το λεξικό μένει στα επεισόδια. Ένα βίντεο
+    // ειδήσεων που αναφέρει έναν υπουργό δεν είναι συζήτηση μαζί του:
+    // θα κολλούσε στη σελίδα του προσώπου ως «εμφάνιση» ένα ρεπορτάζ
+    // όπου δεν μίλησε καν. Στα βίντεο κρατάμε μόνο όσα λέει ρητά ο
+    // τίτλος, «Όνομα: θέμα».
+    if (einaiVideo(ep)) continue;
     const fix = pairOf(ep) || {};
     if (fix.noguest) continue;
     vrethika.set(ep, apoLexiko(ep.title));
@@ -5506,11 +5566,42 @@ function cleanGuestName(name){
 // Ο έλεγχος είναι ΑΡΝΗΤΙΚΟΣ επίτηδες: ψάχνει σημάδια ότι κάτι ΔΕΝ είναι
 // όνομα, αντί να προσπαθεί να ορίσει τι είναι. Έτσι ένα ασυνήθιστο
 // όνομα — «Gian Andrea Paolo Garancini» — περνάει.
+// Λέξεις που κάνουν ένα «όνομα» υπηρεσία, κτίριο, θεσμό ή γεγονός.
+// Γραμμένες από ΜΕΤΡΗΣΗ πάνω στα 3.128 βίντεο, όχι από φαντασία.
+const ORGANISMOS = new RegExp('(^|\\s)(' + [
+  'υπηρεσία', 'υπηρεσίες', 'υπόθεση', 'υποθέσεις', 'περιφέρεια', 'περιφέρειας',
+  'περιφερειάρχη', 'περιφερειάρχης', 'δήμος', 'δήμου', 'δήμοι', 'δημοτική', 'δημοτικό',
+  'διοίκηση', 'αποκεντρωμένη', 'υπουργείο', 'υπουργείου', 'επιμελητήριο',
+  'σύλλογος', 'συλλόγου', 'ένωση', 'ομοσπονδία', 'σωματείο', 'επιτροπή',
+  'ίδρυμα', 'ινστιτούτο', 'ακαδημία', 'πανεπιστήμιο', 'πολυτεχνείο',
+  'νοσοκομείο', 'νοσοκομείου', 'κέντρο', 'μέγαρο', 'μουσείο', 'βιβλιοθήκη',
+  'γυμνάσιο', 'λύκειο', 'σχολείο', 'δημοτικού', 'αεροδρόμιο', 'λιμάνι',
+  'αστυνομία', 'πυροσβεστική', 'λιμεναρχείο', 'στρατόπεδο', 'φυλακές',
+  'φεστιβάλ', 'εκδήλωση', 'συνέδριο', 'ημερίδα', 'έκθεση', 'παρουσίαση',
+  'πρωτάθλημα', 'τουρνουά', 'αγώνας', 'αγώνες', 'φράγμα', 'ποταμός',
+  'μεταναστευτικό', 'τροχαίο', 'σεισμός', 'απεργία', 'συγκέντρωση',
+  'αρχιεπίσκοπος', 'αρχιεπισκόπου', 'μητρόπολη', 'εκκλησία', 'ενορία',
+].join('|') + ')(\\s|$)', 'i');
+
+// Τοπωνύμια της Κρήτης και της επικαιρότητας, εκεί που θα περίμενες
+// επώνυμο. Μόνο στο ΤΕΛΟΣ: ο «Κρητικός» είναι επώνυμο, η «Κρήτης» όχι.
+const TOPOS_TELOS = new RegExp('(^|\\s)(' + [
+  'κρήτη', 'κρήτης', 'ηράκλειο', 'ηρακλείου', 'χανιά', 'χανίων',
+  'ρέθυμνο', 'ρεθύμνου', 'λασίθι', 'λασιθίου', 'αθήνα', 'αθηνών',
+  'θεσσαλονίκη', 'ελλάδα', 'ελλάδας', 'κύπρος', 'κύπρου', 'ευρώπη',
+  'πεδιάδας', 'αλικαρνασσού', 'καστελίου', 'μεσαρά', 'μεσαράς',
+].join('|') + ')$', 'i');
+
+// Πρόθεση ή άρθρο στην αρχή: ό,τι κι αν ακολουθεί, δεν είναι όνομα.
+const ARXI_STOP = /^(σε|στο|στον|στη|στην|στους|στις|από|για|με|προς|κατά|μετά|πριν|ο|η|το|οι|τα|τον|την|του|της|των|νέα|νέο|νέος|νέες|νέοι|έκτακτο|μεγάλη|μεγάλο)$/i;
+
 function looksLikePerson(name){
   const n = String(name).trim();
   if (!n) return false;
 
-  if (/[«»"!;?…:]/.test(n)) return false;   // εισαγωγικά και θαυμαστικά = τίτλος
+  // Εισαγωγικά, θαυμαστικά, και το κόμμα: «Γ. Καραμπελιάς, Ιστορικό»
+  // είναι όνομα ΚΑΙ ιδιότητα, όχι όνομα.
+  if (/[«»"!;?…:,]/.test(n)) return false;
   if (/\d/.test(n)) return false;           // «μέρος 9ο»
 
   const words = n.split(/[\s.\-–]+/).filter(Boolean);
@@ -5525,6 +5616,23 @@ function looksLikePerson(name){
   // δεν πιάνει τίποτα. Το έμαθα εδώ — ισχύει για κάθε ελληνικό regex
   // αυτού του αρχείου.
   if (/(^|\s)ημέρα(\s|$)/i.test(n)) return false;
+
+  // ---- όσα μπήκαν όταν άνοιξε η πόρτα στα βίντεο ----
+  //
+  // Οι τίτλοι των επεισοδίων είναι «Όνομα: θέμα». Των βίντεο ειδήσεων
+  // είναι «Περιφέρεια Κρήτης: …», «Βενιζέλειο Νοσοκομείο: …», «Υπόθεση
+  // Κουνάλη: …». Δύο λέξεις, κεφαλαία και τα δύο, κανένα ψηφίο — τα
+  // περνούσαν όλα, και έφτιαχναν σελίδα προσώπου για έναν οργανισμό.
+  //
+  // Υπηρεσία, όχι άνθρωπος. Οπουδήποτε μέσα στο όνομα.
+  if (ORGANISMOS.test(n)) return false;
+
+  // Τόπος στο τέλος: «Περιφέρεια Κρήτης», «Σε Ηράκλειο», «Φεστιβάλ
+  // Κρήτης». Κανένα επώνυμο δεν είναι τοπωνύμιο σε γενική.
+  if (TOPOS_TELOS.test(n)) return false;
+
+  // Πρόθεση ή άρθρο μπροστά: φράση που κόπηκε, όχι όνομα.
+  if (ARXI_STOP.test(words[0])) return false;
 
   for (const w of words) {
     // Κάθε κομμάτι ονόματος ξεκινά με κεφαλαίο. Το «και», «της», «στο»
@@ -5709,11 +5817,12 @@ function guestKey(name){
 function guestUrl(name){
   return `guest/${slugify(name)}.html`;
 }
-//grouping episodes by guest
-function groupByGuest(episodes){
+// Ομαδοποίηση ανά πρόσωπο. Μέσα μπαίνουν ΚΑΙ επεισόδια ΚΑΙ βίντεο —
+// για το πρόσωπο είναι το ίδιο πράγμα: μια φορά που μίλησε.
+function groupByGuest(items){
   const groups ={};
 
-  for (const ep of episodes){
+  for (const ep of items){
     // ΟΧΙ «if (!ep.guest) continue» εδώ: ένα επεισόδιο χωρίς άνω τελεία
     // δεν έχει ep.guest, αλλά μπορεί να έχει καλεσμένο γραμμένο με το
     // χέρι στο data/pairs.json. Μόνο το guestOf τα ξέρει και τα δύο.
@@ -5722,9 +5831,9 @@ function groupByGuest(episodes){
     for (const name of guestsOf(ep)) {
       const key = guestKey(name);
       if (!key) continue;
-      if(!groups[key]) groups[key] = {names: [], episodes:[]};
+      if(!groups[key]) groups[key] = {names: [], items:[]};
       groups[key].names.push(name);
-      groups[key].episodes.push(ep);
+      groups[key].items.push(ep);
     }
   }
   return groups;
@@ -5742,7 +5851,7 @@ function indexGuestSlugs(groups){
 
   for (const key of Object.keys(groups)) {
     const name = mostCommon(groups[key].names);
-    const withImage = groups[key].episodes.find((e) => e.image);
+    const withImage = groups[key].items.find((e) => e.image);
 
     guestSlugIndex[key] = slugify(name);
     guestIndex.push({
@@ -5750,8 +5859,8 @@ function indexGuestSlugs(groups){
       name,
       slug: slugify(name),
       image: withImage ? withImage.image : '',
-      count: groups[key].episodes.length,
-      last: groups[key].episodes[0] ? groups[key].episodes[0].date : '',
+      count: groups[key].items.length,
+      last: groups[key].items[0] ? groups[key].items[0].date : '',
       hay: matchKey(name),
       weight: name.length,          // τα μεγαλύτερα ονόματα ταιριάζουν πρώτα
     });
@@ -5910,14 +6019,14 @@ function indexPeople(groups){
   peopleIndex = Object.keys(groups).map((key) => {
     const name = mostCommon(groups[key].names);
     const cats = {};
-    for (const ep of groups[key].episodes) {
+    for (const ep of groups[key].items) {
       for (const c of episodeCategories(ep)) cats[c] = (cats[c] || 0) + 1;
     }
     return {
       key,
       name,
       slug: slugify(name),
-      count: groups[key].episodes.length,
+      count: groups[key].items.length,
       cats,
       // Σύνολο μόνο των θεμάτων, για να συγκρίνουμε δύο πρόσωπα.
       topics: new Set(Object.keys(cats)),
@@ -5963,6 +6072,60 @@ function guestInText(text){
     if (g.hay && hay.includes(g.hay)) return g;
   }
   return null;
+}
+
+// Το ίδιο, αλλά κερδίζει ΟΠΟΙΟΣ ΓΡΑΦΕΤΑΙ ΠΡΩΤΟΣ, όχι όποιος έχει το
+// μακρύτερο όνομα.
+//
+// Σε έναν τίτλο υπάρχει ένα όνομα και το μάκρος είναι καλό κριτήριο.
+// Σε μια περιγραφή υπάρχουν τρία και τέσσερα: ο καλεσμένος, ο
+// δημοσιογράφος που τον πήρε, και όποιος αναφέρεται μέσα στην
+// κουβέντα. Ο καλεσμένος είναι σχεδόν πάντα το πρώτο όνομα της πρώτης
+// παραγράφου — «Ο Γιώργος Φλώρος, αντιναύαρχος ε.α., μίλησε με τον…».
+//
+// Βοηθάει και η ίδια η γλώσσα: ο καλεσμένος γράφεται ονομαστική και
+// ταιριάζει, ενώ ο δημοσιογράφος γράφεται αιτιατική («με τον Γιάννη
+// Χαραλαμπίδη») και ΔΕΝ ταιριάζει με το «Γιάννης Χαραλαμπίδης».
+function guestFirstInText(text){
+  const hay = matchKey(text);
+  if (!hay) return null;
+
+  let best = null;
+  let bestAt = Infinity;
+  for (const g of guestIndex) {
+    if (!g.hay) continue;
+    const at = hay.indexOf(g.hay);
+    // Ισοπαλία στη θέση: κερδίζει το μακρύτερο όνομα, όπως και στον
+    // τίτλο — ο «Γιώργος Παπαδόπουλος» πριν τον «Γιώργος Παπά».
+    if (at !== -1 && (at < bestAt || (at === bestAt && g.hay.length > best.hay.length))) {
+      best = g;
+      bestAt = at;
+    }
+  }
+  return best;
+}
+
+// Ποιος μιλάει σε ένα βίντεο. Πρώτα ο τίτλος — εκεί το όνομα μπαίνει
+// επίτηδες. Αν δεν λέει όνομα, η ΠΡΩΤΗ παράγραφος της περιγραφής:
+// παρακάτω το κείμενο μιλάει για πρόσωπα της επικαιρότητας, όχι για
+// τον καλεσμένο.
+function videoGuest(v){
+  // Πρώτα ό,τι έβγαλε το κοινό πέρασμα προσώπων πάνω στον τίτλο του
+  // βίντεο — το ίδιο που βγάζει και τα πρόσωπα των επεισοδίων, με την
+  // ίδια ένωση γραφών και τις ίδιες διορθώσεις του συντάκτη.
+  for (const onoma of guestsOf(v)) {
+    const g = guestIndex.find((x) => x.key === guestKey(onoma));
+    if (g) return g;
+  }
+
+  // Μετά ο τίτλος ως κείμενο: πιάνει τα «μίλησε ο Χ» που δεν έχουν
+  // άνω τελεία, άρα δεν περνούν από το πέρασμα των προσώπων.
+  const apoTitlo = guestInText(v.title);
+  if (apoTitlo) return apoTitlo;
+
+  // Τελευταία η ΠΡΩΤΗ παράγραφος της περιγραφής.
+  const proti = String(v.summary || '').split('\n')[0];
+  return proti ? guestFirstInText(proti) : null;
 }
 
 // Η διεύθυνση της σελίδας του καλεσμένου ενός επεισοδίου — κενό αν δεν
@@ -6261,7 +6424,7 @@ function namesSection(groups, depth = 0){
       const name = mostCommon(groups[key].names);
       return {
         name,
-        n: groups[key].episodes.length,
+        n: groups[key].items.length,
         // Μόνο αληθινό πορτρέτο. Παλιά έμπαινε εδώ το εξώφυλλο του
         // επεισοδίου — δες photoOf().
         face: photoOf(name),
@@ -6321,7 +6484,7 @@ function guestsIndexPage(groups){
   const people = Object.keys(groups).map((key) => {
     const rawName = mostCommon(groups[key].names);
     const pName = parseGuestName(rawName);
-    const eps = groups[key].episodes;
+    const eps = groups[key].items;
     const face = eps.find((ep) => ep.image);
     const displayName = pName.firstname ? `${pName.surname} ${pName.firstname}` : pName.surname;
     return {
@@ -6340,7 +6503,7 @@ function guestsIndexPage(groups){
   const total = people.reduce((n, p) => n + p.n, 0);
   const years = [];
   for (const key of Object.keys(groups)) {
-    for (const ep of groups[key].episodes) {
+    for (const ep of groups[key].items) {
       const y = athensYear(ep.date);
       if (!Number.isNaN(y)) years.push(y);
     }
@@ -6448,7 +6611,9 @@ function guestPage(name, list){
   const count = episodes.length;
 
   const key = guestKey(name);
-  const title = episodes.map((ep) => titleOf(ep)).find(Boolean) || '';
+  // Η ιδιότητα («καθηγητής», «αντιναύαρχος ε.α.») βγαίνει από τον τίτλο
+  // του επεισοδίου — τα βίντεο δεν τη γράφουν με τον ίδιο τρόπο.
+  const title = episodes.filter((x) => !einaiVideo(x)).map((ep) => titleOf(ep)).find(Boolean) || '';
 
   // Η ιδιότητα, αν τη γράψει κάποιος από το διαχειριστικό. Μπαίνει
   // κάτω από το όνομα: «ποιος είναι αυτός» είναι η πρώτη ερώτηση του
@@ -6487,13 +6652,18 @@ function guestPage(name, list){
         <span class="ptag-n">${t.n}</span>
       </a>`).join('\n');
 
-  // ---- τα επεισόδια ----
+  // ---- οι συζητήσεις ----
+  // Επεισόδια και βίντεο ανακατεμένα, χρονολογικά. Για τον επισκέπτη
+  // είναι το ίδιο πράγμα — «πότε μίλησε αυτός ο άνθρωπος» — και η
+  // κάρτα ούτως ή άλλως δείχνει μόνη της τι είναι το καθένα.
+  const itemOf = (x) => (einaiVideo(x) ? itemFromVideo(x) : itemFromEpisode(x));
+
   // Το πιο πρόσφατο παίρνει μεγάλη κάρτα: είναι ο λόγος που κάποιος
   // ανοίγει τη σελίδα ενός προσώπου σήμερα.
   const lead = episodes[0]
-    ? card({ ...itemFromEpisode(episodes[0]), lead: true }, 1)
+    ? card({ ...itemOf(episodes[0]), lead: true }, 1)
     : '';
-  const rest = episodes.slice(1).map((ep) => episodeCard(ep, 1)).join('\n');
+  const rest = episodes.slice(1).map((x) => card(itemOf(x), 1)).join('\n');
 
   // ---- άλλοι για τα ίδια θέματα ----
   const near = nearbyPeople(key).map((p) => `      <a class="pnear" href="${p.slug}.html">
@@ -6777,7 +6947,7 @@ function guestBox(ep, depth = 1){
 // ποιο από τα 435 γνωστά ονόματα αναφέρεται. Η φωτογραφία έρχεται από τα
 // επεισόδια του ίδιου ανθρώπου, όχι από τη μικρογραφία του βίντεο.
 function videoGuestBox(v, depth = 1){
-  const g = guestInText(v.title);
+  const g = videoGuest(v);
   if (!g) return '';
 
   const up = depth === 0 ? '' : '../';
@@ -7141,7 +7311,11 @@ function main(){
   // Οι ομάδες καλεσμένων πρέπει να υπάρχουν ΠΡΙΝ γραφτεί οτιδήποτε, γιατί
   // από αυτές βγαίνει ο σύνδεσμος που βάζει κάθε επεισόδιο προς τον
   // άνθρωπό του.
-  const groups = groupByGuest(episodes);
+  // ΚΑΙ τα βίντεο, εκτός από όσα είναι το ίδιο πράγμα με ένα επεισόδιο:
+  // εκείνα τα δείχνει ήδη η κάρτα του επεισοδίου, και θα μετριόνταν δύο
+  // φορές ως «εμφανίσεις» του ίδιου ανθρώπου.
+  const videoItems = videosOnce().filter((v) => !videoHasTwin(v));
+  const groups = groupByGuest([...episodes, ...videoItems]);
   indexGuestSlugs(groups);
   indexPeople(groups);
   indexRelated(episodes);
@@ -7608,7 +7782,7 @@ ${intro(episodes[0], videos[0])}`,
     expectedGuests.add(`${slug}.html`);
 
     const file = path.join(GUEST_DIR,`${slug}.html`);
-    const next = guestPage(name,group.episodes);
+    const next = guestPage(name,group.items);
     const current = fs.existsSync(file) ? fs.readFileSync(file,'utf8') : null;
     if(current === next) continue;
     fs.writeFileSync(file, next, 'utf8');
@@ -7884,7 +8058,10 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
     // Η απογραφή προσώπων — ίδια λογική, ίδιος λόγος. Παραγόμενο, έξω
     // από το git.
     const peopleFile = path.join(ADMIN_SRC, 'people.json');
-    const peopleText = JSON.stringify(peopleForAdmin(episodes));
+    // ΚΑΙ τα βίντεο: από τη στιγμή που φτιάχνουν πρόσωπα, πρέπει να
+    // φαίνονται κι εδώ — αλλιώς ο συντάκτης βλέπει στο site ένα όνομα
+    // που δεν είναι άνθρωπος και δεν έχει πουθενά να το σβήσει.
+    const peopleText = JSON.stringify(peopleForAdmin([...episodes, ...videoItems]));
     if (!fs.existsSync(peopleFile) || fs.readFileSync(peopleFile, 'utf8') !== peopleText) {
       fs.writeFileSync(peopleFile, peopleText, 'utf8');
     }
