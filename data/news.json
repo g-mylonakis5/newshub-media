@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/winners-family-photo-tiff67-1024x683.jpg",
     "summary": "Οι ταινίες Μια μέρα στη ζωή της Τζο: Κεφάλαιο Φαίδρα της Ζακλίν Λέντζου, Ντούα της Μπλέρτα Μπασόλι και Φυτεύω το χέρι μου στον κήπο των Μπόρις Χάτζιγια και Χ...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "tragodia-1-5-chronon-paidi-katapie-venzini-kai-afise-tin-teleytaia-toy-pnoi-sto-nosokomeio",
+    "title": "Τραγωδία: 1,5 χρονών παιδί κατάπιε βενζίνη και άφησε την τελευταία του πνοή στο νοσοκομείο",
+    "url": "https://www.newshub.gr/el/kriti/tragodia-1-5-chronon-paidi-katapie-venzini-kai-afise-tin-teleytaia-toy-pnoi-sto-nosokomeio",
+    "date": "2026-11-15T19:08:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/nosokomeio.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/nosokomeio.jpg",
+    "summary": "Ανείπωτη τραγωδία στο Ηράκλειο καθώς ένα παιδί, μόλις 1,5 χρονών, έχασε την ζωή του μετά από κατάποση βενζίνης.\r\n\r\nΣύμφωνα με πληροφορίες του newshub.gr, όλα...",
+    "author": null,
     "featured": true
   },
   {
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/aigoprovata.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/aigoprovata.jpg",
     "summary": "Επιχειρηματίας που έχει κτηνοτροφική εγκατάσταση στη Ριτσώνα υπέστη οικονομικό πλήγμα αφού του έκλεψαν εκατοντάδες αρνιά.\r\n\r\nΟ ίδιος υποστηρίζει ότι η κλοπή ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "nayplio-apelathike-o-mpagklantesianos-poy-kaloyse-metanastes-na-erthoyn-paranoma-sti-chora",
-    "title": "Ναύπλιο: Απελάθηκε ο Μπαγκλαντεσιανός που καλούσε μετανάστες να έρθουν παράνομα στη χώρα",
-    "url": "https://www.newshub.gr/el/ellada/nayplio-apelathike-o-mpagklantesianos-poy-kaloyse-metanastes-na-erthoyn-paranoma-sti-chora",
-    "date": "2026-11-10T19:40:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/mpagklantesianos-mak.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/mpagklantesianos-mak.jpg",
-    "summary": "Απελάθηκε σήμερα ο 27χρονος Μπαγκλαντεσιανός, ο οποίος τον περασμένο Ιούνιο καλούσε μέσω βίντεο στα κοινωνικά δίκτυα συμπατριώτες του να έρθουν παράνομα στο ...",
     "author": null,
     "featured": false
   },
