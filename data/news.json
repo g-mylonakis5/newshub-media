@@ -1,5 +1,17 @@
 [
   {
+    "id": "choris-paidopsychiatro-to-irakleio-ston-aera-i-diagnosi-kai-i-parakoloythisi-ekatontadon-paidion",
+    "title": "Χωρίς παιδοψυχίατρο το Ηράκλειο – Στον «αέρα» η διάγνωση και η παρακολούθηση εκατοντάδων παιδιών",
+    "url": "https://www.newshub.gr/el/kriti/choris-paidopsychiatro-to-irakleio-ston-aera-i-diagnosi-kai-i-parakoloythisi-ekatontadon-paidion",
+    "date": "2026-11-15T16:35:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/play-therapy.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/play-therapy.jpg",
+    "summary": "Σοβαρές διαστάσεις λαμβάνει το πρόβλημα της υποστελέχωσης των δημόσιων υπηρεσιών ψυχικής υγείας στην Κρήτη, με την παιδοψυχιατρική φροντίδα να βρίσκεται σε ι...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "zefyri-kakoyrgimatiki-dioxi-stin-34chroni-gia-emprismo-poy-odigise-ston-thanato-ton-dyo-pyrosveston-eleytheres-oi-kores-tis-entalma-gia-ton-syzygo",
     "title": "Ζεφύρι: Κακουργηματική δίωξη στην 34χρονη για εμπρησμό που οδήγησε στον θάνατο των δύο πυροσβεστών - Ελεύθερες οι κόρες της, ένταλμα για τον σύζυγο",
     "url": "https://www.newshub.gr/el/ellada/zefyri-kakoyrgimatiki-dioxi-stin-34chroni-gia-emprismo-poy-odigise-ston-thanato-ton-dyo-pyrosveston-eleytheres-oi-kores-tis-entalma-gia-ton-syzygo",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/maketa-metagogi-roma.jpg",
     "summary": "Στην άσκηση ποινικής δίωξης σε βαθμό κακουργήματος σε βάρος της 34χρονης Ρομά για εμπρησμό που είχε σαν αποτέλεσμα το θάνατο άλλου, προχώρησε η Εισαγγελία Πρ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "kykloma-ekviaston-organone-epitheseis-me-cheirovomvides-mesa-apo-tis-fylakes-oi-synomilies-oi-kodikes-kai-oi-apeiles-se-epicheirimaties",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/maketa-karampola.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/maketa-karampola.jpg",
     "summary": "Συγκλονιστικές είναι οι εικόνες που κατέγραψε drone πάνω από τον αυτοκινητόδρομο «Θράκη» στη Βουλγαρία, αποκαλύπτοντας το μέγεθος της τραγωδίας π...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "to-parartima-irakleioy-lasithioy-tis-enosis-apostraton-axiomatikon-aeroporias-timise-tis-omades-demo",
-    "title": "Το Παράρτημα Ηρακλείου – Λασιθίου της Ένωσης Αποστράτων Αξιωματικών Αεροπορίας τίμησε τις Ομάδες Demo",
-    "url": "https://www.newshub.gr/el/kriti/to-parartima-irakleioy-lasithioy-tis-enosis-apostraton-axiomatikon-aeroporias-timise-tis-omades-demo",
-    "date": "2026-11-10T17:48:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/07-11-2026-e.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/07-11-2026-e.jpg",
-    "summary": "Πτήσεις επίδειξης με αεροσκάφη F-16 Fighting Falcon και Τ-6A Τexan των Ομάδων Αεροπορικών Επιδείξεων \"Ζευς\" και \"Δαίδαλος\" πραγματοποιήθη...",
     "author": null,
     "featured": false
   },
