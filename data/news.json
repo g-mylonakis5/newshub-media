@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/plerome.jpg",
     "summary": "Κατά την περίοδο 16 έως 20 Νοεμβρίου, θα καταβληθούν συνολικά 71.051.797,98 ευρώ σε 78.003 δικαιούχους, στο πλαίσιο των προγραμματισμένων καταβολών του e-ΕΦΚ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "syntagi-gia-psito-cheesecake-neas-yorkis",
@@ -101,7 +101,7 @@
       "url": "https://www.newshub.gr/el/christoforos-papadakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "ntemi-moyr-giortase-ta-64a-genethlia-tis-me-tis-kores-kai-tin-eggoni-tis-eimai-eygnomon",
