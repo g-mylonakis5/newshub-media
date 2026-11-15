@@ -12,6 +12,18 @@
     "featured": false
   },
   {
+    "id": "sygkinisi-ston-10o-pyrosvestiko-stathmo-enos-leptoy-sigi-kai-leyka-loyloydia-gia-toys-nekroys-pyrosvestes",
+    "title": "Συγκίνηση στον 10ο Πυροσβεστικό Σταθμό: Ενός λεπτού σιγή και λευκά λουλούδια για τους νεκρούς πυροσβέστες",
+    "url": "https://www.newshub.gr/el/ellada/sygkinisi-ston-10o-pyrosvestiko-stathmo-enos-leptoy-sigi-kai-leyka-loyloydia-gia-toys-nekroys-pyrosvestes",
+    "date": "2026-11-15T11:20:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/maketa-purosvestiko-soma.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/maketa-purosvestiko-soma.jpg",
+    "summary": "Σε κλίμα βαθιάς συγκίνησης, οι πυροσβέστες του 10ου Πυροσβεστικού Σταθμού απέτισαν σήμερα, Κυριακή 15 Νοεμβρίου, φόρο τιμής στους δύο συναδέλφους τους, ηλικί...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "eisaggeliki-paraggelia-me-entoli-chrysochoidi-gia-anartisi-toy-dimitri-giannakopoyloy-sta-social-media",
     "title": "Εισαγγελική παραγγελία με εντολή Χρυσοχοΐδη για ανάρτηση του Δημήτρη Γιαννακόπουλου στα Social Media",
     "url": "https://www.newshub.gr/el/ellada/eisaggeliki-paraggelia-me-entoli-chrysochoidi-gia-anartisi-toy-dimitri-giannakopoyloy-sta-social-media",
@@ -237,7 +249,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/bce6a710-7458-4869-a2e5-d9ad7e078c15.jpg",
     "summary": "Από μεγάλο ύψος έπεσε σήμερα το πρωί ένας 53χρονος αλλοδαπός στην περιοχή όπου βρίσκεται το 6ο Γυμνάσιο Ηρακλείου.\r\n\r\nΟι συνθήκες κάτω από τις οποίες βρισκότ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "anaskopisi-mitsotaki-treis-prosfores-gia-ydrogonanthrakes-choris-ekptoseis-sto-kalodio-kritis-kyproy",
@@ -345,7 +357,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/maren.jpg",
     "summary": "Στο λιμάνι του Ηρακλείου αναμένεται να επιστρέψει τη Δευτέρα 16 Νοεμβρίου το γαλλικό ερευνητικό πλοίο Abeille Marengo, το οποίο συμμετέχει στις έρευνες για τ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "oi-trypes-tis-forodiafygis-para-ti-diasyndesi-ton-tameiakon-kai-to-mydata",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/ben1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/ben1.jpg",
     "summary": "Σε εξέλιξη βρίσκονται οι εργασίες ασφαλτόστρωσης στην οδό Ελευθερίου Βενιζέλου, με τον Δήμο Χανίων να προχωρά στην αναβάθμιση του οδοστρώματος ενός από τους ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "me-epitychia-i-imerida-enischyontas-tin-koyltoyra-akeraiotitas-stin-topiki-aytodioikisi-tis-kritis",
-    "title": "Με επιτυχία η ημερίδα «Ενισχύοντας την Κουλτούρα Ακεραιότητας στην Τοπική Αυτοδιοίκηση της Κρήτης»",
-    "url": "https://www.newshub.gr/el/kriti/me-epitychia-i-imerida-enischyontas-tin-koyltoyra-akeraiotitas-stin-topiki-aytodioikisi-tis-kritis",
-    "date": "2026-11-10T14:50:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/001.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/001.jpg",
-    "summary": "Με επιτυχία πραγματοποιήθηκε σήμερα, η ενημερωτική ημερίδα με θέμα «Ενισχύοντας την Κουλτούρα Ακεραιότητας στην Τοπική Αυτοδιοίκηση της Κρήτης». ...",
     "author": null,
     "featured": false
   },
