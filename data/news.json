@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/osde_agrotes.jpg",
     "summary": "Σε αγώνα δρόμου για την ολοκλήρωση όσο το δυνατόν περισσότερων δηλώσεων Ενιαίας Αίτησης Ενίσχυσης και την ένταξη μεγαλύτερου αριθμού παραγωγών στην προκαταβο...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "k-kilitsntarogloy-tha-mporoyse-na-xespasei-polemos-me-tin-ellada-exaitias-tis-stratiotikopoiisis-ton-nision",
@@ -513,7 +513,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/maren.jpg",
     "summary": "Στο λιμάνι του Ηρακλείου αναμένεται να επιστρέψει τη Δευτέρα 16 Νοεμβρίου το γαλλικό ερευνητικό πλοίο Abeille Marengo, το οποίο συμμετέχει στις έρευνες για τ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "oi-trypes-tis-forodiafygis-para-ti-diasyndesi-ton-tameiakon-kai-to-mydata",
