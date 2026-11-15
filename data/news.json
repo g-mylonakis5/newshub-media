@@ -1,5 +1,21 @@
 [
   {
+    "id": "dimoskopiseis-politikes-diergasies-kai-i-eythyni-toy-proodeytikoy-choroy",
+    "title": "Δημοσκοπήσεις, πολιτικές διεργασίες και η ευθύνη του προοδευτικού χώρου",
+    "url": "https://www.newshub.gr/el/apopseis/dimoskopiseis-politikes-diergasies-kai-i-eythyni-toy-proodeytikoy-choroy",
+    "date": "2026-11-15T06:00:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/kalpes.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/kalpes.jpg",
+    "summary": "1. Οι δημοσκοπήσεις αποτυπώνουν την πολιτική κρίση και την κοινωνική αναζήτηση\r\n\r\nΟι δημοσκοπήσεις διαχρονικά δεν καταγράφουν απλώς εκλογικές προτιμήσεις. Συ...",
+    "author": {
+      "name": "Χάρης Τσιόκας",
+      "url": "https://www.newshub.gr/el/charis-tsiokas",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/chares-tsiokas.jpg"
+    },
+    "featured": false
+  },
+  {
     "id": "yp-ergasias-o-chartis-ton-pliromon-apo-e-efka-dypa-eos-tis-20-noemvrioy",
     "title": "Υπ. Εργασίας: Ο «χάρτης» των πληρωμών από E-ΕΦΚΑ, ΔΥΠΑ έως τις 20 Νοεμβρίου",
     "url": "https://www.newshub.gr/el/oikonomia/yp-ergasias-o-chartis-ton-pliromon-apo-e-efka-dypa-eos-tis-20-noemvrioy",
@@ -9,7 +25,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/plerome.jpg",
     "summary": "Κατά την περίοδο 16 έως 20 Νοεμβρίου, θα καταβληθούν συνολικά 71.051.797,98 ευρώ σε 78.003 δικαιούχους, στο πλαίσιο των προγραμματισμένων καταβολών του e-ΕΦΚ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "syntagi-gia-psito-cheesecake-neas-yorkis",
@@ -101,7 +117,7 @@
       "url": "https://www.newshub.gr/el/christoforos-papadakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
-    "featured": false
+    "featured": true
   },
   {
     "id": "ntemi-moyr-giortase-ta-64a-genethlia-tis-me-tis-kores-kai-tin-eggoni-tis-eimai-eygnomon",
@@ -7197,17 +7213,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/ekab4e.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/ekab4e.jpg",
     "summary": "Δεύτερη τραγωδία με πτώση ατόμου από μπαλκόνι σημειώθηκε στη Θεσσαλονίκη, με μία γυναίκα 66 ετών να χάνει τη ζωή της στην περιοχή του Λαγκαδά.\r\n\r\nΌπως αναφέρ...",
-    "featured": false
-  },
-  {
-    "id": "mathites-kai-ekpaideytikoi-apo-to-velgio-kai-to-irakleio-sti-lotzia-sto-plaisio-toy-eyropaikoy-programmatos-erasmus",
-    "title": "Μαθητές και εκπαιδευτικοί από το Βέλγιο και το Ηράκλειο στη Λότζια -  Στο πλαίσιο του ευρωπαϊκού προγράμματος Erasmus",
-    "url": "https://www.newshub.gr/el/kriti/mathites-kai-ekpaideytikoi-apo-to-velgio-kai-to-irakleio-sti-lotzia-sto-plaisio-toy-eyropaikoy-programmatos-erasmus",
-    "date": "2026-11-10T10:40:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/img_5227.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/img_5227.jpg",
-    "summary": "Μαθητές και εκπαιδευτικούς από το κολλέγιο Sint Maria της πόλης Geel του Βελγίου καθώς και του 3ου Γενικού Λυκείου Ηρακλείου υποδέχθηκαν στη Λότζια οι Αντιδή...",
     "featured": false
   },
   {
