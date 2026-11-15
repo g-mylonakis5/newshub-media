@@ -1,5 +1,17 @@
 [
   {
+    "id": "thrinos-gia-toys-dyo-pyrosvestes-poy-chathikan-sto-zefyri-oi-syllipseis-kai-ta-senaria-gia-tin-tragodia",
+    "title": "Θρήνος για τους δύο πυροσβέστες που χάθηκαν στο Ζεφύρι: Οι συλλήψεις και τα σενάρια για την τραγωδία",
+    "url": "https://www.newshub.gr/el/ellada/thrinos-gia-toys-dyo-pyrosvestes-poy-chathikan-sto-zefyri-oi-syllipseis-kai-ta-senaria-gia-tin-tragodia",
+    "date": "2026-11-15T07:10:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/maketa-zefiri-pirosvestis.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/maketa-zefiri-pirosvestis.jpg",
+    "summary": "Βαρύ πένθος έχει προκαλέσει στο Πυροσβεστικό Σώμα ο θάνατος δύο πυροσβεστών, ηλικίας 23 και 44 ετών, που έχασαν τη ζωή τους το μεσημέρι του Σαββάτου (14/11),...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "sto-limani-toy-irakleioy-katapleei-to-abeille-marengo-programmatismeni-i-epistrofi-toy-gia-technikes-ergasies",
     "title": "Στο λιμάνι του Ηρακλείου καταπλέει το Abeille Marengo-Προγραμματισμένη η επιστροφή του για τεχνικές εργασίες",
     "url": "https://www.newshub.gr/el/kriti/sto-limani-toy-irakleioy-katapleei-to-abeille-marengo-programmatismeni-i-epistrofi-toy-gia-technikes-ergasies",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/maren.jpg",
     "summary": "Στο λιμάνι του Ηρακλείου αναμένεται να επιστρέψει τη Δευτέρα 16 Νοεμβρίου το γαλλικό ερευνητικό πλοίο Abeille Marengo, το οποίο συμμετέχει στις έρευνες για τ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "oi-trypes-tis-forodiafygis-para-ti-diasyndesi-ton-tameiakon-kai-to-mydata",
@@ -22,6 +34,18 @@
     "summary": "Παρά το myDATA και το πλέγμα των ηλεκτρονικών εφαρμογών, εντούτοις, όπως αποδεικνύεται, υπάρχει πρόσφορο έδαφος για φοροδιαφυγή από τους επιτήδειους.\r\n\r\nΗ υπ...",
     "author": null,
     "featured": false
+  },
+  {
+    "id": "gynaika-anasysthike-nekri-apo-ti-limni-toy-agioy-nikolaoy",
+    "title": "Γυναίκα ανασύσθηκε νεκρή από τη λίμνη του Αγίου Νικολάου",
+    "url": "https://www.newshub.gr/el/kriti/gynaika-anasysthike-nekri-apo-ti-limni-toy-agioy-nikolaoy",
+    "date": "2026-11-15T06:50:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/main_ca35e-dsc_1180.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/main_ca35e-dsc_1180.jpg",
+    "summary": "Συναγερμός σήμανε σήμερα το πρωί στον Άγιο Νικόλαο καθώς εντοπίστηκε  γυναίκα να επιπλέει στη λίμνη της πόλης.\r\n\r\nΣτο σημείο έσπευσε Λιμενικό, Πυρο...",
+    "author": null,
+    "featured": true
   },
   {
     "id": "i-ellada-apo-tin-katastrofi-ston-thriamvo-i-polemiki-proetoimasia-apo-to-1923-os-to-1940-podcast",
@@ -7197,28 +7221,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/aiz-2.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/aiz-2.jpg",
     "summary": "Τη συμφωνία των κομμάτων που συμμετέχουν στο υπό διαμόρφωση κυβερνητικό σχήμα για τα πρόσωπα που θα αναλάβουν καίριες θέσεις στην 26η Κνεσέτ κατά τη μεταβατι...",
-    "featured": false
-  },
-  {
-    "id": "s-pitsigaydaki-otan-to-anosopoiitiko-mperdeyetai-ta-kryfa-symptomata-o-mythos-ton-exetaseon-kai-i-elpida-tis-yfesis-sta-aytoanosa-nosimata-podcast",
-    "title": "Σ. Πιτσιγαυδάκη: Όταν το ανοσοποιητικό “μπερδεύεται” – Τα «κρυφά» συμπτώματα, ο μύθος των εξετάσεων και η ελπίδα της ύφεσης στα αυτοάνοσα νοσήματα (podcast)",
-    "url": "https://www.newshub.gr/el/ygeia/s-pitsigaydaki-otan-to-anosopoiitiko-mperdeyetai-ta-kryfa-symptomata-o-mythos-ton-exetaseon-kai-i-elpida-tis-yfesis-sta-aytoanosa-nosimata-podcast",
-    "date": "2026-11-10T11:40:00.000Z",
-    "category": "Υγεία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/beige-and-black-modern-podcast-youtube-thumbnail-750-x-750-px-binteo-8.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/beige-and-black-modern-podcast-youtube-thumbnail-750-x-750-px-binteo-8.jpg",
-    "summary": "Τα αυτοάνοσα ρευματικά νοσήματα αποτελούν ένα από τα πιο πολύπλοκα κεφάλαια της σύγχρονης ιατρικής, επηρεάζοντας χιλιάδες ανθρώπους. Δυστυχώς, ο όρος «...",
-    "featured": false
-  },
-  {
-    "id": "pierrakakis-koinos-stochos-i-stirixi-ton-politon-apenanti-stis-prokliseis-enos-dyskoloy-cheimona",
-    "title": "Πιερρακάκης: Κοινός στόχος η στήριξη των πολιτών απέναντι στις προκλήσεις ενός δύσκολου χειμώνα",
-    "url": "https://www.newshub.gr/el/oikonomia/pierrakakis-koinos-stochos-i-stirixi-ton-politon-apenanti-stis-prokliseis-enos-dyskoloy-cheimona",
-    "date": "2026-11-10T11:36:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/piera.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/piera.jpg",
-    "summary": "«Κοινός μας στόχος είναι να στηρίξουμε τους πολίτες ώστε να ανταποκριθούν στις προκλήσεις ενός δύσκολου χειμώνα», δήλωσε, μεταξύ άλλων, ο υπουργό...",
     "featured": false
   },
   {
