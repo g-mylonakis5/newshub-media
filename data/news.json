@@ -1,5 +1,17 @@
 [
   {
+    "id": "sto-limani-toy-irakleioy-katapleei-to-abeille-marengo-programmatismeni-i-epistrofi-toy-gia-technikes-ergasies",
+    "title": "Στο λιμάνι του Ηρακλείου καταπλέει το Abeille Marengo-Προγραμματισμένη η επιστροφή του για τεχνικές εργασίες",
+    "url": "https://www.newshub.gr/el/kriti/sto-limani-toy-irakleioy-katapleei-to-abeille-marengo-programmatismeni-i-epistrofi-toy-gia-technikes-ergasies",
+    "date": "2026-11-15T07:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/maren.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/maren.jpg",
+    "summary": "Στο λιμάνι του Ηρακλείου αναμένεται να επιστρέψει τη Δευτέρα 16 Νοεμβρίου το γαλλικό ερευνητικό πλοίο Abeille Marengo, το οποίο συμμετέχει στις έρευνες για τ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "oi-trypes-tis-forodiafygis-para-ti-diasyndesi-ton-tameiakon-kai-to-mydata",
     "title": "Οι τρύπες της φοροδιαφυγής παρά τη διασύνδεση των ταμειακών και το Mydata",
     "url": "https://www.newshub.gr/el/oikonomia/oi-trypes-tis-forodiafygis-para-ti-diasyndesi-ton-tameiakon-kai-to-mydata",
@@ -177,7 +189,7 @@
       "url": "https://www.newshub.gr/el/christoforos-papadakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "ntemi-moyr-giortase-ta-64a-genethlia-tis-me-tis-kores-kai-tin-eggoni-tis-eimai-eygnomon",
@@ -7207,17 +7219,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/piera.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/piera.jpg",
     "summary": "«Κοινός μας στόχος είναι να στηρίξουμε τους πολίτες ώστε να ανταποκριθούν στις προκλήσεις ενός δύσκολου χειμώνα», δήλωσε, μεταξύ άλλων, ο υπουργό...",
-    "featured": false
-  },
-  {
-    "id": "karystos-entopistike-nekri-gynaika-mesa-se-mantri",
-    "title": "Κάρυστος: Εντοπίστηκε νεκρή γυναίκα μέσα σε μαντρί",
-    "url": "https://www.newshub.gr/el/ellada/karystos-entopistike-nekri-gynaika-mesa-se-mantri",
-    "date": "2026-11-10T11:28:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/ekab2gte.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/ekab2gte.jpg",
-    "summary": "Μια γυναίκα βρέθηκε νεκρή μέσα σε μαντρί στην περιοχή της Καρύστου, στην Εύβοια, με την Αστυνομία να έχει ενημερωθεί για το περιστατικό.\r\n\r\nΣύμφωνα με πληροφ...",
     "featured": false
   },
   {
