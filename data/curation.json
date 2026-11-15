@@ -97,11 +97,11 @@
       "https://www.newshub.gr/el/kriti/epicheirisi-aposymforisi-gia-tis-fylakes-kai-stin-kriti-i-eikona-sta-sofronistika-katastimata-toy-nisioy": "2026-11-12T13:37:05.799Z"
     },
     "opinions": {
+      "https://www.newshub.gr/el/apopseis/i-moysiki-einai-oikoymeniki-den-gnorizei-teichi-kai-synora": "2026-11-15T12:55:14.421Z",
       "https://www.newshub.gr/el/apopseis/pos-i-ellada-mporei-na-akyrosei-ti-galazia-patrida": "2026-11-12T22:39:55.505Z",
       "https://www.newshub.gr/el/apopseis/i-apeleytherosi-kai-o-apoichos-tis-katochis": "2026-11-12T22:39:55.505Z",
       "https://www.newshub.gr/el/apopseis/i-krisi-einai-vathyteri-apo-ton-tramp-oi-esoterikes-diaireseis-kai-oi-pagkosmioi-kindynoi": "2026-11-12T22:39:55.505Z",
-      "https://www.newshub.gr/el/apopseis/israil-ilthe-i-ora-tis-politikis-anatropis-toy-netaniachoy": "2026-11-12T22:39:55.505Z",
-      "https://www.newshub.gr/el/apopseis/stoys-dromoys-ergazomenoi-kai-neolaia-tis-italias-enantia-ston-polemo-kai-tin-akriveia": "2026-11-12T22:39:55.505Z"
+      "https://www.newshub.gr/el/apopseis/israil-ilthe-i-ora-tis-politikis-anatropis-toy-netaniachoy": "2026-11-12T22:39:55.505Z"
     },
     "cat:kriti": {
       "4clF6NWNtso": "2026-11-12T22:46:09.499Z",
@@ -109,17 +109,23 @@
     }
   },
   "opinions": [
+    "https://www.newshub.gr/el/apopseis/i-moysiki-einai-oikoymeniki-den-gnorizei-teichi-kai-synora",
     "https://www.newshub.gr/el/apopseis/pos-i-ellada-mporei-na-akyrosei-ti-galazia-patrida",
     "https://www.newshub.gr/el/apopseis/i-apeleytherosi-kai-o-apoichos-tis-katochis",
     "https://www.newshub.gr/el/apopseis/i-krisi-einai-vathyteri-apo-ton-tramp-oi-esoterikes-diaireseis-kai-oi-pagkosmioi-kindynoi",
-    "https://www.newshub.gr/el/apopseis/israil-ilthe-i-ora-tis-politikis-anatropis-toy-netaniachoy",
-    "https://www.newshub.gr/el/apopseis/stoys-dromoys-ergazomenoi-kai-neolaia-tis-italias-enantia-ston-polemo-kai-tin-akriveia",
-    "https://www.newshub.gr/el/apopseis/31-oktovrioy-giorti-toy-chalooyin"
+    "https://www.newshub.gr/el/apopseis/israil-ilthe-i-ora-tis-politikis-anatropis-toy-netaniachoy"
   ],
   "categoryPicks": {
     "kriti": [
       "4clF6NWNtso",
       "3CZp2A-sKeM"
     ]
+  },
+  "featuredPrev": [],
+  "hidden": {
+    "opinions": {
+      "https://www.newshub.gr/el/apopseis/stoys-dromoys-ergazomenoi-kai-neolaia-tis-italias-enantia-ston-polemo-kai-tin-akriveia": "2026-11-15T11:38:54.193Z",
+      "https://www.newshub.gr/el/apopseis/31-oktovrioy-giorti-toy-chalooyin": "2026-11-15T11:39:09.809Z"
+    }
   }
 }
