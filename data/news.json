@@ -1,5 +1,21 @@
 [
   {
+    "id": "g-athanasakis-se-kalo-dromo-oi-diadikasies-gia-tin-apozimiosi-ton-paragogon-toy-oropedioy-ti-leei-sto-newshub-gr-o-dimarchos",
+    "title": "Γ. Αθανασάκης: «Σε καλό δρόμο οι διαδικασίες για την αποζημίωση των παραγωγών του Οροπεδίου» - Τι λέει στο Newshub.gr ο δήμαρχος",
+    "url": "https://www.newshub.gr/el/kriti/g-athanasakis-se-kalo-dromo-oi-diadikasies-gia-tin-apozimiosi-ton-paragogon-toy-oropedioy-ti-leei-sto-newshub-gr-o-dimarchos",
+    "date": "2026-11-15T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/oropedio-lasithiou-zemies.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/oropedio-lasithiou-zemies.jpg",
+    "summary": "Επαφές στην Αθήνα, διαπιστώνοντας όπως λέει στο newshub.gr  ότι οι διαδικασίες βρίσκονται σε καλό δρόμο, είχε ο Δήμαρχος Οροπεδίου Λασθίου Γιώργος Αθανα...",
+    "author": {
+      "name": "Χριστόφορος Παπαδάκης",
+      "url": "https://www.newshub.gr/el/christoforos-papadakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "ntemi-moyr-giortase-ta-64a-genethlia-tis-me-tis-kores-kai-tin-eggoni-tis-eimai-eygnomon",
     "title": "Ντέμι Μουρ: Γιόρτασε τα 64α γενέθλιά της με τις κόρες και την εγγονή της – «Είμαι ευγνώμων»",
     "url": "https://www.newshub.gr/el/sugar/ntemi-moyr-giortase-ta-64a-genethlia-tis-me-tis-kores-kai-tin-eggoni-tis-eimai-eygnomon",
@@ -201,7 +217,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/astynomiko-megaro-erakleiou.jpg",
     "summary": "Περισσότερες από 520 συλλήψεις έγιναν από την Αστυνομία, μέσα στον Οκτώβριο του 2026, σε όλη την Κρήτη.\r\n\r\nΌπως αναφέρεται στη Μηνιαία Δραστηριότητα της Γενι...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "zefyri-i-moiraia-skala-kai-to-flegomeno-ypogeio-pos-pagideytikan-oi-dyo-pyrosvestes",
@@ -7181,17 +7197,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/metanastes-kataulismos.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/metanastes-kataulismos.jpg",
     "summary": "Για την τρέχουσα κατάσταση των μεταναστευτικών ροών στην Ελλάδα, εστιάζοντας στην Κρήτη, μίλησε η υφυπουργός Μετανάστευσης και Ασύλου, Σέβη Βολουδάκη.\r\n\r\nΌπω...",
-    "featured": false
-  },
-  {
-    "id": "italia-kleisti-i-agora-sto-palermo-tin-ora-poy-pernoyse-i-nekriki-pompi-nonoy-tis-mafias",
-    "title": "Ιταλία: Κλειστή η αγορά στο Παλέρμο την ώρα που περνούσε η νεκρική πομπή νονού της μαφίας",
-    "url": "https://www.newshub.gr/el/kosmos/italia-kleisti-i-agora-sto-palermo-tin-ora-poy-pernoyse-i-nekriki-pompi-nonoy-tis-mafias",
-    "date": "2026-11-10T09:45:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/pale.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/pale.jpg",
-    "summary": "Αίσθηση και οργή προκάλεσε στην Ιταλία η εξαναγκαστική λαϊκή συμμετοχή που απαίτησε η μαφία στην κηδεία «νονού» σε κεντρική περιοχή στο Παλέρμο τ...",
     "featured": false
   },
   {
