@@ -7537,9 +7537,9 @@ function main(){
     ...ownArticles.map(itemFromOwnArticle),
   ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  // Το αυτόματο γέμισμα. Αν τα καρφιτσωμένα είναι περισσότερα από τις
-  // εννιά θέσεις, τα κρατάμε ΟΛΑ: είναι ρητή επιλογή ανθρώπου, και δεν
-  // κόβουμε σιωπηλά ό,τι ζήτησε να φαίνεται.
+  // Automatic filling. If pinned items exceed the nine slots we keep them
+  // ALL: a human asked for them, and we do not silently drop what someone
+  // asked to be visible.
   const room = Math.max(FLOW_VISIBLE, flow.length);
   const kryfoFlow = kryfa('latest');
   for (const it of recent) {
@@ -7554,17 +7554,16 @@ function main(){
     }
   }
 
-  // Η χρονολογική θέση κάθε κάρτας, γραμμένη πάνω της ως data-rank.
+  // Each card's chronological position, written on it as data-rank.
   //
-  // Η σειρά του DOM είναι «καρφιτσωμένα πρώτα, μετά ημερομηνία» — αυτό
-  // θέλουμε στο «Όλα». Μέσα σε μια ΚΑΤΗΓΟΡΙΑ όμως δεν το θέλουμε: όποιος
-  // πατάει «Κρήτη» ζητάει τα πιο πρόσφατα της Κρήτης, και ένα παλιό
-  // καρφιτσωμένο στην κορυφή μοιάζει με σφάλμα, όχι με επιλογή. Το
-  // καρφίτσωμα σημαίνει «κράτα το ψηλά στην αρχική ροή», τίποτα άλλο.
+  // DOM order is "pinned first, then date" — right for "Όλα". Inside a
+  // CATEGORY it is wrong: whoever taps "Κρήτη" wants the most recent from
+  // Crete, and an old pinned item on top looks like a bug. Pinning means
+  // "keep it high in the main flow", nothing else.
   //
-  // Το player.js βάζει style.order = data-rank όταν πατηθεί κατηγορία,
-  // και το αφαιρεί στο «Όλα». Η ροή είναι grid, οπότε το order αναδιατάσσει
-  // χωρίς να κουνηθεί τίποτα στο DOM.
+  // player.js sets style.order = data-rank when a category is tapped and
+  // removes it for "Όλα". The flow is a grid, so order rearranges without
+  // touching the DOM.
   const seira = flow.slice()
     .sort((a, b) => new Date(b.date) - new Date(a.date));
   const rank = new Map(seira.map((it, i) => [it, i]));
@@ -7573,23 +7572,23 @@ function main(){
 
   const html = page({
     title: 'NewsHub Media',
-    // Μόνο εδώ: το πλαίσιο της ροής υπάρχει μόνο στην αρχική, και δεν
-    // φορτώνουμε σενάρια σε 4.696 σελίδες που δεν τα χρειάζονται.
+    // Only here: the ticker exists only on the homepage, and we do not
+    // load scripts on 4,700 pages that do not need them.
     scripts: ['roi.js'],
     body: `${siteHeader()}
 
 ${heroBanner(featured)}
 
-${/* Αμέσως μετά την κύρια είδηση, πριν τη ροή. Η ακριβότερη θέση του
-     site — αλλά ΚΑΤΩ από το hero, ποτέ πάνω: η απαίτηση του αφεντικού
-     είναι ότι η αρχική ανοίγει με μία είδηση σε όλο το πλάτος, και μια
-     διαφήμιση από πάνω θα την έκανε δεύτερη. */ ''}
+${/* Straight after the lead story, before the flow. The most valuable
+     slot on the site — but BELOW the hero, never above: the homepage
+     opens with one full-width story, and an ad above would make it
+     second. */ ''}
 ${adSlot('home-hero', 'leaderboard')}
 
   <section class="band band--latest">
-${/* Σκέτο «Τελευταία», όχι «Τελευταία επεισόδια»: στη ροή μπαίνουν
-     και άρθρα και βίντεο, όχι μόνο podcast. Ο τίτλος πρέπει να λέει
-     την αλήθεια για ό,τι είναι από κάτω. */ ''}
+${/* Just "Τελευταία", not "Τελευταία επεισόδια": the flow carries
+     articles and videos too. The heading has to be true about what is
+     under it. */ ''}
 ${bandMark('Lat', 'est', '      <h1 data-flow-head>Τελευταία</h1>')}
 
 ${topicStrip(catGroups)}
@@ -7604,32 +7603,29 @@ ${topicStrip(catGroups)}
 
 ${adSlot('home-top', 'billboard')}
 
-${/* Οι εκπομπές βγαίνουν ΕΞΩ από τις δύο στήλες, επίτηδες: μέσα στην
-     αριστερή στήλη το πλαίσιο έπιανε 1.044px και οι αφίσες έβγαιναν
-     226px — πολύ μικρές για να διαβαστεί το όνομα της εκπομπής που
-     είναι ψημένο μέσα τους. Σε όλο το πλάτος χωρούν τρεις μεγάλες. */ ''}
+${/* Shows go OUTSIDE the two columns on purpose: inside the left column
+     the posters came out 226px wide, too small to read the show name
+     baked into them. Full width fits three large ones. */ ''}
 ${showsSection(showGroups)}
 
-${/* Το «Must read» κάθεται ανάμεσα στις εκπομπές και στα θέματα: μετά
-     τις εκπομπές το δικό μας υλικό έχει ήδη παρουσιαστεί, και πριν τις
-     κατηγορίες ο αναγνώστης κάνει μια παύση με ειδήσεις πριν μπει στο
-     βαθύ μέρος της σελίδας. */ ''}
+${/* Must read sits between the shows and the topics: our own material
+     has been shown, and the reader gets a pause with news before the deep
+     part of the page. */ ''}
 ${mustReadSection(articles, curation, onTop)}
 
-${/* Οι Απόψεις αμέσως από κάτω: ίδια προέλευση, ίδιο κουτί, άλλο
-     είδος ανάγνωσης. Η είδηση λέει τι έγινε, η άποψη ποιος το λέει —
-     γι' αυτό εκεί μετράει η φωτογραφία του άρθρου κι εδώ το πρόσωπο. */ ''}
+${/* Opinions right below: same source, same box, different kind of
+     reading. News says what happened, opinion says who claims it — hence
+     the article photo there and the face here. */ ''}
 ${opinionsSection(articles, curation)}
 
-${/* Αμέσως μετά το Must read, και πριν τα θέματα: όποιος άφησε κάτι
-     στη μέση το βρίσκει πριν μπει στο βαθύ μέρος της σελίδας. Για
-     όποιον δεν άφησε τίποτα η ενότητα δεν υπάρχει καθόλου, οπότε η
-     εγκεκριμένη διάταξη μένει ανέπαφη για τον καινούριο επισκέπτη. */ ''}
+${/* After Must read, before the topics: whoever left something half-read
+     finds it before the deep part of the page. For everyone else the
+     section does not exist, so the approved layout is untouched. */ ''}
 ${resumeSection()}
 
-${/* Αμέσως μετά: «τι άφησες στη μέση» και «τι κράτησες για μετά»
-     είναι η ίδια κουβέντα, και οι δύο ενότητες εμφανίζονται μόνο σε
-     όποιον έχει ήδη ιστορικό. */ ''}
+${/* Right after: "what you left unfinished" and "what you saved for
+     later" are the same conversation, and both sections appear only to
+     someone who already has history. */ ''}
 ${listaSection()}
 
   <div class="page-cols">
@@ -7638,10 +7634,10 @@ ${topicRows(catGroups)}
 
 ${namesSection(groups)}
 
-${/* Η δεύτερη θέση της αρχικής. Ανάμεσα στα «Πρόσωπα» και στο «Και
-     ακόμα»: εκεί τελειώνει το κυρίως σώμα και αρχίζει η ουρά της
-     σελίδας, δηλαδή σημείο παύσης και όχι διακοπή. Η πρώτη θέση
-     (home-top) κάθεται πολύ ψηλότερα, οπότε οι δύο δεν γειτονεύουν. */ ''}
+${/* Second homepage slot. Between "Πρόσωπα" and "Και ακόμα": where the
+     main body ends and the tail of the page begins — a pause, not an
+     interruption. The first slot sits far higher, so the two are never
+     neighbours. */ ''}
 ${adSlot('home-mid', 'leaderboard')}
 
 ${moreTopics(catGroups)}
@@ -7650,17 +7646,14 @@ ${spotlightSections(catGroups)}
     </div>
 
     <div class="page-side">
-${/* ΠΑΝΩ από τη ροή, επίτηδες, και είναι η μόνη θέση που δουλεύει.
-     Μέχρι τώρα κολλητή ήταν ΟΛΗ η στήλη, δηλαδή ό,τι έμπαινε μέσα
-     της ακολουθούσε το σκρολάρισμα — ακριβώς η διαφήμιση που κυνηγάει
-     τον αναγνώστη, που απαγόρευσε το αφεντικό. Τώρα κολλητή είναι
-     μόνο η ροή (.ticker στο styles.css) και η διαφήμιση μένει στη
-     θέση της.
+${/* ABOVE the ticker, on purpose, and the only position that works.
+     The whole column used to be sticky, so anything inside followed the
+     scroll — exactly the ad that chases the reader. Now only the ticker
+     is sticky (.ticker in styles.css) and the ad stays put.
 
-     Κάτω από τη ροή δεν γίνεται: ένα κολλητό στοιχείο κρατάει τον
-     χώρο του αλλά ζωγραφίζεται μετατοπισμένο, οπότε κατεβαίνοντας θα
-     περνούσε από πάνω της. Πάνω της, η ροή ταξιδεύει προς τα κάτω και
-     δεν τη συναντά ποτέ. */ ''}
+     Below the ticker does not work: a sticky element keeps its space but
+     paints offset, so it would scroll over the ad. Above it, the ticker
+     travels down and never meets it. */ ''}
 ${adSlot('home-side', 'mpu')}
 
 ${newsTicker(articles)}
@@ -7668,13 +7661,11 @@ ${newsTicker(articles)}
   </div>
 
 ${intro(episodes[0], videos[0])}`,
-    // Η ταυτότητα του site, μία φορά, εδώ. Όλες οι άλλες σελίδες
-    // αναφέρουν τον ίδιο οργανισμό με το ίδιο @id.
+    // Site identity, once, here. Every other page refers to the same
+    // organisation by the same @id.
     //
-    // Το SearchAction λέει στη Google «έχω δική μου αναζήτηση, εδώ
-    // είναι» — στα αποτελέσματα μπορεί να εμφανιστεί πλαίσιο
-    // αναζήτησης κάτω από το όνομά μας. Δουλεύει ΜΟΝΟ επειδή η
-    // search.html διαβάζει πλέον το ?q= (δες searchPage).
+    // SearchAction tells Google we have our own search; it works only
+    // because search.html now reads ?q= (see searchPage).
     jsonld: [
       ldOrg(),
       {
@@ -7698,29 +7689,26 @@ ${intro(episodes[0], videos[0])}`,
 
   fs.mkdirSync(PUBLIC_DIR, { recursive: true }); //creation of the public directory if it doesn't exist
 
-  // Τα λογότυπα ζουν στο public/shows/ — ανεβαίνουν στο git, δεν παράγονται.
+  // Logos live in public/shows/ — committed, not generated.
 
   writeIfChanged(path.join(PUBLIC_DIR, 'index.html'), html); //writes the generated HTML to the index.html file
 
-  // Ποια είναι ΟΝΤΩΣ τα «Τελευταία» αυτή τη στιγμή — για το διαχειριστικό.
+  // What "Τελευταία" actually is right now — for the admin.
   //
-  // Το διαχειριστικό δεν μπορεί να το υπολογίσει μόνο του: η επιλογή
-  // εδώ αγνοεί τα βίντεο με δίδυμο podcast, βάζει πρώτα τα δικά μας
-  // άρθρα και κρατά έξω το πρωτοσέλιδο. Μια πρόβλεψη που πέφτει έξω
-  // είναι χειρότερη από καθόλου πρόβλεψη, οπότε γράφουμε την αλήθεια.
+  // The admin cannot work it out alone: this selection drops videos that
+  // have a twin podcast and keeps the hero out. A prediction that misses
+  // is worse than none, so we write the truth.
   //
-  // Χωρίς ώρα μέσα: θα άλλαζε σε κάθε build και θα λέρωνε το git χωρίς
-  // να έχει αλλάξει τίποτα στο περιεχόμενο.
+  // No timestamp inside: it would change on every build and dirty git
+  // with no change in content.
   const pinnedHrefs = new Set(pinned.map((it) => it.href));
   const shown = flow.filter((it) => !it.extra);
 
-  // Και λίγα ρεφενέ από κάτω: όταν ο δημοσιογράφος βγάλει κάτι με το ✕,
-  // η θέση που αδειάζει πρέπει να γεμίσει με ΑΥΤΟ που θα έβαζε το site —
-  // αλλιώς το διαχειριστικό θα ξαναέλεγε «1 θέση με τα πιο πρόσφατα» και
-  // θα χανόταν η εικόνα των εννιά.
+  // Plus a few spares below: when a journalist removes something with the
+  // ✕, the freed slot must be filled with WHAT THE SITE WOULD PUT there.
   //
-  // Τα κρυμμένα μένουν έξω κι από εδώ: το απόθεμα είναι ακριβώς «τι θα
-  // έβαζε το site», και το site δεν τα βάζει.
+  // Hidden items stay out of the spares too: the reserve is exactly "what
+  // the site would show", and the site does not show them.
   const shownHrefs = new Set(shown.map((it) => it.href));
   const reserve = recent
     .filter((it) => !shownHrefs.has(it.href) && !onTop.has(it.href) && !kryfoFlow(it))
@@ -7741,17 +7729,15 @@ ${intro(episodes[0], videos[0])}`,
     items: shown.map((it) => flowRow(it))
       .concat(reserve.map((it) => flowRow(it, { reserve: true }))),
   }, null, 2));
-  // Το αποτύπωμα του χτισίματος: πότε έγινε, και ποιο είναι το νεότερο
-  // κομμάτι που ξέρει.
+  // Build fingerprint: when it ran, and the newest item it knows about.
   //
-  // Υπάρχει για ΕΝΑΝ λόγο: να μπορεί κάποιος απ' έξω να ρωτήσει το
-  // ζωντανό site «πόσο παλιός είσαι;». Το check-fresh.js κοιτάζει τα
-  // ΔΙΚΑ ΜΑΣ δεδομένα και απαντά «μπαίνουν ειδήσεις;» — άλλο ερώτημα.
-  // Αν σπάσει το ανέβασμα, τα δεδομένα συνεχίζουν να μπαίνουν και ο
-  // έλεγχος μένει πράσινος ενώ το site έχει παγώσει. Δες check-live.js.
+  // It exists so someone outside can ask the live site how old it is.
+  // check-fresh.js looks at OUR data and answers a different question —
+  // if the deploy breaks, data keeps arriving and that check stays green
+  // while the site is frozen. See check-live.js.
   //
-  // ΔΕΝ περνάει από writeIfChanged: η ώρα αλλάζει εξ ορισμού σε κάθε
-  // χτίσιμο, και αυτό ακριβώς θέλουμε να μετράμε.
+  // Deliberately not through writeIfChanged: the timestamp changes on
+  // every build, which is exactly what we want to measure.
   fs.writeFileSync(path.join(PUBLIC_DIR, 'build.json'), JSON.stringify({
     pote: new Date().toISOString(),
     neotero: [...episodes, ...articles]
@@ -7765,7 +7751,7 @@ ${intro(episodes[0], videos[0])}`,
   writeIfChanged(path.join(PUBLIC_DIR, 'search.html'), searchPage(episodes, catGroups));
   writeIfChanged(path.join(PUBLIC_DIR, 'shows.html'), showsIndexPage(showGroups));
 
-  // Το αρχείο όλων των επεισοδίων, σελιδοποιημένο.
+  // The full episode archive, paginated.
   const archivePages = pageCount(episodes.length);
   const expectedArchive = new Set();
   for (let p = 1; p <= archivePages; p++) {
@@ -7774,9 +7760,9 @@ ${intro(episodes[0], videos[0])}`,
     writeIfChanged(path.join(PUBLIC_DIR, name), episodesPage(episodes, p));
   }
 
-  // Οι σελίδες επεισοδίου. Συγκρίνουμε με ό,τι υπάρχει ήδη στον δίσκο
-  // και γράφουμε μόνο τις αλλαγμένες — αλλιώς κάθε build θα πείραζε και
-  // τα 1027 αρχεία χωρίς λόγο.
+  // Episode pages. Compared against what is already on disk so only the
+  // changed ones are written — otherwise every build would touch all
+  // 1,094 files for nothing.
   fs.mkdirSync(EPISODE_DIR, { recursive: true });
   let written = 0;
   for (const ep of episodes) {
@@ -7797,9 +7783,9 @@ ${intro(episodes[0], videos[0])}`,
     removed++;
   }
 
-  // Οι απομαγνητοφωνήσεις, σε ξεχωριστά αρχεία που τα ζητάει ο player
-  // μόνο όταν ανοίξει κανείς την ενότητα. Δες το σχόλιο στο
-  // transcriptSection για το γιατί δεν είναι μέσα στις σελίδες.
+  // Transcripts, in separate files the player fetches only when someone
+  // opens the section. See transcriptSection for why they are not inside
+  // the pages.
   fs.mkdirSync(TRANSCRIPT_OUT, { recursive: true });
   const expectedTr = new Set();
   let trWritten = 0;
@@ -7831,9 +7817,9 @@ ${intro(episodes[0], videos[0])}`,
     const name = mostCommon(group.names);   // η γραφή που εμφανίζεται πιο συχνά
     const slug = slugify(name);             // ...και από αυτήν βγαίνει η διεύθυνση
 
-    // Το χαλαρό κλειδί ένωσε, το slug ονομάζει — άρα δύο ομάδες μπορούν
-    // θεωρητικά να ζητήσουν το ίδιο αρχείο. Το φωνάζουμε αντί να γράψουμε
-    // σιωπηλά τη μία πάνω στην άλλη.
+    // The loose key merges, the slug names — so two groups can in theory
+    // ask for the same file. We say so instead of silently writing one
+    // over the other.
     if (expectedGuests.has(`${slug}.html`)) {
       console.warn(`ΠΡΟΣΟΧΗ: δύο καλεσμένοι ζητούν το guest/${slug}.html — ο «${name}» δεν γράφτηκε`);
       continue;
@@ -7857,10 +7843,10 @@ ${intro(episodes[0], videos[0])}`,
     guestsRemoved++;
   }
 
-  // Σελίδες βίντεο — ίδιο μοτίβο με τα επεισόδια.
+  // Video pages — same pattern as episodes.
   fs.mkdirSync(VIDEO_DIR, { recursive: true });
-  // Ένα βίντεο μπορεί να υπάρχει σε πολλές λίστες. Κρατάμε μία σελίδα ανά
-  // βίντεο, με την ειδικότερη εκπομπή του.
+  // A video can appear in several playlists. One page per video, under
+  // its most specific show.
   const best = {};
   for (const v of videos) {
     const name = path.basename(videoUrl(v));
@@ -7918,27 +7904,23 @@ ${intro(episodes[0], videos[0])}`,
 
   writeIfChanged(path.join(PUBLIC_DIR, 'categories.html'), categoriesIndexPage(catGroups));
 
-  // Σελίδες άρθρων — όσα έχουν σώμα στο data/news-bodies/.
+  // Article pages — the ones with a body in data/news-bodies/.
   //
-  // Γράφονται ΜΕΤΑ τις κατηγορίες επίτηδες: το άρθρο δείχνει τη
-  // κατηγορία του, και 4 από τις 16 κατηγορίες των ειδήσεών τους
-  // (Sugar, Τα εν οίκω, Έξοδος, Προσωπογραφίες) δεν έχουν δική μας
-  // σελίδα. Χωρίς αυτόν τον έλεγχο, το άρθρο έδειχνε σε 404.
+  // Written AFTER the categories on purpose: an article shows its
+  // category, and 4 of their 16 categories have no page of ours. Without
+  // the check the article pointed at a 404.
   //
-  // ΔΕΝ σβήνουμε όσες περισσέψουν. Ένα άρθρο βγαίνει από τα must read
-  // μέσα σε ώρες, αλλά η σελίδα του μπορεί να έχει ήδη μοιραστεί ή να
-  // έχει μπει στη Google. Αν τη σβήναμε, θα γινόταν 404 — και το 404
-  // σε σελίδα που δείχνει το newshub.gr ως πρωτότυπο βλάπτει ακριβώς
-  // αυτό που ήρθε να βοηθήσει. Ο φάκελος μεγαλώνει όσο τα σώματα, και
-  // εκείνα τα κρατάει μετρημένα το fetch-news.js.
+  // Leftovers are NOT deleted. An article drops out of must-read within
+  // hours, but its page may already be shared or indexed; deleting it
+  // would turn that into a 404. The folder grows with the bodies, and
+  // fetch-news.js keeps those bounded.
   fs.mkdirSync(ARTICLE_DIR, { recursive: true });
   const hasCatPage = (cat) => !!cat && expectedCats.has(path.basename(categoryUrl(cat)));
 
-  // ΠΡΩΤΑ τα δικά μας. Μοιράζονται φάκελο με τις αναδημοσιεύσεις —
-  // για τον αναγνώστη είναι το ίδιο πράγμα — αλλά αν δύο άρθρα πέσουν
-  // στο ίδιο όνομα, κερδίζει το δικό μας και το λέμε δυνατά. Σιωπηλό
-  // πάτημα σημαίνει ότι ο δημοσιογράφος έγραψε άρθρο που δεν βγήκε
-  // ποτέ, και θα το μάθαινε μόνο αν τύχαινε να το ψάξει.
+  // OUR OWN first. They share a folder with the republished ones — for
+  // the reader they are the same thing — but if two articles land on the
+  // same name, ours wins and we say so loudly. A silent overwrite means a
+  // journalist wrote an article that never appeared.
   const ownTaken = new Set();
   let ownWritten = 0;
   for (const a of ownArticles) {
@@ -7947,9 +7929,9 @@ ${intro(episodes[0], videos[0])}`,
     if (writeIfChanged(file, ownArticlePage(a, hasCatPage(a.category)))) ownWritten++;
   }
 
-  // Οι σελίδες των δημοσιογράφων. Μία ανά υπογραφή, και σβήνονται όσες
-  // έμειναν ορφανές — αλλιώς μια σελίδα θα ζούσε για πάντα δείχνοντας
-  // άρθρα που άλλαξαν υπογραφή ή σβήστηκαν.
+  // Journalist pages. One per byline, and orphans are deleted — otherwise
+  // a page lives forever listing articles that changed byline or were
+  // removed.
   const writerGroups = writersFrom(ownArticles);
   const WRITER_DIR = path.join(PUBLIC_DIR, 'arthrografos');
   fs.mkdirSync(WRITER_DIR, { recursive: true });
@@ -7988,21 +7970,16 @@ ${intro(episodes[0], videos[0])}`,
     if (writeIfChanged(file, articlePage(a, body, hasCat))) artWritten++;
   }
 
-  // ---- Οι ορφανές σελίδες άρθρων, μόνο στην κεφαλίδα τους ----
+  // ---- Orphaned article pages, header only ----
   //
-  // Οι αναδημοσιεύσεις δεν σβήνονται όταν βγουν από τη ροή — ο λόγος
-  // είναι παραπάνω. Δεν ξαναγράφονται όμως ποτέ: το σώμα τους έχει
-  // φύγει από το data/news-bodies/ (το fetch-news.js τα κρατάει
-  // μετρημένα), οπότε το build δεν ΜΠΟΡΕΙ να τις ξαναφτιάξει.
+  // Republished pages are not deleted when they leave the flow (reason
+  // above), but they are never rewritten either: their body is gone from
+  // data/news-bodies/, so the build CANNOT regenerate them. They stay
+  // frozen with the header of the day they were written — which left 799
+  // of them still calling Google for fonts.
   //
-  // Έτσι μένουν παγωμένες στην κεφαλίδα της ημέρας που γράφτηκαν. Όταν
-  // οι γραμματοσειρές έφυγαν από τη Google, 799 τέτοιες σελίδες
-  // συνέχιζαν να τη χτυπούν σε κάθε επίσκεψη — ακριβώς ο τρίτος
-  // διακομιστής που βγάλαμε από παντού αλλού.
-  //
-  // Εδώ αλλάζουμε ΜΟΝΟ τις δύο γραμμές των γραμματοσειρών, χωρίς να
-  // ακουμπήσουμε τίποτα άλλο. Όταν δεν μείνει καμία, ο βρόχος δεν
-  // βρίσκει τίποτα και δεν κοστίζει τίποτα.
+  // Here we change ONLY the two font lines. When none are left the loop
+  // finds nothing and costs nothing.
   const paliesFonts = /[ \t]*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com"[^>]*>\r?\n[ \t]*<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com[^>]*>\r?\n/;
   const neesFonts = `${FONT_PRELOAD
     .map((f) => `  <link rel="preload" href="../fonts/${f}" as="font" type="font/woff2" crossorigin>`)
@@ -8021,7 +7998,7 @@ ${intro(episodes[0], videos[0])}`,
     console.log(`  ${artFixed} παλιές σελίδες άρθρων: η κεφαλίδα τους δεν ζητά πια γραμματοσειρές από τη Google`);
   }
 
-  // Σελίδες εκπομπών — ίδιο μοτίβο: γράψε ό,τι άλλαξε, σβήσε τα ορφανά.
+  // Show pages — same pattern: write what changed, delete the orphans.
   fs.mkdirSync(SHOW_DIR, { recursive: true });
   const expectedShows = new Set();
   let showsWritten = 0;
@@ -8047,24 +8024,22 @@ ${intro(episodes[0], videos[0])}`,
     showsRemoved++;
   }
 
-  // Τα τρία αρχεία που θέλει κάθε σοβαρό site και δεν είναι σελίδες:
-  // η 404, ο κατάλογος για τη Google και οι οδηγίες για τα ρομπότ.
+  // The three files every site needs that are not pages: 404, the sitemap
+  // for Google, and the robots instructions.
   writeIfChanged(path.join(PUBLIC_DIR, '404.html'), notFoundPage());
   writeIfChanged(path.join(PUBLIC_DIR, 'aporrito.html'), privacyPage());
 
-  // Ο φάκελος transcript/ μένει έξω. Κανένα link δεν δείχνει εκεί — τα
-  // ζητάει ο player με fetch — αλλά το γράφουμε ρητά: είναι αυτόματο
-  // κείμενο με λάθος ονόματα, και δεν θέλουμε να γίνει αποτέλεσμα
-  // αναζήτησης με λόγια που δεν είπε κανείς.
+  // transcript/ stays out. Nothing links there — the player fetches them
+  // — but we say it explicitly: machine transcripts get names wrong, and
+  // we do not want them as search results for words nobody said.
   writeIfChanged(path.join(PUBLIC_DIR, 'robots.txt'),
     `User-agent: *\nAllow: /\nDisallow: /transcript/\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 
-  // Το ads.txt δηλώνει ποιος έχει δικαίωμα να πουλήσει χώρο εδώ. Χωρίς
-  // αυτό πολλοί αγοραστές δεν δίνουν προσφορά καθόλου. Το «f08c47...»
-  // είναι ο σταθερός κωδικός της Google, ίδιος για όλους.
+  // ads.txt declares who may sell space here. Without it many buyers do
+  // not bid at all. The f08c47... id is Google's, the same for everyone.
   //
-  // Μπαίνει μόνο με διακόπτη ανοιχτό: ένα ads.txt που δηλώνει δίκτυο
-  // χωρίς να υπάρχει δίκτυο είναι σκέτο ψέμα προς τους αγοραστές.
+  // Only written when the switch is on: an ads.txt naming a network that
+  // is not actually serving is a lie to the buyers.
   if (ADSENSE) {
     writeIfChanged(path.join(PUBLIC_DIR, 'ads.txt'),
       `google.com, ${ADSENSE.replace(/^ca-/, '')}, DIRECT, f08c47fec0942fa0\n`);
@@ -8077,23 +8052,23 @@ ${intro(episodes[0], videos[0])}`,
     { loc: 'shows.html' },
     { loc: 'categories.html' },
     { loc: 'guests.html' },
-    // Μπαίνει στον κατάλογο επίτηδες: το AdSense και κάθε έλεγχος
-    // συμμόρφωσης ψάχνει τη σελίδα απορρήτου, και τη θέλει ευρετηριασμένη.
+    // In the sitemap on purpose: AdSense and every compliance check looks
+    // for the privacy page and wants it indexed.
     { loc: 'aporrito.html' },
     ...[...expectedArchive].map((n) => ({ loc: n })),
     ...episodes.map((ep) => ({ loc: episodeUrl(ep), date: ep.date })),
     ...Object.keys(best).map((n) => ({ loc: `video/${n}`, date: best[n].date })),
-    // Όλες οι σελίδες, όχι μόνο η πρώτη — αλλιώς φτιάξαμε 85 σελίδες
-    // που δεν θα τις βρει ποτέ κανείς.
+    // Every page, not just the first — otherwise we built 85 pages nobody
+    // will ever find.
     ...[...expectedShows].map((n) => ({ loc: `show/${n}` })),
     ...[...expectedCats].map((n) => ({ loc: `category/${n}` })),
     ...[...expectedGuests].map((n) => ({ loc: `guest/${n}` })),
-    // ΜΟΝΟ τα δικά μας άρθρα. Οι αναδημοσιεύσεις του newshub.gr μένουν
-    // έξω: δηλώνουν αλλού το πρωτότυπό τους, άρα δεν ζητούν
-    // ευρετηρίαση για τον εαυτό τους.
+    // ONLY our own articles. Republished newshub.gr pieces stay out: they
+    // declare their canonical elsewhere, so they do not ask to be indexed
+    // for themselves.
     ...ownArticles.map((a) => ({ loc: ownArticleUrl(a), date: a.date })),
-    // Και οι σελίδες των δημοσιογράφων μας: δικό μας περιεχόμενο, με
-    // σταθερή διεύθυνση, που αξίζει να βρίσκεται από αναζήτηση.
+    // And our journalists' pages: our content, stable addresses, worth
+    // finding through search.
     ...[...writerGroups.keys()].map((name) => ({
       loc: writerUrl(name),
       date: writerGroups.get(name)[0].date,
@@ -8115,27 +8090,22 @@ console.log(`Σελίδες επεισοδίου: ${written} γράφτηκαν,
     : `Απομαγνητοφωνήσεις: ΚΑΤΕΒΑΣΜΕΝΕΣ μέχρι νεωτέρας${trRemoved ? ` — ${trRemoved} σβήστηκαν τώρα` : ''}`);
 console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτηκαν, ${guestsRemoved} σβήστηκαν`);
 
-  // ---- το διαχειριστικό ----
+  // ---- the admin ----
   //
-  // Ο πηγαίος κώδικάς του ζει στο admin/ και αντιγράφεται εδώ. ΔΕΝ
-  // γράφεται κατευθείαν στο public/, γιατί το .gitignore πετάει όλο το
-  // public/ ως παραγόμενο — ό,τι έμπαινε εκεί χανόταν στο επόμενο
-  // deployment. Αντιγραφή, όχι μετακίνηση: το admin/ μένει η πηγή.
+  // Its source lives in admin/ and is copied here. Not written straight
+  // into public/, because .gitignore drops all of public/ as generated.
+  // Copy, not move: admin/ stays the source.
   const ADMIN_SRC = path.join(__dirname, 'admin');
   const ADMIN_OUT = path.join(PUBLIC_DIR, 'admin');
   let adminFiles = 0;
 
-  // Τι κατηγορία ΔΙΝΕΙ ΣΗΜΕΡΑ το site σε κάθε επεισόδιο και βίντεο.
+  // Which category the site gives each episode and video TODAY.
   //
-  // Το διαχειριστικό πρέπει να δείχνει στον συντάκτη ποια είναι η
-  // αυτόματη πρόταση — χωρίς αυτήν δεν ξέρει τι διορθώνει. Τη λογική
-  // την ξέρει ΜΟΝΟ αυτό το αρχείο (suggestCategories), και δεν την
-  // αντιγράφουμε στη διεπαφή: δύο αντίγραφα αποκλίνουν και ο
-  // συντάκτης θα διόρθωνε κάτι άλλο από αυτό που βλέπει στο site.
-  //
-  // Γράφεται ΠΑΝΤΑ, δίπλα στα υπόλοιπα αρχεία του διαχειριστικού: από
-  // εκεί το σερβίρει το serve.js. Είναι παραγόμενο και μένει έξω από
-  // το git — 4.800 εγγραφές δεν έχουν θέση σε κάθε commit.
+  // The admin has to show the editor the automatic suggestion, otherwise
+  // they do not know what they are correcting. Only this file knows that
+  // logic (suggestCategories) and we do not copy it into the UI: two
+  // copies drift. Generated, out of git — 4,800 entries have no place in
+  // every commit.
   if (fs.existsSync(ADMIN_SRC)) {
     const autoCats = {};
     for (const ep of episodes) autoCats[ep.id] = suggestCategories(ep.title);
@@ -8147,34 +8117,31 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
       fs.writeFileSync(catsFile, catsText, 'utf8');
     }
 
-    // Η απογραφή προσώπων — ίδια λογική, ίδιος λόγος. Παραγόμενο, έξω
-    // από το git.
+    // People inventory — same logic, same reason. Generated, out of git.
     const peopleFile = path.join(ADMIN_SRC, 'people.json');
-    // ΚΑΙ τα βίντεο: από τη στιγμή που φτιάχνουν πρόσωπα, πρέπει να
-    // φαίνονται κι εδώ — αλλιώς ο συντάκτης βλέπει στο site ένα όνομα
-    // που δεν είναι άνθρωπος και δεν έχει πουθενά να το σβήσει.
+    // Videos too: once they create people, those people must show up
+    // here, or the editor sees a name on the site that is not a person and
+    // has nowhere to remove it.
     const peopleText = JSON.stringify(peopleForAdmin([...episodes, ...videoItems]));
     if (!fs.existsSync(peopleFile) || fs.readFileSync(peopleFile, 'utf8') !== peopleText) {
       fs.writeFileSync(peopleFile, peopleText, 'utf8');
     }
 
-    // Τα θέματα με το πλήθος τους, για την καρτέλα «Θέματα αρχικής».
+    // Topics with their counts, for the "Θέματα αρχικής" tab.
     //
-    // Ίδιος λόγος με τα παραπάνω: ποιες κατηγορίες υπάρχουν ΣΗΜΕΡΑ και
-    // πόσα κομμάτια έχει η καθεμία το ξέρει μόνο αυτό το αρχείο, αφού
-    // ενώσει επεισόδια, βίντεο και δικά μας άρθρα. Μαζί πάνε και οι
-    // προεπιλογές του κώδικα, ώστε το διαχειριστικό να δείχνει τι
-    // ισχύει όσο δεν έχει διαλέξει κανείς τίποτα — χωρίς να τις
-    // αντιγράψει και να αποκλίνει.
+    // Only this file knows which categories exist today and how many items
+    // each has, after merging episodes, videos and our own articles. The
+    // code defaults travel with them so the admin shows what applies while
+    // nobody has chosen anything.
     const topicsFile = path.join(ADMIN_SRC, 'topics.json');
     const topicsText = JSON.stringify({
       defaults: {
         featured: FEATURED_TOPICS,
         spotlight: SPOTLIGHT_TOPICS.map(([name]) => name),
       },
-      // Πόσες μέρες ζει μια χειροκίνητη επιλογή, ανά λίστα. Το ξέρει το
-      // build (PIN_ZOI) και το στέλνει εδώ, ώστε το διαχειριστικό να
-      // δείχνει ΤΗΝ ΑΛΗΘΕΙΑ και όχι ένα δεύτερο αντίγραφο που αποκλίνει.
+      // How many days a manual pick lives, per list. The build knows
+      // (PIN_ZOI) and sends it, so the admin shows the truth instead of a
+      // second copy that drifts.
       pinLife: PIN_ZOI,
       list: Object.keys(catGroups)
         .map((key) => ({ name: catGroups[key].name, key, n: catGroups[key].items.length }))
@@ -8184,8 +8151,8 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
       fs.writeFileSync(topicsFile, topicsText, 'utf8');
     }
 
-    // Και η απογραφή του ζευγαρώματος: ποια επεισόδια δεν βρήκαν βίντεο
-    // ή καλεσμένο. Παραγόμενο, έξω από το git.
+    // Pairing inventory: which episodes found no video or guest.
+    // Generated, out of git.
     const todoFile = path.join(ADMIN_SRC, 'pairs-todo.json');
     const todoText = JSON.stringify(pairsForAdmin(episodes));
     if (!fs.existsSync(todoFile) || fs.readFileSync(todoFile, 'utf8') !== todoText) {
@@ -8193,19 +8160,12 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
     }
   }
 
-  // Το διαχειριστικό ΔΕΝ ανεβαίνει στο site μέχρι να υπάρχει πύλη
-  // εισόδου μπροστά του.
-  //
-  // Μετρημένο στις 4 Νοεμβρίου: το newshubmedia.gr/admin/ απαντούσε
-  // 200 σε οποιονδήποτε. Δεν μπορούσε να γράψει τίποτα — το /api/ δεν
-  // υπάρχει ακόμα στον αέρα — αλλά η στιγμή που θα έμπαιναν οι
-  // Functions θα το άνοιγε διάπλατα.
-  //
-  // Τοπικά δεν χάνεται τίποτα: το serve.js το σερβίρει κατευθείαν από
-  // τον φάκελο admin/. Όταν στηθεί το Cloudflare Access, αυτό ανοίγει
-  // με ADMIN_PUBLIC=1 — και ΜΟΝΟ τότε.
+  // The admin does NOT go to the live site until there is a gate in front
+  // of it. Locally serve.js serves it straight from admin/. Once
+  // Cloudflare Access is in place, ADMIN_PUBLIC=1 opens it — and only
+  // then.
   if (!process.env.ADMIN_PUBLIC) {
-    // Ό,τι ανέβηκε σε προηγούμενο build φεύγει τώρα.
+    // Anything a previous build uploaded goes now.
     if (fs.existsSync(ADMIN_OUT)) {
       fs.rmSync(ADMIN_OUT, { recursive: true, force: true });
       console.log('Διαχειριστικό: αφαιρέθηκε από το public/ (δεν υπάρχει ακόμα πύλη εισόδου)');
@@ -8220,13 +8180,12 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
       const to = path.join(ADMIN_OUT, file);
       let next = fs.readFileSync(from);
 
-      // Σφραγίδα έκδοσης στο CSS και στο JS του διαχειριστικού.
+      // Version stamp on the admin CSS and JS.
       //
-      // Τα αρχεία εδώ είναι στατικά όπως όλα τα άλλα, άρα το Cloudflare
-      // λέει στον browser να τα κρατήσει τέσσερις ώρες. Μια διόρθωση
-      // στη διεπαφή δεν έφτανε ποτέ στο κινητό του συντάκτη μέσα στην
-      // ίδια βάρδια — και στον υπολογιστή χρειαζόταν Ctrl+Shift+R, που
-      // κανείς δεν ξέρει. Ίδιο μοτίβο με το assetVersion() του site.
+      // These are static files, so Cloudflare tells the browser to keep
+      // them for four hours. Without the stamp a UI fix never reached an
+      // editor's phone within the same shift. Same pattern as
+      // assetVersion() for the site.
       if (file === 'index.html') {
         const tag = (name) => crypto.createHash('md5')
           .update(fs.readFileSync(path.join(ADMIN_SRC, name)))
@@ -8236,8 +8195,8 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
           .replace('href="admin.css"', `href="admin.css?v=${tag('admin.css')}"`)
           .replace('src="admin.js"', `src="admin.js?v=${tag('admin.js')}"`));
       }
-      // Γράφουμε μόνο ό,τι άλλαξε: αλλιώς το publish.js νομίζει πως
-      // πειράχτηκαν σελίδες και ξαναχτίζει το ευρετήριο για το τίποτα.
+      // Write only what changed, or publish.js thinks pages were touched
+      // and rebuilds the search index for nothing.
       if (!fs.existsSync(to) || !fs.readFileSync(to).equals(next)) {
         fs.writeFileSync(to, next);
         adminFiles++;
@@ -8246,18 +8205,16 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
     console.log(`Διαχειριστικό: ${adminFiles} αρχεία αντιγράφηκαν ΣΤΟ SITE (ADMIN_PUBLIC=1)`);
   }
 
-  // Πόσα αρχεία πειράχτηκαν συνολικά. Το χρειάζεται το publish.js για να
-  // αποφασίσει αν αξίζει να ξαναφτιαχτεί το ευρετήριο αναζήτησης.
-  // Το «writes» μετράει τις μοναδικές σελίδες — αρχική, θέματα, αρχείο,
-  // sitemap. Χωρίς αυτό, μια αλλαγή μόνο στην αρχική δεν θα έφτανε ποτέ
-  // στο ευρετήριο αναζήτησης.
+  // How many files were touched. publish.js uses it to decide whether the
+  // search index is worth rebuilding. "writes" counts the one-off pages —
+  // homepage, topics, archive, sitemap.
   return written + removed + guestsWritten + guestsRemoved
     + showsWritten + showsRemoved + videosWritten + videosRemoved
     + catsWritten + catsRemoved + writes + adminFiles;
 }
 
-// Τρέχει μόνο του όταν το καλείς κατευθείαν (node build.js). Όταν το
-// φορτώνει άλλο αρχείο, απλώς δίνει τη main για να την καλέσει εκείνο.
+// Runs on its own when called directly (node build.js). When required
+// by another file it just exports main.
 if (require.main === module) {
   main();
 } else {
