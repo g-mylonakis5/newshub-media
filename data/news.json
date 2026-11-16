@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/elikiomenoi-cheria-.jpg",
     "summary": "Το Τμήμα Κοινωνικής Προστασίας & Παιδείας του Δήμου Αγίου Νικολάου ενημερώνει τα μέλη του Κ.Α.Π.Η. Αγίου Νικολάου ότι την Πέμπτη 19 Νοεμβρίου 2026 στις 1...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "treis-metanastes-me-norvigiki-psora-sto-pagni-ypo-diereynisi-ta-peristatika",
+    "title": "Τρεις μετανάστες με νορβηγική ψώρα στο ΠΑΓΝΗ - Yπό διερεύνηση τα περιστατικά",
+    "url": "https://www.newshub.gr/el/kriti/treis-metanastes-me-norvigiki-psora-sto-pagni-ypo-diereynisi-ta-peristatika",
+    "date": "2026-11-16T14:19:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/pagnh.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/pagnh.jpg",
+    "summary": "Σε υγειονομική κινητοποίηση βρίσκονται οι αρμόδιες υπηρεσίες στην Κρήτη, μετά τον εντοπισμό 3 κρουσμάτων νορβηγικής ψώρας σε μετανάστες που έφτασαν στο Λασίθ...",
+    "author": null,
     "featured": true
   },
   {
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/paul_mccartney.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/paul_mccartney.jpg",
     "summary": "Μια νέα κοινή εμφάνιση ετοιμάζουν ο Πολ ΜακΚάρτνεϊ και ο Ρίνγκο Σταρ, καθώς οι δύο πρώην Beatles θα συναντηθούν ξανά επί σκηνής το 2027, στο πλαίσιο του φεστ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "stoys-35-000-oi-thanatoi-kathe-chrono-stin-ee-apo-anthektika-vaktiria",
-    "title": "Στους 35.000 οι θάνατοι κάθε χρόνο στην ΕΕ από ανθεκτικά βακτήρια",
-    "url": "https://www.newshub.gr/el/ygeia/stoys-35-000-oi-thanatoi-kathe-chrono-stin-ee-apo-anthektika-vaktiria",
-    "date": "2026-11-11T11:49:00.000Z",
-    "category": "Υγεία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/pharmaka.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/pharmaka.jpg",
-    "summary": "Κάθε χρόνο, περίπου 35.000 άνθρωποι στην Ευρωπαϊκή Ένωση χάνουν τη ζωή τους από λοιμώξεις που τα αντιβιοτικά δεν μπορούν πλέον να θεραπεύσουν. Σύμφωνα με εκτ...",
     "author": null,
     "featured": false
   },
