@@ -247,6 +247,66 @@ async function viaApi(playlistId, key) {
   return { show, videos };
 }
 
+// ---- ποιες λίστες λείπουν από τη λίστα μας ----
+//
+// Η PLAYLISTS γράφεται με το χέρι. Άρα κάθε νέα εκπομπή που ανοίγει η
+// σύνταξη στο YouTube είναι ΑΟΡΑΤΗ στο site μέχρι να τη γράψει κάποιος
+// εδώ — και κανείς δεν το θυμάται, επειδή τίποτα δεν χαλάει: απλώς
+// λείπει. Έτσι έμειναν έξω οι «Επίκαιρα» και ο «Αντίλογος».
+//
+// Τώρα ρωτάμε το ίδιο το κανάλι τι λίστες έχει και φωνάζουμε για όσες
+// δεν αναγνωρίζουμε. ΔΕΝ τις κατεβάζουμε μόνοι μας: μια λίστα μπορεί να
+// είναι πρόχειρη, διπλή ή να μη θέλουμε να μπει — η απόφαση μένει σε
+// άνθρωπο. Κοστίζει 1 μονάδα ανά σελίδα των 50, δηλαδή τίποτα μπροστά
+// στα playlistItems που ήδη τραβάμε.
+const CHANNEL = 'UCgI7vd72xX-ZNWb_x7zzWJg';
+
+async function lipoysesListes(key, gnosta) {
+  const found = [];
+  let pageToken = '';
+
+  do {
+    const page = await api('playlists', {
+      part: 'snippet,contentDetails',
+      channelId: CHANNEL,
+      maxResults: '50',
+      ...(pageToken ? { pageToken } : {}),
+    }, key);
+
+    for (const p of page.items || []) {
+      // Σύγκριση ΚΑΙ με το όνομα, όχι μόνο με τον κωδικό: κάποιες δικές
+      // μας εγγραφές είναι κομμένοι κωδικοί που το API τους δέχεται,
+      // αλλά τους επιστρέφει ολόκληρους. Χωρίς το όνομα θα βγάζαμε
+      // «καινούρια» λίστα για εκπομπή που ήδη κατεβάζουμε.
+      const title = (p.snippet && p.snippet.title) || '';
+      if (gnosta.ids.has(p.id) || gnosta.titloi.has(title)) continue;
+      found.push({ id: p.id, title, n: (p.contentDetails || {}).itemCount || 0 });
+    }
+
+    pageToken = page.nextPageToken || '';
+  } while (pageToken);
+
+  return found;
+}
+
+function anaforaLipoyson(found) {
+  if (!found.length) {
+    console.log('Καμία άγνωστη λίστα στο κανάλι.');
+    return;
+  }
+
+  console.log('');
+  console.log(found.length === 1
+    ? 'ΠΡΟΣΟΧΗ: 1 λίστα του καναλιού ΔΕΝ είναι στη PLAYLISTS:'
+    : `ΠΡΟΣΟΧΗ: ${found.length} λίστες του καναλιού ΔΕΝ είναι στη PLAYLISTS:`);
+  for (const p of found.sort((a, b) => b.n - a.n)) {
+    console.log(`  '${p.id}', // ${p.title} (${p.n} βίντεο)`);
+  }
+  console.log('');
+  console.log('Αν θέλεις να μπουν στο site, αντίγραψε τις γραμμές στη');
+  console.log('λίστα PLAYLISTS στην κορυφή αυτού του αρχείου.');
+}
+
 // node fetch-videos.js --check
 //
 // Ρωτάει κάθε λίστα χωριστά και λέει ποια απαντά και ποια όχι, ΧΩΡΙΣ
@@ -277,6 +337,7 @@ async function check() {
   }
 
   let ok = 0;
+  const titloi = new Set();
   for (const id of PLAYLISTS) {
     try {
       const r = await fetch(`https://www.googleapis.com/youtube/v3/playlists?part=snippet,contentDetails&id=${id}&key=${key}`);
@@ -288,6 +349,7 @@ async function check() {
       } else {
         ok++;
         const s = j.items[0];
+        titloi.add(s.snippet.title);
         console.log(`  ✓ ${id.padEnd(36)} ${String(s.contentDetails.itemCount).padStart(5)}  ${s.snippet.title}`);
       }
     } catch (err) {
@@ -295,6 +357,15 @@ async function check() {
     }
   }
   console.log(`\n${ok} από ${PLAYLISTS.length} λίστες απαντούν.`);
+
+  // Ο έλεγχος απαντά «ποιες από τις δικές μας ζουν». Το ανάποδο —
+  // ποιες του καναλιού δεν είναι δικές μας — είναι η άλλη μισή
+  // απάντηση, και εδώ δεν κοστίζει τίποτα παραπάνω.
+  try {
+    anaforaLipoyson(await lipoysesListes(key, { ids: new Set(PLAYLISTS), titloi }));
+  } catch (err) {
+    console.log(`Δεν ελέγχθηκε τι λίστες λείπουν: ${err.message}`);
+  }
 }
 
 async function main() {
@@ -351,6 +422,18 @@ async function main() {
       failed++;
       console.warn(`  ΣΦΑΛΜΑ στη λίστα ${id}: ${err.message}`);
     }
+  }
+
+  // Τα ονόματα τα ξέρουμε μόνο μετά τον βρόχο — τα γράφει το viaApi
+  // στο showInfo. Σε δικό της try: μια αστοχία εδώ είναι ενημέρωση που
+  // χάθηκε, όχι λόγος να πάνε χαμένα 1.500 βίντεο που ήδη κατέβηκαν.
+  try {
+    anaforaLipoyson(await lipoysesListes(key, {
+      ids: new Set(PLAYLISTS),
+      titloi: new Set(Object.keys(showInfo)),
+    }));
+  } catch (err) {
+    console.warn(`  δεν ελέγχθηκε τι λίστες λείπουν: ${err.message}`);
   }
 
   // ---- διπλότυπα ----
