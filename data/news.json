@@ -1,5 +1,17 @@
 [
   {
+    "id": "to-organomeno-egklima-oi-achyranthropoi-kai-oi-ypoptes-ypotheseis-sto-irakleio",
+    "title": "Το Οργανωμένο Έγκλημα, οι «αχυράνθρωποι» και οι ύποπτες υποθέσεις στο Ηράκλειο",
+    "url": "https://www.newshub.gr/el/kriti/to-organomeno-egklima-oi-achyranthropoi-kai-oi-ypoptes-ypotheseis-sto-irakleio",
+    "date": "2026-11-16T07:20:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/astynomia-peripolikoo.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/astynomia-peripolikoo.jpg",
+    "summary": "Θέμα των ημερών που απασχολεί σε μεγάλο βαθμό την εσωτερική επικαιρότητα ειναι αυτό της αποκάλυψης των κυκλωμάτων που εξαπατούσαν το Δημόσιο και φοροδιαφεύγα...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "pagkritios-enosis-ta-anepisima-apotelesmata-ton-eklogon-gia-tis-opoies-echoyn-katate-thei-enstaseis-proti-i-rena-vasilaki",
     "title": "Παγκρήτιος Ένωσις: Τα ανεπίσημα αποτελέσματα των εκλογών για τις οποίες έχουν κατατε΄θεί ενστάσεις - Πρώτη η Ρένα Βασιλάκη",
     "url": "https://www.newshub.gr/el/kriti/pagkritios-enosis-ta-anepisima-apotelesmata-ton-eklogon-gia-tis-opoies-echoyn-katate-thei-enstaseis-proti-i-rena-vasilaki",
@@ -189,7 +201,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/moro-1024x577.jpg",
     "summary": "Με χειροπέδες βρέθηκαν οι γονείς του 1,5 έτους παιδιού που έσβησε μετά από κατάποση βενζίνης στο Ηράκλειο.\r\n\r\nΗ τραγωδία με το άτυχο παιδί συγκλονίζει από χθ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "krisimi-pagkritia-syneleysi-agroton-kai-ktinotrofon-organonetai-gia-tin-erchomeni-tetarti-kai-isos-apofasistoyn-kinitopoiiseis",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/2026-05-01t212015z_911386812_rc.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/2026-05-01t212015z_911386812_rc.jpg",
     "summary": "Ο πληθωρισμός στις ΗΠΑ ξεπέρασε τις προβλέψεις ενισχύοντας τα επιχειρήματα όσων προβλέπουν αύξηση επιτοκίων από τη Fed τον επόμενο μήνα.\r\n\r\nΟ δείκτης τιμών κ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kairos-vroches-kataigides-kai-notiades-simera-tetarti",
-    "title": "Καιρός: Βροχές, καταιγίδες και νοτιάδες σήμερα, Τετάρτη",
-    "url": "https://www.newshub.gr/el/ellada/kairos-vroches-kataigides-kai-notiades-simera-tetarti",
-    "date": "2026-11-11T05:47:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/kairos.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/kairos.jpg",
-    "summary": "Νεφώσεις παροδικά αυξημένες με τοπικές βροχές κυρίως στα δυτικά και την ανατολική νησιωτική χώρα, αναμένεται να επικρατήσουν σήμερα Τετάρτη.\r\n\r\nΣποραδικές ...",
     "author": null,
     "featured": false
   },
