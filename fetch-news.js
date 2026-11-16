@@ -115,6 +115,10 @@ function get(url, until = '') {
       }
 
       let body = '';
+      // Αφού κόψουμε εμείς τη σύνδεση, το Node βγάζει κανονικά σφάλμα —
+      // δικό μας σφάλμα, όχι του διακομιστή. Χωρίς αυτό το σημάδι θα
+      // απορρίπταμε μια λήψη που πέτυχε.
+      let teleiose = false;
       res.setEncoding('utf8');
       res.on('data', (chunk) => {
         body += chunk;
@@ -122,12 +126,34 @@ function get(url, until = '') {
         // μας ενδιαφέρει. Κόβουμε εκεί τη σύνδεση: λιγότερα δεδομένα για
         // εμάς, λιγότερος φόρτος για τον δικό τους διακομιστή.
         if (until && body.includes(until)) {
+          teleiose = true;
           res.destroy();
           resolve(body);
         }
       });
-      res.on('end', () => resolve(body));
-      res.on('error', () => resolve(body));
+
+      // ΚΟΜΜΕΝΗ ΛΗΨΗ = ΑΠΟΤΥΧΙΑ, ΟΧΙ ΜΙΣΟ ΚΕΙΜΕΝΟ.
+      //
+      // Παλιά και οι δύο γραμμές έλεγαν resolve(body): αν η σύνδεση
+      // έσπαγε στη μέση, το get ΠΕΤΥΧΑΙΝΕ με μισό ή άδειο κείμενο. Το
+      // μισό sitemap έβγαζε 0 άρθρα, η λήψη κοκκίνιζε — και η επανάληψη
+      // από κάτω δεν έπαιρνε ποτέ μπρος, επειδή τυπικά δεν είχε γίνει
+      // σφάλμα. Στις 15-16 Νοε 2026 έφυγαν έτσι δεκάδες email αποτυχίας
+      // για ένα sitemap που δούλευε μια χαρά.
+      res.on('end', () => {
+        if (teleiose) return;
+        // res.complete: το Node λέει αν ήρθε ΟΛΟ το σώμα της απάντησης.
+        if (!res.complete) {
+          return reject(new Error(`κομμένη λήψη στο ${url}`));
+        }
+        teleiose = true;
+        resolve(body);
+      });
+      res.on('error', (err) => {
+        if (teleiose) return;
+        teleiose = true;
+        reject(new Error(`${err.message} στο ${url}`));
+      });
     });
 
     req.on('timeout', () => { req.destroy(); reject(new Error(`λήξη χρόνου στο ${url}`)); });
@@ -155,11 +181,20 @@ const WAITS = [5000, 15000];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function getStubborn(url, until = ''){
+// Το «elegxos» είναι προαιρετικός έλεγχος περιεχομένου: παίρνει το
+// κείμενο που ήρθε και γυρίζει κενό αν είναι εντάξει, αλλιώς το τι
+// φταίει. Υπάρχει επειδή μια λήψη μπορεί να πετύχει τεχνικά (200,
+// ολόκληρο σώμα) και να είναι παρ' όλα αυτά άχρηστη — π.χ. σελίδα
+// σφάλματος δική τους αντί για XML. Τέτοιο πράγμα ΑΞΙΖΕΙ επανάληψη
+// όσο και μια αργοπορία· ο παλιός κώδικας το κοκκίνιζε κατευθείαν.
+async function getStubborn(url, until = '', elegxos = null){
   let last;
   for (let i = 0; i < TRIES; i++) {
     try {
-      return await get(url, until);
+      const body = await get(url, until);
+      const psegadi = elegxos ? elegxos(body) : '';
+      if (psegadi) throw new Error(psegadi);
+      return body;
     } catch (err) {
       last = err;
       if (i < TRIES - 1) {
@@ -638,7 +673,11 @@ async function fetchAll(list) {
 
 async function main() {
   console.log('Διαβάζω το sitemap ειδήσεων...');
-  const listed = parseSitemap(await getStubborn(SITEMAP));
+  // Το «0 άρθρα» μπαίνει ΜΕΣΑ στην επανάληψη, όχι μετά: αν το sitemap
+  // ήρθε άδειο ή μισό, ξαναζητιέται (5", 15") πριν κοκκινίσει η λήψη.
+  const listed = parseSitemap(await getStubborn(SITEMAP, '', (body) => (
+    parseSitemap(body).length ? '' : 'το sitemap γύρισε 0 άρθρα'
+  )));
   console.log(`  ${listed.length} άρθρα στη ροή τους`);
 
   // ΜΗΔΕΝ ΑΡΘΡΑ = ΒΛΑΒΗ, ΟΧΙ ΑΔΕΙΑ ΜΕΡΑ.
