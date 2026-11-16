@@ -1,5 +1,17 @@
 [
   {
+    "id": "kriti-mayros-oktovrios-to-dekamino-toy-2026-33-nekroi-kai-130-trochaia-protia-toy-irakleioy-sta-trochaia-okto-thanatifora-ston-voak",
+    "title": "Κρήτη: «Μαύρος» Οκτώβριος το δεκάμηνο του 2026: 33 νεκροί και 130 τροχαία - Πρωτιά του Ηρακλείου στα τροχαία, οκτώ θανατηφόρα στον ΒΟΑΚ",
+    "url": "https://www.newshub.gr/el/kriti/kriti-mayros-oktovrios-to-dekamino-toy-2026-33-nekroi-kai-130-trochaia-protia-toy-irakleioy-sta-trochaia-okto-thanatifora-ston-voak",
+    "date": "2026-11-16T13:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/trochaio-asprobalta.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/trochaio-asprobalta.jpg",
+    "summary": "Βαρύς είναι ο απολογισμός των τροχαίων ατυχημάτων στην Κρήτη κατά το πρώτο δεκάμηνο του 2026, σύμφωνα με τα επίσημα στοιχεία της Γενικής Περιφερειακής Αστυνο...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "irakleio-i-el-as-toy-alexi-tsipra-kalei-sti-sygkentrosi-tis-tritis-gia-ta-53-chronia-apo-tin-exegersi-toy-polytechneioy",
     "title": "Ηράκλειο: Η ΕΛ.ΑΣ.  του Αλέξη Τσίπρα καλεί στη συγκέντρωση της Τρίτης για τα 53 χρόνια από την εξέγερση του Πολυτεχνείου",
     "url": "https://www.newshub.gr/el/kriti/irakleio-i-el-as-toy-alexi-tsipra-kalei-sti-sygkentrosi-tis-tritis-gia-ta-53-chronia-apo-tin-exegersi-toy-polytechneioy",
@@ -81,7 +93,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/dorea-organon.jpg",
     "summary": "Μια σπουδαία πράξη ανθρωπιάς και αλληλεγγύης μέσα από τον ανείπωτο πόνο της απώλειας. Η μητέρα του προέδρου του Δημοτικού Συμβουλίου Χερσονήσου, Βαγγέλη Κοκο...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "poy-i-mikroviaki-antochi-apeilei-tin-ygeia-eos-39-ekat-thanatoi-se-25-chronia-apo-tin-antistasi-sta-antiviotika",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/mazonakis-giorgos-tsai.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/mazonakis-giorgos-tsai.jpg",
     "summary": "Η Μαρία Μαζωνάκη δημοσίευσε στον προσωπικό της λογαριασμό στο Instagram τη φωτογραφία μιας χειρόγραφης μαθητικής έκθεσης που αναφέρεται στον αδελφό της. Η αν...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "rizes-stin-kriti-zoi-ston-peiraia-mia-xechoristi-vradia-istorias-moysikis-kai-paradosis-me-ton-vasili-skoyla",
-    "title": "«Ρίζες στην Κρήτη - Ζωή στον Πειραιά»: Μια ξεχωριστή βραδιά ιστορίας, μουσικής και παράδοσης με τον Βασίλη Σκουλά",
-    "url": "https://www.newshub.gr/el/istoria-politismos/rizes-stin-kriti-zoi-ston-peiraia-mia-xechoristi-vradia-istorias-moysikis-kai-paradosis-me-ton-vasili-skoyla",
-    "date": "2026-11-11T10:45:00.000Z",
-    "category": "Ιστορία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/skoulas_a-696x464.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/skoulas_a-696x464.jpg",
-    "summary": "Μια ξεχωριστή βραδιά αφιερωμένη στην ιστορία, τη μουσική και την παράδοση της Κρήτης πραγματοποιήθηκε, στην Κεντρική Σκηνή του Δημοτικού Θεάτρου Πειραιά, με ...",
     "author": null,
     "featured": false
   },
