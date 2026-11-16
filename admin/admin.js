@@ -3153,6 +3153,41 @@ function saveAds(){
 
 // Η εικόνα που γύρισε ο επιλογέας. Το «slide» λέει ποια θέση της
 // σειράς: αριθμός = αντικατάσταση, -1 = προσθήκη στο τέλος.
+// Πόσο είναι το αρχείο, σε πίξελ.
+//
+// Ο δημοσιογράφος ΔΕΝ το πληκτρολογεί — ούτε καν το βλέπει. Το ξέρει
+// ο browser μόλις φορτώσει το αρχείο, και το κρατάμε επειδή το build
+// στον αέρα ΔΕΝ μπορεί να το μετρήσει: οι φωτογραφίες ζουν στο R2,
+// όχι στο git. Με αυτό το κουτί της διαφήμισης παίρνει το σχήμα του
+// creative και γεμίζει, αντί να το χωράει με κενά γύρω.
+//
+// Αν αποτύχει, δεν πειράζει κανέναν: η διαφήμιση μένει χωρίς
+// διαστάσεις και η θέση κρατάει το σταθερό της ύψος, όπως πάντα.
+function adMeasure(url){
+  return new Promise(function (done) {
+    if (adIsVideo(url)) {
+      var v = document.createElement('video');
+      v.preload = 'metadata';
+      v.muted = true;
+      v.onloadedmetadata = function () {
+        done(v.videoWidth && v.videoHeight ? { w: v.videoWidth, h: v.videoHeight } : null);
+      };
+      v.onerror = function () { done(null); };
+      v.src = url;
+      return;
+    }
+
+    var img = new Image();
+    img.onload = function () {
+      done(img.naturalWidth && img.naturalHeight
+        ? { w: img.naturalWidth, h: img.naturalHeight }
+        : null);
+    };
+    img.onerror = function () { done(null); };
+    img.src = url;
+  });
+}
+
 function adSetImage(i, url, slide){
   var a = ad.list[i];
   if (!a) return;
@@ -3164,6 +3199,34 @@ function adSetImage(i, url, slide){
   adPutPics(a, pics);
   drawAds();
   adDirty(true);
+
+  adRemeasure(i);
+}
+
+// Το σχήμα το δίνει ΤΟ ΠΡΩΤΟ αρχείο, και στο slideshow.
+//
+// Οι εικόνες ενός slideshow υποτίθεται ότι είναι ίδιου μεγέθους — είναι
+// η ίδια καμπάνια. Αν δεν είναι, το κουτί ακολουθεί την πρώτη και οι
+// υπόλοιπες μπαίνουν μέσα του ολόκληρες, όπως πριν.
+//
+// Καλείται σε ΚΑΘΕ αλλαγή της λίστας εικόνων, όχι μόνο στη διαλογή:
+// σβήνοντας την πρώτη εικόνα ή ανεβάζοντας άλλη στη θέση της, αλλάζει
+// το σχήμα — και μια αποθηκευμένη αναλογία που δεν ισχύει πια είναι
+// χειρότερη από καμία.
+function adRemeasure(i){
+  var a = ad.list[i];
+  if (!a) return;
+
+  var first = adPics(a)[0];
+  if (!first) { delete a.w; delete a.h; return; }
+
+  adMeasure(first).then(function (size) {
+    if (ad.list[i] !== a) return;          // άλλαξε στο μεταξύ
+    if (size) { a.w = size.w; a.h = size.h; }
+    else { delete a.w; delete a.h; }
+    drawAds();
+    adDirty(true);
+  });
 }
 
 function wireAds(){
@@ -3189,6 +3252,7 @@ function wireAds(){
       adPutPics(sa, sp);
       drawAds();
       adDirty(true);
+      adRemeasure(Number(sUp.dataset.adSlideUp));
       return;
     }
 
@@ -3201,6 +3265,7 @@ function wireAds(){
       adPutPics(da, dp);
       drawAds();
       adDirty(true);
+      adRemeasure(Number(sDel.dataset.adSlideDel));
       return;
     }
 
