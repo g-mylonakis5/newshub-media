@@ -1,5 +1,17 @@
 [
   {
+    "id": "prasino-fos-gia-ti-chrimatodotisi-ergon-apokatastasis-me-18-ekat-eyro-ston-dimo-mylopotamoy",
+    "title": "«Πράσινο φως» για τη χρηματοδότηση έργων αποκατάστασης με 18 εκατ. ευρώ στον Δήμο Μυλοποτάμου",
+    "url": "https://www.newshub.gr/el/kriti/prasino-fos-gia-ti-chrimatodotisi-ergon-apokatastasis-me-18-ekat-eyro-ston-dimo-mylopotamoy",
+    "date": "2026-11-16T05:20:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/img_6251.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/img_6251.jpg",
+    "summary": "Ο Δήμαρχος Μυλοποτάμου, Γεώργιος Κλάδος, ενημερώθηκε το πρωί της Παρασκευής 13 Νοεμβρίου, σε τηλεφωνική επικοινωνία με τα αρμόδια υπουργεία, για τη δρομολόγη...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "tasos-tsiplakos-pos-chanei-i-toyrkia-to-paichnidi-stin-anatoliki-mesogeio-krisimi-i-epitychia-toy-gsi-podcast",
     "title": "Τάσος Τσιπλάκος: Πώς χάνει η Τουρκία το παιχνίδι στην Ανατολική Μεσόγειο! Κρίσιμη η επιτυχία του Gsi! (podcast)",
     "url": "https://www.newshub.gr/el/geopolitiki/tasos-tsiplakos-pos-chanei-i-toyrkia-to-paichnidi-stin-anatoliki-mesogeio-krisimi-i-epitychia-toy-gsi-podcast",
@@ -169,7 +181,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/nosokomeio.jpg",
     "summary": "Ανείπωτη τραγωδία στο Ηράκλειο καθώς ένα παιδί, μόλις 1,5 χρονών, έχασε την ζωή του μετά από κατάποση βενζίνης.\r\n\r\nΣύμφωνα με πληροφορίες του newshub.gr, όλα...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "takis-theodorikakos-stirizoyme-me-praxeis-tis-laikes-agores-giati-prosferoyn-poiotika-proionta-se-pio-prosites-times",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/ap25301603557723.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/ap25301603557723.jpg",
     "summary": "Ένα πολυεθνικό δίκτυο εταιρειών, με εξαγωγές προηγμένων ημιαγωγών αξίας δισ. δολαρίων, υποψίες κατασκοπείας και η στενή σχέση του επικεφαλής της Nvidia με το...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "amerikanos-stratiotikos-synelifthi-sti-vretania-gia-kataskopeia-yper-tis-rosias",
-    "title": "Αμερικανός στρατιωτικός συνελήφθη στη Βρετανία για κατασκοπεία υπέρ της Ρωσίας",
-    "url": "https://www.newshub.gr/el/kosmos/amerikanos-stratiotikos-synelifthi-sti-vretania-gia-kataskopeia-yper-tis-rosias",
-    "date": "2026-11-10T21:10:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/uk-police.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/uk-police.jpg",
-    "summary": "Η βρετανική αντιτρομοκρατική υπηρεσία συνέλαβε την Τρίτη ανώτερο αξιωματικό του Στρατού των ΗΠΑ.\r\n\r\nΟι Αρχές στη Βρετανία τονίζουν ότι οι κατηγορίες σχετίζον...",
     "author": null,
     "featured": false
   },
