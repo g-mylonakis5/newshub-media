@@ -1,42 +1,29 @@
-// Δικλείδα: ανανεώνεται όντως το ΖΩΝΤΑΝΟ site;
+// Watchdog: is the LIVE site still being rebuilt?
 //
-// ΓΙΑΤΙ ΔΕΝ ΑΡΚΕΙ ΤΟ check-fresh.js
+// check-fresh.js asks whether articles reach our data. Since the build and
+// deploy moved into GitHub Actions, that is a different question: if the
+// deploy breaks (expired CLOUDFLARE_API_TOKEN, wrangler change, Cloudflare
+// outage) the data keeps arriving, check-fresh.js stays green, and the site
+// quietly freezes.
 //
-// Εκείνο ρωτάει «μπαίνουν ειδήσεις στα δεδομένα μας;». Μέχρι τις 11
-// Νοεμβρίου 2026 ήταν το ίδιο ερώτημα με το «ανανεώνεται το site;»,
-// γιατί το Cloudflare έχτιζε μόνο του σε κάθε push.
+// So this one asks the site itself. build.js writes build.json on every
+// build, with its timestamp; a stale timestamp means something along
+// build -> deploy -> Cloudflare is broken.
 //
-// Από τότε το χτίσιμο και το ανέβασμα τα κάνει το GitHub Action. Αν
-// σπάσει ΕΚΕΙΝΟ — ληγμένο CLOUDFLARE_API_TOKEN, αλλαγή στο wrangler,
-// βλάβη του Cloudflare — τα δεδομένα συνεχίζουν να μπαίνουν κανονικά,
-// το check-fresh.js μένει ΠΡΑΣΙΝΟ, και το site παγώνει χωρίς να το
-// πάρει κανείς είδηση. Αυτό ακριβώς είναι το είδος της βλάβης που μας
-// τρώει: σιωπηλή, και φαίνεται μόνο όταν παραπονεθεί κάποιος.
-//
-// Γι' αυτό εδώ δεν κοιτάμε τα δικά μας αρχεία. Ρωτάμε το ίδιο το site.
-//
-// Το build.json το γράφει το build.js σε κάθε χτίσιμο, με την ώρα του.
-// Αν η ώρα εκείνη είναι παλιά, κάτι στη διαδρομή
-// «χτίσιμο -> ανέβασμα -> Cloudflare» έχει σπάσει.
-//
-// Έξοδος 0 = το site ανανεώνεται. Έξοδος 1 = έχει παγώσει.
+// Exit 0 = fresh. Exit 1 = frozen.
 //
 //   node check-live.js
 
 const SITE = process.env.SITE_URL || 'https://newshubmedia.gr';
 
-// Πόσες ώρες χωρίς χτίσιμο θεωρούνται βλάβη.
-//
-// Το ρολόι χτυπάει κάθε λεπτό και χτίζει μόνο όταν βγει κάτι — τη νύχτα
-// σωστά δεν βγαίνει τίποτα. Το μεγαλύτερο φυσιολογικό κενό είναι η
-// νύχτα, γι' αυτό ο έλεγχος τρέχει μόνο μέσα στη μέρα και το όριο
-// είναι γενναιόδωρο: 3 ώρες είναι πολύ πάνω από το φυσιολογικό
-// (6 λεπτά) και πολύ κάτω από μια νύχτα.
+// Hours without a build that count as a fault. The clock fires every minute
+// and builds only when something new arrives, so the longest normal gap is
+// the night. Generous on purpose: typical is 6 minutes.
 const ORIO_ORES = 3;
 
-// Οι ώρες που ΠΕΡΙΜΕΝΟΥΜΕ κίνηση, σε UTC. Ίδιο παράθυρο με το ρολόι
-// (roloi/wrangler.toml): 04:00-22:59 UTC καλύπτει 07:00-24:00 Ελλάδας
-// χειμώνα και καλοκαίρι.
+// Hours we expect traffic, UTC. Same window as the clock in
+// roloi/wrangler.toml: 04:00-22:59 UTC covers 07:00-24:00 Greek time in
+// both winter and summer.
 const APO_ORA = 4;
 const OS_ORA = 22;
 
@@ -50,8 +37,8 @@ async function main(){
 
   let res;
   try {
-    // Χωρίς μνήμη: μας νοιάζει τι υπάρχει ΤΩΡΑ στο site, όχι τι είχε
-    // κρατήσει κάποιος ενδιάμεσος.
+    // No caching: what matters is what the site serves right now, not what
+    // some intermediary kept.
     res = await fetch(`${SITE}/build.json?t=${Date.now()}`, {
       headers: { 'Cache-Control': 'no-cache' },
     });
@@ -61,8 +48,8 @@ async function main(){
   }
 
   if (!res.ok) {
-    // 404 σημαίνει ότι το τελευταίο ανέβασμα έγινε με παλιό build.js,
-    // πριν μπει αυτό το αρχείο. Δεν είναι βλάβη από μόνο του.
+    // 404 means the last deploy ran an older build.js, from before this
+    // file existed. Not a fault in itself.
     console.error(`Το ${SITE}/build.json απάντησε ${res.status}.`);
     return res.status === 404 ? 0 : 1;
   }

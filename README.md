@@ -1,116 +1,105 @@
 # Newshub Multimedia
 
-Το multimedia site του [newshub.gr](https://www.newshub.gr) — podcasts, βίντεο
-και ειδήσεις από την Κρήτη. Στατικό, χωρίς framework, χωρίς server.
+The multimedia site of [newshub.gr](https://www.newshub.gr) — podcasts, video
+and news from Crete. Live at **[newshubmedia.gr](https://newshubmedia.gr)**.
 
-## Τι είναι
+Static HTML. No framework, no database, no server at runtime.
 
-Ένα Node script διαβάζει τρεις δημόσιες πηγές και γράφει έτοιμα αρχεία HTML:
+## What it does
 
-| Πηγή | Τι δίνει | Πώς |
+Node scripts read three public sources and write finished HTML:
+
+| Source | What it gives | How |
 |---|---|---|
-| Buzzsprout RSS | 1.094 επεισόδια, 452 απομαγνητοφωνήσεις | δημόσιο feed |
-| YouTube | 3.823 βίντεο σε 15 λίστες | YouTube Data API |
-| newshub.gr | ειδήσεις | `sitemap_google_news.xml` |
+| Buzzsprout RSS | 1,094 episodes, 452 transcripts | public feed |
+| YouTube | 3,823 videos in 15 playlists | YouTube Data API |
+| newshub.gr | news articles | `sitemap_google_news.xml` |
 
-**Καμία πηγή δεν αλλάζει.** Το site μόνο διαβάζει.
+None of the sources is written to. The site only reads.
 
-Αποτέλεσμα: ~6.400 σελίδες, μηδέν κόστος ανά επισκέπτη, αναζήτηση με
-[Pagefind](https://pagefind.app) που τρέχει στον browser.
+Output: ~6,400 pages, search that runs in the browser
+([Pagefind](https://pagefind.app)), nothing third-party on the page.
 
-## Πώς τρέχει
+GitHub Actions fetch, commit and deploy on a schedule. A watchdog
+(`check-fresh.js`) opens an issue if no new article has arrived for hours,
+because the publisher's sitemap is a rolling three-day window — anything
+missed there is gone.
+
+## Running it
 
 ```bash
-npm install          # μόνο την πρώτη φορά
-npm run fetch        # κατεβάζει επεισόδια, βίντεο, καιρό
-npm run build        # χτίσιμο + ευρετήριο αναζήτησης
-npm run build:full   # fetch + τα παραπάνω
+npm install          # first time only
+npm run fetch        # episodes, videos, weather
+npm run build        # build + search index
+npm run build:full   # fetch + the above
 npm run serve        # http://localhost:8080
 ```
 
-Για γρήγορη δοκιμή χωρίς να ξανακατέβει τίποτα:
+`npm run build:fast` builds without the search index — for quick iteration.
 
-```bash
-npm run build:fast   # μόνο χτίσιμο, χωρίς ευρετήριο
-```
+Opening the files by double-click does **not** work: browsers block `fetch`
+on `file://`, which kills search, transcripts and uninterrupted audio while
+navigating. Always go through `npm run serve`.
 
-### Γιατί το `build` δεν κατεβάζει πια δεδομένα
+### Why `build` no longer fetches
 
-Αυτό ακριβώς τρέχει το Cloudflare σε κάθε deployment, και τα δεδομένα
-είναι **ήδη** στο repo: τα κατεβάζει και τα κάνει commit το GitHub
-Action «Φρέσκο υλικό», κάθε μισή ώρα.
+Cloudflare runs `npm run build` on every deployment, and the data is already
+in the repo — the "Φρέσκο υλικό" workflow downloads and commits it.
 
-Όσο το `fetch` ήταν μέσα, κάθε αλλαγή στο διαχειριστικό ξανακατέβαζε
-επεισόδια και βίντεο πριν χτίσει — ~45 δευτερόλεπτα παραπάνω, 15+ φορές
-τη μέρα. Χειρότερο: χτυπούσε το YouTube API, που έχει **ημερήσιο** όριο
-κλήσεων· το `fetch.yml` το αποφεύγει προσεκτικά και το build το
-παρέκαμπτε σιωπηλά.
+While `fetch` was part of the build, every admin change re-downloaded
+episodes and videos first: ~45 seconds extra, 15+ times a day, and it spent
+calls against the YouTube **daily** quota that `fetch.yml` is careful to
+protect. Use `build:full` for a manual full run.
 
-Για χειροκίνητο πλήρες χτίσιμο υπάρχει το `build:full`.
+Weather is the exception and stays inside `build`: `data/weather.json` is
+deliberately not in git (half-hour-old weather is not weather), the API needs
+no key and takes a second. When `fetch` left the build it took weather with
+it and the temperature silently vanished from the header for a day — hence
+the separate line. If the fetch fails the build carries on.
 
-**Εξαίρεση: ο καιρός.** Το `fetch-weather.js` μένει μέσα στο `build`,
-και είναι το μόνο. Το `data/weather.json` δεν ανεβαίνει στο git —
-είναι εφήμερο εξ ορισμού, και ένας καιρός μισής ώρας δεν είναι καιρός.
-Δεν έχει όριο κλήσεων, δεν θέλει κλειδί, κρατάει ένα δευτερόλεπτο.
+## Scripts
 
-Όταν βγήκε το `fetch` από το χτίσιμο, πήρε μαζί του και τον καιρό: η
-ένδειξη θερμοκρασίας εξαφανίστηκε από τη μπάρα και δεν το είδε κανείς
-για μια μέρα. Γι' αυτό γράφεται ξεχωριστά — αν κάποτε ξαναμπεί το
-`fetch`, αυτή η γραμμή πρέπει να μείνει. Αν η λήψη αποτύχει, το
-χτίσιμο συνεχίζει κανονικά και η μπάρα δείχνει μόνο τα κοινωνικά.
-
-> Άνοιγμα με διπλό κλικ **δεν** δουλεύει: ο browser απαγορεύει `fetch` σε
-> τοπικά αρχεία, οπότε χάνονται η αναζήτηση, οι απομαγνητοφωνήσεις και η
-> πλοήγηση χωρίς διακοπή του ήχου. Πάντα μέσω `npm run serve`.
-
-## Τα scripts
-
-| Αρχείο | Τι κάνει |
+| File | What it does |
 |---|---|
-| `build.js` | γράφει όλες τις σελίδες· σταδιακό, γράφει μόνο ό,τι άλλαξε |
-| `publish.js` | χτίσιμο + ευρετήριο αναζήτησης, μόνο όταν χρειάζεται |
-| `feed.js` | διαβάζει το RSS του Buzzsprout |
-| `fetch-episodes.js` | σώζει `data/episodes.json` |
-| `fetch-videos.js` | σώζει `data/videos.json` — **θέλει `YOUTUBE_API_KEY`** |
-| `fetch-news.js` | σώζει `data/news.json` — **συσσωρευτικό** |
-| `fetch-transcripts.js` | κατεβάζει τις απομαγνητοφωνήσεις, μόνο όσες λείπουν |
-| `find-aliases.js` | βρίσκει διπλοεγγραφές προσώπων — **δεν ενώνει μόνο του** |
-| `serve.js` | τοπικός διακομιστής |
+| `build.js` | writes every page; incremental, only what changed |
+| `publish.js` | build + search index, only when needed |
+| `feed.js` | reads the Buzzsprout RSS |
+| `fetch-episodes.js` | writes `data/episodes.json` |
+| `fetch-videos.js` | writes `data/videos.json` — needs `YOUTUBE_API_KEY` |
+| `fetch-news.js` | writes `data/news.json` — accumulates, never truncates |
+| `fetch-transcripts.js` | downloads missing transcripts only |
+| `find-aliases.js` | reports duplicate people — never merges on its own |
+| `check-fresh.js` | watchdog: are articles still arriving? |
+| `check-images.js` | opens real pages in a browser, fails if any image is cropped |
+| `serve.js` | local server, also serves the admin |
 
-## Ρυθμίσεις
+## Configuration
 
-Ένα αρχείο `.env` στη ρίζα:
+A `.env` file in the root:
 
 ```
 YOUTUBE_API_KEY=...
 ```
 
-**Δεν ανεβαίνει ποτέ στο git.**
+Never committed. In CI the same values come from repository secrets.
 
-## Τι αλλάζεις πού
+## Where to change what
 
-| Θέλω να αλλάξω | Αρχείο |
+| To change | File |
 |---|---|
-| χρώματα, γραμματοσειρές, μεγέθη | `public/styles.css`, στο `:root` |
-| ποιο επεισόδιο μπαίνει μεγάλο | `data/curation.json` |
-| κατηγορίες και λέξεις-κλειδιά | `build.js`, `CATEGORIES` |
-| ονόματα που είναι ο ίδιος άνθρωπος | `data/people-aliases.json` |
-| μενού | `build.js`, `MENU` |
-| διεύθυνση του site | `build.js`, `SITE_URL` |
+| colours, fonts, sizes | `public/styles.css`, in `:root` |
+| which episode goes big on the homepage | `data/curation.json` |
+| categories and keywords | `build.js`, `CATEGORIES` |
+| names that are the same person | `data/people-aliases.json` |
+| menu | `build.js`, `MENU` |
+| site address | `build.js`, `SITE_URL` |
 
-## Τι ΔΕΝ είναι στο git
+## What is not in git
 
-Ό,τι παράγεται ή κατεβαίνει ξανά: οι σελίδες μέσα στο `public/`, το
-ευρετήριο του Pagefind, το `node_modules/`, τα `.env`.
+Anything generated or re-downloadable: the pages under `public/`, the
+Pagefind index, `node_modules/`, `.env`, and the images journalists upload
+(those live in Cloudflare R2).
 
-Μένουν όμως στο git τα δεδομένα που **δεν ξαναφτιάχνονται**:
-`data/news.json` (συσσωρεύεται άρθρο-άρθρο), `data/people-aliases.json`
-και `data/curation.json` (γραμμένα με το χέρι), και οι απομαγνητοφωνήσεις.
-
-## Κατάσταση
-
-Στον αέρα: **[newshubmedia.gr](https://newshubmedia.gr)**
-
-Ανανεώνεται μόνο του: τα GitHub Actions κατεβάζουν, κάνουν commit και
-ανεβάζουν κάθε λίγα λεπτά, και μια δικλείδα ανοίγει issue αν σταματήσουν
-να μπαίνουν ειδήσεις. Δες [.github/workflows/fetch.yml](.github/workflows/fetch.yml).
+What stays in git is the data that cannot be rebuilt: `data/news.json`
+(accumulated article by article), `data/people-aliases.json` and
+`data/curation.json` (written by hand), and the transcripts.

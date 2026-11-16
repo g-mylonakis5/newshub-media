@@ -1,19 +1,17 @@
-// Δικλείδα: μπαίνουν όντως ειδήσεις;
+// Watchdog: are articles still arriving?
 //
-// Όλα όσα μπορούν να σταματήσουν τη ροή το κάνουν ΣΙΩΠΗΛΑ — σπασμένο ή
-// άδειο sitemap, ληγμένο token, χρονοδιάγραμμα που απενεργοποίησε το
-// GitHub, ανασχεδιασμός του newshub.gr. Κανένα δεν βγάζει σφάλμα· απλώς
-// μια μέρα το site παύει να ανανεώνεται.
+// Everything that can stop the flow does so SILENTLY — a broken or empty
+// sitemap, an expired token, a schedule GitHub disabled, a redesign on
+// newshub.gr. None of them raises an error; the site just stops updating.
 //
-// Γι' αυτό δεν κοιτάμε σφάλματα, κοιτάμε ΑΠΟΤΕΛΕΣΜΑ: πόση ώρα έχει να
-// μπει καινούρια είδηση. Ένας έλεγχος πιάνει όλες τις αιτίες μαζί.
+// So we check the result, not the errors: how long since the newest
+// article. One check covers every cause.
 //
-// Γιατί επείγει: το sitemap του newshub.gr είναι κυλιόμενο παράθυρο
-// ΤΡΙΩΝ ΗΜΕΡΩΝ. Ό,τι δεν προλάβουμε να σώσουμε χάνεται οριστικά — δεν
-// υπάρχει πουθενά αλλού. Αν η ροή σπάσει και το δούμε σε δέκα μέρες,
-// λείπει μια βδομάδα ειδήσεων για πάντα.
+// It matters because their sitemap is a rolling THREE-DAY window. Anything
+// we fail to save is gone for good. If the flow breaks and we notice ten
+// days later, a week of news is missing permanently.
 //
-// Έξοδος 0 = όλα καλά. Έξοδος 1 = κάτι πάγωσε.
+// Exit 0 = fine. Exit 1 = frozen.
 //
 //   node check-fresh.js
 
@@ -22,22 +20,20 @@ const path = require('path');
 
 const NEWS = path.join(__dirname, 'data', 'news.json');
 
-// Μετρημένο στα πραγματικά δεδομένα: το newshub.gr δημοσιεύει 07:00 με
-// 24:00 ώρα Ελλάδας, περίπου κάθε 11 λεπτά. Το μεγαλύτερο φυσιολογικό
-// κενό είναι 7,8 ώρες και είναι ΠΑΝΤΑ η νύχτα.
-//
-// Οπότε ελέγχουμε μόνο μέσα στη μέρα, με όριο 3 ώρες: πολύ πάνω από το
-// φυσιολογικό της ημέρας, πολύ κάτω από τη νυχτερινή σιωπή.
+// Measured on the real data: newshub.gr publishes 07:00-24:00 Greek time,
+// roughly every 11 minutes. The largest normal gap is 7.8 hours and it is
+// always the night. So we only check during the day, with a 3-hour limit:
+// far above daytime normal, far below the nightly silence.
 const MAX_HOURS = 3;
 
-// Ώρες Ελλάδας που ελέγχουμε. Ξεκινάμε στις 10:00 και όχι στις 07:00
-// ώστε να έχει προλάβει να βγει το πρώτο κύμα της ημέρας.
+// Greek hours we check. Starting at 10:00 rather than 07:00 gives the
+// first wave of the day time to appear.
 const FROM_HOUR = 10;
 const TO_HOUR = 23;
 
-// Ελλάδα = UTC+2 τον χειμώνα, UTC+3 το καλοκαίρι. Δεν το υπολογίζουμε
-// μόνοι μας — το ερώτημα «τι ώρα είναι στην Αθήνα» το απαντά η ίδια η
-// Node, και η θερινή ώρα αλλάζει χωρίς να μας ρωτήσει κανείς.
+// Greece is UTC+2 in winter, UTC+3 in summer. We don't work that out
+// ourselves — Node answers "what time is it in Athens", and daylight saving
+// changes without asking us.
 function athensHour(date){
   const s = date.toLocaleString('en-GB', {
     timeZone: 'Europe/Athens',

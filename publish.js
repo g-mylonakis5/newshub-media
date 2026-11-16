@@ -1,10 +1,9 @@
-// publish.js — χτίζει το site και ξαναφτιάχνει το ευρετήριο αναζήτησης
-// ΜΟΝΟ όταν χρειάζεται.
+// publish.js — builds the site and rebuilds the search index ONLY when
+// it is worth it.
 //
-// Γιατί υπάρχει: το Pagefind θέλει ~100 δευτερόλεπτα, ενώ το build όταν
-// δεν άλλαξε τίποτα τελειώνει σε 6. Αν ο host ξαναχτίζει κάθε λίγες ώρες
-// για να πιάνει νέα επεισόδια, οι περισσότερες φορές δεν θα έχουν αλλαγές
-// — και τα δωρεάν πακέτα φιλοξενίας χρεώνουν σε λεπτά χτισίματος.
+// Pagefind takes ~100 seconds; a build with nothing to do finishes in 6.
+// Rebuilding every few hours to pick up new episodes means most runs have
+// no changes at all — and free hosting plans bill build minutes.
 //
 //   node publish.js
 
@@ -16,37 +15,35 @@ const { main: build } = require('./build.js');
 
 const INDEX_DIR = path.join(__dirname, 'public/pagefind');
 
-// Κάθε πόσο, το πολύ, ξαναφτιάχνεται το ευρετήριο αναζήτησης.
+// How often, at most, the search index is rebuilt.
 //
-// Το χτίσιμο των σελίδων θέλει 14 δευτερόλεπτα· το ευρετήριο 100. Όταν
-// ανεβαίνουν 160 φορές τη μέρα, το ευρετήριο είναι ΟΛΟΣ ο χρόνος
-// αναμονής — και ξαναχτίζεται ολόκληρο για ένα άρθρο.
+// Pages take 14 seconds, the index 100. At 160 deploys a day the index is
+// the entire wait — rebuilt whole for a single article.
 //
-// Με το φρένο, η σελίδα ενός άρθρου ανεβαίνει αμέσως· μόνο η ΑΝΑΖΗΤΗΣΗ
-// μπορεί να μην το βρίσκει για λίγα λεπτά. Κανείς δεν ψάχνει κάτι που
-// μόλις βγήκε — το διαβάζει από την αρχική.
+// With the brake on, an article's page ships immediately; only SEARCH may
+// miss it for a few minutes. Nobody searches for something just published;
+// they read it off the homepage.
 //
-// Μηδέν ή κενό = χωρίς φρένο, όπως πριν. Το ορίζει το Action.
+// Zero or empty = no brake. Set by the Action.
 const FRENO_LEPTA = Number(process.env.EVRETIRIO_LEPTA || 0);
 
 function hasIndex() {
   return fs.existsSync(path.join(INDEX_DIR, 'pagefind.js'));
 }
 
-// Πόσα λεπτά έχει το σημερινό ευρετήριο; Άπειρο αν δεν υπάρχει.
+// Age of the current index in minutes; Infinity if there is none.
 function indexAgeMin() {
   const stamp = path.join(INDEX_DIR, 'pagefind.js');
   if (!fs.existsSync(stamp)) return Infinity;
   return (Date.now() - fs.statSync(stamp).mtimeMs) / 60000;
 }
 
-// Υπάρχει σελίδα νεότερη από το ευρετήριο;
+// Is any page newer than the index?
 //
-// ΔΕΝ αρκεί να ρωτήσουμε «άλλαξε κάτι σε αυτό το τρέξιμο»: αν κάποιος
-// τρέξει σκέτο `node build.js` — όπως γίνεται συνέχεια στη δουλειά —
-// οι σελίδες αλλάζουν χωρίς να το μάθει ποτέ το publish.js. Μετά, το
-// επόμενο publish βλέπει «καμία αλλαγή» και το ευρετήριο μένει πίσω
-// για πάντα. Το βρήκαμε όταν η αναζήτηση ήταν 92 ωρών.
+// Asking "did this run change anything" is not enough: a plain `node
+// build.js` — which happens constantly during work — changes pages without
+// publish.js ever knowing. The next publish then sees "no changes" and the
+// index stays behind forever. Found when search was 92 hours stale.
 function indexIsStale() {
   const stamp = path.join(INDEX_DIR, 'pagefind.js');
   if (!fs.existsSync(stamp)) return true;
@@ -71,18 +68,15 @@ function indexIsStale() {
 }
 
 function reindex() {
-  // ΠΡΩΤΑ σβήνουμε τον παλιό φάκελο.
+  // Delete the old folder FIRST.
   //
-  // Το Pagefind γράφει ένα αρχείο ανά κομμάτι σελίδας με όνομα που
-  // βγαίνει από το περιεχόμενο. Όταν αλλάζει μια σελίδα, γράφεται ΝΕΟ
-  // αρχείο — το παλιό μένει για πάντα.
-  //
-  // Σε επτά builds είχαν μαζευτεί 19.009 fragments για 4.660 σελίδες,
-  // και το deployment χτύπησε στο όριο των 20.000 αρχείων του
-  // Cloudflare Pages. Τα 14.886 ήταν νεκρά.
+  // Pagefind writes one file per page fragment, named after its content.
+  // When a page changes it writes a NEW file and the old one stays forever.
+  // Seven builds left 19,009 fragments for 4,660 pages and the deploy hit
+  // Cloudflare Pages' 20,000-file limit. 14,886 of them were dead.
   fs.rmSync(INDEX_DIR, { recursive: true, force: true });
 
-  // Το npx κατεβάζει το Pagefind την πρώτη φορά και μετά το βρίσκει έτοιμο.
+  // npx downloads Pagefind the first time and finds it ready afterwards.
   execFileSync('npx', ['-y', 'pagefind@latest', '--site', 'public'], {
     cwd: __dirname,
     stdio: 'inherit',
@@ -96,7 +90,7 @@ function reindex() {
   }
 }
 
-// Πόσα αρχεία θα σταλούν — το Cloudflare Pages δέχεται έως 20.000.
+// How many files will be uploaded — Cloudflare Pages accepts up to 20,000.
 function countFiles(dir) {
   let n = 0;
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -114,9 +108,9 @@ function main() {
 
   console.log('');
 
-  // Το φρένο μπαίνει ΠΡΙΝ από κάθε άλλον έλεγχο, αλλά ΠΟΤΕ όταν λείπει
-  // ευρετήριο: χωρίς αυτό η αναζήτηση δεν δουλεύει καθόλου, και αυτό
-  // δεν είναι καθυστέρηση, είναι βλάβη.
+  // The brake comes before every other check, but NEVER when the index is
+  // missing: without it search does not work at all, and that is a fault,
+  // not a delay.
   const ilikia = indexAgeMin();
 
   if (!hasIndex()) {

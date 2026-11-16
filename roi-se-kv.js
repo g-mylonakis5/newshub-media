@@ -1,38 +1,31 @@
-// Η ροή ειδήσεων στο KV.
+// Pushes the news ticker into Cloudflare KV.
 //
-// ΓΙΑΤΙ ΥΠΑΡΧΕΙ
+// Changing one line of the ticker used to mean rebuilding 4,697 pages: ~4
+// minutes, against the 500 free Cloudflare Pages builds a month (16 a day)
+// while newshub.gr publishes ~93 articles. The maths never worked.
 //
-// Μέχρι σήμερα, για να αλλάξει μία γραμμή στη ροή ειδήσεων, ξαναχτίζαμε
-// 4.697 σελίδες. Το χτίσιμο θέλει ~4 λεπτά και το δωρεάν Cloudflare
-// Pages δίνει 500 τον μήνα — δηλαδή 16 τη μέρα, ενώ το newshub.gr βγάζει
-// ~93 άρθρα. Τα μαθηματικά δεν έβγαιναν ποτέ.
+// So the ticker no longer goes through a build. It lives in KV, the page
+// reads it from the edge, and builds are left for what actually changes
+// rarely: episodes, pages, articles.
 //
-// Οπότε η ροή παύει να περνάει από χτίσιμο. Μπαίνει σε KV, η σελίδα τη
-// διαβάζει από την άκρη του δικτύου, και το χτίσιμο μένει για ό,τι
-// αλλάζει πραγματικά σπάνια: επεισόδια, σελίδες, άρθρα.
+// The ticker HTML still ships inside the page as a fallback: Facebook and
+// Viber crawlers never run JavaScript. Worst case is then a few hours old
+// instead of an empty box.
 //
-// ΤΙ ΔΕΝ ΑΛΛΑΖΕΙ
-//
-// Το HTML της ροής ΜΕΝΕΙ μέσα στη σελίδα, όπως ήταν. Είναι το δίχτυ:
-// τα ρομπότ του Facebook και του Viber δεν εκτελούν JavaScript ποτέ,
-// και η σύνδεση κόβεται. Χωρίς το δίχτυ, το χειρότερο σενάριο είναι
-// άδειο κουτί· με αυτό, είναι ειδήσεις λίγων ωρών.
-//
-// Τρέχει μέσα στο GitHub Action, αμέσως μετά τη λήψη των ειδήσεων.
+// Runs inside the GitHub Action, right after the news fetch.
 //
 //   node roi-se-kv.js
 //
-// Δεν μιλάει στην Cloudflare κατευθείαν: στέλνει τους τίτλους στον
-// Worker (roloi/), που έχει ΗΔΗ δικαίωμα γραψίματος στο KV από το
-// binding του. Ένα δεύτερο token, με δική του λήξη και δική του
-// διαρροή, για να κάνει το ίδιο ακριβώς πράγμα, είναι σκέτο βάρος.
+// It does not talk to Cloudflare directly: it posts the titles to the
+// Worker (roloi/), which already has KV write access through its binding.
+// A second token, with its own expiry and its own way to leak, to do the
+// same job, is pure overhead.
 //
-// Θέλει δύο μεταβλητές περιβάλλοντος. Αν λείπει έστω μία, βγαίνει
-// ΗΣΥΧΑ με επιτυχία: η ζωντανή ροή είναι βελτίωση, όχι προϋπόθεση. Αν
-// δεν στηθεί, το site δουλεύει ακριβώς όπως πριν.
+// Needs two environment variables. If either is missing it exits QUIETLY
+// with success: the live ticker is an improvement, not a requirement.
 //
-//   ROLOI_URL     η διεύθυνση του Worker
-//   ROLOI_KLEIDI  το μυστικό του — το ίδιο που έχει ο Worker
+//   ROLOI_URL     the Worker's address
+//   ROLOI_KLEIDI  its shared secret — the same value the Worker holds
 
 const fs = require('fs');
 const path = require('path');
@@ -40,8 +33,8 @@ const path = require('path');
 const NEWS = path.join(__dirname, 'data', 'news.json');
 const BLOCK = require('./data/roi-apokleismena.json');
 
-// Όσα δείχνει το πλαίσιο, συν λίγα παραπάνω: αν αύριο ζητήσει το
-// αφεντικό δέκα αντί για οκτώ, δεν θέλουμε να ξαναστηθεί τίποτα.
+// What the box shows, plus a few spare: if eight becomes ten tomorrow,
+// nothing needs rebuilding.
 const POSA = 12;
 
 
@@ -49,8 +42,8 @@ function xorismaTonon(s) {
   return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 }
 
-// Ίδιος έλεγχος με το build.js, ίδια λίστα, ίδιο αποτέλεσμα. Μόνο στον
-// τίτλο — δες το data/roi-apokleismena.json για το γιατί.
+// Same check as build.js, same list, same result. Title only — see
+// data/roi-apokleismena.json for why.
 function apokleietai(a) {
   if (BLOCK.katigories.some((c) => c === a.category)) return true;
 
@@ -69,9 +62,9 @@ function diale() {
 
 function roi(diales) {
   return diales
-    // ΜΟΝΟ τα τρία πεδία που δείχνει το πλαίσιο. Όχι περιλήψεις, όχι
-    // εικόνες: ο αναγνώστης θα κατεβάσει αυτό το JSON σε κάθε άνοιγμα
-    // της αρχικής, και ό,τι δεν φαίνεται είναι καθαρή καθυστέρηση.
+    // ONLY the three fields the box shows. No summaries, no images: the
+    // reader downloads this JSON on every visit to the homepage, and
+    // anything invisible is pure latency.
     .map((a) => ({ t: a.title, u: a.url, k: a.category || '' }));
 }
 
@@ -91,26 +84,25 @@ async function main() {
   const diales = diale();
   const items = roi(diales);
   if (!items.length) {
-    // Ποτέ άδεια ροή στο KV: θα έσβηνε το πλαίσιο σε όλους, και μια
-    // στιγμιαία αστοχία της λήψης θα γινόταν ορατή βλάβη. Καλύτερα να
-    // μείνει η προηγούμενη ροή.
+    // Never write an empty ticker: it would blank the box for everyone,
+    // turning a momentary fetch glitch into a visible fault. Better to
+    // leave the previous one in place.
     console.warn('ΠΡΟΣΟΧΗ: η ροή βγήκε άδεια — ΔΕΝ γράφω στο KV.');
     return;
   }
 
-  // Το «proto» είναι η ώρα της πρώτης είδησης, όχι η ώρα που γράψαμε.
-  // Με αυτό η σελίδα αποφασίζει αν αξίζει να αντικαταστήσει ό,τι έχει
-  // ήδη γραμμένο μέσα της: το KV και το χτίσιμο γεμίζουν από
-  // διαφορετικά μέρη και δεν προλαβαίνουν πάντα με την ίδια σειρά.
+  // "proto" is the timestamp of the newest article, not of this write.
+  // The page uses it to decide whether this beats what was baked into it:
+  // KV and the build fill from different places and do not always arrive
+  // in order.
   const soma = JSON.stringify({
     pote: new Date().toISOString(),
     proto: diales[0].date || '',
     items,
   });
 
-  // Το κλειδί πάει στη διεύθυνση, όχι σε κεφαλίδα: έτσι το δέχεται ο
-  // Worker και στη χειροκίνητη δοκιμή από browser, με έναν τρόπο αντί
-  // για δύο.
+  // The key goes in the URL, not a header, so the Worker also accepts it
+  // from a browser during a manual test — one code path instead of two.
   const url = `${ROLOI_URL.replace(/\/+$/, '')}/?kleidi=${encodeURIComponent(ROLOI_KLEIDI)}`;
 
   const res = await fetch(url, {
