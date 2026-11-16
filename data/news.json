@@ -1,5 +1,29 @@
 [
   {
+    "id": "irakleio-apo-simera-kai-gia-mia-evdomada-ergasies-tis-deyai-stis-odoys-ch-trikoypi-itanoy-kai-g-vasilaki",
+    "title": "Ηράκλειο: Από σημερα και για μία εβδομάδα εργασίες της ΔΕΥΑΗ στις οδούς Χ.Τρικούπη, Ιτάνου και Γ.Βασιλάκη",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-apo-simera-kai-gia-mia-evdomada-ergasies-tis-deyai-stis-odoys-ch-trikoypi-itanoy-kai-g-vasilaki",
+    "date": "2026-11-16T06:10:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/deuae-erga.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/deuae-erga.jpg",
+    "summary": "Συνεχίζονται από σημερα σε οδούς του Ηρακλείου οι εργασίες αντικατάστασης του δικτύου ύδρευσης, στο πλαίσιο του εμβληματικού έργου κατασκευής δικτύων ύδρευση...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "astatos-o-simerinos-kairos-me-vroches-kai-thermokrasia-mechri-23-vathmoys-kelsioy",
+    "title": "Άστατος ο σημερινός καιρός με βροχές και θερμοκρασία μέχρι 23 βαθμούς Κελσίου",
+    "url": "https://www.newshub.gr/el/ellada/astatos-o-simerinos-kairos-me-vroches-kai-thermokrasia-mechri-23-vathmoys-kelsioy",
+    "date": "2026-11-16T06:10:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/br.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/br.jpg",
+    "summary": "Άστατος θα είναι σήμερα, Δευτέρα (16/11), ο καιρός με βροχές και καταιγίδες να αναμένονται σήμερα δυτικά τμήματα της χώρας.\r\n\r\nΣτα δυτικά και τα βόρεια περιμ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "enimerotiki-ekdilosi-sto-dimarcheio-malevizioy-gia-ti-nea-prosklisi-toy-programmatos-leader-1",
     "title": "Ενημερωτική εκδήλωση στο Δημαρχείο Μαλεβιζίου για τη νέα πρόσκληση του προγράμματος Leader",
     "url": "https://www.newshub.gr/el/kriti/enimerotiki-ekdilosi-sto-dimarcheio-malevizioy-gia-ti-nea-prosklisi-toy-programmatos-leader-1",
@@ -7216,30 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/abeille_marengo.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/abeille_marengo.jpg",
     "summary": "Άκυρη και ανίσχυρη χαρακτηρίζει η Αθήνα την τουρκική NAVTEX για τις έρευνες του «Abeille Marengo» στο πλαίσιο της ηλεκτρικής διασύνδεσης Κρήτης...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "to-irakleio-tima-ton-polioycho-toy-agio-mina-i-zoi-kai-ta-thaymata-toy",
-    "title": "Το Ηράκλειο τιμά τον πολιούχο του Άγιο Μηνά - Η ζωή και τα θαύματά του!",
-    "url": "https://www.newshub.gr/el/kriti/to-irakleio-tima-ton-polioycho-toy-agio-mina-i-zoi-kai-ta-thaymata-toy",
-    "date": "2026-11-11T05:06:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/a-211.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/a-211.jpg",
-    "summary": "Τον πολιούχο του Άγιο Μηνά γιορτάζει το Ηράκλειο σημερα με το μικρό ναό του Αγίου Μηνά να δέχεται απο χθες τους πιστούς που συρρεύσουν για να ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "i-epikoinoniaki-taktiki-tis-toyrkias-meta-ton-apoploy-toy-abeille-marengo-exedose-nea-navtex",
-    "title": "Η επικοινωνιακή τακτική της Τουρκίας μετά τον απόπλου του Abeille Marengo – Εξέδωσε νέα Navtex",
-    "url": "https://www.newshub.gr/el/geopolitiki/i-epikoinoniaki-taktiki-tis-toyrkias-meta-ton-apoploy-toy-abeille-marengo-exedose-nea-navtex",
-    "date": "2026-11-11T05:00:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/greecefranceelectricity-abeille_marengo-photo.width-1200.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/greecefranceelectricity-abeille_marengo-photo.width-1200.jpg",
-    "summary": "Νέα NAVTEX για το γαλλικό ερευνητικό πλοίο «Abeille Marengo» εξέδωσε το βράδυ της Τρίτης (10/11) η Τουρκία, λίγες ώρες μετά τον απόπλου του πλοίο...",
     "author": null,
     "featured": false
   },
