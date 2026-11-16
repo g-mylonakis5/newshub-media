@@ -1,5 +1,17 @@
 [
   {
+    "id": "tailandi-toylachiston-11-nekroi-exaitias-pyrkagias-sto-toyristiko-nisi-poyket",
+    "title": "Ταϊλάνδη: Τουλάχιστον 11 νεκροί εξαιτίας πυρκαγιάς στο τουριστικό νησί Πουκέτ",
+    "url": "https://www.newshub.gr/el/kosmos/tailandi-toylachiston-11-nekroi-exaitias-pyrkagias-sto-toyristiko-nisi-poyket",
+    "date": "2026-11-16T08:50:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/a12f86754d1940f780437780b5ddf385.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/a12f86754d1940f780437780b5ddf385.jpg",
+    "summary": "Πυρκαγιά ξέσπασε τις πρώτες πρωινές ώρες σήμερα (σ.σ. χθες Κυριακή το βράδυ ώρα Ελλάδας) σε τετραώροφο κτίριο, στο οποίο στεγάζονταν καταστήματα και ενοικιαζ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "eki-i-diasyndesi-tis-kritis-prepei-na-ferei-fthinotero-reyma-gia-oloys-toys-kritikoys-i-epistoli-toy-prosopikoy-tis-dei",
     "title": "ΕΚΗ: Η διασύνδεση της Κρήτης πρέπει να φέρει φθηνότερο ρεύμα για όλους τους Κρητικούς-Η επιστολή του προσωπικού της ΔΕΗ",
     "url": "https://www.newshub.gr/el/kriti/eki-i-diasyndesi-tis-kritis-prepei-na-ferei-fthinotero-reyma-gia-oloys-toys-kritikoys-i-epistoli-toy-prosopikoy-tis-dei",
@@ -45,7 +57,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/eeeo.jpg",
     "summary": "Στο λιμάνι του Ηρακλείου βρίσκεται από τις 7.25 το πρωί το γαλλικό ερευνητικό πλοίο Abeille Marengo, το οποίο πραγματοποιεί έρευνες στο πλαίσιο του έργου ηλε...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "teli-fevroyarioy-to-idrytiko-synedrio-tis-ellinikis-aristeris-symparataxis-vinteo",
@@ -141,7 +153,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/astynomia-peripolikoo.jpg",
     "summary": "Θέμα των ημερών που απασχολεί σε μεγάλο βαθμό την εσωτερική επικαιρότητα ειναι αυτό της αποκάλυψης των κυκλωμάτων που εξαπατούσαν το Δημόσιο και φοροδιαφεύγα...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "pagkritios-enosis-ta-anepisima-apotelesmata-ton-eklogon-gia-tis-opoies-echoyn-katate-thei-enstaseis-proti-i-rena-vasilaki",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/screenshot-2026-11-11-071825.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/screenshot-2026-11-11-071825.jpg",
     "summary": "Ο Αμερικανός ηθοποιός Στέισι Κιτς, ένας από τους σημαντικούς ερμηνευτές του αμερικανικού θεάτρου, ο οποίος έγινε ευρύτερα γνωστός μέσα από τον ρόλο του ιδιωτ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kentro-epicheiriseon-me-techniti-noimosyni-stinei-i-aade-to-neo-psifiako-stratigeio-tis-aade-me-ai-kai-drones",
-    "title": "Κέντρο επιχειρήσεων με Τεχνητή Νοημοσύνη στήνει η ΑΑΔΕ- Το νέο ψηφιακό στρατηγείο της ΑΑΔΕ με Ai και Drones",
-    "url": "https://www.newshub.gr/el/oikonomia/kentro-epicheiriseon-me-techniti-noimosyni-stinei-i-aade-to-neo-psifiako-stratigeio-tis-aade-me-ai-kai-drones",
-    "date": "2026-11-11T07:19:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/aade2.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/aade2.jpg",
-    "summary": "Στην αναβάθμιση και μετεξέλιξη του κεντρικού επιχειρησιακού θαλάμου της Γενικής Διεύθυνσης Δυνάμεων Ελέγχου Οικονομικών Συναλλαγών (ΔΕΟΣ), για την κάλυψη των...",
     "author": null,
     "featured": false
   },
