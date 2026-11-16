@@ -56,8 +56,8 @@
     "",
     "Ό,τι αφήσεις κενό ή σβήσεις, το αποφασίζει μόνο του το build."
   ],
-  "featured": "arthro/to-newshubmedia-gr-einai-ston-aera.html",
-  "featuredUntil": "2026-11-20",
+  "featured": "arthro/o-gampros-toy-tramp-tzarent-koysner-kai-i-alli-art-of-the-deal.html",
+  "featuredUntil": "2026-11-23",
   "secondary": [],
   "latest": [],
   "mustRead": [
@@ -121,7 +121,12 @@
       "3CZp2A-sKeM"
     ]
   },
-  "featuredPrev": [],
+  "featuredPrev": [
+    {
+      "ref": "arthro/to-newshubmedia-gr-einai-ston-aera.html",
+      "hero": ""
+    }
+  ],
   "hidden": {
     "opinions": {
       "https://www.newshub.gr/el/apopseis/stoys-dromoys-ergazomenoi-kai-neolaia-tis-italias-enantia-ston-polemo-kai-tin-akriveia": "2026-11-15T11:38:54.193Z",
