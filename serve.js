@@ -1,11 +1,10 @@
-// serve.js — μικρός τοπικός διακομιστής για να βλέπουμε το site σωστά.
+// serve.js — small local server, so the site behaves like the real one.
 //
-// Ανοίγοντας τα αρχεία με διπλό κλικ, η διεύθυνση είναι file:///C:/...
-// Αυτό χαλάει πράγματα που απαιτούν κανονική προέλευση: το YouTube αρνείται
-// να παίξει ενσωματωμένο βίντεο (Error 153), και αργότερα δεν θα δουλέψει
-// ούτε η αναζήτηση με Pagefind.
+// Opened by double-click the address is file:///C:/... which breaks
+// anything needing a real origin: YouTube refuses to play embeds (Error
+// 153) and Pagefind search does not work.
 //
-// Δεν χρειάζεται εγκατάσταση — χρησιμοποιεί μόνο ό,τι έχει ήδη ο Node.
+// Nothing to install — only what Node already ships.
 //
 //   node serve.js      ->  http://localhost:8080
 
@@ -20,12 +19,12 @@ const { stats } = require('./stats-api.js');
 const ROOT = path.join(__dirname, 'public');
 const ENV_FILE = path.join(__dirname, '.env');
 
-// Διαβάζει το .env χωρίς βιβλιοθήκη: κάθε γραμμή ΟΝΟΜΑ=τιμή. Ίδιο με
-// το fetch-videos.js.
+// Reads .env without a library: one NAME=value per line. Same as in
+// fetch-videos.js.
 //
-// Στον αέρα δεν υπάρχει .env — τα μυστικά ζουν στις ρυθμίσεις του
-// Cloudflare Pages και τα δίνει εκείνο στη Function. Εδώ είναι ο
-// τοπικός αντικαταστάτης, ώστε η δοκιμή να μοιάζει με την πραγματικότητα.
+// In production there is no .env — the secrets live in Cloudflare Pages
+// settings and are handed to the Function. This is the local stand-in so
+// testing resembles reality.
 function readEnv() {
   if (!fs.existsSync(ENV_FILE)) return {};
   const out = {};
@@ -39,8 +38,8 @@ function readEnv() {
   return out;
 }
 
-// Αλλάζει με PORT=8090 node serve.js — χρήσιμο για να τρέχουν δύο
-// αντίγραφα μαζί, π.χ. το site που κοιτάς κι ένα για δοκιμή.
+// Override with PORT=8090 node serve.js — useful for running two copies
+// at once, e.g. the site you are looking at and one for testing.
 const PORT = Number(process.env.PORT) || 8080;
 
 const TYPES = {
@@ -56,26 +55,26 @@ const TYPES = {
   '.ico': 'image/x-icon',
   '.woff2': 'font/woff2',
 
-  // Οι δύο μορφές των διαφημίσεων. Έλειπαν, και χωρίς αυτές ο browser
-  // έπαιρνε «application/octet-stream»: άγνωστα bytes, που ΔΕΝ παίζουν
-  // σε <video> και δεν δείχνονται σε <img>. Στον αέρα το Cloudflare
-  // βάζει σωστό τύπο μόνο του, οπότε το κενό φαινόταν μόνο εδώ — και
-  // ακριβώς εδώ δοκιμάζουμε πριν πουλήσουμε θέση σε συνεργάτη.
+// The two ad formats. They were missing, and without them the browser
+// got application/octet-stream: unknown bytes, which do not play in
+// <video> and do not show in <img>. Cloudflare sets the type correctly
+// in production, so the gap only showed here — exactly where we test
+// before selling a slot to a partner.
   '.mp4': 'video/mp4',
   '.gif': 'image/gif',
 };
 
-// ---- ο αποθηκευτής του διαχειριστικού, τοπική έκδοση ----
+// ---- the admin store, local version ----
 //
-// Γράφει κατευθείαν στα αρχεία του data/. Στον αέρα τη θέση του παίρνει
-// ένας που κάνει commit στο git — δες functions/api/. Η διεπαφή και το
-// admin-api.js δεν ξέρουν ποιος από τους δύο τρέχει.
+// Writes straight into data/. In production its place is taken by one
+// that commits to git — see functions/api/. Neither the UI nor
+// admin-api.js knows which of the two is running.
 const DATA = path.join(__dirname, 'data');
 
-// Οι φωτογραφίες ΔΕΝ πάνε στο git — δες το σχόλιο στο admin-api.js.
-// Τοπικά ζουν εδώ, στον αέρα σε Cloudflare R2. Και στις δύο περιπτώσεις
-// σερβίρονται από το /uploads/, ώστε ένα άρθρο γραμμένο τοπικά να
-// δείχνει σωστά και στον αέρα χωρίς να αλλάξει γραμμή.
+// Images do NOT go into git — see the comment in admin-api.js. Locally
+// they live here, in production in Cloudflare R2. Both are served from
+// /uploads/, so an article written locally displays correctly in
+// production without changing a line.
 const UPLOADS = path.join(__dirname, 'uploads');
 
 const localStore = {
@@ -90,8 +89,8 @@ const localStore = {
   listImages: async () => {
     try {
       const files = await fs.promises.readdir(UPLOADS);
-      // Νεότερα πρώτα: το όνομα ξεκινά με χρονοσφραγίδα, οπότε η
-      // ανάποδη αλφαβητική σειρά είναι και χρονολογική.
+      // Newest first: the filename starts with a timestamp, so reverse
+      // alphabetical order is chronological.
       return files.filter((f) => /\.(jpg|webp|png)$/i.test(f)).sort().reverse();
     } catch (err) {
       if (err.code === 'ENOENT') return [];
@@ -103,7 +102,7 @@ const localStore = {
     try {
       await fs.promises.unlink(path.join(UPLOADS, file));
     } catch (err) {
-      // Αρχείο που δεν υπάρχει δεν είναι σφάλμα — όπως και στο R2.
+      // A file that does not exist is not an error — same as in R2.
       if (err.code !== 'ENOENT') throw err;
     }
   },
@@ -114,8 +113,8 @@ function sendJson(res, status, body){
   res.end(JSON.stringify(body));
 }
 
-// Διαβάζει το σώμα του αιτήματος. Όριο 5MB: ένα curation.json είναι
-// μερικά KB, οπότε οτιδήποτε μεγαλύτερο είναι λάθος ή επίθεση.
+// Reads the request body. 5MB limit: a curation.json is a few KB, so
+// anything larger is a mistake or an attack.
 function readBody(req){
   return new Promise((resolve, reject) => {
     let data = '';
@@ -150,8 +149,8 @@ async function handleApi(req, res, rel){
   sendJson(res, 405, { error: 'Μόνο GET και PUT' });
 }
 
-// Διαβάζει δυαδικό σώμα (φωτογραφία). Ξεχωριστό από το readBody, που
-// μαζεύει κείμενο: ενώνοντας bytes σε string χαλάει η εικόνα.
+// Reads a binary body (an image). Separate from readBody, which
+// collects text: concatenating bytes into a string corrupts the image.
 function readBytes(req, limit){
   return new Promise((resolve, reject) => {
     const parts = [];
@@ -173,9 +172,9 @@ async function handleImages(req, res){
   }
 
   if (req.method === 'POST') {
-    // Το όνομα και ο τύπος έρχονται σε κεφαλίδες, το αρχείο ωμό στο
-    // σώμα. Απλούστερο από multipart, και ο browser το στέλνει έτσι
-    // χωρίς βιβλιοθήκη — δες το send() στο admin.js.
+    // Name and type arrive in headers, the file raw in the body.
+    // Simpler than multipart, and the browser sends it that way with no
+    // library — see send() in admin.js.
     const type = (req.headers['content-type'] || '').split(';')[0];
     const bytes = await readBytes(req, admin.maxFor(type) + 1024);
     const r = await admin.saveImage(localStore, {
@@ -195,21 +194,21 @@ async function handleImages(req, res){
   sendJson(res, 405, { error: 'Μόνο GET, POST και DELETE' });
 }
 
-// «Φέρε τα νέα τώρα».
-//
-// Στον αέρα αυτό ξεκινά το workflow του GitHub — δες το
-// functions/api/refresh.js. Τοπικά δεν υπάρχει GitHub: τρέχουμε
-// κατευθείαν τα ίδια scripts, στον ίδιο υπολογιστή.
-//
-// Τα βαριά (βίντεο, απομαγνητοφωνήσεις) μένουν έξω: το YouTube θέλει
-// κλειδί που τοπικά συνήθως λείπει, και οι απομαγνητοφωνήσεις είναι
-// 20 MB που τις έχουμε ήδη.
+  // "Fetch the news now".
+  //
+  // In production this starts the GitHub workflow — see
+  // functions/api/refresh.js. Locally there is no GitHub: we run the same
+  // scripts directly, on the same machine.
+  //
+  // The heavy ones (videos, transcripts) stay out: YouTube needs a key
+  // that is usually missing locally, and the transcripts are 20 MB we
+  // already have.
 let refreshing = false;
 
 async function handleRefresh(req, res){
   if (req.method !== 'POST') return sendJson(res, 405, { error: 'Μόνο POST' });
 
-  // Δύο μαζί θα έγραφαν το ένα πάνω στο άλλο τα ίδια αρχεία.
+    // Two at once would write the same files over each other.
   if (refreshing) return sendJson(res, 409, { error: 'Τρέχει ήδη.' });
   refreshing = true;
 
@@ -232,7 +231,7 @@ async function handleRefresh(req, res){
 }
 
 const server = http.createServer((req, res) => {
-  // Κόβουμε το ερωτηματικό και αποκωδικοποιούμε τα ελληνικά στη διεύθυνση.
+  // Strip the query string and decode Greek characters in the path.
   let rel = decodeURIComponent(req.url.split('?')[0]);
 
   if (rel.startsWith('/api/data/')) {
@@ -250,11 +249,11 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Οι μετρήσεις — δες functions/api/stats.js.
+  // Stats — see functions/api/stats.js.
   //
-  // Τοπικά το κλειδί έρχεται από το .env, στον αέρα από τις ρυθμίσεις
-  // του Cloudflare Pages. Η λογική είναι η ίδια και στα δύο, οπότε ό,τι
-  // βλέπεις εδώ είναι ακριβώς ό,τι θα δει και ο συντάκτης.
+  // Locally the token comes from .env, in production from Cloudflare
+  // Pages settings. The logic is identical, so what you see here is
+  // exactly what the editor will see.
   if (rel === '/api/stats') {
     const period = (req.url.split('?')[1] || '').match(/period=([\w]+)/);
     stats({ ...readEnv(), ...process.env }, period ? period[1] : '7d')
@@ -263,15 +262,14 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Ποιος είναι συνδεδεμένος — δες functions/api/poios.js.
+  // Who is signed in — see functions/api/poios.js.
   //
-  // Τοπικά δεν υπάρχει Cloudflare Access, άρα ούτε email. Γυρίζουμε
-  // κενό, που είναι και η αλήθεια: στο τοπικό το διαχειριστικό το
-  // ανοίγει όποιος κάθεται στο μηχάνημα. Η σελίδα το περιμένει και
-  // δείχνει τη λίστα με τα γνωστά ονόματα.
+  // Locally there is no Cloudflare Access, so no email. We return empty,
+  // which is the truth: locally the admin is open to whoever sits at the
+  // machine. The page expects that and shows the list of known names.
   //
-  // Το DOKIMI_EMAIL είναι ΜΟΝΟ για δοκιμή της αυτόματης υπογραφής
-  // τοπικά — δεν υπάρχει στον αέρα, όπου το email το δίνει το Access:
+  // DOKIMI_EMAIL exists ONLY to test the automatic byline locally — it
+  // does not exist in production, where Access provides the email:
   //
   //   DOKIMI_EMAIL=kapoios@newshub.gr node serve.js
   if (rel === '/api/poios') {
@@ -279,8 +277,8 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Οι ανεβασμένες φωτογραφίες. Ζουν ΕΞΩ από το public/ — δες το
-  // UPLOADS παραπάνω — οπότε τις σερβίρουμε χωριστά.
+  // Uploaded images. They live OUTSIDE public/ — see UPLOADS above — so
+  // we serve them separately.
   if (rel.startsWith('/uploads/')) {
     const file = path.join(UPLOADS, path.basename(rel));
     fs.readFile(file, (err, data) => {
@@ -288,15 +286,15 @@ const server = http.createServer((req, res) => {
 
       const type = TYPES[path.extname(file)] || 'application/octet-stream';
 
-      // Μερική αποστολή, για το βίντεο.
+      // Partial responses, for video.
       //
-      // Ο browser δεν ζητάει ένα βίντεο ολόκληρο: στέλνει «Range» και
-      // περιμένει 206 με το κομμάτι που ζήτησε. Το Safari ΑΡΝΕΙΤΑΙ να
-      // παίξει πηγή που απαντά 200 σε αίτημα Range — και το iPhone
-      // είναι ακριβώς η συσκευή όπου θέλουμε να δούμε αν ο κανόνας
-      // «καμία διαφήμιση δεν σκεπάζει το περιεχόμενο» κρατάει.
+      // A browser does not ask for a whole video: it sends Range and
+      // expects 206 with the slice it asked for. Safari REFUSES to play a
+      // source that answers 200 to a Range request — and the iPhone is
+      // exactly where we want to check that "no ad covers the content"
+      // still holds.
       //
-      // Δέκα γραμμές εδώ, ώστε η τοπική δοκιμή να λέει την αλήθεια.
+      // Ten lines here, so the local test tells the truth.
       const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '');
       if (range && data.length) {
         const start = range[1] ? Number(range[1]) : 0;
@@ -329,15 +327,14 @@ const server = http.createServer((req, res) => {
 
   if (rel.endsWith('/')) rel += 'index.html';
 
-  // Το διαχειριστικό σερβίρεται από τον ΠΗΓΑΙΟ φάκελο admin/, όχι από
-  // το public/.
+  // The admin is served from the SOURCE folder admin/, not from public/.
   //
-  // Γιατί: ό,τι μπαίνει στο public/ ανεβαίνει στο site, και μέχρι να
-  // στηθεί το Cloudflare Access το /admin/ θα ήταν ανοιχτό σε όλους.
-  // Το μετρήσαμε — απαντούσε 200 στο newshubmedia.gr/admin/.
+  // Why: everything in public/ goes to the live site, and until Cloudflare
+  // Access was in place /admin/ would have been open to everyone. We
+  // measured it — newshubmedia.gr/admin/ answered 200.
   //
-  // Έτσι κερδίζουμε και κάτι καθημερινό: η αλλαγή στο admin/admin.js
-  // φαίνεται με απλό refresh, χωρίς να ξανατρέξει το build.
+  // It also buys something daily: a change in admin/admin.js shows up on
+  // a plain refresh, without rerunning the build.
   if (rel.startsWith('/admin/')) {
     const name = path.basename(rel);
     const file = path.join(__dirname, 'admin', name);
@@ -349,7 +346,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Δεν αφήνουμε κανέναν να βγει έξω από τον φάκελο public με ../
+  // Nobody escapes the public folder with ../
   const file = path.join(ROOT, path.normalize(rel).replace(/^(\.\.[/\\])+/, ''));
   if (!file.startsWith(ROOT)) {
     res.writeHead(403).end('Απαγορεύεται');
@@ -359,12 +356,12 @@ const server = http.createServer((req, res) => {
   send(file, rel, res);
 });
 
-// Στέλνει το αρχείο — και, αν δεν υπάρχει, ξαναδοκιμάζει με .html.
+// Sends the file — and, if it is missing, retries with .html.
 //
-// Οι σύνδεσμοι του site δεν γράφουν πια .html: το Cloudflare Pages
-// σερβίρει το /episode/x από το αρχείο x.html μόνο του. Ο τοπικός
-// server δεν το ήξερε αυτό και απαντούσε 404 σε κάθε κλικ, ενώ στον
-// αέρα όλα δούλευαν — το χειρότερο είδος διαφοράς.
+// Site links no longer carry .html: Cloudflare Pages serves /episode/x
+// from x.html by itself. The local server did not know that and answered
+// 404 on every click while production worked fine — the worst kind of
+// difference.
 function send(file, rel, res){
   fs.readFile(file, (err, data) => {
     if (!err) {
