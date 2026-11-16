@@ -55,6 +55,14 @@ const TYPES = {
   '.webp': 'image/webp',
   '.ico': 'image/x-icon',
   '.woff2': 'font/woff2',
+
+  // Οι δύο μορφές των διαφημίσεων. Έλειπαν, και χωρίς αυτές ο browser
+  // έπαιρνε «application/octet-stream»: άγνωστα bytes, που ΔΕΝ παίζουν
+  // σε <video> και δεν δείχνονται σε <img>. Στον αέρα το Cloudflare
+  // βάζει σωστό τύπο μόνο του, οπότε το κενό φαινόταν μόνο εδώ — και
+  // ακριβώς εδώ δοκιμάζουμε πριν πουλήσουμε θέση σε συνεργάτη.
+  '.mp4': 'video/mp4',
+  '.gif': 'image/gif',
 };
 
 // ---- ο αποθηκευτής του διαχειριστικού, τοπική έκδοση ----
@@ -277,7 +285,43 @@ const server = http.createServer((req, res) => {
     const file = path.join(UPLOADS, path.basename(rel));
     fs.readFile(file, (err, data) => {
       if (err) { res.writeHead(404).end('Δεν βρέθηκε'); return; }
-      res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream' });
+
+      const type = TYPES[path.extname(file)] || 'application/octet-stream';
+
+      // Μερική αποστολή, για το βίντεο.
+      //
+      // Ο browser δεν ζητάει ένα βίντεο ολόκληρο: στέλνει «Range» και
+      // περιμένει 206 με το κομμάτι που ζήτησε. Το Safari ΑΡΝΕΙΤΑΙ να
+      // παίξει πηγή που απαντά 200 σε αίτημα Range — και το iPhone
+      // είναι ακριβώς η συσκευή όπου θέλουμε να δούμε αν ο κανόνας
+      // «καμία διαφήμιση δεν σκεπάζει το περιεχόμενο» κρατάει.
+      //
+      // Δέκα γραμμές εδώ, ώστε η τοπική δοκιμή να λέει την αλήθεια.
+      const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '');
+      if (range && data.length) {
+        const start = range[1] ? Number(range[1]) : 0;
+        const end = range[2] ? Math.min(Number(range[2]), data.length - 1) : data.length - 1;
+
+        if (start > end || start >= data.length) {
+          res.writeHead(416, { 'Content-Range': `bytes */${data.length}` }).end();
+          return;
+        }
+
+        res.writeHead(206, {
+          'Content-Type': type,
+          'Content-Range': `bytes ${start}-${end}/${data.length}`,
+          'Accept-Ranges': 'bytes',
+          'Content-Length': end - start + 1,
+        });
+        res.end(data.subarray(start, end + 1));
+        return;
+      }
+
+      res.writeHead(200, {
+        'Content-Type': type,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': data.length,
+      });
       res.end(data);
     });
     return;
