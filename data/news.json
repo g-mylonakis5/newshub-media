@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/pharmaka.jpg",
     "summary": "Η αυξανόμενη αντίσταση στα αντιβιοτικά και σε άλλα φάρμακα απειλεί να καταστήσει επικίνδυνες για τη ζωή επεμβάσεις ρουτίνας και τοκετούς και να θέσει σε κίνδ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "ergazomenoi-pagni-zitoyn-na-stamatisei-i-peitharchiki-dioxi-toy-giatroy-leyteri-kritsotaki",
@@ -81,7 +81,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/dikastiko-megaro-erakleio.jpg",
     "summary": "Συγκλονίζει η οικογενειακή τραγωδία στη Νέα Αλικαρνασσό Ηρακλείου, όπου ένα αγοράκι μόλις 18 μηνών έχασε τη ζωή του, αφού φέρεται να κατάπιε βενζίνη μέσα στο...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "gynaikeia-epicheirimatikotita-ekpaideysi-mia-drasi-endynamosis-kai-empneysis-sto-plaisio-toy-helios-sto-irakleio",
