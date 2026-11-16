@@ -703,8 +703,24 @@ async function deleteImage(store, name){
   if (!file || !/^[\w.-]+$/.test(file) || file.includes('..')) {
     return { status: 400, body: { error: 'Άκυρο όνομα αρχείου.' } };
   }
-  if (!/\.(jpg|jpeg|webp|png)$/i.test(file)) {
-    return { status: 400, body: { error: 'Διαγράφονται μόνο φωτογραφίες.' } };
+  // ΟΙ ΙΔΙΕΣ ΜΟΡΦΕΣ ΠΟΥ ΔΕΧΕΤΑΙ ΚΑΙ ΤΟ ΑΝΕΒΑΣΜΑ — δες IMAGE_TYPES και
+  // VIDEO_TYPES πιο πάνω.
+  //
+  // Η λίστα εδώ είχε μείνει πίσω: όταν μπήκαν το GIF και το mp4 για τις
+  // διαφημίσεις, το ανέβασμα τα δέχτηκε και η διαγραφή όχι. Ένα λάθος
+  // αρχείο 8MB έμενε για πάντα στη βιβλιοθήκη, χωρίς τρόπο να φύγει —
+  // και οι φωτογραφίες ζουν στο R2, όχι στο git, άρα ούτε με χειροκίνητο
+  // commit δεν έβγαινε.
+  // Το «jpeg» μπαίνει με το χέρι: εμείς σώζουμε πάντα ως .jpg, αλλά
+  // παλιότερα αρχεία μπορεί να το έχουν ολόκληρο και πρέπει να σβήνουν.
+  const ok = Object.values(IMAGE_TYPES)
+    .concat(Object.values(VIDEO_TYPES))
+    .concat('jpeg');
+  if (!ok.some((ext) => new RegExp(`\\.${ext}$`, 'i').test(file))) {
+    return {
+      status: 400,
+      body: { error: `Διαγράφονται μόνο αρχεία ${ok.join(', ')}.` },
+    };
   }
 
   try {

@@ -68,6 +68,24 @@ const SITE_NAME = 'Newshub Media';
 // Οκτωβρίου και μετρούσε μηδέν για 12 μέρες, γιατί το domain δεν
 // περνάει ως proxied zone από αυτόν τον λογαριασμό. Οπότε το βάζουμε
 // εμείς στις σελίδες.
+// Ποιες γραμματοσειρές ξεκινούν να κατεβαίνουν ΑΜΕΣΩΣ, μαζί με το HTML.
+//
+// Μόνο ελληνικά και λατινικά: αυτά είναι που βλέπει πραγματικά ο
+// αναγνώστης — τίτλοι και κείμενο στα ελληνικά, ετικέτες τύπου
+// «PODCAST» στα λατινικά. Τα latin-ext τα φέρνει το CSS αν χρειαστούν,
+// χωρίς preload: είναι σπάνιοι χαρακτήρες και δεν αξίζει να
+// ανταγωνίζονται το περιεχόμενο στα πρώτα δευτερόλεπτα.
+//
+// Χωρίς preload το font-display: optional δεν θα προλάβαινε σχεδόν
+// ποτέ, και η σελίδα θα έμενε στην εφεδρική γραμματοσειρά. Οι δύο
+// ρυθμίσεις δουλεύουν ΜΑΖΙ — δες το σχόλιο στην κορυφή του styles.css.
+const FONT_PRELOAD = [
+  'source-serif-4-greek.woff2',
+  'commissioner-greek.woff2',
+  'source-serif-4-latin.woff2',
+  'commissioner-latin.woff2',
+];
+
 const CF_ANALYTICS = '1c6e9c91e5cd4c0ebdbeb09703c977fe';
 const GOOGLE_VERIFY = '';
 const GA4 = 'G-VSQD1S3PN5';
@@ -720,8 +738,7 @@ ${image ? '' : `  <meta property="og:image:width" content="1200">
 
 ${ldBlock(jsonld)}${GOOGLE_VERIFY ? `  <meta name="google-site-verification" content="${esc(GOOGLE_VERIFY)}">\n` : ''}  <link rel="icon" href="${up}shows/logo-icon.png" type="image/png" sizes="512x512">
   <link rel="apple-touch-icon" href="${up}shows/logo-icon.png">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400..900&family=Source+Serif+4:wght@400..600&display=swap">
+${FONT_PRELOAD.map((f) => `  <link rel="preload" href="${up}fonts/${f}" as="font" type="font/woff2" crossorigin>`).join('\n')}
   <link rel="stylesheet" href="${up}styles.css${assetVersion('styles.css')}">
 ${tags}
 ${metriseis()}${adsenseTag()}</head>
@@ -7969,6 +7986,39 @@ ${intro(episodes[0], videos[0])}`,
     const hasCat = hasCatPage(a.category);
     const file = path.join(ARTICLE_DIR, `${a.id}.html`);
     if (writeIfChanged(file, articlePage(a, body, hasCat))) artWritten++;
+  }
+
+  // ---- Οι ορφανές σελίδες άρθρων, μόνο στην κεφαλίδα τους ----
+  //
+  // Οι αναδημοσιεύσεις δεν σβήνονται όταν βγουν από τη ροή — ο λόγος
+  // είναι παραπάνω. Δεν ξαναγράφονται όμως ποτέ: το σώμα τους έχει
+  // φύγει από το data/news-bodies/ (το fetch-news.js τα κρατάει
+  // μετρημένα), οπότε το build δεν ΜΠΟΡΕΙ να τις ξαναφτιάξει.
+  //
+  // Έτσι μένουν παγωμένες στην κεφαλίδα της ημέρας που γράφτηκαν. Όταν
+  // οι γραμματοσειρές έφυγαν από τη Google, 799 τέτοιες σελίδες
+  // συνέχιζαν να τη χτυπούν σε κάθε επίσκεψη — ακριβώς ο τρίτος
+  // διακομιστής που βγάλαμε από παντού αλλού.
+  //
+  // Εδώ αλλάζουμε ΜΟΝΟ τις δύο γραμμές των γραμματοσειρών, χωρίς να
+  // ακουμπήσουμε τίποτα άλλο. Όταν δεν μείνει καμία, ο βρόχος δεν
+  // βρίσκει τίποτα και δεν κοστίζει τίποτα.
+  const paliesFonts = /[ \t]*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com"[^>]*>\r?\n[ \t]*<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com[^>]*>\r?\n/;
+  const neesFonts = `${FONT_PRELOAD
+    .map((f) => `  <link rel="preload" href="../fonts/${f}" as="font" type="font/woff2" crossorigin>`)
+    .join('\n')}\n`;
+
+  let artFixed = 0;
+  for (const name of fs.readdirSync(ARTICLE_DIR)) {
+    if (!name.endsWith('.html')) continue;
+    const file = path.join(ARTICLE_DIR, name);
+    const html = fs.readFileSync(file, 'utf8');
+    if (!paliesFonts.test(html)) continue;
+    fs.writeFileSync(file, html.replace(paliesFonts, neesFonts), 'utf8');
+    artFixed++;
+  }
+  if (artFixed) {
+    console.log(`  ${artFixed} παλιές σελίδες άρθρων: η κεφαλίδα τους δεν ζητά πια γραμματοσειρές από τη Google`);
   }
 
   // Σελίδες εκπομπών — ίδιο μοτίβο: γράψε ό,τι άλλαξε, σβήσε τα ορφανά.

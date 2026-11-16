@@ -30,6 +30,11 @@ public/*
 !public/*.png
 !public/*.webp
 !public/shows/
+# Οι γραμματοσειρές, κατεβασμένες μία φορά από τις Google Fonts και
+# φιλοξενούμενες από εμάς: δεν τις παράγει το build, άρα χωρίς αυτή τη
+# γραμμή το Cloudflare θα έχτιζε σελίδες που ζητούν αρχεία που δεν
+# ανέβηκαν ποτέ — και όλο το site θα γύριζε στη Georgia.
+!public/fonts/
 
 data/weather.json
 
