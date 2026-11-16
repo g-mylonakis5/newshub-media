@@ -1,5 +1,29 @@
 [
   {
+    "id": "tanker-me-sitari-vythistike-stin-aoz-tis-voylgarias-sti-mayri-thalassa-to-pliroma-diasothike-me-elikoptero-vinteo",
+    "title": "Τάνκερ με σιτάρι βυθίστηκε στην ΑΟΖ της Βουλγαρίας στη ⁠Μαύρη Θάλασσα – Το πλήρωμα διασώθηκε με ελικόπτερο (βίντεο)",
+    "url": "https://www.newshub.gr/el/kosmos/tanker-me-sitari-vythistike-stin-aoz-tis-voylgarias-sti-mayri-thalassa-to-pliroma-diasothike-me-elikoptero-vinteo",
+    "date": "2026-11-16T18:00:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/tanker23-xrm.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/tanker23-xrm.jpg",
+    "summary": "Η Βουλγαρία διέσωσε με ασφάλεια τα 12 μέλη του πληρώματος ενός τάνκερ, που μετέφερε 3.000 μετρικούς ​τόνους σιταριού και βυθίστηκε ​στην αποκλειστική οικονομ...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "neo-karavani-me-metanastes-notia-tis-kritis-anamesa-toys-enas-anilikos",
+    "title": "Νέο καραβάνι με… μετανάστες νότια της Κρήτης-Ανάμεσά τους ένας ανήλικος",
+    "url": "https://www.newshub.gr/el/kriti/neo-karavani-me-metanastes-notia-tis-kritis-anamesa-toys-enas-anilikos",
+    "date": "2026-11-16T17:57:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/limeniko.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/limeniko.jpg",
+    "summary": "Δεν έχουν τέλος τα καραβάνια με&hellip; μετανάστες που φτάνουν νότια της Κρήτης.\r\n\r\nΣύμφωνα με πληροφορίες του newshub.gr σήμερα το πρωί ενημερώθηκε η Λιμενι...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "o-manos-chatzimalonas-me-to-stand-up-therapy-epanastasoy-ston-agio-nikolao",
     "title": "Ο Μάνος Χατζημαλωνάς με το «stand Up Therapy – ΕΠΑΝΑΣΤΑΣΟΥ!» στον Άγιο Νικόλαο",
     "url": "https://www.newshub.gr/el/exodos/o-manos-chatzimalonas-me-to-stand-up-therapy-epanastasoy-ston-agio-nikolao",
@@ -8,6 +32,18 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/parast.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/parast.jpg",
     "summary": "Μια διαφορετική βιωματική εμπειρία, που συνδυάζει το χιούμορ με την ψυχολογία, την επιστημονική γνώση με την προσωπική έκφραση και τη δύναμη της ανθρώπινης ε...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "apogeiothike-i-epivatiki-kinisi-sto-aerodromio-chanion-ti-deichnoyn-ta-stoicheia-tis-fraport",
+    "title": "Απογειώθηκε η επιβατική κίνηση στο αεροδρόμιο Χανίων – Τι δείχνουν τα στοιχεία της Fraport",
+    "url": "https://www.newshub.gr/el/kriti/apogeiothike-i-epivatiki-kinisi-sto-aerodromio-chanion-ti-deichnoyn-ta-stoicheia-tis-fraport",
+    "date": "2026-11-16T17:46:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/aeroplano1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/aeroplano1.jpg",
+    "summary": "Με ήπια άνοδο 1,9% στην επιβατική κίνηση και 2,1% στις πτήσεις έκλεισε ο Οκτώβριος του 2026 για τα 14 περιφερειακά αεροδρόμια που διαχειρίζεται η Fraport Gre...",
     "author": null,
     "featured": true
   },
@@ -7204,42 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/trofima.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/trofima.jpg",
     "summary": "Εναν διαφορετικό πόλεμο υφίστανται τα τέσσερα τελευταία χρόνια τα νοικοκυριά στην Ελλάδα, τον πόλεμο με το αυξημένο κόστος διαβίωσης που προκαλούν οι ενεργει...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "egkrithike-apo-ti-voyli-i-rythmisi-gia-to-georgios-karaiskakis-ti-perilamvanei-to-schedio",
-    "title": "Εγκρίθηκε από τη Βουλή η ρύθμιση για το «Γεώργιος Καραϊσκάκης» -Τι περιλαμβάνει το σχέδιο",
-    "url": "https://www.newshub.gr/el/athlitika/egkrithike-apo-ti-voyli-i-rythmisi-gia-to-georgios-karaiskakis-ti-perilamvanei-to-schedio",
-    "date": "2026-11-11T15:06:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/neo-g.-karaiskakis.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/neo-g.-karaiskakis.jpg",
-    "summary": "Εγκρίθηκε από τη Βουλή η νομοθετική ρύθμιση για την ανακατασκευή του\r\n\r\n«Γ. Καραϊσκάκης», που είχε ενσωματωθεί σε νομοσχέδιο του υπουργείου Περιβ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "geniki-apergia-stin-ispania-stoys-dromoys-gia-ti-stegastiki-krisi-epeisodia-sti-madriti",
-    "title": "Γενική απεργία στην Ισπανία: Στους δρόμους για τη στεγαστική κρίση - Επεισόδια στη Μαδρίτη",
-    "url": "https://www.newshub.gr/el/kosmos/geniki-apergia-stin-ispania-stoys-dromoys-gia-ti-stegastiki-krisi-epeisodia-sti-madriti",
-    "date": "2026-11-11T14:55:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/spain-strike2.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/spain-strike2.jpg",
-    "summary": "Σε γενική απεργία προχώρησαν την Τετάρτη οι εργαζόμενοι στην Ισπανία, για πρώτη φορά έπειτα από 14 χρόνια, διαμαρτυρόμενοι για τη στεγαστική κρίση και το δια...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "argentini-apedrase-proin-melos-ton-erythron-taxiarchion-foroyse-ilektroniko-vrachiolaki",
-    "title": "Αργεντινή: Απέδρασε πρώην μέλος των Ερυθρών Ταξιαρχιών - Φορούσε ηλεκτρονικό βραχιολάκι",
-    "url": "https://www.newshub.gr/el/kosmos/argentini-apedrase-proin-melos-ton-erythron-taxiarchion-foroyse-ilektroniko-vrachiolaki",
-    "date": "2026-11-11T14:44:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/bertulazzi1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/bertulazzi1.jpg",
-    "summary": "Πρώην μέλος των Ερυθρών Ταξιαρχιών, ο 74χρονος Ιταλός Λεονάρντο Μπερτουλάτσι, ο οποίος βρισκόταν σε κατ&rsquo; οίκον περιορισμό στο Μπουένος Άιρες, απέδρασε ...",
     "author": null,
     "featured": false
   },
