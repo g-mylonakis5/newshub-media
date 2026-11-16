@@ -4909,6 +4909,13 @@ const PLATFORMS = [
   ['Audible', 'https://www.audible.com/podcast/podcasts-newshubgr/B08K57X52T', '#F8991C',
     `<circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M6.5 12h1.8l1.6-3.4 2 7 1.8-5.2 1.3 1.6h2.5" stroke="${DARK}" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`],
 
+  // Ο σύνδεσμος δεν βγήκε από τον λογαριασμό του Buzzsprout — δεν τον
+  // έχουμε. Τον δίνει η ΔΗΜΟΣΙΑ σελίδα του podcast, buzzsprout.com/1904089,
+  // που δείχνει όλες τις πλατφόρμες όπου έχει καταχωρηθεί. Εκεί κοιτάμε
+  // και την επόμενη φορά που θα προστεθεί κάπου αλλού.
+  ['Amazon Music', 'https://music.amazon.com/podcasts/69249bb9-33d2-4d3c-9ada-1fbc7b93588b', '#25D1DA',
+    `<circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7 10.5v3M9.5 8.5v7M12 9.5v5M14.5 7.5v9M17 10.5v3" stroke="${DARK}" stroke-width="1.6" fill="none" stroke-linecap="round"/>`],
+
   ['Buzzsprout', 'https://www.buzzsprout.com/1904089', '#5BA829',
     `<circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.4 16.6c-.5-4.4 2.7-8 9-8.2.5 5.3-3.1 8.8-9 8.2z" fill="${DARK}"/>`],
 ];
