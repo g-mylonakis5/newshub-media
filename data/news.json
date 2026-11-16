@@ -1,5 +1,17 @@
 [
   {
+    "id": "poylame-fthina-reyma-ti-mera-agorazoyme-akriva-to-vrady",
+    "title": "Πουλάμε φθηνά ρεύμα τη μέρα, αγοράζουμε ακριβά το βράδυ",
+    "url": "https://www.newshub.gr/el/oikonomia/poylame-fthina-reyma-ti-mera-agorazoyme-akriva-to-vrady",
+    "date": "2026-11-16T05:27:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/solar_panel_shutterstock_-768x480.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/solar_panel_shutterstock_-768x480.jpg",
+    "summary": "Στις οκτώ το βράδυ, όταν η παραγωγή των φωτοβολταϊκών υποχωρεί, η Βουλγαρία μπορεί να εξάγει στην Ελλάδα ηλεκτρική ενέργεια που είχε εισαγάγει από αυτήν λίγε...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "prasino-fos-gia-ti-chrimatodotisi-ergon-apokatastasis-me-18-ekat-eyro-ston-dimo-mylopotamoy",
     "title": "«Πράσινο φως» για τη χρηματοδότηση έργων αποκατάστασης με 18 εκατ. ευρώ στον Δήμο Μυλοποτάμου",
     "url": "https://www.newshub.gr/el/kriti/prasino-fos-gia-ti-chrimatodotisi-ergon-apokatastasis-me-18-ekat-eyro-ston-dimo-mylopotamoy",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/img_6251.jpg",
     "summary": "Ο Δήμαρχος Μυλοποτάμου, Γεώργιος Κλάδος, ενημερώθηκε το πρωί της Παρασκευής 13 Νοεμβρίου, σε τηλεφωνική επικοινωνία με τα αρμόδια υπουργεία, για τη δρομολόγη...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "tasos-tsiplakos-pos-chanei-i-toyrkia-to-paichnidi-stin-anatoliki-mesogeio-krisimi-i-epitychia-toy-gsi-podcast",
@@ -22,6 +34,18 @@
     "summary": "Ο Τάσος Τσιπλάκος, γεωπολιτικός αναλυτής και σύμβουλος στρατηγικής, υπεύθυνος της πλατφόρμας ενημέρωσης South East Med Energy and Defence, μίλησε  ...",
     "author": null,
     "featured": false
+  },
+  {
+    "id": "irakleio-synelifthisan-oi-goneis-toy-1-5-etoys-paidioy-poy-pethane-meta-apo-kataposi-venzinis",
+    "title": "Ηράκλειο: Συνελήφθησαν οι γονείς του 1,5 έτους παιδιού που πέθανε μετά από κατάποση βενζίνης",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-synelifthisan-oi-goneis-toy-1-5-etoys-paidioy-poy-pethane-meta-apo-kataposi-venzinis",
+    "date": "2026-11-16T05:07:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/moro-1024x577.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/moro-1024x577.jpg",
+    "summary": "Με χειροπέδες βρέθηκαν οι γονείς του 1,5 έτους παιδιού που έσβησε μετά από κατάποση βενζίνης στο Ηράκλειο.\r\n\r\nΗ τραγωδία με το άτυχο παιδί συγκλονίζει από χθ...",
+    "author": null,
+    "featured": true
   },
   {
     "id": "krisimi-pagkritia-syneleysi-agroton-kai-ktinotrofon-organonetai-gia-tin-erchomeni-tetarti-kai-isos-apofasistoyn-kinitopoiiseis",
@@ -7216,30 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/messi_ethini_argentinis_in__1_.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/messi_ethini_argentinis_in__1_.jpg",
     "summary": "Στις 7 Οκτωβρίου, στο «Μονουμεντάλ» ο Λιονέλ Μέσι αποχαιρέτησε την εθνική ομάδα της Αργεντινής, ολοκληρώνοντας τη διαδρομή του με τη «αλμπι...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "o-pateras-tis-megkan-markl-synelifthi-xana-afairese-to-ilektroniko-vrachiolaki-parakoloythisis",
-    "title": "Ο πατέρας της Μέγκαν Μαρκλ συνελήφθη ξανά-Αφαίρεσε το ηλεκτρονικό βραχιολάκι παρακολούθησης",
-    "url": "https://www.newshub.gr/el/kosmos/o-pateras-tis-megkan-markl-synelifthi-xana-afairese-to-ilektroniko-vrachiolaki-parakoloythisis",
-    "date": "2026-11-10T21:30:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/mark.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/mark.jpg",
-    "summary": "Νέα σύλληψη για τον Τόμας Μαρκλ, πατέρα της Δούκισσας του Σάσεξ, Μέγκαν Μαρκλ, στη Φλόριντα, καθώς φέρεται να αφαίρεσε τη συσκευή ηλεκτρονικής επιτήρησης που...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "skandalo-nvidia-to-syntheto-diktyo-polisis-tsip-7-5-dis-dolarion-stin-kina-kai-o-rolos-tramp",
-    "title": "Σκάνδαλο Νvidia: Το σύνθετο δίκτυο πώλησης τσιπ 7,5 δισ. δολαρίων στην Κίνα και ο ρόλος Τραμπ",
-    "url": "https://www.newshub.gr/el/oikonomia/skandalo-nvidia-to-syntheto-diktyo-polisis-tsip-7-5-dis-dolarion-stin-kina-kai-o-rolos-tramp",
-    "date": "2026-11-10T21:20:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/10-11/ap25301603557723.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/10-11/ap25301603557723.jpg",
-    "summary": "Ένα πολυεθνικό δίκτυο εταιρειών, με εξαγωγές προηγμένων ημιαγωγών αξίας δισ. δολαρίων, υποψίες κατασκοπείας και η στενή σχέση του επικεφαλής της Nvidia με το...",
     "author": null,
     "featured": false
   },
