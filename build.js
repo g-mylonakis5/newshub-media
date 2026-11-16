@@ -7025,8 +7025,8 @@ function guestLine(ep, depth = 1){
   const g = guestIndex.find((x) => x.key === guestKey(name));
   if (!g) return '';
 
-  // Βιογραφικά δεν έχουμε. Ο αριθμός των εμφανίσεων είναι το μόνο που
-  // ξέρουμε με βεβαιότητα, και λέει κάτι: τακτικός ή πρώτη φορά.
+  // We have no biographies. The appearance count is the one thing we know
+  // for certain, and it says something: regular, or first time.
   const more = g.count > 1
     ? ` <span class="byline-count">${g.count} εμφανίσεις στο αρχείο</span>`
     : '';
@@ -7034,14 +7034,11 @@ function guestLine(ep, depth = 1){
   return `        <p class="episode-byline">με τον/την <a href="${guestHref(ep, depth)}">${esc(g.name)}</a>${more}</p>`;
 }
 
-// Η απομαγνητοφώνηση, μέσα στη σελίδα.
+// The transcript, for the page.
 //
-// Το feed δίνει μόνο διεύθυνση προς το Buzzsprout· το fetch-transcripts.js
-// τις κατεβάζει σε data/transcripts/<id>.json. Υπάρχουν για 401 από τα
-// 1.053 επεισόδια — όπου λείπει, η ενότητα απλώς δεν εμφανίζεται.
-//
-// Είναι αυτόματη, όχι ανθρώπινη: λείπουν τα τελικά «ς» και τα ονόματα
-// βγαίνουν λάθος. Γι' αυτό μένει κλειστή και το γράφει από πάνω.
+// The feed only gives a Buzzsprout URL; fetch-transcripts.js downloads them
+// into data/transcripts/<id>.json. Where one is missing the section simply
+// does not appear.
 const transcriptCache = {};
 function transcriptOf(ep){
   if (transcriptCache[ep.id] === undefined) {
@@ -7056,16 +7053,15 @@ function transcriptOf(ep){
   return transcriptCache[ep.id];
 }
 
-// Τα δεδομένα της απομαγνητοφώνησης, σε μορφή έτοιμη για τον browser.
+// Transcript data in the shape the browser wants.
 //
-// Η ομαδοποίηση γίνεται εδώ, όχι στη σελίδα: διαδοχικές γραμμές του ίδιου
-// ομιλητή γίνονται ένα μπλοκ, ώστε η χρονοσήμανση να μπαίνει μία φορά σε
-// κάθε αλλαγή ομιλητή.
+// Grouping happens here, not in the page: consecutive lines from the same
+// speaker become one block, so the timestamp is printed once per change of
+// speaker.
 //
-// Κάθε γραμμή είναι πίνακας [ομιλητής, δευτερόλεπτο, κείμενο] και όχι
-// αντικείμενο με κλειδιά: με 17.793 γραμμές συνολικά, τα ονόματα των
-// κλειδιών θα ζύγιζαν περισσότερο από τα δεδομένα. Η ώρα σε μορφή «1:02»
-// δεν αποθηκεύεται — ο player τη φτιάχνει από το δευτερόλεπτο.
+// Each line is an array [speaker, second, text] rather than an object:
+// across 17,793 lines the key names would outweigh the data. The "1:02"
+// form is not stored — the player derives it.
 function transcriptData(ep){
   const lines = transcriptOf(ep);
   if (!lines || !lines.length) return null;
@@ -7077,9 +7073,9 @@ function transcriptData(ep){
     else blocks.push({ who: l.who, at: l.at, text: l.text });
   }
 
-  // Ονόματα ομιλητών δεν ξέρουμε — το Buzzsprout δίνει «SPEAKER_00».
-  // Δεν βάζουμε ψεύτικα· κρατάμε μόνο αριθμό ώστε να ξεχωρίζει οπτικά
-  // ο ένας από τον άλλον, με τον πρώτο που μιλάει πάντα ως 0.
+  // We do not know speaker names — Buzzsprout gives "SPEAKER_00". We do
+  // not invent any; just a number so one is visually distinct from the
+  // next, with the first voice always 0.
   const order = [];
   const speaker = (who) => {
     if (!order.includes(who)) order.push(who);
@@ -7096,37 +7092,22 @@ function transcriptFile(ep){
   return `transcript/${ep.id}.json`;
 }
 
-// Το κέλυφος της ενότητας. Το κείμενο ΔΕΝ μπαίνει εδώ.
+// The section shell. The text itself does NOT go in here.
 //
-// Μπήκε πρώτα μέσα στο HTML και ήταν λάθος για δύο λόγους. Οι σελίδες
-// πήγαν από 21KB στα 76KB — και η ταχύτητα είναι ρητή απαίτηση. Και,
-// πιο σοβαρό, η απομαγνητοφώνηση είναι αυτόματη και βγάζει λέξεις και
-// ονόματα λάθος· μέσα στη σελίδα τη διάβαζε η Google και μπορούσε να
-// τη δείξει ως απόσπασμα, αποδίδοντας σε κατονομαζόμενους ανθρώπους
-// λόγια που δεν είπαν.
+// Inlining it took pages from 21KB to 76KB, and worse: the transcript is
+// machine-made and gets words and names wrong, so Google could show it as
+// a snippet, attributing to named people words they never said.
 //
-// Έτσι μένει η χρήσιμη δουλειά της — βρίσκεις το σημείο και πατάς για
-// να πάει ο ήχος εκεί — χωρίς να γίνεται δημοσιευμένο κείμενο. Ο
-// αριθμός λέξεων είναι από το build, ώστε η επικεφαλίδα να είναι
-// πλήρης πριν κατεβεί τίποτα.
+// This keeps the useful part — find a moment, tap, the audio jumps there —
+// without it becoming published text. The word count comes from the build
+// so the heading is complete before anything downloads.
 //
-// Αν κάποτε βελτιωθεί η ποιότητα και θέλουμε να μπει σε Google και
-// αναζήτηση, τα δεδομένα είναι ήδη εδώ: αρκεί να γραφτούν οι γραμμές
-// μέσα στο HTML, όπως στην πρώτη εκδοχή.
-// ΚΑΤΕΒΑΣΜΕΝΕΣ ΜΕΧΡΙ ΝΕΩΤΕΡΑΣ — 11 Νοεμβρίου 2026.
-//
-// Η ποιότητα της αυτόματης μεταγραφής δεν είναι δημοσιεύσιμη: χαλασμένα
-// ελληνικά και, κυρίως, κύρια ονόματα λάθος. Αποδίδει σε κατονομαζόμενους
-// ανθρώπους λόγια που δεν είπαν, έστω και με την ένδειξη «μπορεί να έχει
-// λάθη» από πάνω.
-//
-// Ο διακόπτης κρύβει ΚΑΙ την ενότητα στη σελίδα επεισοδίου ΚΑΙ τον
-// σύνδεσμο προς το Buzzsprout — αλλιώς οι ίδιες λέξεις θα φαίνονταν
-// απλώς αλλού. Τα 438 αρχεία του public/transcript/ σβήνονται στο
-// επόμενο χτίσιμο.
-//
-// Τα δεδομένα ΜΕΝΟΥΝ στο data/transcripts/ και το fetch-transcripts.js
-// συνεχίζει να τα κατεβάζει. Μία γραμμή σε true τα ξαναφέρνει όλα.
+// SWITCHED OFF until further notice: the quality is not publishable.
+// Broken Greek and, above all, wrong proper names. The switch hides both
+// the section and the Buzzsprout link, otherwise the same words would just
+// show up elsewhere. The data stays in data/transcripts/ and
+// fetch-transcripts.js keeps downloading it; one line back to true brings
+// it all back.
 const TRANSCRIPTS_ON = false;
 
 function transcriptSection(ep){
@@ -7147,9 +7128,8 @@ function transcriptSection(ep){
         </details>`;
 }
 
-// Τα άλλα μέσα — όπου αλλού ακούγεται το podcast.
-// Κουμπί πλατφόρμας με το σήμα της: εικονίδιο στο χρώμα της μάρκας,
-// όνομα, και το βελάκι που λέει «φεύγεις από εδώ».
+// The other platforms — where else the podcast can be heard. Each button
+// carries its brand mark, name, and the arrow that says you are leaving.
 function platformsRow(){
   return PLATFORMS
     .map(([name, url, brand, icon]) => `<a class="plat" href="${url}" target="_blank" rel="noopener" style="--brand:${brand}">
@@ -7174,19 +7154,16 @@ function episodePage(ep){
     ...cats.map((c) => `<a href="../${categoryUrl(c)}">${esc(c)}</a>`),
   ].filter(Boolean).join(' · ');
 
-  // Η οθόνη. Όπου υπάρχει βίντεο μπαίνουν και τα δύο — βίντεο και
-  // εξώφυλλο — και ο διακόπτης αποφασίζει ποιο φαίνεται.
+  // The stage. Where a video exists both go in — video and cover art —
+  // and the switch decides which shows.
   //
-  // ΑΝΟΙΓΕΙ ΣΤΟΝ ΗΧΟ, όχι στο βίντεο. Κάθε σελίδα ανοίγει με το δικό
-  // της μέσο: η σελίδα βίντεο με βίντεο, η σελίδα επεισοδίου με ήχο.
-  // Εδώ ήρθες από τη ροή επεισοδίων, με αφίσα, διάρκεια και
-  // απομαγνητοφώνηση — είναι σελίδα podcast.
+  // OPENS ON AUDIO, not video. Each page opens with its own medium: a
+  // video page with video, an episode page with audio.
   //
-  // Είχε σημασία πέρα από το ύφος: 891 από τις 1.079 σελίδες
-  // επεισοδίου έχουν δίδυμο βίντεο, και όσο άνοιγαν στο «Βλέπω» το
-  // πάτημα του play ξεκινούσε iframe του YouTube. Ο δικός μας player
-  // δεν έτρεχε καθόλου, άρα δεν κρατιόταν θέση και το «Συνέχισε όπου
-  // έμεινες» δεν έβλεπε ποτέ τίποτα στο 83% του αρχείου.
+  // It mattered beyond style: 891 of 1,079 episode pages have a twin
+  // video, and while they opened on "Βλέπω" pressing play started a
+  // YouTube iframe. Our player never ran, so no position was saved and
+  // "resume where you left off" saw nothing across 83% of the archive.
   const stage = twin
     ? `        <div class="stage-media" data-embed="${twin.embed}" hidden>
           <img src="${twin.image}" alt="" loading="lazy">
@@ -7199,10 +7176,9 @@ function episodePage(ep){
           ${ep.image ? `<img src="${ep.image}" alt="" loading="lazy">` : ''}
         </div>`;
 
-  // Ένα κριτήριο, και το λέει η επικεφαλίδα. Τα ονόματα των εκπομπών
-  // έχουν κάθε γένος και αριθμό — «ΕΠΙΚΑΙΡΟΤΗΤΑ», «Παρασκήνιο», «25
-  // μαθήματα…» — άρα το άρθρο γράφεται ρητά ανά εκπομπή, δες SHOW_SE.
-  // Όποια λείπει πέφτει στα εισαγωγικά, που δουλεύουν για κάθε όνομα.
+  // One criterion, stated in the heading. Show names come in every gender
+  // and number, so the article is spelled out per show — see SHOW_SE.
+  // Anything missing falls back to quotes, which work for any name.
   const rel = relatedEpisodes(ep);
   const queueHead = rel.by === 'show'
     ? `Επόμενο ${esc(showSe(rel.label))}`
@@ -7216,11 +7192,9 @@ function episodePage(ep){
         </span>
       </a>`).join('\n');
 
-  // Ο διακόπτης έχει νόημα μόνο όταν υπάρχουν και τα δύο μέσα.
-  //
-  // Το «Ακούω» κρατάει το is-on, ώστε να συμφωνεί με το stage πιο
-  // πάνω: ο διακόπτης πρέπει να δείχνει τι παίζει ΗΔΗ, αλλιώς το
-  // πρώτο πάτημα δεν αλλάζει τίποτα ορατό.
+  // The switch only makes sense when both media exist. "Ακούω" keeps
+  // is-on so it agrees with the stage above: the switch must show what is
+  // ALREADY playing.
   const toggle = twin
     ? `      <div class="modes">
         <button type="button" class="mode" data-mode="video">Βλέπω</button>
@@ -7228,9 +7202,8 @@ function episodePage(ep){
       </div>`
     : '';
 
-  // Μία λίστα, δύο αναγνώστες: οι ψίχες που βλέπει ο επισκέπτης και η
-  // BreadcrumbList που διαβάζει η Google. Αν αλλάξει η διαδρομή,
-  // αλλάζουν μαζί.
+  // One list, two readers: the crumbs the visitor sees and the
+  // BreadcrumbList Google reads. Change the path and both change.
   const crumbs = [
     { label: 'Αρχική', href: 'index.html' },
     show ? { label: showName(show), href: showUrl(show) } : null,
@@ -7272,9 +7245,9 @@ ${guestLine(ep, 1)}
         <p class="episode-meta">${meta}</p>
 ${summaryHtml(ep.summary)}
 
-${/* Η γραμμή υπάρχει ΜΟΝΟ αν έχει σύνδεσμο μέσα. Με τις
-     απομαγνητοφωνήσεις κατεβασμένες, άδεια θα έβγαινε σε 438
-     σελίδες — και η .episode-links κρατάει κενό από μόνη της. */ ''}
+${/* The line exists ONLY if it has a link inside. With transcripts
+     switched off it would be empty on 438 pages, and .episode-links
+     reserves space on its own. */ ''}
 ${(() => {
   const links = [
     twin ? `<a href="${twin.url}" target="_blank" rel="noopener">Άνοιγμα στο YouTube ↗</a>` : '',
@@ -7289,16 +7262,14 @@ ${(() => {
 
 ${transcriptSection(ep)}
 
-${/* Η μόνη θέση της σελίδας επεισοδίου, και μπαίνει ΕΔΩ επίτηδες:
-     μετά το περιεχόμενο, πριν τις προτάσεις. Ο player κάθεται στην
-     κορυφή, οπότε ανάμεσά τους μεσολαβεί ολόκληρη η σελίδα — «καμία
-     διαφήμιση μέσα ή πάνω από τον player». */ ''}
+${/* The only slot on an episode page, placed HERE on purpose: after the
+     content, before the suggestions. The player sits at the top, so the
+     whole page separates them — "no ad inside or above the player". */ ''}
 ${adSlot('episode-mid', 'leaderboard')}
 
-${/* Και μια δεύτερη, σε σχήμα MPU. Κάθεται κάτω από την πρώτη, όχι
-     πλάι της: η σελίδα επεισοδίου δεν έχει πλαϊνή στήλη σε κινητό,
-     και δύο διατάξεις για την ίδια θέση θα σήμαιναν δύο δεσμευμένα
-     ύψη να συντηρούμε. */ ''}
+${/* And a second one, MPU shaped. Below the first, not beside it: the
+     episode page has no side column on mobile, and two layouts for one
+     slot would mean two reserved heights to maintain. */ ''}
 ${adSlot('episode-side', 'mpu')}
 
         ${queue ? `<section class="queue">
@@ -7330,9 +7301,9 @@ ${showBannerBox(show, 1)}
     image: ep.image,
     url: episodeUrl(ep),
     type: 'article',
-    // Επεισόδιο podcast, όχι άρθρο: έχει ήχο, διάρκεια και σειρά.
-    // Το associatedMedia δείχνει στο πραγματικό mp3 του Buzzsprout —
-    // την ίδια διεύθυνση που παίζει ο player μας.
+    // A podcast episode, not an article: it has audio, duration and a
+    // series. associatedMedia points at the real Buzzsprout mp3 — the same
+    // URL our player uses.
     jsonld: [
       {
         '@type': 'PodcastEpisode',
@@ -7364,7 +7335,7 @@ ${showBannerBox(show, 1)}
 }
 
 function main(){
-  // Διαβασμένα, με διορθωμένη ημερομηνία και ταξινομημένα — δες loadEpisodes.
+  // Parsed, with corrected dates and sorted — see loadEpisodes.
   const episodes = loadEpisodes();
 
   // Οι ομάδες καλεσμένων πρέπει να υπάρχουν ΠΡΙΝ γραφτεί οτιδήποτε, γιατί
@@ -7380,28 +7351,26 @@ function main(){
   indexRelated(episodes);
 
 
-  // Τα 5 banners: ένα μεγάλο και τέσσερα από κάτω. Podcast και ειδήσεις
-  // μπαίνουν στην ίδια δεξαμενή — η σημαντικότητα κρίνει, όχι ο τύπος.
+  // The 5 banners: one large and four below. Podcasts and news share one
+  // pool — importance decides, not type.
   const curation = loadCuration();
   const articles = loadNews();
   const ownArticles = loadOwnArticles();
   const videos = loadVideos();
   const showGroups = buildShows(videos, episodes);
 
-  // Οι ομάδες θεμάτων χρειάζονται ΕΔΩ, πριν γραφτεί η αρχική: από αυτές
-  // βγαίνει η λωρίδα-φίλτρο και οι τέσσερις θεματικές λωρίδες.
+  // Topic groups are needed HERE, before the homepage is written: the
+  // filter strip and the four topic rows come out of them.
   const catGroups = buildCategories(videos, episodes, ownArticles);
   indexMenu(showGroups, catGroups);
 
-  // ---- Τι δεν κατατάχθηκε ----
+  // ---- What did not get classified ----
   //
-  // Και η κατηγορία και η εκπομπή βγαίνουν με μάντεμα: η πρώτη από
-  // λέξεις του τίτλου, η δεύτερη από τη λίστα YouTube του διδύμου
-  // βίντεο. Και τα δύο αστοχούν ΣΙΩΠΗΛΑ — το επεισόδιο απλώς δεν
-  // εμφανίζεται πουθενά, και κανείς δεν ψάχνει κάτι που δεν ξέρει ότι
-  // λείπει. Γι' αυτό μετριούνται δυνατά σε κάθε χτίσιμο.
-  //
-  // Και τα δύο διορθώνονται από το διαχειριστικό, ένα-ένα.
+  // Both category and show are guessed: the first from title words, the
+  // second from the twin video's YouTube playlist. Both fail SILENTLY —
+  // the episode simply appears nowhere, and nobody looks for something
+  // they do not know is missing. So we count them out loud on every
+  // build. Both are fixed from the admin, one by one.
   const dixosKat = episodes.filter((ep) => !episodeCategories(ep).length);
   const dixosEkp = episodes.filter((ep) => !videoTwin(ep));
 
@@ -7411,9 +7380,9 @@ function main(){
   console.log(`Χωρίς κατηγορία: ${pos(dixosKat.length)}`);
   console.log(`Χωρίς εκπομπή:   ${pos(dixosEkp.length)}`);
 
-  // Το συνολικό ποσοστό κρύβει το μόνο που μετράει: αν ό,τι ανεβαίνει
-  // ΤΩΡΑ κατατάσσεται σωστά. Τα παλιά κενά διορθώνονται μία φορά
-  // από το διαχειριστικό — ένα καινούριο που χάνεται είναι βλάβη.
+  // The overall share hides the only thing that matters: whether what is
+  // published NOW is classified correctly. Old gaps are fixed once from
+  // the admin; a new one that slips through is a fault.
   const edo = Date.now() - 90 * 864e5;
   const fres = episodes.filter((ep) => new Date(ep.date).getTime() > edo);
   if (fres.length) {
@@ -7423,17 +7392,17 @@ function main(){
       + `${fk} χωρίς κατηγορία, ${fe} χωρίς εκπομπή`);
   }
 
-  // Ένα βίντεο μπορεί να υπάρχει σε πολλές λίστες. Κρατάμε μία εγγραφή
-  // ανά βίντεο, με την ειδικότερη εκπομπή — αλλιώς η κάρτα θα έγραφε
-  // «Συνεντεύξεις» ενώ η σελίδα του «Αναλύσεις».
+  // A video can live in several playlists. One entry per video, under its
+  // most specific show — otherwise the card would say "Συνεντεύξεις"
+  // while its own page says "Αναλύσεις".
   const seenVideo = {};
   for (const v of videos) seenVideo[v.id] = moreSpecific(seenVideo[v.id], v);
   const uniqueVideos = Object.values(seenVideo)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const pool = [
-    // Τα δικά μας πρώτα: είναι λίγα και γραμμένα με το χέρι, άρα όταν
-    // υπάρχουν αξίζουν τουλάχιστον ίση θέση με ό,τι τραβήχτηκε αυτόματα.
+    // Ours first: few and handwritten, so when they exist they deserve at
+    // least equal footing with what was pulled automatically.
     ...ownArticles.map((a) => ({ ...itemFromOwnArticle(a), id: a.id })),
     ...articles.map((a) => ({ ...itemFromArticle(a), id: a.id, featured: a.featured })),
     ...uniqueVideos.slice(0, 20).map((v) => ({ ...itemFromVideo(v), id: v.id })),
@@ -7453,13 +7422,13 @@ function main(){
     }
   }
 
-  // Διάλεξε ο συντάκτης άρθρο που ΔΕΝ έχει σώμα;
+  // Did the editor pick an article with NO body?
   //
-  // Τότε δεν θα ανοίξει εδώ — θα φύγει για το newshub.gr, σιωπηλά, και
-  // ο συντάκτης θα νομίζει ότι το ανέβασε στο Media channel. Συμβαίνει
-  // όταν διαλέξει άρθρο παλιότερο από όσα κρατάει το fetch-news.js.
-  // Δεν το διορθώνουμε αυτόματα — το build δεν κατεβάζει από το δίκτυο
-  // — αλλά ΔΕΝ το αφήνουμε να περάσει αμίλητο.
+  // Then it will not open here — it leaves for newshub.gr, silently,
+  // while the editor thinks it was published on the Media channel. It
+  // happens when they pick one older than fetch-news.js keeps. We do not
+  // fix it automatically (the build never downloads), but we do not let
+  // it pass in silence either.
   for (const want of [curation.featured, ...(curation.mustRead || [])].filter(Boolean)) {
     const hit = articles.find((a) => sameItem({ id: a.id, href: a.url }, want));
     if (hit && !articleBody(hit.id)) {
@@ -7470,21 +7439,17 @@ function main(){
 
   const featured = pickFeatured(pool, curation);
 
-  // Οι τέσσερις δευτερεύουσες κάρτες κάτω από το πρωτοσέλιδο βγήκαν:
-  // μετά τη μεγάλη κάρτα ακολουθεί κατευθείαν η ροή.
+  // The four secondary cards under the hero are gone: the flow follows
+  // the big card directly. pickSecondary stays in the code and works —
+  // two lines here bring it back.
   //
-  // ΠΡΟΣΟΧΗ: οι σημειώσεις του έργου γράφουν ότι τα τέσσερα δευτερεύοντα τα ζήτησε
-  // ρητά το αφεντικό. Η pickSecondary μένει στον κώδικα και δουλεύει —
-  // επαναφέρεται με δύο γραμμές εδώ.
-  //
-  // Μόνο το πρωτοσέλιδο κρατιέται έξω από τη ροή τώρα· όσα έβγαιναν
-  // στα δευτερεύοντα επιστρέφουν κανονικά μέσα της.
+  // Only the hero is held out of the flow now.
   const onTop = new Set([featured.href]);
 
-  // Η ροή κάτω από τα banners. Φαίνονται τα 24 πιο πρόσφατα, αλλά μέσα
-  // της κρύβονται και τα 6 πιο πρόσφατα ΚΑΘΕ θέματος. Έτσι όταν κάποιος
-  // πατήσει «Tech-Hub» — 33 αντικείμενα συνολικά, κανένα μέσα στα 24 πιο
-  // πρόσφατα — υπάρχει τι να δείξουμε, χωρίς να φορτώσει τίποτα.
+  // The flow under the banners. The 24 most recent are visible, and the 6
+  // most recent of EVERY topic are hidden inside it. So tapping
+  // "Tech-Hub" — 33 items, none among the 24 — has something to show
+  // without loading anything.
   const flow = [];
   const inFlow = new Set();
   const pushFlow = (item) => {
@@ -7494,11 +7459,11 @@ function main(){
     flow.push(item);
   };
 
-  // ΠΡΩΤΑ τα καρφιτσωμένα, με τη σειρά που τα έβαλε ο δημοσιογράφος.
+  // Pinned items FIRST, in the order the journalist set.
   //
-  // Πριν από οτιδήποτε άλλο: αν έμπαιναν μετά τα δικά μας άρθρα, η
-  // «σειρά» του διαχειριστικού δεν θα ήταν η σειρά της σελίδας, και
-  // αυτό είναι ακριβώς ό,τι ζητήθηκε να ελέγχει.
+  // Before anything else: if they came after our own articles, the order
+  // in the admin would not be the order on the page — which is exactly
+  // what it is there to control.
   const pinned = pinnedFlow(curation, [
     { list: episodes, make: (ep) => itemFromEpisode(ep) },
     { list: uniqueVideos, make: (v) => itemFromVideo(v) },
@@ -7507,30 +7472,24 @@ function main(){
   ]);
   for (const it of pinned) pushFlow(it);
 
-  // Τα βίντεο εκπομπών που δεν έχουν podcast.
+  // Show videos with no podcast.
   //
-  // Η ροή έπαιρνε ΜΟΝΟ επεισόδια, και 2.325 βίντεο δεν έχουν επεισόδιο:
-  // μια ολόκληρη εκπομπή που βγήκε μόνο στο YouTube δεν υπήρχε πουθενά
-  // στην αρχική — ούτε στη ροή, ούτε στη σελίδα «Όλα τα επεισόδια».
-  // Την έβρισκες μόνο αν πατούσες το θέμα της ή τη σελίδα της εκπομπής.
+  // The flow used to take episodes only, and 2,325 videos have no
+  // episode: a whole show published only on YouTube appeared nowhere on
+  // the homepage.
   //
-  // Δεν μπαίνουν όλα: χωρίς λίστα δεν είναι εκπομπή, και η ΕΠΙΚΑΙΡΟΤΗΤΑ
-  // μένει απέξω (δες FLOW_SKIP_SHOWS). Μένει περίπου ένα την ημέρα.
+  // Not all of them: without a playlist it is not a show, and
+  // ΕΠΙΚΑΙΡΟΤΗΤΑ stays out (see FLOW_SKIP_SHOWS). Leaves about one a day.
   const soloShows = uniqueVideos.filter((v) =>
     v.show && !FLOW_SKIP_SHOWS.has(v.show) && !videoHasTwin(v));
 
-  // Ανακατεμένα και ταξινομημένα ΜΑΖΙ: αλλιώς το χθεσινό βίντεο θα
-  // έμπαινε κάτω από προχθεσινό podcast.
+  // Mixed and sorted TOGETHER: otherwise yesterday's video would sit
+  // below a podcast from the day before.
   //
-  // Τα δικά μας άρθρα μπαίνουν κι αυτά εδώ, με την ημερομηνία τους.
-  // Μέχρι τις 13 Νοεμβρίου 2026 έμπαιναν ΠΡΙΝ από όλα, όσο παλιά κι
-  // αν ήταν: ένα άρθρο της 6ης Νοεμβρίου καθόταν πάνω από σημερινά
-  // επεισόδια, και με δέκα άρθρα θα έπνιγαν όλη τη ροή.
-  //
-  // Η ανάγκη που το γέννησε ήταν σωστή — πρωτότυπο περιεχόμενο που
-  // δεν υπάρχει πουθενά αλλού — αλλά η θέση δεν κερδίζεται με το
-  // είδος, κερδίζεται με την ώρα. Όποιος θέλει κάτι ψηλά ανεξάρτητα
-  // από ημερομηνία το καρφιτσώνει· γι' αυτό υπάρχει το καρφίτσωμα.
+  // Our own articles go in here too, by their date. They used to go
+  // first regardless of age, which put a week-old article above today's
+  // episodes. Position is earned by time, not by type; anything that must
+  // stay high regardless gets pinned.
   const recent = [
     ...episodes.slice(0, 40).map(itemFromEpisode),
     ...soloShows.slice(0, 40).map(itemFromVideo),
