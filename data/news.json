@@ -1,5 +1,17 @@
 [
   {
+    "id": "synelifthisan-dyo-15chronoi-os-diakinites-metanaston-stin-palaiochora",
+    "title": "Συνελήφθησαν δύο 15χρονοι ως διακινητές μεταναστών στην Παλαιόχωρα",
+    "url": "https://www.newshub.gr/el/kriti/synelifthisan-dyo-15chronoi-os-diakinites-metanaston-stin-palaiochora",
+    "date": "2026-11-17T21:28:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/xeiropedes-1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/xeiropedes-1.jpg",
+    "summary": "Στη σύλληψη δύο 15χρονων ως τους διακινητές δύο καραβανιών&hellip; μεταναστών που εντοπίστηκαν χθες και προχθές στην Παλαιόχωρα προχώρησαν οι λιμενικές αρχές...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "zelenski-sti-diaskepsi-ramstain-chreiazomaste-pyrayloys-antiaeroporikis-amynas-kai-akomi-40-machitika-f-16",
     "title": "Ζελένσκι στη Διάσκεψη Ράμσταϊν: Χρειαζόμαστε πυραύλους αντιαεροπορικής άμυνας και ακόμη 40 μαχητικά F-16",
     "url": "https://www.newshub.gr/el/geopolitiki/zelenski-sti-diaskepsi-ramstain-chreiazomaste-pyrayloys-antiaeroporikis-amynas-kai-akomi-40-machitika-f-16",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/ap26321588527683.jpg",
     "summary": "Ο Ουκρανός πρόεδρος Βολοντίμιρ Ζελένσκι, ο οποίος συμμετέχει μέσω βιντεοδιάσκεψης στην 37η διάσκεψη της Διεθνούς Ομάδας Επαφής για την Άμυνα της Ουκρανίας, τ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "synergasia-nato-kai-openai-gia-tin-antimetopisi-kyvernoepitheseon",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/maketa-drone-probata.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/maketa-drone-probata.jpg",
     "summary": "Οι πραγματικές ανάγκες των κτηνοτρόφων μπορούν να αποτελέσουν αφετηρία για την ανάπτυξη νέων ψηφιακών εργαλείων. Η συνεργασία του ΜΑΙΧ με το Πολυτεχνείο Κρήτ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "pyrovolismoi-stin-oyasingkton-enas-nekros-kai-4-traymaties-nekros-kai-o-drastis",
-    "title": "Πυροβολισμοί στην Ουάσινγκτον: Ένας νεκρός και 4 τραυματίες – Νεκρός και ο δράστης",
-    "url": "https://www.newshub.gr/el/kosmos/pyrovolismoi-stin-oyasingkton-enas-nekros-kai-4-traymaties-nekros-kai-o-drastis",
-    "date": "2026-11-12T18:36:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/pyrovolismoi-1024x576.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/pyrovolismoi-1024x576.jpg",
-    "summary": "Νεκρός φαίνεται πως είναι ο ύποπτος για την αιματηρή επίθεση που έγινε νωρίς το πρωί στην Ουάσιγκτον, περίπου ενάμισι χιλιόμετρο από τον Λευκό Οίκο.\r\n\r\nΣύμφω...",
     "author": null,
     "featured": false
   },
