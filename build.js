@@ -6,8 +6,8 @@ const DATA_FILE = path.join(__dirname, 'data/episodes.json');
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const EPISODE_DIR = path.join(PUBLIC_DIR, 'episode');
 const GUEST_DIR = path.join(PUBLIC_DIR,'guest');
-// Πόσες κάρτες φαίνονται στη ροή της αρχικής. Κρατιέται μικρή επίτηδες:
-// από κάτω υπάρχει σύνδεσμος για ολόκληρο το αρχείο.
+// How many cards show in the homepage flow. Deliberately small: a link to
+// the full archive sits underneath.
 const HOW_MANY = 9;
 const CURATION_FILE = path.join(__dirname, 'data/curation.json');
 const NEWS_FILE = path.join(__dirname, 'data/news.json');
@@ -15,70 +15,29 @@ const VIDEO_FILE = path.join(__dirname, 'data/videos.json');
 const TRANSCRIPT_DIR = path.join(__dirname, 'data/transcripts');
 const TRANSCRIPT_OUT = path.join(__dirname, 'public/transcript');
 const ALIAS_FILE = path.join(__dirname, 'data/people-aliases.json');
-// Οι χειροκίνητες διορθώσεις στο ζευγάρωμα, γραμμένες στο διαχειριστικό.
+// Manual pairing fixes, written in the admin.
 const PAIRS_FILE = path.join(__dirname, 'data/pairs.json');
-// Η λογική «ποιες γραφές είναι ο ίδιος άνθρωπος» ζει εκεί, και τη
-// δανειζόμαστε για να γράψουμε τις προτάσεις στο διαχειριστικό.
+// The "which spellings are the same person" logic lives there, and we
+// borrow it to write the suggestions for the admin.
 const { suggestFamilies } = require('./find-aliases.js');
 const SHOW_ART_FILE = path.join(__dirname, 'data/show-art.json');
 const ADS_FILE = path.join(__dirname, 'data/ads.json');
 const SHOWS_FILE = path.join(__dirname, 'data/shows.json');
 const SHOW_DIR = path.join(PUBLIC_DIR, 'show');
 const ARTICLE_DIR = path.join(PUBLIC_DIR, 'arthro');
-// Τα σώματα των ειδήσεων του newshub.gr. ΔΕΝ είναι το data/articles.json
-// — εκείνο το γράφει το διαχειριστικό και κρατάει τα δικά μας άρθρα.
+// Bodies of newshub.gr news. NOT data/articles.json — that one is written
+// by the admin and holds our own articles.
 const NEWS_BODY_DIR = path.join(__dirname, 'data/news-bodies');
-// Τα δικά μας άρθρα, γραμμένα στο διαχειριστικό.
+// Our own articles, written in the admin.
 const OWN_ARTICLES_FILE = path.join(__dirname, 'data/articles.json');
 const VIDEO_DIR = path.join(PUBLIC_DIR, 'video');
 const CATEGORY_DIR = path.join(PUBLIC_DIR, 'category');
 
-// Η τελική διεύθυνση του site. Χρειάζεται για τις κάρτες κοινοποίησης,
-// το canonical και το sitemap — όλα θέλουν ΠΛΗΡΗ διεύθυνση, όχι σχετική.
-// Άλλαξέ τη μόλις κλειδώσει το domain.
+// The final site address. Needed for share cards, canonical URLs and the
+// sitemap — all of which want an ABSOLUTE address.
 const SITE_URL = 'https://newshubmedia.gr';
 const SITE_NAME = 'Newshub Media';
 
-// ---- μετρήσεις και επαλήθευση ----
-//
-// ΟΛΑ κενά σημαίνει «τίποτα δεν μπαίνει στις σελίδες». Γεμίζεις μόνο
-// ό,τι χρειάζεσαι, και το επόμενο χτίσιμο το περνάει σε 4.700 σελίδες.
-//
-// 1) CF_ANALYTICS — Cloudflare Web Analytics.
-//    Επισκέπτες και σελίδες, ΧΩΡΙΣ cookies: δεν χρειάζεται μπάνερ
-//    συγκατάθεσης, σε αντίθεση με το Google Analytics. Δοκίμασε πρώτα
-//    από το dashboard (Analytics & Logs -> Web Analytics): για site
-//    που ήδη περνάει από Cloudflare μπαίνει χωρίς καμία γραμμή κώδικα.
-//    Αν σου δώσει «token», κόλλησέ το εδώ.
-//
-// 2) GOOGLE_VERIFY — Google Search Console.
-//    Δεν είναι μετρήσεις επισκεψιμότητας: δείχνει τι ψάχνει ο κόσμος
-//    στο Google και μας βρίσκει, και ποιες σελίδες μπήκαν στο
-//    ευρετήριο. Χωρίς cookies. Εναλλακτικά επαληθεύεται με εγγραφή DNS,
-//    που δεν αγγίζει καθόλου τις σελίδες — προτίμησέ το αν μπορείς.
-//
-// 3) GA4 — Google Analytics.
-//    ΜΟΝΟ αν το ζητήσει ρητά το αφεντικό: βάζει cookies, άρα χρειάζεται
-//    μπάνερ συγκατάθεσης που σήμερα ΔΕΝ υπάρχει. Μην το γεμίσεις πριν
-//    μπει το μπάνερ.
-// Το token είναι ΔΗΜΟΣΙΟ — φαίνεται στον κώδικα κάθε σελίδας. Γι' αυτό
-// μπαίνει εδώ και όχι στα μυστικά.
-//
-// Το «Automatic setup» του Cloudflare δεν δούλεψε: στήθηκε στις 31
-// Οκτωβρίου και μετρούσε μηδέν για 12 μέρες, γιατί το domain δεν
-// περνάει ως proxied zone από αυτόν τον λογαριασμό. Οπότε το βάζουμε
-// εμείς στις σελίδες.
-// Ποιες γραμματοσειρές ξεκινούν να κατεβαίνουν ΑΜΕΣΩΣ, μαζί με το HTML.
-//
-// Μόνο ελληνικά και λατινικά: αυτά είναι που βλέπει πραγματικά ο
-// αναγνώστης — τίτλοι και κείμενο στα ελληνικά, ετικέτες τύπου
-// «PODCAST» στα λατινικά. Τα latin-ext τα φέρνει το CSS αν χρειαστούν,
-// χωρίς preload: είναι σπάνιοι χαρακτήρες και δεν αξίζει να
-// ανταγωνίζονται το περιεχόμενο στα πρώτα δευτερόλεπτα.
-//
-// Χωρίς preload το font-display: optional δεν θα προλάβαινε σχεδόν
-// ποτέ, και η σελίδα θα έμενε στην εφεδρική γραμματοσειρά. Οι δύο
-// ρυθμίσεις δουλεύουν ΜΑΖΙ — δες το σχόλιο στην κορυφή του styles.css.
 const FONT_PRELOAD = [
   'source-serif-4-greek.woff2',
   'commissioner-greek.woff2',
@@ -90,20 +49,6 @@ const CF_ANALYTICS = '1c6e9c91e5cd4c0ebdbeb09703c977fe';
 const GOOGLE_VERIFY = '';
 const GA4 = 'G-VSQD1S3PN5';
 
-// 4) ADSENSE — ο εκδοτικός κωδικός του Google AdSense, «ca-pub-...».
-//
-//    ΚΕΝΟ = το site βγαίνει ακριβώς όπως πριν: κανένα ξένο script,
-//    καμία cookie διαφημιστικού δικτύου, και η σελίδα απορρήτου λέει
-//    «δεν υπάρχει καμία διαφημιστική εδώ». Γεμάτο = μπαίνει το script
-//    και αλλάζει ΜΟΝΟ του και το κείμενο του απορρήτου. Ένας διακόπτης,
-//    όχι δύο αλήθειες.
-//
-//    ΤΙ ΔΕΝ ΚΑΝΕΙ ΑΥΤΟ ΕΔΩ: δεν βάζει καμία θέση διαφήμισης. Είναι μόνο
-//    η ταυτοποίηση του site, αυτό που ζητάει το AdSense πριν εγκρίνει.
-//    Οι θέσεις μπαίνουν χωριστά, αφού εγκριθεί — και ΜΟΝΟ ως χειροκίνητα
-//    units σταθερού ύψους. Τα Auto ads μένουν κλειστά από το πάνελ:
-//    anchor και vignette σκεπάζουν το περιεχόμενο, που το απαγορεύει
-//    ρητά το αφεντικό.
 const ADSENSE = 'ca-pub-6446657266547680';
 
 const GREEK = {
@@ -112,9 +57,9 @@ const GREEK = {
   'ρ':'r','σ':'s','ς':'s','τ':'t','υ':'y','φ':'f','χ':'ch','ψ':'ps','ω':'o'
 };
 
-// Οι τίτλοι έρχονται από το RSS με κωδικοποιημένα σύμβολα: &quot; αντί
-// για " και &amp; αντί για &. Το decode τα κάνει κανονικούς χαρακτήρες,
-// το esc τα ξαναγράφει ασφαλή για HTML. Πάντα decode πρώτα, esc μετά.
+// Titles arrive from RSS with encoded entities: &quot; for " and &amp;
+// for &. decode turns them into real characters, esc makes them safe for
+// HTML again. Always decode first, esc second.
 function decode(text){
   return String(text)
     .replace(/&quot;/g, '"').replace(/&#39;/g, "'")
@@ -128,13 +73,13 @@ function esc(text){
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// Κείμενο -> κομμάτι διεύθυνσης. Το decode πρώτα, αλλιώς το &quot;
-// του τίτλου γίνεται η λέξη "quot" μέσα στο link.
+// Text -> URL slug. decode first, or a title's &quot; becomes the word
+// "quot" inside the link.
 function slugify(text){
   const full = decode(text).toLowerCase()
-    // Τα διαλυτικά σημαίνουν «μη διαβάσεις τα δύο φωνήεντα μαζί». Πρέπει
-    // να λυθούν ΠΡΙΝ τους κανόνες των διφθόγγων, αλλιώς το «Αϋφαντής»
-    // περνάει από το αυ -> av και βγαίνει avfantis αντί για ayfantis.
+  // A diaeresis means "do not read these two vowels together". It has to
+  // be resolved BEFORE the diphthong rules, or "Αϋφαντής" goes through
+  // αυ -> av and comes out avfantis instead of ayfantis.
     .replace(/[ΐϊ]/g, 'i').replace(/[ΰϋ]/g, 'y')
     .normalize('NFD').replace(/[̀-ͯ]/g, '')
     .replace(/ου/g, 'ou').replace(/αυ/g, 'av').replace(/ευ/g, 'ev')
@@ -148,27 +93,14 @@ function slugify(text){
 
 function episodeUrl(ep) {
   const number = ep.id.replace(/\D/g, '');
-  // ep.slug είναι ο ΑΥΘΕΝΤΙΚΟΣ τίτλος, πριν τις διορθώσεις του
-  // συντάκτη. Η διεύθυνση δεν αλλάζει ποτέ — δες το loadEpisodes.
+  // ep.slug is the ORIGINAL title, before the editor's corrections. The
+  // URL never changes — see loadEpisodes.
   return `episode/${number}-${slugify(ep.slug || ep.headline)}.html`;
 }
 
 
 const MONTHS=['Ιαν','Φεβ','Μαρ','Απρ','Μαϊ','Ιουν','Ιουλ','Αυγ','Σεπ','Οκτ','Νοε','Δεκ'];
 
-// ---- Η ώρα είναι ΠΑΝΤΑ ελληνική ----
-//
-// Το getHours() και τα αδέλφια του δίνουν την ώρα ΤΟΥ ΜΗΧΑΝΗΜΑΤΟΣ ΠΟΥ
-// ΧΤΙΖΕΙ. Τοπικά αυτό είναι Ελλάδα και όλα δείχνουν σωστά· στο
-// Cloudflare είναι UTC, και κάθε ώρα στο site έβγαινε ΔΥΟ ΩΡΕΣ ΠΙΣΩ.
-// Το είδε το αφεντικό στις 7 Νοεμβρίου 2026, βάζοντας δίπλα-δίπλα το
-// newshub.gr (19:20) και το δικό μας (17:20).
-//
-// Ήταν αθέατο ακριβώς επειδή τοπικά δούλευε. Γι' αυτό καμία ημερομηνία
-// δεν τυπώνεται πια κατευθείαν: όλες περνούν από εδώ.
-//
-// Δεν υπολογίζουμε μόνοι μας UTC+2/+3 — η θερινή ώρα αλλάζει χωρίς να
-// μας ρωτήσει κανείς, και η Node ξέρει ήδη την απάντηση.
 const ATHENS = 'Europe/Athens';
 const athensFmt = new Intl.DateTimeFormat('en-GB', {
   timeZone: ATHENS,
@@ -180,7 +112,7 @@ const athensFmt = new Intl.DateTimeFormat('en-GB', {
 
 const DAY_INDEX = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
 
-// Τα κομμάτια μιας στιγμής, όπως τα βλέπει κάποιος στην Κρήτη.
+// The parts of a moment, as someone in Crete sees them.
 function athens(iso){
   const d = iso instanceof Date ? iso : new Date(iso);
   if (isNaN(d)) return null;
@@ -198,26 +130,19 @@ function athens(iso){
   };
 }
 
-// Το έτος του, στην Ελλάδα. Το ζητάμε συχνά και σκέτο.
+// Its year, in Greece. Asked for often enough to deserve its own helper.
 function athensYear(iso){
   const a = athens(iso);
   return a ? a.year : NaN;
 }
-// Για ό,τι βγήκε σήμερα ή χθες γράφουμε «σήμερα 14:20» αντί για σκέτη
-// ημερομηνία — δείχνει αμέσως τι είναι φρέσκο.
-//
-// ΠΡΟΣΟΧΗ: το «σήμερα» υπολογίζεται τη ΣΤΙΓΜΗ ΤΟΥ BUILD. Σε στατικό site
-// αυτό σημαίνει ότι μια σελίδα φτιαγμένη στις 23:50 λέει «σήμερα» και
-// μισή ώρα μετά έχει άδικο. Αντέχει γιατί ξαναχτίζουμε κάθε δύο ώρες·
-// αν ποτέ αραιώσει αυτό, το «σήμερα» πρέπει να φύγει.
 function formatDate(iso){
   if(!iso) return '';
   const a = athens(iso);
   if (!a) return '';
 
-  // Και το «σήμερα» μετριέται με ελληνικά μεσάνυχτα: αλλιώς, ένα
-  // χτίσιμο στη 01:30 ώρα Ελλάδας θα έλεγε «χθες» για κάτι που μόλις
-  // βγήκε, επειδή στο UTC η μέρα δεν έχει αλλάξει ακόμα.
+// "Today" is measured at Greek midnight: otherwise a build at 01:30 local
+// would say "yesterday" for something just published, because in UTC the
+// day has not turned.
   const now = athens(new Date());
   const days = Math.round(
     (Date.UTC(now.year, now.month, now.day) - Date.UTC(a.year, a.month, a.day)) / 864e5,
@@ -237,9 +162,9 @@ function formatDuration(seconds){
   return `${Math.floor(minutes / 60)}ω ${minutes % 60} λεπτά`;
 }
 
-// Η μπάρα του μόνιμου player. Υπάρχει σε ΚΑΘΕ σελίδα, κρυμμένη, και
-// εμφανίζεται μόλις ξεκινήσει κάτι να παίζει. Επειδή ζει έξω από το
-// #page, η πλοήγηση δεν την αγγίζει και ο ήχος δεν κόβεται.
+// The persistent player bar. It exists on EVERY page, hidden, and appears
+// once something plays. Living outside #page, navigation never touches it
+// and the audio is not cut.
 function playerBar(){
   return `  <div class="bar" hidden aria-label="Αναπαραγωγή">
     <a class="bar-now" href="#">
@@ -267,21 +192,10 @@ function playerBar(){
   </div>`;
 }
 
-// Το κοινό περίβλημα κάθε σελίδας, ώστε το <head> να γράφεται μία φορά.
-// Το depth λέει πόσο βαθιά κάθεται το αρχείο, για να βρει το styles.css:
-// 0 = public/index.html, 1 = public/episode/κάτι.html
-// Κάθε περιγραφή του Buzzsprout έχει γύρω από το κείμενο πράγματα που
-// είναι ίδια σε όλα τα επεισόδια: μπροστά «🎙️(ημερομηνία) Τα podcasts
-// του Newshub.gr», και πίσω μια ουρά με hashtags και συνδέσμους προς
-// Apple, Spotify, YouTube, facebook, twitter, instagram, TikTok.
-//
-// Η ουρά είναι κατά μέσο όρο 560 χαρακτήρες — πιο μεγάλη από όσο
-// χωράει μια κάρτα — και δεν λέει τίποτα για το συγκεκριμένο επεισόδιο.
-// Κόβουμε στο πρώτο σημάδι της και κρατάμε ό,τι είναι από πάνω.
 const SUMMARY_TAIL = [
-  // «To κανάλι μας στα Apple podcasts», «στη σελίδα μας στο facebook»,
-  // «στο κανάλι μας στο Youtube». Το «To» γράφεται άλλοτε με λατινικό
-  // και άλλοτε με ελληνικό o — γι' αυτό δέχεται και τα δύο.
+// Channel boilerplate in its various spellings. "To" is written
+// sometimes with a Latin and sometimes with a Greek o, so both are
+// accepted.
   /\s*(?:[TΤ][oο]\s+|στ[ηοα]\s+)?(?:σελίδα|κανάλι)\s+μας\s+στ/u,
   /\s*Μας τιμάτε/u,
   /\s*@Newshub/iu,
@@ -289,34 +203,28 @@ const SUMMARY_TAIL = [
   /\s*Support the show/i,
   /\s*https?:\/\//u,
   /\s*#\s*[\p{L}\d]/u,
-  // Σε 2 επεισόδια το «🎙️(ημερομηνία) Τα podcasts του Newshub.gr» δεν
-  // είναι μπροστά αλλά στη μέση: μπαίνει μετά από μια σειρά πραγματικού
-  // κειμένου. Από το μικρόφωνο και μετά, τίποτα δεν αφορά το επεισόδιο.
+// In 2 episodes the "🎙️(date) Τα podcasts του Newshub.gr" marker is not
+// at the front but in the middle. From the microphone on, nothing
+// concerns the episode.
   /\s*🎙/u,
 ];
 
-// Το μικρόφωνο στην αρχή γράφεται με πέντε διαφορετικούς τρόπους:
-//   🎙️(12/10/2026) ·  🎙️ 27/11/2024 ·  🎙️10/05/2025
-//   (🎙️ 3/2/2025) ·  🎙️(Το podcast μεταδόθηκε στις …) ·  🎙️ σκέτο
-// Ένας κανόνας για όλα: προαιρετική παρένθεση, το μικρόφωνο, μετά είτε
-// παρένθεση με ό,τι έχει μέσα είτε σκέτη ημερομηνία.
 const SUMMARY_LEAD = [
   /^\(?\s*🎙️?\s*(?:\([^)]*\)|\d{1,2}\/\d{1,2}\/\d{2,4})?\s*\)?\s*/u,
   /^Τα podcasts του Newshub\.?gr\s*/i,
 ];
 
 function stripBoilerplate(text){
-  // Τα κενά μαζεύονται ΜΕΣΑ στη γραμμή. Οι αλλαγές γραμμής είναι οι
-  // παράγραφοι του Buzzsprout και πρέπει να φτάσουν ως το summaryHtml —
-  // ένα σκέτο \s+ τις έτρωγε, και η περιγραφή έβγαινε ένα κατεβατό.
+// Spaces are collapsed WITHIN a line. Line breaks are Buzzsprout's
+// paragraphs and must survive to summaryHtml — a plain s+ ate them and
+// the description came out as one slab.
   let t = String(text || '')
     .split('\n')
     .map((line) => line.replace(/\s+/g, ' ').trim())
     .filter(Boolean)
     .join('\n');
 
-  // Σε βρόχο, γιατί έρχονται και με την αντίστροφη σειρά: άλλοτε
-  // «🎙️(ημερομηνία) Τα podcasts του Newshub.gr», άλλοτε το ανάποδο.
+// In a loop, because they also arrive in reverse order.
   for (let again = true; again; ) {
     again = false;
     for (const re of SUMMARY_LEAD) {
@@ -333,30 +241,22 @@ function stripBoilerplate(text){
   return t.slice(0, cut).trim().replace(/[-–·,;:]+$/, '').trim();
 }
 
-// Κόβει σε καθαρό μήκος για περιγραφή — χωρίς να σπάει λέξη στη μέση.
+// Trims to a clean length for a description, without cutting a word in
+// half. Single line: it goes into <meta description> and share cards.
 function clip(text, max = 160){
-  // Μονή γραμμή: πάει σε <meta description> και σε κάρτες.
   const t = stripBoilerplate(text).replace(/\s+/g, ' ');
   if (t.length <= max) return t;
   return t.slice(0, max).replace(/\s+\S*$/, '') + '…';
 }
 
-// Σε 18 επεισόδια η περιγραφή απαριθμεί τα σημεία της συζήτησης με
-// παύλες: εισαγωγή, μετά « - » και κάθε θέμα χωριστά. Σε αυτά φτιάχνουμε
-// λίστα· στα υπόλοιπα μένει μια παράγραφος.
-//
-// Η παύλα πρέπει να έρχεται μετά από τέλος πρότασης ΚΑΙ να ακολουθείται
-// από κεφαλαίο. Χωρίς αυτόν τον περιορισμό έσπαγαν 174 περιγραφές στη
-// μέση, γιατί η ίδια παύλα χρησιμοποιείται και μέσα στην πρόταση:
-// «Μαιευτήρας - Γυναικολόγος», «Ελλάδας – Κύπρου», «τα πάνω - κάτω».
 const SUMMARY_POINT = /(?<=[.;!?»])\s+[-–]\s+(?=[Α-ΩΆΈΉΊΌΎΏΪΫA-Z«])/u;
 
 function summaryHtml(text){
   const t = stripBoilerplate(text);
   if (!t) return '';
 
-  // Αληθινές παράγραφοι, όπως τις έγραψε ο συντάκτης στο Buzzsprout.
-  // Όταν υπάρχουν, δεν μαντεύουμε: τις σεβόμαστε όπως είναι.
+// Real paragraphs, as the editor wrote them in Buzzsprout. Where they
+// exist we do not guess.
   const paras = t.split('\n').map((x) => x.trim()).filter(Boolean);
   if (paras.length > 1) {
     return paras
@@ -374,13 +274,6 @@ ${bits.slice(1).map((x) => `          <li>${esc(x)}</li>`).join('\n')}
         </ul>`;
 }
 
-// Σφραγίδα έκδοσης για styles.css και player.js.
-//
-// Ο browser κρατάει τα αρχεία αυτά στη μνήμη του — σωστά, γιατί αλλιώς
-// θα τα κατέβαζε σε κάθε σελίδα. Όταν όμως τα αλλάζουμε, συνεχίζει να
-// δείχνει τα παλιά: νέο HTML με παλιά στυλ, που μοιάζει με χαλασμένη
-// σελίδα. Με τη σφραγίδα, η διεύθυνση αλλάζει μόλις αλλάξει το αρχείο,
-// οπότε είναι υποχρεωμένος να κατεβάσει το νέο.
 const stamps = {};
 function assetVersion(name){
   if (stamps[name] === undefined) {
@@ -392,18 +285,6 @@ function assetVersion(name){
   return stamps[name] ? `?v=${stamps[name]}` : '';
 }
 
-// ---- καθαρές διευθύνσεις ----
-//
-// Στον δίσκο τα αρχεία μένουν .html — έτσι τα σερβίρει το Cloudflare
-// Pages. Στους συνδέσμους όμως το .html δεν φαίνεται πουθενά.
-//
-// Δεν είναι καλλωπισμός. Το Pages κάνει 308 κάθε /x.html σε /x, οπότε
-// κάθε κλικ πλήρωνε ένα περιττό ταξίδι. Και το player.js, που πλοηγεί
-// μόνο του για να μη σταματά ο ήχος, έγραφε στη μπάρα διευθύνσεων το
-// href αυτούσιο: ο επισκέπτης έβλεπε «newshubmedia.gr/index.html».
-//
-// Γίνεται σε ΕΝΑ σημείο, πάνω στην έτοιμη σελίδα, αντί σε πενήντα
-// σημεία που φτιάχνουν href. Δύο αντίγραφα ενός κανόνα αποκλίνουν.
 function cleanUrl(u){
   if (!u) return u;
   return u
@@ -414,68 +295,33 @@ function cleanUrl(u){
 function cleanHref(u){
   if (!u || u.startsWith('#') || u.startsWith('mailto:')) return u;
 
-  // Ξένοι σύνδεσμοι μένουν ΑΚΡΙΒΩΣ όπως είναι: το .html τους δεν είναι
-  // δικό μας θέμα, και το newshub.gr όντως σερβίρει τέτοιες διευθύνσεις.
+// External links stay EXACTLY as they are: their .html is not our
+// business, and newshub.gr really does serve such URLs.
   if (/^(https?:)?\/\//.test(u) && !u.startsWith(SITE_URL)) return u;
 
   const out = cleanUrl(u);
 
-  // Άδειο href σημαίνει «η τρέχουσα σελίδα» — όχι η αρχική. Το σκέτο
-  // «index.html» γίνεται «./», που από οποιοδήποτε βάθος δείχνει σωστά.
+// An empty href means "the current page", not the homepage. A plain
+// index.html becomes "./", which is correct at any depth.
   return out === '' ? './' : out;
 }
 
-// Περνάει την έτοιμη σελίδα και καθαρίζει ΟΛΟΥΣ τους συνδέσμους. Το
-// data-href μπαίνει κι αυτό: είναι ο σύνδεσμος που κουβαλάει η μόνιμη
-// μπάρα του player όταν αλλάζει σελίδα.
+// Walks the finished page and cleans EVERY link, data-href included: that
+// is the link the persistent player bar carries across navigation.
 function cleanLinks(html){
   return html.replace(/\b(href|data-href)="([^"]*)"/g,
     (m, attr, u) => `${attr}="${cleanHref(u)}"`);
 }
 
-// Τα σενάρια μέτρησης, στο τέλος του <head>.
-//
-// ΠΑΝΤΑ defer ή async: η μέτρηση δεν έχει καμία δουλειά να καθυστερεί
-// το φόρτωμα της σελίδας — αυτό είναι το ίδιο σκεπτικό με τις
-// διαφημίσεις, «φορτώνουν τελευταίες, ποτέ πριν το περιεχόμενο».
-//
-// Κενό όταν δεν έχει οριστεί τίποτα: ούτε ένα byte παραπάνω σε 4.700
-// σελίδες για μετρήσεις που δεν υπάρχουν.
 function metriseis(){
   const out = [];
 
   if (CF_ANALYTICS) {
-    // Ακριβώς η μορφή που δίνει σήμερα το dashboard του Cloudflare.
-    // Το type="module" δεν είναι ιδιοτροπία: τα modules καθυστερούν από
-    // μόνα τους, άρα δεν μπλοκάρει τίποτα, και δεν τρέχει καθόλου σε
-    // παλιούς browser που δεν θα το κατάφερναν ούτως ή άλλως.
     out.push('  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"'
       + ` data-cf-beacon='{"token": "${esc(CF_ANALYTICS)}"}'></script>`);
   }
 
   if (GA4) {
-    // ---- Google Analytics με Consent Mode v2 ----
-    //
-    // Η ΣΕΙΡΑ ΕΙΝΑΙ ΤΟ ΠΑΝ. Η δήλωση συγκατάθεσης πρέπει να έχει ήδη
-    // τρέξει όταν φτάνει το gtag.js — αλλιώς η πρώτη μέτρηση φεύγει με
-    // cookie πριν απαντήσει ο επισκέπτης, και το μπάνερ γίνεται
-    // διακοσμητικό. Γι' αυτό αυτό το κομμάτι είναι ΜΕΣΑ στη σελίδα και
-    // όχι σε αρχείο: ένα εξωτερικό αρχείο, όσο γρήγορο κι αν είναι,
-    // μπορεί να φτάσει δεύτερο.
-    //
-    // «denied» παντού στην αρχή. Το Google εξακολουθεί να δέχεται
-    // σήματα χωρίς cookies και συμπληρώνει με εκτιμήσεις όσους δεν
-    // απάντησαν — γι' αυτό διαλέξαμε Consent Mode αντί για «τίποτα
-    // πριν το ναι».
-    //
-    // Το wait_for_update δίνει μισό δευτερόλεπτο στο synainesi.js να
-    // πει «αυτός είχε ήδη δεχτεί», ώστε η πρώτη προβολή του να μην
-    // χαθεί.
-    //
-    // ΤΟ localStorage ΜΠΟΡΕΙ ΝΑ ΣΚΑΣΕΙ: σε ιδιωτικό παράθυρο ή με
-    // μπλοκαρισμένα δεδομένα site, η ανάγνωση πετάει σφάλμα. Χωρίς το
-    // try/catch θα έσπαγε ΟΛΟ το script του head, δηλαδή και η μέτρηση
-    // και το μπάνερ.
     out.push('  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}'
       + "var _s='denied';try{if(localStorage.getItem('synainesi')==='nai')_s='granted'}catch(e){}"
       + "gtag('consent','default',{ad_storage:_s,ad_user_data:_s,ad_personalization:_s,"
@@ -488,16 +334,6 @@ function metriseis(){
   return out.length ? out.join('\n') + '\n' : '';
 }
 
-// Το script του AdSense.
-//
-// Μπαίνει ΜΕΤΑ το metriseis() και αυτό δεν είναι θέμα αισθητικής: εκεί
-// μέσα δηλώνεται το Consent Mode με ad_storage και ad_personalization
-// σε «denied». Αν το adsbygoogle.js φτάσει πρώτο, η πρώτη προβολή
-// φεύγει με διαφημιστικό cookie πριν απαντήσει ο επισκέπτης.
-//
-// async και τελευταίο στο <head>: η Google το θέλει στο head για να
-// ταυτοποιήσει το site, αλλά async σημαίνει ότι δεν μπλοκάρει τίποτα —
-// το περιεχόμενο ζωγραφίζεται πρώτο, όπως ζήτησε το αφεντικό.
 function adsenseTag(){
   if (!ADSENSE) return '';
 
@@ -505,27 +341,13 @@ function adsenseTag(){
      crossorigin="anonymous"></script>\n`;
 }
 
-// Η λωρίδα της συγκατάθεσης.
-//
-// Υπάρχει ΜΟΝΟ όταν υπάρχει Google Analytics. Όσο μετράμε μόνο με
-// Cloudflare — χωρίς cookies — δεν χρειάζεται συγκατάθεση για τίποτα,
-// και ένα μπάνερ που ρωτάει χωρίς λόγο είναι απλώς ένα εμπόδιο.
-//
-// Λωρίδα στο κάτω μέρος, όχι κουτί στη μέση: ο κανόνας του αφεντικού
-// λέει ότι τίποτα δεν σκεπάζει το περιεχόμενο. Το κουτί στη μέση
-// φέρνει περισσότερες αποδοχές — και διώχνει περισσότερο κόσμο.
-//
-// Τα δύο κουμπιά έχουν ΙΔΙΟ βάρος. Ένα γκρίζο «Όχι» δίπλα σε ένα
-// φωτεινό «Αποδοχή» δεν είναι ελεύθερη επιλογή, και οι αρχές
-// προστασίας δεδομένων το λένε ρητά.
 function consentBar(depth = 0){
   if (!GA4 && !ADSENSE) return '';
 
   const up = depth === 0 ? '' : '../';
 
-  // Το κείμενο λέει ΟΛΟΥΣ τους λόγους. Μπάνερ που ζητάει άδεια για
-  // μετρήσεις και στην πράξη ανοίγει και διαφημιστικό δίκτυο δεν είναι
-  // έγκυρη συγκατάθεση.
+// The text states ALL the reasons. A banner asking consent for analytics
+// that in practice also opens an ad network is not valid consent.
   const logos = GA4 && ADSENSE
     ? 'Το Google Analytics μετράει πόσος κόσμος μας διαβάζει και το Google AdSense '
       + 'φέρνει τις διαφημίσεις. Και τα δύο χρειάζονται cookies'
@@ -545,26 +367,11 @@ function consentBar(depth = 0){
 </div>`;
 }
 
-// ---- Δομημένα δεδομένα (JSON-LD) ----
-//
-// Ό,τι λέει η σελίδα στον άνθρωπο, εδώ το ξαναλέμε στη μηχανή — με
-// ονόματα που η Google αναγνωρίζει. Δεν αλλάζει ΤΙΠΟΤΑ ορατό: είναι
-// ένα <script> στο <head> που κανείς δεν βλέπει.
-//
-// Γιατί έχει σημασία για ΕΜΑΣ συγκεκριμένα:
-//   · NewsArticle -> προϋπόθεση για τα «Top stories» και το Google News
-//   · PodcastEpisode -> η Google μαθαίνει ότι υπάρχει ήχος, πόσης διάρκειας
-//   · VideoObject -> μικρογραφία βίντεο μέσα στα αποτελέσματα
-//   · BreadcrumbList -> διαδρομή αντί για γυμνή διεύθυνση κάτω από τον τίτλο
-//
-// ΚΑΝΟΝΑΣ: εδώ μπαίνει μόνο ό,τι υπάρχει και στη σελίδα. Δομημένα
-// δεδομένα που λένε κάτι άλλο από το ορατό κείμενο είναι παράβαση και
-// τιμωρούνται — δεν γράφουμε ποτέ τίποτα «για τη μηχανή».
 const LOGO_URL = `${SITE_URL}/shows/logo-icon.png`;
 
-// Ο εκδότης, μικρός. Μπαίνει μέσα σε κάθε άρθρο, επεισόδιο και βίντεο,
-// άρα πληρώνεται 4.700 φορές — γι' αυτό κρατάει μόνο τα υποχρεωτικά.
-// Η πλήρης μορφή, με τα σόσιαλ, υπάρχει μία φορά στην αρχική.
+// Publisher, short form. It goes inside every article, episode and video,
+// so it is paid for 4,700 times — hence only the mandatory fields. The
+// full form, with socials, appears once on the homepage.
 const LD_PUB = {
   '@type': 'NewsMediaOrganization',
   '@id': `${SITE_URL}/#org`,
@@ -575,29 +382,19 @@ const LD_PUB = {
 
 function ldOrg(){
   return Object.assign({}, LD_PUB, {
-    // Τα ίδια σόσιαλ που δείχνει το υποσέλιδο. Λένε στη Google «αυτό το
-    // site και αυτοί οι λογαριασμοί είναι ο ίδιος οργανισμός».
+// The same socials the footer shows. They tell Google this site and these
+// accounts are the same organisation.
     sameAs: SOCIAL.map(([, link]) => link),
     description: 'Podcasts, βίντεο και συζητήσεις του newshub.gr — από την Κρήτη και τον κόσμο.',
   });
 }
 
-// Σχετική διεύθυνση σελίδας -> πλήρης, στη ΜΙΑ γραφή που χρησιμοποιούμε
+// Relative page URL -> absolute, in the ONE spelling we use everywhere.
 // παντού (canonical, sitemap, og:url): χωρίς .html, χωρίς index.
 function absUrl(url){
   return `${SITE_URL}/${cleanUrl(url || '')}`;
 }
 
-// Διεύθυνση εικόνας, πάντα πλήρης.
-//
-// Τα εξώφυλλα του Buzzsprout και του YouTube έρχονται ήδη πλήρη. Οι
-// φωτογραφίες που ανεβάζει ο δημοσιογράφος από το διαχειριστικό όμως
-// έρχονται ως «/uploads/...» — σωστό μέσα στη σελίδα, ΑΚΥΡΟ στο
-// og:image και στα δομημένα δεδομένα: το Facebook και η Google
-// απαιτούν πλήρη διεύθυνση και αλλιώς δεν δείχνουν τίποτα.
-//
-// Αυτό ήταν παλιό σφάλμα, όχι καινούριο: κάθε δικό μας άρθρο
-// μοιραζόταν χωρίς φωτογραφία.
 function absAsset(u){
   const s = String(u || '').trim();
   if (!s) return '';
@@ -619,10 +416,6 @@ function ldDuration(seconds){
   return `PT${Math.floor(s / 60)}M${s % 60}S`;
 }
 
-// Σκέτο κείμενο, χωρίς σήμανση. Δύο παγίδες μαζεμένες:
-//   · ΟΧΙ esc() — το JSON.stringify κάνει τη δική του δουλειά, και ένα
-//     &quot; μέσα σε JSON-LD φτάνει αυτολεξεί στα αποτελέσματα
-//   · τα 110 σημεία είναι το όριο που κόβει η Google στο headline
 function ldText(text, max = 110){
   const t = decode(String(text || '')).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
   if (t.length <= max) return t;
@@ -675,10 +468,6 @@ function ldBlock(nodes){
 
 function page({ title, body, depth = 0, scripts = [], description = '', image = '', url = '', type = 'website', prev = '', next = '', canonical = '', jsonld = null }){
   const up = depth === 0 ? '' : '../';
-  // Ο player φορτώνει ΠΑΝΤΟΥ: κρατάει τον ήχο ζωντανό και αναλαμβάνει την
-  // πλοήγηση, οπότε πρέπει να υπάρχει και στις σελίδες που δεν παίζουν ήχο.
-  // Το synainesi.js μόνο όταν υπάρχει τι να συγκατατεθεί — δες
-  // consentBar(). Χωρίς Google Analytics δεν μπαίνει ούτε byte.
   const vasika = (GA4 || ADSENSE) ? ['player.js', 'synainesi.js'] : ['player.js'];
 
   const tags = vasika.concat(scripts.filter((s) => vasika.indexOf(s) === -1))
@@ -689,25 +478,8 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   // Με κάθετο στο τέλος — ίδια γραφή με τον κατάλογο sitemap.xml, ώστε η
   // Google να μη βλέπει δύο διευθύνσεις για την ίδια αρχική.
   const full = `${SITE_URL}/${cleanUrl(url)}`;
-  // Η εικόνα που δείχνουν Messenger, Viber και Facebook όταν κολλήσει
-  // κανείς τον σύνδεσμο. Όπου υπάρχει δική της — εξώφυλλο επεισοδίου,
-  // φωτογραφία άρθρου — μπαίνει εκείνη. Αλλιώς το λογότυπο, σε 1200x630
-  // όπως το θέλουν οι πλατφόρμες. Το φτιάχνει το make-share.js.
-  //
-  // Ήταν το intro.jpg: μια φωτογραφία στούντιο που δεν λέει ποιοι είμαστε.
-  // Στην αρχική, που μοιράζεται περισσότερο από κάθε άλλη σελίδα, ο
-  // παραλήπτης έβλεπε ένα μικρόφωνο και από κάτω «NewsHub Media».
-  //
-  // Οι διαστάσεις γράφονται παρακάτω ΜΟΝΟ γι' αυτήν, που την ξέρουμε: με
-  // αυτές το Facebook δείχνει τη μεγάλη κάρτα ήδη από την πρώτη φορά. Για
-  // τα εξώφυλλα του Buzzsprout δεν τις ξέρουμε, και μια λάθος διάσταση
-  // είναι χειρότερη από καμία.
   const pic = absAsset(image) || `${SITE_URL}/share.jpg`;
 
-  // Το canonical δείχνει κανονικά στη ΔΙΚΗ μας διεύθυνση. Εξαίρεση: οι
-  // σελίδες άρθρων του newshub.gr, που δηλώνουν πρωτότυπο το δικό τους.
-  // Έτσι ο αναγνώστης διαβάζει εδώ, αλλά η Google μετράει την αξία εκεί
-  // — αυτός είναι όλος ο σκοπός, το SEO του newshub.gr.
   const canon = canonical || full;
 
   return cleanLinks(`<!DOCTYPE html>
@@ -830,10 +602,6 @@ function topBar(weather){
     </div>`
     : '';
 
-  // ΔΕΝ είναι πια ξεχωριστή λωρίδα. Ο καιρός και τα κοινωνικά δίκτυα
-  // κατεβαίνουν στη γραμμή του μενού, αριστερά· η ημερομηνία πάει δίπλα
-  // στο σήμα. Η παλιά πάνω λωρίδα έφευγε — ήταν μια τρίτη οριζόντια
-  // ζώνη που έτρωγε ύψος χωρίς να λέει κάτι.
   return { weather: w, social: `<nav class="social">${socialLinks()}</nav>`, today: todayLabel() };
 }
 
@@ -884,18 +652,6 @@ function intro(newestEpisode, newestVideo){
   </section>`;
 }
 
-// Ψίχουλα πλοήγησης: Αρχική → Εκπομπή → Κατηγορία → ο τίτλος.
-// Όσα βήματα δεν έχουν δεδομένα απλώς λείπουν — δεν αφήνουμε κενά σκαλιά.
-// Το τελευταίο κομμάτι είναι πάντα κείμενο, όχι σύνδεσμος: είσαι ήδη εκεί.
-// Θολό υπόβαθρο στην κορυφή μιας σελίδας, φτιαγμένο από μια εικόνα που
-// έχουμε ήδη: το εξώφυλλο του επεισοδίου, η φωτογραφία του καλεσμένου,
-// η κάρτα της εκπομπής, το πιο πρόσφατο επεισόδιο του θέματος.
-//
-// Το θόλωμα μπαίνει στην ΕΙΚΟΝΑ, σε δικό της στοιχείο — ποτέ στο κείμενο.
-// Αν έμπαινε στον γονέα, θα θόλωνε και τα γράμματα από πάνω.
-//
-// Το ύψος είναι μηδέν ώστε να μη σπρώχνει τίποτα προς τα κάτω: κάθεται
-// πίσω από τα ψίχουλα και την κορυφή του περιεχομένου.
 function pageHero(image){
   if (!image) return '';
   return `  <div class="page-hero" aria-hidden="true">
@@ -918,14 +674,6 @@ function breadcrumb(parts, depth = 0){
   return `  <nav class="crumbs">${html}</nav>`;
 }
 
-// Οι θεσμικές σελίδες ΔΕΝ ξαναγράφονται εδώ: υπάρχουν στο newshub.gr και
-// ισχύουν για τον ίδιο εκδότη. Δείχνουμε εκεί, αντί να βάλουμε νεκρό
-// κείμενο ή να φτιάξουμε δεύτερο αντίγραφο που θα μείνει πίσω.
-// Ταυτότητα, επικοινωνία και όροι είναι του ΟΡΓΑΝΙΣΜΟΥ και ζουν στο
-// newshub.gr. Το απόρρητο όμως είναι του SITE: εδώ δεν υπάρχουν cookies,
-// δεν υπάρχει διαφημιστικό δίκτυο, και το YouTube φορτώνει μόνο μετά
-// από κλικ. Η πολιτική του newshub.gr περιγράφει άλλο site — γι' αυτό
-// ο σύνδεσμος δείχνει στη δική μας σελίδα.
 const LEGAL = [
   ['Ταυτότητα', 'https://www.newshub.gr/el/taytotita'],
   ['Επικοινωνία', 'https://www.newshub.gr/el/epikoinonia'],
@@ -933,29 +681,6 @@ const LEGAL = [
   ['Απόρρητο', 'aporrito.html', true],
 ];
 
-// Το υποσέλιδο ακολουθεί τη δομή του newshub.gr: σύνδεσμοι στο κέντρο,
-// σόσιαλ από κάτω, σήμα, και χωριστή γραμμή με τα δικαιώματα.
-// Θέση διαφήμισης. ΜΟΝΟ ο χώρος — το δίκτυο δεν έχει επιλεγεί ακόμα.
-//
-// Οι απαιτήσεις του αφεντικού, κατά λέξη: καμία διαφήμιση δεν σκεπάζει
-// περιεχόμενο, κάθε θέση έχει δεσμευμένο ύψος από την αρχή, φορτώνουν
-// τελευταίες, καμία μέσα ή πάνω από τον player. Οι τρεις πρώτες
-// κρίνονται εδώ, η τέταρτη στο πού καλείται αυτή η συνάρτηση.
-//
-// Το ύψος το δεσμεύει το CSS μέσω της κλάσης, ΟΧΙ inline style: έτσι
-// το responsive μένει σε ένα σημείο. Γι' αυτό κάθε νέο όνομα θέσης
-// χρειάζεται και κανόνα .ad--<όνομα> στο styles.css, αλλιώς βγαίνει
-// με ύψος μηδέν και ξαναγυρίζει το layout shift που αποφεύγουμε.
-//
-//   place  — πού κάθεται· μπαίνει ως data-ad, εκεί θα κρεμάσει το
-//            δίκτυο το δικό του div όταν έρθει η ώρα
-//   size   — ποια κλάση μεγέθους, από το styles.css
-// Οι διαφημίσεις των συνεργατών, από το διαχειριστικό.
-//
-// Στατικές εικόνες με σύνδεσμο, τίποτα άλλο: κανένα ξένο script, άρα
-// καμία καθυστέρηση, κανένα cookie και κανένα κόστος ανά επισκέπτη.
-// Οι απαιτήσεις του αφεντικού μένουν ανέπαφες — η θέση έχει ήδη
-// δεσμευμένο ύψος, δεν σκεπάζει τίποτα και δεν κουνάει τη σελίδα.
 let adsCache;
 function adsAll(){
   if (adsCache) return adsCache;
@@ -972,29 +697,8 @@ function adsAll(){
   return adsCache;
 }
 
-// Ποια διαφήμιση παίζει σε μια θέση σήμερα.
-//
-// Όταν δύο συνεργάτες μοιράζονται την ίδια θέση, εναλλάσσονται ΑΝΑ
-// ΗΜΕΡΑ. Όχι τυχαία και όχι με JavaScript: η σελίδα είναι στατική και
-// την ίδια ώρα όλοι πρέπει να βλέπουν το ίδιο πράγμα, αλλιώς κανείς
-// δεν μπορεί να ελέγξει τι προβλήθηκε. Μέσα στην ίδια μέρα το build
-// τρέχει δεκάδες φορές και βγάζει πάντα το ίδιο αποτέλεσμα.
-// Οι εικόνες μιας διαφήμισης, πάντα ως λίστα.
-//
-// Μία εικόνα ή πολλές είναι το ΙΔΙΟ πράγμα για όλον τον υπόλοιπο
-// κώδικα — αλλάζει μόνο το πλήθος. Έτσι ο έλεγχος «παίζει;», η
-// εναλλαγή ανά ημέρα και το κουτί μένουν ένα σημείο το καθένα.
-//
-// Το παλιό «image» διαβάζεται ακόμα: υπάρχουν διαφημίσεις γραμμένες
-// πριν μπει το slideshow, και δεν τις ξαναγράφουμε για να αλλάξει
-// σχήμα το αρχείο.
 const AD_SLIDES_MAX = 6;
 
-// Βίντεο ή εικόνα; Η απάντηση βγαίνει από την κατάληξη και μόνο.
-//
-// Το GIF ΔΕΝ είναι εδώ μέσα επίτηδες: είναι εικόνα, μπαίνει σε <img>
-// και κινείται μόνο του. Δεν χρειάζεται τίποτα ξεχωριστό από εμάς —
-// ούτε στο build, ούτε στο CSS, ούτε στο slideshow.
 function isAdVideo(src){
   return /\.mp4$/i.test(String(src || ''));
 }
@@ -1018,12 +722,6 @@ function adEvery(a){
   return Math.min(AD_EVERY_MAX, Math.max(AD_EVERY_MIN, Math.round(n)));
 }
 
-// Το «offset» υπάρχει για τις λίστες.
-//
-// Μια σελίδα με 60 κάρτες έχει δύο θέσεις. Χωρίς αυτό θα έδειχναν την
-// ΙΔΙΑ διαφήμιση δύο φορές στην ίδια οθόνη — που μοιάζει με βλάβη, όχι
-// με καμπάνια. Με το offset η δεύτερη θέση παίρνει τον επόμενο
-// συνεργάτη, και μόνο αν υπάρχει ένας μόνο επαναλαμβάνεται.
 function adFor(place, offset = 0){
   const today = new Date().toISOString().slice(0, 10);
 
@@ -1040,37 +738,10 @@ function adFor(place, offset = 0){
   return live[(day + offset) % live.length];
 }
 
-// Το περιεχόμενο μιας γεμάτης θέσης.
-//
-// Μία εικόνα βγαίνει όπως πάντα. Δύο ή περισσότερες γίνονται slideshow
-// — και η εναλλαγή είναι ΚΑΘΑΡΟ CSS, ούτε ένα byte JavaScript.
-//
-// Γιατί όχι JavaScript: ο μόνιμος player αλλάζει σελίδες με View
-// Transitions χωρίς να ξαναφορτώνει τίποτα, οπότε κάθε χρονόμετρο θα
-// έπρεπε να το σταματάει και να το ξαναστήνει κάποιος. Μια animation
-// του CSS δεν χρειάζεται κανέναν: ζει και πεθαίνει με το στοιχείο.
-//
-// Όλες οι εικόνες φορτώνουν μαζί — είναι ήδη μέσα στο δεσμευμένο
-// κουτί, άρα καμία δεν κουνάει τη σελίδα όταν έρθει. Η πρώτη είναι
-// lazy όπως πριν· οι υπόλοιπες επίσης, γιατί μια θέση που δεν την
-// είδε ποτέ κανείς δεν έχει λόγο να κατεβάσει έξι αρχεία.
 function adInner(ad){
   const pics = adPics(ad);
   const alt = esc(ad.alt || ad.partner || 'Διαφήμιση');
 
-  // Βίντεο: μόνο του, ποτέ μέσα σε slideshow — το επιβάλλει και ο
-  // έλεγχος του admin-api.js.
-  //
-  // Συμπεριφέρεται σαν GIF, και αυτό είναι σκόπιμο: ΧΩΡΙΣ ΗΧΟ, χωρίς
-  // κουμπιά, σε επανάληψη. Ένα banner που αρχίζει να μιλάει μόνο του
-  // είναι ακριβώς το είδος διαφήμισης που απαγόρευσε το αφεντικό.
-  //
-  // Το «playsinline» δεν είναι λεπτομέρεια: χωρίς αυτό το iPhone ανοίγει
-  // το βίντεο σε ΟΛΗ την οθόνη μόλις ξεκινήσει — δηλαδή η διαφήμιση
-  // σκεπάζει το περιεχόμενο, που είναι ο ένας κανόνας που δεν σπάει.
-  //
-  // «metadata» και όχι «auto»: κατεβαίνει μόνο το πρώτο καρέ μέχρι να
-  // χρειαστεί, ώστε η διαφήμιση να μη ανταγωνίζεται το περιεχόμενο.
   if (pics.length === 1 && isAdVideo(pics[0])) {
     return `    <a class="ad-link" href="${esc(ad.url || '#')}" target="_blank" rel="noopener sponsored"
        aria-label="Διαφήμιση: ${esc(ad.partner || '')}">
@@ -1096,32 +767,6 @@ ${media}
     <span class="ad-note ad-note--on">Διαφήμιση</span>`;
 }
 
-// place — το όνομα που γράφεται ως data-ad, μοναδικό μέσα στη σελίδα
-// key   — ποια θέση ΠΟΥΛΗΘΗΚΕ· όταν λείπει, είναι το ίδιο το place
-//
-// Τα δύο χωρίζουν εξαιτίας των λιστών: εκεί οι θέσεις λέγονται
-// «archive-list-1», «archive-list-2» κ.ο.κ., αλλά ο συνεργάτης αγοράζει
-// «τις λίστες του αρχείου», όχι την τρίτη θέση της δεύτερης σελίδας.
-// Χωρίς αυτόν τον χωρισμό το διαχειριστικό θα έπρεπε να δείχνει
-// εκατοντάδες ονόματα που αλλάζουν μόνα τους όταν μπαίνει περιεχόμενο.
-// Η αναλογία του creative, όταν τη γνωρίζουμε.
-//
-// ΓΙΑΤΙ ΑΠΟΘΗΚΕΥΜΕΝΗ ΚΑΙ ΟΧΙ ΜΕΤΡΗΜΕΝΗ ΕΔΩ: τα ανεβασμένα αρχεία ΔΕΝ
-// ζουν στο git — ζουν στο R2. Το build στον αέρα δεν μπορεί να τα
-// ανοίξει για να τα μετρήσει. Τις διαστάσεις τις ξέρει ο browser τη
-// στιγμή που ο δημοσιογράφος διαλέγει το αρχείο, κι εκεί τις γράφει
-// το διαχειριστικό — χωρίς να του ζητήσει τίποτα.
-//
-// Χωρίς αυτήν, η θέση κρατούσε σταθερό ύψος και το creative έμπαινε
-// μέσα με contain: ένα 300×250 σε leaderboard 90px γινόταν 108×90,
-// μια σταγόνα μέσα σε φαρδύ άδειο κουτί. Με την αναλογία, το ΚΟΥΤΙ
-// ακολουθεί το αρχείο — όπως κάνουν και οι διαφημίσεις του
-// newshub.gr — και γεμίζει.
-//
-// Η δέσμευση χώρου ΔΕΝ χάνεται: η αναλογία είναι γνωστή τη στιγμή του
-// χτισίματος, άρα ο browser ξέρει το ύψος πριν κατέβει ένα byte. Τα
-// όρια ανά θέση ζουν στο CSS (--ad-min / --ad-max), ώστε ένα κάθετο
-// creative να μην καταπιεί τη σελίδα.
 function adRatio(ad){
   const w = Number(ad && ad.w);
   const h = Number(ad && ad.h);
@@ -1141,11 +786,6 @@ function adSlot(place, size, key = place, offset = 0){
   const ar = ad ? adRatio(ad) : '';
   const cls = `ad ad--${size}${ad ? ' ad--full' : ''}${ar ? ' ad--fit' : ''}`;
 
-  // Μαζί με την αναλογία πάει και το ΦΥΣΙΚΟ ΠΛΑΤΟΣ. Χωρίς αυτό, ένα
-  // banner 970px καθόταν στη μέση ενός κουτιού 1444px: το ύψος ήταν
-  // σωστό, αλλά δεξιά κι αριστερά έμενε άδειο πλαίσιο — μετρημένο,
-  // γέμιζε το 45%. Δεν το τεντώνουμε για να γεμίσει· μαζεύουμε το
-  // κουτί στο μέγεθός του.
   const style = ar ? ` style="--ad-ar:${ar};--ad-wpx:${Number(ad.w)}px"` : '';
 
   return `  <aside class="${cls}"${style} data-ad="${place}" aria-label="Διαφήμιση">
@@ -1153,25 +793,8 @@ ${inner}
   </aside>`;
 }
 
-// Παρεμβάλλει θέσεις ανάμεσα στις κάρτες μιας λίστας.
-//
-// Ανά 20 και όχι πυκνότερα: η σελίδα δείχνει 60 κάρτες, οπότε βγαίνουν
-// δύο θέσεις — μαζί με τη θέση του footer, τρεις σε όλη τη σελίδα.
-// Το ύφος που ζητήθηκε είναι «πολύς αέρας, λίγα στοιχεία ανά οθόνη».
-//
-// ΠΟΤΕ στο τέλος: εκεί ακολουθεί ήδη η θέση του footer, και δύο
-// διαφημίσεις η μία πάνω στην άλλη μοιάζουν με σελίδα-σκουπίδι.
 const CARDS_PER_AD = 20;
 
-// Είναι η λίστα ΟΛΗ βίντεο; Τότε οι κάρτες της παίρνουν πλαίσιο 16:9
-// αντί για τετράγωνο, και οι μικρογραφίες του YouTube γεμίζουν χωρίς
-// θολό πάνω-κάτω. Δες .grid--wide στο styles.css.
-//
-// «Σχεδόν όλα» και όχι «όλα»: η Αγροτική επικαιρότητα έχει 59 βίντεο
-// και ΕΝΑ podcast, και με απαίτηση για καθαρή λίστα έμενε αδιόρθωτη —
-// 59 κάρτες με θολό εξαιτίας μιας. Η μοναδική τετράγωνη αφίσα ΔΕΝ
-// κόβεται: μπαίνει ολόκληρη μέσα στο φαρδύ πλαίσιο, με το θολό της.
-// Δες .grid--wide .card[data-kind="podcast"] στο styles.css.
 const WIDE_SHARE = 0.8;
 
 function allVideo(items){
@@ -1196,27 +819,6 @@ function cardsWithAds(cards, place){
   return out.join('\n');
 }
 
-// ---- η κυματομορφή του player ----
-//
-// ΔΙΑΚΟΣΜΗΤΙΚΗ, όχι αληθινή: ΔΕΝ δείχνει πού μιλάει κάποιος και πού
-// υπάρχει σιωπή. Το λέμε καθαρά εδώ ώστε να μην το ανακαλύψει κανείς
-// με έκπληξη σε έξι μήνες.
-//
-// Γιατί όχι αληθινή: τα 1.059 επεισόδια είναι 25,7 GB. Για πραγματικά
-// peaks πρέπει να κατέβουν όλα και να περάσουν από ffmpeg. Γίνεται —
-// σταδιακά στο GitHub Actions, όπως οι απομαγνητοφωνήσεις — αλλά είναι
-// δουλειά ημερών και η προθεσμία είναι κοντά. Αν γίνει, αλλάζει ΜΟΝΟ
-// αυτή η συνάρτηση: η όψη και ο player μένουν ως έχουν.
-//
-// Σταθερή ανά επεισόδιο: βγαίνει από το id, άρα το ίδιο επεισόδιο
-// δείχνει πάντα την ίδια κυματομορφή — σε κάθε build και σε κάθε
-// συσκευή. Τυχαία θα «ανακατευόταν» σε κάθε ανανέωση.
-// Πολλά και λεπτά ραβδία, όπως του Buzzsprout.
-//
-// Είχαν γίνει 30 και χοντρά, και το αποτέλεσμα δεν διαβαζόταν ως ήχος:
-// είκοσι μπλοκ σχεδόν ίδιου ύψους μοιάζουν με μπάρα φόρτωσης. Η
-// κυματομορφή αναγνωρίζεται από την ΠΥΚΝΟΤΗΤΑ — πολλά λεπτά ραβδία με
-// μεγάλη διαφορά ύψους μεταξύ τους.
 const WAVE_BARS = 120;
 
 function waveMask(seed){
@@ -1231,54 +833,14 @@ function waveMask(seed){
 
   const bars = [];
   for (let i = 0; i < WAVE_BARS; i++) {
-    // Ένα ημίτονο δίνει το γενικό σχήμα — χωρίς αυτό οι μπάρες μοιάζουν
-    // με θόρυβο, όχι με ομιλία. Ο τυχαίος παράγοντας σπάει τη συμμετρία.
-    // Το ημίτονο δίνει το γενικό σχήμα. Ήταν 0.45 ± 0.3 και στο κάτω
-    // μέρος του κύματος η κυματομορφή ισοπεδωνόταν σε σχεδόν ευθεία
-    // γραμμή — έμοιαζε με σφάλμα φόρτωσης, όχι με ήχο. Μικρότερο
-    // εύρος γύρω από ψηλότερη βάση κρατά παντού ζωή.
-    // Δύο ημίτονα αντί για ένα: το αργό δίνει το γενικό ανέβασμα και
-    // κατέβασμα μιας κουβέντας, το γρήγορο τις συλλαβές από μέσα. Με
-    // ένα μόνο, και με στενό εύρος γύρω από ψηλή βάση, όλα τα ραβδία
-    // έβγαιναν σχεδόν ίδια — έμοιαζαν με χάρακα χρόνου, όχι με ήχο.
     const argo = Math.sin((i / WAVE_BARS) * Math.PI * 2.6);
     const grigoro = Math.sin((i / WAVE_BARS) * Math.PI * 9.4);
     const curve = 0.56 + 0.26 * argo + 0.13 * grigoro;
 
-    // Το κάτω όριο είναι χαμηλά επίτηδες: χρειάζονται και κοντά
-    // ραβδία για να φανούν ψηλά τα διπλανά τους. Χωρίς αυτά δεν
-    // υπάρχει δυναμική, άρα δεν μοιάζει με κυματομορφή.
-    // Πλατύ εύρος: το χαμηλότερο ραβδί πέφτει στο 12% και το ψηλότερο
-    // πιάνει το 100%. Με στενό εύρος όλα έβγαιναν στο ίδιο ύψος και η
-    // κυματομορφή έμοιαζε με χάρακα.
     const height = Math.max(0.12, Math.min(1, curve * (0.38 + next() * 1.25)));
     bars.push(height);
   }
 
-  // Το SVG γίνεται ΜΑΣΚΑ, όχι εικόνα: το χρώμα το δίνουν από κάτω τα
-  // δύο στρώματα του player. Έτσι το «παιγμένο» κόκκινο και το
-  // «υπόλοιπο» μπλε βγαίνουν με ένα μόνο width, όπως και πριν —
-  // ο player.js δεν χρειάστηκε να αλλάξει ούτε γραμμή.
-  // Το SVG μπαίνει σε HTML attribute και πολλαπλασιάζεται επί 1.059
-  // σελίδες, οπότε κάθε χαρακτήρας μετράει δύο φορές:
-  //
-  //   1) Εισαγωγικά — ΑΠΑΓΟΡΕΥΟΝΤΑΙ. Το πρώτο γράψιμο έβγαζε
-  //      style="--wave: url("data:...")" και το διπλό εισαγωγικό
-  //      τερμάτιζε το attribute στη μέση. Λύση: encodeURIComponent,
-  //      που τα κωδικοποιεί όλα, και url() χωρίς εισαγωγικά.
-  //
-  //   2) Μέγεθος — ακέραιες συντεταγμένες αντί για δεκαδικά, και
-  //      viewBox σε πλέγμα που βγάζει στρογγυλούς αριθμούς. Τα
-  //      δεκαδικά τριπλασίαζαν το μήκος χωρίς ορατή διαφορά.
-  //   3) ΜΙΑ διαδρομή, όχι 120 ορθογώνια. Με <rect> κάθε ραβδί ήθελε
-  //      x, y, width, height και rx — 48 χαρακτήρες πριν καν την
-  //      κωδικοποίηση, δηλαδή 11,8KB μάσκα μέσα σε σελίδα 39KB.
-  //      Μια διαδρομή με στρογγυλές άκρες γράφει «M1428 34v32»: τα
-  //      ίδια ραβδία, το ένα πέμπτο των χαρακτήρων.
-  //
-  // Βήμα 12, ραβδί 7: το ραβδί και το κενό του είναι σχεδόν ίσα, όπως
-  // στου Buzzsprout. Ήταν 14 στα 20 — δηλαδή το ραβδί έτρωγε το κενό
-  // και τα διπλανά κολλούσαν σε ενιαίο μπλοκ.
   const step = 12;
   const width = 7;
 
@@ -1296,27 +858,10 @@ function waveMask(seed){
   }).join('');
 
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${WAVE_BARS * step} 100' preserveAspectRatio='none'><path d='${d}' stroke='#fff' stroke-width='${width}' stroke-linecap='round'/></svg>`;
-  // Το encodeURIComponent αφήνει άθικτα τα ' ( ) ! * — δες τον ορισμό
-  // του. Μέσα σε url(...) χωρίς εισαγωγικά, ένα ' αρκεί για να μη
-  // διαβαστεί ο κανόνας καθόλου: η μάσκα δεν εφαρμοζόταν και ο player
-  // έβγαινε δύο συμπαγή ορθογώνια. Τα κωδικοποιούμε ρητά.
   const data = encodeURIComponent(svg).replace(/'/g, '%27').replace(/[()]/g, (c) => (c === '(' ? '%28' : '%29'));
   return `url(data:image/svg+xml,${data})`;
 }
 
-// Ο player του επεισοδίου, σε ΜΙΑ θέση.
-//
-// Ήταν γραμμένος τρεις φορές — σελίδα επεισοδίου, σελίδα βίντεο με
-// δίδυμο podcast, ενσωματωμένο επεισόδιο μέσα σε άρθρο — και κάθε
-// αλλαγή έπρεπε να γίνει τρεις φορές σωστά.
-//
-// Η διάταξη ακολουθεί τον player του Buzzsprout: εξώφυλλο αριστερά,
-// από πάνω δεξιά το όνομα της εκπομπής, μετά το στρογγυλό κουμπί δίπλα
-// στον τίτλο, η κυματομορφή σε όλο το πλάτος και οι χρόνοι από κάτω.
-//
-// Το μόνο που ΔΕΝ αντιγράφουμε είναι τα ±15: ο Buzzsprout δεν τα έχει,
-// αλλά εμείς τα είχαμε και αφαιρούνται μόνο αν το ζητήσει κάποιος —
-// μπαίνουν στη γραμμή των χρόνων, όπου δεν ανταγωνίζονται το ▶.
 function playerView({ id, src, title, show, art, href, indent = 8 }){
   const pad = ' '.repeat(indent);
   const p = (n, s) => `${' '.repeat(indent + n)}${s}`;
@@ -1397,15 +942,6 @@ function siteFooter(depth = 0){
   </footer>`;
 }
 
-// Το κύριο μενού, σε ΕΝΑ σημείο: το χρησιμοποιούν και η γραμμή της
-// κεφαλίδας και το πάνελ του κινητού. Οι διευθύνσεις γράφονται χωρίς
-// πρόθεμα· το «../» το βάζει όποιος το χρησιμοποιεί, ανάλογα με το βάθος.
-//
-// Το «Podcasts» δείχνει στο αρχείο όλων των επεισοδίων: είναι ο ΜΟΝΟΣ
-// δρόμος προς 87 επεισόδια που δεν έχουν ούτε εκπομπή ούτε θέμα.
-// Το «Video» έφυγε — και τα 3.027 βίντεο έχουν εκπομπή.
-// Η αναζήτηση έχει δικό της script, που δεν τρέχει αν η σελίδα μπει
-// μέσω της γρήγορης πλοήγησης· το data-reload τη φορτώνει κανονικά.
 const MENU = [
   ['Εκπομπές', 'shows.html'],
   ['Podcasts', 'episodes.html'],
@@ -1414,16 +950,6 @@ const MENU = [
   ['Αρχείο', 'search.html', true],
 ];
 
-// ---- το πάνελ του πλέγματος ----
-//
-// Το κύριο μενού ΔΕΝ κρύβεται: το πάνελ είναι επιπλέον, για το βάθος που
-// δεν χωράει πουθενά — 12 εκπομπές, 13 θέματα, 382 πρόσωπα.
-//
-// Κάτω από 760px παίρνει μέσα του και το κύριο μενού, οπότε η κεφαλίδα
-// του κινητού πέφτει από 170px (δύο σειρές) σε μία.
-//
-// Γεμίζει μία φορά στο main(), πριν γραφτεί οποιαδήποτε σελίδα: η
-// siteHeader καλείται από παντού και δεν μπορεί να κουβαλάει δεδομένα.
 let menuData = { shows: [], topics: [], people: [] };
 function indexMenu(showGroups, catGroups){
   menuData = {
@@ -1541,18 +1067,9 @@ function itemFromEpisode(ep){
   const vt = videoTwin(ep);
   return {
     kind: 'podcast',
-    // Ο κωδικός του Buzzsprout. Ίδιος λόγος με το itemFromVideo από
-    // κάτω: χωρίς αυτόν η sameItem() δεν αναγνώριζε το επεισόδιο όταν
-    // το διαχειριστικό το καρφιτσώνει με τον κωδικό του, και η επιλογή
-    // χανόταν χωρίς μήνυμα. Το βρήκαμε στα θέματα της αρχικής.
     id: ep.id,
     href: episodeUrl(ep),
     external: false,
-    // Η ταμπέλα γράφει ΤΟ ΘΕΜΑ, όχι την εκπομπή. Όλα εδώ είναι podcast,
-    // οπότε το «Podcast» δίπλα στο «Συνεντεύξεις» έλεγε δύο διαφορετικά
-    // είδη πράγματος στην ίδια θέση. Το αν είναι ήχος ή βίντεο το λέει
-    // πλέον το ΧΡΩΜΑ της ταμπέλας.
-    // Κενό όταν δεν ξέρουμε κατηγορία: δεν το γεμίζουμε με το είδος.
     label: episodeCategories(ep)[0] || '',
     name: guestOf(ep),
     title: decode(ep.headline),
@@ -1589,17 +1106,6 @@ function itemFromVideo(v){
   };
 }
 
-// ---- Τα άρθρα του newshub.gr που ανοίγουν ΕΔΩ ----
-//
-// Οδηγία του αφεντικού, 4 Νοεμβρίου: όσα άρθρα ανεβαίνουν στο Media
-// channel — τα must read και το πρωτοσέλιδο όταν είναι είδηση —
-// ανοίγουν σε δική μας σελίδα, με backlink προς το newshub.gr. Η ροή
-// ειδήσεων στο πλάι ΔΕΝ αλλάζει: εκείνη οδηγεί στο newshub.gr.
-//
-// Σελίδα παίρνει μόνο όποιο άρθρο έχει σώμα στο data/news-bodies/. Το
-// γράφει το fetch-news.js, και μόνο για όσα μπορεί να χρειαστούν.
-// Χωρίς σώμα, το άρθρο μένει εξωτερικός σύνδεσμος — ποτέ μισοάδεια
-// σελίδα, που θα έκανε ακριβώς το αντίθετο για το SEO.
 const bodyCache = new Map();
 function articleBody(id){
   if (bodyCache.has(id)) return bodyCache.get(id);
@@ -1655,31 +1161,13 @@ function card(item, depth = 0, rank = null){
   // Έτσι η λωρίδα-φίλτρο βρίσκει τις κάρτες της χωρίς να ρωτήσει διακομιστή.
   const topics = (item.topics || []).map(slugify).filter(Boolean).join(' ');
 
-  // Οι «extra» κάρτες υπάρχουν στη σελίδα για το φιλτράρισμα, αλλά μένουν
-  // κρυμμένες όσο δείχνουμε τα πιο πρόσφατα όλων των θεμάτων.
-  // Κρυμμένες ΑΠΟ ΕΔΩ, όχι από τη JavaScript: όποιος την έχει κλειστή
-  // βλέπει τα 24 πιο πρόσφατα, όχι και τα ενενήντα μαζί.
   const cls = ['card', item.extra ? 'is-extra' : '', item.lead ? 'card--lead' : '']
     .filter(Boolean).join(' ');
 
-  // Το YouTube δίνει τρία μεγέθη μικρογραφίας και ΔΕΝ είναι ίδιου σχήματος:
-  // το maxresdefault είναι καθαρό 16:9, ενώ το sddefault (640×480) και το
-  // hqdefault (480×360) είναι 4:3 με μαύρες λωρίδες πάνω και κάτω.
-  // 585 από τα βίντεό μας δεν έχουν maxres. Τα σημαδεύουμε εδώ, και το CSS
-  // τα μεγεθύνει τόσο όσο χρειάζεται για να φύγουν οι λωρίδες.
   const letterbox = /\/(sddefault|hqdefault)\.jpg/.test(item.image || '');
   const imgCls = `card-image${letterbox ? ' card-image--letterbox' : ''}`;
   const hide = item.extra ? ' hidden' : '';
 
-  // Το κείμενο κάθεται ΚΑΤΩ από την εικόνα, όχι μέσα της.
-  //
-  // Δοκιμάστηκε και μέσα, με σκίαση στο κάτω μέρος. Στις μεγάλες κάρτες
-  // της ροής διαβαζόταν· στις μικρές — λωρίδες θεμάτων, «και ακόμα»,
-  // spotlight — γινόταν χάος: τα εξώφυλλά μας είναι αφίσες με δικό τους
-  // κείμενο και πρόσωπα, και ο τίτλος μας έπεφτε από πάνω τους.
-  //
-  // Εδώ η εικόνα μένει ολόκληρη και καθαρή, και το κείμενο διαβάζεται
-  // πάντα — ανεξάρτητα από το πόσο μικρή είναι η κάρτα.
   return `<article class="${cls}"${hide} data-kind="${item.kind}"${topics ? ` data-topics="${topics}"` : ''}${rank === null ? '' : ` data-rank="${rank}"`}>
     <a class="card-link" href="${href}"${out}>
     <span class="card-media">
@@ -1701,11 +1189,6 @@ function card(item, depth = 0, rank = null){
   </article>`;
 }
 
-// Μέσα σε μπλοκ θέματος, η ετικέτα δείχνει ΤΟ ΘΕΜΑ ΤΟΥ ΜΠΛΟΚ.
-//
-// Ένα επεισόδιο ανήκει συχνά σε πολλές κατηγορίες, και η ετικέτα έπαιρνε
-// πάντα την πρώτη της λίστας. Έτσι, μέσα στο μπλοκ «Πολιτική» έβγαινε
-// ετικέτα «Γεωπολιτική» — σωστή για το επεισόδιο, λάθος για τη θέση.
 function inTopic(item, name){
   return { ...item, label: name, labelIsKind: false };
 }
@@ -1754,17 +1237,6 @@ function loadCuration(){
   }
 }
 
-// Οι ειδήσεις. Σήμερα το data/news.json είναι δείγμα· όταν έρθει το API
-// του newshub.gr, ένα fetch-news.js θα γράφει το ΙΔΙΟ αρχείο και δεν
-// αλλάζει τίποτα από εδώ και πάνω.
-// Ειδήσεις που δεν αναδημοσιεύουμε. Η λίστα ζει στο
-// data/roi-apokleismena.json — εκεί μέσα γράφει και γιατί, και εκεί
-// αλλάζει.
-//
-// Δεν είναι εδώ επειδή τη διαβάζει και το roi-se-kv.js, που στέλνει τη
-// ζωντανή ροή στο KV. Αν την είχαμε δύο φορές, κάποια μέρα θα έμπαινε
-// λέξη στη μία και όχι στην άλλη — και θα το μαθαίναμε από το άρθρο
-// που δεν έπρεπε να βγει.
 const NEWS_BLOCK = require('./data/roi-apokleismena.json');
 const NEWS_BLOCK_WORDS = NEWS_BLOCK.lexeis;
 const NEWS_BLOCK_CATEGORIES = NEWS_BLOCK.katigories;
@@ -1796,16 +1268,6 @@ function loadNews(){
   }
 }
 
-// ---- Τα ΔΙΚΑ ΜΑΣ άρθρα ----
-//
-// Γράφονται στο διαχειριστικό και ζουν στο data/articles.json. Δεν
-// υπάρχουν πουθενά αλλού: κανένα feed, καμία πηγή, μόνο εδώ. Γι' αυτό
-// και σε όλα διαφέρουν από τις αναδημοσιεύσεις — canonical σε εμάς,
-// μπαίνουν στο sitemap, καμία γραμμή προέλευσης.
-//
-// Το σχήμα του σώματος είναι ΤΟ ΙΔΙΟ με των ειδήσεων ({type, text}),
-// με δύο επιπλέον τύπους: image και embed. Έτσι ο κώδικας που τα
-// ζωγραφίζει μένει ένας.
 function loadOwnArticles(){
   if (!fs.existsSync(OWN_ARTICLES_FILE)) return [];
 
@@ -1891,12 +1353,6 @@ function itemFromOwnArticle(a){
   };
 }
 
-// Ποιο μπαίνει μεγάλο — podcast, video ή είδηση, ό,τι είναι σημαντικότερο.
-// Σειρά προτεραιότητας: επιλογή συντάκτη, μετά είδηση σημασμένη ως
-// featured, μετά το πιο πρόσφατο επεισόδιο.
-// Το πρωτοσέλιδο ΠΡΕΠΕΙ να έχει εικόνα: χωρίς αυτήν βγάζει ένα άδειο
-// σκούρο ορθογώνιο μισής οθόνης. Οπότε σε κάθε στάδιο προτιμάμε κάτι
-// που έχει, και μόνο ως έσχατη λύση δεχόμαστε κάτι χωρίς.
 function pickFeatured(items, curation){
   const withImage = items.filter((it) => it.hero);
 
@@ -1951,13 +1407,6 @@ function sameItem(it, want){
   const mine = strip(it.href);
   if (mine === target) return true;
 
-  // Η ΠΗΓΑΙΑ διεύθυνση, όταν το αντικείμενο ζει αλλού.
-  //
-  // Τα άρθρα του newshub.gr δείχνουν πλέον στη δική μας σελίδα, οπότε
-  // το href τους είναι «arthro/κάτι.html». Ο συντάκτης όμως κολλάει
-  // στο curation.json τη διεύθυνση που βλέπει στον browser — τη δική
-  // ΤΟΥΣ. Χωρίς αυτόν τον έλεγχο η επιλογή του αποτύγχανε σιωπηλά και
-  // η αρχική γύριζε στην αυτόματη, σαν να μην είχε γράψει τίποτα.
   if (it.source && strip(it.source) === target) return true;
 
   // Τελευταία ευκαιρία: μόνο το όνομα του αρχείου, χωρίς κατάληξη —
@@ -1966,19 +1415,6 @@ function sameItem(it, want){
   return tail(mine) === tail(target);
 }
 
-// Το καρφίτσωμα πιάνει και τις ΔΥΟ μορφές της ίδιας συζήτησης.
-//
-// Ίδιο πρόβλημα με την katigoriaApoDidimo, άλλη όψη του: ο συντάκτης
-// καρφιτσώνει στο διαχειριστικό το βίντεο που βλέπει, και η αρχική
-// κρατάει το επεισόδιο. Το καρφίτσωμα δεν έβρισκε ποτέ τίποτα και
-// σβηνόταν σιωπηλά — η θέση γέμιζε αυτόματα, σαν να μην πάτησε
-// κανείς τίποτα.
-//
-// Βρέθηκε δοκιμάζοντας: δύο καρφιτσωμένα στο θέμα «Κρήτη», κανένα
-// από τα δύο δεν έβγαινε στην αρχική.
-//
-// Επιστρέφει όλες τις γραφές που σημαίνουν το ίδιο πράγμα, ώστε να
-// δοκιμαστούν με τη σειρά.
 function refsDidimou(ref){
   const refs = [ref];
 
@@ -2010,22 +1446,6 @@ function curationExpired(curation){
   return !isNaN(until) && until < new Date();
 }
 
-// ---- πόσο ζει μια χειροκίνητη επιλογή ----
-//
-// Το πρωτοσέλιδο είχε από την αρχή ημερομηνία λήξης. Οι υπόλοιπες
-// λίστες δεν είχαν τίποτα, και αυτό φάνηκε στην πράξη: τα τέσσερα
-// «Must read» έμειναν κολλημένα δύο μέρες, ενώ είναι ειδήσεις.
-//
-// Δεν λήγουν όλα το ίδιο, γιατί δεν είναι το ίδιο πράγμα:
-//
-//   Must read  — ειδήσεις της ημέρας. Μπαγιατεύουν αμέσως.
-//   Τελευταία  — μια καλή συνέντευξη αξίζει να μείνει πάνω μια βδομάδα.
-//   Απόψεις    — ίδιος ρυθμός με τα Τελευταία.
-//   Θέματα     — εκεί καρφιτσώνεις κλασικές συζητήσεις, όχι επικαιρότητα.
-//
-// Η ημερομηνία κάθε επιλογής γράφεται από το διαχειριστικό στο
-// curation.pinnedAt. Επιλογή ΧΩΡΙΣ ημερομηνία θεωρείται φρέσκια: δεν
-// πετάμε τη δουλειά κανενός επειδή έγινε πριν μπει αυτός ο μηχανισμός.
 const PIN_ZOI = {
   mustRead: 3,
   latest: 7,
@@ -2047,27 +1467,6 @@ function freshPins(lista, refs, kleidi){
   });
 }
 
-// ---- τι έβγαλε ρητά ο δημοσιογράφος με το ✕ ----
-//
-// Το ✕ δεν αρκεί να σβήσει ένα καρφίτσωμα: το αυτόματο γέμισμα είναι
-// χρονολογικό, οπότε στο επόμενο build το ίδιο πράγμα ξαναέμπαινε μόνο
-// του, συχνά στην ίδια θέση. Μέχρι τις 14 Νοεμβρίου 2026 ο μόνος τρόπος
-// να κρατήσει το ✕ ήταν να καρφιτσωθούν ΟΛΕΣ οι θέσεις — που πάγωνε τη
-// ροή: τίποτα φρέσκο δεν ανέβαινε ποτέ, και η αρχική κουβαλούσε για
-// βδομάδες ό,τι έτυχε να είναι ορατό τη στιγμή που πατήθηκε το ✕.
-//
-// Άρα το «όχι αυτό» γράφεται ρητά, στο curation.hidden, με ημερομηνία:
-//
-//   "hidden": { "latest": { "episode/2011....html": "2026-11-14T09:00:00Z" } }
-//
-// Ζει όσο και ένα καρφίτσωμα της ίδιας λίστας (PIN_ZOI) — μετά η
-// επικαιρότητα έχει προχωρήσει, το πράγμα δεν θα ξαναβγεί μόνο του
-// από ημερομηνία, και δεν κρατάμε αιώνιες μαύρες λίστες.
-//
-// Πιάνει ΚΑΙ το δίδυμο: βγάζεις το βίντεο, δεν σου γυρίζει το podcast.
-//
-// Τα καρφιτσωμένα ΔΕΝ περνούν από εδώ. Αν κάποιος βγάλει κάτι και μετά
-// το καρφιτσώσει ο ίδιος, το εννοεί — το χέρι υπερισχύει.
 function kryfa(lista, kleidi){
   const stamps = (curation().hidden || {})[kleidi || lista] || {};
   const life = PIN_ZOI[lista];
@@ -2086,24 +1485,6 @@ function kryfa(lista, kleidi){
   return (it) => zonta.some((refs) => sameOrTwin(it, refs));
 }
 
-// Τα 4 από κάτω. Όσα όρισε ο συντάκτης πρώτα, μετά γεμίζουμε εναλλάξ
-// είδηση–podcast ώστε να μη βγαίνουν τέσσερα ίδιου τύπου.
-// Τα καρφιτσωμένα της ροής «Τελευταία»: ποια θέλει ο δημοσιογράφος να
-// φαίνονται πρώτα, και με ΠΟΙΑ ΣΕΙΡΑ.
-//
-// Γιατί υπάρχει: η ροή είναι καθαρά χρονολογική, και μια καλή συνέντευξη
-// πέφτει κάτω μέσα σε δύο μέρες. Κάποια αξίζουν να μείνουν πάνω για
-// βδομάδες — αυτό δεν βγαίνει από ημερομηνία, το ξέρει μόνο άνθρωπος.
-//
-// ΔΕΝ βάζουμε ημερομηνία λήξης, σε αντίθεση με το πρωτοσέλιδο. Εκεί η
-// δικλείδα χρειάζεται γιατί μια ξεχασμένη γραμμή παγώνει ΟΛΗ την
-// αρχική. Εδώ το ξεχασμένο καρφίτσωμα πιάνει μία θέση από τις εννιά,
-// και οι υπόλοιπες συνεχίζουν να ανανεώνονται κανονικά — ενώ το «να
-// μείνει πολύ καιρό» είναι ακριβώς ο σκοπός. Το διαχειριστικό δείχνει
-// πόσο παλιό είναι το καθένα, ώστε να φαίνεται τι ξεχάστηκε.
-//
-// Ό,τι δεν βρεθεί αγνοείται σιωπηλά: ένα επεισόδιο μπορεί να έχει βγει
-// από τα 40 πιο πρόσφατα, και δεν θέλουμε να ρίξει το build.
 function pinnedFlow(curation, pools){
   const want = freshPins('latest', (curation.latest || []).map((s) => String(s).trim()).filter(Boolean));
   if (!want.length) return [];
@@ -2144,14 +1525,6 @@ function pickSecondary(items, curation, featured){
   return out.slice(0, 4);
 }
 
-// Πόσο πλατιά είναι ΣΤΗΝ ΠΡΑΓΜΑΤΙΚΟΤΗΤΑ η εικόνα. Δεν το μαντεύουμε: το
-// λέει η ίδια η διεύθυνση.
-//   · ειδήσεις  — static.newshub.gr/765x435/... (μόνο αυτό το μέγεθος
-//     υπάρχει· δοκιμάστηκαν 1200, 1600, 1920 και απαντά 404)
-//   · YouTube   — maxresdefault 1280, sddefault 640, hqdefault 480
-//   · Buzzsprout— οι αφίσες είναι 1400×1400
-// Το χρειάζεται το πρωτοσέλιδο, για να μην τραβήξει μια μικρή φωτογραφία
-// στα 1600 και τη θολώσει.
 function naturalWidth(url = ''){
   const nh = url.match(/static\.newshub\.gr\/(\d+)x\d+\//);
   if (nh) return Number(nh[1]);
@@ -2174,15 +1547,6 @@ function naturalRatio(url = ''){
 function heroBanner(item){
   const out = item.external ? ' target="_blank" rel="noopener"' : '';
 
-  // ΔΥΟ ΣΧΗΜΑΤΑ ΠΗΓΗΣ, ΔΥΟ ΣΥΜΠΕΡΙΦΟΡΕΣ — και στις δύο ολόκληρη εικόνα.
-  //
-  // · ΕΙΔΗΣΗ / ΒΙΝΤΕΟ: η φωτογραφία είναι φαρδιά, οπότε η λωρίδα παίρνει
-  //   ΤΟ ΣΧΗΜΑ ΤΗΣ και τη γεμίζει από άκρη σε άκρη. Μηδέν θολό.
-  // · PODCAST: η αφίσα είναι τετράγωνη. Σε φαρδιά λωρίδα ή θα κοπεί ή θα
-  //   αφήσει κενό — διαλέγουμε το κενό, και το γεμίζει η ίδια θολωμένη.
-  //
-  // Ο τίτλος δεν κάθεται πάνω στην εικόνα σε καμία περίπτωση: πάει από
-  // κάτω, στη ροή, όπου διαβάζεται χωρίς σκιές.
   const art = item.kind === 'podcast' && naturalRatio(item.hero) < 1.3;
   const ar = naturalRatio(item.hero).toFixed(3);
 
@@ -2207,18 +1571,6 @@ function heroBanner(item){
 
 // ---- εκπομπές ----
 
-// Τα βίντεο από τις λίστες του YouTube. Κάθε βίντεο ξέρει ήδη σε ποια
-// εκπομπή ανήκει — δεν μαντεύουμε τίποτα, ήρθε μέσα από τη λίστα της.
-//
-// Διαβάζεται ΜΙΑ φορά και μένει στη μνήμη: δέκα σημεία το ζητούν, και
-// κάθε φορά ξαναδιάβαζε και ξαναδιάβαζε 2MB JSON.
-//
-// Το ίδιο βίντεο σε δύο λίστες μένει δύο φορές ΕΠΙΤΗΔΕΣ — έτσι φαίνεται
-// και στις δύο εκπομπές. Φεύγουν μόνο οι πανομοιότυπες εγγραφές (ίδιο
-// βίντεο, ίδια εκπομπή), που έδειχναν το ίδιο βίντεο δύο φορές στη σειρά
-// μέσα στην ίδια λωρίδα. Το ξεκαθάρισμα γίνεται και εδώ και στο
-// fetch-videos.js: το δεύτερο θέλει YOUTUBE_API_KEY για να ξανατρέξει,
-// οπότε το build δεν πρέπει να περιμένει καθαρό αρχείο για να δουλέψει.
 let videoCache;
 function loadVideos(){
   if (videoCache) return videoCache;
@@ -2239,13 +1591,6 @@ function loadVideos(){
   }
 }
 
-// Το ίδιο βίντεο ΜΙΑ φορά, όποιες λίστες κι αν το έχουν.
-//
-// Το loadVideos() κρατάει επίτηδες και τις δύο εγγραφές ενός βίντεο που
-// ανήκει σε δύο εκπομπές — έτσι φαίνεται και στις δύο λωρίδες. Όπου
-// όμως μετράμε ανθρώπους, το διπλό θα μετρούσε δύο εμφανίσεις για μία
-// συνέντευξη, και η σελίδα του προσώπου θα έδειχνε την ίδια κάρτα δυο
-// και τρεις φορές.
 let videosOnceCache;
 function videosOnce(){
   if (videosOnceCache) return videosOnceCache;
@@ -2265,28 +1610,6 @@ function einaiVideo(x){
   return !!(x && x.embed);
 }
 
-// ---- τα επεισόδια, με διορθωμένη ημερομηνία ----
-//
-// Το Buzzsprout δίνει «πότε ανέβηκε το podcast», όχι «πότε έγινε η
-// συνέντευξη». Τα δύο απέχουν: στα 770 ζευγάρια που βρίσκουμε, το
-// podcast βγαίνει κατά μέσο όρο 1,7 μέρες μετά το βίντεο.
-//
-// Το αποτέλεσμα το είδε χρήστης: συνέντευξη της 31ης Οκτωβρίου —
-// έτσι τη γράφει και το newshub.gr και το YouTube — έβγαινε εδώ ως
-// «χθες», επειδή το podcast ανέβηκε πέντε μέρες αργότερα. Σε
-// ειδησεογραφικό site αυτό δεν είναι λεπτομέρεια.
-//
-// Παίρνουμε λοιπόν την ημερομηνία του βίντεο όταν είναι παλιότερη.
-//
-// ΜΕ ΟΡΙΟ 30 ΗΜΕΡΩΝ, και ο λόγος είναι πραγματικός: υπάρχουν βίντεο
-// του 2024 που ξαναβγήκαν ως podcast το 2026 — ολόκληρες σειρές, σαν
-// τα «25 μαθήματα ελληνικής ιστορίας», 620 μέρες μετά. Εκείνες είναι
-// ΕΠΑΝΕΚΔΟΣΕΙΣ: το newsroom τις ανέβασε επίτηδες για να ξαναφανούν,
-// και αν τις γυρίζαμε στο 2024 δεν θα τις έβλεπε ποτέ κανείς.
-//
-// Το όριο είναι αυθαίρετο και το παραδεχόμαστε. Στις τελευταίες 90
-// μέρες κανένα από τα 140 επεισόδια δεν ξεπερνά τις 7 — οπότε οι 30
-// αφήνουν χώρο χωρίς να αγγίζουν την κανονική ροή.
 const AIR_WINDOW_DAYS = 30;
 
 function airDate(ep){
@@ -2302,10 +1625,6 @@ function airDate(ep){
   return new Date(vid).toISOString();
 }
 
-// Ένας κατάλογος για όλο το build. Ήταν τέσσερα ξεχωριστά διαβάσματα
-// του ίδιου αρχείου, άρα τέσσερα ανεξάρτητα αντίγραφα: η διόρθωση σε
-// ένα δεν θα φαινόταν στα άλλα, και η σελίδα βίντεο θα έγραφε άλλη
-// ημερομηνία από τη σελίδα επεισοδίου.
 let episodeCache;
 function loadEpisodes(){
   if (episodeCache) return episodeCache;
@@ -2323,27 +1642,7 @@ function loadEpisodes(){
   // επεισόδια θα γύριζε ατέρμονα.
   episodeCache = list;
 
-  // ---- Οι διορθώσεις του συντάκτη ----
-  //
-  // Το Buzzsprout και το YouTube είναι ΜΟΝΟ ΓΙΑ ΑΝΑΓΝΩΣΗ — δεν τα
-  // αγγίζουμε ποτέ. Ο δημοσιογράφος όμως πρέπει να μπορεί να
-  // διορθώσει τίτλο, περιγραφή ή φωτογραφία χωρίς να περιμένει
-  // κανέναν, και χωρίς να μάθει καινούριο εργαλείο.
-  //
-  // Μπαίνουν ΕΔΩ, στο ένα σημείο που διαβάζει τα επεισόδια, ώστε να τις
-  // δουν όλα μαζί: κάρτες, σελίδα, αναζήτηση, ζευγάρωμα με βίντεο,
-  // σελίδα καλεσμένου. Αν τις βάζαμε στην εμφάνιση, θα έπρεπε να τις
-  // θυμόμαστε σε δεκαπέντε μέρη και θα ξεχνιόταν το δέκατο έκτο.
-  //
-  // ΝΙΚΑΕΙ ΠΑΝΤΑ Ο ΑΝΘΡΩΠΟΣ. Ό,τι γράφτηκε εδώ δεν το σβήνει καμία
-  // επόμενη λήψη — ακόμα κι αν αλλάξει το Buzzsprout. Αλλιώς η
-  // διόρθωση θα εξαφανιζόταν μόνη της μέσα στην επόμενη μισή ώρα και
-  // κανείς δεν θα καταλάβαινε γιατί.
   for (const ep of list) {
-    // Η διεύθυνση κλειδώνει ΠΡΙΝ αλλάξει ο τίτλος, και δεν ξεκλειδώνει
-    // ποτέ: οι σελίδες επεισοδίου είναι ήδη μοιρασμένες και ευρετη-
-    // ριασμένες. Ένας διορθωμένος τίτλος δεν αξίζει 1.074 σπασμένους
-    // συνδέσμους.
     ep.slug = ep.headline;
 
     const fix = pairOf(ep);
@@ -2369,20 +1668,6 @@ function loadEpisodes(){
     if (fix.image) ep.image = String(fix.image);
   }
 
-  // Ποιος μιλάει. ΜΕΤΑ τις διορθώσεις του συντάκτη, γιατί διαβάζει τον
-  // διορθωμένο τίτλο, και πάνω σε ΟΛΗ τη λίστα μαζί: το λεξικό και η
-  // ένωση των γραφών χρειάζονται να ξέρουν τι βγήκε στα άλλα επεισόδια.
-  // ΚΑΙ ΤΑ ΒΙΝΤΕΟ ΜΑΖΙ, στο ίδιο πέρασμα.
-  //
-  // Ως τις 15 Νοεμβρίου 2026 τα πρόσωπα έβγαιναν ΜΟΝΟ από τα επεισόδια
-  // του podcast. Ένα βίντεο που δεν είχε δίδυμο επεισόδιο δεν έφτιαχνε
-  // ποτέ πρόσωπο, και το πάνελ «Καλεσμένος» έμενε άδειο ακόμα κι όταν
-  // ο τίτλος φώναζε το όνομα.
-  //
-  // Μαζί στο ίδιο πέρασμα και ΟΧΙ σε δεύτερο, επειδή η ένωση των γραφών
-  // χρειάζεται να τα βλέπει όλα: το YouTube γράφει «Κ. Λουκόπουλος» και
-  // το Buzzsprout «Κωνσταντίνος Λουκόπουλος». Σε δύο χωριστά περάσματα
-  // θα έβγαιναν δύο άνθρωποι με μοιρασμένες εμφανίσεις.
   valeProsopa([...list, ...videosOnce()]);
 
   for (const ep of list) {
@@ -2404,11 +1689,6 @@ function videoUrl(v){
   return `video/${v.id}-${slugify(v.title)}.html`;
 }
 
-// Σελίδα βίντεο. Το βίντεο ΠΑΙΖΕΙ ΕΔΩ — δεν στέλνουμε τον κόσμο στο
-// YouTube. Αλλά δεν φορτώνουμε και τον player τους αμέσως: δείχνουμε τη
-// μικρογραφία με κουμπί, και το πραγματικό βίντεο μπαίνει μόνο αν πατηθεί.
-// Έτσι η σελίδα ανοίγει ακαριαία και δεν φορτώνει τίποτα ξένο πριν το
-// ζητήσει ο επισκέπτης — ο κανόνας των σημειώσεων για ταχύτητα.
 function videoPage(v, category){
   const title = esc(decode(v.title));
 
@@ -2423,10 +1703,6 @@ function videoPage(v, category){
   // συμπεριφορά με τη σελίδα επεισοδίου. Αυτό ήταν που διέφερε.
   const twin = episodeTwin(v);
 
-  // Το κείμενο της σελίδας. Προηγείται ΠΑΝΤΑ το επεισόδιο: εκεί γράφει
-  // η σύνταξη την κανονική περιγραφή, με παραγράφους και σημεία. Η
-  // περιγραφή του YouTube είναι η εφεδρεία για τα 2.195 βίντεο που δεν
-  // έχουν δίδυμο — αυτά έβγαιναν ως τώρα με σκέτο τίτλο και τίποτα άλλο.
   const keimeno = (twin && twin.summary) || v.summary || '';
 
   const meta = [
@@ -2498,11 +1774,6 @@ ${twin ? '          <span class="strip-note">Η θέση σου κρατιέτα
         ${cats[0] ? `<p class="card-label">${esc(cats[0])}</p>` : ''}
         <h1 class="episode-title">${title}</h1>
         <p class="episode-meta">${meta}</p>
-${/* ΜΕΣΑ από το summaryHtml, ποτέ ωμό. Με σκέτο esc() έφταναν εδώ οι
-     hashtags και όλοι οι σύνδεσμοι Apple/Spotify/YouTube/facebook/
-     twitter/instagram/TikTok της ουράς του Buzzsprout — και μάλιστα
-     σαν ένα κατεβατό, γιατί χάνονταν και οι παράγραφοι. Η σελίδα
-     επεισοδίου το έκανε σωστά από την αρχή· η σελίδα βίντεο όχι. */ ''}
 ${keimeno ? summaryHtml(keimeno) : ''}
 
         <p class="episode-links">
@@ -2510,10 +1781,6 @@ ${keimeno ? summaryHtml(keimeno) : ''}
           ${twin ? `<a href="../${episodeUrl(twin)}">Η σελίδα του επεισοδίου →</a>` : ''}
         </p>
 
-${/* Κάτω από το βίντεο, την περιγραφή και τους συνδέσμους, και πριν
-     το «Επόμενο». Δηλαδή αφού τελειώσει ό,τι ήρθε να δει ο επισκέπτης
-     και πριν του προταθεί το επόμενο — το φυσικό σημείο παύσης.
-     ΠΟΤΕ πιο πάνω: ο player κάθεται στην κορυφή αυτής της στήλης. */ ''}
 ${adSlot('video-mid', 'leaderboard')}
 
         ${queue ? `<section class="queue">
@@ -2569,39 +1836,6 @@ ${showBannerBox(v.show, 1)}
   });
 }
 
-// Η σελίδα ενός άρθρου του newshub.gr, φιλοξενούμενη εδώ.
-//
-// Τρία πράγματα την κρατούν τίμια απέναντι στην πηγή, και τα τρία
-// είναι απαίτηση — χωρίς αυτά η σελίδα θα ανταγωνιζόταν το πρωτότυπο
-// αντί να το στηρίζει:
-//   1. canonical προς το newshub.gr
-//   2. η προέλευση γραμμένη ΠΑΝΩ από το κείμενο, όχι κρυμμένη στο τέλος
-//   3. σύνδεσμος πίσω στο πρωτότυπο, χωρίς nofollow
-//
-// Έξω από το sitemap μας: σελίδα που δηλώνει αλλού το πρωτότυπό της
-// δεν ζητάει ευρετηρίαση για τον εαυτό της.
-// Το hasCat λέει αν υπάρχει ΔΙΚΗ μας σελίδα γι' αυτή την κατηγορία.
-// Τέσσερις από τις δικές τους — Sugar, Τα εν οίκω, Έξοδος,
-// Προσωπογραφίες — δεν έχουν, γιατί δεν έχουμε περιεχόμενο εκεί. Η
-// ετικέτα γράφεται πάντα, αλλά γίνεται σύνδεσμος μόνο όταν οδηγεί
-// κάπου.
-// Το σώμα ενός άρθρου σε HTML. Κοινό για τις αναδημοσιεύσεις και για
-// τα δικά μας: οι πρώτες φέρνουν μόνο p και h, τα δεύτερα και εικόνες
-// και ενσωματώσεις.
-//
-// Ό,τι δεν αναγνωρίζεται ΠΑΡΑΛΕΙΠΕΤΑΙ σιωπηλά αντί να τυπωθεί ωμό. Το
-// data/articles.json το γράφει το διαχειριστικό, δηλαδή τελικά ένας
-// browser — δεν το εμπιστευόμαστε να βγει αυτούσιο στη σελίδα.
-// Πού μπαίνει η διαφήμιση μέσα στο κείμενο — ή πουθενά.
-//
-// Μετά την τρίτη παράγραφο: ο αναγνώστης έχει ήδη μπει στο θέμα και
-// δεν τον σταματάμε στην πρώτη ανάσα. Και μόνο σε άρθρα με έξι
-// παραγράφους και πάνω — σε τρισέλιδο κείμενο η θέση θα κατέληγε
-// δίπλα σε εκείνη του footer, δύο διαφημίσεις μαζί.
-//
-// ΠΟΤΕ ακριβώς πάνω από player: ρητή απαίτηση του αφεντικού. Αν η
-// επόμενη ενότητα είναι ενσωμάτωση — βίντεο ή επεισόδιο που ακούγεται
-// μέσα στο άρθρο — προσπερνάμε και ψάχνουμε την επόμενη παράγραφο.
 const AD_AFTER_PARAS = 3;
 const AD_MIN_PARAS = 6;
 
@@ -2639,11 +1873,6 @@ function articleBodyHtml(body){
     // μπει ξένο script στη σελίδα.
     if (p.type === 'embed' && p.id) {
       if (p.kind === 'youtube' && /^[\w-]{6,20}$/.test(p.id)) {
-        // ΠΛΗΡΗΣ διεύθυνση, όχι σκέτος κωδικός: ο player γράφει
-        // iframe.src = data-embed + '?autoplay=1', όπως ακριβώς κάνει και
-        // στις σελίδες βίντεο, όπου το πεδίο embed είναι ήδη ολόκληρο
-        // το https://www.youtube.com/embed/... Με σκέτο τον κωδικό έβγαινε
-        // σχετικός σύνδεσμος και το βίντεο του άρθρου δεν έπαιζε ποτέ.
         return `        <div class="art-embed stage-media" data-embed="https://www.youtube.com/embed/${esc(p.id)}">
           <img src="https://i.ytimg.com/vi/${esc(p.id)}/hqdefault.jpg" alt="" loading="lazy">
           <button type="button" class="video-play" aria-label="Αναπαραγωγή">▶</button>
@@ -2660,13 +1889,6 @@ function articleBodyHtml(body){
             </span>
           </a>`;
 
-          // Με τον διακόπτη του διαχειριστικού το επεισόδιο ΑΚΟΥΓΕΤΑΙ εδώ,
-          // χωρίς ο αναγνώστης να φύγει από το άρθρο. Είναι η ίδια όψη με
-          // τη σελίδα επεισοδίου — το player.js δέχεται ήδη πολλές όψεις
-          // στην ίδια σελίδα και δείχνει σε καθεμία μόνο το δικό της
-          // επεισόδιο, οπότε δύο ενσωματωμένα επεισόδια σε ένα άρθρο δεν
-          // μπερδεύονται. Η κάρτα μένει από πάνω: λέει ΤΙ ακούς, και
-          // οδηγεί στη σελίδα του αν θες περιγραφή και απομαγνητοφώνηση.
           if (p.play && ep.audio) {
             const show = episodeShow(ep);
             return `        <div class="art-embed-play">
@@ -2778,23 +2000,6 @@ ${adSlot('article-end', 'leaderboard')}
   });
 }
 
-// Η σελίδα ενός ΔΙΚΟΥ ΜΑΣ άρθρου, γραμμένου στο διαχειριστικό.
-//
-// Σχεδόν ίδια όψη με την αναδημοσίευση — ο αναγνώστης δεν πρέπει να
-// μαθαίνει δεύτερη διάταξη — αλλά τρία πράγματα αλλάζουν, και όλα
-// λένε «αυτό είναι δικό μας»:
-//   · canonical στη δική μας διεύθυνση (το βάζει μόνο του το page)
-//   · καμία γραμμή προέλευσης, κανένα backlink
-//   · υπογραφή του δημοσιογράφου
-// ---- Ο δημοσιογράφος που υπογράφει ----
-//
-// Κάθε υπογραφή γίνεται σελίδα με όλα τα άρθρα του μέσα στο
-// newshubmedia. Μέχρι τώρα το όνομα ήταν σκέτο κείμενο: ο αναγνώστης
-// που ήθελε «κι άλλο από αυτόν» δεν είχε πού να πατήσει.
-//
-// Ξεχωριστός φάκελος από τους καλεσμένους (/guest/): άλλο πράγμα
-// ποιος μίλησε σε podcast, άλλο ποιος έγραψε άρθρο. Ο ίδιος άνθρωπος
-// μπορεί να είναι και τα δύο, και οι δύο σελίδες λένε άλλη ιστορία.
 function writerUrl(name){
   return `arthrografos/${slugify(name)}.html`;
 }
@@ -2881,14 +2086,6 @@ ${cards}
   });
 }
 
-// Η περίληψη ενός δικού μας άρθρου.
-//
-// Έφυγε από το διαχειριστικό: ο συντάκτης έγραφε δύο φορές το ίδιο
-// πράγμα, και η δεύτερη φορά ήταν πάντα βιαστική. Τη βγάζουμε από την
-// πρώτη παράγραφο — εκεί ζει ούτως ή άλλως η είδηση.
-//
-// Ό,τι γράφτηκε με το χέρι παλιότερα μένει και κερδίζει: δεν σβήνουμε
-// δουλειά ανθρώπου επειδή αλλάξαμε γνώμη για τη φόρμα.
 const SUMMARY_CHARS = 200;
 
 function ownSummary(a){
@@ -2908,11 +2105,6 @@ function ownSummary(a){
 function ownArticlePage(a, hasCat = false){
   const title = esc(a.title);
 
-  // Σκέτο το όνομα. Το «από τον/την Γιώργος Παυλουδής» θέλει γενική
-  // («του Γιώργου Παυλουδή»), και τη γενική δεν τη βγάζουμε από
-  // ονομαστική χωρίς να ξέρουμε το όνομα — ούτε το φύλο, που δεν το
-  // ρωτάμε. Τα περισσότερα site γράφουν σκέτο το όνομα· το ίδιο.
-  // Το όνομα πατιέται και οδηγεί σε όλα του τα άρθρα — δες writerPage().
   const byline = [
     a.author ? `<a class="art-by" href="../${writerUrl(a.author)}">${esc(a.author)}</a>` : '',
     formatDate(a.date),
@@ -2971,13 +2163,6 @@ ${adSlot('article-end', 'leaderboard')}
     image: a.image || '',
     url: ownArticleUrl(a),
     type: 'article',
-    // ΜΟΝΟ εδώ μπαίνει NewsArticle, και μόνο επειδή το άρθρο είναι
-    // δικό μας. Στις αναδημοσιεύσεις του newshub.gr δεν μπαίνει: εκεί
-    // το canonical δηλώνει ότι το πρωτότυπο είναι αλλού, και δομημένα
-    // δεδομένα εδώ θα διεκδικούσαν ξένη δουλειά.
-    //
-    // Το dateModified λείπει επίτηδες — δεν κρατάμε ώρα διόρθωσης, και
-    // δεν γράφουμε ημερομηνία που δεν ξέρουμε.
     jsonld: [
       {
         '@type': 'NewsArticle',
@@ -3002,29 +2187,6 @@ ${adSlot('article-end', 'leaderboard')}
   });
 }
 
-// ---- κατηγορίες ----
-//
-// Οι ίδιες με το newshub.gr, με τη μόνη αλλαγή που ζήτησε το αφεντικό:
-// η «Ιστορία - Πολιτισμός» σπάει στα δύο.
-//
-// Η κατηγορία ΔΕΝ βγαίνει αξιόπιστα από το κείμενο — το μετρήσαμε. Οπότε
-// η αλήθεια έρχεται από το διαχειριστικό (data/curation.json) και αυτό
-// εδώ είναι μόνο ΠΡΟΤΑΣΗ, για να μην ξεκινά ο συντάκτης από το μηδέν.
-//
-// Η σειρά μετράει: από την πιο ειδική προς την πιο γενική. Όταν ένας
-// τίτλος ταιριάζει σε πολλές, κερδίζει η πρώτη.
-// Κάθε ρίζα λέει ΠΟΥ επιτρέπεται να βρεθεί μέσα στη λέξη:
-//
-//   χωρίς σημάδι  →  στην ΑΡΧΗ της λέξης  (αμπελ: «αμπέλι» ναι, «ΚαρΑΜΠΕΛιάς» όχι)
-//   «~» μπροστά   →  ΟΠΟΥΔΗΠΟΤΕ μέσα στη λέξη, για τα σύνθετα
-//                    (~κρητ: «Παγκρήτιο», ~υπουργ: «υφυπουργός»)
-//   «=» μπροστά   →  ΟΛΟΚΛΗΡΗ η λέξη  (=νατο, =οφη, =ηπα, =αεπ)
-//
-// Πριν ψάχναμε παντού μέσα στο κείμενο, και η ρίζα έπιανε λέξεις που δεν
-// μιλούσαν για το θέμα: το «νατο» μέσα στην «ΑΝΑΤΟλή» και στον «θάΝΑΤΟ»
-// (73 τίτλοι), το «ποιητ» μέσα στο «ανοσοΠΟΙΗΤικό» (11), το «αθηνα» μέσα
-// στον «ΠαναΘΗΝΑϊκό». Τα κενά-μπαλώματα (' αμπελ', ' οφη ', ' χανι') δεν
-// χρειάζονται πια — τα λύνει η αρχή λέξης.
 const CATEGORIES = [
   ['Agronews',    ['αγροτ', '~καλλιεργ', 'ελαιολαδ', 'αμπελ', '~κτηνοτροφ', 'γεωργ', '~φυτοφαρμακ', '~κτηνιατρ']],
   ['Tech-Hub',    ['τεχνολογ', 'ψηφιακ', 'τεχνητη νοημοσυν', 'διαδικτυ', 'λογισμικ', 'ρομποτ']],
@@ -3040,11 +2202,6 @@ const CATEGORIES = [
   ['Γεωπολιτική', ['γεωπολιτικ', '~τουρκι', '=νατο', '~ισραηλ', '~ουκραν', '~αμυν', '~πολεμ', 'εξοπλισ',
     'ερντογαν', 'αιγαι', 'μεσ ανατολ', 'ορμουζ', 'χουθι', 'χαμας', 'γαζα', 'συρια', 'κυπριακ', 'πυραυλ']],
   ['Οικονομία',   ['οικονομ', 'γεωοικονομ', '~πληθωρισμ', 'επενδυσ', 'φορολογ', 'τραπεζ', '=αεπ', 'ενεργειακ',
-    // ΜΟΝΟ «επιχειρημ-» (επιχειρηματίες, επιχειρηματικότητα). Η λέξη
-    // «επιχειρήσεις» ΔΕΝ μπαίνει με τίποτα: είναι η ίδια ακριβώς λέξη
-    // με τις στρατιωτικές «Ειδικές Επιχειρήσεις», και το «επιχειρήσει»
-    // είναι ρήμα («θα επιχειρήσει να επιβάλλει»). Δεν ξεχωρίζουν από
-    // τον τύπο της λέξης — μόνο από το νόημα.
     'επιχειρημ', 'συνταξ', 'αγορα', 'εμποριο', 'ακριβεια']],
   ['Πολιτική',    ['~κυβερνησ', 'βουλη', '~εκλογ', '~κομμα', '~υπουργ', 'πρωθυπουργ', 'συνταγμ',
     'πολιτικ', 'μητσοτακ', 'τσιπρα', 'συριζα', 'πασοκ', 'δημοκρατ', 'ακροδεξ', '~αριστερ',
@@ -3088,24 +2245,8 @@ function rizaTairiazei(words, { parts, pou }){
   return false;
 }
 
-// Τα θέματα που παίρνουν δική τους λωρίδα στην αρχική, με σειρά. Τα
-// υπόλοιπα φαίνονται στη λωρίδα-φίλτρο και στη σελίδα «Τα θέματά μας».
-//
-// Διαλεγμένα ώστε να διαφέρουν μεταξύ τους: ο τόπος, ο κόσμος, η οικονομία
-// της Κρήτης, το αρχείο. Τέσσερις λωρίδες «Κρήτη / Ελλάδα / Κόσμος /
-// Γεωπολιτική» θα έλεγαν τέσσερις φορές το ίδιο πράγμα.
-//
-// ΑΛΛΑΖΕΙ ΕΔΩ, και πουθενά αλλού. Αργότερα το διαχειριστικό θα γράφει
-// featuredTopics στο data/curation.json και θα υπερισχύει αυτής της λίστας.
-// Η Πολιτική μπαίνει ανάμεσα στο Agronews και την Ιστορία, όχι δίπλα
-// στη Γεωπολιτική: δύο γειτονικές λωρίδες με παρόμοιο όνομα διαβάζονται
-// σαν η ίδια ενότητα δύο φορές.
 const FEATURED_TOPICS = ['Κρήτη', 'Γεωπολιτική', 'Πολιτική', 'Ιστορία'];
 
-// Θέματα με δική τους ενότητα σε χρωματιστό πλαίσιο, κάτω από το «Και
-// ακόμα». Κάθε ένα έχει δικό του γραφικό — γι' αυτό δηλώνεται και η
-// παραλλαγή του. Δεν μπαίνουν ούτε στις κύριες λωρίδες ούτε στο «Και
-// ακόμα», αλλιώς θα εμφανίζονταν δύο φορές.
 const SPOTLIGHT_TOPICS = [
   ['Agronews', 'agro', 'Η γη της Κρήτης, από το χωράφι στην αγορά'],
   ['Tech-Hub', 'tech', 'Τεχνολογία, ψηφιακά και τεχνητή νοημοσύνη'],
@@ -3131,13 +2272,6 @@ function featuredTopics(){
   return names.slice(0, FEATURED_MAX);
 }
 
-// Τα θέματα σε πλαίσιο. Η παραλλαγή του γραφικού ΔΕΝ ακολουθεί το θέμα
-// αλλά τη ΘΕΣΗ: η πρώτη ενότητα βγαίνει πράσινη, η δεύτερη μπλε. Έτσι
-// ο συντάκτης μπορεί να βάλει όποιο θέμα θέλει χωρίς να γραφτεί χρώμα
-// και εικονίδιο γι' αυτό.
-//
-// Ό,τι έχει ήδη λωρίδα δεν ξαναμπαίνει εδώ: θα έβγαινε δύο φορές στην
-// ίδια σελίδα, μία μεγάλη και μία σε πλαίσιο.
 function spotlightTopics(){
   const picked = curation().spotlightTopics;
   const names = Array.isArray(picked) && picked.length
@@ -3152,16 +2286,6 @@ function spotlightTopics(){
     .map((name, i) => [name, i === 0 ? 'agro' : 'tech', SPOTLIGHT_BLURB[name] || '']);
 }
 
-// Ψάχνουμε ΜΟΝΟ στον τίτλο. Η περιγραφή είναι βιογραφικό του καλεσμένου
-// («ο συγγραφέας, εκδότης...») και κατατάσσει τον άνθρωπο αντί για το θέμα.
-// Επιστρέφει ΟΛΕΣ όσες ταιριάζουν, όχι μία.
-//
-// Η «Κρήτη» είναι τόπος, όχι θέμα — ένα επεισόδιο για την υγεία στο ΠΑΓΝΗ
-// είναι και Υγεία και Κρήτη. Με μία μόνο κατηγορία, 331 επεισόδια έχαναν
-// την Κρήτη τους επειδή κέρδιζε κάτι πιο ειδικό.
-// ΟΧΙ matchKey εδώ: εκείνο κόβει στους 60 χαρακτήρες, γιατί φτιάχτηκε
-// για να ταυτοποιεί τίτλους. Για κατηγορίες θέλουμε ΟΛΟΝ τον τίτλο —
-// αλλιώς χάνονται λέξεις που βρίσκονται στο δεύτερο μισό.
 function katWords(s){
   return String(s == null ? '' : s).toLowerCase()
     .normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -3171,26 +2295,12 @@ function katWords(s){
     .filter(Boolean);
 }
 
-// Μοιάζει με όνομα ανθρώπου αυτό που γράφτηκε πριν την άνω τελεία;
-//
-// Μόνο για τα βίντεο: εκείνα δεν έχουν πεδίο καλεσμένου, μόνο τίτλο
-// «Όνομα: θέμα». Κριτήρια σφιχτά επίτηδες — λίγες λέξεις, όλες με
-// κεφαλαίο αρχικό ή αρχικό γράμμα με τελεία, χωρίς αριθμούς. Ένας
-// τίτλος σαν «Το πόκερ της Μέσης Ανατολής: οι άσσοι» ΔΕΝ περνάει,
-// οπότε δεν χάνουμε θέμα από το πρώτο μισό.
 function moiazeiOnoma(s){
   const kommatia = String(s).split(/[\s\-–]+/).filter(Boolean);
   if (!kommatia.length || kommatia.length > 5) return false;
   return kommatia.every((w) => /^[Α-ΩΆΈΉΊΌΎΏA-Z][^\s]*$/.test(w));
 }
 
-// Ο τίτλος ΧΩΡΙΣ το όνομα του καλεσμένου.
-//
-// Το όνομα δεν είναι θέμα, και μέσα του κρύβονται ρίζες κατηγοριών:
-// το «Γιώργος ΚαρΑΜΠΕΛιάς» έπιανε το «αμπελ» και 43 συζητήσεις για
-// γεωπολιτική και ιστορία έμπαιναν στο Agronews — η σελίδα του έγραφε
-// «Agronews 26». Ίδιο είδος σφάλματος με το « οφη » στα Αθλητικά:
-// ψάχναμε ρίζες μέσα σε κείμενο που δεν μιλάει για το θέμα.
 function themaKeimeno(title, guest){
   const words = katWords(decode(title));
 
@@ -3229,11 +2339,6 @@ function curation(){
   return curationCache;
 }
 
-// Οι τελικές κατηγορίες: ό,τι όρισε ο συντάκτης, αλλιώς οι προτάσεις.
-// Δέχεται και μία γραμμένη σκέτα και λίστα, για να μη δεσμεύουμε το
-// διαχειριστικό σε μορφή πριν γραφτεί.
-// Κρατάμε ό,τι βρήκαμε: τώρα που κάθε κάρτα γράφει τις κατηγορίες της,
-// η συνάρτηση καλείται δεκάδες χιλιάδες φορές αντί για μία ανά επεισόδιο.
 const catCache = new Map();
 
 function categoriesFor(id, title, guest){
@@ -3248,24 +2353,6 @@ function categoriesFor(id, title, guest){
   return result;
 }
 
-// Η χειροκίνητη κατηγορία ταξιδεύει στο δίδυμο.
-//
-// Μια συνέντευξη υπάρχει δύο φορές: ως podcast στο Buzzsprout και ως
-// βίντεο στο YouTube. Στο διαχειριστικό ο συντάκτης βλέπει και τις
-// δύο εγγραφές και διορθώνει όποια βρει πρώτη.
-//
-// Η αρχική όμως κρατάει ΜΙΑ: όπου υπάρχουν και τα δύο μένει το
-// επεισόδιο, γιατί έχει δική μας σελίδα (δες buildCategories).
-//
-// Μέχρι τις 13 Νοεμβρίου 2026 η διόρθωση πάνω στο ΒΙΝΤΕΟ δεν έφτανε
-// ποτέ στο επεισόδιο. Μετρημένο παράδειγμα: το «Κ. Βαρδαβάς:
-// Ερωτήματα για Καθαριότητα, ΔΕΠΑΝΑΛ» πήρε χειροκίνητα «Κρήτη» στο
-// βίντεο 3CZp2A-sKeM, και το επεισόδιο Buzzsprout-20090505 — αυτό
-// που βγαίνει στο site — έμεινε χωρίς καμία κατηγορία.
-//
-// Υπολογίζεται ΜΙΑ φορά: οι χειροκίνητες διορθώσεις είναι λίγες, τα
-// επεισόδια χιλιάδες, και η episodeCategories καλείται δεκάδες
-// χιλιάδες φορές.
 let didimoKatigories;
 function katigoriaApoDidimo(epId){
   if (!didimoKatigories) {
@@ -3305,23 +2392,6 @@ const SHOW_SHORT = {
   'Ιστορίες του Ηρακλείου': 'Ιστορίες Ηρακλείου',
 };
 
-// «Επόμενο στις Υγεία» — τα ελληνικά δεν σηκώνουν μοτίβο.
-//
-// Η επικεφαλίδα κολλούσε ένα σταθερό «στις» μπροστά σε κάθε όνομα
-// εκπομπής, και τα ονόματα έχουν κάθε γένος και αριθμό: «στις Υγεία»,
-// «στις Επικαιρότητα», «στις Παρασκήνιο». Σε 2.167 από τις 3.124
-// σελίδες βίντεο η φράση ήταν λάθος.
-//
-// Ούτε κανόνας από την κατάληξη σώζει: θα χρειαζόταν και κλίση
-// («Αντίλογος» -> «στον Αντίλογο»). Οι εκπομπές είναι λίγες και
-// σταθερές, άρα γράφονται εδώ ολόκληρες, μία φορά.
-//
-// ΤΟ ΚΛΕΙΔΙ ΕΙΝΑΙ Η ΕΤΙΚΕΤΑ που βλέπει ο κόσμος — ό,τι βγάζει η
-// showLabel() — όχι το όνομα της λίστας στο YouTube.
-//
-// Όποια εκπομπή λείπει πέφτει στα εισαγωγικά: «Επόμενο από «X»».
-// Στραβό δεν βγαίνει ποτέ, και μια καινούρια λίστα στο YouTube δεν
-// χρειάζεται να περιμένει αλλαγή κώδικα για να φανεί σωστά.
 const SHOW_SE = {
   'Επικαιρότητα': 'στην Επικαιρότητα',
   'Συνεντεύξεις': 'στις Συνεντεύξεις',
@@ -3344,11 +2414,6 @@ function showSe(label){
   return SHOW_SE[label] || `από «${label}»`;
 }
 
-// Τα ονόματα έρχονται από τις λίστες του YouTube, γραμμένα από ανθρώπους
-// σε διαφορετικές στιγμές: μία είναι ΟΛΟΚΕΦΑΛΑΙΑ, και το όνομα του site
-// γράφεται πότε με κεφαλαίο και πότε με πεζό. Εδώ μπαίνουν στην ίδια
-// μορφή. Το slug ΔΕΝ αλλάζει — βγαίνει από πεζά χωρίς τόνους — άρα δεν
-// σπάει κανένας σύνδεσμος και καμία σελίδα δεν μετονομάζεται.
 const SHOW_NAME = {
   'ΕΠΙΚΑΙΡΟΤΗΤΑ': 'Επικαιρότητα',
   'Αναλύσεις στο Newshub.gr': 'Αναλύσεις στο newshub.gr',
@@ -3358,14 +2423,6 @@ function showName(raw){
   return SHOW_NAME[raw] || raw;
 }
 
-// Η σειρά με την οποία βγαίνουν οι εκπομπές στην αρχική και στη σελίδα
-// «Εκπομπές». Μέχρι τώρα ήταν κατά πλήθος επεισοδίων — ο αριθμός όμως
-// δεν λέει τι είναι σημαντικό για το site. Η σειρά είναι συντακτική
-// απόφαση, όχι στατιστικό, και γράφεται εδώ.
-//
-// Τα ονόματα μπαίνουν ΑΚΡΙΒΩΣ όπως έρχονται από το YouTube και γίνονται
-// slug, ώστε να μη σπάσει τίποτα αν κάποιος γράψει τόνο διαφορετικά.
-// Ό,τι δεν είναι στη λίστα βγαίνει μετά, με το παλιό κριτήριο.
 const SHOW_ORDER = [
   'Συνεντεύξεις και πρόσωπα της επικαιρότητας',
   'Αναλύσεις στο Newshub.gr',
@@ -3411,37 +2468,11 @@ function matchKey(text){
     .slice(0, 60);
 }
 
-// Σε ποια εκπομπή ανήκει ένα επεισόδιο. Το μαθαίνουμε κοιτώντας αν ο
-// τίτλος του υπάρχει στα βίντεο — εκεί η εκπομπή είναι γνωστή με βεβαιότητα.
-// Τίποτα δεν γράφεται στα αρχεία δεδομένων· η σύνδεση ζει μόνο στο build.
-// Δεύτερο κλειδί: μόνο το κομμάτι ΜΕΤΑ την άνω τελεία.
-//
-// Οι τίτλοι γράφονται «Όνομα: θέμα», και το όνομα συχνά διαφέρει ανάμεσα
-// στις δύο πηγές — «Ειρήνη Αναστασοπούλου» στο Buzzsprout, «Ειρ.
-// Αναστασοπούλου» στο YouTube. Το θέμα όμως είναι ίδιο, οπότε όταν ο
-// πλήρης τίτλος αποτυγχάνει, δοκιμάζουμε αυτό. Κερδίζει 103 επεισόδια.
 function headKey(text){
   const m = decode(text).match(/^([^:]{3,40}):\s*(.+)$/);
   return matchKey(m ? m[2] : text);
 }
 
-// ---- η χειροκίνητη διόρθωση ----
-//
-// Όλα τα παραπάνω είναι ΜΑΝΤΕΜΑ από τον τίτλο, και αστοχούν σιωπηλά:
-// 299 από τα 1.069 επεισόδια δεν βρίσκουν βίντεο και 94 δεν βγάζουν
-// καλεσμένο, επειδή ο τίτλος γράφτηκε αλλιώς στο YouTube ή δεν έχει
-// άνω τελεία. Τίποτα δεν σπάει — απλώς λείπει, και δεν το βλέπει κανείς.
-//
-// Το data/pairs.json είναι η απάντηση ανθρώπου σε αυτά: ανά επεισόδιο,
-//
-//   "Buzzsprout-20078837": {
-//     "video": "XNLy2B983xs",     ρητό βίντεο
-//     "guest": "Μαρία Παπαδάκη",  ρητός καλεσμένος
-//     "novideo": true,            δεν υπάρχει βίντεο, σταμάτα να ρωτάς
-//     "noguest": true             δεν υπάρχει καλεσμένος
-//   }
-//
-// Κερδίζει ΠΑΝΤΑ τον τίτλο. Ο τίτλος είναι εικασία, αυτό είναι απόφαση.
 let pairData;
 function pairs(){
   if (pairData) return pairData;
@@ -3470,13 +2501,6 @@ function pairOf(ep){
   return (ep && pairs().byEpisode[ep.id]) || null;
 }
 
-// Τα κλειδιά τίτλου ενός επεισοδίου, για όποιον ψάχνει το βίντεό του.
-//
-// Κενά όταν υπάρχει ρητή απάντηση — είτε «αυτό είναι το βίντεο» είτε
-// «βίντεο δεν υπάρχει». Και στις δύο περιπτώσεις το μάντεμα πρέπει να
-// σωπάσει: αλλιώς μια τυχαία ομοιότητα τίτλου θα έφερνε ΔΕΥΤΕΡΟ βίντεο
-// από την πίσω πόρτα, και ο συντάκτης θα κοίταζε μια διόρθωση που δεν
-// ίσχυσε πουθενά.
 function episodeKeys(ep){
   const fix = pairOf(ep);
   if (fix && (fix.video || fix.novideo)) return [];
@@ -3491,15 +2515,6 @@ function tagKey(s){
     .replace(/[^a-zα-ω0-9]+/gi, '');
 }
 
-// Η εκπομπή από ετικέτα του Buzzsprout. Ζητάει ΡΗΤΗ σήμανση:
-//
-//     #εκπομπή:Αναλύσεις
-//
-// Δεν δεχόμαστε σκέτο «#Αναλύσεις», γιατί οι ετικέτες είναι κυρίως
-// θεματικές και θα μπερδεύονταν: ένα επεισόδιο με #ιστορία μιλάει ΓΙΑ
-// ιστορία, δεν ανήκει απαραίτητα στην εκπομπή «Ιστορία στο newshub.gr».
-// Δεχόμαστε και το πλήρες όνομα της λίστας, που είναι αρκετά ξεχωριστό
-// ώστε να μην πέφτει τυχαία.
 let showByTag;
 function showFromTags(ep){
   if (!ep.keywords || !ep.keywords.length) return '';
@@ -3553,11 +2568,6 @@ function buildShows(videos, episodes){
     if (!key) continue;
     if (!groups[key]) groups[key] = { name: v.show, items: [] };
 
-    // Το ζευγάρωμα γίνεται ΜΟΝΟ από το episodeTwin. Εδώ υπήρχε δεύτερο
-    // αντίγραφο της ίδιας αναζήτησης, και έμεινε πίσω: όταν προστέθηκε
-    // το ταίριασμα με όνομα και ημερομηνία, η λωρίδα της εκπομπής
-    // συνέχισε να δείχνει το βίντεο ενώ η ροή έδειχνε το επεισόδιο.
-    // Ίδιο πράγμα, δύο θέσεις, δύο ημερομηνίες — το είδε το αφεντικό.
     const twin = episodeTwin(v);
     groups[key].items.push(twin ? itemFromEpisode(twin) : itemFromVideo(v));
   }
@@ -3569,19 +2579,6 @@ function buildShows(videos, episodes){
   return groups;
 }
 
-// Η ενότητα «Εκπομπές» της αρχικής: μία κάρτα ανά εκπομπή, με τη
-// μικρογραφία του πιο πρόσφατου βίντεό της.
-// ---- τα εξώφυλλα των εκπομπών ----
-//
-// Έχουν τον τίτλο ΨΗΜΕΝΟ μέσα στην εικόνα, στο κέντρο, σε 16:9.
-// Από αυτό βγαίνουν δύο κανόνες που δεν παραβιάζονται πουθενά:
-//
-//   1. ΠΟΤΕ crop. Το παραμικρό κόψιμο τρώει τον τίτλο. Όπου μπαίνουν,
-//      μπαίνουν ολόκληρες, σε θέση 16:9.
-//   2. Ποτέ δικός μας τίτλος από πάνω τους. Θα γραφόταν δύο φορές.
-//
-// Η αντιστοίχιση είναι ΔΕΔΟΜΕΝΑ, στο data/show-art.json: τα ονόματα
-// των εκπομπών έρχονται από το YouTube και δεν μαντεύονται από slug.
 let artMap;
 function showArtMap(){
   if (!artMap) {
@@ -3589,10 +2586,6 @@ function showArtMap(){
     try {
       const raw = JSON.parse(fs.readFileSync(SHOW_ART_FILE, 'utf8'));
       for (const [show, v] of Object.entries(raw.art || {})) {
-        // Δέχεται και σκέτο όνομα αρχείου, για να μη σπάσει αν κάποιος
-        // γράψει γρήγορα «"Εκπομπή": "αρχείο"» χωρίς τα υπόλοιπα.
-        // Το url είναι η φωτογραφία που ανέβηκε από το διαχειριστικό·
-        // το file είναι τα έτοιμα webp του public/shows/ σε τρία μεγέθη.
         artMap[matchKey(show)] = typeof v === 'string'
           ? { file: v, titled: true }
           : { file: v.file, url: v.url || '', titled: v.titled !== false };
@@ -3630,12 +2623,6 @@ function artIsTitled(name){
   return !!(a && a.titled);
 }
 
-// Η περιγραφή μιας εκπομπής, γραμμένη από τη σύνταξη στο YouTube και
-// κατεβασμένη από το fetch-videos.js. 12 από τις 16 έχουν — οι
-// υπόλοιπες απλώς δεν δείχνουν παράγραφο.
-//
-// Δεν τις γράφουμε εμείς: η σύνταξη τις έχει ήδη, και έτσι μένουν
-// συγχρονισμένες χωρίς να μάθει κανείς καινούργιο εργαλείο.
 let showsInfo;
 function showAbout(name){
   if (!showsInfo) {
@@ -3655,12 +2642,6 @@ function showAbout(name){
   const text = showsInfo[matchKey(showName(name))] || showsInfo[matchKey(name)] || '';
   if (!text) return [];
 
-  // Η περιγραφή του YouTube είναι γραμμένη σε ΓΡΑΜΜΕΣ, και οι γραμμές
-  // σημαίνουν κάτι: η τελευταία είναι συνήθως «Παρουσίαση: Όνομα».
-  //
-  // Τις ισοπεδώναμε σε κενά, κι έβγαινε «…ιστορία, πολιτισμός
-  // παρουσίαση: Γιάννης Χαραλαμπίδης» — δύο προτάσεις κολλημένες,
-  // με πεζό αρχικό στη μέση. Τώρα κάθε γραμμή μένει χωριστή.
   return text
     .split(/\s*https?:\/\//)[0]          // ό,τι ακολουθεί σύνδεσμο φεύγει
     .split(/\r?\n/)
@@ -3672,25 +2653,8 @@ function showAbout(name){
     .slice(0, 3);
 }
 
-// Η εικόνα σε τρία μεγέθη. Ο browser διαλέγει μόνος του από το srcset:
-// μια κάρτα 343px κατεβάζει 24KB, όχι το πλήρες των 300KB.
-//
-// Το «sizes» λέει πόσο ΠΛΑΤΟΣ θα πιάσει η εικόνα στη σελίδα — χωρίς
-// αυτό ο browser υποθέτει 100vw και κατεβάζει πάντα το μεγαλύτερο.
-// Κάτω από αυτό το πλάτος ο ψημένος τίτλος δεν διαβάζεται: η εικόνα
-// γίνεται θολή κηλίδα και είναι χειρότερη από ένα στιγμιότυπο. Όποια
-// θέση είναι πιο στενή, παίρνει το εξώφυλλο του τελευταίου επεισοδίου.
 const ART_MIN = 200;
 
-// Οι διαστάσεις ενός webp, διαβασμένες από το ΙΔΙΟ το αρχείο.
-//
-// Γράφαμε παντού «400w, 800w, 1600w» και «width=1600 height=900» χωρίς
-// να τα ελέγχει κανείς, και δύο πράγματα χαλούσαν:
-//   · όποια αφίσα ήταν μικρότερη, ο browser τη θεωρούσε 1600άρα και τη
-//     ζωγράφιζε σμικρυμένη — 426px αρχείο έβγαινε 224px στη σελίδα
-//   · η τετράγωνη αφίσα δήλωνε 16:9, άρα η σελίδα τιναζόταν μόλις
-//     φόρτωνε η εικόνα και φαινόταν το αληθινό της σχήμα
-// Τα αρχεία είναι 40 και διαβάζονται μία φορά το καθένα.
 const artSizeCache = new Map();
 function webpSize(file){
   if (artSizeCache.has(file)) return artSizeCache.get(file);
@@ -3725,10 +2689,6 @@ function showArtImg(name, { depth = 0, sizes, cls = '', eager = false, minWidth 
 
   const up = depth === 0 ? '' : '../';
 
-  // Ανεβασμένη φωτογραφία: ένα αρχείο, ένα μέγεθος. Δεν φτιάχνουμε
-  // srcset από το πουθενά — θα δηλώναμε πλάτη που δεν υπάρχουν — και
-  // δεν ξέρουμε διαστάσεις, οπότε ούτε width/height. Οι έτοιμες
-  // αφίσες από κάτω κρατούν και τα τρία μεγέθη τους.
   if (art.url) {
     return `<img${cls ? ` class="${cls}"` : ''} src="${esc(art.url)}"
             sizes="${sizes}" alt="${esc(showName(name))}"${eager ? '' : ' loading="lazy"'}>`;
@@ -3781,12 +2741,6 @@ function showsSection(groups, depth = 0){
         minWidth: 256,
       });
 
-      // Το όνομα γράφεται ΠΑΝΤΑ. Το είχα παραλείψει όπου ο τίτλος είναι
-      // ψημένος στην αφίσα, αλλά σε κάρτα 256px δεν διαβάζεται — και οι
-      // μισές κάρτες έμεναν ανώνυμες δίπλα στις άλλες.
-      //
-      // Η διαφορά είναι ΠΟΥ κάθεται: με αφίσα πάει από κάτω, ώστε να
-      // μη σκεπάζει την εικόνα· χωρίς, μένει πάνω της με σκίαση.
       return `      <article class="show-card${art ? ' show-card--art' : ''}">
         <a class="card-link" href="${up}${showUrl(g.name)}">
           ${art || (latest && latest.image
@@ -3836,17 +2790,6 @@ function micIcon(){
 
 // ---- σελίδες κατηγορίας ----
 
-// Μία ομάδα ανά κατηγορία, με επεισόδια ΚΑΙ βίντεο μαζί. Όπου ένα βίντεο
-// έχει δίδυμο επεισόδιο, κρατάμε το επεισόδιο — έχει δική μας σελίδα.
-// Τα δικά μας άρθρα μπαίνουν ΚΑΙ ΑΥΤΑ στις σελίδες κατηγορίας.
-//
-// Χωρίς αυτό, ο δημοσιογράφος διάλεγε «Κρήτη» στο διαχειριστικό και η
-// επιλογή του έκανε μόνο την ετικέτα στην κάρτα: το άρθρο δεν φαινόταν
-// ποτέ στο /category/kriti.html. Η επιλογή πρέπει να σημαίνει αυτό που
-// δείχνει ότι σημαίνει.
-//
-// Η κατηγορία εδώ είναι ΡΗΤΗ — τη διάλεξε άνθρωπος — σε αντίθεση με
-// επεισόδια και βίντεο, όπου τη μαντεύουμε από τον τίτλο.
 function buildCategories(videos, episodes, ownArticles = []){
   const groups = {};
   const seen = new Set();
@@ -3903,40 +2846,6 @@ function videoHasTwin(v){
   return !!twinApoOnoma(v);
 }
 
-// ---- Δεύτερη ευκαιρία: ίδιος άνθρωπος, ίδια μέρα, ίδιο θέμα ----
-//
-// Η σύγκριση τίτλων πιάνει μόνο όταν οι δύο συντάκτες έγραψαν τα ίδια
-// λόγια. Συχνά δεν το κάνουν:
-//
-//   YouTube     Γιώργος Αϋφαντής: Έχουμε αποτύχει στη Τουρκική αποτροπή!
-//   Buzzsprout  Γιώργος Αϋφαντής: «Έχουμε αποτύχει στην αποτροπή έναντι
-//               της Τουρκίας – Οδεύουμε σε σύγκρουση...»
-//
-// Ίδια συνέντευξη, δύο τίτλοι. Έβγαινε δύο φορές στην αρχική, και το
-// είδε το αφεντικό πριν από εμάς.
-//
-// ΤΡΕΙΣ ΟΡΟΙ ΜΑΖΙ, και χρειάζονται και οι τρεις. Μετρημένο στα 2.327
-// βίντεο χωρίς δίδυμο: το «ίδιο όνομα + 48 ώρες» βρίσκει 66 ζευγάρια
-// και κανένα διφορούμενο — αλλά τα 3 από αυτά είναι ΛΑΘΟΣ, γιατί ο
-// ίδιος άνθρωπος μίλησε δύο φορές για άλλο πράγμα:
-//
-//   V  Χρόνης Βάρσος: Η Ελλάδα στη «χαραυγή» του 2ου ΠΠ
-//   E  Χρόνης Βάρσος: Αφιέρωμα στη Μικρασιατική Καταστροφή
-//
-// Οι κοινές λέξεις τα κόβουν και τα τρία, χωρίς να χάσουν κανένα σωστό.
-// Δέκα μέρες, όχι δύο. Το βίντεο ανεβαίνει στο YouTube την ίδια μέρα,
-// ο ήχος στο Buzzsprout όποτε προλάβει ο μοντέρ — συνήθως τρεις με
-// τέσσερις μέρες μετά. Με παράθυρο δύο ημερών χάναμε ακριβώς αυτά.
-//
-// Μετρημένο στα βίντεο χωρίς δίδυμο, με τον έλεγχο λέξεων ενεργό:
-//
-//    2 μέρες →  42 ζευγάρια, 0 διφορούμενα
-//    5 μέρες →  70 ζευγάρια, 0 διφορούμενα
-//   10 μέρες →  70 ζευγάρια, 0 διφορούμενα
-//   21 μέρες →  71 ζευγάρια, 0 διφορούμενα
-//   60 μέρες →  71 ζευγάρια, 2 ΔΙΦΟΡΟΥΜΕΝΑ
-//
-// Στις 10 είμαστε στο πλατό και πολύ πριν αρχίσουν τα μπερδέματα.
 const TWIN_MERES = 10;     // πόσο μακριά επιτρέπεται να είναι οι δύο ημερομηνίες
 const TWIN_KOINES = 2;     // πόσες λέξεις πρέπει να μοιράζονται τα θέματα
 const TWIN_MIKOS = 5;      // πόσο μεγάλη πρέπει να είναι μια λέξη για να μετρήσει
@@ -3947,21 +2856,6 @@ function onomaApoTitlo(text){
   return m ? matchKey(m[1]) : '';
 }
 
-// Το ίδιο όνομα συντομογραφημένο: «κ λουκοπουλος» από το
-// «κωνσταντινος λουκοπουλος», και από τον εαυτό του.
-//
-// ΓΙΑΤΙ ΧΡΕΙΑΖΕΤΑΙ
-//
-// Το YouTube και το Buzzsprout τα γράφουν αλλιώς. Το επεισόδιο λέει
-// «Κωνσταντίνος Λουκόπουλος:», το βίντεο «Κ. Λουκόπουλος:» — ίδιος
-// άνθρωπος, ίδια μέρα, ίδια κουβέντα, αλλά δύο διαφορετικά κλειδιά.
-// Το βίντεο δεν έβρισκε δίδυμο και έμπαινε ΞΕΧΩΡΙΣΤΑ στη ροή, δίπλα
-// στο επεισόδιό του. Μετρήθηκε στις 10 Νοεμβρίου 2026: 332 βίντεο
-// γράφουν συντομογραφημένο το μικρό όνομα, και 76 από αυτά έχουν
-// επεισόδιο που τους αντιστοιχεί μονοσήμαντα.
-//
-// Επιστρέφει κενό σε ένα και μόνο όνομα: χωρίς επώνυμο το κλειδί θα
-// ήταν ένα γράμμα και θα κόλλαγε τους πάντες μαζί.
 function kleidiArxikou(onoma){
   const lexeis = String(onoma).split(' ').filter(Boolean);
   if (lexeis.length < 2) return '';
@@ -4016,11 +2910,6 @@ function twinApoOnoma(v){
 
   const dikes = themaLexeis(v.title);
 
-  // Πρώτα η ημερομηνία, μετά το θέμα — και η μέτρηση γίνεται ΠΑΝΩ ΣΕ
-  // ΟΣΑ ΠΕΡΑΣΑΝ και τα δύο. Με δεκαήμερο παράθυρο ένας συχνός
-  // καλεσμένος έχει συχνά δύο επεισόδια μέσα στο διάστημα· αν
-  // κόβαμε στο «δύο υποψήφιοι» πριν κοιτάξουμε θέμα, θα πετούσαμε
-  // ζευγάρια που είναι ολοφάνερα σωστά.
   const tairiazoun = ypopsifia.filter((ep) => {
     if (Math.abs(new Date(ep.date).getTime() - pote) >= TWIN_MERES * 864e5) return false;
 
@@ -4101,13 +2990,6 @@ function pageCount(total){
   return Math.max(1, Math.ceil(total / PER_PAGE));
 }
 
-// Γράφει μόνο αν άλλαξε κάτι, και λέει αν έγραψε.
-//
-// Το ίδιο μοτίβο που κάνουν ήδη οι σελίδες επεισοδίων. Οι «μοναδικές»
-// σελίδες — αρχική, θέματα, εκπομπές — γράφονταν πάντα, οπότε η
-// ημερομηνία τους άλλαζε σε κάθε τρέξιμο ακόμα κι όταν το περιεχόμενο
-// ήταν ίδιο. Αυτό χαλούσε τον έλεγχο «είναι παλιό το ευρετήριο;» και
-// πείραζε άδικα 25 αρχεία σε κάθε build.
 let writes = 0;
 function writeIfChanged(file, text){
   const current = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null;
@@ -4117,10 +2999,6 @@ function writeIfChanged(file, text){
   return true;
 }
 
-// Η επικεφαλίδα μιας σελίδας θέματος ή εκπομπής: εικονίδιο μέσα σε
-// έγχρωμο τετράγωνο, όνομα, και μετρητής. Το χρώμα και το εικονίδιο
-// είναι ΤΑ ΙΔΙΑ με τη λωρίδα του θέματος στην αρχική — ώστε να φαίνεται
-// ότι είναι το ίδιο πράγμα, από όπου κι αν ήρθες.
 function sectionHead(kind, name, line, key){
   return `    <header class="sec-head" data-topic="${key}">
       <span class="sec-head-icon">${topicIcon(key)}</span>
@@ -4204,11 +3082,6 @@ ${pager(base, n, pages)}
   return pagedShell({ name, body, base, n, pages, dir: 'category' });
 }
 
-// Κοινό τύλιγμα για τις σελιδοποιημένες σελίδες: τίτλος που λέει σε ποια
-// σελίδα είσαι, και τα rel=prev/next που θέλει η Google για να καταλάβει
-// ότι οι 19 σελίδες της Κρήτης είναι μία σειρά, όχι 19 άσχετες σελίδες.
-// ΠΡΟΣΟΧΗ: η παράμετρος λέγεται «n», όχι «page» — το «page» είναι το
-// όνομα της συνάρτησης που φτιάχνει τη σελίδα, και θα τη σκέπαζε.
 function pagedShell({ name, body, base, n, pages, dir }){
   const suffix = n > 1 ? ` — σελίδα ${n}` : '';
   return page({
@@ -4332,12 +3205,6 @@ const TOPICS_LEAD = 4;
 const TOPICS_PEEK = 3;
 
 function categoriesIndexPage(groups){
-  // Τα θέματα χωρίς περιεχόμενο δεν φαίνονται καθόλου. Ένα θέμα που
-  // υπόσχεται και δεν δίνει τίποτα είναι χειρότερο από ένα που λείπει.
-  //
-  // Σειρά κατά πλήθος, φθίνουσα. Πριν ήταν με τη σειρά του CATEGORIES,
-  // που είναι σειρά αναγνώρισης λέξεων — τυχαία για τον αναγνώστη, και
-  // έβαζε πρώτα τα «Agronews» και «Tech-Hub» με λίγα κομμάτια.
   const live = CATEGORIES
     .map(([name]) => ({ name, key: slugify(name), g: groups[slugify(name)] }))
     .filter((c) => c.g && c.g.items.length)
@@ -4347,12 +3214,6 @@ function categoriesIndexPage(groups){
   const lead = live.slice(0, TOPICS_LEAD);
   const rest = live.slice(TOPICS_LEAD);
 
-  // Τα κορυφαία με εικόνα. Η εικόνα είναι του πιο πρόσφατου κομματιού
-  // του θέματος που έχει εξώφυλλο — δεν έχουν όλα.
-  //
-  // Κρατάμε ποιες εικόνες πιάστηκαν, γιατί ένα επεισόδιο ανήκει σε
-  // πολλά θέματα: το πιο πρόσφατο της «Πολιτικής» ήταν και το πιο
-  // πρόσφατο του «Κόσμου», και οι δύο κάρτες έβγαιναν ίδιες.
   const used = new Set();
   const leadCards = lead.map(({ name, key, g, n }) => {
     const pic = g.items.find((it) => it.image && !used.has(it.image))
@@ -4370,12 +3231,6 @@ function categoriesIndexPage(groups){
       </a>`;
   }).join('\n');
 
-  // Τα υπόλοιπα: στήλη με τους πιο πρόσφατους τίτλους, χωρίς εικόνες.
-  //
-  // ΕΠΙΤΗΔΕΣ διαφορετικά από την αρχική. Εκείνη δείχνει κάρτες με
-  // εξώφυλλα· αν τα έβαζα κι εδώ, η σελίδα θα ήταν η ίδια σελίδα δύο
-  // φορές. Εδώ η δουλειά είναι άλλη: να δεις με μια ματιά τι βρίσκεται
-  // μέσα σε κάθε θέμα, και σκέτα ονόματα με έναν αριθμό δεν το λένε.
   const restCols = rest.map(({ name, key, g, n }) => {
     const rows = g.items.slice(0, TOPICS_PEEK).map((it) => `          <a class="tcol-row" href="${it.href}">
             <span class="tcol-title">${esc(it.title)}</span>
@@ -4424,13 +3279,6 @@ ${restCols}
 
 // ---- τα θέματα στην αρχική ----
 
-// Η λεπτή λωρίδα πάνω από τη ροή. Κάθε ετικέτα είναι ΚΑΝΟΝΙΚΟΣ σύνδεσμος
-// προς τη σελίδα του θέματος — δουλεύει χωρίς JavaScript και η Google
-// ακολουθεί και τα δεκατρία. Ο player.js πιάνει το κλικ και φιλτράρει τη
-// ροή επί τόπου, χωρίς να φορτώσει τίποτα.
-//
-// Μόνο κείμενο, καμία εικόνα: έτσι δεν μπερδεύεται με τις κάρτες των
-// εκπομπών πιο κάτω. Εκπομπή = πού ακούστηκε. Θέμα = περί τίνος μιλάει.
 function topicStrip(groups){
   const keys = Object.keys(groups)
     .filter((k) => groups[k].items.length)
@@ -4444,10 +3292,6 @@ function topicStrip(groups){
     return `        <a class="topic" href="${categoryUrl(g.name)}" data-topic="${key}" data-name="${esc(g.name)}" data-count="${n}">${esc(g.name)}</a>`;
   }).join('\n');
 
-  // Χωρίς ορατή ετικέτα «Θέματα» μπροστά: οι ίδιες οι ετικέτες λένε τι
-  // είναι, και η λωρίδα κάθεται ήδη κάτω από τον τίτλο της ενότητας.
-  // Το aria-label μένει — όποιος ακούει τη σελίδα δεν βλέπει τα χρώματα
-  // και χρειάζεται να ξέρει τι είναι αυτή η ομάδα συνδέσμων.
   return `  <nav class="topics" aria-label="Φίλτρα θεμάτων">
     <div class="topics-list">
         <a class="topic is-on" href="categories.html" data-topic="all">Όλα</a>
@@ -4479,14 +3323,6 @@ function topicIcon(key){
   return `<svg viewBox="0 0 24 24" aria-hidden="true">${glyph}</svg>`;
 }
 
-// Πόσες κάρτες παίρνει κάθε θέμα στη λωρίδα του: μία μεγάλη και τρεις
-// μικρές.
-//
-// Ήταν 5 (μία συν τέσσερις), για να μη μένει μισοάδεια η δεξιά στήλη
-// δίπλα στην τετράγωνη μεγάλη εικόνα. Το γέμιζε, αλλά στρίμωχνε τις
-// μικρογραφίες. Τώρα οι μικρές είναι τρεις και η μικρογραφία τους
-// μεγάλωσε αντίστοιχα — δες το .row-card-link στο styles.css, που
-// πρέπει να αλλάζει ΜΑΖΙ με αυτόν τον αριθμό, αλλιώς ξαναμένει κενό.
 const TOPIC_ROW = 4;
 
 // Πόσες κάρτες κάθε θέματος κρύβονται μέσα στη ροή της αρχικής, ώστε το
@@ -4497,29 +3333,8 @@ const FLOW_PER_TOPIC = 6;
 // Τα καρφιτσωμένα του διαχειριστικού πιάνουν θέσεις ΜΕΣΑ σε αυτά.
 const FLOW_VISIBLE = 9;
 
-// Λίστες του YouTube που ΔΕΝ μπαίνουν στη ροή της αρχικής όταν δεν
-// έχουν podcast από πίσω.
-//
-// Η ΕΠΙΚΑΙΡΟΤΗΤΑ δεν είναι εκπομπή: είναι ωμά αποσπάσματα ρεπορτάζ,
-// 31 τον μήνα — περισσότερα από όλες τις εκπομπές μαζί. Μέσα στη ροή
-// θα έπνιγαν τα επεισόδια, που είναι ο λόγος ύπαρξης της σελίδας.
-//
-// Στις κατηγορίες, στα θέματα και στη σελίδα της λίστας τους βγαίνουν
-// κανονικά. Εδώ μιλάμε ΜΟΝΟ για τις εννιά κάρτες της αρχικής.
 const FLOW_SKIP_SHOWS = new Set(['ΕΠΙΚΑΙΡΟΤΗΤΑ']);
 
-// Τα κομμάτια ενός θέματος, με τη σειρά που θα βγουν ΣΤΗΝ ΑΡΧΙΚΗ.
-//
-// Πρώτα όσα καρφίτσωσε ο συντάκτης από το διαχειριστικό, με τη δική
-// του σειρά· από κάτω όλα τα υπόλοιπα με ημερομηνία, όπως πάντα. Έτσι
-// μια κενή επιλογή δεν αδειάζει ποτέ τη λωρίδα: το αυτόματο είναι από
-// κάτω και περιμένει.
-//
-// ΜΟΝΟ η αρχική. Η σελίδα του θέματος (/category/…) μένει χρονολογική:
-// εκεί ο κόσμος ψάχνει «όλα όσα έχετε», όχι επιμέλεια.
-//
-// Το κλειδί είναι το ίδιο slug με τη διεύθυνση της κατηγορίας, για να
-// διαβάζεται το curation.json με το μάτι.
 const homeCache = new Map();
 function homeItems(group){
   const key = slugify(group.name);
@@ -4598,10 +3413,6 @@ function topicRows(groups){
     .join('\n\n');
 }
 
-// Οι ενότητες με χρωματιστό πλαίσιο, κάτω από το «Και ακόμα». Η κάθε μία
-// παίρνει το χρώμα του θέματός της — πράσινο το Agronews, μπλε το
-// Tech-Hub — και δικό της γραφικό: το «agro» βάζει το εικονίδιο μεγάλο
-// στο πλάι, το «tech» το βάζει πάνω με κεφαλαία γράμματα.
 function spotlightSections(groups){
   return spotlightTopics()
     .map(([name, variant, blurb]) => ({ g: groups[slugify(name)], variant, blurb, key: slugify(name) }))
@@ -4629,27 +3440,11 @@ ${cards}
     .join('\n\n');
 }
 
-// Πόσες κάρτες δείχνει μια ενότητα με πλαίσιο.
-//
-// Ήταν 4 και οι κάρτες έβγαιναν 196px μέσα στη στήλη — η εικόνα τόσο
-// μικρή που δεν έλεγε τίποτα. Τρεις πιάνουν τον ίδιο χώρο και
-// αναπνέουν. Αλλάζει ΜΑΖΙ με την κλάση .grid--3 παρακάτω.
 const SPOTLIGHT_CARDS = 3;
 
-// Το γραφικό σήμα μιας ενότητας: κουκκίδα που χτυπάει, μεγάλη λέξη σε
-// δύο τόνους, γραμμές δεξιά κι αριστερά. Το «δεύτερο μισό πιο σβηστό»
-// είναι το μοτίβο του λογοτύπου του newshub.gr, όπου το «hub» ξεχωρίζει.
-// Γράφεται ΜΙΑ φορά και το φοράνε όλες οι ενότητες.
 function bandMark(first, second, sub, depth = 0){
   const up = depth === 0 ? '' : '../';
 
-  // Το σήμα μπαίνει ΑΝΑΜΕΣΑ στη γραμμή και στην τελεία που αναβοσβήνει.
-  // Σκοπός του δεν είναι να διαβαστεί — είναι να αναγνωρίζεται. Κάθε
-  // λωρίδα της αρχικής το περνάει μπροστά από τα μάτια, ώστε να μένει
-  // ότι αυτό εδώ είναι το Newshub Multimedia, όχι το κεντρικό site.
-  //
-  // aria-hidden: ο αναγνώστης οθόνης δεν έχει λόγο να το ακούσει σε
-  // κάθε ενότητα — η επικεφαλίδα από κάτω λέει ήδη τι είναι.
   return `    <div class="band-head">
       <p class="mark">
         <img class="mark-sign" src="${up}shows/logo-icon.png" alt="" aria-hidden="true" width="512" height="512" loading="lazy">
@@ -4707,13 +3502,6 @@ ${blocks}
   </section>`;
 }
 
-// Η σελίδα με όλες τις εκπομπές. Πιο αναλυτική από την ενότητα της
-// αρχικής: δείχνει και το πιο πρόσφατο επεισόδιο κάθε εκπομπής.
-// Ο ρυθμός μιας εκπομπής, από τις ημερομηνίες των επεισοδίων της.
-//
-// Δώδεκα κουτάκια, ένα ανά μήνα του τελευταίου χρόνου. Δείχνει με μια
-// ματιά ποια εκπομπή βγάζει σταθερά και ποια κατά διαστήματα — κάτι που
-// δεν φαίνεται πουθενά αλλού στο site, ούτε καν στο Buzzsprout.
 function showStats(g){
   const dates = g.items.map((it) => new Date(it.date))
     .filter((d) => !isNaN(d))
@@ -4725,10 +3513,6 @@ function showStats(g){
   const last = dates[dates.length - 1];
   const now = new Date();
 
-  // Μετράμε και ΠΟΣΟΥΣ από τους δώδεκα μήνες υπήρχε η εκπομπή. Το
-  // «Παρασκήνιο» ξεκίνησε τον Φεβρουάριο και βγάζει επεισόδιο κάθε μήνα
-  // από τότε — αν το μετρούσαμε σε δώδεκα, θα έβγαινε 9/12 και θα
-  // κατέληγε στις «αραιές» για μήνες που δεν υπήρχε καν.
   const firstMonth = new Date(first.getFullYear(), first.getMonth(), 1);
 
   const bars = [];
@@ -4793,11 +3577,6 @@ function showsIndexPage(groups){
 
   const total = keys.reduce((sum, k) => sum + groups[k].items.length, 0);
 
-  // Αφίσες, όχι λίστα. Η μεγάλη κάρτα δείχνει και τον τελευταίο τίτλο
-  // από κάτω — σε σελίδα αφιερωμένη στις εκπομπές αξίζει να ξέρεις τι
-  // παίζει τώρα στην καθεμιά, όχι μόνο πόσα επεισόδια έχει.
-  // Κάρτες με το όνομα ΚΑΤΩ από την εικόνα — όχι πάνω της όπως στην
-  // αρχική. Η σειρά είναι κατά μέγεθος αρχείου.
   const cards = keys.map((key) => {
     const g = groups[key];
     const latest = g.items[0];
@@ -4876,15 +3655,6 @@ function showPage(group, n = 1){
   // οπότε οι μικρογραφίες τους μπορούν να γεμίσουν πλαίσιο 16:9.
   const wide = allVideo(page) ? ' grid--wide' : '';
 
-  // Η κορυφή: η αφίσα σε ΛΟΓΙΚΟ πλάτος, όχι σε όλη την οθόνη, και η
-  // ίδια εικόνα θολή από πίσω για να γεμίζει τον χώρο.
-  //
-  // Σε πλήρες πλάτος έπιανε 1224×689 — μισή οθόνη πριν δεις ένα
-  // επεισόδιο. Και τέσσερις από τις αφίσες ήρθαν σε 426px, οπότε
-  // τεντωμένες σε 1224 θα ήταν θολές ούτως ή άλλως.
-  //
-  // Ο <h1> μένει κρυμμένος όπου ο τίτλος είναι ψημένος στην εικόνα:
-  // τον χρειάζονται η Google και όποιος ακούει τη σελίδα.
   const art = showArtImg(group.name, {
     depth: 1,
     // Η κλάση ΔΕΝ είναι διακοσμητική: δίνει contain και height:auto.
@@ -4933,17 +3703,6 @@ ${pager(base, n, pages)}
   return pagedShell({ name, body, base, n, pages, dir: 'show' });
 }
 
-// Το podcast σε κάθε πλατφόρμα. Σκέτοι σύνδεσμοι με το όνομα της κάθε
-// υπηρεσίας — όχι τα επίσημα κουμπιά τους με τα λογότυπα, που θα ήταν έξι
-// εικόνες παραπάνω και ξένα χρώματα μέσα στην παλέτα μας.
-// Το τρίτο στοιχείο είναι το χρώμα της κάθε πλατφόρμας. Περνάει ως
-// μεταβλητή --brand, οπότε αν αύριο αλλάξουμε ύφος — γεμάτο, περίγραμμα,
-// σβηστό — πειράζουμε ΜΟΝΟ τον κανόνα στο CSS, όχι τη λίστα.
-// Το τέταρτο στοιχείο είναι το σήμα της πλατφόρμας, σχεδιασμένο ως SVG
-// μέσα στη σελίδα. Δεν κατεβάζουμε τα επίσημα κουμπιά τους: θα ήταν έξι
-// εικόνες παραπάνω σε κάθε σελίδα, σε λευκό φόντο που δεν ταιριάζει.
-// Το «κενό» μέσα στα σήματα παίρνει το φόντο μας από το CSS, ώστε να
-// ακολουθεί κι αυτό την παλέτα αν κάποτε αλλάξει.
 const DARK = 'var(--bg)';
 const PLATFORMS = [
   ['YouTube', 'https://www.youtube.com/@newshubgr/podcasts', '#FF0000',
@@ -4961,10 +3720,6 @@ const PLATFORMS = [
   ['Audible', 'https://www.audible.com/podcast/podcasts-newshubgr/B08K57X52T', '#F8991C',
     `<circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M6.5 12h1.8l1.6-3.4 2 7 1.8-5.2 1.3 1.6h2.5" stroke="${DARK}" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`],
 
-  // Ο σύνδεσμος δεν βγήκε από τον λογαριασμό του Buzzsprout — δεν τον
-  // έχουμε. Τον δίνει η ΔΗΜΟΣΙΑ σελίδα του podcast, buzzsprout.com/1904089,
-  // που δείχνει όλες τις πλατφόρμες όπου έχει καταχωρηθεί. Εκεί κοιτάμε
-  // και την επόμενη φορά που θα προστεθεί κάπου αλλού.
   ['Amazon Music', 'https://music.amazon.com/podcasts/69249bb9-33d2-4d3c-9ada-1fbc7b93588b', '#25D1DA',
     `<circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7 10.5v3M9.5 8.5v7M12 9.5v5M14.5 7.5v9M17 10.5v3" stroke="${DARK}" stroke-width="1.6" fill="none" stroke-linecap="round"/>`],
 
@@ -4972,18 +3727,6 @@ const PLATFORMS = [
     `<circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.4 16.6c-.5-4.4 2.7-8 9-8.2.5 5.3-3.1 8.8-9 8.2z" fill="${DARK}"/>`],
 ];
 
-// ---- «Must read» ----
-//
-// Τα κορυφαία άρθρα του κεντρικού site, σε δική τους ζώνη με κόκκινο
-// πλαίσιο και το λογότυπο του newshub.gr — ώστε να είναι σαφές ότι εδώ
-// μιλάει το κεντρικό site, όχι το multimedia.
-//
-// ΠΡΟΣΟΧΗ: «κορυφαία» δεν το ξέρει κανείς αυτόματα. Δεν έχουμε
-// επισκεψιμότητα, ούτε ετικέτα στο feed. Άρα δύο δρόμοι, με την ίδια
-// σειρά προτεραιότητας που ακολουθεί και το πρωτοσέλιδο:
-//   1. χειροκίνητα — data/curation.json, πεδίο mustRead
-//   2. αυτόματα — τα πιο πρόσφατα, ΕΝΑ ανά κατηγορία, ώστε να μη βγουν
-//      τέσσερα «Οικονομία» στη σειρά.
 const MUST_COUNT = 4;
 
 function pickMustRead(articles, curation, taken = new Set()){
@@ -5015,16 +3758,6 @@ function pickMustRead(articles, curation, taken = new Set()){
   return chosen.slice(0, MUST_COUNT);
 }
 
-// ---- «Συνέχισε όπου έμεινες» ----
-//
-// Το ΜΟΝΟ κομμάτι της αρχικής που δεν το ξέρει το build: τι άκουσε ο
-// καθένας ζει στον browser του και πουθενά αλλού. Οπότε εδώ γράφουμε
-// άδειο και ΚΡΥΦΟ κουτί, και το γεμίζει το player.js αν βρει κάτι.
-//
-// Γιατί hidden από το build αντί για display:none στο CSS: ο
-// καινούριος επισκέπτης — και κάθε ρομπότ — δεν πρέπει να δει καν
-// επικεφαλίδα για ενότητα που δεν έχει περιεχόμενο. Έτσι δεν μπαίνει
-// ποτέ άδειο κουτί στη σελίδα ούτε στο ευρετήριο της αναζήτησης.
 function resumeSection(){
   return `  <section class="syn" data-synexeia hidden aria-labelledby="syn-head">
     <div class="syn-head">
@@ -5035,17 +3768,6 @@ function resumeSection(){
   </section>`;
 }
 
-// ---- «Η λίστα μου» ----
-//
-// Ίδια λογική με το «Συνέχισε όπου έμεινες», και επίτηδες από κάτω του:
-// το ένα λέει «τι άφησες στη μέση», το άλλο «τι κράτησες για μετά».
-// Κρυφό από το build για τον ίδιο λόγο — κανένας άδειος τίτλος σε
-// καινούριο επισκέπτη ή σε ρομπότ.
-//
-// Το κουμπί «+ Στη λίστα μου» κρατούσε μόνο τον κωδικό του επεισοδίου,
-// χωρίς τίτλο, εξώφυλλο ή διεύθυνση — δηλαδή τίποτα που να μπορεί να
-// ζωγραφιστεί. Γι' αυτό «δεν δούλευε»: ο κόσμος το πατούσε και δεν
-// έβλεπε τίποτα πουθενά.
 function listaSection(){
   return `  <section class="syn lista" data-lista hidden aria-labelledby="lista-head">
     <div class="syn-head">
@@ -5056,23 +3778,8 @@ function listaSection(){
   </section>`;
 }
 
-// ---- Απόψεις ----
-//
-// Τα υπογεγραμμένα κείμενα του newshub.gr. Ανοίγουν ΕΚΕΙ, όχι εδώ —
-// ρητή οδηγία: η άποψη ανήκει στον αρθρογράφο και στο site που τη
-// φιλοξενεί, εμείς τη δείχνουμε και στέλνουμε κόσμο.
-//
-// Η ενότητα κάθεται αμέσως κάτω από το Must read και μοιάζει μαζί του
-// επίτηδες: ίδιο κουτί, ίδιο σήμα με το λογότυπό τους. Αλλάζει το
-// περιεχόμενο της κάρτας — εδώ το πρόσωπο είναι το θέμα, όχι η
-// φωτογραφία του άρθρου.
 const OPINIONS_SHOWN = 6;
 
-// Το πορτρέτο του αρθρογράφου. Πρώτα ό,τι όρισε το διαχειριστικό, μετά
-// ό,τι κατέβηκε από το newshub.gr.
-//
-// Γιατί υπάρχει η παράκαμψη: οι δικές τους φωτογραφίες είναι παλιές ή
-// κομμένες σε 50 πίξελ, και κάποιοι αρθρογράφοι δεν έχουν καθόλου.
 let writersCache;
 function writersFile(){
   if (writersCache === undefined) {
@@ -5095,15 +3802,6 @@ function writerPhoto(author){
   return mine || author.photo || '';
 }
 
-// Η υπογραφή του αρθρογράφου, πάνω από το κείμενο της άποψης.
-//
-// Μόνο στις αναδημοσιεύσεις που έχουν υπογραφή — στην πράξη μόνο οι
-// Απόψεις, αφού οι απλές ειδήσεις του newshub.gr δεν υπογράφονται.
-//
-// Το όνομα πάει στη σελίδα ΤΟΥΣ, όχι σε δική μας: ο αρθρογράφος δεν
-// είναι δημοσιογράφος μας, και όλο το υπόλοιπο έργο του ζει εκεί. Μια
-// μισοάδεια δική μας σελίδα με δύο απόψεις θα ήταν χειρότερη από τη
-// σωστή διεύθυνση.
 function writerLine(a){
   const name = a.author && a.author.name ? a.author.name : '';
   if (!name) return '';
@@ -5135,15 +3833,6 @@ function pickOpinions(articles, curation){
 
   const have = new Set(chosen.map((a) => a.url));
 
-  // ΕΝΑ ΠΡΟΣΩΠΟ ΜΙΑ ΦΟΡΑ στο αυτόματο γέμισμα.
-  //
-  // Η ζώνη δείχνει πρόσωπα, όχι μόνο τίτλους. Ένας αρθρογράφος που
-  // έγραψε δύο φορές μέσα στη βδομάδα έπιανε δύο από τις έξι θέσεις
-  // με το ίδιο πορτρέτο — φαινόταν λάθος, και έκλεινε τη θέση ενός
-  // άλλου. Τον Νοέμβριο του 2026 συνέβη με τον Νότη Μαριά.
-  //
-  // Ο κανόνας ΔΕΝ αγγίζει τις χειροκίνητες επιλογές: αν ο συντάκτης
-  // βάλει ο ίδιος δύο κείμενα του ίδιου ανθρώπου, το εννοεί.
   const onoma = (a) => (a.author && a.author.name) || '';
   const prosopa = new Set(chosen.map(onoma).filter(Boolean));
 
@@ -5186,10 +3875,6 @@ function opinionsSection(articles, curation){
     const name = a.author && a.author.name ? a.author.name : '';
     const face = writerPhoto(a.author);
 
-    // Ίδιος κανόνας με τα must read: ανοίγει ΕΔΩ όταν έχουμε κατεβάσει
-    // το κείμενο, αλλιώς μένει σύνδεσμος προς το newshub.gr. Ποτέ δική
-    // μας σελίδα χωρίς άρθρο μέσα — το βελάκι λέει στον αναγνώστη πού
-    // πάει, και πρέπει να λέει την αλήθεια.
     const mine = !!articleBody(a.id);
     const href = mine ? articleUrl(a) : esc(a.url);
     const out = mine ? '' : ' target="_blank" rel="noopener"';
@@ -5274,20 +3959,6 @@ ${cards}
   </section>`;
 }
 
-// Η ροή ειδήσεων στο πλάι. Αν δεν υπάρχουν ειδήσεις, δεν βγαίνει καθόλου
-// — καλύτερα να λείπει το πλαίσιο παρά να στέκει άδειο.
-//
-// Το data-roi είναι το σημάδι για το public/roi.js, που αντικαθιστά
-// αυτούς τους τίτλους με φρέσκους από το KV. Ό,τι γράφουμε εδώ είναι το
-// δίχτυ: το βλέπουν τα ρομπότ των κοινωνικών δικτύων, που δεν εκτελούν
-// JavaScript, και όποιος έχασε τη σύνδεση. Γι' αυτό γράφεται κανονικά
-// και όχι άδειο πλαίσιο που «θα γεμίσει μετά».
-//
-// Μέσα στο data-roi μπαίνει η ώρα της πρώτης είδησης. Είναι η απάντηση
-// στο «ποιος από τους δύο είναι πιο φρέσκος»: το KV γράφεται από το
-// Action και η σελίδα από το χτίσιμο, και δεν προλαβαίνουν πάντα με την
-// ίδια σειρά. Χωρίς τη σύγκριση, ένα KV που έμεινε πίσω θα έσβηνε
-// καινούριες ειδήσεις και θα έβαζε παλιές στη θέση τους.
 function newsTicker(articles){
   if (!articles.length) return '';
 
@@ -5308,44 +3979,6 @@ ${rows}
 }
 
 
-// ---------------------------------------------------------------------
-// ΠΟΙΟΣ ΜΙΛΑΕΙ — τα πρόσωπα βγαίνουν από τον τίτλο
-// ---------------------------------------------------------------------
-//
-// Ο αρχικός κανόνας ήταν ένας: «Όνομα Επώνυμο: θέμα», 2-4 λέξεις πριν
-// την άνω τελεία. Καθαρός, και πιάνει τα 897 από τα 1.087. Τα υπόλοιπα
-// 190 τα έχανε όλα, και πάντα για τυπογραφικό λόγο:
-//
-//   76  «Ο Χ Ψ στο newshub.gr: …»        πέντε λέξεις, κόβεται
-//   38  χωρίς άνω τελεία                 «Η Μαρία Χ μιλά για…»
-//   10  μόνο επώνυμο ή αρχικό            «Ατσαλάκης:», «Λ.Καμπουρίδης:»
-//    6  κόμμα αντί για άνω τελεία        «Γ. Καραμπελιάς, «25 μαθήματα»…»
-//    6  δύο πρόσωπα ή εκπομπή μπροστά    «Α. Συρίγος - Γ. Καραμπελιάς:»
-//
-// Το αποτέλεσμα φαινόταν στη σελίδα του ανθρώπου: ο Καραμπελιάς έβγαζε
-// 26 συζητήσεις ενώ είχε 44, και ολόκληρη η σειρά «25 μαθήματα
-// ελληνικής ιστορίας» έλειπε — επειδή ο τίτλος της βάζει κόμμα.
-//
-// Τρία περάσματα, με αυτή τη σειρά:
-//
-//   1. ο τίτλος, με καθαρισμό πριν το μέτρημα των λέξεων
-//   2. λεξικό: ονόματα που ξέρουμε από ΑΛΛΑ επεισόδια, μέσα στον τίτλο
-//   3. ένωση γραφών και αρχικών: «Γ. Καραμπελιάς» -> «Γιώργος Καραμπελιάς»
-//
-// Το 3ο αγγίζει ΤΑΥΤΟΤΗΤΕΣ, οπότε ενώνει μόνο όταν η απάντηση είναι
-// μοναδική, και σταματά σε ό,τι έχει απορριφθεί στο not_aliases του
-// data/people-aliases.json. Η σελίδα «Πρόσωπα» του διαχειριστικού
-// δείχνει κάθε ένωση ως «γραφή», με × δίπλα της.
-//
-// ΤΙΠΟΤΑ από εδώ δεν αγγίζει το ep.headline: από εκείνο βγαίνει η
-// διεύθυνση της σελίδας, και 1.087 μοιρασμένοι σύνδεσμοι δεν αλλάζουν
-// για να φανεί ένα όνομα πιο όμορφα.
-
-// Οι λέξεις που τελειώνουν το όνομα και αρχίζουν τη φράση.
-//
-// ΟΧΙ \b στο τέλος: στη JavaScript ορίζεται πάνω στο [A-Za-z0-9_], άρα
-// δίπλα σε ελληνικό γράμμα δεν βρίσκει ποτέ όριο λέξης και ο κανόνας
-// δεν πιάνει τίποτα — το ίδιο λάθος με το looksLikePerson παρακάτω.
 const ONOMA_STOP = /\s+(για|μιλ[άαεί]\S*|αναλύει|εξηγεί|σχολιάζει|απαντά|περιγράφει|αποκαλύπτει|προειδοποιεί|αφιέρωμα|ρίχνει|ανοίγει|στο|στον|στη|στην|σε)(?=\s|$|[,:«"'])/i;
 
 // Αρχικό και επώνυμο, με ή χωρίς κενό: «Δ.Δερβής-Μπουρνιάς», «Τρ.Καρατράντος».
@@ -5422,11 +4055,6 @@ function onomataApoTitlo(title){
     if (got.length) return got;
   }
 
-  // Το όνομα ΜΕΣΑ στη φράση, μπροστά από ρήμα ομιλίας:
-  // «80 χρόνια μετά τον «Ζορμπά»: Η Μαριλένα Μηλαθιανάκη μιλά στο…»
-  // Δύο λέξεις, κεφαλαίο και μετά πεζά, και αμέσως μετά το ρήμα — ένα
-  // «Η Ελλάδα αναλύει» δεν υπάρχει, αλλά αν προκύψει, σβήνεται από την
-  // καρτέλα «Πρόσωπα» όπως κάθε άλλο σκουπίδι.
   const v = t.match(/(?:^|[\s«"(])(?:[ΟΗ]\s+)?([Α-ΩΆΈΉΊΌΎΏ][α-ωά-ώ]{2,}\s+[Α-ΩΆΈΉΊΌΎΏ][α-ωά-ώ]{3,})\s+(?:μιλ[άαεί]\S*|αναλύει|εξηγεί|σχολιάζει|απαντά|περιγράφει|αποκαλύπτει|συμμετέχει|ανοίγει)(?=\s|$)/);
   if (v) {
     const one = enaOnoma(v[1]);
@@ -5440,12 +4068,6 @@ function onomaKleidi(s){
   return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 }
 
-// ---- το λεξικό και η ένωση ----
-//
-// Γίνονται ΜΙΑ φορά, πάνω σε όλα τα επεισόδια μαζί: και τα δύο
-// χρειάζονται να ξέρουν τι βγήκε αλλού. Το αποτέλεσμα κάθεται στο
-// ep.guests, και το ep.guestRaw κρατάει τη γραφή ΠΡΙΝ την ένωση —
-// από εκείνη βγαίνουν οι «γραφές» στην καρτέλα «Πρόσωπα».
 function valeProsopa(list){
   const vrethika = new Map();
 
@@ -5467,16 +4089,6 @@ function valeProsopa(list){
   const gnosta = new Map();     // κλειδί ονόματος -> όνομα
   const epitheta = new Map();   // κλειδί επωνύμου -> σύνολο ονομάτων
 
-  // ΜΟΝΟ από τα επεισόδια.
-  //
-  // Μάθημα της 15ης Νοεμβρίου 2026: μόλις μπήκαν και τα βίντεο, ένας
-  // τίτλος ειδήσεων — «Σε Ηράκλειο και πάλι η Λίνα Μενδώνη…» — έδωσε
-  // «πρόσωπο» με επώνυμο «Ηράκλειο». Το λεξικό το δέχτηκε, και μετά
-  // κόλλησε αυτόν τον «άνθρωπο» σε 484 τίτλους που γράφουν Ηράκλειο.
-  //
-  // Οι τίτλοι των επεισοδίων είναι «Όνομα: θέμα» σχεδόν πάντα· των
-  // βίντεο ειδήσεων σχεδόν ποτέ. Ένα σκουπίδι στο λεξικό δεν μένει
-  // ένα: πολλαπλασιάζεται σε όλη τη ροή.
   for (const [ep, names] of vrethika) {
     if (einaiVideo(ep)) continue;
     for (const n of names) {
@@ -5517,11 +4129,6 @@ function valeProsopa(list){
 
   for (const [ep, names] of vrethika) {
     if (names.length) continue;
-    // Και το ΜΑΝΤΕΜΑ με το λεξικό μένει στα επεισόδια. Ένα βίντεο
-    // ειδήσεων που αναφέρει έναν υπουργό δεν είναι συζήτηση μαζί του:
-    // θα κολλούσε στη σελίδα του προσώπου ως «εμφάνιση» ένα ρεπορτάζ
-    // όπου δεν μίλησε καν. Στα βίντεο κρατάμε μόνο όσα λέει ρητά ο
-    // τίτλος, «Όνομα: θέμα».
     if (einaiVideo(ep)) continue;
     const fix = pairOf(ep) || {};
     if (fix.noguest) continue;
@@ -5588,10 +4195,6 @@ function valeProsopa(list){
   }
 }
 
-// Πολλοί τίτλοι γράφονται «Όνομα Επώνυμο στο newshub.gr: ...», οπότε ο
-// διαχωρισμός παίρνει και τον ιστότοπο για μέρος του ονόματος. 64 ονόματα
-// το έχουν, και 26 από αυτά είναι άνθρωποι που υπάρχουν ήδη και καθαροί —
-// χωρίς αυτό, ο καθένας τους παίρνει δεύτερη μισοάδεια σελίδα.
 function cleanGuestName(name){
   return String(name)
     // Το όνομα του site, με ή χωρίς «στο», και με τα ορθογραφικά που
@@ -5602,13 +4205,6 @@ function cleanGuestName(name){
     .replace(/[\s,–-]*μέρος\s+\S+$/i, '')
     // Αρχές που δεν είναι μέρος του ονόματος. Το «O» μπαίνει και λατινικό.
     .replace(/^\s*αποκλειστικ[όο]\s*!?\s*/i, '')
-    // Επίθετα-καμπάνα που η σύνταξη κολλάει μπροστά από το όνομα:
-    // «Αποκαλυπτικός Σταυρος Λυγερός: ...». Περνούσαν τον έλεγχο
-    // looksLikePerson — τρεις λέξεις, όλες με κεφαλαίο — και έφτιαχναν
-    // τρίτη σελίδα για άνθρωπο που είχε ήδη δύο.
-    //
-    // Ρητή λίστα, ΟΧΙ κανόνας για καταλήξεις σε -ικός: υπάρχουν
-    // επώνυμα που τελειώνουν έτσι και θα τα έτρωγε.
     .replace(/^\s*(αποκαλυπτικ|συγκλονιστικ|συγκινητικ)[όοήηάαέεςσ]*\s+/i, '')
     // Το «i» είναι απαραίτητο: οι τίτλοι γράφουν «Ο Αλέξανδρος», με
     // κεφαλαίο άρθρο. Μπαίνει και λατινικό o, που ξεφεύγει στο γράψιμο.
@@ -5617,16 +4213,6 @@ function cleanGuestName(name){
     .trim();
 }
 
-// Οι τίτλοι «Κάτι: κάτι άλλο» ΔΕΝ έχουν πάντα όνομα μπροστά. Μερικές
-// φορές μπροστά είναι η εκπομπή («ΑΝΑΛΥΣΕΙΣ Εξ Απορρήτων») ή σκέτος
-// τίτλος («Ρωσική εισβολή»). Χωρίς έλεγχο, αυτά εμφανίζονταν στη θέση
-// του καλεσμένου και έφτιαχναν και δικές τους σελίδες προσώπου.
-//
-// Ο έλεγχος είναι ΑΡΝΗΤΙΚΟΣ επίτηδες: ψάχνει σημάδια ότι κάτι ΔΕΝ είναι
-// όνομα, αντί να προσπαθεί να ορίσει τι είναι. Έτσι ένα ασυνήθιστο
-// όνομα — «Gian Andrea Paolo Garancini» — περνάει.
-// Λέξεις που κάνουν ένα «όνομα» υπηρεσία, κτίριο, θεσμό ή γεγονός.
-// Γραμμένες από ΜΕΤΡΗΣΗ πάνω στα 3.128 βίντεο, όχι από φαντασία.
 const ORGANISMOS = new RegExp('(^|\\s)(' + [
   'υπηρεσία', 'υπηρεσίες', 'υπόθεση', 'υποθέσεις', 'περιφέρεια', 'περιφέρειας',
   'περιφερειάρχη', 'περιφερειάρχης', 'δήμος', 'δήμου', 'δήμοι', 'δημοτική', 'δημοτικό',
@@ -5666,24 +4252,8 @@ function looksLikePerson(name){
   const words = n.split(/[\s.\-–]+/).filter(Boolean);
   if (words.length < 2 || words.length > 4) return false;
 
-  // Επετειακοί τίτλοι: «Παγκόσμια Ημέρα Θαλασσαιμίας», «Παγκόσμια Ημέρα
-  // Ραδιοφώνου». Τρεις λέξεις με κεφαλαία, άρα περνούσαν όλους τους
-  // παρακάτω ελέγχους και έπαιρναν σελίδα προσώπου.
-  //
-  // ΧΩΡΙΣ \b: στη JavaScript το \b ορίζεται πάνω στο [A-Za-z0-9_], άρα
-  // δίπλα σε ελληνικό γράμμα δεν βρίσκει ποτέ όριο λέξης και ο κανόνας
-  // δεν πιάνει τίποτα. Το έμαθα εδώ — ισχύει για κάθε ελληνικό regex
-  // αυτού του αρχείου.
   if (/(^|\s)ημέρα(\s|$)/i.test(n)) return false;
 
-  // ---- όσα μπήκαν όταν άνοιξε η πόρτα στα βίντεο ----
-  //
-  // Οι τίτλοι των επεισοδίων είναι «Όνομα: θέμα». Των βίντεο ειδήσεων
-  // είναι «Περιφέρεια Κρήτης: …», «Βενιζέλειο Νοσοκομείο: …», «Υπόθεση
-  // Κουνάλη: …». Δύο λέξεις, κεφαλαία και τα δύο, κανένα ψηφίο — τα
-  // περνούσαν όλα, και έφτιαχναν σελίδα προσώπου για έναν οργανισμό.
-  //
-  // Υπηρεσία, όχι άνθρωπος. Οπουδήποτε μέσα στο όνομα.
   if (ORGANISMOS.test(n)) return false;
 
   // Τόπος στο τέλος: «Περιφέρεια Κρήτης», «Σε Ηράκλειο», «Φεστιβάλ
@@ -5704,24 +4274,10 @@ function looksLikePerson(name){
   return true;
 }
 
-// Τα λίγα που περνούν τον έλεγχο αλλά δεν είναι άνθρωποι.
-//
-// Ήταν σκληρογραμμένα εδώ. Τώρα ζουν στο data/people-aliases.json, στο
-// κλειδί not_people, ώστε να τα σβήνει ο συντάκτης από την καρτέλα
-// «Πρόσωπα» — χωρίς αυτό, κάθε νέο σκουπίδι ήθελε αλλαγή κώδικα.
 function notGuest(name){
   return aliases().notPeople.has(guestKey(name));
 }
 
-// ---- ένα όνομα ανά άνθρωπο ----
-//
-// Η σύνταξη γράφει άλλοτε «Α. Συρίγος» και άλλοτε «Άγγελος Συρίγος».
-// Χωρίς ένωση, ο ίδιος άνθρωπος παίρνει δύο σελίδες με μοιρασμένα
-// επεισόδια και λάθος μετρήματα.
-//
-// Οι αντιστοιχίσεις είναι ΔΕΔΟΜΕΝΑ, όχι κώδικας: το data/people-aliases.json
-// γράφεται με έγκριση ανθρώπου. Το find-aliases.js προτείνει, δεν αποφασίζει
-// — δύο αδέρφια με το ίδιο επώνυμο μοιάζουν ίδια σε κάθε αυτόματο έλεγχο.
 let aliasData;
 function aliases(){
   if (!aliasData) {
@@ -5788,12 +4344,6 @@ function titleOf(ep){
 // ΟΛΑ τα σημεία περνούν από εδώ, ώστε κάρτα, σελίδα προσώπου και
 // «σχετικά» να συμφωνούν μεταξύ τους.
 function guestOf(ep){
-  // Η χειροκίνητη απάντηση πρώτη, και κερδίζει ακόμα κι όταν ο τίτλος
-  // δεν έχει άνω τελεία — εκεί ο αυτόματος δεν βγάζει ΤΙΠΟΤΑ να
-  // διορθωθεί, και 94 επεισόδια έμεναν για πάντα χωρίς άνθρωπο.
-  //
-  // Περνάει και αυτή από την ένωση γραφών: αλλιώς ένα όνομα γραμμένο με
-  // το χέρι θα έφτιαχνε ΔΕΥΤΕΡΗ σελίδα δίπλα στην κανονική.
   const fix = pairOf(ep);
   if (fix && fix.noguest) return '';
   if (fix && fix.guest) {
@@ -5804,12 +4354,6 @@ function guestOf(ep){
   return guestsOf(ep)[0] || '';
 }
 
-// ΟΛΑ τα πρόσωπα ενός επεισοδίου. Σχεδόν πάντα ένα — αλλά «Α. Συρίγος -
-// Γ. Καραμπελιάς» είναι δύο άνθρωποι, και το επεισόδιο ανήκει και στους
-// δύο. Μέχρι τώρα ο δεύτερος δεν υπήρχε πουθενά.
-//
-// Η κάρτα και το πρωτοσέλιδο δείχνουν τον πρώτο (guestOf): δεν χωράνε
-// δύο ονόματα σε μία γραμμή. Οι σελίδες προσώπων τα θέλουν και τα δύο.
 function guestsOf(ep){
   const fix = pairOf(ep);
   if (fix && fix.noguest) return [];
@@ -5837,13 +4381,6 @@ function roleOf(name){
   return aliases().roles[guestKey(name)] || '';
 }
 
-// Το πορτρέτο ενός προσώπου, όπως το διάλεξε ο συντάκτης.
-//
-// ΠΡΟΣΟΧΗ στη διαφορά από το ep.image: εκείνο είναι το εξώφυλλο του
-// επεισοδίου — τετράγωνη αφίσα με ψημένο μέσα τον τίτλο και συχνά το
-// λογότυπο. Κομμένο σε κύκλο δείχνει μισό γράμμα, όχι άνθρωπο. Γι' αυτό
-// οι δύο δεν ανακατεύονται πουθενά: όπου θέλουμε πρόσωπο, είτε υπάρχει
-// πορτρέτο είτε πέφτουμε στα αρχικά.
 function photoOf(name){
   return aliases().photos[guestKey(name)] || '';
 }
@@ -5865,10 +4402,6 @@ function aliasNos(){
   return aliases().nos;
 }
 
-// Χαλαρό κλειδί ΜΟΝΟ για την ένωση — ισοπεδώνει και τα διαλυτικά, ώστε
-// το «Αϋφαντής» και το τυπογραφικό «Αυφαντής» να πέσουν στον ίδιο άνθρωπο.
-// Η διεύθυνση δεν βγαίνει από εδώ: βγαίνει από τη γραφή που κερδίζει,
-// ώστε να μένει σωστή. Ένωση και διεύθυνση θέλουν διαφορετικά κριτήρια.
 function guestKey(name){
   return slugify(String(name).replace(/[ΐϊ]/g, 'ι').replace(/[ΰϋ]/g, 'υ'));
 }
@@ -5882,11 +4415,6 @@ function groupByGuest(items){
   const groups ={};
 
   for (const ep of items){
-    // ΟΧΙ «if (!ep.guest) continue» εδώ: ένα επεισόδιο χωρίς άνω τελεία
-    // δεν έχει ep.guest, αλλά μπορεί να έχει καλεσμένο γραμμένο με το
-    // χέρι στο data/pairs.json. Μόνο το guestOf τα ξέρει και τα δύο.
-    // ΟΛΑ τα πρόσωπα, όχι μόνο το πρώτο: ένα επεισόδιο με δύο
-    // καλεσμένους ανήκει και στις δύο σελίδες.
     for (const name of guestsOf(ep)) {
       const key = guestKey(name);
       if (!key) continue;
@@ -5898,10 +4426,6 @@ function groupByGuest(items){
   return groups;
 }
 
-// Από ποιο κλειδί σε ποιο αρχείο. Γεμίζει μία φορά στο build, μόλις
-// σχηματιστούν οι ομάδες. Χρειάζεται επειδή το αρχείο παίρνει το όνομα
-// της γραφής που κέρδισε, όχι του κλειδιού — οπότε δεν υπολογίζεται
-// κατευθείαν από το όνομα που γράφει το επεισόδιο.
 let guestSlugIndex = {};
 let guestIndex = [];
 function indexGuestSlugs(groups){
@@ -5930,16 +4454,6 @@ function indexGuestSlugs(groups){
   guestIndex.sort((a, b) => b.weight - a.weight);
 }
 
-// ---- η απογραφή προσώπων για το διαχειριστικό ----
-//
-// Τι βλέπει ο συντάκτης στην καρτέλα «Πρόσωπα»: κάθε άνθρωπος όπως
-// τον βγάζει ΣΗΜΕΡΑ το site, με όλες τις γραφές που έπεσαν πάνω του,
-// όσα σβήστηκαν ως «δεν είναι άνθρωπος», και τις προτάσεις ένωσης.
-//
-// Γράφεται από εδώ και ΜΟΝΟ από εδώ, για τον ίδιο λόγο που γράφεται
-// και το auto-categories.json: τη λογική (καθαρισμός τίτλου, έλεγχος
-// looksLikePerson, ένωση) την ξέρει αυτό το αρχείο. Αντίγραφο στη
-// διεπαφή θα απέκλινε, και ο συντάκτης θα διόρθωνε φαντάσματα.
 function peopleForAdmin(episodes){
   // Πρώτα η ωμή απογραφή: κάθε γραφή ονόματος όπως βγαίνει από τον
   // τίτλο, ΠΡΙΝ την ένωση. Χωρίς αυτό δεν φαίνεται τι ενώθηκε με τι.
@@ -5994,13 +4508,6 @@ function peopleForAdmin(episodes){
     writings: (writings[p.key] || []).map((w) => w.name),
   })).sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, 'el'));
 
-  // Προτάσεις ένωσης. Κρατάμε μόνο όσες έχουν κάτι να προσφέρουν:
-  // ό,τι είναι ήδη ενωμένο δεν ξαναρωτιέται, αλλιώς η καρτέλα θα
-  // έδειχνε 39 «προτάσεις» που ο συντάκτης έχει ήδη εγκρίνει.
-  //
-  // Ούτε ό,τι έχει ΑΠΟΡΡΙΦΘΕΙ ρητά: δύο αδέρφια με το ίδιο επώνυμο
-  // μοιάζουν ίδια σε κάθε αυτόματο έλεγχο, και η πρόταση θα ξαναρχόταν
-  // σε κάθε build μέχρι να την εγκρίνει κάποιος από κούραση.
   const map = aliases().map;
   const no = new Set(aliasNos());
   const suggest = suggestFamilies(raw)
@@ -6021,15 +4528,6 @@ function peopleForAdmin(episodes){
   return { people, rejected: rejected.sort((a, b) => b.n - a.n), suggest };
 }
 
-// Η απογραφή του ζευγαρώματος, για το διαχειριστικό.
-//
-// Ίδιος λόγος με το people.json και το auto-categories.json: τη λογική
-// (matchKey, headKey, splitTitle, looksLikePerson) την ξέρει ΜΟΝΟ αυτό
-// το αρχείο. Αντίγραφο στη διεπαφή θα απέκλινε, και ο συντάκτης θα
-// διόρθωνε επεισόδια που στο site φαίνονται μια χαρά.
-//
-// Μπαίνουν μόνο τα προβληματικά — και όσα έχουν ήδη διορθωθεί, ώστε η
-// διόρθωση να φαίνεται και να μπορεί να αναιρεθεί.
 function pairsForAdmin(episodes){
   const rows = [];
 
@@ -6040,16 +4538,6 @@ function pairsForAdmin(episodes){
     const touched = !!(fix.video || fix.guest || fix.novideo || fix.noguest
       || fix.title || fix.summary || fix.image);
 
-    // ΟΛΑ τα επεισόδια, όχι μόνο τα ελλιπή.
-    //
-    // Παλιά η λίστα ήταν μόνο «τι λείπει», και σωστά: ήταν λίστα
-    // δουλειάς. Τώρα από την ίδια οθόνη διορθώνεται και τίτλος,
-    // περιγραφή και φωτογραφία — και αυτά δεν «λείπουν» ποτέ, απλώς
-    // κάποια μέρα κάποιος θέλει να τα αλλάξει. Αν δεν είναι στη λίστα,
-    // δεν μπορεί.
-    //
-    // Η λίστα δουλειάς δεν χάνεται: έγινε φίλτρο, και είναι το
-    // προεπιλεγμένο. Το «gaps» λέει αν η γραμμή ανήκει σε αυτήν.
     rows.push({
       id: ep.id,
       title: decode(ep.title),
@@ -6067,12 +4555,6 @@ function pairsForAdmin(episodes){
   return { rows };
 }
 
-// Ποιο πρόσωπο μιλάει για ποια θέματα, και πόσο συχνά.
-//
-// Το χρειάζονται δύο πράγματα στη σελίδα προσώπου: η ενότητα «Μιλάει
-// για», και το «άλλοι που μιλούν για τα ίδια θέματα» στο τέλος.
-// Φτιάχνεται μία φορά — αλλιώς κάθε μία από τις 382 σελίδες θα διάβαζε
-// ξανά όλα τα επεισόδια όλων των άλλων.
 let peopleIndex = [];
 function indexPeople(groups){
   peopleIndex = Object.keys(groups).map((key) => {
@@ -6133,18 +4615,6 @@ function guestInText(text){
   return null;
 }
 
-// Το ίδιο, αλλά κερδίζει ΟΠΟΙΟΣ ΓΡΑΦΕΤΑΙ ΠΡΩΤΟΣ, όχι όποιος έχει το
-// μακρύτερο όνομα.
-//
-// Σε έναν τίτλο υπάρχει ένα όνομα και το μάκρος είναι καλό κριτήριο.
-// Σε μια περιγραφή υπάρχουν τρία και τέσσερα: ο καλεσμένος, ο
-// δημοσιογράφος που τον πήρε, και όποιος αναφέρεται μέσα στην
-// κουβέντα. Ο καλεσμένος είναι σχεδόν πάντα το πρώτο όνομα της πρώτης
-// παραγράφου — «Ο Γιώργος Φλώρος, αντιναύαρχος ε.α., μίλησε με τον…».
-//
-// Βοηθάει και η ίδια η γλώσσα: ο καλεσμένος γράφεται ονομαστική και
-// ταιριάζει, ενώ ο δημοσιογράφος γράφεται αιτιατική («με τον Γιάννη
-// Χαραλαμπίδη») και ΔΕΝ ταιριάζει με το «Γιάννης Χαραλαμπίδης».
 function guestFirstInText(text){
   const hay = matchKey(text);
   if (!hay) return null;
@@ -6164,10 +4634,6 @@ function guestFirstInText(text){
   return best;
 }
 
-// Ποιος μιλάει σε ένα βίντεο. Πρώτα ο τίτλος — εκεί το όνομα μπαίνει
-// επίτηδες. Αν δεν λέει όνομα, η ΠΡΩΤΗ παράγραφος της περιγραφής:
-// παρακάτω το κείμενο μιλάει για πρόσωπα της επικαιρότητας, όχι για
-// τον καλεσμένο.
 function videoGuest(v){
   // Πρώτα ό,τι έβγαλε το κοινό πέρασμα προσώπων πάνω στον τίτλο του
   // βίντεο — το ίδιο που βγάζει και τα πρόσωπα των επεισοδίων, με την
@@ -6233,15 +4699,6 @@ function notFoundPage(){
   return page({ title: `Η σελίδα δεν βρέθηκε — ${SITE_NAME}`, body });
 }
 
-// ---- Απόρρητο ----
-//
-// Γραμμένη από ΜΕΤΡΗΣΗ, όχι από πρότυπο: κάθε τρίτος που αναφέρεται
-// εδώ βρέθηκε ψάχνοντας τις πραγματικές διευθύνσεις μέσα στις
-// χτισμένες σελίδες. Αν προστεθεί κάτι που φορτώνει από αλλού —
-// γραμματοσειρά, χάρτης, διαφημιστικό δίκτυο — μπαίνει ΚΑΙ εδώ.
-//
-// Το newshub.gr έχει τη δική του πολιτική, αλλά περιγράφει εκείνο το
-// site: άλλα cookies, άλλα εργαλεία. Εδώ λέμε τι ισχύει ΕΔΩ.
 function privacyPage(){
   const body = `${siteHeader()}
 
@@ -6430,12 +4887,6 @@ ${latest}
         }
       });
 
-      // Αναζήτηση από τη διεύθυνση: /search?q=κρήτη ψάχνει μόνη της.
-      //
-      // Δύο πράγματα κερδίζουμε: ο σύνδεσμος μιας αναζήτησης γίνεται
-      // να μοιραστεί, και η Google μπορεί να δείξει πλαίσιο αναζήτησης
-      // στα αποτελέσματά μας (SearchAction στην αρχική) — το οποίο
-      // στέλνει ακριβώς σε αυτή τη διεύθυνση.
       try {
         var q = new URLSearchParams(location.search).get('q');
         if (q) ui.triggerSearch(q);
@@ -6461,17 +4912,8 @@ function firstLetter(name){
 // Πόσα ονόματα δείχνει η ενότητα «Τα πρόσωπα» στην αρχική.
 const NAMES_SHOWN = 40;
 
-// Έγινε συνάρτηση: ήταν σταθερό false όσο δεν είχαμε κανένα πορτρέτο.
-// Τώρα το αφεντικό τα βάζει ένα-ένα από το διαχειριστικό, οπότε ανάβει
-// μόνο του με το πρώτο — κανείς δεν χρειάζεται να θυμηθεί να γυρίσει
-// έναν διακόπτη σε αρχείο που δεν ξέρει ότι υπάρχει.
 function peopleFaces(){ return haveFaces(); }
 
-// Η ενότητα «Τα πρόσωπα»: ποιοι μιλούν εδώ, σε μία ματιά.
-//
-// Ονόματα και αριθμοί, χωρίς εικόνες — γιατί οι «εικόνες» που θα
-// είχαμε είναι εξώφυλλα επεισοδίων, δηλαδή αφίσες, όχι πρόσωπα.
-// Σαράντα αφίσες στη σειρά θα έλεγαν λιγότερα από σαράντα ονόματα.
 function namesSection(groups, depth = 0){
   const keys = Object.keys(groups);
   if (!keys.length) return '';
@@ -6494,15 +4936,6 @@ function namesSection(groups, depth = 0){
 
   const faceOn = peopleFaces();
 
-  // ΧΩΡΙΣ αρχικά εδώ, σε αντίθεση με τη λίστα καλεσμένων.
-  //
-  // Στα 26px τα δύο γράμματα δεν διαβάζονται· γίνονται μουτζούρα, και
-  // σαράντα μουτζούρες στη σειρά τραβούν το μάτι από τα ονόματα, που
-  // είναι το περιεχόμενο της ενότητας. Ο άδειος κύκλος είναι ήσυχος
-  // και κάνει τις λίγες αληθινές φωτογραφίες να ξεχωρίζουν.
-  //
-  // Στη guests.html τα αρχικά μένουν: εκεί ο κύκλος είναι 110px και
-  // το όνομα γράφεται από κάτω, οπότε διαβάζονται κανονικά.
   const chips = people.map((p) => `      <a class="pname" href="${up}guest/${slugify(p.name)}.html">
         ${faceOn ? `<span class="pname-face">${p.face
           ? `<img src="${esc(p.face)}" alt="" loading="lazy">`
@@ -6604,13 +5037,6 @@ function guestsIndexPage(groups){
       </li>`);
   }
 
-  // Τα γράμματα ήταν άγκυρες: σε πήγαιναν στο «Κ» μέσα σε μια λίστα
-  // 373 ονομάτων που έμενε ολόκληρη ανοιχτή. Τώρα φιλτράρουν —
-  // δείχνουν ΜΟΝΟ τα ονόματα του γράμματος, και η σελίδα από εννιά
-  // οθόνες γίνεται μισή.
-  //
-  // Μένουν <a href="#g-X">: χωρίς JavaScript εξακολουθούν να είναι
-  // άγκυρες που δουλεύουν, όπως πριν. Η JS απλώς τα αναβαθμίζει.
   const abc = [
     `        <a href="#g-all" data-letter-all class="is-on">Όλα</a>`,
     ...letters.map((l) => `        <a href="#g-${l}" data-letter-pick="${l}">${l}</a>`),
@@ -6711,10 +5137,6 @@ function guestPage(name, list){
         <span class="ptag-n">${t.n}</span>
       </a>`).join('\n');
 
-  // ---- οι συζητήσεις ----
-  // Επεισόδια και βίντεο ανακατεμένα, χρονολογικά. Για τον επισκέπτη
-  // είναι το ίδιο πράγμα — «πότε μίλησε αυτός ο άνθρωπος» — και η
-  // κάρτα ούτως ή άλλως δείχνει μόνη της τι είναι το καθένα.
   const itemOf = (x) => (einaiVideo(x) ? itemFromVideo(x) : itemFromEpisode(x));
 
   // Το πιο πρόσφατο παίρνει μεγάλη κάρτα: είναι ο λόγος που κάποιος
@@ -6887,11 +5309,6 @@ function indexRelated(episodes){
   }
 }
 
-// ONE criterion, and the section heading says which.
-//
-// It used to mix three — same guest, then same show, then recent — so
-// under "Επόμενο στις Αναλύσεις" episodes from another show appeared.
-// Now: same show where we know it, otherwise same topic.
 function relatedEpisodes(ep, max = 4){
   const show = episodeShow(ep);
 
@@ -7143,16 +5560,6 @@ function episodePage(ep){
     ...cats.map((c) => `<a href="../${categoryUrl(c)}">${esc(c)}</a>`),
   ].filter(Boolean).join(' · ');
 
-  // The stage. Where a video exists both go in — video and cover art —
-  // and the switch decides which shows.
-  //
-  // OPENS ON AUDIO, not video. Each page opens with its own medium: a
-  // video page with video, an episode page with audio.
-  //
-  // It mattered beyond style: 891 of 1,079 episode pages have a twin
-  // video, and while they opened on "Βλέπω" pressing play started a
-  // YouTube iframe. Our player never ran, so no position was saved and
-  // "resume where you left off" saw nothing across 83% of the archive.
   const stage = twin
     ? `        <div class="stage-media" data-embed="${twin.embed}" hidden>
           <img src="${twin.image}" alt="" loading="lazy">
@@ -7327,12 +5734,6 @@ function main(){
   // Parsed, with corrected dates and sorted — see loadEpisodes.
   const episodes = loadEpisodes();
 
-  // Οι ομάδες καλεσμένων πρέπει να υπάρχουν ΠΡΙΝ γραφτεί οτιδήποτε, γιατί
-  // από αυτές βγαίνει ο σύνδεσμος που βάζει κάθε επεισόδιο προς τον
-  // άνθρωπό του.
-  // ΚΑΙ τα βίντεο, εκτός από όσα είναι το ίδιο πράγμα με ένα επεισόδιο:
-  // εκείνα τα δείχνει ήδη η κάρτα του επεισοδίου, και θα μετριόνταν δύο
-  // φορές ως «εμφανίσεις» του ίδιου ανθρώπου.
   const videoItems = videosOnce().filter((v) => !videoHasTwin(v));
   const groups = groupByGuest([...episodes, ...videoItems]);
   indexGuestSlugs(groups);
@@ -7461,14 +5862,6 @@ function main(){
   ]);
   for (const it of pinned) pushFlow(it);
 
-  // Show videos with no podcast.
-  //
-  // The flow used to take episodes only, and 2,325 videos have no
-  // episode: a whole show published only on YouTube appeared nowhere on
-  // the homepage.
-  //
-  // Not all of them: without a playlist it is not a show, and
-  // ΕΠΙΚΑΙΡΟΤΗΤΑ stays out (see FLOW_SKIP_SHOWS). Leaves about one a day.
   const soloShows = uniqueVideos.filter((v) =>
     v.show && !FLOW_SKIP_SHOWS.has(v.show) && !videoHasTwin(v));
 
@@ -7502,16 +5895,6 @@ function main(){
     }
   }
 
-  // Each card's chronological position, written on it as data-rank.
-  //
-  // DOM order is "pinned first, then date" — right for "Όλα". Inside a
-  // CATEGORY it is wrong: whoever taps "Κρήτη" wants the most recent from
-  // Crete, and an old pinned item on top looks like a bug. Pinning means
-  // "keep it high in the main flow", nothing else.
-  //
-  // player.js sets style.order = data-rank when a category is tapped and
-  // removes it for "Όλα". The flow is a grid, so order rearranges without
-  // touching the DOM.
   const seira = flow.slice()
     .sort((a, b) => new Date(b.date) - new Date(a.date));
   const rank = new Map(seira.map((it, i) => [it, i]));
@@ -7582,10 +5965,6 @@ ${topicRows(catGroups)}
 
 ${namesSection(groups)}
 
-${/* Second homepage slot. Between "Πρόσωπα" and "Και ακόμα": where the
-     main body ends and the tail of the page begins — a pause, not an
-     interruption. The first slot sits far higher, so the two are never
-     neighbours. */ ''}
 ${adSlot('home-mid', 'leaderboard')}
 
 ${moreTopics(catGroups)}
@@ -7641,14 +6020,6 @@ ${intro(episodes[0], videos[0])}`,
 
   writeIfChanged(path.join(PUBLIC_DIR, 'index.html'), html); //writes the generated HTML to the index.html file
 
-  // What "Τελευταία" actually is right now — for the admin.
-  //
-  // The admin cannot work it out alone: this selection drops videos that
-  // have a twin podcast and keeps the hero out. A prediction that misses
-  // is worse than none, so we write the truth.
-  //
-  // No timestamp inside: it would change on every build and dirty git
-  // with no change in content.
   const pinnedHrefs = new Set(pinned.map((it) => it.href));
   const shown = flow.filter((it) => !it.extra);
 
@@ -8075,12 +6446,6 @@ console.log(`Σελίδες καλεσμένων: ${guestsWritten} γράφτη�
       fs.writeFileSync(peopleFile, peopleText, 'utf8');
     }
 
-    // Topics with their counts, for the "Θέματα αρχικής" tab.
-    //
-    // Only this file knows which categories exist today and how many items
-    // each has, after merging episodes, videos and our own articles. The
-    // code defaults travel with them so the admin shows what applies while
-    // nobody has chosen anything.
     const topicsFile = path.join(ADMIN_SRC, 'topics.json');
     const topicsText = JSON.stringify({
       defaults: {
