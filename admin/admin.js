@@ -576,6 +576,136 @@ function shrink(file){
   });
 }
 
+// ---- the mp4 pre-flight ----
+//
+// A partner's video ad fails in ways nobody sees until it is live, so we
+// read the file itself before it goes anywhere.
+
+// Over this, a phone on a slow connection shows an empty frame for seconds.
+var AD_MAX_MB = 5;
+
+// Containers we walk into; everything else we step over.
+var MP4_IN = { moov: 1, trak: 1, mdia: 1, minf: 1, stbl: 1 };
+
+// The tracks of an mp4: one { handler, format } per trak.
+//
+// handler is 'vide' or 'soun', format the codec's four letters ('avc1',
+// 'mp4a'). No library: the boxes are [size][type][payload] all the way
+// down, and we need two fields out of them.
+function mp4Tracks(buf){
+  var dv = new DataView(buf);
+  var tracks = [];
+  var cur = null;
+
+  function tag(p){
+    return String.fromCharCode(dv.getUint8(p), dv.getUint8(p + 1), dv.getUint8(p + 2), dv.getUint8(p + 3));
+  }
+
+  function walk(from, to){
+    var p = from;
+
+    while (p + 8 <= to) {
+      var size = dv.getUint32(p);
+      var type = tag(p + 4);
+      var head = 8;
+
+      // size 1 means a 64-bit length follows. We read the low half only —
+      // a 4GB advert is not a thing.
+      if (size === 1) { size = dv.getUint32(p + 12); head = 16; }
+      // size 0 means "to the end of the file".
+      if (size === 0) size = to - p;
+      if (size < head || p + size > to) return;   // corrupt; stop here
+
+      var body = p + head;
+
+      if (type === 'trak') { cur = { handler: '', format: '' }; tracks.push(cur); }
+
+      if (type === 'hdlr' && cur) {
+        // version/flags (4) + pre_defined (4), then the handler.
+        if (body + 12 <= to) cur.handler = tag(body + 8);
+      }
+
+      if (type === 'stsd' && cur) {
+        // version/flags (4) + entry_count (4), then the first entry:
+        // its own size (4) and then the format.
+        if (body + 16 <= to) cur.format = tag(body + 12);
+      }
+
+      if (MP4_IN[type]) walk(body, p + size);
+
+      p += size;
+    }
+  }
+
+  walk(0, dv.byteLength);
+  return tracks;
+}
+
+// What is wrong with this file — in the words of someone who will have to
+// go back to the advertiser and ask for another one.
+function adVideoProblems(file, tracks){
+  var out = [];
+  var video = null;
+  var sound = null;
+
+  tracks.forEach(function (t) {
+    if (t.handler === 'vide' && !video) video = t;
+    if (t.handler === 'soun' && !sound) sound = t;
+  });
+
+  if (!video) {
+    out.push('Δεν βρέθηκε εικόνα μέσα στο αρχείο — μάλλον δεν είναι βίντεο.');
+    return out;
+  }
+
+  // An advert plays by itself, muted. A file with a sound track is
+  // blocked by the browser and stays frozen on its first frame.
+  if (sound) {
+    out.push('Έχει ήχο. Οι διαφημίσεις ξεκινούν μόνες τους, και ο browser '
+      + 'μπλοκάρει ό,τι έχει ήχο — θα μείνει κολλημένο στο πρώτο καρέ. '
+      + 'Ζήτησέ το χωρίς ηχητικό κανάλι.');
+  }
+
+  // avc1/avc3 is H.264. Everything else is a gamble on Safari, which is
+  // most of the phones in Greece.
+  if (video.format && !/^avc[13]$/.test(video.format)) {
+    out.push('Η κωδικοποίηση είναι «' + video.format + '», όχι H.264. '
+      + 'Στο Safari μπορεί να μην παίξει καθόλου. Ζήτησέ το σε H.264.');
+  }
+
+  var mb = file.size / 1048576;
+  if (mb > AD_MAX_MB) {
+    out.push('Είναι ' + mb.toFixed(1) + ' MB. Πάνω από ' + AD_MAX_MB
+      + ' MB, σε κινητό με αδύναμο σήμα η θέση μένει άδεια για δευτερόλεπτα.');
+  }
+
+  return out;
+}
+
+// Reads the file and asks before an advert with a known fault goes up.
+// A warning and not a block: the file may be the only one the advertiser
+// sent, and the campaign starts tomorrow.
+function adVideoOk(file){
+  return file.arrayBuffer().then(function (buf) {
+    var problems;
+
+    try {
+      problems = adVideoProblems(file, mp4Tracks(buf));
+    } catch (err) {
+      // An unreadable container is itself the answer.
+      problems = ['Το αρχείο δεν διαβάζεται ως mp4 (' + err.message + ').'];
+    }
+
+    if (!problems.length) return true;
+
+    return window.confirm(
+      'Το «' + file.name + '» έχει πρόβλημα:\n\n'
+      + problems.map(function (p, i) { return (i + 1) + '. ' + p; }).join('\n\n')
+      + '\n\nΝα ανέβει έτσι;'
+    );
+  });
+}
+
 function sayUpload(text, kind){
   var el = $('[data-upload]');
   if (!text) { el.hidden = true; return; }
@@ -597,23 +727,31 @@ function upload(files, ctx){
     loadShots().then(function () { goTo('lib', 'day:' + todayYmd()); });
   };
 
+  // Images and mp4. The file input has said video/mp4 all along, but this
+  // filter did not, so an advert picked from the screen was turned away
+  // with "images only" — the mp4 path had only ever been used through the
+  // API.
   var list = Array.prototype.slice.call(files).filter(function (f) {
-    return /^image\//.test(f.type);
+    return /^image\//.test(f.type) || f.type === 'video/mp4';
   });
-  if (!list.length) { say('Μόνο φωτογραφίες.', 'bad'); return; }
+  if (!list.length) { say('Μόνο φωτογραφίες ή mp4.', 'bad'); return; }
 
   var done = 0;
   var failed = [];
-  var last = '';    // η διεύθυνση της τελευταίας που ανέβηκε
+  var skipped = 0;  // said no at the mp4 prompt
+  var last = '';    // the URL of the last one that went up
 
   // One at a time: on a weak connection ten parallel uploads block each
   // other and all time out together.
   function next(i){
     if (i >= list.length) {
+      var word = done === 1 ? 'Το αρχείο ανέβηκε.' : done + ' αρχεία ανέβηκαν.';
+      if (skipped) word += ' ' + (skipped === 1 ? '1 δεν ανέβηκε.' : skipped + ' δεν ανέβηκαν.');
+
       say(
         failed.length
           ? done + ' ανέβηκαν, ' + failed.length + ' απέτυχαν: ' + failed.join(', ')
-          : (done === 1 ? 'Η φωτογραφία ανέβηκε.' : done + ' φωτογραφίες ανέβηκαν.'),
+          : word,
         failed.length ? 'bad' : 'ok'
       );
       after(last, done);
@@ -625,7 +763,15 @@ function upload(files, ctx){
 
     var raw = /^(image\/gif|video\/)/.test(file.type);
 
-    (raw ? Promise.resolve(file) : shrink(file)).then(function (blob) {
+    // An mp4 is read and checked first. Said no at the prompt? It is
+    // skipped, not failed — the editor decided, nothing went wrong.
+    var pass = file.type === 'video/mp4' ? adVideoOk(file) : Promise.resolve(true);
+
+    pass.then(function (go) {
+      if (!go) { skipped++; return null; }
+      return raw ? file : shrink(file);
+    }).then(function (blob) {
+      if (!blob) return null;
       return fetch('/api/images', {
         method: 'POST',
         headers: {
@@ -633,8 +779,9 @@ function upload(files, ctx){
           'X-File-Name': encodeURIComponent(file.name),
         },
         body: blob,
-      });
-    }).then(readJson, netFail).then(function (d) {
+      }).then(readJson, netFail);
+    }).then(function (d) {
+      if (!d) return;            // skipped at the prompt
       done++;
       last = d.url || '';
     }).catch(function (err) {
