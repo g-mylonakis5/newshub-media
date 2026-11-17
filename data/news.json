@@ -1,5 +1,41 @@
 [
   {
+    "id": "synantisi-toy-dimarchoy-irakleioy-me-ton-proin-voyleyti-chari-mamoylaki-ti-syzitisan",
+    "title": "Συνάντηση του Δημάρχου Ηρακλείου με τον πρώην Βουλευτή Χάρη Μαμουλάκη-Τι συζήτησαν",
+    "url": "https://www.newshub.gr/el/kriti/synantisi-toy-dimarchoy-irakleioy-me-ton-proin-voyleyti-chari-mamoylaki-ti-syzitisan",
+    "date": "2026-11-17T16:15:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/mmm.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/mmm.jpg",
+    "summary": "Ο Δήμαρχος Ηρακλείου Αλέξης Καλοκαιρινός συναντήθηκε με τον πρώην Βουλευτή Ηρακλείου Χάρη Μαμουλάκη το πρωί της Τρίτης 17/11 στη Λότζια.\r\n\r\nΣτην ατ...",
+    "author": null,
+    "featured": true
+  },
+  {
+    "id": "voak-apoleies-poron-toy-tameioy-anakampsis-kai-sto-sdit-tmima-toy-dromoy-chersonisos-neapoli",
+    "title": "ΒΟΑΚ: Απώλειες πόρων του Ταμείου Ανάκαμψης και στο ΣΔΙΤ τμήμα του δρόμου «Χερσόνησος-Νεάπολη»",
+    "url": "https://www.newshub.gr/el/oikonomia/voak-apoleies-poron-toy-tameioy-anakampsis-kai-sto-sdit-tmima-toy-dromoy-chersonisos-neapoli",
+    "date": "2026-11-17T16:10:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/voak_boak.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/voak_boak.jpg",
+    "summary": "Απώλειες ύψους 33 εκατ. ευρώ, από τα συνολικά 90 εκατ. που προβλέπονταν αρχικά (ως συνολική δημόσια χρηματοδοτική συνεισφορά) καταγράφονται και επισήμως από ...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "ipa-epese-to-aporrito-esoteriko-diktyo-epikoinonion-tis-ypiresias-ethnikis-asfaleias",
+    "title": "ΗΠΑ: «Έπεσε» το απόρρητο εσωτερικό δίκτυο επικοινωνιών της Υπηρεσίας Εθνικής Ασφάλειας",
+    "url": "https://www.newshub.gr/el/kosmos/ipa-epese-to-aporrito-esoteriko-diktyo-epikoinonion-tis-ypiresias-ethnikis-asfaleias",
+    "date": "2026-11-17T16:03:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/maketa-nsa.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/maketa-nsa.jpg",
+    "summary": "Εκτός λειτουργίας έχει τεθεί το άκρως απόρρητο εσωτερικό δίκτυο επικοινωνιών της Υπηρεσίας Εθνικής Ασφάλειας των ΗΠΑ (NSA), προκαλώντας προβλήματα στην ανταλ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "giati-ypovathmise-tin-elliniki-agora-metochon-se-neutral-i-jp-morgan",
     "title": "Γιατί υποβάθμισε την ελληνική αγορά μετοχών σε «neutral» η Jp Morgan",
     "url": "https://www.newshub.gr/el/oikonomia/giati-ypovathmise-tin-elliniki-agora-metochon-se-neutral-i-jp-morgan",
@@ -9,7 +45,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/1471943-jp-morgan_930.jpg",
     "summary": "Η JP Morgan υποβαθμίζει την ελληνική αγορά μετοχών σε «neutral» από «overweight».\r\n\r\nΗ απόφαση περιλαμβάνεται στην έκθεση στρατηγικής...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "epichorigisi-200-000-eyro-apo-tin-perifereia-kritis-gia-tin-energeiaki-anavathmisi-ton-egkatastaseon-toy-eaki",
@@ -7204,42 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/ereunetiko-skaphos-abeille_marengo.jpg--okkk.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/ereunetiko-skaphos-abeille_marengo.jpg--okkk.jpg",
     "summary": "Hπια είναι η αντίδραση της Τουρκίας μόλις το Abeille Marengo άρχισε να πλέει στα διεθνή ύδατα, εντός της οριοθετημένης ελληνικής ΑΟΖ, νοτιοανατολικά της Καρπ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kriti-parateinontai-ta-proliptika-metra-gia-tin-eylogia-ton-aigoprovaton-oi-logoi-tis-apofasis",
-    "title": "Κρήτη: Παρατείνονται τα προληπτικά μέτρα για την ευλογιά των αιγοπροβάτων - Οι λόγοι της απόφασης",
-    "url": "https://www.newshub.gr/el/kriti/kriti-parateinontai-ta-proliptika-metra-gia-tin-eylogia-ton-aigoprovaton-oi-logoi-tis-apofasis",
-    "date": "2026-11-12T13:35:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/probatatatattt.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/probatatatattt.jpg",
-    "summary": "Η Περιφέρεια Κρήτης ενημερώνει τον αγροκτηνοτροφικό κόσμο και τους εμπλεκόμενους φορείς ότι παρατείνονται τα άμεσα, προληπτικά μέτρα για την προστασία της κτ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "apati-parasyrei-odigoys-se-plasti-pliromi-ti-ischyei-me-tis-pragmatikes-kliseis-kai-tin-ekptosi",
-    "title": "Απάτη παρασύρει οδηγούς σε πλαστή πληρωμή: Τι ισχύει με τις πραγματικές κλήσεις και την έκπτωση",
-    "url": "https://www.newshub.gr/el/autohub/apati-parasyrei-odigoys-se-plasti-pliromi-ti-ischyei-me-tis-pragmatikes-kliseis-kai-tin-ekptosi",
-    "date": "2026-11-12T13:29:00.000Z",
-    "category": "autohub",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/autokineta.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/autokineta.jpg",
-    "summary": "SMS που εμφανίζεται ως μήνυμα από το «GOV» επιχειρεί να παρασύρει οδηγούς σε πλαστή διαδικασία πληρωμής για δήθεν υπέρβαση του ορίου ταχύτητας.\r\n...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "sto-nosokomeio-i-proistameni-epitheoritria-tis-anexartitis-archis-epitheorisis-ergasias-epeita-apo-frastiko-epeisodio-me-tin-z-konstantopoyloy",
-    "title": "Στο νοσοκομείο η προϊσταμένη επιθεωρήτρια της Ανεξάρτητης Αρχής Επιθεώρησης Εργασίας, έπειτα από φραστικό επεισόδιο με την Ζ. Κωνσταντοπούλου",
-    "url": "https://www.newshub.gr/el/ellada/sto-nosokomeio-i-proistameni-epitheoritria-tis-anexartitis-archis-epitheorisis-ergasias-epeita-apo-frastiko-epeisodio-me-tin-z-konstantopoyloy",
-    "date": "2026-11-12T13:22:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/zoe-konstantopoulou.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/zoe-konstantopoulou.jpg",
-    "summary": "Στο νοσοκομείο Γεννηματάς μεταφέρθηκε με ασθενοφόρο του ΕΚΑΒ προϊσταμένη επιθεωρήτρια της Ανεξάρτητης Αρχής Επιθεώρησης Εργασίας, έπειτα από λιποθυμικό επεισ...",
     "author": null,
     "featured": false
   },
