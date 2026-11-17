@@ -1,5 +1,17 @@
 [
   {
+    "id": "proedros-finlandias-na-katartistei-chronodiagramma-kai-atzenta-gia-tis-roso-oykranikes-diapragmateyseis",
+    "title": "Πρόεδρος Φινλανδίας: Να καταρτιστεί  χρονοδιάγραμμα και ατζέντα για τις ρωσο-ουκρανικές διαπραγματεύσεις",
+    "url": "https://www.newshub.gr/el/geopolitiki/proedros-finlandias-na-katartistei-chronodiagramma-kai-atzenta-gia-tis-roso-oykranikes-diapragmateyseis",
+    "date": "2026-11-17T16:20:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/2a8a0bb3a46a46b0a9b345e6931e302d.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/2a8a0bb3a46a46b0a9b345e6931e302d.jpg",
+    "summary": "Ο πρόεδρος της Φινλανδίας Αλεξάντερ Στουμπ δήλωσε σήμερα ότι είναι σημαντικό να καταρτιστεί ένα σαφές χρονοδιάγραμμα και μια ατζέντα για τις διαπραγματεύσεις...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "synantisi-toy-dimarchoy-irakleioy-me-ton-proin-voyleyti-chari-mamoylaki-ti-syzitisan",
     "title": "Συνάντηση του Δημάρχου Ηρακλείου με τον πρώην Βουλευτή Χάρη Μαμουλάκη-Τι συζήτησαν",
     "url": "https://www.newshub.gr/el/kriti/synantisi-toy-dimarchoy-irakleioy-me-ton-proin-voyleyti-chari-mamoylaki-ti-syzitisan",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/mmm.jpg",
     "summary": "Ο Δήμαρχος Ηρακλείου Αλέξης Καλοκαιρινός συναντήθηκε με τον πρώην Βουλευτή Ηρακλείου Χάρη Μαμουλάκη το πρωί της Τρίτης 17/11 στη Λότζια.\r\n\r\nΣτην ατ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "voak-apoleies-poron-toy-tameioy-anakampsis-kai-sto-sdit-tmima-toy-dromoy-chersonisos-neapoli",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/gamos.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/gamos.jpg",
     "summary": "Ελεύθερος χωρίς κανέναν περιοριστικό όρο αφέθηκε τελικά ο 32χρονος γαμπρός ο οποίος συνελήφθη, μετά από μπαλοθιές που έπεσαν, κατά τη διάρκεια του πρόγαμου, ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "ereynitiko-skafos-abeille-marengo-amesi-elliniki-apantisi-se-minyma-toyrkikis-fregatas-pros-to-galliko-ereynitiko-molis-ekeino-mpike-se-diethni-ydata",
-    "title": "Ερευνητικό σκάφος Abeille Marengo: Άμεση ελληνική απάντηση σε μήνυμα τουρκικής φρεγάτας προς το γαλλικό ερευνητικό μόλις εκείνο μπήκε σε διεθνή ύδατα",
-    "url": "https://www.newshub.gr/el/ellada/ereynitiko-skafos-abeille-marengo-amesi-elliniki-apantisi-se-minyma-toyrkikis-fregatas-pros-to-galliko-ereynitiko-molis-ekeino-mpike-se-diethni-ydata",
-    "date": "2026-11-12T13:44:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/ereunetiko-skaphos-abeille_marengo.jpg--okkk.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/ereunetiko-skaphos-abeille_marengo.jpg--okkk.jpg",
-    "summary": "Hπια είναι η αντίδραση της Τουρκίας μόλις το Abeille Marengo άρχισε να πλέει στα διεθνή ύδατα, εντός της οριοθετημένης ελληνικής ΑΟΖ, νοτιοανατολικά της Καρπ...",
     "author": null,
     "featured": false
   },
