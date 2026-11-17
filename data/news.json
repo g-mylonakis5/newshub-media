@@ -1,5 +1,17 @@
 [
   {
+    "id": "metrita-gia-ektakti-anagki-i-proetoimasia-gia-tis-protes-72-ores-krisis-stin-ee",
+    "title": "Μετρητά για έκτακτη ανάγκη: Η προετοιμασία για τις πρώτες 72 ώρες κρίσης στην ΕΕ",
+    "url": "https://www.newshub.gr/el/oikonomia/metrita-gia-ektakti-anagki-i-proetoimasia-gia-tis-protes-72-ores-krisis-stin-ee",
+    "date": "2026-11-17T19:27:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/xrhmata.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/xrhmata.jpg",
+    "summary": "Σε μια καθημερινότητα όπου οι πληρωμές γίνονται σχεδόν μηχανικά με ένα άγγιγμα του κινητού ή της τραπεζικής κάρτας, ένα μικρό ποσό μετρητών στο σπίτι μπορεί ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "soyidia-kai-vretania-ypegrapsan-symfonia-synergasias-me-to-kievo-gia-ta-pyromachika-ton-machitikon-gripen",
     "title": "Σουηδία και Βρετανία υπέγραψαν συμφωνία συνεργασίας με το Κίεβο για τα πυρομαχικά των μαχητικών Gripen",
     "url": "https://www.newshub.gr/el/geopolitiki/soyidia-kai-vretania-ypegrapsan-symfonia-synergasias-me-to-kievo-gia-ta-pyromachika-ton-machitikon-gripen",
@@ -285,7 +297,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/3fae924b-571d-4d47-b263-e45a5ecd5f06.jpg",
     "summary": "Αντιδράσεων συνέχεια σήμερα για το «αγκάθι» της εγκατάστασης της νέας Μονάδας του Εθνικού Οργανισμού Πρόληψης και Αντιμετώπισης Εξαρτήσεων ατόμων...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "nosokomeio-paidon-agia-sofia-egcheirisi-15-oron-se-11chroni-afairethike-ogkos-apo-ton-nefro-eos-tin-kardia",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/nosokomeio-diadromos.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/nosokomeio-diadromos.jpg",
     "summary": "Αρκετά κρούσματα γαστρεντερίτιδας καταγράφονται από τις αρχές Οκτωβρίου μέχρι και τώρα στο νησί της Σκοπέλου με τουλάχιστον 60 περιπτώσεις να έχουν καταγραφε...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "metopiki-sygkroysi-ich-me-scholiko-sti-larisa-diasolinothike-to-paidi-poy-epevaine-sto-aytokinito-sovara-traymatismenos-o-pateras-toy",
-    "title": "Μετωπική σύγκρουση ΙΧ με σχολικό στη Λάρισα: Διασωληνώθηκε το παιδί που επέβαινε στο αυτοκίνητο, σοβαρά τραυματισμένος ο πατέρας του",
-    "url": "https://www.newshub.gr/el/ellada/metopiki-sygkroysi-ich-me-scholiko-sti-larisa-diasolinothike-to-paidi-poy-epevaine-sto-aytokinito-sovara-traymatismenos-o-pateras-toy",
-    "date": "2026-11-12T17:08:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/larisa-troxaio-exo.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/larisa-troxaio-exo.jpg",
-    "summary": "Τροχαίο ατύχημα σημειώθηκε το απόγευμα της Πέμπτης (12/11) έξω από τη Λάρισα όταν  ΙΧ αυτοκίνητο στο οποίο επέβαινε πατέρας και ένα μικρό παιδί σε ειδικ...",
     "author": null,
     "featured": false
   },
