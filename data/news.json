@@ -1,5 +1,17 @@
 [
   {
+    "id": "chalandri-andras-epitethike-stin-aderfi-toy-kai-tin-tyflose-me-ta-cheria-moy-tis-evgala-ta-matia",
+    "title": "Χαλάνδρι: Άνδρας επιτέθηκε στην αδερφή του και την τύφλωσε – «Με τα χέρια μου της έβγαλα τα μάτια»",
+    "url": "https://www.newshub.gr/el/ellada/chalandri-andras-epitethike-stin-aderfi-toy-kai-tin-tyflose-me-ta-cheria-moy-tis-evgala-ta-matia",
+    "date": "2026-11-17T21:50:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/kakopoihsh.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/kakopoihsh.jpg",
+    "summary": "Μία σοκαριστική επίθεση που προκαλεί αποτροπιασμό σημειώθηκε τον Ιανουάριο του 2026 στο Χαλάνδρι, έπειτα από άγριο τσακωμό μεταξύ δύο αδερφών, που είχε ως απ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "norvigia-kyvernoepithesi-sta-systimata-toy-megalyteroy-promitheyti-fysikoy-aerioy-tis-eyropis",
     "title": "Νορβηγία: Κυβερνοεπίθεση στα συστήματα του μεγαλύτερου προμηθευτή φυσικού αερίου της Ευρώπης",
     "url": "https://www.newshub.gr/el/kosmos/norvigia-kyvernoepithesi-sta-systimata-toy-megalyteroy-promitheyti-fysikoy-aerioy-tis-eyropis",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/equinor_lng_mk.jpg",
     "summary": "Ο νορβηγικός ενεργειακός όμιλος πετρελαίου και φυσικού αερίου Equinor ανακοίνωσε την Τρίτη (17/11) ότι εντόπισε κυβερνοεπίθεση σε εξέλιξη σε κάποια συστήματα...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "ypothesi-giorgoy-mazonaki-o-michanismos-thanatoy-einai-dedomenos-monodromos-i-apodosi-katigorion-leei-o-dikigoros-tis-oikogeneias",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/pierrakakhs-androylakhs.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/pierrakakhs-androylakhs.jpg",
     "summary": "Με αιχμή τη 13η σύνταξη, την επαναφορά του 13ου μισθού στο Δημόσιο και τη μείωση του ΦΠΑ σε βασικά είδη, ο πρόεδρος του ΠΑΣΟΚ και ο υπουργός Οικονομικών διασ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kyriakos-mitsotakis-apo-to-doyvlino-den-mporei-na-yparxei-makrochroni-eirini-stin-oykrania-choris-tin-eyropi-sto-trapezi-ton-diapragmateyseon",
-    "title": "Κυριάκος Μητσοτάκης από το Δουβλίνο: «Δεν μπορεί να υπάρξει μακρόχρονη ειρήνη στην Ουκρανία χωρίς την Ευρώπη στο τραπέζι των διαπραγματεύσεων»",
-    "url": "https://www.newshub.gr/el/ellada/kyriakos-mitsotakis-apo-to-doyvlino-den-mporei-na-yparxei-makrochroni-eirini-stin-oykrania-choris-tin-eyropi-sto-trapezi-ton-diapragmateyseon",
-    "date": "2026-11-12T18:58:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/7162824-1024x683.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/7162824-1024x683.jpg",
-    "summary": "Στην ανάγκη συμμετοχής της Ευρώπης στις διαπραγματεύσεις για τον τερματισμό του πολέμου στην Ουκρανία, στις εξελίξεις στη Μέση Ανατολή, στην οικονομική ανθεκ...",
     "author": null,
     "featured": false
   },
