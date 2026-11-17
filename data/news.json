@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-trochaio-atychima-sygkroysi-ich-me-asthenoforo-ston-dromo-pros-pagni",
+    "title": "Ηράκλειο: Τροχαίο ατύχημα - Σύγκρουση ΙΧ με ασθενοφόρο στον δρόμο προς ΠΑΓΝΗ",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-trochaio-atychima-sygkroysi-ich-me-asthenoforo-ston-dromo-pros-pagni",
+    "date": "2026-11-17T08:30:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/asthenophoro-ape-mpe.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/asthenophoro-ape-mpe.jpg",
+    "summary": "Τροχαίο ατύχημα σημειώθηκε νωρίς το πρωί της Τρίτης 17 Νοεμβρίου, στον δρόμο προς το Πανεπιστημιακό Γενικό Νοσοκομείο Ηρακλείου (ΠΑΓΝΗ), όταν ΙΧ αυτοκίνητο σ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "palaiochora-entopistikan-33-metanastes-sti-vrachodi-periochi-toy-krioy",
     "title": "Παλαιόχωρα: Εντοπίστηκαν 33 μετανάστες στη βραχώδη περιοχή του Κριού",
     "url": "https://www.newshub.gr/el/kriti/palaiochora-entopistikan-33-metanastes-sti-vrachodi-periochi-toy-krioy",
@@ -33,7 +45,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/lotzia-koul-2.jpg",
     "summary": "Εγκρίθηκε από το Δημοτικό Συμβούλιο η εισήγηση της Δημοτικής Αρχής για πάγωμα των Δημοτικών Τελών το 2027 και διατήρησή τους στο ίδιο επίπεδο όπως και το 202...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "rythmisi-120-doseon-pote-anoigei-i-platforma-gia-ta-chrei-sto-dimosio-ta-kritiria-entaxis",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/germania.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/germania.jpg",
     "summary": "Το Συμβούλιο Οικονομικών Εμπειρογνωμόνων, που συμβουλεύει την κυβέρνηση της Γερμανίας, παρέδωσε την Τετάρτη στον καγκελάριο Μερτς, παρόντος και του υπουργού ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "sakil-o-nil-an-epaiza-akomi-sto-nva-tha-imoyn-o-giannis-antetokoynmpo",
-    "title": "Σακίλ Ο Νιλ: Αν έπαιζα ακόμη στο ΝΒΑ, θα ήμουν ο Γιάννης Αντετοκούνμπο",
-    "url": "https://www.newshub.gr/el/athlitika/sakil-o-nil-an-epaiza-akomi-sto-nva-tha-imoyn-o-giannis-antetokoynmpo",
-    "date": "2026-11-11T21:40:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/gettyimages-2301732279.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/gettyimages-2301732279.jpg",
-    "summary": "O Σακίλ Ο'Νιλ δεν σταματά να εκφράζει τον θαυμασμό του για τον τρόπο που αγωνίζεται ο Γιάννης Αντετοκούνμπο.\r\n\r\n«Ακούω συνεχώς ότι ο \"Σακ&quot...",
     "author": null,
     "featured": false
   },
