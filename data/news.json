@@ -1,5 +1,17 @@
 [
   {
+    "id": "synergasia-nato-kai-openai-gia-tin-antimetopisi-kyvernoepitheseon",
+    "title": "Συνεργασία ΝΑΤΟ και Openai για την αντιμετώπιση κυβερνοεπιθέσεων",
+    "url": "https://www.newshub.gr/el/kosmos/synergasia-nato-kai-openai-gia-tin-antimetopisi-kyvernoepitheseon",
+    "date": "2026-11-17T21:06:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/ap26272702716571-1024x683.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/ap26272702716571-1024x683.jpg",
+    "summary": "Η OpenAI ανακοίνωσε την Τρίτη, 17/11, τη σύναψη συνεργασίας με το ΝΑΤΟ, με στόχο την παροχή εργαλείων κυβερνοασφάλειας στη Βορειοατλαντική Συμμαχία και την υ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "giortes-gia-oloys-pote-kanei-premiera-to-programma-poia-proionta-tha-perilamvanei",
     "title": "Γιορτές για Όλους: Πότε κάνει πρεμιέρα το πρόγραμμα – Ποια προϊόντα θα περιλαμβάνει",
     "url": "https://www.newshub.gr/el/oikonomia/giortes-gia-oloys-pote-kanei-premiera-to-programma-poia-proionta-tha-perilamvanei",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/giortes-ne-1-1536x679.jpg",
     "summary": "Κλείδωσε η ημερομηνία για την έναρξη του προγράμματος  «Γιορτές για Όλους».\r\n\r\nΌπως ανακοίνωσε σήμερα ο υφυπουργός Ανάπτυξης Βασίλης Σπανάκη...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "soyidia-telesigrafo-sta-kommata-gia-ton-schimatismo-kyvernisis-prin-apo-ta-christoygenna",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/gepedo-mpasket-ypaithrio.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/gepedo-mpasket-ypaithrio.jpg",
     "summary": "Στην επανεξέταση του συνολικού πλαισίου αθλητικής μοριοδότησης για την εισαγωγή στην Τριτοβάθμια Εκπαίδευση προχωρεί το υπουργείο Παιδείας, μετά τις αντιδράσ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kriti-ayxisi-stis-times-stis-vrachychronies-misthoseis-kai-stin-plirotita-to-2026-ti-deichnei-nea-ereyna-tis-hosthub",
-    "title": "Κρήτη: Αύξηση στις τιμές στις βραχυχρόνιες μισθώσεις και στην πληρότητα το 2026 – Τι δείχνει νέα έρευνα της Hosthub",
-    "url": "https://www.newshub.gr/el/kriti/kriti-ayxisi-stis-times-stis-vrachychronies-misthoseis-kai-stin-plirotita-to-2026-ti-deichnei-nea-ereyna-tis-hosthub",
-    "date": "2026-11-12T18:21:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/2-airbnb-1536x848.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/2-airbnb-1536x848.jpg",
-    "summary": "Αύξηση των μέσων τιμών διανυκτέρευσης, αλλά ουσιαστική στασιμότητα στις πληρότητες καταγράφει η ελληνική αγορά βραχυχρόνιας μίσθωσης το 2026, σύμφωνα με νέα ...",
     "author": null,
     "featured": false
   },
