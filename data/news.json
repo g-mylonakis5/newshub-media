@@ -1,5 +1,17 @@
 [
   {
+    "id": "vretania-synelifthi-ypsilovathmos-amerikanos-stratiotikos-os-ypoptos-gia-kataskopeia-yper-tis-rosias",
+    "title": "Βρετανία: Συνελήφθη υψηλόβαθμος Αμερικανός στρατιωτικός, ως ύποπτος για κατασκοπεία υπέρ της Ρωσίας",
+    "url": "https://www.newshub.gr/el/kosmos/vretania-synelifthi-ypsilovathmos-amerikanos-stratiotikos-os-ypoptos-gia-kataskopeia-yper-tis-rosias",
+    "date": "2026-11-17T20:00:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/us_army_flag.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/us_army_flag.jpg",
+    "summary": "Ένας 41χρονος ανώτερος αξιωματικός του αμερικανικού στρατού συνελήφθη και κρατείται στη Βρετανία ως ύποπτος για κατασκοπεία υπέρ της Ρωσίας, σύμφωνα με ανακο...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "mark-royte-themito-to-oykraniko-chtypima-sti-gefyra-tis-krimaias-einai-simantiko-to-oti-amynetai-to-kievo",
     "title": "Μαρκ Ρούτε: Θεμιτό το ουκρανικό χτύπημα στη γέφυρα της Κριμαίας – Είναι σημαντικό το ότι αμύνεται το Κίεβο",
     "url": "https://www.newshub.gr/el/geopolitiki/mark-royte-themito-to-oykraniko-chtypima-sti-gefyra-tis-krimaias-einai-simantiko-to-oti-amynetai-to-kievo",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/route-rutte.jpg",
     "summary": "Ο γενικός γραμματέας του ΝΑΤΟ Μαρκ Ρούτε και ο βρετανός υπουργός Άμυνας Γουές Στρίτινγκ δήλωσαν την Τρίτη (17/11) πως η ουκρανική επίθεση στη ρωσικής κατασκε...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "epeisodia-sti-leoforo-alexandras-meta-tin-poreia-toy-polytechneioy-dyo-traymaties-prosagoges-mesa-se-stathmo-toy-metro",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/tourkiko-ntrooun.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/tourkiko-ntrooun.jpg",
     "summary": "Επτά παραβιάσεις του ελληνικού εθνικού εναέριου χώρου και μία εικονική αερομαχία (εμπλοκή) σημειώθηκαν την Πέμπτη (12/11) στο βορειοανατολικό Αιγαίο, όπου ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "i-nea-kinimatografiki-leschi-irakleioy-nekli-epistrefei",
-    "title": "Η Νέα Κινηματογραφική Λέσχη Ηρακλείου (ΝέΚΛΗ) επιστρέφει",
-    "url": "https://www.newshub.gr/el/exodos/i-nea-kinimatografiki-leschi-irakleioy-nekli-epistrefei",
-    "date": "2026-11-12T17:42:00.000Z",
-    "category": "Έξοδος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/kill-jockey.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/kill-jockey.jpg",
-    "summary": "Η Νέα Κινηματογραφική Λέσχη Ηρακλείου (ΝέΚΛΗ) υποδέχεται τη νέα κινηματογραφική σεζόν 2026-2027 και προσκαλεί το σινεφίλ κοινό της πόλης στην πρώτη επίσημη π...",
     "author": null,
     "featured": false
   },
