@@ -1,5 +1,17 @@
 [
   {
+    "id": "prostima-kai-afairesi-diplomatos-gia-ta-tzamia-toy-aytokinitoy-ti-na-gnorizoyn-oi-odigoi",
+    "title": "Πρόστιμα και αφαίρεση διπλώματος για τα τζάμια του αυτοκινήτου  - Τι να γνωρίζουν οι οδηγοί",
+    "url": "https://www.newshub.gr/el/autohub/prostima-kai-afairesi-diplomatos-gia-ta-tzamia-toy-aytokinitoy-ti-na-gnorizoyn-oi-odigoi",
+    "date": "2026-11-17T09:11:00.000Z",
+    "category": "autohub",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/autokineta.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/autokineta.jpg",
+    "summary": "Το περιστατικό σημειώθηκε τα ξημερώματα της Κυριακής 15 Νοεμβρίου 2026 στο Κολωνάκι, όταν αστυνομικοί του Τμήματος Δίωξης Εκβιαστών έλεγξαν εταιρικό αυτοκίνη...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "giannis-priovolos-17-noemvrioy-1973-to-polytechneio-mesa-apo-ta-kagkela-tis-scholis-eyelpidon-podcast",
     "title": "Γιάννης Πριόβολος: 17 Νοεμβρίου 1973 - Το Πολυτεχνείο μέσα από τα κάγκελα της Σχολής Ευελπίδων! (podcast)",
     "url": "https://www.newshub.gr/el/ellada/giannis-priovolos-17-noemvrioy-1973-to-polytechneio-mesa-apo-ta-kagkela-tis-scholis-eyelpidon-podcast",
@@ -69,6 +81,22 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/metanastes-kontine-doulemporiko.jpg",
     "summary": "Στον εντοπισμό 33 αλλοδαπών, όλοι άνδρες, προχώρησαν τις βραδινές ώρες της Δευτέρας στελέχη του Λιμενικού Σώματος στη βραχώδη περιοχή Κριού της Παλαιόχωρας.\r...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "pos-didasketai-to-polytechneio",
+    "title": "Πως διδάσκεται το «Πολυτεχνείο»",
+    "url": "https://www.newshub.gr/el/apopseis/pos-didasketai-to-polytechneio",
+    "date": "2026-11-17T08:11:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/polytexneio73.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/polytexneio73.jpg",
+    "summary": "Ανεξαρτήτως της όποιας «χρήσης» και εκμετάλλευσης έχει υποστεί το «Πολυτεχνείο» από το κομμάτι της Αριστεράς που το απομονώνει από τη...",
+    "author": {
+      "name": "Τάσος Σακελλαρόπουλος",
+      "url": "https://www.newshub.gr/el/tasos-sakellaropoylos",
+      "photo": "https://static.newshub.gr/files/2025-fotografies-gia-roh/septembrios/3-9/sakellaropoulos.jpg"
+    },
     "featured": false
   },
   {
@@ -7212,30 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/trochaio-b.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/trochaio-b.jpg",
     "summary": "Με αφορμή την παγκόσμια μέρα  μνήμης για τα θύματα τροχαίων ατυχημάτων που έχει καθιερωθεί ως η τρίτη Κυριακή του Νοεμβρίου, αυτήν την Κυριακή...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "imerida-gia-tis-epaggelmatikes-prooptikes-ton-apofoiton-tis-filosofikis-scholis-sto-xenia",
-    "title": "Ημερίδα για τις επαγγελματικές προοπτικές των αποφοίτων της Φιλοσοφικής Σχολής στο «Ξενία»",
-    "url": "https://www.newshub.gr/el/kriti/imerida-gia-tis-epaggelmatikes-prooptikes-ton-apofoiton-tis-filosofikis-scholis-sto-xenia",
-    "date": "2026-11-12T05:20:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/panepistemio-rethymno.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/panepistemio-rethymno.jpg",
-    "summary": "Τη Δευτέρα 23-11, στο Πολιτιστικό Φοιτητικό Κέντρο «Ξενία», από τις 6.00 το απόγευμα, θα γίνει η ετήσια (τρίτη) εκδήλωση για τις επαγγελματικές π...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "nikolas-farantoyris-i-kyvernisi-leei-psemata-gia-to-kalodio-na-paremvei-amesa-i-komision-se-kriti-kai-gaydo-gia-tis-metanasteytikes-roes-podcast",
-    "title": "Νικόλας Φαραντούρης: «Η κυβέρνηση λέει ψέματα για το καλώδιο – Να παρέμβει άμεσα η Κομισιόν σε Κρήτη και Γαύδο για τις μεταναστευτικές ροές» (podcast)",
-    "url": "https://www.newshub.gr/el/geopolitiki/nikolas-farantoyris-i-kyvernisi-leei-psemata-gia-to-kalodio-na-paremvei-amesa-i-komision-se-kriti-kai-gaydo-gia-tis-metanasteytikes-roes-podcast",
-    "date": "2026-11-12T05:15:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/anonymo-2048-x-1152-px-binteo-7.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/anonymo-2048-x-1152-px-binteo-7.jpg",
-    "summary": "Με μια κατεπείγουσα ερώτηση του στο Ευρωπαϊκό Κοινοβούλιο, ο ευρωβουλευτής του ΠΑΣΟΚ Νικόλας Φαραντούρης φέρνει στις Βρυξέλλες δύο κρίσιμα ζητήματα τις ανεξέ...",
     "author": null,
     "featured": false
   },
