@@ -1,5 +1,21 @@
 [
   {
+    "id": "g-papadomanolakis-sto-newshub-gr-okto-oi-nekroi-pyrosvestes-sti-chora-mas-fetos-ochi-den-tha-to-dechtoyme-san-kanonikotita",
+    "title": "Γ. Παπαδομανωλάκης στο Newshub.gr: «Οκτώ οι νεκροί πυροσβέστες στη χώρα μας φέτος – Όχι, δεν θα το δεχτούμε σαν «κανονικότητα»",
+    "url": "https://www.newshub.gr/el/kriti/g-papadomanolakis-sto-newshub-gr-okto-oi-nekroi-pyrosvestes-sti-chora-mas-fetos-ochi-den-tha-to-dechtoyme-san-kanonikotita",
+    "date": "2026-11-17T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/gerertete.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/gerertete.jpg",
+    "summary": "Χωρίς να θεωρείται από το επίσημο κράτος επάγγελμα «επικίνδυνο και ανθυγιεινό (!)», ο κλάδος των πυροσβεστών της χώρας μας θρηνεί ήδη μέσα σε ένα...",
+    "author": {
+      "name": "Χριστόφορος Παπαδάκης",
+      "url": "https://www.newshub.gr/el/christoforos-papadakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "mystiriodes-radiosima-pros-ti-gi-apo-spanio-astriko-systima",
     "title": "Μυστηριώδες ραδιοσήμα προς τη Γη από σπάνιο αστρικό σύστημα",
     "url": "https://www.newshub.gr/el/tech-hub/mystiriodes-radiosima-pros-ti-gi-apo-spanio-astriko-systima",
@@ -117,7 +133,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/kolymbeterio.jpg",
     "summary": "Μια ακόμη σημαντική παρέμβαση για την ενίσχυση των αθλητικών υποδομών του Ηρακλείου παίρνει τον δρόμο της υλοποίησης. Αναρτήθηκε  στη διαύγεια η απόφαση...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "chania-stis-26-noemvrioy-i-dimoprasia-gia-ta-7-kena-katastimata-tis-dimotikis-agoras",
@@ -7224,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/polonia_diadilwsi_mk.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/polonia_diadilwsi_mk.jpg",
     "summary": "Δεκάδες χιλιάδες Πολωνοί κρατώντας σημαίες της χώρας συγκεντρώθηκαν σήμερα το μεσημέρι στο κέντρο της Βαρσοβίας, την πρωτεύουσα της Πολωνίας, για την παραδοσ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kostis-chatzidakis-tha-prochoriso-se-minyseis-os-edo-me-ti-mythologia-gia-tin-akiniti-perioysia-moy",
-    "title": "Κωστής Χατζηδάκης: Θα προχωρήσω σε μηνύσεις-Ως εδώ με τη μυθολογία για την ακίνητη περιουσία μου",
-    "url": "https://www.newshub.gr/el/ellada/kostis-chatzidakis-tha-prochoriso-se-minyseis-os-edo-me-ti-mythologia-gia-tin-akiniti-perioysia-moy",
-    "date": "2026-11-11T18:40:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/xatzidakis-kostis-geniki.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/xatzidakis-kostis-geniki.jpg",
-    "summary": "Με μια οργισμένη ανάρτηση απαντά ο Κωστής Χατζηδάκης στην παραφιλολογία που έχει αναπτυχθεί σχετικά με την ακίνητη περιουσία του, ξεκαθαρίζοντας την πηγή προ...",
     "author": null,
     "featured": false
   },
