@@ -496,8 +496,8 @@ function autoAll(what){
   var n = k.poso();
   if (!n) return;
 
-  // Η ερώτηση λέει ΠΟΣΑ και ΑΠΟ ΠΟΥ. Ένα σκέτο «Είσαι σίγουρος;» δεν
-  // βοηθάει κανέναν να καταλάβει τι πάει να χάσει.
+  // The prompt states HOW MANY and FROM WHERE: a bare "are you sure?"
+  // tells nobody what they are about to lose.
   var ok = confirm(
     (n === 1 ? 'Θα αφαιρεθεί το 1 καρφιτσωμένο' : 'Θα αφαιρεθούν και τα ' + n + ' καρφιτσωμένα')
     + ' από ' + k.ti() + ', και θα ξαναδιαλέγει το site μόνο του.\n\n'
@@ -509,9 +509,9 @@ function autoAll(what){
   say('Καθαρίστηκε. Πάτα Αποθήκευση για να ισχύσει.');
 }
 
-// Το κουμπί υπάρχει πάντα στο HTML και απλώς κρύβεται όταν δεν υπάρχει
-// τίποτα να καθαριστεί. Το label το γράφει εδώ μόνο όποιος χρειάζεται
-// όνομα μέσα του — δηλαδή τα θέματα.
+// The button is always in the HTML and only hides when there is nothing
+// to clear. The label is passed in only where it needs a name inside
+// it — that is, topics.
 function autoAllButton(what, label){
   var btn = $('[data-auto-all="' + what + '"]');
   if (!btn) return;
@@ -535,12 +535,11 @@ function save(){
 }
 
 // ---------------------------------------------------------------------
-// Φωτογραφίες
+// Images
 // ---------------------------------------------------------------------
 
-// Το μεγαλύτερο πλάτος που κρατάμε. Η πιο φαρδιά θέση του site είναι
-// 1.384px· σε οθόνη με διπλή πυκνότητα θέλει 2.000 για να μη φαίνεται
-// θολή. Παραπάνω είναι σκέτο βάρος.
+// Widest we keep. The site's widest slot is 1,384px; a 2x screen needs
+// 2,000 not to look blurry. Beyond that is pure weight.
 var MAX_W = 2000;
 
 function shrink(file){
@@ -560,8 +559,8 @@ function shrink(file){
       canvas.height = h;
       canvas.getContext('2d').drawImage(img, 0, 0, w, h);
 
-      // 0.82: πάνω από αυτό το αρχείο μεγαλώνει χωρίς ορατό κέρδος,
-      // κάτω από αυτό αρχίζουν να φαίνονται τετράγωνα στα πρόσωπα.
+      // 0.82: above it the file grows with no visible gain, below it
+      // blocking artefacts start to show on faces.
       canvas.toBlob(function (blob) {
         if (blob) resolve(blob);
         else reject(new Error('Δεν έγινε η σμίκρυνση'));
@@ -585,15 +584,15 @@ function sayUpload(text, kind){
   if (kind) el.setAttribute('data-kind', kind); else el.removeAttribute('data-kind');
 }
 
-// Το ανέβασμα γίνεται από δύο σημεία: την καρτέλα «Φωτογραφίες» και τον
-// επιλογέα μέσα στο άρθρο. Αλλάζει μόνο πού γράφεται το μήνυμα και τι
-// γίνεται στο τέλος — όχι η ίδια η δουλειά.
+// Upload runs from two places: the Images tab and the picker inside an
+// article. Only the message target and the final step differ — not the
+// work itself.
 function upload(files, ctx){
   ctx = ctx || {};
   var say = ctx.say || sayUpload;
-  // Μετά το ανέβασμα πάμε στον φάκελο της ΣΗΜΕΡΙΝΗΣ μέρας: εκεί μόλις
-  // μπήκαν. Χωρίς αυτό, ο συντάκτης ανεβάζει δέκα φωτογραφίες και
-  // κοιτάζει μια λίστα φακέλων, χωρίς καμία απόδειξη ότι έγινε κάτι.
+  // After upload, jump to TODAY's folder: that is where they landed.
+  // Without it the editor uploads ten images and stares at a list of
+  // folders with no proof anything happened.
   var after = ctx.after || function () {
     loadShots().then(function () { goTo('lib', 'day:' + todayYmd()); });
   };
@@ -607,8 +606,8 @@ function upload(files, ctx){
   var failed = [];
   var last = '';    // η διεύθυνση της τελευταίας που ανέβηκε
 
-  // Μία-μία και όχι όλες μαζί: σε αδύναμο σήμα, δέκα παράλληλα
-  // ανεβάσματα μπλοκάρουν το ένα το άλλο και κόβονται όλα μαζί.
+  // One at a time: on a weak connection ten parallel uploads block each
+  // other and all time out together.
   function next(i){
     if (i >= list.length) {
       say(
@@ -653,13 +652,13 @@ var lib = {
   standard: [],     // τα ονόματα που έχουν αστεράκι
   rest: {},
   loaded: false,
-  // Πού βρίσκεται το καθένα από τα δύο πλέγματα. null = η ρίζα.
+  // Where each of the two grids is. null = the root.
   at: { lib: null, pick: null },
   find: { lib: '', pick: '' },
 };
 
-// Η χρονοσφραγίδα του ονόματος. Χωρίς αυτή, η φωτογραφία πάει στον
-// φάκελο «Χωρίς ημερομηνία» — μπορεί να ανέβηκε με άλλο εργαλείο.
+// Timestamp from the filename. Without one the image goes to the
+// "no date" folder — it may have been uploaded by another tool.
 function shotStamp(name){
   var m = String(name || '').match(/^(\d{4})(\d{2})(\d{2})\d{6}-/);
   if (!m) return null;
@@ -693,7 +692,7 @@ function todayYmd(){
 
 function isStandard(name){ return lib.standard.indexOf(name) > -1; }
 
-// Ποιες φωτογραφίες ανήκουν σε μια θέση του δέντρου.
+// Which images belong to a node of the tree.
 function shotsAt(at){
   if (!at) return [];
   if (at.kind === 'std') {
@@ -709,11 +708,11 @@ function shotsAt(at){
   });
 }
 
-// ---- οι κάρτες ----
+// ---- the cards ----
 
-// Η κάρτα μιας φωτογραφίας. Ίδια στη βιβλιοθήκη και στον επιλογέα —
-// αλλάζει μόνο τι κουμπί κουβαλάει: «Αντιγραφή» στη βιβλιοθήκη, ενώ
-// στον επιλογέα ολόκληρη η κάρτα είναι το κουμπί.
+// One image card. Same in the library and the picker — only the button
+// differs: "Copy" in the library, while in the picker the whole card is
+// the button.
 function shotHTML(f, mode){
   var m = f.name.match(/^(\d{8})(\d{6})-(.+)\.\w+$/);
   var label = m ? m[3].replace(/-/g, ' ') : f.name;
@@ -721,16 +720,16 @@ function shotHTML(f, mode){
   var pick = mode === 'pick';
   var on = isStandard(f.name);
 
-  // Το βίντεο της βιβλιοθήκης θέλει <video>: με <img> θα έδειχνε
-  // σπασμένη εικόνα και ο συντάκτης θα νόμιζε ότι χάλασε το ανέβασμα.
+  // Library video needs <video>: an <img> would show a broken image and
+  // the editor would think the upload failed.
   return '<figure class="shot"'
     + (pick ? ' tabindex="0" role="button" data-take="' + esc(f.url) + '"' : '') + '>'
     + (adIsVideo(f.url)
       ? '<video src="' + esc(f.url) + '" muted loop playsinline preload="metadata"></video>'
       : '<img src="' + esc(f.url) + '" alt="" loading="lazy">')
-    // Το αστεράκι μπαίνει ΚΑΙ στον επιλογέα: η στιγμή που καταλαβαίνεις
-    // ότι μια φωτογραφία θα τη χρειάζεσαι ξανά είναι όταν τη βάζεις σε
-    // άρθρο, όχι όταν περνάς από τη βιβλιοθήκη.
+    // The star shows in the picker TOO: the moment you realise an image
+    // will be needed again is when you put it in an article, not when
+    // you pass through the library.
     + '<button type="button" class="shot-star' + (on ? ' is-on' : '') + '"'
     + ' data-star="' + esc(f.name) + '"'
     + ' aria-pressed="' + (on ? 'true' : 'false') + '"'
@@ -759,7 +758,7 @@ function folderHTML(go, title, sub, cover, extra){
 
 function countLabel(n){ return n === 1 ? '1 φωτογραφία' : n + ' φωτογραφίες'; }
 
-// ---- η ζωγραφική ----
+// ---- drawing ----
 
 function drawCrumbs(mode){
   var box = $(mode === 'pick' ? '[data-pick-crumbs]' : '[data-shot-crumbs]');
@@ -770,8 +769,8 @@ function drawCrumbs(mode){
     return;
   }
 
-  // Στη ρίζα η διαδρομή είναι σκέτο «Βιβλιοθήκη» που δείχνει στον εαυτό
-  // της — θόρυβος. Εμφανίζεται μόλις μπεις κάπου.
+  // At the root the trail is a bare "Library" pointing at itself —
+  // noise. It appears once you are inside something.
   if (!at) { box.innerHTML = ''; return; }
 
   var parts = ['<button type="button" class="crumb" data-go="">Βιβλιοθήκη</button>'];
@@ -803,9 +802,9 @@ function drawShotsBox(mode){
     return;
   }
 
-  // Η αναζήτηση αγνοεί τους φακέλους: ψάχνει σε όλα μαζί. Αυτός είναι
-  // ο λόγος που υπάρχει — ο φάκελος βοηθάει όταν ξέρεις πότε, και
-  // εμποδίζει όταν δεν ξέρεις.
+  // Search ignores folders and looks at everything. That is why it
+  // exists — a folder helps when you know when, and gets in the way
+  // when you do not.
   if (find) {
     var hits = lib.files.filter(function (f) {
       return flat(f.name).indexOf(find) > -1;
@@ -816,7 +815,7 @@ function drawShotsBox(mode){
     return;
   }
 
-  // Μέσα σε φάκελο: οι φωτογραφίες του.
+  // Inside a folder: its images.
   if (at) {
     var inside = shotsAt(at);
     box.innerHTML = inside.length
@@ -825,7 +824,7 @@ function drawShotsBox(mode){
     return;
   }
 
-  // Η ρίζα: ★ Στάνταρ, μετά οι μήνες από τον νεότερο.
+  // The root: ★ Standard, then months newest first.
   var std = lib.files.filter(function (f) { return isStandard(f.name); });
   var out = [folderHTML('std', '★ Στάνταρ',
     std.length ? countLabel(std.length) : 'κενό — σημάδεψε με ☆',
@@ -853,8 +852,8 @@ function drawShotsBox(mode){
   box.innerHTML = out.join('');
 }
 
-// Μέσα σε μήνα δείχνουμε ΜΕΡΕΣ, όχι φωτογραφίες: ένας μήνας μπορεί να
-// έχει διακόσιες, και τότε ο φάκελος δεν βοήθησε σε τίποτα.
+// Inside a month we show DAYS, not images: a month can hold two hundred,
+// and then the folder helped with nothing.
 function drawMonth(mode, ym){
   var box = $(mode === 'pick' ? '[data-pick-shots]' : '[data-shots]');
   drawCrumbs(mode);
@@ -910,8 +909,8 @@ function fillShots(box, mode){
 function loadShots(){ return fillShots($('[data-shots]'), 'lib'); }
 function loadPickShots(){ return fillShots($('[data-pick-shots]'), 'pick'); }
 
-// Γράφει ΟΛΟ το αρχείο, όχι μόνο τη λίστα: ό,τι άλλο έχει μέσα —
-// οδηγίες, μελλοντικά πεδία — επιβιώνει.
+// Writes the WHOLE file, not just the list: anything else in there —
+// notes, future fields — survives.
 function savePhotos(){
   var body = {};
   Object.keys(lib.rest).forEach(function (k) { body[k] = lib.rest[k]; });
@@ -919,9 +918,8 @@ function savePhotos(){
   return api('photos', 'PUT', body);
 }
 
-// Το αστεράκι. Γράφεται αμέσως — δεν υπάρχει κουμπί «Αποθήκευση» στις
-// φωτογραφίες, και μια σήμανση που χάνεται στην ανανέωση είναι χειρότερη
-// από καθόλου σήμανση.
+// The star. Written immediately — images have no Save button, and a mark
+// that disappears on refresh is worse than no mark at all.
 function toggleStandard(name){
   var at = lib.standard.indexOf(name);
   if (at > -1) lib.standard.splice(at, 1);
@@ -931,8 +929,8 @@ function toggleStandard(name){
   if (!$('[data-picker]').hidden) drawLib('pick');
 
   savePhotos().catch(function (err) {
-    // Πίσω στην προηγούμενη κατάσταση: αλλιώς η οθόνη λέει ότι σώθηκε
-    // κάτι που δεν σώθηκε, και ο συντάκτης το μαθαίνει αύριο.
+    // Back to the previous state: otherwise the screen claims something
+    // was saved that was not, and the editor finds out tomorrow.
     if (at > -1) lib.standard.splice(at, 0, name);
     else lib.standard.splice(lib.standard.indexOf(name), 1);
     drawLib('lib');
@@ -940,8 +938,8 @@ function toggleStandard(name){
   });
 }
 
-// Μετά από ανέβασμα ή διαγραφή ενημερώνονται και τα δύο πλέγματα —
-// αλλιώς ο επιλογέας δείχνει φωτογραφία που μόλις σβήστηκε.
+// After an upload or a delete both grids refresh — otherwise the picker
+// shows an image that was just deleted.
 function refreshShots(){
   loadShots();
   if (!$('[data-picker]').hidden) loadPickShots();
@@ -959,8 +957,8 @@ function delShot(name){
     .then(function () {
       sayUpload('Η φωτογραφία διαγράφηκε.', 'ok');
 
-      // Φεύγει και από τις στάνταρ, αλλιώς ο φάκελος κουβαλάει για
-      // πάντα το όνομα ενός αρχείου που δεν υπάρχει.
+      // Drops out of the standard set too, or the folder carries the
+      // name of a file that no longer exists forever.
       var at = lib.standard.indexOf(name);
       if (at > -1) {
         lib.standard.splice(at, 1);
@@ -988,8 +986,8 @@ function wireShots(){
     input.value = '';   // ώστε η ίδια φωτογραφία να ξαναδέχεται επιλογή
   });
 
-  // Χωρίς preventDefault ο browser ΑΝΟΙΓΕΙ τη φωτογραφία σε νέα καρτέλα
-  // και χάνεται η δουλειά της σελίδας.
+  // Without preventDefault the browser OPENS the image in a new tab and
+  // the page's work is lost.
   ['dragenter', 'dragover'].forEach(function (ev) {
     drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('is-over'); });
   });
@@ -1000,12 +998,12 @@ function wireShots(){
     if (e.dataTransfer && e.dataTransfer.files) upload(e.dataTransfer.files);
   });
 
-  // Το ίδιο και σε ΟΛΗ τη σελίδα: αν κάποιος αφήσει φωτογραφία δίπλα
-  // από τη ζώνη, να μη φύγει από το διαχειριστικό.
+  // Same for the WHOLE page: if someone drops an image next to the zone,
+  // it must not navigate away from the admin.
   window.addEventListener('dragover', function (e) { e.preventDefault(); });
   window.addEventListener('drop', function (e) { e.preventDefault(); });
 
-  // Η πλοήγηση στους φακέλους — και στα δύο πλέγματα, με τον ίδιο κώδικα.
+  // Folder navigation — both grids, same code.
   ['lib', 'pick'].forEach(function (mode) {
     var grid = $(mode === 'pick' ? '[data-pick-shots]' : '[data-shots]');
     var crumbs = $(mode === 'pick' ? '[data-pick-crumbs]' : '[data-shot-crumbs]');
@@ -1016,9 +1014,9 @@ function wireShots(){
       if (go) goTo(mode, go.dataset.go);
     });
 
-    // Στο πλέγμα ο φάκελος και το αστεράκι πιάνονται ΠΡΙΝ από τα
-    // υπόλοιπα: η κάρτα του επιλογέα είναι ολόκληρη κουμπί, οπότε
-    // χωρίς αυτό το αστεράκι θα διάλεγε τη φωτογραφία.
+    // In the grid the folder and the star are caught BEFORE the rest:
+    // the picker card is one big button, so without this the star
+    // would pick the image.
     grid.addEventListener('click', function (e) {
       var go = e.target.closest('[data-go]');
       if (go) { goTo(mode, go.dataset.go); return; }
@@ -1079,8 +1077,8 @@ var pin = {
   life: { mustRead: 3, latest: 7, opinions: 7, topics: 30 },
 };
 
-// Μετά από πόσες μέρες φεύγει από το αρχείο μια ληγμένη. Αρκετά μακριά
-// ώστε να προλάβει να τη δει και να την ξανακρατήσει κάποιος.
+// Days before an expired pick leaves the file. Far enough out that
+// someone can still see it and renew it.
 var PIN_KATHARISMA = 60;
 
 function pinKey(lista, onoma){
@@ -1092,8 +1090,8 @@ function pinStamps(key){
   return all[key] || {};
 }
 
-// Πόσες μέρες μένουν. null = δεν έχει ημερομηνία (παλιά επιλογή, πριν
-// μπει ο μηχανισμός) — το build τη θεωρεί φρέσκια.
+// Days left. null = no date (an old pick, from before the mechanism) —
+// the build treats it as fresh.
 function pinMeres(lista, key, ref){
   var t = Date.parse(pinStamps(key)[ref] || '');
   if (isNaN(t)) return null;
@@ -1102,15 +1100,15 @@ function pinMeres(lista, key, ref){
   return (t + meres * 864e5 - Date.now()) / 864e5;
 }
 
-// Έληξε; Τότε το site ΔΕΝ τη δείχνει πια, και η θέση της στο
-// διαχειριστικό πρέπει να φαίνεται σβηστή — αλλιώς η αρίθμηση «01»
-// λέει ότι είναι πρώτη στην αρχική, ενώ εκεί κάθεται κάτι άλλο.
+// Expired? Then the site no longer shows it, and its slot in the admin
+// must look dimmed — otherwise the "01" numbering claims it is first on
+// the homepage while something else sits there.
 function pinLixe(lista, key, ref){
   var left = pinMeres(lista, key, ref);
   return left !== null && left <= 0;
 }
 
-// Η ετικέτα δίπλα στη θέση. Γράφει πόσο μένει, ή ότι έληξε.
+// The label next to a slot: how long is left, or that it expired.
 function pinSima(lista, key, ref){
   var left = pinMeres(lista, key, ref);
   if (left === null) return '';
@@ -1128,8 +1126,8 @@ function pinSima(lista, key, ref){
   return '<span class="pinok">' + t + '</span>';
 }
 
-// Σφραγίζει τη λίστα πριν την αποθήκευση: ό,τι μπήκε τώρα παίρνει την
-// ώρα του, ό,τι βγήκε χάνει τη δική του, και ό,τι γέρασε πολύ φεύγει.
+// Stamps the list before saving: whatever went in now gets its time,
+// whatever came out loses its, and whatever aged out is dropped.
 function pinSfragida(key, refs){
   if (!state.curation.pinnedAt) state.curation.pinnedAt = {};
 
@@ -1141,8 +1139,8 @@ function pinSfragida(key, refs){
     nea[ref] = palia[ref] || tora;
   });
 
-  // Οι ληγμένες που έμειναν στη λίστα κρατούν την παλιά τους ώρα — έτσι
-  // φαίνονται ως ληγμένες. Φεύγουν εντελώς μόνο όταν περάσει ο καιρός.
+  // Expired picks still in the list keep their old time, so they show as
+  // expired. They leave for good only once enough time passes.
   Object.keys(nea).forEach(function (ref) {
     var t = Date.parse(nea[ref]);
     if (!isNaN(t) && Date.now() - t > PIN_KATHARISMA * 864e5) delete nea[ref];
@@ -1152,7 +1150,7 @@ function pinSfragida(key, refs){
   else delete state.curation.pinnedAt[key];
 }
 
-// «Ξανακράτα το»: η επιλογή ξαναρχίζει από σήμερα.
+// "Renew": the pick starts counting from today again.
 function pinAgain(key, ref){
   if (!state.curation.pinnedAt) state.curation.pinnedAt = {};
   if (!state.curation.pinnedAt[key]) state.curation.pinnedAt[key] = {};
@@ -1170,8 +1168,8 @@ function kryMap(key){
   return (state.curation.hidden || {})[key] || {};
 }
 
-// Μόνο όσα ισχύουν ακόμα. Τα ληγμένα μένουν στο αρχείο μέχρι την
-// επόμενη αποθήκευση — τα καθαρίζει το kryKatharise().
+// Only what still applies. Expired entries stay in the file until the
+// next save — kryKatharise() clears them.
 function kryRefs(lista, key){
   var map = kryMap(key);
   var meres = pin.life[lista];
@@ -1214,8 +1212,8 @@ function kryOla(key){
   if (state.curation.hidden) delete state.curation.hidden[key];
 }
 
-// Κρυμμένο; Περνάει από isChosen, γιατί το ίδιο πράγμα γράφεται άλλοτε
-// ως κωδικός και άλλοτε ως διεύθυνση σελίδας.
+// Hidden? Goes through isChosen, because the same thing is written
+// sometimes as an id and sometimes as a page URL.
 function kryfoIt(lista, key, it, ref){
   return kryRefs(lista, key).some(function (k) {
     if (it) return isChosen(it, k);
@@ -1223,8 +1221,8 @@ function kryfoIt(lista, key, it, ref){
   });
 }
 
-// Τα ληγμένα φεύγουν στην αποθήκευση: δεν έχουν καμία επίδραση πια, και
-// δεν θέλουμε το curation.json να γεμίσει μαύρες λίστες του Ιουνίου.
+// Expired entries go on save: they have no effect any more, and we do
+// not want curation.json filling up with blocklists from June.
 function kryKatharise(lista, key){
   var map = (state.curation.hidden || {})[key];
   if (!map) return;
@@ -1235,8 +1233,8 @@ function kryKatharise(lista, key){
   if (!Object.keys(map).length) kryXana(key, '');
 }
 
-// Η γραμμή «κρυμμένα: 3 — επαναφορά». Υπάρχει ώστε να μη χάνεται τίποτα
-// στα κρυφά: ό,τι βγήκε με το ✕ φαίνεται, και γυρίζει με ένα πάτημα.
+// The "hidden: 3 — restore" line. It exists so nothing disappears
+// silently: what ✕ removed is visible, and comes back in one click.
 function kryGrammi(lista, key, poio){
   var refs = kryRefs(lista, key);
   if (!refs.length) return '';
@@ -1252,8 +1250,8 @@ function kryGrammi(lista, key, poio){
     + '</p>';
 }
 
-// Η γραμμή μπαίνει ΚΑΤΩ από τις θέσεις, σαν υποσέλιδο της λίστας: δεν
-// είναι θέση της αρχικής, είναι ο λογαριασμός του τι βγήκε.
+// The line goes BELOW the slots, as a footer of the list: it is not a
+// homepage slot, it is the account of what was taken out.
 function kryfaMeta(box, lista, key, poio){
   var old = box.parentNode.querySelector('.krynote');
   if (old) old.remove();
@@ -1262,8 +1260,8 @@ function kryfaMeta(box, lista, key, poio){
   if (html) box.insertAdjacentHTML('afterend', html);
 }
 
-// Η επαναφορά. Το «poio» λέει σε ποια λίστα ανήκει το κουμπί — για τα
-// θέματα κουβαλά και το όνομα του θέματος, γιατί κάθε θέμα έχει δικά του.
+// Restore. "poio" says which list the button belongs to — for topics it
+// carries the topic name too, since each topic has its own.
 function kryEpanafora(poio, ref){
   var p = String(poio || '');
 
@@ -1370,9 +1368,9 @@ function drawCats(){
 
 function catSet(id, name, on){
   var c = catsOf(id);
-  // Η πρώτη αλλαγή ξεκινά από ό,τι δείχνει ΤΩΡΑ το site, όχι από το
-  // μηδέν: αλλιώς ο συντάκτης που προσθέτει μία κατηγορία θα έσβηνε
-  // άθελά του τη σωστή που είχε βρει το site.
+  // The first change starts from what the site shows NOW, not from
+  // empty: otherwise an editor adding one category would silently wipe
+  // the correct ones the site had found.
   var list = c.list.slice();
 
   var at = list.indexOf(name);
@@ -1416,7 +1414,7 @@ function wireCats(){
     if (e.target.closest('[data-cat-reset]')) { catReset(id); return; }
     if (e.target.closest('.catpick')) return;      // τα κουτάκια τα πιάνει το change
 
-    // Κλικ στη γραμμή: ανοίγει ή κλείνει.
+    // Click on the row: open or close.
     cat.openId = cat.openId === id ? null : id;
     drawCats();
   });
@@ -1451,8 +1449,8 @@ function wireCats(){
   $('[data-save="categories"]').addEventListener('click', saveCats);
 }
 
-// Οι αυτόματες προτάσεις. Αν λείπει το αρχείο — πρώτο τρέξιμο πριν
-// χτιστεί το site — η καρτέλα δουλεύει, απλώς δείχνει «καμία» παντού.
+// The automatic suggestions. If the file is missing — first run before
+// the site is built — the tab still works, it just shows "none".
 function loadAutoCats(){
   return fetch('auto-categories.json').then(function (r) {
     return r.ok ? r.json() : {};
@@ -1473,7 +1471,7 @@ var th = {
 function thReady(file){
   var f = file && typeof file === 'object' ? file : {};
   th.list = Array.isArray(f.list) ? f.list : [];
-  // Οι μέρες ζωής κάθε λίστας, όπως τις ξέρει το build.
+  // Each list's lifetime in days, as the build knows it.
   if (f.pinLife && typeof f.pinLife === 'object') pin.life = f.pinLife;
 
   var d = f.defaults && typeof f.defaults === 'object' ? f.defaults : {};
@@ -1483,21 +1481,21 @@ function thReady(file){
   };
 }
 
-// Διάλεξε κανείς, ή ισχύει ακόμα η προεπιλογή του κώδικα;
+// Did anyone pick, or does the code's default still stand?
 function thChosen(key){
   var v = state.curation[key];
   return Array.isArray(v) && v.length ? v : null;
 }
 
-// Τι βγαίνει ΤΩΡΑ στο site — είτε το διάλεξε άνθρωπος είτε όχι.
+// What the site shows NOW — picked by a human or not.
 function thNow(key, fallback, max){
   return (thChosen(key) || fallback).slice(0, max);
 }
 
 function thRows(){ return thNow('featuredTopics', th.defaults.featured, TH_ROWS); }
 
-// Ό,τι έχει ήδη λωρίδα δεν ξαναμπαίνει σε πλαίσιο — θα έβγαινε δύο
-// φορές στην ίδια σελίδα. Ίδιος κανόνας με το spotlightTopics() του build.
+// Anything that already has a row is not put in a spotlight too — it
+// would appear twice on one page. Same rule as the build's spotlightTopics().
 function thSpots(){
   var pano = thRows();
   return thNow('spotlightTopics', th.defaults.spotlight, TH_SPOTS)
@@ -1510,8 +1508,8 @@ function thCount(name){
   return hit ? hit.n : 0;
 }
 
-// Μία θέση. Χωρίς εικόνα: το θέμα δεν έχει δική του φωτογραφία, και
-// ένα άδειο πλαίσιο δίπλα σε κάθε γραμμή θα ήταν σκέτος θόρυβος.
+// One slot. No image: a topic has no photo of its own, and an empty
+// frame next to every row would be pure noise.
 function thSlot(name, i, total, auto, up, del){
   var n = thCount(name);
 
@@ -1532,8 +1530,8 @@ function thSlot(name, i, total, auto, up, del){
     + '</span></div>';
 }
 
-// Οι ετικέτες επιλογής. Ίδιο σχήμα με τα κουτάκια της καρτέλας
-// «Κατηγορίες» — ο συντάκτης τα έχει ήδη δει.
+// The pick chips. Same shape as the Categories tab's boxes — the editor
+// has seen them already.
 function thPicker(box, chosen, attr, full){
   box.innerHTML = th.list.map(function (t) {
     var on = chosen.indexOf(t.name) > -1;
@@ -1575,14 +1573,14 @@ function drawThemata(){
   thPicker($('[data-th-pick-row]'), rows, 'th-add', rows.length >= TH_ROWS);
   thPicker($('[data-th-pick-spot]'), spots, 'th-sadd', spots.length >= TH_SPOTS);
 
-  // Το κάτω μέρος ξαναζωγραφίζεται μαζί: αν αλλάξει το πού κάθεται ένα
-  // θέμα, αλλάζει και το πόσες θέσεις έχει.
+  // The lower half is redrawn with it: if where a topic sits changes, so
+  // does how many slots it has.
   drawThCat();
 }
 
-// Γράφει μια λίστα στο curation. Η ΠΡΩΤΗ αλλαγή ξεκινά από ό,τι βγαίνει
-// τώρα στο site, όχι από το μηδέν — αλλιώς ο συντάκτης που προσθέτει
-// ένα θέμα θα έσβηνε άθελά του τα τέσσερα που ίσχυαν.
+// Writes a list into curation. The FIRST change starts from what the
+// site shows now, not from empty — otherwise an editor adding one topic
+// would silently wipe the four that applied.
 function thSave(key, list){
   state.curation[key] = list;
   drawThemata();
@@ -1621,9 +1619,9 @@ function thRemove(key, now, i){
   thSave(key, list);
 }
 
-// Πόσες θέσεις δείχνει η αρχική για ένα θέμα. Εξαρτάται από το ΠΟΥ
-// κάθεται: λωρίδα, πλαίσιο, ή «Και ακόμα». Οι αριθμοί είναι του
-// build.js — TOPIC_ROW, SPOTLIGHT_CARDS, MORE_CARDS.
+// How many slots the homepage gives a topic. Depends on WHERE it sits:
+// row, spotlight, or "More". The numbers are build.js's —
+// TOPIC_ROW, SPOTLIGHT_CARDS, MORE_CARDS.
 function thPosesTheseis(name){
   if (thRows().indexOf(name) > -1) return 4;
   if (thSpots().indexOf(name) > -1) return 3;
@@ -1636,9 +1634,9 @@ function thPouVgainei(name){
   return '«Και ακόμα»';
 }
 
-// Οι κατηγορίες ενός κομματιού. Τα δικά μας άρθρα κουβαλούν τη δική
-// τους — δεν περνούν από το auto-categories.json, που το γράφει το
-// build μόνο για επεισόδια και βίντεο.
+// One item's categories. Our own articles carry their own — they do not
+// go through auto-categories.json, which the build writes only for
+// episodes and videos.
 function thKatigoriesTou(it){
   if (it.kind === 'article') return it.who ? [it.who] : [];
   return catsOf(it.id).list;
@@ -1659,9 +1657,9 @@ function thPicks(name){
 function thSetPicks(name, list){
   if (!state.curation.categoryPicks) state.curation.categoryPicks = {};
 
-  // Άδεια λίστα = καμία χειροκίνητη επιλογή. Τη σβήνουμε εντελώς αντί
-  // να αφήσουμε άδειο κουτί στο αρχείο — το curation.json διαβάζεται
-  // και με το μάτι.
+  // Empty list = no manual pick. We drop the key entirely instead of
+  // leaving an empty box in the file — curation.json is also read by
+  // eye.
   if (list.length) state.curation.categoryPicks[slugify(name)] = list;
   else delete state.curation.categoryPicks[slugify(name)];
 
@@ -1669,8 +1667,8 @@ function thSetPicks(name, list){
   thDirty(true);
 }
 
-// Τι θα δείξει η αρχική: πρώτα τα καρφιτσωμένα, μετά το αυτόματο
-// γέμισμα. Αντιγράφει το homeItems() του build.js.
+// What the homepage will show: pinned first, then the automatic fill.
+// Mirrors build.js's homeItems().
 function thProvoli(name){
   var pinned = thPicks(name);
   var pool = thTouThematos(name);
@@ -1687,7 +1685,7 @@ function thProvoli(name){
   var key = pinKey('topics', name);
   for (var i = 0; i < pool.length && rows.length < thPosesTheseis(name); i++) {
     if (taken[pool[i].ref]) continue;
-    // Ό,τι βγήκε με το ✕ από ΑΥΤΟ το θέμα δεν ξαναμπαίνει μόνο του.
+    // What ✕ removed from THIS topic does not come back on its own.
     if (kryfoIt('topics', key, pool[i])) continue;
     taken[pool[i].ref] = true;
     rows.push({ item: pool[i], ref: pool[i].ref, auto: true });
@@ -1700,7 +1698,7 @@ function drawThCat(){
   var box = $('[data-th-cat-box]');
   var name = th.open;
 
-  // Οι ετικέτες των θεμάτων, πάντα ορατές.
+  // Topic chips, always visible.
   var chips = $('[data-th-pick-cat]');
   chips.innerHTML = th.list.map(function (t) {
     var n = thPicks(t.name).length;
@@ -1742,8 +1740,8 @@ function drawThCat(){
           + (i === 0 ? ' disabled' : '') + '>↑</button>'
           + '<button type="button" data-thc-down="' + i + '" aria-label="Κάτω"'
           + (i === thPicks(name).length - 1 ? ' disabled' : '') + '>↓</button>')
-      // Το ✕ ΚΑΙ στις αυτόματες: «αυτό όχι σε αυτό το θέμα» είναι ο
-      // λόγος που ανοίγει κανείς την καρτέλα.
+      // ✕ on the automatic ones TOO: "not this, not in this topic" is
+      // why anyone opens the tab.
       + '<button type="button" data-thc-del="' + i + '" aria-label="Αφαίρεση">✕</button>'
       + '</span></div>';
   }).join('');
@@ -1820,9 +1818,9 @@ function thcMove(i, step){
   thSetPicks(th.open, list);
 }
 
-// Το ✕ σε θέση θέματος — καρφιτσωμένη ή αυτόματη. Ο δείκτης μετράει
-// ΓΡΑΜΜΕΣ της οθόνης, όχι θέσεις της λίστας: πρέπει να περάσει από το
-// thProvoli() για να βρει τι δείχνει πραγματικά εκείνη η γραμμή.
+// ✕ on a topic slot — pinned or automatic. The index counts SCREEN
+// rows, not list positions: it has to go through thProvoli() to find
+// what that row actually shows.
 function thcRemove(i){
   var name = th.open;
   var r = thProvoli(name)[i];
@@ -1844,7 +1842,7 @@ function thDirty(on){
 }
 
 function saveThemata(){
-  // Κάθε καρφιτσωμένο παίρνει ώρα, για να ξέρει το build πότε λήγει.
+  // Every pin gets a time, so the build knows when it expires.
   th.list.forEach(function (t) {
     pinSfragida(pinKey('topics', t.name), thPicks(t.name));
     kryKatharise('topics', pinKey('topics', t.name));
@@ -1860,7 +1858,7 @@ function saveThemata(){
 }
 
 function wireThemata(){
-  // Οι τέσσερις λωρίδες: μετακίνηση και αφαίρεση.
+  // The four rows: move and remove.
   $('[data-th-rows]').addEventListener('click', function (e) {
     var b = e.target.closest('button');
     if (!b) return;
@@ -1881,7 +1879,7 @@ function wireThemata(){
     var b = e.target.closest('[data-th-add]');
     if (!b) return;
     var name = b.dataset.thAdd;
-    // Το ίδιο θέμα δεν γίνεται να είναι και λωρίδα και πλαίσιο.
+    // One topic cannot be both a row and a spotlight.
     if (thSpots().indexOf(name) > -1) {
       say('Το «' + name + '» είναι ήδη ενότητα σε πλαίσιο. Βγάλ\' το από εκεί πρώτα.', 'bad');
       return;
@@ -1900,12 +1898,12 @@ function wireThemata(){
     thToggle('spotlightTopics', thSpots(), TH_SPOTS, name);
   });
 
-  // ---- τι βγαίνει σε κάθε θέμα ----
+  // ---- what shows under each topic ----
 
   $('[data-th-pick-cat]').addEventListener('click', function (e) {
     var b = e.target.closest('[data-th-cat]');
     if (!b) return;
-    // Δεύτερο κλικ στο ίδιο θέμα το κλείνει.
+    // A second click on the same topic closes it.
     th.open = th.open === b.dataset.thCat ? '' : b.dataset.thCat;
     th.find = '';
     th.shown = PAGE;
@@ -1940,21 +1938,21 @@ function wireThemata(){
   $('[data-save="themata"]').addEventListener('click', saveThemata);
 }
 
-// Η απογραφή των θεμάτων. ΑΝΕΚΤΙΚΟ: αν δεν έχει τρέξει build ακόμα, η
-// καρτέλα δείχνει άδεια λίστα αντί να ρίξει όλο το διαχειριστικό.
+// The topic inventory. FORGIVING: if no build has run yet, the tab shows
+// an empty list instead of taking the whole admin down.
 function loadTopics(){
   return fetch('topics.json').then(function (r) {
     return r.ok ? r.json() : null;
   }).catch(function () { return null; });
 }
 
-// Όσες θέσεις δείχνει η ροή πριν το «Όλα τα επεισόδια →».
-// Ίδιος αριθμός με το FLOW_VISIBLE στο build.js.
+// Slots the flow shows before "Όλα τα επεισόδια →".
+// Same number as FLOW_VISIBLE in build.js.
 var LATEST_SLOTS = 9;
 
-// Πάνω από τόσες μέρες, το καρφιτσωμένο θεωρείται ξεχασμένο και το
-// λέμε. Δεν το σβήνουμε — μπορεί να είναι σκόπιμο. Απλώς δεν αφήνουμε
-// κανέναν να ανακαλύψει σε έξι μήνες ότι η αρχική κουβαλάει τον Ιούλιο.
+// Past this many days a pin counts as forgotten and we say so. We do not
+// delete it — it may be deliberate. We just do not let anyone discover
+// in six months that the homepage is still carrying July.
 var LATEST_STALE_DAYS = 30;
 
 var lt = {
@@ -1978,8 +1976,8 @@ function ltFlow(){
   return (f && Array.isArray(f.items)) ? f.items : [];
 }
 
-// Το γράφει το build στη ρίζα του site, γι' αυτό απόλυτη διαδρομή: το
-// διαχειριστικό ζει στο /admin/, το flow.json ένα επίπεδο πιο πάνω.
+// The build writes it at the site root, hence the absolute path: the
+// admin lives in /admin/, flow.json one level up.
 function loadFlow(){
   return fetch('/flow.json').then(function (r) {
     return r.ok ? r.json() : null;
@@ -1999,8 +1997,8 @@ function ltAuto(){
 
   ltFlow().forEach(function (f) {
     if (f.pinned) return;
-    // Καρφιτσώνεται ΜΕ ΤΗ ΔΙΕΥΘΥΝΣΗ ΤΗΣ ΣΕΛΙΔΑΣ, όπως τη γράφει το build:
-    // εκεί η sameItem() τη συγκρίνει ίδια-με-ίδια, χωρίς μαντεψιές.
+    // Pinned BY PAGE URL, exactly as the build writes it: there
+    // sameItem() compares like with like, with no guessing.
     vale(f.href, findItemByRef(f.href) || {
       kind: f.kind, title: f.title, who: f.who,
       image: f.image, date: f.date,
@@ -2040,22 +2038,22 @@ function ltEpisodeTitles(){
   return map;
 }
 
-// Μια γραμμή ανά θέση: πρώτα τα καρφιτσωμένα, μετά όσα βάζει μόνο του
-// το site — με το αληθινό τους περιεχόμενο, όχι ως «X θέσεις».
+// One row per slot: pinned first, then what the site fills in by itself —
+// with its real content, not as "X slots".
 function ltRows(){
   var rows = ltList().map(function (ref) {
     return { ref: ref, item: findItemByRef(ref), auto: false };
   });
 
-  // Το πρωτοσέλιδο και τα τέσσερα από κάτω δεν ξαναμπαίνουν στη ροή —
-  // το build τα κρατά έξω (onTop). Προτείνοντάς τα, ο δημοσιογράφος θα
-  // έβλεπε στη θέση 03 κάτι που δεν βγαίνει ποτέ εκεί.
+  // The lead and the four below it do not re-enter the flow — the build
+  // keeps them out (onTop). Suggesting them would show the journalist
+  // something at slot 03 that never appears there.
   var panw = [state.curation.featured]
     .concat(state.curation.secondary || [])
     .filter(Boolean);
 
-  // Η γραμμή του flow.json δεν έχει πάντα κωδικό — τότε κρίνεται από τη
-  // διεύθυνσή της, που είναι το μόνο που ξέρουμε για αυτή.
+  // A flow.json row does not always carry an id — then it is judged by
+  // its URL, which is all we know about it.
   var tairiazei = function (c, ref){
     return c.item && c.item.id
       ? isChosen(c.item, ref)
@@ -2088,9 +2086,9 @@ function ltSlot(r, i, total){
       + '<p class="slot-title">' + esc(r.ref) + '</p>'
       + '<p class="slot-meta">Δεν βρέθηκε — μπορεί να είναι παλιό ή σβησμένο. '
       + 'Το site θα το προσπεράσει.</p></div>'
-      // Τα βελάκια μπαίνουν ΚΑΙ εδώ: μια γραμμή που δεν αναγνωρίστηκε
-      // πρέπει να μπορεί να μετακινηθεί, αλλιώς μπλοκάρει τη σειρά
-      // όλων των από κάτω.
+      // Arrows go here TOO: a row that was not recognised must still be
+      // movable, otherwise it blocks the ordering of everything below
+      // it.
       + '<span class="slot-acts">'
       + '<button type="button" data-lt-up="' + i + '" aria-label="Πάνω"'
       + (i === 0 ? ' disabled' : '') + '>↑</button>'
@@ -2139,8 +2137,8 @@ function drawLatest(){
     return ltSlot(r, i, rows.length);
   }).join('');
 
-  // Δίχτυ: αν το flow.json δεν υπάρχει ακόμα (δεν έχει τρέξει build
-  // μετά την αλλαγή), δεν αφήνουμε κενές θέσεις χωρίς εξήγηση.
+  // Safety net: if flow.json does not exist yet (no build since the
+  // change), we do not leave empty slots with no explanation.
   var free = Math.max(0, LATEST_SLOTS - rows.length);
   if (free) {
     html += '<div class="slot slot--auto">'
@@ -2227,7 +2225,7 @@ function ltToggle(ref){
     list.splice(at, 1);
     kryvo('latest', ref);            // ίδιος λόγος με το ✕ — δες kryvo()
   } else {
-    // Ξαναμπαίνει με το χέρι: το «όχι αυτό» δεν ισχύει πια.
+    // Pinned by hand again: the "not this" no longer applies.
     kryXanaOles('latest', ref);
     list.push(ref);
   }
@@ -2249,8 +2247,8 @@ function ltRemove(i){
   var r = rows[i];
   if (!r) return;
 
-  // Το «όχι αυτό» γράφεται για ΟΛΕΣ τις περιπτώσεις — και για αυτόματη
-  // θέση. Αλλιώς το επόμενο build θα το ξανάβαζε στην ίδια θέση.
+  // The "not this" is written in ALL cases — automatic slots included.
+  // Otherwise the next build would put it back in the same place.
   kryvo('latest', r.ref);
 
   var list = ltList();
@@ -2344,7 +2342,7 @@ var mr = {
   find: '',
 };
 
-// Μόνο ειδήσεις: στο κόκκινο πλαίσιο δεν μπαίνει podcast ούτε βίντεο.
+// News only: no podcast or video goes in the red frame.
 function newsItems(){
   return state.items.filter(function (it) { return it.kind === 'news'; });
 }
@@ -2353,9 +2351,9 @@ function mrList(){
   return (state.curation.mustRead || []).slice(0, MUST);
 }
 
-// Τι θα δείξει η αρχική σε κάθε θέση: πρώτα οι χειροκίνητες επιλογές,
-// μετά το αυτόματο γέμισμα. Αντιγράφει τη λογική του pickMustRead στο
-// build.js — ένα ανά κατηγορία, για να μη βγουν τέσσερα «Οικονομία».
+// What the homepage shows in each slot: manual picks first, then the
+// automatic fill. Mirrors pickMustRead in build.js — one per category,
+// so four "Οικονομία" do not come out.
 function mrPreview(){
   var chosen = mrList().map(function (ref) {
     var hit = null;
@@ -2374,7 +2372,7 @@ function mrPreview(){
     for (var i = 0; i < pool.length && chosen.length < MUST; i++) {
       var it = pool[i];
       if (taken[it.ref]) continue;
-      // Ό,τι βγήκε με το ✕ δεν ξαναμπαίνει μόνο του — δες kryvo().
+      // What ✕ removed does not come back on its own — see kryvo().
       if (kryfoIt('mustRead', 'mustRead', it)) continue;
       if (pass === 0 && cats[it.who]) continue;   // πρώτο πέρασμα: μία ανά κατηγορία
       taken[it.ref] = true;
@@ -2412,8 +2410,8 @@ function drawMustRead(){
         ? '<span class="pill pill--draft">αυτόματο</span>'
         : '<button type="button" data-mr-up="' + i + '" aria-label="Πάνω"'
           + (i === 0 ? ' disabled' : '') + '>↑</button>')
-      // Το ✕ ΚΑΙ στις αυτόματες: «αυτή όχι» είναι η πιο συχνή κίνηση,
-      // και πριν χρειαζόταν πρώτα να καρφιτσωθούν οι άλλες τρεις.
+      // ✕ on the automatic ones TOO: "not this one" is the commonest
+      // move, and before, the other three had to be pinned first.
       + '<button type="button" data-mr-del="' + esc(r.ref) + '" aria-label="Αφαίρεση">✕</button>'
       + '</span></div>';
   }).join('');
@@ -2531,21 +2529,21 @@ var AD_PLACES = [
 
 var ad = { list: [], open: -1 };
 
-// Πόσες εικόνες δέχεται ένα slideshow, και πόσο κρατάει καθεμία.
-// ΤΑ ΙΔΙΑ νούμερα με το build.js και το admin-api.js — αν αλλάξουν εδώ
-// μόνο, το διαχειριστικό θα δέχεται κάτι που ο server θα απορρίπτει.
+// How many images a slideshow takes, and how long each is held.
+// THE SAME numbers as build.js and admin-api.js — change them only here
+// and the admin accepts what the server rejects.
 var AD_SLIDES_MAX = 6;
 var AD_EVERY_DEF = 5;
 
-// Βίντεο ή εικόνα; Από την κατάληξη, όπως και στο build.js. Το GIF
-// μετράει ως εικόνα — μπαίνει σε <img> και κινείται μόνο του.
+// Video or image? From the extension, as in build.js. A GIF counts as an
+// image — it goes in an <img> and animates by itself.
 function adIsVideo(src){
   return /\.mp4$/i.test(String(src || ''));
 }
 
-// Η μικρογραφία μιας δημιουργικής. Το βίντεο θέλει <video>: ένα <img>
-// με πηγή mp4 δείχνει σπασμένη εικόνα, και ο συντάκτης θα νόμιζε ότι
-// χάλασε το ανέβασμα.
+// A creative's thumbnail. Video needs <video>: an <img> with an mp4
+// source shows a broken image, and the editor would think the upload
+// failed.
 function adThumb(src, cls){
   if (adIsVideo(src)) {
     return '<video class="' + cls + '" src="' + esc(src) + '"'
@@ -2554,16 +2552,16 @@ function adThumb(src, cls){
   return '<img class="' + cls + '" src="' + esc(src) + '" alt="">';
 }
 
-// Οι εικόνες μιας διαφήμισης, πάντα ως λίστα. Το παλιό «image»
-// διαβάζεται ακόμα, για όσες γράφτηκαν πριν μπει το slideshow.
+// An ad's images, always as a list. The old "image" is still read, for
+// the ones written before slideshows existed.
 function adPics(a){
   if (Array.isArray(a.images) && a.images.length) return a.images.slice();
   return a.image ? [a.image] : [];
 }
 
-// Και η αντίστροφη. ΜΙΑ εικόνα γράφεται ως «image» και όχι ως λίστα
-// ενός στοιχείου: έτσι οι παλιές διαφημίσεις μένουν ακριβώς όπως ήταν
-// και το αρχείο δεν γεμίζει σχήματα που δεν χρειάζονται.
+// And the reverse. ONE image is written as "image" and not as a
+// single-item list: that keeps old ads exactly as they were and spares
+// the file shapes it does not need.
 function adPutPics(a, pics){
   var clean = pics.filter(Boolean).slice(0, AD_SLIDES_MAX);
 
@@ -2595,8 +2593,8 @@ function adSay(text, kind){
   if (kind) el.setAttribute('data-kind', kind); else el.removeAttribute('data-kind');
 }
 
-// Παίζει σήμερα; Ίδιος έλεγχος με την adFor() του build.js — αλλιώς η
-// οθόνη θα έλεγε «ενεργή» για κάτι που το site δεν δείχνει.
+// Running today? Same check as build.js's adFor() — otherwise the screen
+// would say "active" for something the site does not show.
 function adLive(a){
   var today = new Date().toISOString().slice(0, 10);
   return a.status !== 'off'
@@ -2714,9 +2712,9 @@ function adDrawList(){
             + 'Δεκτά: JPG, PNG, WebP, GIF ή ένα βίντεο MP4.</span>')
       + '</div></div>'
 
-      // Ο ρυθμός φαίνεται ΜΟΝΟ όταν υπάρχει κάτι να εναλλαχθεί. Ένα
-      // πεδίο που δεν κάνει τίποτα είναι ερώτηση χωρίς νόημα — και το
-      // βίντεο έχει δικό του ρυθμό, τον δικό του χρόνο.
+      // The interval shows ONLY when there is something to alternate. A
+      // field that does nothing is a meaningless question — and video
+      // has its own pace, its own duration.
       + (pics.length > 1 && !pics.some(adIsVideo)
         ? '<div class="field"><label>Κάθε πόσα δευτερόλεπτα αλλάζει</label>'
           + '<input type="number" min="3" max="20" step="1" data-ad="every"'
@@ -2761,8 +2759,8 @@ function adNew(){
 }
 
 function saveAds(){
-  // Οι ίδιοι έλεγχοι με το API, αλλά ΠΡΙΝ φύγει το αίτημα: έτσι ο
-  // συντάκτης βλέπει ποια γραμμή φταίει αντί για ένα γενικό σφάλμα.
+  // The same checks as the API, but BEFORE the request leaves: the
+  // editor sees which field is wrong instead of a generic error.
   for (var i = 0; i < ad.list.length; i++) {
     var a = ad.list[i];
     var no = 'Διαφήμιση ' + (i + 1) + ': ';
@@ -2918,8 +2916,8 @@ function wireAds(){
 
     var f = e.target.closest('[data-ad]');
     if (f && f.dataset.ad !== 'status') {
-      // Ο ρυθμός είναι αριθμός, όχι κείμενο: ένα «5» σε εισαγωγικά
-      // περνάει τον έλεγχο σήμερα, αλλά είναι λάθος μέσα στο αρχείο.
+      // The interval is a number, not text: a quoted "5" passes the
+      // check today but is wrong inside the file.
       a[f.dataset.ad] = f.dataset.ad === 'every'
         ? Number(f.value)
         : f.value.trim();
@@ -2927,7 +2925,7 @@ function wireAds(){
     }
   });
 
-  // Τα κουτάκια δεν βγάζουν «input» παντού.
+  // Checkboxes do not fire "input" everywhere.
   box.addEventListener('change', function (e) {
     var card = e.target.closest('[data-ad-i]');
     if (!card) return;
@@ -2967,15 +2965,15 @@ function opList(){
   return (state.curation.opinions || []).slice();
 }
 
-// Το πορτρέτο που θα δει ο κόσμος: πρώτα ό,τι ορίστηκε εδώ, μετά ό,τι
-// κατέβηκε από το newshub.gr. Ίδια σειρά με το writerPhoto() του build.
+// The portrait the public sees: what was set here first, then whatever
+// came down from newshub.gr. Same order as the build's writerPhoto().
 function opFace(a){
   var name = a.author && a.author.name ? a.author.name : '';
   if (name && wr.photos[name]) return wr.photos[name];
   return a.author && a.author.photo ? a.author.photo : '';
 }
 
-// Τι θα δείξει η αρχική: πρώτα οι διαλεγμένες, μετά οι πιο πρόσφατες.
+// What the homepage will show: picked first, then the most recent.
 function opPreview(){
   var all = opAll();
   var rows = opList().map(function (ref) {
@@ -2989,7 +2987,7 @@ function opPreview(){
 
   for (var i = 0; i < all.length && rows.length < OPINIONS; i++) {
     if (taken[all[i].url]) continue;
-    // Ό,τι βγήκε με το ✕ δεν ξαναμπαίνει μόνο του — δες kryvo().
+    // What ✕ removed does not come back on its own — see kryvo().
     if (kryfoIt('opinions', 'opinions', { id: all[i].id, ref: all[i].url })) continue;
     taken[all[i].url] = true;
     rows.push({ ref: all[i].url, item: all[i], auto: true });
@@ -3052,8 +3050,8 @@ function drawOpinions(){
   autoAllButton('apopseis');
 }
 
-// Ό,τι βλέπει γίνεται ρητή επιλογή μόλις πειράξει κάτι — ίδιος λόγος
-// με τα «Τελευταία», δες ltFix().
+// What it shows becomes an explicit pick as soon as anything is touched —
+// same reason as "Τελευταία", see ltFix().
 function opFix(){
   var rows = opPreview();
   if (!rows.some(function (r) { return r.auto; })) return;
@@ -3168,8 +3166,8 @@ function ipografiMou(){
   return (me.email && wr.ipografes[me.email]) || '';
 }
 
-// Τα ονόματα που κυκλοφορούν ήδη: όσα υπογράφουν δικά μας άρθρα, και
-// όσα έχουν δηλωθεί από λογαριασμούς. Πατιούνται αντί να γράφονται.
+// Names already in circulation: those signing our own articles, and
+// those declared by accounts. Clicked instead of typed.
 function ipografesGnostes(){
   var seen = {};
 
@@ -3205,14 +3203,14 @@ function thimisouIpografi(onoma){
 
   wr.ipografes[me.email] = n;
   return wrSave().catch(function (err) {
-    // Δεν χαλάμε την αποθήκευση του άρθρου γι' αυτό. Το άρθρο σώθηκε·
-    // το πολύ να ξαναγράψει το όνομά του την επόμενη φορά.
+    // We do not fail the article save over this. The article is saved;
+    // at worst the name is typed again next time.
     delete wr.ipografes[me.email];
     console.warn('Η υπογραφή δεν θυμήθηκε:', err.message);
   });
 }
 
-// Όλοι όσοι υπογράφουν άποψη, με το πλήθος τους.
+// Everyone who signs an opinion piece, with their counts.
 function wrPeople(){
   var seen = {};
   opAll().forEach(function (a) {
@@ -3260,8 +3258,8 @@ function drawWriters(){
   }).join('');
 }
 
-// ΚΑΙ ΤΑ ΔΥΟ μαζί. Το αρχείο γράφεται ολόκληρο κάθε φορά, οπότε αν
-// στείλουμε μόνο τα πορτρέτα, σβήνουμε τις υπογραφές — και αντίστροφα.
+// BOTH together. The file is written whole every time, so sending only
+// the portraits would wipe the bylines — and the reverse.
 function wrSave(){
   return api('writers', 'PUT', { photos: wr.photos, ipografes: wr.ipografes });
 }
@@ -3276,8 +3274,8 @@ function wrSetPhoto(name, url){
   wrSave().then(function () {
     say('Η φωτογραφία του «' + name + '» αποθηκεύτηκε.', 'ok');
   }).catch(function (err) {
-    // Πίσω στην προηγούμενη κατάσταση — αλλιώς η οθόνη λέει ότι σώθηκε
-    // κάτι που δεν σώθηκε. Ίδιος κανόνας με τις στάνταρ φωτογραφίες.
+    // Back to the previous state — otherwise the screen claims a save
+    // that did not happen. Same rule as the standard images.
     if (was) wr.photos[name] = was; else delete wr.photos[name];
     drawWriters();
     say('Δεν αποθηκεύτηκε: ' + err.message, 'bad');
@@ -3373,8 +3371,8 @@ function wireMustRead(){
   $('[data-save="mustread"]').addEventListener('click', saveMustRead);
 }
 
-// Οι κατηγορίες του site. Ίδιες με του build — αν αλλάξουν εκεί,
-// αλλάζουν κι εδώ.
+// The site's categories. Same as the build's — change them there and
+// they change here.
 var CATS = ['Κρήτη', 'Ελλάδα', 'Κόσμος', 'Οικονομία', 'Γεωπολιτική', 'Πολιτική',
   'Υγεία', 'Αθλητικά', 'Agronews', 'Tech-Hub', 'Ιστορία', 'Πολιτισμός',
   'Περιβάλλον', 'Απόψεις'];
@@ -3385,9 +3383,9 @@ var GREEK = {
   ρ: 'r', σ: 's', ς: 's', τ: 't', υ: 'y', φ: 'f', χ: 'ch', ψ: 'ps', ω: 'o',
 };
 
-// Η διεύθυνση της σελίδας, από τον τίτλο. Λατινικά: ένα ελληνικό όνομα
-// αρχείου ταξιδεύει ως %CF%86%CE%B1… και αρκεί ένα εργαλείο στη μέση
-// που δεν το αποκωδικοποιεί για να σπάσει ο σύνδεσμος.
+// The page URL, from the title. Latin: a Greek filename travels as
+// %CF%86%CE%B1… and one tool in the middle that fails to decode it is
+// enough to break the link.
 function slugify(s){
   return String(s || '').toLowerCase()
     .normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -3398,8 +3396,8 @@ function slugify(s){
     .replace(/-+$/, '');
 }
 
-// Το <input type="datetime-local"> θέλει «2026-11-04T10:00» σε ΤΟΠΙΚΗ
-// ώρα, ενώ εμείς κρατάμε ISO σε UTC. Οι δύο μετατροπές.
+// <input type="datetime-local"> wants "2026-11-04T10:00" in LOCAL time,
+// while we store ISO in UTC. The two conversions.
 function toLocalInput(iso){
   var d = new Date(iso);
   if (isNaN(d)) return '';
@@ -3435,13 +3433,13 @@ function artDirty(on){
   state.dirty = on;      // μπαίνει στην ίδια δικλείδα «μη φύγεις»
   if (on) artSay('Μη αποθηκευμένες αλλαγές', 'warn');
 
-  // Κάθε αλλαγή πάει αμέσως στο αντίγραφο του browser. Δεν κοστίζει
-  // τίποτα — ένα άρθρο είναι λίγα κιλομπάιτ — και είναι η διαφορά
-  // ανάμεσα στο «ξαναγράψ' το» και στο «να το, συνέχισε».
+  // Every change goes straight to the browser's copy. It costs nothing —
+  // an article is a few kilobytes — and it is the difference between
+  // "write it again" and "here it is, carry on".
   if (on) draftSave();
 }
 
-// ---- η λίστα ----
+// ---- the list ----
 
 function drawArtList(){
   var box = $('[data-art-list]');
@@ -3451,7 +3449,7 @@ function drawArtList(){
     return;
   }
 
-  // Τα πιο πρόσφατα πρώτα — εκείνα δουλεύει κανείς.
+  // Most recent first — those are the ones being worked on.
   var rows = art.list.map(function (a, i) {
     return { a: a, i: i };
   }).sort(function (x, y) {
@@ -3480,12 +3478,12 @@ function drawArtList(){
   }).join('');
 }
 
-// ---- άνοιγμα / κλείσιμο ----
+// ---- open / close ----
 
 function blankArticle(){
   return {
-    // Η υπογραφή έρχεται έτοιμη από τον λογαριασμό. Αλλάζεται
-    // ελεύθερα — ο εξωτερικός συνεργάτης δεν έχει λογαριασμό.
+    // The byline comes ready from the account. Freely editable — an
+    // outside contributor has no account.
     id: '', title: '', summary: '', category: CATS[0], author: ipografiMou(),
     date: new Date().toISOString(), image: '', imageCaption: '',
     status: 'draft', body: [{ type: 'p', text: '' }],
@@ -3503,8 +3501,8 @@ function draftSave(){
       article: art.open,
     }));
   } catch (err) {
-    // Γεμάτος ή κλειδωμένος αποθηκευτικός χώρος (ιδιωτικό παράθυρο).
-    // Δεν είναι λόγος να σταματήσει η σύνταξη — απλώς δεν έχουμε δίχτυ.
+    // Full or locked storage (private window). Not a reason to stop
+    // writing — we just have no safety net.
   }
 }
 
@@ -3523,16 +3521,16 @@ function draftRead(){
   }
 }
 
-// Ρωτάει μία φορά, στο άνοιγμα της καρτέλας Άρθρα.
+// Asks once, when the Articles tab opens.
 function draftOffer(){
-  // Πριν φορτώσουν τα άρθρα δεν μπορούμε να ανοίξουμε υπάρχον: η
-  // art.list είναι ακόμα άδεια και το openArticle θα έσκαγε.
+  // Before the articles load we cannot open an existing one: art.list is
+  // still empty and openArticle would throw.
   if (!art.ready) return;
 
   var d = draftRead();
   if (!d || art.open) return;
 
-  // Το άρθρο που επεξεργαζόταν μπορεί να έχει διαγραφεί στο μεταξύ.
+  // The article being edited may have been deleted meanwhile.
   if (d.index >= 0 && !art.list[d.index]) d.index = -1;
 
   var name = d.article.title || 'χωρίς τίτλο';
@@ -3558,8 +3556,8 @@ function draftOffer(){
 
 function openArticle(i){
   art.index = typeof i === 'number' ? i : -1;
-  // Αντίγραφο, όχι το ίδιο αντικείμενο: αν ο συντάκτης φύγει χωρίς
-  // αποθήκευση, η λίστα δεν πρέπει να έχει ήδη αλλάξει.
+  // A copy, not the same object: if the editor leaves without saving,
+  // the list must not have changed already.
   art.open = art.index >= 0
     ? JSON.parse(JSON.stringify(art.list[art.index]))
     : blankArticle();
@@ -3574,21 +3572,21 @@ function openArticle(i){
   artSay('');
 }
 
-// Η φόρμα από το art.open. Ξεχωριστή από το openArticle γιατί τη
-// χρειάζεται και η επαναφορά αντιγράφου, που δεν ανοίγει κάτι νέο.
+// The form, from art.open. Separate from openArticle because the draft
+// restore needs it too, and that opens nothing new.
 function fillArticle(){
   $('[data-art="title"]').value = art.open.title || '';
   $('[data-art="category"]').value = art.open.category || CATS[0];
-  // Παλιό άρθρο χωρίς υπογραφή το συμπληρώνουμε κι αυτό: τα πρώτα
-  // άρθρα γράφτηκαν πριν υπάρξει το πεδίο, και χωρίς υπογραφή δεν
-  // αποκτούν ποτέ σελίδα δημοσιογράφου.
+  // An old article with no byline gets one filled in as well: the first
+  // articles were written before the field existed, and without a byline
+  // they never get a journalist page.
   $('[data-art="author"]').value = art.open.author || ipografiMou();
   $('[data-art="date"]').value = toLocalInput(art.open.date);
   $('[data-art="status"]').value = art.open.status || 'draft';
   $('[data-art="image"]').value = art.open.image || '';
   $('[data-art="imageCaption"]').value = art.open.imageCaption || '';
 
-  // Τσεκαρισμένο αν αυτό το άρθρο είναι ήδη το μεγάλο της αρχικής.
+  // Checked if this article is already the homepage lead.
   $('[data-art-top]').checked =
     !!art.open.id && state.curation.featured === artRef(art.open.id);
 
@@ -3673,8 +3671,8 @@ function previewHtml(a){
 }
 
 function openPreview(){
-  // ΠΡΩΤΑ μαζεύουμε ό,τι γράφτηκε: αλλιώς η προεπισκόπηση δείχνει την
-  // προηγούμενη αποθήκευση και ο συντάκτης ψάχνει γιατί «δεν άλλαξε».
+  // FIRST collect what was typed: otherwise the preview shows the last
+  // save and the editor hunts for why "nothing changed".
   if (!art.open) return;
   collect();
 
@@ -3687,7 +3685,7 @@ function openPreview(){
 
 function closePreview(){
   $('[data-preview]').hidden = true;
-  // Αδειάζει, ώστε να μη μείνει να παίζει κάτι από μέσα.
+  // Emptied, so nothing is left playing inside it.
   $('[data-preview-frame]').srcdoc = '';
 }
 
@@ -3707,14 +3705,14 @@ function drawThumb(){
   img.src = url;
 }
 
-// ---- τα μπλοκ ----
+// ---- the blocks ----
 
 var BLOCK_NAME = {
   p: 'Παράγραφος', h: 'Υπότιτλος', image: 'Φωτογραφία',
   youtube: 'Βίντεο YouTube', episode: 'Επεισόδιο',
 };
 
-// Το μπλοκ όπως το κρατάει το αρχείο -> τι είδος κουτί δείχνουμε.
+// A block as the file stores it -> which kind of box we show.
 function blockKind(b){
   if (b.type === 'embed') return b.kind === 'episode' ? 'episode' : 'youtube';
   return b.type;
@@ -3774,8 +3772,8 @@ function addBlock(kind){
   drawBlocks();
   artDirty(true);
 
-  // Ο δρομέας στο καινούριο κουτί: αλλιώς ο συντάκτης πατάει
-  // «+ Παράγραφος» και μετά πρέπει να ψάξει πού πήγε.
+  // Cursor into the new box: otherwise the editor hits "+ Παράγραφος"
+  // and then has to hunt for where it went.
   var boxes = $$('.block');
   var last = boxes[boxes.length - 1];
   if (last) {
@@ -3785,9 +3783,9 @@ function addBlock(kind){
   }
 }
 
-// Από τον σύνδεσμο YouTube κρατάμε ΜΟΝΟ τον κωδικό. Ο συντάκτης
-// κολλάει ό,τι του δώσει ο browser — watch?v=, youtu.be/, /embed/ —
-// και όλα πρέπει να καταλήγουν στο ίδιο.
+// From a YouTube link we keep the id ONLY. The editor pastes whatever
+// the browser gives them — watch?v=, youtu.be/, /embed/ — and all of it
+// has to end up the same.
 function youtubeId(v){
   var s = String(v || '').trim();
   var m = s.match(/(?:v=|youtu\.be\/|\/embed\/|\/shorts\/)([\w-]{6,20})/);
@@ -3795,15 +3793,15 @@ function youtubeId(v){
   return /^[\w-]{6,20}$/.test(s) ? s : s;
 }
 
-// ---- αποθήκευση ----
+// ---- saving ----
 
 function collect(){
   var a = art.open;
 
   a.title = $('[data-art="title"]').value.trim();
-  // Η περίληψη ΔΕΝ γράφεται πια εδώ — τη βγάζει το site από την πρώτη
-  // παράγραφο (ownSummary στο build.js). Ό,τι γράφτηκε παλιότερα με το
-  // χέρι μένει ανέπαφο στο a.summary και εξακολουθεί να κερδίζει.
+  // The summary is NO longer written here — the site derives it from the
+  // first paragraph (ownSummary in build.js). Anything written by hand
+  // earlier stays untouched in a.summary and still wins.
   a.category = $('[data-art="category"]').value;
   a.author = $('[data-art="author"]').value.trim();
   a.date = fromLocalInput($('[data-art="date"]').value) || new Date().toISOString();
@@ -3811,9 +3809,9 @@ function collect(){
   a.image = $('[data-art="image"]').value.trim();
   a.imageCaption = $('[data-art="imageCaption"]').value.trim();
 
-  // Ο κωδικός κλειδώνει στην ΠΡΩΤΗ αποθήκευση και δεν ξανααλλάζει.
-  // Αλλιώς μια διόρθωση στον τίτλο θα άλλαζε τη διεύθυνση ενός άρθρου
-  // που κυκλοφορεί ήδη — και κάθε σύνδεσμος προς αυτό θα έσπαγε.
+  // The id locks on the FIRST save and never changes again. Otherwise a
+  // fix to the title would change the URL of an article already in
+  // circulation — and every link to it would break.
   if (!a.id) a.id = slugify(a.title);
 
   var out = JSON.parse(JSON.stringify(a));
@@ -3828,12 +3826,12 @@ function collect(){
   return out;
 }
 
-// Η διεύθυνση ενός δικού μας άρθρου, όπως τη γράφει το build.
+// The URL of one of our own articles, as the build writes it.
 function artRef(id){ return 'arthro/' + id + '.html'; }
 
-// Δείχνει το κουτάκι μόνο σε δημοσιευμένο άρθρο, και τσεκαρισμένο αν
-// αυτό το άρθρο είναι ΗΔΗ το μεγάλο της αρχικής — ώστε να λέει την
-// αλήθεια και να μη χρειάζεται ο συντάκτης να πάει να κοιτάξει.
+// Shows the checkbox only on a published article, and checked if this
+// article is ALREADY the homepage lead — so that it tells the truth and
+// the editor does not have to go and look.
 function drawTop(){
   if (!art.open) return;
 
@@ -3856,17 +3854,17 @@ function syncFeatured(a, want){
   var back = null;
 
   if (should) {
-    // Ό,τι έσπρωξε το άρθρο πάει στο ιστορικό — δες choose().
+    // Whatever this article pushed out goes into the history — see choose().
     if (state.curation.featured) {
       heroPush(state.curation.featured, state.curation.featuredHero);
     }
     state.curation.featured = ref;
     state.curation.featuredUntil = metaApo(7);
-    // Η χειροκίνητη εικόνα ανήκει στην προηγούμενη επιλογή — δες choose().
+    // The manual image belongs to the previous pick — see choose().
     state.curation.featuredHero = '';
   } else {
-    // Βγαίνει — άρα γυρίζουμε στο προηγούμενο, όχι στο πιο πρόσφατο.
-    // Ίδιος κανόνας με το κουμπί: δες autoAgain().
+    // It is coming out — so we go back to the previous one, not the most
+    // recent. Same rule as the button: see autoAgain().
     state.curation.featured = '';
     state.curation.featuredHero = '';
     back = heroRestore();
@@ -3891,22 +3889,22 @@ function saveArticle(){
   if (!a.id) { artSay('Ο τίτλος δεν δίνει έγκυρη διεύθυνση.', 'bad'); return; }
   if (!a.body.length) { artSay('Το άρθρο δεν έχει κείμενο.', 'bad'); return; }
 
-  // Δύο άρθρα με τον ίδιο κωδικό θα πατούσε το ένα το άλλο.
+  // Two articles with the same id would overwrite each other.
   var clash = art.list.some(function (other, i) {
     return i !== art.index && other.id === a.id;
   });
   if (clash) { artSay('Υπάρχει ήδη άρθρο με αυτή τη διεύθυνση. Άλλαξε τον τίτλο.', 'bad'); return; }
 
-  // Αντί για περίληψη, ζητάμε ΚΕΙΜΕΝΟ: από εκεί βγαίνει πλέον και η
-  // περίληψη, οπότε άδειο άρθρο σημαίνει και άδειο απόσπασμα στη Google.
+  // Instead of a summary we require TEXT: the summary now comes from it,
+  // so an empty article also means an empty snippet in Google.
   if (a.status === 'published' && !a.body.some(function (p) { return p.text && p.text.trim(); })) {
     artSay('Γράψε κείμενο πριν δημοσιεύσεις — από την πρώτη παράγραφο βγαίνει και η περίληψη.', 'bad');
     return;
   }
 
-  // Το πρωτοσέλιδο ΠΡΕΠΕΙ να έχει εικόνα: χωρίς αυτήν το build αγνοεί
-  // την επιλογή και γυρίζει στην αυτόματη, χωρίς να το δει κανείς —
-  // ο συντάκτης νομίζει ότι το έβαλε και δεν το έβαλε.
+  // The lead MUST have an image: without one the build ignores the pick
+  // and falls back to the automatic choice, with nobody seeing it — the
+  // editor thinks they set it and they did not.
   if ($('[data-art-top]').checked && a.status === 'published' && !a.image) {
     artSay('Το πρωτοσέλιδο θέλει κεντρική φωτογραφία. Βάλε μία ή ξετσέκαρε το κουτάκι.', 'bad');
     return;
@@ -3919,17 +3917,17 @@ function saveArticle(){
   api('articles', 'PUT', next).then(function () {
     art.list = next;
     art.index = art.index >= 0 ? art.index : next.length - 1;
-    // Το άρθρο υπάρχει πια — άρα μπορεί και να διαγραφεί. Χωρίς αυτό,
-    // ο συντάκτης έπρεπε να βγει στη λίστα και να το ξανανοίξει.
+    // The article now exists — so it can also be deleted. Without this
+    // the editor had to go out to the list and reopen it.
     $('[data-art-delete]').hidden = false;
     artDirty(false);
-    // Σώθηκε αληθινά — το δίχτυ δεν χρειάζεται πια, και αν μείνει θα
-    // προτείνει παλιό κείμενο την επόμενη φορά.
+    // Really saved — the safety net is no longer needed, and if it stays
+    // it will offer stale text next time.
     draftClear();
-    // Και η υπογραφή, ώστε την επόμενη φορά να μην ξαναγραφτεί.
+    // And the byline, so it is not typed again next time.
     thimisouIpografi(a.author).then(drawIpografes);
     drawArtList();
-    // Η λίστα του πρωτοσέλιδου ξέρει πια το νέο ή αλλαγμένο άρθρο.
+    // The lead list now knows about the new or changed article.
     state.items = normalize(state.raw.episodes, state.raw.videos, state.raw.news, art.list);
 
     return syncFeatured(a, $('[data-art-top]').checked);
@@ -3954,8 +3952,8 @@ function deleteArticle(){
   api('articles', 'PUT', next).then(function () {
     art.list = next;
     state.items = normalize(state.raw.episodes, state.raw.videos, state.raw.news, art.list);
-    // Διαγραμμένο άρθρο δεν γίνεται να μένει μεγάλο στην αρχική: ο
-    // σύνδεσμος θα οδηγούσε σε σελίδα που δεν υπάρχει.
+    // A deleted article cannot stay as the homepage lead: the link would
+    // lead to a page that does not exist.
     return syncFeatured(a, false);
   }).then(function () {
     artDirty(false);
@@ -4000,9 +3998,9 @@ function applyPick(url){
   var t = art.pending;
   if (!t) { pickClose(); return; }
 
-  // Το πορτρέτο προσώπου ΠΡΙΝ τον έλεγχο του art.open: δεν υπάρχει
-  // ανοιχτό άρθρο όταν ο επιλογέας καλείται από την καρτέλα «Πρόσωπα»,
-  // και ο παλιός έλεγχος θα έκλεινε το παράθυρο χωρίς να κάνει τίποτα.
+  // The face portrait BEFORE the art.open check: there is no open
+  // article when the picker is called from the Faces tab, and the old
+  // check closed the window without doing anything.
   if (t.person) {
     ppSetPhoto(t.person, url);
     pickClose();
@@ -4010,23 +4008,23 @@ function applyPick(url){
     return;
   }
 
-  // Η εικόνα μιας διαφήμισης, από την καρτέλα «Διαφημίσεις».
+  // An ad's image, from the Ads tab.
   if (t.ad != null) {
     adSetImage(t.ad, url, t.slide);
     pickClose();
     return;
   }
 
-  // Το πορτρέτο αρθρογράφου, από την καρτέλα «Απόψεις».
+  // A columnist's portrait, from the Opinion tab.
   if (t.writer) {
     wrSetPhoto(t.writer, url);
     pickClose();
     return;
   }
 
-  // Η αφίσα εκπομπής, από την καρτέλα «Εκπομπές». Ίδιος λόγος: δεν
-  // υπάρχει ανοιχτό άρθρο, και ο έλεγχος πιο κάτω θα έκλεινε το
-  // παράθυρο χωρίς να αλλάξει τίποτα.
+  // A show's poster, from the Shows tab. Same reason: there is no open
+  // article, and the check below would close the window without
+  // changing anything.
   if (t.show) {
     shSetArt(t.show, url);
     pickClose();
@@ -4034,8 +4032,8 @@ function applyPick(url){
     return;
   }
 
-  // Το ίδιο και για τη φωτογραφία επεισοδίου, από την καρτέλα
-  // «Ζευγάρωμα»: ούτε εκεί υπάρχει ανοιχτό άρθρο.
+  // Same for an episode photo, from the Pairing tab: no open article
+  // there either.
   if (t.episode) {
     prSet(t.episode, { image: url });
     pickClose();
@@ -4065,8 +4063,8 @@ function pickUpload(files){
     after: function (url, done) {
       loadShots();
       loadPickShots();
-      // Μία φωτογραφία = σαφής πρόθεση: μπαίνει κατευθείαν. Πολλές
-      // μαζί σημαίνει ότι γεμίζει τη βιβλιοθήκη, οπότε διαλέγει μόνος.
+  // One image = clear intent: it goes straight in. Several at once means
+  // they are filling the library, so they pick themselves.
       if (done === 1 && url) applyPick(url);
     },
   });
@@ -4128,8 +4126,8 @@ function applyFind(id){
   var t = art.finding;
   if (!t) { findClose(); return; }
 
-  // Δεύτερος πελάτης: η καρτέλα «Ελλείψεις». Ο επιλογέας δεν ξέρει πού
-  // πάει η απάντηση — του το λέει αυτός που τον άνοιξε.
+  // Second caller: the Gaps tab. The picker does not know where the
+  // answer goes — whoever opened it tells it.
   if (t.take) { t.take(id); findClose(); return; }
 
   if (!art.open) { findClose(); return; }
@@ -4153,7 +4151,7 @@ function wireRefresh(){
     fetch('/api/refresh', { method: 'POST' }).then(readJson, netFail).then(function () {
       say('Ξεκίνησε. Τα νέα επεισόδια και οι ειδήσεις θα φανούν εδώ σε '
         + '1-2 λεπτά — ανανέωσε τη σελίδα τότε.', 'ok');
-      // Όσο τρέχει, δεύτερο πάτημα δεν προσθέτει τίποτα.
+      // While it runs, a second press adds nothing.
       setTimeout(function () { btn.disabled = false; }, 90000);
     }).catch(function (err) {
       say('Δεν ξεκίνησε: ' + err.message, 'bad');
@@ -4196,8 +4194,8 @@ function wirePicker(){
   });
 
   shots.addEventListener('click', function (e) {
-    // Η διαγραφή πρώτη: το κουμπί κάθεται ΠΑΝΩ στην κάρτα που επιλέγει,
-    // και χωρίς αυτό ένα κλικ στο ✕ θα έβαζε κιόλας τη φωτογραφία.
+    // Delete first: the button sits ON the card that selects, and
+    // without this a click on ✕ would also insert the image.
     var del = e.target.closest('[data-del]');
     if (del) { e.stopPropagation(); delShot(del.dataset.del); return; }
 
@@ -4261,9 +4259,9 @@ function wireArticles(){
     if (e.key === 'Escape' && !$('[data-preview]').hidden) closePreview();
   });
 
-  // Υπολογιστής ή κινητό. Το κινητό είναι η μισή κίνηση του site, και
-  // ένα άρθρο που διαβάζεται άνετα στα 1.200 πίξελ μπορεί να είναι
-  // τοίχος κειμένου στα 390.
+  // Desktop or phone. Phones are half the site's traffic, and an article
+  // that reads comfortably at 1,200 pixels can be a wall of text at
+  // 390.
   $('[data-preview] .preview-sizes').addEventListener('click', function (e) {
     var chip = e.target.closest('.chip');
     if (!chip) return;
@@ -4275,27 +4273,28 @@ function wireArticles(){
   });
   $('[data-art-delete]').addEventListener('click', deleteArticle);
 
-  // Τα πεδία της κεφαλίδας — ένας listener για όλα.
+  // The header fields — one listener for all of them.
   $('[data-art-editor]').addEventListener('input', function (e) {
     var f = e.target.closest('[data-art]');
     if (!f) return;
     artDirty(true);
     if (f.dataset.art === 'title') { art.open.title = f.value; drawSlug(); }
     if (f.dataset.art === 'image') { art.open.image = f.value; drawThumb(); }
-    // Πρόχειρο δεν μπαίνει στο πρωτοσέλιδο — το κουτάκι κρύβεται.
+    // A draft cannot be the lead — the checkbox hides.
     if (f.dataset.art === 'status') drawTop();
-    // Ποιο κουμπάκι είναι αναμμένο ακολουθεί ό,τι γράφεται.
+    // Which chip is lit follows what is being typed.
     if (f.dataset.art === 'author') drawIpografes();
   });
 
-  // Τα κουμπάκια με τα γνωστά ονόματα.
+  // The chips with the known names.
   $('[data-art-ipografes]').addEventListener('click', function (e) {
     var b = e.target.closest('[data-ipografi]');
     if (!b) return;
 
     var pedio = $('[data-art="author"]');
-    // Δεύτερο πάτημα στο ίδιο το σβήνει: το άρθρο χωρίς υπογραφή είναι
-    // θεμιτό — π.χ. ανακοίνωση — και χωρίς αυτό δεν ξεπατώνεται.
+    // A second press on the same one clears it: an article with no
+    // byline is legitimate — an announcement, say — and without this
+    // there is no way to undo it.
     pedio.value = pedio.value.trim() === b.dataset.ipografi ? '' : b.dataset.ipografi;
     artDirty(true);
     drawIpografes();
@@ -4306,7 +4305,7 @@ function wireArticles(){
     artDirty(true);
   });
 
-  // Τα μπλοκ — επίσης ένας listener.
+  // The blocks — one listener as well.
   var blocks = $('[data-art-blocks]');
 
   blocks.addEventListener('input', function (e) {
@@ -4316,8 +4315,8 @@ function wireArticles(){
 
     var b = art.open.body[Number(box.dataset.bi)];
 
-    // Δικλείδα: αν η οθόνη δείχνει μπλοκ που δεν υπάρχει πια στη μνήμη,
-    // το πλήκτρο θα χανόταν αμίλητα. Καλύτερα να το πούμε.
+    // Safety catch: if the screen shows a block that is no longer in
+    // memory, the keystroke would vanish silently. Better to say so.
     if (!b) {
       artSay('Κάτι ξεσυγχρονίστηκε. Πάτησε «Πίσω στη λίστα» και ξανάνοιξε το άρθρο.', 'bad');
       return;
@@ -4362,21 +4361,21 @@ function wireArticles(){
     if (find) findItem({ block: i, kind: find.dataset.bkind });
   });
 
-  // Όταν φύγει ο δρομέας από το πεδίο — ΟΧΙ σε κάθε πληκτρολόγηση,
-  // γιατί θα χανόταν η θέση του δρομέα στη μέση της λέξης.
+  // When the cursor leaves the field — NOT on every keystroke, which
+  // would lose the caret position mid-word.
   blocks.addEventListener('change', function (e) {
     var box = e.target.closest('[data-bi]');
     if (!box) return;
     var b = art.open.body[Number(box.dataset.bi)];
     if (!b) return;
 
-    // Ο σύνδεσμος YouTube γίνεται κωδικός ΚΑΙ στην οθόνη. Χωρίς αυτό ο
-    // συντάκτης βλέπει ακόμα ό,τι κόλλησε και νομίζει ότι δεν πιάστηκε.
+    // The YouTube link becomes an id ON SCREEN too. Without this the
+    // editor still sees what they pasted and thinks it was not taken.
     if (e.target.dataset.bx === 'id' && blockKind(b) === 'youtube') {
       e.target.value = b.id;
     }
 
-    // Η προεπισκόπηση της φωτογραφίας θέλει ξαναζωγράφισμα.
+    // The image preview needs redrawing.
     if (e.target.dataset.bx === 'src') drawBlocks();
   });
 
@@ -4399,7 +4398,7 @@ var pp = {
   mfind: '',       // η αναζήτηση μέσα στο «ένωσε με…»
 };
 
-// Το αρχείο μπορεί να μην έχει ακόμα τα κλειδιά που πειράζουμε.
+// The file may not have the keys we are touching yet.
 function ppReady(file){
   var f = file && typeof file === 'object' ? file : {};
   if (!f.aliases || typeof f.aliases !== 'object') f.aliases = {};
@@ -4424,9 +4423,9 @@ function ppIsOut(name){
   return pp.file.not_people.some(function (n) { return ppSame(n, name); });
 }
 
-// Το πορτρέτο. Ίδιο μοτίβο με την ιδιότητα — και με τον ίδιο λόγο να
-// μη συγκρίνουμε με ===: η γραφή στο αρχείο μπορεί να μην είναι αυτή
-// που δείχνει σήμερα το site.
+// The portrait. Same pattern as the role — and the same reason not to
+// compare with ===: the spelling in the file may not be the one the site
+// shows today.
 function ppPhoto(name){
   var keys = Object.keys(pp.file.photos);
   for (var i = 0; i < keys.length; i++) {
@@ -4443,8 +4442,8 @@ function ppSetPhoto(name, url){
   ppDirty(true);
 }
 
-// Με ποιον ενώθηκε αυτό το όνομα ΤΩΡΑ, σε αυτή τη συνεδρία. Ό,τι ήταν
-// ήδη ενωμένο δεν φτάνει εδώ: το people.json το δίνει ήδη ενωμένο.
+// Who this name was merged with NOW, in this session. Anything already
+// merged never reaches here: people.json hands it over merged.
 function ppMovedTo(name){
   var a = pp.file.aliases;
   var canon = Object.keys(a);
@@ -4458,11 +4457,11 @@ function ppMovedTo(name){
   return '';
 }
 
-// ---- οι ενέργειες ----
+// ---- the actions ----
 
 function ppSetRole(name, text){
-  // Σβήνουμε ό,τι υπάρχει με άλλη γραφή, αλλιώς μένουν δύο εγγραφές
-  // για τον ίδιο άνθρωπο και κερδίζει όποια θέλει.
+  // We delete whatever exists under another spelling, or two records
+  // remain for the same person and whichever wins, wins.
   Object.keys(pp.file.roles).forEach(function (k) {
     if (ppSame(k, name)) delete pp.file.roles[k];
   });
@@ -4472,7 +4471,7 @@ function ppSetRole(name, text){
 
 function ppOut(name){
   if (!ppIsOut(name)) pp.file.not_people.push(name);
-  // Ό,τι δεν είναι άνθρωπος δεν έχει ιδιότητα.
+  // Anything that is not a person has no role.
   Object.keys(pp.file.roles).forEach(function (k) {
     if (ppSame(k, name)) delete pp.file.roles[k];
   });
@@ -4506,7 +4505,7 @@ function ppMerge(from, into){
 
   pp.file.aliases[into] = list;
 
-  // Η ιδιότητα ακολουθεί, αν ο άλλος δεν έχει δική του.
+  // The role follows, if the other has none of its own.
   var role = ppRole(from);
   Object.keys(pp.file.roles).forEach(function (k) {
     if (ppSame(k, from)) delete pp.file.roles[k];
@@ -4543,8 +4542,8 @@ function ppSplit(canonical, variant){
   drawPeople();
 }
 
-// «Όχι, άλλος άνθρωπος». Γράφεται, ώστε η πρόταση να μην ξαναέρθει
-// στο επόμενο build — αλλιώς ο συντάκτης θα την απορρίπτει για πάντα.
+// "No, a different person". Written down, so the suggestion does not
+// return on the next build — otherwise the editor rejects it forever.
 function ppNotAlias(canonical, other){
   pp.file.not_aliases.push([canonical, other]);
   ppDirty(true);
@@ -4566,7 +4565,7 @@ function savePeople(){
   });
 }
 
-// ---- η λίστα ----
+// ---- the list ----
 
 function ppFace(p){
   if (p.photo) return '<img src="' + esc(p.photo) + '" alt="" loading="lazy">';
@@ -4591,8 +4590,8 @@ function ppAll(){
     };
   });
 
-  // Τα σβησμένα δεν υπάρχουν στο people.json ως πρόσωπα — έρχονται
-  // χωριστά, ώστε να μπορεί ο συντάκτης να πάρει πίσω ένα λάθος.
+  // Deleted ones do not exist in people.json as people — they come
+  // separately, so the editor can take a mistake back.
   pp.out.forEach(function (r) {
     rows.push({
       name: r.name, n: r.n, last: '', image: '',
@@ -4723,8 +4722,8 @@ function ppEditor(p){
   return out;
 }
 
-// Σε ποιον μπορεί να ενωθεί. Χωρίς αναζήτηση δεν δείχνουμε τίποτα: 373
-// ονόματα σε λίστα δεν βοηθούν κανέναν.
+// Who it can merge into. Without a search we show nothing: 373 names in
+// a list help nobody.
 function ppMergeHits(p){
   if (!pp.mfind) return '<p class="muted">Γράψε δύο γράμματα.</p>';
 
@@ -4744,11 +4743,11 @@ function ppMergeHits(p){
   }).join('');
 }
 
-// ---- οι προτάσεις ----
+// ---- the suggestions ----
 
 function drawSuggest(box){
-  // Ό,τι έχει απαντηθεί σε αυτή τη συνεδρία φεύγει αμέσως: η ένωση
-  // φαίνεται στα aliases, η απόρριψη στα not_aliases.
+  // Anything answered in this session leaves at once: a merge shows in
+  // aliases, a rejection in not_aliases.
   var live = [];
   pp.sug.forEach(function (f) {
     f.others.forEach(function (o) {
@@ -4796,7 +4795,7 @@ function wirePeople(){
   var rows = $('[data-pp-rows]');
 
   rows.addEventListener('click', function (e) {
-    // Οι προτάσεις πρώτα: έχουν δικά τους κουμπιά.
+    // Suggestions first: they have buttons of their own.
     var sug = e.target.closest('[data-pcanon]');
     if (sug) {
       var canon = sug.dataset.pcanon;
@@ -4819,8 +4818,8 @@ function wirePeople(){
     if (e.target.closest('[data-pp-out]')) { ppOut(name); return; }
     if (e.target.closest('[data-pp-in]')) { ppIn(name); return; }
 
-    // Ο ΙΔΙΟΣ επιλογέας που έχουν τα άρθρα: φάκελοι, αναζήτηση, ★
-    // στάνταρ, και ανέβασμα νέας με σύρσιμο. Κανένα νέο εργαλείο.
+    // THE SAME picker the articles have: folders, search, ★ standard,
+    // and drag-and-drop upload. No new tool.
     if (e.target.closest('[data-pp-pic]')) { pickImage({ person: name }); return; }
     if (e.target.closest('[data-pp-pic-off]')) {
       ppSetPhoto(name, '');
@@ -4828,8 +4827,8 @@ function wirePeople(){
       return;
     }
 
-    // Κλικ μέσα στον επεξεργαστή δεν κλείνει τη γραμμή — αλλιώς δεν
-    // μπορείς να πατήσεις μέσα στο κουτί της ιδιότητας.
+    // A click inside the editor does not close the row — otherwise you
+    // cannot click inside the role box.
     if (e.target.closest('.pedit')) return;
 
     pp.openName = pp.openName && ppSame(pp.openName, name) ? null : name;
@@ -4837,8 +4836,8 @@ function wirePeople(){
     drawPeople();
   });
 
-  // Η ιδιότητα γράφεται ΧΩΡΙΣ ξαναζωγράφισμα: αλλιώς χάνεται ο δρομέας
-  // στο πρώτο γράμμα.
+  // The role is written WITHOUT a redraw: otherwise the caret is lost
+  // on the first letter.
   rows.addEventListener('input', function (e) {
     var row = e.target.closest('[data-pname]');
     if (!row) return;
@@ -4850,7 +4849,7 @@ function wirePeople(){
 
     if (e.target.matches('[data-pp-mfind]')) {
       pp.mfind = flat(e.target.value);
-      // Μόνο η λίστα αποτελεσμάτων, για τον ίδιο λόγο.
+      // Only the results list, for the same reason.
       var p = ppAll().filter(function (x) { return ppSame(x.name, row.dataset.pname); })[0];
       if (p) $('.pmhits', row).innerHTML = ppMergeHits(p);
     }
@@ -4880,8 +4879,8 @@ function wirePeople(){
   $('[data-save="people"]').addEventListener('click', savePeople);
 }
 
-// Η απογραφή προσώπων. Αν λείπει το αρχείο — πρώτο τρέξιμο πριν χτιστεί
-// το site — η καρτέλα δουλεύει, απλώς είναι άδεια.
+// The people inventory. If the file is missing — first run before the
+// site is built — the tab still works, it is just empty.
 function loadPeople(){
   return fetch('people.json').then(function (r) {
     return r.ok ? r.json() : null;
@@ -4913,9 +4912,9 @@ function shReady(shows, art){
   sh.art = art && typeof art === 'object' ? art : {};
   if (!sh.art.art || typeof sh.art.art !== 'object') sh.art.art = {};
 
-  // Οι διαθέσιμες αφίσες: όσες χρησιμοποιούνται ήδη. Καινούρια δεν
-  // ανεβαίνει από εδώ — θέλει τρία μεγέθη που τα φτιάχνει το
-  // make-shows.js από τα πρωτότυπα του σχεδιαστή.
+  // Posters available: the ones already in use. New ones are not
+  // uploaded here — they need three sizes, which make-shows.js builds
+  // from the designer's originals.
   var seen = {};
   Object.keys(sh.art.art).forEach(function (name) {
     var f = sh.art.art[name] && sh.art.art[name].file;
@@ -4944,9 +4943,9 @@ function drawShows(){
           + esc(f) + '</option>';
       })).join('');
 
-    // Η αφίσα βγαίνει είτε από ανεβασμένη φωτογραφία (a.url) είτε από
-    // τα έτοιμα webp του public/shows/. Η ανεβασμένη ΠΡΟΗΓΕΙΤΑΙ: αν ο
-    // δημοσιογράφος μόλις ανέβασε κάτι, αυτό θέλει να δει.
+    // The poster comes either from an uploaded image (a.url) or from
+    // the ready webp files in public/shows/. The uploaded one WINS: if
+    // the journalist just uploaded something, that is what they want.
     var thumb = a.url || (file ? '/shows/' + file + '-400.webp' : '');
 
     return '<article class="show" data-show="' + esc(name) + '">'
@@ -4984,8 +4983,8 @@ function drawShows(){
       + '</div>'
       + '</div>'
 
-      // Η επεξήγηση μπαίνει ΜΙΑ φορά στην κορυφή της καρτέλας: εδώ θα
-      // επαναλαμβανόταν δεκαπέντε φορές και θα έπνιγε τα πεδία.
+      // The explanation goes in ONCE at the top of the tab: here it
+      // would repeat fifteen times and drown the fields.
       + '<label class="check">'
       + '<input type="checkbox" data-sh="titled"' + (a.titled ? ' checked' : '') + '>'
       + '<span>Ο τίτλος είναι ήδη ψημένος μέσα στην εικόνα</span>'
@@ -5004,7 +5003,7 @@ function shClearArt(name){
   var a = sh.art.art[name];
   if (!a) return;
   delete a.url;
-  // Χωρίς ανεβασμένη ΚΑΙ χωρίς έτοιμη, η εγγραφή δεν λέει τίποτα.
+  // With no uploaded AND no ready poster, the record says nothing.
   if (!a.file) delete sh.art.art[name];
   shDirty(true);
   drawShows();
@@ -5037,7 +5036,7 @@ function wireShows(){
     shDirty(true);
   });
 
-  // Τα select και τα checkbox δεν βγάζουν «input» παντού.
+  // Selects and checkboxes do not fire "input" everywhere.
   box.addEventListener('change', function (e) {
     var f = e.target.closest('[data-sh]');
     var card = e.target.closest('[data-show]');
@@ -5071,8 +5070,8 @@ function saveShows(){
   btn.disabled = true;
   shSay('Αποθηκεύεται…');
 
-  // Δύο αρχεία, δύο αποθηκεύσεις. Σειριακά και όχι παράλληλα: αν το
-  // δεύτερο αποτύχει, θέλουμε να ξέρουμε ότι το πρώτο πέρασε.
+  // Two files, two saves. Sequential, not parallel: if the second
+  // fails, we want to know the first went through.
   api('shows', 'PUT', sh.shows)
     .then(function () { return api('show-art', 'PUT', sh.art); })
     .then(function () {
@@ -5096,8 +5095,8 @@ var pr = {
   shown: PR_PAGE,
 };
 
-// Οι χρονιές που υπάρχουν όντως στα επεισόδια, από την πιο πρόσφατη.
-// Δεν τις γράφουμε με το χέρι: του χρόνου θα έλειπε το 2027.
+// The seasons that actually exist in the episodes, newest first. Not
+// hand-written: next year 2027 would be missing.
 function prYears(){
   var seen = {};
   pr.rows.forEach(function (r) {
@@ -5129,9 +5128,9 @@ function prReady(file){
 
 function prRec(id){ return pr.file.pairs[id] || {}; }
 
-// Τι ισχύει ΤΕΛΙΚΑ για μια γραμμή: η χειροκίνητη απάντηση πρώτη, μετά
-// το αυτόματο. Ίδια σειρά με το build.js — αλλιώς η καρτέλα θα έδειχνε
-// άλλα από όσα βγαίνουν στο site.
+// What FINALLY applies to a row: the manual answer first, then the
+// automatic one. Same order as build.js — otherwise the tab would show
+// something other than what the site publishes.
 function prNow(r){
   var rec = prRec(r.id);
   return {
@@ -5155,8 +5154,8 @@ function prSet(id, patch){
   var rec = pr.file.pairs[id] || {};
   Object.keys(patch).forEach(function (k) { rec[k] = patch[k]; });
 
-  // Ό,τι έμεινε κενό ή ψεύτικο φεύγει. Το αρχείο το διαβάζει και
-  // άνθρωπος· μισοάδειες εγγραφές δεν λένε τίποτα.
+  // Anything left empty or bogus is dropped. A human reads this file
+  // too; half-empty records say nothing.
   Object.keys(rec).forEach(function (k) { if (!rec[k]) delete rec[k]; });
 
   if (Object.keys(rec).length) pr.file.pairs[id] = rec;
@@ -5181,10 +5180,10 @@ function savePairs(){
   });
 }
 
-// ---- η λίστα ----
+// ---- the list ----
 
-// Ο τίτλος ενός βίντεο από τον κωδικό του. Τα βίντεο είναι ήδη
-// φορτωμένα για το πρωτοσέλιδο, οπότε δεν κατεβαίνει τίποτα.
+// A video's title from its id. The videos are already loaded for the
+// lead, so nothing is downloaded.
 function prVideoTitle(id){
   for (var i = 0; i < state.items.length; i++) {
     if (state.items[i].kind === 'video' && state.items[i].id === id) {
@@ -5200,15 +5199,15 @@ function prHits(){
     if (pr.year && String(r.date).slice(0, 4) !== pr.year) return false;
 
     var now = prNow(r);
-    // «Θέλουν δουλειά»: λείπει βίντεο ή καλεσμένος και δεν έχει
-    // απαντήσει άνθρωπος. Ό,τι έχει ήδη διορθωθεί βγαίνει από τη
-    // λίστα — γι' αυτό υπάρχει.
+    // "Needs work": a video or guest is missing and no human has
+    // answered. Anything already fixed drops off the list — that is
+    // what it is for.
     if (pr.filter === 'gaps') {
       return (!now.video && !now.rec.novideo) || (!now.guest && !now.rec.noguest);
     }
     if (pr.filter === 'done') return now.byHand;
-    // Τα δηλωμένα «δεν υπάρχει» φεύγουν από τις ελλείψεις: γι' αυτό
-    // μπήκαν — για να στραγγίζει η λίστα αντί να ρωτάει για πάντα.
+    // Declared "does not exist" leaves the gaps: that is why it was
+    // added — so the list drains instead of asking forever.
     if (pr.filter === 'video') return !now.video && !now.rec.novideo;
     if (pr.filter === 'guest') return !now.guest && !now.rec.noguest;
     return true;
@@ -5249,7 +5248,7 @@ function prRow(r){
   var now = prNow(r);
   var rec = now.rec;
 
-  // ---- η γραμμή του βίντεο ----
+  // ---- the video row ----
   var vid;
   if (rec.novideo) {
     vid = '<span class="pair-no">Δεν υπάρχει βίντεο</span>'
@@ -5267,15 +5266,15 @@ function prRow(r){
       + '<button type="button" class="btn btn--tiny" data-pr-novideo>Δεν υπάρχει</button>';
   }
 
-  // ---- η γραμμή του καλεσμένου ----
+  // ---- the guest row ----
   var guest;
   if (rec.noguest) {
     guest = '<span class="pair-no">Δεν υπάρχει καλεσμένος</span>'
       + '<button type="button" class="btn btn--tiny" data-pr-undo-guest>Αναίρεση</button>';
   } else {
-    // Πάντα πεδίο, όχι κουμπί: το όνομα γράφεται, δεν διαλέγεται. Όταν
-    // ο αυτόματος βρήκε κάτι, μπαίνει ως υπόδειξη μέσα στο πεδίο —
-    // έτσι φαίνεται τι θα ισχύσει αν ο συντάκτης δεν γράψει τίποτα.
+    // Always a field, never a button: the name is typed, not picked.
+    // When the automatic pass found something it goes in as the field's
+    // placeholder — showing what applies if the editor types nothing.
     guest = '<input type="text" class="pair-name" data-pr-guest'
       + ' value="' + esc(rec.guest || '') + '"'
       + ' placeholder="' + esc(r.guest || 'Όνομα καλεσμένου') + '"'
@@ -5366,8 +5365,8 @@ function wirePairs(){
     var id = row.dataset.prId;
 
     if (e.target.closest('[data-pr-pick]')) {
-      // Ο ίδιος επιλογέας που χρησιμοποιούν τα άρθρα — ψάχνει στα βίντεο
-      // που είναι ήδη φορτωμένα.
+      // The same picker the articles use — it searches the videos that
+      // are already loaded.
       findItem({ kind: 'video', take: function (vid) {
         prSet(id, { video: vid, novideo: false });
         drawPairs();
@@ -5396,7 +5395,7 @@ function wirePairs(){
       return;
     }
 
-    // ---- οι διορθώσεις στο ίδιο το επεισόδιο ----
+    // ---- fixes to the episode itself ----
     if (e.target.closest('[data-pr-undo-title]')) {
       prSet(id, { title: '' });
       drawPairs();
@@ -5417,9 +5416,9 @@ function wirePairs(){
       return;
     }
 
-    // «Ξεκίνα από το υπάρχον»: αντιγράφει την περιγραφή του Buzzsprout
-    // μέσα στο πεδίο, για να τη διορθώσει αντί να τη γράψει από την
-    // αρχή. Οι περισσότερες αλλαγές είναι μία πρόταση, όχι νέο κείμενο.
+    // "Start from what is there": copies the Buzzsprout description
+    // into the field, to be corrected rather than rewritten. Most
+    // changes are one sentence, not new text.
     if (e.target.closest('[data-pr-copy-summary]')) {
       var feed = prFeedEpisode(id);
       if (!feed || !feed.summary) {
@@ -5431,8 +5430,8 @@ function wirePairs(){
     }
   });
 
-  // «change» και όχι «input»: με κάθε πάτημα πλήκτρου θα ξανασχεδιαζόταν
-  // η λίστα και το πεδίο θα έχανε την εστίαση στο πρώτο γράμμα.
+  // "change" and not "input": every keystroke would redraw the list and
+  // the field would lose focus on the first letter.
   box.addEventListener('change', function (e) {
     var row = e.target.closest('[data-pr-id]');
     if (!row) return;
@@ -5444,9 +5443,9 @@ function wirePairs(){
       return;
     }
 
-    // Η περιγραφή κρατάει τις αλλαγές γραμμής: είναι οι παράγραφοί της,
-    // και η σελίδα τις ξαναγυρίζει σε <p>. Μόνο τα κενά στις άκρες
-    // φεύγουν.
+    // The description keeps its line breaks: they are its paragraphs,
+    // and the page turns them back into <p>. Only the edges are
+    // trimmed.
     if (e.target.matches('[data-pr-summary]')) {
       prSet(rid, { summary: e.target.value.replace(/[^\S\n]+/g, ' ').trim() });
       drawPairs();
@@ -5494,9 +5493,9 @@ function stLoad(){
     });
 }
 
-// Μια λίστα «όνομα — πόσα», με μπάρα που δείχνει τη σχέση.
-// Τα νούμερα μόνα τους δεν λένε τίποτα σε κανέναν: το «60» είναι πολύ ή
-// λίγο; Η μπάρα απαντάει χωρίς λέξεις.
+// A "name — count" list, with a bar showing the proportion.
+// Numbers alone tell nobody anything: is "60" a lot or a little? The bar
+// answers without words.
 function stBars(list, kenoTitlos){
   if (!list || !list.length) return '<p class="muted">' + kenoTitlos + '</p>';
 
@@ -5540,9 +5539,9 @@ function drawStats(d){
   $('[data-st-dev]').innerHTML = stBars(stLabel(d.syskeves, stSyskevi), 'Άγνωστη συσκευή.');
 }
 
-// Τα ονόματα όπως τα λέει ο άνθρωπος, όχι όπως τα λέει το API. Ο
-// συντάκτης δεν διαβάζει «GR» και «desktop», και το σκέτο «/» δεν
-// λέει σε κανέναν ότι είναι η αρχική σελίδα.
+// Names as a human says them, not as the API does. The editor does not
+// read "GR" and "desktop", and a bare "/" tells nobody it is the
+// homepage.
 function stLabel(list, fn){
   return (list || []).map(function (r) { return { name: fn(r.name), n: r.n }; });
 }
@@ -5555,9 +5554,9 @@ function stSelida(path){
 var SYSKEVES = { desktop: 'Υπολογιστής', mobile: 'Κινητό', tablet: 'Τάμπλετ' };
 function stSyskevi(s){ return SYSKEVES[s] || s || 'Άγνωστη'; }
 
-// Τα ονόματα χωρών τα ξέρει ο ίδιος ο browser — δεν τα γράφουμε με το
-// χέρι, θα λείπει πάντα η επόμενη. Αν δεν τα υποστηρίζει, μένει ο
-// κωδικός, που είναι κατανοητός έτσι κι αλλιώς.
+// Country names come from the browser itself — not hand-written, the
+// next one would always be missing. Where it is unsupported the code
+// stays, which is understandable anyway.
 var xoresNames;
 function stXora(code){
   if (!code) return 'Άγνωστη';
@@ -5569,7 +5568,7 @@ function stXora(code){
   }
 }
 
-// Οι μέρες που λείπουν, με μηδέν.
+// The missing days, filled with zero.
 function stFill(meres, period){
   var poses = period === '24h' ? 1 : (period === '30d' ? 30 : 7);
   if (poses === 1) return meres;
@@ -5592,11 +5591,11 @@ function stMera(iso){
 }
 
 // ---------------------------------------------------------------------
-// Σύνδεση
+// Wiring
 // ---------------------------------------------------------------------
 
 function wire(){
-  // Καρτέλες
+  // Tabs
   $$('.tab').forEach(function (tab) {
     tab.addEventListener('click', function (e) {
       e.preventDefault();
@@ -5604,16 +5603,16 @@ function wire(){
       var name = tab.dataset.tab;
       $$('.panel').forEach(function (p) { p.classList.toggle('is-on', p.dataset.panel === name); });
       location.hash = name;
-      // Το δίχτυ προτείνεται εδώ και όχι στη φόρτωση: ερώτηση που
-      // σκάει μόλις ανοίξει η σελίδα, σε όποια καρτέλα κι αν πήγαινε
-      // ο συντάκτης, είναι ενοχλητική.
+      // The safety net is offered here and not on load: a prompt that
+      // fires the moment the page opens, whichever tab the editor was
+      // heading for, is a nuisance.
       if (name === 'arthra') draftOffer();
-      // Οι μετρήσεις κατεβαίνουν την πρώτη φορά που ανοίγει η καρτέλα.
+      // Stats download the first time the tab opens.
       if (name === 'metriseis' && !st.loaded) stLoad();
     });
   });
 
-  // Οι περίοδοι και η ανανέωση των μετρήσεων.
+  // The periods and the stats refresh.
   $('[data-st-period]').addEventListener('click', function (e) {
     var chip = e.target.closest('.chip');
     if (!chip) return;
@@ -5624,22 +5623,22 @@ function wire(){
 
   $('[data-st-reload]').addEventListener('click', stLoad);
 
-  // Επιλογή — ένας listener για όλη τη λίστα, όχι ένας ανά κάρτα.
+  // Selection — one listener for the whole list, not one per card.
   $('[data-picks]').addEventListener('click', function (e) {
     var pick = e.target.closest('.pick');
     if (pick) choose(pick.dataset.ref);
   });
 
-  // Ένας listener στο κουτί, όχι στο κουμπί: το κουμπί ξαναγράφεται
-  // σε κάθε drawNow() και θα έχανε τον δικό του.
+  // One listener on the box, not on the button: the button is rewritten
+  // on every drawNow() and would lose its own.
   $('[data-now-featured]').addEventListener('click', function (e) {
     if (e.target.closest('[data-auto]')) autoAgain();
     else if (e.target.closest('[data-newest]')) autoNewest();
   });
 
-  // Τα «Καθάρισε όλα» των τεσσάρων καρτελών, με έναν listener στο
-  // έγγραφο: τα κουμπιά είναι σταθερά στο HTML, αλλά κάθονται σε
-  // τέσσερα διαφορετικά panel και δεν αξίζουν τέσσερις listeners.
+  // The four tabs' "clear all" buttons, with one listener on the
+  // document: the buttons are fixed in the HTML, but they sit in four
+  // different panels and do not deserve four listeners.
   document.addEventListener('click', function (e) {
     var btn = e.target.closest('[data-auto-all]');
     if (btn) autoAll(btn.dataset.autoAll);
@@ -5656,8 +5655,8 @@ function wire(){
     if (!chip) return;
     state.kind = chip.dataset.kind;
     state.shown = PAGE;
-    // Σκοπευμένο στη ΔΙΚΗ του ομάδα: το σκέτο '.chip' έσβηνε το «is-on»
-    // από τα φίλτρα των άλλων καρτελών, που έμεναν ενεργά στην πράξη.
+    // Scoped to its OWN group: a bare '.chip' cleared "is-on" from the
+    // other tabs' filters, which stayed active in practice.
     $$('[data-kind-filter] .chip').forEach(function (c) {
       c.classList.toggle('is-on', c === chip);
     });
@@ -5686,14 +5685,14 @@ function wire(){
   wireMustRead();
   wireOpinions();
   wireAds();
-  // «Ξανακράτα το» — ένας ακροατής για όλη τη σελίδα, γιατί το κουμπί
-  // εμφανίζεται σε τέσσερις διαφορετικές καρτέλες.
+  // "Renew" — one listener for the whole page, because the button
+  // appears in four different tabs.
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-pin-again]');
     if (b) { pinAgain(b.dataset.pinKey, b.dataset.pinAgain); return; }
 
-    // «↩ επαναφορά»: ό,τι είχε βγει με το ✕ ξαναμπαίνει στο αυτόματο.
-    // Ίδιος λόγος για έναν ακροατή — το κουμπί ζει σε τέσσερις καρτέλες.
+    // "↩ restore": what ✕ took out goes back into the automatic fill.
+    // Same reason for one listener — the button lives in four tabs.
     var k = e.target.closest('[data-kry-back]');
     if (k) kryEpanafora(k.dataset.kryPoio, k.dataset.kryBack);
   });
@@ -5703,7 +5702,7 @@ function wire(){
   wirePeople();
   wirePairs();
 
-  // Δικλείδα: φεύγει η σελίδα με αναλλοίωτη δουλειά μέσα.
+  // Safety catch: leaving the page with unsaved work in it.
   window.addEventListener('beforeunload', function (e) {
     if (state.dirty) { e.preventDefault(); e.returnValue = ''; }
   });
@@ -5731,27 +5730,27 @@ function boot(){
     api('pairs'),
     loadPairsTodo(),
     api('photos').catch(function () { return null; }),
-    // Η ροή του τελευταίου build. ΑΝΕΚΤΙΚΟ όπως οι φωτογραφίες: αν δεν
-    // έχει τρέξει build ακόμα, δείχνουμε μόνο τα καρφιτσωμένα — δεν
-    // ρίχνουμε ολόκληρο το διαχειριστικό για μια προεπισκόπηση.
+    // The last build's flow. FORGIVING like the images: if no build has
+    // run yet we show only the pins — we do not take the whole admin
+    // down over a preview.
     loadFlow(),
-    // Τα πορτρέτα των αρθρογράφων. ΑΝΕΚΤΙΚΟ: το αρχείο δεν υπάρχει
-    // μέχρι να αλλάξει κανείς την πρώτη φωτογραφία.
+    // The columnists' portraits. FORGIVING: the file does not exist
+    // until someone changes the first photo.
     api('writers').catch(function () { return null; }),
-    // Οι διαφημίσεις. ΑΝΕΚΤΙΚΟ: το αρχείο δεν υπάρχει μέχρι να μπει η
-    // πρώτη — και μια καρτέλα διαφημίσεων δεν ρίχνει το διαχειριστικό.
+    // The ads. FORGIVING: the file does not exist until the first one
+    // is added — and an ads tab does not take the admin down.
     api('ads').catch(function () { return null; }),
-    // Ποιος είναι συνδεδεμένος. ΑΝΕΚΤΙΚΟ: τοπικά δεν υπάρχει Access,
-    // και η υπογραφή γράφεται με το χέρι όπως πάντα.
+    // Who is signed in. FORGIVING: there is no Access locally, and the
+    // byline is typed by hand as always.
     fetch('/api/poios')
       .then(function (res) { return res.ok ? res.json() : null; })
       .catch(function () { return null; }),
-    // Τα θέματα με το πλήθος τους, για την καρτέλα «Θέματα αρχικής».
-    // ΑΝΕΚΤΙΚΟ: το αρχείο το γράφει το build — πριν το πρώτο τρέξιμο
-    // δεν υπάρχει.
+    // The topics with their counts, for the "Θέματα αρχικής" tab.
+    // FORGIVING: the build writes this file — before the first run it
+    // does not exist.
     loadTopics(),
   ]).then(function (r) {
-    // Το αρχείο μπορεί να μην υπάρχει ακόμα — τότε το API δίνει null.
+    // The file may not exist yet — then the API returns null.
     var photos = r[12] && typeof r[12] === 'object' ? r[12] : {};
     lib.standard = Array.isArray(photos.standard) ? photos.standard : [];
     lib.rest = {};
@@ -5760,10 +5759,10 @@ function boot(){
     });
     state.curation = r[0] || {};
     cat.auto = r[5] || {};
-    // Το αρχείο δεν υπάρχει μέχρι να γραφτεί το πρώτο άρθρο — τότε το
-    // API επιστρέφει null, όχι σφάλμα.
+    // The file does not exist until the first article is written — then
+    // the API returns null, not an error.
     art.list = Array.isArray(r[4]) ? r[4] : [];
-    // Μετά τα άρθρα: η λίστα του πρωτοσέλιδου τα περιλαμβάνει.
+    // After the articles: the lead list includes them.
     state.raw = { episodes: r[1], videos: r[2], news: r[3] };
     state.items = normalize(r[1], r[2], r[3], art.list);
     state.flow = r[13];
@@ -5804,9 +5803,9 @@ function boot(){
     loadShots();
     say('');
 
-    // Από εδώ και πέρα η λίστα άρθρων είναι αληθινή, οπότε το δίχτυ
-    // μπορεί να προταθεί. Αν ο συντάκτης ήρθε κατευθείαν στα Άρθρα —
-    // π.χ. ανανέωσε ενώ έγραφε — ρωτάμε αμέσως.
+    // From here on the article list is real, so the safety net can be
+    // offered. If the editor came straight to Articles — a refresh
+    // mid-write, say — we ask immediately.
     art.ready = true;
     if (location.hash === '#arthra') draftOffer();
   }).catch(function (err) {
