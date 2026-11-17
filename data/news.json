@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-se-etoimotita-i-topiki-el-as-gia-tin-sygkentrosi-gia-to-polytechneio-kai-to-kroyazieroploio",
+    "title": "Ηράκλειο: Σε ετοιμότητα η τοπική ΕΛ.ΑΣ. για την συγκέντρωση για το Πολυτεχνείο και το κρουαζιερόπλοιο",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-se-etoimotita-i-topiki-el-as-gia-tin-sygkentrosi-gia-to-polytechneio-kai-to-kroyazieroploio",
+    "date": "2026-11-17T07:30:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/polytechneio-poreia-erakleio-1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/polytechneio-poreia-erakleio-1.jpg",
+    "summary": "Σε ετοιμοτητα βρίσκεται ηδη η τοπική ΕΛ.ΑΣ. λόγω της πορείας που θα πραγματοποιηθεί στο κέντρο του Ηρακλείου σημερα, στα πλαίσια του εορτασμού για την επέτει...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "koryfonontai-oi-ekdiloseis-stin-athina-gia-tin-53i-epeteio-toy-polytechneioy",
     "title": "Κορυφώνονται οι εκδηλώσεις στην Αθήνα για την 53η επέτειο του Πολυτεχνείου",
     "url": "https://www.newshub.gr/el/ellada/koryfonontai-oi-ekdiloseis-stin-athina-gia-tin-53i-epeteio-toy-polytechneioy",
@@ -21,7 +33,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/kolymbeterio-erakleio-apo-psela.jpg",
     "summary": "Σημαντική εξέλιξη για τις κολυμβητικές εγκαταστάσεις του Εθνικού Αθλητικού Κέντρου Ηρακλείου (ΕΑΚΗ), καθώς εγκρίθηκε η χρηματοδότηση ύψους 1.200.000 ευρώ για...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "kalesma-sti-sygkentrosi-apo-tin-enosi-giatron-esy-gia-tin-epeteio-toy-polytechneioy",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/noid.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/noid.jpg",
     "summary": "Η υπόθεση κατασκοπείας που συνδέεται με την «ερωτική παγίδα» που φέρεται να στήθηκε στον διευθύνοντα σύμβουλο της Nvidia, φέρνει στο προσκήνιο τη...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "i-germania-vazei-stop-sta-kinezika-drones-ypo-ton-fovo-kataskopeias-sto-mikroskopio-kai-ta-kinezika-exypna-aytokinita",
-    "title": "Η Γερμανία βάζει «stop» στα κινέζικα Drones υπό τον φόβο κατασκοπείας-Στο μικροσκόπιο και τα κινεζικά «έξυπνα» αυτοκίνητα",
-    "url": "https://www.newshub.gr/el/kosmos/i-germania-vazei-stop-sta-kinezika-drones-ypo-ton-fovo-kataskopeias-sto-mikroskopio-kai-ta-kinezika-exypna-aytokinita",
-    "date": "2026-11-11T20:55:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/drone.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/drone.jpg",
-    "summary": "Μετά τον σάλο που έχει προκληθεί με τις υποθέσεις κατασκοπείας για λογαριασμό της Κίνας και υπό τον φόβο διαρροή πληροφοριών τους, οι ένοπλες δυνάμεις της Γε...",
     "author": null,
     "featured": false
   },
