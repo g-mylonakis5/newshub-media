@@ -1,4 +1,4 @@
-// feed.js — φέρνει και διαβάζει το RSS. Το χρησιμοποιούν τα άλλα αρχεία.
+// feed.js — fetches and parses the RSS. The other files use it.
 
 const fs = require('fs');
 
@@ -30,7 +30,7 @@ function toSeconds(value) {
   return value.split(':').map(Number).reduce((total, part) => total * 60 + part, 0);
 }
 
-// Καθαρίζει HTML και κενά από την περιγραφή.
+// Strips HTML and whitespace from the description.
 const ENTITIES = {
   nbsp: ' ', amp: '&', quot: '"', apos: "'", lt: '<', gt: '>',
   laquo: '«', raquo: '»', hellip: '…', ndash: '–', mdash: '—',
@@ -58,8 +58,8 @@ function stripHtml(html) {
 
   for (let i = 0; i < 2 && t.includes('&'); i++) t = entities(t);
 
-  // Τα κενά μαζεύονται ΜΕΣΑ σε κάθε γραμμή, όχι σε όλο το κείμενο:
-  // ένα σκέτο \s+ θα έτρωγε και τις αλλαγές γραμμής που μόλις βάλαμε.
+  // Whitespace is collapsed WITHIN each line, not across the whole text:
+  // a bare \s+ would eat the line breaks we just put in.
   return t
     .split('\n')
     .map((line) => line.replace(/[^\S\n]+/g, ' ').trim())
@@ -67,8 +67,8 @@ function stripHtml(html) {
     .join('\n');
 }
 
-// "Γαβριήλ Χαρίτος: Η 7η Οκτωβρίου..." -> καλεσμένος + καθαρός τίτλος.
-// Αν δεν υπάρχει το μοτίβο, αφήνουμε τον τίτλο όπως είναι.
+// "Γαβριήλ Χαρίτος: Η 7η Οκτωβρίου..." -> guest + clean title.
+// Where the pattern is absent we leave the title as it is.
 function splitGuest(title) {
   const m = title.match(/^([^:]{3,40}):\s*(.+)$/);
   if (!m) return { guest: '', headline: title };

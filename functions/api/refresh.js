@@ -36,9 +36,9 @@ export async function onRequest(context) {
     body: JSON.stringify({ ref: branch, inputs: { varia: 'true' } }),
   });
 
-  // Επιτυχία = 204 χωρίς σώμα. Οτιδήποτε άλλο θέλει εξήγηση στα
-  // ελληνικά: ο συντάκτης δεν ξέρει τι είναι «403 Resource not
-  // accessible by integration».
+  // Success = 204 with no body. Anything else needs an explanation in
+  // Greek: the editor does not know what "403 Resource not accessible by
+  // integration" means.
   if (res.status === 204) {
     return json(200, { ok: true, who: whoFrom(request) });
   }

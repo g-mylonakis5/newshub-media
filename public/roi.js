@@ -10,9 +10,9 @@
     items.slice(0, POSA).forEach(function (it) {
       if (!it || !it.t || !it.u) return;
 
-      // Με createElement και textContent, όχι innerHTML: οι τίτλοι
-      // έρχονται από ξένη σελίδα και δεν τους εμπιστευόμαστε να
-      // μπουν αυτούσιοι μέσα στη δική μας.
+      // With createElement and textContent, not innerHTML: the titles
+      // come from a foreign page and we do not trust them to go into
+      // ours verbatim.
       var a = document.createElement('a');
       a.href = it.u;
       a.target = '_blank';
@@ -34,8 +34,8 @@
       frag.appendChild(li);
     });
 
-    // Μόνο αν βγήκε κάτι. Άδειο fragment σημαίνει ότι το /roi μας
-    // έδωσε σκουπίδια — και τότε τα γραμμένα είναι καλύτερα.
+    // Only if something came out. An empty fragment means our /roi gave
+    // us junk — and then what is baked in is better.
     if (!frag.childNodes.length) return;
 
     ul.replaceChildren(frag);
@@ -59,19 +59,19 @@
 
       grapse(ul, data.items);
     } catch (err) {
-      // Σιωπή. Η σελίδα έχει ήδη ροή· δεν υπάρχει τίποτα να πει στον
-      // αναγνώστη, και μια κόκκινη γραμμή στην κονσόλα δεν τον βοηθά.
+      // Silence. The page already has a ticker; there is nothing to tell
+      // the reader, and a red line in the console does not help them.
     }
   }
 
-  // Στο φόρτωμα, και ξανά σε κάθε αλλαγή σελίδας χωρίς φόρτωμα: ο
-  // player.js αλλάζει το περιεχόμενο με View Transitions, οπότε
-  // γυρνώντας στην αρχική το πλαίσιο είναι καινούριο και άγραφο.
+  // On load, and again on every page change without a load: player.js
+  // swaps the content with View Transitions, so coming back to the
+  // homepage the box is new and unwritten.
   anaveosi();
   document.addEventListener('selida:allaxe', anaveosi);
 
-  // Και όταν ο αναγνώστης ξαναγυρίζει στην καρτέλα. Ένα κινητό που
-  // έμεινε ανοιχτό από το πρωί δείχνει πρωινές ειδήσεις το βράδυ.
+  // And when the reader returns to the tab. A phone left open since the
+  // morning shows morning news in the evening.
   document.addEventListener('visibilitychange', function () {
     if (!document.hidden) anaveosi();
   });

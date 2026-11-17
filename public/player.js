@@ -11,7 +11,7 @@
 
   var bar = document.querySelector('.bar');
 
-  // ---------- βοηθητικά ----------
+  // ---------- helpers ----------
 
   function clock(s) {
     if (!isFinite(s)) return '--:--';
@@ -62,8 +62,8 @@
     } catch (e) { return []; }
   }
 
-  // Το κλειδί είναι ΜΙΚΡΟ επίτηδες (t, s, a, h, p, d, w): ο χώρος του
-  // localStorage είναι λίγα MB και τον μοιράζονται όλα όσα κρατάμε.
+  // The keys are SHORT on purpose (t, s, a, h, p, d, w): localStorage is
+  // a few MB and everything we keep shares it.
   function synVale(sviseMono) {
     if (!track) return;
 
@@ -89,9 +89,9 @@
     } catch (e) { /* γεμάτος χώρος ή ιδιωτική περιήγηση */ }
   }
 
-  // ---------- οι όψεις ----------
+  // ---------- the views ----------
 
-  // Κάθε όψη είναι ένα στοιχείο: η μπάρα, ή ένα .player μέσα στη σελίδα.
+  // Each view is one element: the bar, or a .player inside the page.
   function views() {
     var list = [];
     if (bar && !bar.hidden) list.push(bar);
@@ -105,7 +105,7 @@
     var playing = !audio.paused && !audio.ended;
 
     views().forEach(function (v) {
-      // Η όψη της σελίδας δείχνει μόνο ΤΟ ΔΙΚΟ ΤΗΣ επεισόδιο.
+      // A page view shows ITS OWN episode only.
       var mine = !v.dataset.id || (track && v.dataset.id === track.id);
 
       var fill = v.querySelector('.bar-fill, .player-fill');
@@ -139,7 +139,7 @@
       var link = bar.querySelector('.bar-now');
       if (link && track.href) link.setAttribute('href', track.href);
 
-      // Η κυματομορφή του τρέχοντος επεισοδίου πάνω στη μόνιμη μπάρα.
+      // The current episode's waveform on the persistent bar.
       var seek = bar.querySelector('.bar-seek');
       if (seek && seek.style.getPropertyValue('--wave') !== track.wave) {
         seek.style.setProperty('--wave', track.wave || '');
@@ -147,7 +147,7 @@
     }
   }
 
-  // ---------- έλεγχος ----------
+  // ---------- control ----------
 
   function load(next, andPlay) {
     var same = track && track.id === next.id;
@@ -181,14 +181,14 @@
       audio.addEventListener('loadedmetadata', function once() {
         audio.removeEventListener('loadedmetadata', once);
         audio.currentTime = seconds;
-        // Όποιος πατάει μια ώρα θέλει να ακούσει, όχι μόνο να μετακινηθεί.
+        // Anyone clicking a timestamp wants to listen, not just to seek.
         if (audio.paused) audio.play().catch(function () {});
         render();
       });
     };
 
-    // Το load() βάζει κι αυτό ένα loadedmetadata για την αποθηκευμένη
-    // θέση. Το δικό μας μπαίνει μετά, άρα τρέχει μετά, άρα κερδίζει.
+    // load() also adds a loadedmetadata for the stored position. Ours is
+    // added after, so it runs after, so it wins.
     if (!track || view.dataset.id !== track.id) {
       load(trackFrom(view), true);
       later();
@@ -223,8 +223,8 @@
 
       var said = document.createElement('span');
       said.className = 'tr-text';
-      // textContent, όχι innerHTML: το κείμενο έρχεται από το Buzzsprout
-      // και δεν το γράφουμε εμείς — ό,τι μοιάζει με ετικέτα μένει γράμματα.
+      // textContent, not innerHTML: the text comes from Buzzsprout and we
+      // do not write it — anything that looks like a tag stays letters.
       said.textContent = text;
 
       row.appendChild(btn);
@@ -233,7 +233,7 @@
     }
 
     box.appendChild(frag);
-    // Ο πίνακας των γραμμών φτιάχτηκε όταν δεν υπήρχε τίποτα — ξανά.
+    // The line index was built when there was nothing — again.
     trRows = null;
     trNow = -1;
   }
@@ -260,7 +260,7 @@
       });
   }
 
-  // ---- το πάνελ του πλέγματος ----
+  // ---- the grid panel ----
 
   function gridMenu() {
     return document.getElementById('gridmenu');
@@ -281,8 +281,8 @@
       return;
     }
 
-    // Κλικ έξω από το πάνελ το κλείνει. Μέσα του όχι — αλλιώς δεν θα
-    // προλάβαινε να ανοίξει ο σύνδεσμος που μόλις πατήθηκε.
+    // A click outside the panel closes it. Inside it does not — otherwise
+    // the link just clicked would not have time to open.
     var panel = gridMenu();
     if (panel && !panel.hidden && !e.target.closest('#gridmenu')) setGrid(false);
   });
@@ -304,7 +304,7 @@
       .trim();
   }
 
-  // Ποιο γράμμα είναι επιλεγμένο. Κενό = όλα.
+  // Which letter is selected. Empty = all.
   var pickedLetter = '';
 
   function filterPeople(box) {
@@ -316,9 +316,9 @@
     var shown = 0;
 
     for (var i = 0; i < rows.length; i++) {
-      // Δύο φίλτρα μαζί: το γραμμένο όνομα ΚΑΙ το γράμμα. Όποιος
-      // γράφει στο κουτί ενώ έχει διαλέξει «Κ» περιμένει να ψάξει
-      // μέσα στα Κ, όχι να του αλλάξει κρυφά η επιλογή.
+      // Two filters together: the typed name AND the letter. Someone
+      // typing in the box while "Κ" is selected expects to search within
+      // the Κ, not to have their choice silently changed.
       var okText = !want || rows[i].dataset.find.indexOf(want) !== -1;
       var okLetter = !pickedLetter || rows[i].dataset.letter === pickedLetter;
       var ok = okText && okLetter;
@@ -326,13 +326,13 @@
       if (ok) shown++;
     }
 
-    // Τα γράμματα-άγκυρες κρύβονται όταν δεν τους έμεινε κανένα όνομα,
-    // αλλιώς μένει ένα «Κ» να δείχνει το κενό.
+    // The letter anchors hide when no name is left under them, or a "Κ"
+    // is left pointing at nothing.
     var marks = list.querySelectorAll('.plist-mark');
     for (var j = 0; j < marks.length; j++) {
-      // Με επιλεγμένο γράμμα όλοι οι δείκτες περισσεύουν: το γράμμα το
-      // λέει ήδη το αλφάβητο από πάνω, τονισμένο. Το «Κ» πάνω από μια
-      // λίστα μόνο με Κ έτρωγε μια θέση στήλης χωρίς να λέει τίποτα.
+      // With a letter selected all the markers are redundant: the
+      // alphabet above already says it, highlighted. A "Κ" above a list
+      // of nothing but Κ ate a column slot and said nothing.
       if (pickedLetter) { marks[j].hidden = true; continue; }
 
       var any = false;
@@ -347,19 +347,19 @@
     var none = list.querySelector('.plist-none');
     if (none) none.hidden = shown > 0;
 
-    // Το αλφάβητο ΜΕΝΕΙ ορατό όταν γράφεις: είναι πλέον φίλτρο, όχι
-    // σύνολο αγκυρών, και χρειάζεσαι τον δρόμο της επιστροφής στο «Όλα».
+    // The alphabet STAYS visible while you type: it is now a filter, not
+    // a set of anchors, and you need the way back to "all".
   }
 
-  // Το «input» ανεβαίνει στο document, σε αντίθεση με focus/blur — οπότε
-  // ένας listener αρκεί και μετά από αλλαγή σελίδας.
+  // "input" bubbles to the document, unlike focus/blur — so one listener
+  // is enough, even after a page change.
   document.addEventListener('input', function (e) {
     var box = e.target.closest('[data-people-filter]');
     if (box) filterPeople(box);
   });
 
-  // Κλικ σε γράμμα: δείχνει μόνο αυτό. Ο ίδιος listener πιάνει και το
-  // «Όλα», που καθαρίζει την επιλογή.
+  // Click on a letter: show only that one. The same listener catches
+  // "all", which clears the selection.
   document.addEventListener('click', function (e) {
     var pick = e.target.closest('[data-letter-pick], [data-letter-all]');
     if (!pick) return;
@@ -378,9 +378,9 @@
     filterPeople(document.querySelector('[data-people-filter]'));
   });
 
-  // Η γραμμή που ακούγεται τώρα. Οι γραμμές είναι έως 158, και το
-  // timeupdate χτυπάει τέσσερις φορές το δευτερόλεπτο, οπότε δεν ψάχνουμε
-  // από την αρχή: σχεδόν πάντα προχωράμε μία γραμμή μπροστά.
+  // The line playing now. There are up to 158 lines, and timeupdate fires
+  // four times a second, so we do not search from the start: almost
+  // always we move one line forward.
   var trRows = null;
   var trNow = -1;
 
@@ -413,9 +413,9 @@
     };
   }
 
-  // Το --wave κάθεται στο .player-bar μέσα στην όψη. Αν λείπει — παλιά
-  // σελίδα, ή όψη χωρίς μπάρα — γυρίζουμε κενό και ο CSS κανόνας
-  // αφήνει την απλή γραμμή, που δουλεύει μια χαρά.
+  // --wave sits on the .player-bar inside the view. If it is missing — an
+  // old page, or a view with no bar — we return empty and the CSS rule
+  // leaves the plain line, which works fine.
   function waveOf(el) {
     var seek = el.querySelector ? el.querySelector('.player-bar') : null;
     return (seek && seek.style.getPropertyValue('--wave')) || '';
@@ -431,14 +431,14 @@
     }
   }
 
-  // ---------- τα θέματα της αρχικής ----------
+  // ---------- the homepage topics ----------
 
-  // Πόσες κάρτες δείχνουμε όταν διαλέξει κάποιος θέμα.
+  // How many cards we show once someone picks a topic.
   var TOPIC_MAX = 12;
 
-  // Φιλτράρει τη ροή χωρίς να φορτώσει ΤΙΠΟΤΑ: οι κάρτες όλων των θεμάτων
-  // είναι ήδη μέσα στη σελίδα, απλώς κρυμμένες. Γι' αυτό η αλλαγή θέματος
-  // είναι ακαριαία, όσα επεισόδια κι αν έχει το αρχείο.
+  // Filters the flow without loading ANYTHING: the cards for every topic
+  // are already in the page, just hidden. That is why changing topic is
+  // instant, however many episodes the archive holds.
   function showTopic(key) {
     var flow = document.querySelector('.flow');
     if (!flow) return;
@@ -449,8 +449,8 @@
       var c = cards[i];
       var ok;
       if (key === 'all') {
-        // «Όλα» = τα πιο πρόσφατα. Οι κάρτες που μπήκαν για χάρη των
-        // θεμάτων μένουν κρυμμένες, αλλιώς η ροή θα τριπλασιαζόταν.
+        // "All" = the most recent. The cards added for the topics' sake
+        // stay hidden, or the flow would triple.
         ok = c.className.indexOf('is-extra') === -1;
       } else {
         var mine = (' ' + (c.getAttribute('data-topics') || '') + ' ')
@@ -465,9 +465,9 @@
 
     flow.setAttribute('data-topic', key);
 
-    // Ποια ετικέτα είναι αναμμένη, και τι λέει ο τίτλος από πάνω.
-    // Ίδιο κείμενο με το build (η λωρίδα «Latest»): η ροή έχει και
-    // άρθρα και βίντεο, όχι μόνο επεισόδια.
+    // Which chip is lit, and what the title above says. The same wording
+    // as the build (the "Latest" strip): the flow holds articles and
+    // videos too, not only episodes.
     var name = 'Τελευταία';
     var href = 'episodes.html';
     var count = '';
@@ -489,17 +489,17 @@
       label.textContent = key === 'all' ? label.dataset.first : name;
     }
 
-    // Ο τίτλος κάθεται ΕΞΩ από τη ροή, στην κορυφή της κόκκινης λωρίδας,
-    // γι' αυτό τον ψάχνουμε σε όλη τη σελίδα και όχι μέσα στη ροή.
+    // The title sits OUTSIDE the flow, at the top of the red strip, which
+    // is why we look for it across the page and not inside the flow.
     var head = document.querySelector('[data-flow-head]');
     if (head) head.textContent = name;
 
-    // Ο δρόμος προς όλο το θέμα. Δείχνουμε 12 από 1.082 — πρέπει να
-    // υπάρχει τρόπος να δει τα υπόλοιπα.
+    // The way through to the whole topic. We show 12 of 1,082 — there has
+    // to be a way to see the rest.
     var foot = flow.querySelector('.flow-all');
     var link = flow.querySelector('[data-flow-all]');
-    // Ο σύνδεσμος υπάρχει ΠΑΝΤΑ, αλλάζει μόνο πού δείχνει: στο αρχείο
-    // όταν βλέπεις τα πιο πρόσφατα, στο θέμα όταν έχεις διαλέξει θέμα.
+    // The link is ALWAYS there, only its target changes: the archive when
+    // you are seeing the most recent, the topic when you have picked one.
     if (foot && link) {
       link.setAttribute('href', href);
       link.textContent = key === 'all'
@@ -508,12 +508,12 @@
     }
   }
 
-  // ---------- κλικ, με έναν ακροατή για όλα ----------
+  // ---------- clicks, with one listener for everything ----------
 
   document.addEventListener('click', function (e) {
-    // α) ο ψεύτικος player του YouTube: το πραγματικό βίντεο μπαίνει ΠΑΝΩ
-    // από τη μικρογραφία, όχι στη θέση της — ώστε όταν κλείσει, η
-    // μικρογραφία να είναι ακόμα εκεί.
+    // a) YouTube's fake player: the real video goes ON TOP of the
+    // thumbnail, not in its place — so when it closes, the thumbnail is
+    // still there.
     var stage = e.target.closest('[data-embed]');
     if (stage && !stage.querySelector('iframe')) {
       var frame = document.createElement('iframe');
@@ -526,7 +526,7 @@
       return;
     }
 
-    // β) ο διακόπτης Βλέπω / Ακούω
+    // b) the Watch / Listen toggle
     var mode = e.target.closest('.mode');
     if (mode) {
       var wantVideo = mode.dataset.mode === 'video';
@@ -550,14 +550,14 @@
       return;                      // το <details> ανοίγει μόνο του
     }
 
-    // δ) χρονοσήμανση απομαγνητοφώνησης: πήγαινε τον ήχο εκεί
+    // d) a transcript timestamp: move the audio there
     var at = e.target.closest('[data-seek]');
     if (at) {
       seekTo(Number(at.dataset.seek));
       return;
     }
 
-    // ε) τα χειριστήρια του player
+    // e) the player controls
     var ctl = e.target.closest('[data-player]');
     if (ctl) {
       var view = ctl.closest('[data-player-view], .bar');
@@ -600,7 +600,7 @@
       }
     }
 
-    // δ) Κοινοποίηση
+    // d) Share
     var share = e.target.closest('.act-share');
     if (share) {
       var url = location.href.split('#')[0];
@@ -614,15 +614,15 @@
       return;
     }
 
-    // ε) Στη λίστα μου
+    // e) My list
     var save = e.target.closest('.act-save');
     if (save) {
       listaAllaxe(save);
       return;
     }
 
-    // ε2) Το ✕ πάνω σε κάρτα της λίστας. Μέσα σε <a>, οπότε χωρίς
-    // preventDefault το πάτημα θα άνοιγε και το επεισόδιο.
+    // e2) The ✕ on a card in the list. It is inside an <a>, so without
+    // preventDefault the press would also open the episode.
     var vgale = e.target.closest('[data-lista-vgale]');
     if (vgale) {
       e.preventDefault();
@@ -634,9 +634,9 @@
       return;
     }
 
-    // στ) οι ετικέτες θεμάτων στην αρχική. Φιλτράρουν επί τόπου, αλλά
-    // μένουν κανονικοί σύνδεσμοι: χωρίς JavaScript, ή με μεσαίο κλικ,
-    // ανοίγουν τη σελίδα του θέματος.
+    // f) the topic chips on the homepage. They filter in place, but stay
+    // ordinary links: with no JavaScript, or on a middle click, they open
+    // the topic's page.
     var chip = e.target.closest('.topic');
     if (chip && document.querySelector('.flow')) {
       e.preventDefault();
@@ -687,7 +687,7 @@
     var list = listaDiavase();
     var meta = list.filter(function (x) { return x.id !== id; });
 
-    // Ήταν ήδη μέσα — το πάτημα το βγάζει.
+    // It was already in — the press takes it out.
     if (meta.length !== list.length) {
       listaGrapse(meta);
     } else {
@@ -720,8 +720,8 @@
     box.hidden = false;
   }
 
-  // Ίδια κάρτα με το «Συνέχισε», χωρίς μπάρα προόδου — εδώ δεν υπάρχει
-  // θέση να δείξουμε — και με ένα ✕ για να βγαίνει από τη λίστα.
+  // The same card as "Continue", without the progress bar — there is no
+  // position to show here — and with a ✕ to drop it from the list.
   function listaKarta(x) {
     var a = document.createElement('a');
     a.className = 'syn-card';
@@ -790,10 +790,10 @@
     }
   }
 
-  // ---------- συμβάντα του ήχου ----------
+  // ---------- audio events ----------
 
-  // Ένα πράγμα τη φορά: μόλις ξεκινήσει ο ήχος, κλείνει το βίντεο του
-  // YouTube — αλλιώς θα ακούγονταν και τα δύο μαζί.
+  // One thing at a time: as soon as the audio starts, the YouTube video
+  // closes — otherwise both would play together.
   function stopVideo() {
     var frames = document.querySelectorAll('.stage-media iframe, .video-frame iframe');
     for (var i = 0; i < frames.length; i++) frames[i].remove();
@@ -822,8 +822,8 @@
     var href = a.getAttribute('href');
     if (!href || href.charAt(0) === '#') return false;
     if (a.target || a.hasAttribute('download')) return false;
-    // Σελίδες με δικό τους script πρέπει να φορτώνουν κανονικά: τα script
-    // που μπαίνουν με αντικατάσταση περιεχομένου δεν εκτελούνται ποτέ.
+    // Pages with a script of their own have to load normally: scripts
+    // inserted by replacing content never execute.
     if (a.hasAttribute('data-reload')) return false;
     if (a.origin !== location.origin) return false;
     return true;
@@ -872,14 +872,14 @@
       document.title = doc.title;
       window.scrollTo(0, 0);
       markSaved();
-      // Οι γραμμές της απομαγνητοφώνησης είναι άλλες τώρα: ο παλιός
-      // πίνακας δείχνει σε στοιχεία που δεν υπάρχουν πια στη σελίδα.
+      // The transcript's lines are different now: the old index points at
+      // elements that are no longer in the page.
       trRows = null;
       trNow = -1;
       render();
-      // Η σελίδα άλλαξε χωρίς να φορτώσει. Ό,τι άλλο στήθηκε πάνω στο
-      // παλιό περιεχόμενο πρέπει να το μάθει — το roi.js, π.χ., έχει
-      // μπροστά του καινούριο πλαίσιο ροής και δεν το ξέρει.
+      // The page changed without loading. Anything else built on the old
+      // content has to find out — roi.js, for instance, is facing a new
+      // ticker box and does not know it.
       document.dispatchEvent(new CustomEvent('selida:allaxe'));
     };
 
@@ -891,9 +891,9 @@
 
     if (push) history.pushState({}, '', url);
 
-    // Πού βρισκόμαστε τώρα, χωρίς την άγκυρα. Το κρατάει ενημερωμένο
-    // ο έλεγχος του popstate παρακάτω — αλλιώς, μετά από δύο κλικ, θα
-    // νόμιζε ότι το «πίσω» είναι απλώς άγκυρα και δεν θα γύριζε.
+    // Where we are now, without the anchor. The popstate check below
+    // keeps it current — otherwise, after two clicks, it would think
+    // "back" was just an anchor and would not go back.
     edo = String(url).split('#')[0];
   }
 
@@ -946,8 +946,8 @@
       media.appendChild(kena);
     }
 
-    // Η μπάρα προόδου. Κάθεται ΜΕΣΑ στην αφίσα, στο κάτω χείλος —
-    // το ίδιο σημάδι που ξέρει ο κόσμος από κάθε άλλον player.
+    // The progress bar. It sits INSIDE the poster, at the bottom edge —
+    // the same mark people know from every other player.
     var bar = document.createElement('span');
     bar.className = 'syn-bar';
     var fill = document.createElement('span');
@@ -989,9 +989,9 @@
     var grid = box.querySelector('[data-synexeia-grid]');
     if (!grid) return;
 
-    // Κρατάμε μόνο όσα έχουν ΚΑΙ θέση ΚΑΙ διάρκεια: χωρίς διάρκεια δεν
-    // υπάρχει ποσοστό, άρα δεν υπάρχει γραφικό. Και όσα έφτασαν στο
-    // τέλος δεν είναι «συνέχισε», είναι «τελείωσε».
+    // We keep only what has BOTH a position AND a duration: with no
+    // duration there is no percentage, so there is no graphic. And
+    // anything that reached the end is not "continue", it is "finished".
     var list = synDiavase().filter(function (x) {
       return x && x.id && x.h && x.d > 0 && x.p > 0 && x.p < x.d;
     }).slice(0, SYN_DEIXNE);
@@ -1002,8 +1002,8 @@
     box.hidden = false;
   }
 
-  // Και μετά από πλοήγηση χωρίς φόρτωση: η αρχική μπορεί να ξαναέρθει
-  // μπροστά μας με άλλο περιεχόμενο και άλλο (κρυφό) κουτί.
+  // And after navigation without a load: the homepage may come back in
+  // front of us with different content and a different (hidden) box.
   document.addEventListener('selida:allaxe', synDeixe);
   document.addEventListener('selida:allaxe', listaDeixe);
   document.addEventListener('selida:allaxe', markSaved);
@@ -1012,9 +1012,9 @@
     if (e.persisted) { synDeixe(); listaDeixe(); }
   });
 
-  // ---------- ξεκίνημα ----------
+  // ---------- startup ----------
 
-  // Αν ο σύνδεσμος κουβαλάει στιγμή (#t=905), ξεκινάμε από εκεί.
+  // If the link carries a moment (#t=905), we start from there.
   var jump = location.hash.match(/^#t=(\d+)/);
   if (jump) {
     var view = document.querySelector('[data-player-view]');
@@ -1049,7 +1049,7 @@
     function step(now) {
       if (!started) started = now;
       var t = Math.min(1, (now - started) / DURATION);
-      // Γρήγορα στην αρχή, αργά στο τέλος — ίδια αίσθηση με τις κινήσεις.
+      // Fast at the start, slow at the end — the same feel as the motion.
       var eased = 1 - Math.pow(1 - t, 3);
       el.textContent = Math.round(target * eased).toLocaleString('el');
       if (t < 1) requestAnimationFrame(step);

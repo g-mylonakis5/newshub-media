@@ -42,7 +42,7 @@ jobs:
       - name: Χτίσιμο
         env:
           ADMIN_PUBLIC: '1'
-          # Το ευρετήριο δεν μας νοιάζει εδώ — μετράμε εικόνες.
+          # The index does not matter here — we are measuring images.
           EVRETIRIO_LEPTA: '10000'
         run: npm run build
 
@@ -57,7 +57,7 @@ jobs:
         continue-on-error: true
         run: node check-images.js
 
-      # ---- η ειδοποίηση ----
+      # ---- the alert ----
       - name: Ειδοποίηση αν κάτι έπεσε
         if: steps.zontano.outcome == 'failure' || steps.eikones.outcome == 'failure'
         env:
@@ -90,8 +90,8 @@ jobs:
               --body "$SINCE — συνεχίζεται. Τελευταίο τρέξιμο: $RUN"
           fi
 
-      # Το τρέξιμο κοκκινίζει στο τέλος, αφού γραφτεί το issue. Πράσινο
-      # τρέξιμο πάνω σε αληθινή βλάβη είναι χειρότερο από καθόλου έλεγχο.
+      # The run goes red at the end, after the issue is written. A green
+      # run over a real fault is worse than no check at all.
       - name: Το αποτέλεσμα
         if: always()
         run: |

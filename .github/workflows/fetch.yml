@@ -7,9 +7,9 @@ on:
     - cron: '40 4,10,16 * * *'  # βίντεο, απομαγνητοφωνήσεις — 3 φορές τη μέρα
   workflow_dispatch:            # και με το χέρι, από την καρτέλα Actions
     inputs:
-      # Άσκηση πυρκαγιάς. Η δικλείδα θα χτυπήσει πρώτη φορά σε έξι
-      # μήνες, όταν κανείς δεν θα θυμάται πώς στήθηκε — και ένας
-      # συναγερμός που δεν τον άκουσες ποτέ είναι υπόθεση, όχι δικλείδα.
+      # Fire drill. The safety catch will fire for the first time in six
+      # months, when nobody remembers how it was set up — and an alarm
+      # you have never heard is a guess, not a safety catch.
       dokimi:
         description: 'Δοκιμή ειδοποίησης — χτυπάει επίτηδες ο συναγερμός'
         type: boolean
@@ -24,7 +24,7 @@ permissions:
   contents: write
   issues: write     # για την ειδοποίηση όταν παγώσει η ροή
 
-# Δύο τρεξίματα μαζί θα χτυπούσαν το ένα το push του άλλου.
+# Two runs at once would clobber each other's push.
 concurrency:
   group: fetch
   cancel-in-progress: false
@@ -32,7 +32,7 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    # Το σημάδι «μπήκε κάτι καινούριο», για το ανέβασμα που ακολουθεί.
+    # The "something new arrived" flag, for the deploy that follows.
     outputs:
       allaxe: ${{ steps.push.outputs.allaxe }}
     steps:
@@ -86,9 +86,9 @@ jobs:
             exit 0
           fi
 
-          # Το σημάδι για το ανέβασμα. Χωρίς αλλαγή δεδομένων δεν
-          # υπάρχει τίποτα καινούριο να ανέβει, και το τρέξιμο σταματά
-          # εδώ — δες το job «anevasma» στο τέλος του αρχείου.
+          # The flag for the deploy. With no data change there is nothing
+          # new to ship, and the run stops here — see the "anevasma" job
+          # at the end of the file.
           echo 'allaxe=1' >> "$GITHUB_OUTPUT"
           git commit -m "Φρέσκο υλικό — $(date -u '+%Y-%m-%d %H:%M UTC')"
 
@@ -129,8 +129,9 @@ jobs:
           ETIKETA='pagoma'
           PERIGRAFI='Η ροή σταμάτησε να ανανεώνεται'
 
-          # Στη δοκιμή το μήνυμα πρέπει να λέει ΑΜΕΣΩΣ ότι είναι δοκιμή:
-          # αλλιώς κάποιος θα ψάχνει μισή ώρα βλάβη που δεν υπάρχει.
+          # In a drill the message must say IMMEDIATELY that it is a
+          # drill: otherwise someone spends half an hour hunting a fault
+          # that does not exist.
           if [ '${{ inputs.dokimi }}' = 'true' ]; then
             TITLE='ΔΟΚΙΜΗ — Πάγωσε η ροή ειδήσεων'
             DOKIMI='> **ΔΟΚΙΜΗ.** Δεν συμβαίνει τίποτα, ο συναγερμός χτύπησε'
@@ -139,8 +140,8 @@ jobs:
             PERIGRAFI='Δοκιμή του συναγερμού — δεν είναι αληθινή βλάβη'
           fi
 
-          # Την πρώτη φορά η ετικέτα δεν υπάρχει, και χωρίς αυτήν το
-          # «gh issue list --label» σφάλλει αντί να γυρίσει άδειο.
+          # The first time, the label does not exist, and without it
+          # "gh issue list --label" errors instead of returning empty.
           gh label create "$ETIKETA" --repo "$REPO" --color B60205 \
             --description "$PERIGRAFI" 2>/dev/null || true
 
@@ -184,9 +185,9 @@ jobs:
       - name: Ποια πηγή έπεσε
         if: always()
         run: |
-          # Με if, όχι με «[ ] && ...»: το bash εδώ τρέχει με -e, και μια
-          # ψευδής συνθήκη σε τέτοια γραμμή μπορεί να ρίξει το βήμα για
-          # λάθος λόγο.
+          # With if, not with "[ ] && ...": bash runs with -e here, and a
+          # false condition on such a line can fail the step for the
+          # wrong reason.
           BAD=''
           if [ '${{ steps.eidiseis.outcome }}' = 'failure' ]; then BAD="$BAD ειδήσεις"; fi
           if [ '${{ steps.epeisodia.outcome }}' = 'failure' ]; then BAD="$BAD επεισόδια"; fi

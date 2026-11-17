@@ -12,9 +12,9 @@
     try { localStorage.setItem(KLEIDI, timi); } catch (e) { /* ιδιωτικό παράθυρο */ }
   }
 
-  // Η απάντηση στο Google. Αν λείπει το gtag — μπλοκαρισμένο από
-  // επέκταση, ή δεν πρόλαβε να φορτώσει — δεν σπάει τίποτα: η επιλογή
-  // έχει ήδη γραφτεί και ισχύει από την επόμενη σελίδα.
+  // The answer to Google. If gtag is missing — blocked by an extension,
+  // or it did not load in time — nothing breaks: the choice is already
+  // written and applies from the next page on.
   function pesStoGoogle(nai){
     if (typeof window.gtag !== 'function') return;
     var t = nai ? 'granted' : 'denied';
@@ -37,9 +37,9 @@
     var bar = document.querySelector('[data-synainesi]');
     if (!bar) return;
 
-    // Ήδη απαντημένο: η λωρίδα δεν εμφανίζεται ποτέ. Το «όχι» δεν
-    // ξαναρωτιέται — μια ερώτηση που επανέρχεται είναι πίεση, όχι
-    // ερώτηση. Αλλάζει από τη σελίδα «Απόρρητο».
+    // Already answered: the banner never appears. A "no" is not asked
+    // again — a question that keeps coming back is pressure, not a
+    // question. It is changed from the Privacy page.
     var exei = diavase();
     if (exei === 'nai' || exei === 'oxi') {
       pesStoGoogle(exei === 'nai');
@@ -54,9 +54,8 @@
     });
   }
 
-  // Το κουμπί «Άλλαξε την επιλογή σου» της σελίδας Απόρρητο. Η ανάκληση
-  // πρέπει να είναι τόσο εύκολη όσο η συγκατάθεση — το λέει ο νόμος,
-  // και είναι και το σωστό.
+  // The Privacy page's "change your choice" button. Withdrawing has to be
+  // as easy as consenting — the law says so, and it is right anyway.
   function stiseAllagi(){
     var box = document.querySelector('[data-syn-allagi]');
     if (!box) return;

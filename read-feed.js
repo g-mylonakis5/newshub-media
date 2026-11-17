@@ -1,11 +1,11 @@
-// Διαβάζει το RSS του podcast και τυπώνει τι υπάρχει μέσα.
-// Τρέξε: node read-feed.js <διαδρομή-αρχείου-ή-URL>
+// Reads the podcast RSS and prints what is in it.
+// Run: node read-feed.js <file-path-or-URL>
 
 const fs = require('fs');
 
 const FEED_URL = 'https://feeds.buzzsprout.com/1904089.rss';
 
-// --- 1. Φέρνουμε το feed -----------------------------------------------
+// --- 1. Fetch the feed -------------------------------------------------
 async function loadFeed(source) {
   if (source && fs.existsSync(source)) {
     return fs.readFileSync(source, 'utf8');
@@ -15,7 +15,7 @@ async function loadFeed(source) {
   return res.text();
 }
 
-// --- 2. Μικρά βοηθητικά για να βγάλουμε τιμές από το XML ----------------
+// --- 2. Small helpers for pulling values out of the XML ----------------
 function tag(block, name) {
   const m = block.match(new RegExp('<' + name + '[^>]*>([\\s\\S]*?)</' + name + '>'));
   if (!m) return '';
@@ -27,7 +27,7 @@ function attr(block, name, key) {
   return m ? m[1] : '';
 }
 
-// "1:19:30" ή "24:46" ή "1470" -> δευτερόλεπτα
+// "1:19:30" or "24:46" or "1470" -> seconds
 function toSeconds(value) {
   if (!value) return 0;
   if (!value.includes(':')) return parseInt(value, 10) || 0;
@@ -35,7 +35,7 @@ function toSeconds(value) {
   return parts.reduce((total, part) => total * 60 + part, 0);
 }
 
-// --- 3. Σπάμε το feed σε επεισόδια --------------------------------------
+// --- 3. Split the feed into episodes -----------------------------------
 function parseEpisodes(xml) {
   const blocks = xml.split('<item>').slice(1);
   return blocks.map((raw) => {
@@ -56,7 +56,7 @@ function parseEpisodes(xml) {
   });
 }
 
-// --- 4. Τυπώνουμε τι βρήκαμε --------------------------------------------
+// --- 4. Print what we found --------------------------------------------
 function hours(seconds) {
   return (seconds / 3600).toFixed(1);
 }

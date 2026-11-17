@@ -10,8 +10,8 @@ on:
 permissions:
   contents: read
 
-# Όταν στοιβάζονται πολλά, μόνο το τελευταίο μετράει: ανεβάζει ολόκληρο
-# τον φάκελο, οπότε το προτελευταίο δεν λείπει από πουθενά.
+# When several stack up only the last one counts: it uploads the whole
+# folder, so the one before it is missing from nowhere.
 concurrency:
   group: anevasma
   cancel-in-progress: true
@@ -28,9 +28,9 @@ jobs:
         with:
           node-version: '22'
 
-      # ΧΩΡΙΣ npm ci. Το χτίσιμο δεν έχει καμία εξάρτηση — το package.json
-      # έχει μόνο το playwright, και αυτό μόνο για τον έλεγχο εικόνων.
-      # Το Pagefind το φέρνει το npx όταν χρειαστεί.
+      # NO npm ci. The build has no dependencies — package.json holds
+      # only playwright, and that only for the image check. npx fetches
+      # Pagefind when it is needed.
 
       - name: Η ώρα, για το κλειδί της μνήμης
         id: ora

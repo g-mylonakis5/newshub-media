@@ -1,11 +1,11 @@
-// /api/images — η βιβλιοθήκη φωτογραφιών.
+// /api/images — the image library.
 //
-//   GET   λίστα ό,τι υπάρχει
-//   POST  ανέβασμα· το σώμα είναι η ΙΔΙΑ η εικόνα, όχι φόρμα
+//   GET   list what is there
+//   POST  upload; the body IS the image, not a form
 //
-// Ο browser τη στέλνει ήδη σμικρυσμένη — δες τη shrink() στο admin.js.
+// The browser sends it already shrunk — see shrink() in admin.js.
 //
-// ΑΣΦΑΛΕΙΑ: πίσω από Cloudflare Access, όπως και το /api/data/.
+// SECURITY: behind Cloudflare Access, like /api/data/.
 import admin from '../../admin-api.js';
 import { gitStore } from '../../admin-store.js';
 
@@ -33,9 +33,9 @@ export async function onRequest(context) {
   if (request.method === 'POST') {
     const type = (request.headers.get('content-type') || '').split(';')[0];
 
-    // Διαβάζουμε ΜΕΧΡΙ το όριο και όχι ό,τι σταλεί: χωρίς αυτό, ένα
-    // κακόβουλο αίτημα θα μας έβαζε να κατεβάσουμε γιγαμπάιτ πριν καν
-    // ελέγξουμε το μέγεθος.
+    // We read UP TO the limit and not whatever is sent: without this a
+    // malicious request would have us download gigabytes before we even
+    // check the size.
     const len = Number(request.headers.get('content-length') || 0);
     if (len > admin.maxFor(type)) {
       return json(400, {
@@ -56,7 +56,7 @@ export async function onRequest(context) {
   }
 
   if (request.method === 'DELETE') {
-    // Το όνομα έρχεται στη διεύθυνση: /api/images?name=<αρχείο>
+    // The name comes in the URL: /api/images?name=<file>
     const name = new URL(request.url).searchParams.get('name');
     const r = await admin.deleteImage(store, name);
     return json(r.status, r.body);

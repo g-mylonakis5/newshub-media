@@ -36,8 +36,8 @@ jobs:
 
       - run: npm ci
 
-      # Μόνο το Chromium. Το --with-deps φέρνει τις βιβλιοθήκες που
-      # λείπουν από τον ubuntu runner· χωρίς αυτό ο browser δεν ανοίγει.
+      # Chromium only. --with-deps pulls the libraries the ubuntu runner
+      # lacks; without it the browser does not open.
       - name: Chromium
         run: npx playwright install --with-deps chromium
 

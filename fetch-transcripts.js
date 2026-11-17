@@ -51,15 +51,15 @@ function decode(s) {
     .trim();
 }
 
-// «1:02:03» ή «5:07» -> δευτερόλεπτα
+// "1:02:03" or "5:07" -> seconds
 function toSeconds(stamp) {
   const parts = String(stamp).split(':').map(Number);
   if (parts.some(isNaN)) return 0;
   return parts.reduce((acc, n) => acc * 60 + n, 0);
 }
 
-// Η σελίδα δίνει τριάδες <cite>ομιλητής</cite><time>στιγμή</time><p>λόγια</p>.
-// Κρατάμε μόνο αυτά — όχι το υπόλοιπο HTML της σελίδας τους.
+// The page gives triples <cite>speaker</cite><time>mark</time><p>words</p>.
+// We keep only those — not the rest of their page's HTML.
 function parse(html) {
   const out = [];
   const re = /<cite>([^<]*)<\/cite>\s*<time>([^<]*)<\/time>\s*<p>([\s\S]*?)<\/p>/g;

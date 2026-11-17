@@ -12,8 +12,8 @@ export async function onRequestGet(context) {
     status: r.status,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      // Οι μετρήσεις αλλάζουν συνέχεια. Μια καρτέλα που δείχνει
-      // χθεσινά νούμερα είναι χειρότερη από καθόλου καρτέλα.
+      // The stats change constantly. A tab showing yesterday's numbers
+      // is worse than no tab at all.
       'Cache-Control': 'no-store',
     },
   });

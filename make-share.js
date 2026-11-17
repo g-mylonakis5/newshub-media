@@ -6,7 +6,7 @@ const { chromium } = require('playwright');
 const LOGO = path.join(__dirname, 'public/shows/logo-full-dark.png');
 const OUT = path.join(__dirname, 'public/share.jpg');
 
-// Το φόντο του site — ίδιο με το --bg του styles.css.
+// The site's background — the same as --bg in styles.css.
 const BG = '#0A1322';
 
 (async () => {
@@ -18,9 +18,8 @@ const BG = '#0A1322';
 
   const logo = 'data:image/png;base64,' + fs.readFileSync(LOGO).toString('base64');
 
-  // Το λογότυπο πιάνει το 68% του πλάτους. Οι πλατφόρμες κόβουν τις άκρες
-  // σε μικρές προεπισκοπήσεις — ο αέρας γύρω του δεν είναι σπατάλη, είναι
-  // το περιθώριο ασφαλείας.
+  // The logo takes 68% of the width. Platforms crop the edges in small
+  // previews — the air around it is not waste, it is the safety margin.
   await page.setContent(`<!doctype html>
 <html><head><meta charset="utf-8"><style>
   html, body { margin: 0; height: 100%; }

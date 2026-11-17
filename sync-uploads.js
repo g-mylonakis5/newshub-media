@@ -6,13 +6,13 @@ const SITE_URL = 'https://newshubmedia.gr';
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const UPLOADS = path.join(__dirname, 'uploads');
 
-// Όσα κατεβάζουμε ταυτόχρονα. Είναι το δικό μας site πίσω από την
-// Cloudflare, αλλά δεν υπάρχει λόγος να του ρίξουμε 100 αιτήσεις μαζί.
+// How many we download at once. It is our own site behind Cloudflare,
+// but there is no reason to hit it with 100 requests together.
 const AT_ONCE = 4;
 
 const ONOMA = /^[\w.-]+$/;
 
-// Ποιες φωτογραφίες ζητούν οι σελίδες που έχουμε χτίσει.
+// Which images the pages we have built ask for.
 function zitoumena() {
   const out = new Set();
   if (!fs.existsSync(PUBLIC_DIR)) return out;
@@ -38,9 +38,9 @@ async function kateva(file) {
   const bytes = Buffer.from(await res.arrayBuffer());
   if (!bytes.length) throw new Error('άδειο αρχείο');
 
-  // Γράφουμε ΜΟΝΟ αν είναι όντως εικόνα ή βίντεο. Αν κάποτε το site
-  // απαντήσει με σελίδα σφάλματος και κωδικό 200, δεν θέλουμε να σωθεί
-  // ως .jpg και να ψάχνουμε μετά γιατί δεν ανοίγει.
+  // We write ONLY if it really is an image or a video. If the site ever
+  // answers with an error page and a 200, we do not want it saved as a
+  // .jpg and then wonder why it will not open.
   const type = res.headers.get('content-type') || '';
   if (!type.startsWith('image/') && !type.startsWith('video/')) {
     throw new Error(`δεν είναι εικόνα ούτε βίντεο (${type})`);
@@ -97,9 +97,9 @@ async function main() {
   console.log();
   console.log(`Κατέβηκαν ${ok} από ${leipoun.length}, ${Math.round(bytes / 1024)}KB συνολικά.`);
 
-  // Οι αποτυχίες ΔΕΝ ρίχνουν την εντολή: μια φωτογραφία που σβήστηκε
-  // από τη βιβλιοθήκη ενώ το άρθρο τη ζητάει ακόμα θα δίνει πάντα 404,
-  // και δεν υπάρχει λόγος να κοκκινίζει το τερματικό σου κάθε φορά.
+  // Failures do NOT fail the command: an image deleted from the library
+  // while an article still asks for it will always 404, and there is no
+  // reason for your terminal to go red over it every time.
   if (apotyxies.length) {
     console.log();
     console.log(`${apotyxies.length} δεν βρέθηκαν στον αέρα:`);

@@ -1,5 +1,5 @@
-// fetch-episodes.js — κατεβάζει το feed και το σώζει σε data/episodes.json
-// Τρέξε: node fetch-episodes.js
+// fetch-episodes.js — downloads the feed and saves it to data/episodes.json
+// Run: node fetch-episodes.js
 
 const fs = require('fs');
 const path = require('path');

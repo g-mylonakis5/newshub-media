@@ -3,8 +3,8 @@
 
 const GRAPHQL = 'https://api.cloudflare.com/client/v4/graphql';
 
-// Πόσο πίσω κοιτάμε. Το δωρεάν πλάνο κρατάει λίγες μέρες ιστορικό,
-// οπότε δεν ζητάμε χρόνια: θα γύριζε άδειο και θα φαινόταν χαλασμένο.
+// How far back we look. The free plan keeps a few days of history, so we
+// do not ask for years: it would come back empty and look broken.
 const PERIODOI = {
   '24h': { ores: 24, titlos: 'τελευταίο 24ωρο' },
   '7d': { ores: 24 * 7, titlos: 'τελευταίες 7 μέρες' },
@@ -94,9 +94,9 @@ async function stats(env, period){
     return { status: 502, body: { error: 'Το Cloudflare απάντησε κάτι που δεν είναι JSON.' } };
   }
 
-  // Το GraphQL απαντάει 200 ακόμα και όταν αποτυγχάνει — το λάθος
-  // κάθεται μέσα στο σώμα. Χωρίς αυτόν τον έλεγχο η οθόνη θα έδειχνε
-  // μηδενικά και ο συντάκτης θα νόμιζε ότι δεν τον διαβάζει κανείς.
+  // GraphQL answers 200 even when it fails — the error sits inside the
+  // body. Without this check the screen would show zeros and the editor
+  // would think nobody is reading them.
   if (data.errors && data.errors.length) {
     const first = data.errors[0];
     return { status: 502, body: { error: `Cloudflare: ${first.message || 'άγνωστο σφάλμα'}` } };
@@ -118,8 +118,8 @@ async function stats(env, period){
     body: {
       period,
       titlos: p.titlos,
-      // «Προβολές» = φορτώματα σελίδας, «επισκέψεις» = ξεχωριστές
-      // επισκέψεις. Τα λέμε ελληνικά γιατί τα διαβάζει δημοσιογράφος.
+      // "Προβολές" = page loads, "επισκέψεις" = distinct visits. Named
+      // in Greek because a journalist reads them.
       provoles: synolo.count || 0,
       episkepseis: (synolo.sum && synolo.sum.visits) || 0,
       meres: (acc.meres || []).map((r) => ({
@@ -128,7 +128,7 @@ async function stats(env, period){
         episkepseis: (r.sum && r.sum.visits) || 0,
       })),
       selides: rows(acc.selides, 'requestPath'),
-      // Το κενό refererHost σημαίνει «ήρθε κατευθείαν» — όχι άγνωστο.
+      // An empty refererHost means "came directly" — not unknown.
       apo: rows(acc.apo, 'refererHost').map((r) => ({
         name: r.name || 'απευθείας',
         n: r.n,

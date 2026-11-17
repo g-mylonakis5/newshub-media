@@ -2,9 +2,9 @@
 export async function onRequestGet(context) {
   const { env } = context;
 
-  // Αν λείπει η σύνδεση με το KV, δεν είναι σφάλμα του επισκέπτη: η
-  // σελίδα έχει ήδη τη ροή γραμμένη μέσα της και απλώς θα κρατήσει
-  // εκείνη. Απαντάμε «άδειο» και η σελίδα δεν αγγίζει τίποτα.
+  // If the KV binding is missing, that is not the visitor's fault: the
+  // page already has the ticker written into it and will simply keep
+  // that one. We answer "empty" and the page touches nothing.
   if (!env.ROI) {
     return apantisi({ items: [] });
   }
@@ -12,8 +12,8 @@ export async function onRequestGet(context) {
   const raw = await env.ROI.get('roi');
   if (!raw) return apantisi({ items: [] });
 
-  // Περνάει αυτούσιο: ό,τι γράψαμε εμείς, αυτό διαβάζουμε. Δεν το
-  // ξαναφτιάχνουμε με JSON.parse και JSON.stringify για το τίποτα.
+  // Passed through verbatim: what we wrote is what we read. We do not
+  // rebuild it with JSON.parse and JSON.stringify for nothing.
   return new Response(raw, kefalides());
 }
 
@@ -26,8 +26,8 @@ function kefalides() {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'public, max-age=30, stale-while-revalidate=120',
-      // Η ροή δείχνει σε newshub.gr· κανείς άλλος δεν τη χρειάζεται,
-      // αλλά δεν υπάρχει και λόγος να την κρύψουμε.
+      // The ticker points at newshub.gr; nobody else needs it, but there
+      // is no reason to hide it either.
       'Access-Control-Allow-Origin': '*',
     },
   };
