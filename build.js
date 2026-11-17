@@ -389,8 +389,8 @@ function ldOrg(){
   });
 }
 
-// Relative page URL -> absolute, in the ONE spelling we use everywhere.
-// παντού (canonical, sitemap, og:url): χωρίς .html, χωρίς index.
+// Relative page URL -> absolute, in the ONE spelling we use everywhere
+// (canonical, sitemap, og:url): no .html, no index.
 function absUrl(url){
   return `${SITE_URL}/${cleanUrl(url || '')}`;
 }
@@ -402,14 +402,14 @@ function absAsset(u){
   return `${SITE_URL}/${s.replace(/^(\.\.?\/)+/, '').replace(/^\//, '')}`;
 }
 
-// Η ημερομηνία θέλει μορφή ISO με ζώνη ώρας. Ό,τι δεν διαβάζεται
-// φεύγει τελείως: λάθος ημερομηνία είναι χειρότερη από καμία.
+// The date needs ISO form with a timezone. Anything unreadable is dropped
+// entirely: a wrong date is worse than none.
 function ldDate(d){
   const t = Date.parse(d);
   return Number.isNaN(t) ? '' : new Date(t).toISOString();
 }
 
-// Διάρκεια σε ISO 8601 — «PT23M27S». Έτσι τη θέλει το schema.org.
+// Duration in ISO 8601 — "PT23M27S". The form schema.org wants.
 function ldDuration(seconds){
   const s = Math.round(Number(seconds) || 0);
   if (!s) return '';
@@ -422,9 +422,8 @@ function ldText(text, max = 110){
   return t.slice(0, max).replace(/\s+\S*$/, '') + '…';
 }
 
-// Οι ίδιες ψίχες που δείχνει η σελίδα, στη γλώσσα της μηχανής.
-// Δέχεται ακριβώς τη λίστα που δίνουμε στο breadcrumb() — ένα σημείο
-// αλήθειας, όχι δύο που θα ξεσυγχρονιστούν.
+// The same crumbs the page shows, in machine language. Takes exactly the
+// list given to breadcrumb() — one source of truth, not two that drift.
 function ldCrumbs(parts){
   const items = (parts || []).filter(Boolean);
   if (items.length < 2) return null;
@@ -433,14 +432,14 @@ function ldCrumbs(parts){
     '@type': 'BreadcrumbList',
     itemListElement: items.map((p, i) => Object.assign(
       { '@type': 'ListItem', position: i + 1, name: ldText(p.label, 160) },
-      // Το τελευταίο σκαλί είναι η τρέχουσα σελίδα και δεν έχει σύνδεσμο.
+      // The last crumb is the current page and carries no link.
       p.href ? { item: absUrl(p.href) } : {},
     )),
   };
 }
 
-// Πετάει τα κενά κλειδιά. Το schema.org δέχεται ελλείψεις· δεν δέχεται
-// άδειες τιμές — ένα datePublished: "" είναι σφάλμα, η απουσία όχι.
+// Drops empty keys. schema.org accepts missing fields; it does not accept
+// empty values — datePublished: "" is an error, absence is not.
 function ldClean(node){
   if (!node) return null;
   const out = {};
@@ -460,9 +459,9 @@ function ldBlock(nodes){
     ? Object.assign({ '@context': 'https://schema.org' }, list[0])
     : { '@context': 'https://schema.org', '@graph': list };
 
-  // Το « < » γίνεται \u003c επίτηδες. Αν ένας τίτλος περιέχει κάποτε
-  // «</script>», χωρίς αυτό θα έκλεινε τη σελίδα στη μέση. Το JSON
-  // παραμένει έγκυρο — είναι απλώς άλλη γραφή του ίδιου χαρακτήρα.
+  // " < " becomes < on purpose. If a title ever contains
+  // "</script>", without this it would close the page mid-way. The JSON
+  // stays valid — it is just another spelling of the same character.
   return `  <script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>\n`;
 }
 
@@ -475,8 +474,8 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
     .join('\n');
 
   const desc = esc(clip(description || 'Podcasts, βίντεο και συζητήσεις του newshub.gr — από την Κρήτη και τον κόσμο.'));
-  // Με κάθετο στο τέλος — ίδια γραφή με τον κατάλογο sitemap.xml, ώστε η
-  // Google να μη βλέπει δύο διευθύνσεις για την ίδια αρχική.
+  // With a trailing slash — the same spelling as in sitemap.xml, so
+  // Google does not see two URLs for one homepage.
   const full = `${SITE_URL}/${cleanUrl(url)}`;
   const pic = absAsset(image) || `${SITE_URL}/share.jpg`;
 
@@ -531,8 +530,8 @@ ${consentBar(depth)}
 }
 
 
-// Τα σόσιαλ του newshub.gr. Τα εικονίδια είναι SVG γραμμένα μέσα στη
-// σελίδα — μηδέν εξωτερικό αρχείο, μηδέν βιβλιοθήκη εικονιδίων.
+// newshub.gr socials. The icons are SVG written into the page — zero
+// external files, zero icon library.
 const SOCIAL = [
   ['Facebook', 'https://www.facebook.com/newshub.gr',
     'M14 9h2V6h-2c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2.2l.3-3H14v-2c0-.6.4-1 1-1z'],
@@ -552,8 +551,8 @@ function socialLinks(){
     .join('');
 }
 
-// Ο καιρός έρχεται έτοιμος από το data/weather.json — δεν τον ζητάει ο
-// browser. Αν λείπει το αρχείο, η λωρίδα δείχνει μόνο τα σόσιαλ.
+// Weather arrives ready in data/weather.json — the browser never asks
+// for it. If the file is missing, the strip shows only the socials.
 function loadWeather(){
   const file = path.join(__dirname, 'data/weather.json');
   if (!fs.existsSync(file)) return null;
@@ -565,16 +564,15 @@ function loadWeather(){
   }
 }
 
-// Το διαβάζουμε μία φορά και το κρατάμε — αλλιώς θα ανοίγαμε το ίδιο
-// αρχείο 1.500 φορές, μία για κάθε σελίδα.
+// Read once and cached — otherwise we would open the same file 1,500
+// times, once per page.
 let weatherCache;
 function weather(){
   if (weatherCache === undefined) weatherCache = loadWeather();
   return weatherCache;
 }
 
-// Εικονίδια καιρού, ένα ανά οικογένεια κωδικών WMO. Γραμμένα μέσα στη
-// σελίδα, όπως και τα σόσιαλ.
+// Weather icons, one per family of WMO codes. Inline, like the socials.
 const SKY = {
   sun:   '<circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>',
   cloud: '<path d="M7.2 19h9.9a3.9 3.9 0 0 0 .5-7.77 5.6 5.6 0 0 0-10.78-1.2A4.3 4.3 0 0 0 7.2 19z"/>',
@@ -614,14 +612,13 @@ function todayLabel(){
   return `${DAYS[a.weekday]}, ${a.day} ${MONTHS_FULL[a.month]} ${a.year}`;
 }
 
-// Το σλόγκαν και η φράση από κάτω. Γράφονται ΕΔΩ και πουθενά αλλού.
-// Προσωρινή διατύπωση — περιμένει την τελική από το αφεντικό.
+// The strapline and the line under it. Written HERE and nowhere else.
 const SLOGAN = 'Ενημέρωση που αξίζει να έχεις.';
 const TAGLINE = 'Podcasts και βίντεο του newshub.gr — συζητήσεις, αναλύσεις και πρόσωπα, από την Κρήτη και τον κόσμο.';
 
-// Η φωτογραφία της λωρίδας. Μπαίνει ως public/intro.jpg όποτε υπάρχει·
-// μέχρι τότε η λωρίδα στέκει μόνη της, χωρίς κενό και χωρίς σπασμένη
-// εικόνα. Υποστηρίζονται jpg, png και webp.
+// The strip image. Used as public/intro.jpg whenever it exists; until
+// then the strip stands alone, with no gap and no broken image. jpg, png
+// and webp are supported.
 function introImage(){
   for (const name of ['intro.jpg', 'intro.png', 'intro.webp']) {
     if (fs.existsSync(path.join(PUBLIC_DIR, name))) return name;
@@ -632,15 +629,14 @@ function introImage(){
 function intro(newestEpisode, newestVideo){
   const img = introImage();
 
-  // ΕΝΑ κουμπί. Το σλόγκαν λέει «ιστορίες που αξίζει να ακούς», οπότε το
-  // κουμπί οδηγεί στο πιο πρόσφατο επεισόδιο — όχι στο βίντεο.
+  // ONE button. The strapline promises stories worth hearing, so it leads
+  // to the most recent episode — not to video.
   const cta = newestEpisode
     ? `<a class="intro-cta" href="${episodeUrl(newestEpisode)}">♪ Άκουσε το τελευταίο</a>`
     : (newestVideo ? `<a class="intro-cta" href="${videoUrl(newestVideo)}">▶ Δες το τελευταίο</a>` : '');
 
-  // Με εικόνα: τα λόγια κάθονται ΠΑΝΩ της, με σκίαση βαθμιαία από
-  // αριστερά — ο κανόνας των σημειώσεων, όχι συμπαγής μαύρη λωρίδα.
-  // Χωρίς εικόνα: σκέτο κείμενο, χωρίς κενό.
+  // With an image: the words sit ON it, with a gradient from the left.
+  // Without one: plain text, no gap.
   return `  <section class="intro${img ? ' intro--photo' : ''}">
     ${img ? `<img class="intro-bg" src="${img}" alt="" fetchpriority="high">` : ''}
     <div class="intro-text">
@@ -709,9 +705,8 @@ function adPics(a){
   return a && a.image ? [a.image] : [];
 }
 
-// Πόσο κρατάει κάθε εικόνα. Κάτω από 3 δευτερόλεπτα δεν προλαβαίνει
-// να διαβαστεί τηλέφωνο ή διεύθυνση — που είναι όλο το νόημα μιας
-// τοπικής διαφήμισης.
+// How long each image lasts. Under 3 seconds there is no time to read a
+// phone number or address — which is the whole point of a local ad.
 const AD_EVERY_MIN = 3;
 const AD_EVERY_MAX = 20;
 const AD_EVERY_DEF = 5;
@@ -777,8 +772,8 @@ function adRatio(ad){
 function adSlot(place, size, key = place, offset = 0){
   const ad = adFor(key, offset);
 
-  // Κενή θέση: μένει ο δεσμευμένος χώρος και η λέξη. Έτσι η σελίδα
-  // έχει ακριβώς το ίδιο ύψος με ή χωρίς διαφήμιση.
+  // Empty slot: the reserved space and the word stay. The page is exactly
+  // the same height with or without an ad.
   const inner = ad
     ? adInner(ad)
     : '    <span class="ad-note">Διαφήμιση</span>';
@@ -809,8 +804,8 @@ function cardsWithAds(cards, place){
   cards.forEach((html, i) => {
     if (i > 0 && i % CARDS_PER_AD === 0) {
       const nth = i / CARDS_PER_AD;
-      // Το «place» είναι αυτό που αγοράζεται· ο αριθμός μένει μόνο στο
-      // data-ad, για να ξεχωρίζουν οι θέσεις μέσα στη σελίδα.
+      // "place" is what gets sold; the number stays in data-ad only, to
+      // tell slots apart within a page.
       out.push(adSlot(`${place}-${nth}`, 'leaderboard', place, nth - 1));
     }
     out.push(html);
@@ -822,8 +817,8 @@ function cardsWithAds(cards, place){
 const WAVE_BARS = 120;
 
 function waveMask(seed){
-  // Ένας μικρός ντετερμινιστικός γεννήτορας. Δεν θέλουμε ποιότητα
-  // κρυπτογραφίας, θέλουμε να μη βγαίνει το ίδιο σχήμα σε όλους.
+  // A small deterministic generator. Not cryptographic quality — just
+  // enough that everyone does not get the same shape.
   let h = 0;
   for (const ch of String(seed)) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
   const next = () => {
@@ -846,14 +841,13 @@ function waveMask(seed){
 
   const d = bars.map((v, i) => {
     const h = Math.round(v * 100);
-    // Η στρογγυλή άκρη προεξέχει κατά μισό πάχος σε κάθε πλευρά, οπότε
-    // η γραμμή τραβιέται κοντύτερη για να βγει το ύψος που ζητήθηκε.
+    // The round cap sticks out by half the stroke on each side, so the
+    // line is drawn shorter to end up at the requested height.
     const len = Math.max(0, h - width);
     const top = Math.round((100 - len) / 2);
     const x = i * step + Math.round(width / 2);
-    // Μηδενικό μήκος = κουκκίδα. Το «v0» αρκεί: το linecap round το
-    // κάνει κύκλο, που είναι ακριβώς ό,τι θέλουμε για ένα ραβδί
-    // κοντύτερο από το πάχος του.
+    // Zero length = a dot. "v0" is enough: linecap round turns it into a
+    // circle, which is what we want for a bar shorter than its width.
     return `M${x} ${top}v${len}`;
   }).join('');
 
@@ -907,8 +901,8 @@ function siteFooter(depth = 0){
     .map(([t, href, reload]) => `<a href="${up}${href}"${reload ? ' data-reload' : ''}>${t}</a>`)
     .join('\n      ');
 
-  // Το τρίτο στοιχείο σημαίνει «δική μας σελίδα»: θέλει το πρόθεμα του
-  // βάθους, και ΔΕΝ ανοίγει σε νέα καρτέλα — δεν φεύγεις από το site.
+  // A third element means "our own page": it needs the depth prefix and
+  // does NOT open in a new tab.
   const legal = LEGAL
     .map(([t, href, diki]) => (diki
       ? `<a href="${up}${href}">${t}</a>`
@@ -991,9 +985,8 @@ ${rows.map((r) => `        <a class="gm-link" href="${up}${r.href}"><span>${esc(
         </a>`)
     .join('\n');
 
-  // Το κύριο μενού μπαίνει ΚΑΙ εδώ, αλλά φαίνεται μόνο κάτω από 760px:
-  // εκεί κρύβεται από τη γραμμή της κεφαλίδας. Στον υπολογιστή μένει
-  // πάνω και αυτό το αντίγραφο είναι κρυφό με CSS.
+  // The main menu is here too, but only visible below 760px, where the
+  // header bar hides it. On desktop this copy stays hidden via CSS.
   const nav = `      <nav class="gm-nav">
 ${MENU.map(([t, href, reload]) => `        <a href="${up}${href}"${reload ? ' data-reload' : ''}>${t}</a>`).join('\n')}
       </nav>`;
@@ -1060,9 +1053,8 @@ ${gridPanel(depth)}
   </header>`
 
 }
-// Κοινή μορφή για podcast και είδηση. Η κάρτα και το hero δουλεύουν πάνω
-// σε αυτήν και δεν χρειάζεται να ξέρουν τι είναι το καθένα — αλλάζει μόνο
-// το χρώμα της ετικέτας. Έτσι μπαίνουν στην ίδια ροή, όπως στο mockup.
+// One shape for podcasts and news. Cards and the hero work on it without
+// knowing which is which; only the label colour changes.
 function itemFromEpisode(ep){
   const vt = videoTwin(ep);
   return {
@@ -1076,8 +1068,8 @@ function itemFromEpisode(ep){
     image: ep.image,
     hero: (vt && vt.image) ? vt.image : ep.image,
     date: ep.date,
-    // Η διάρκεια βγήκε από το meta και πήγε σε δικό της πλακίδιο πάνω
-    // στην εικόνα — αλλιώς θα γραφόταν δύο φορές στην ίδια κάρτα.
+    // Duration moved out of the meta line onto its own badge over the
+    // image — otherwise it would be printed twice on the same card.
     meta: formatDate(ep.date),
     duration: formatDuration(ep.seconds),
     cta: 'Άκου το επεισόδιο',
@@ -1088,9 +1080,9 @@ function itemFromEpisode(ep){
 function itemFromVideo(v){
   return {
     kind: 'video',
-    // Ο κωδικός του YouTube. Χρειάζεται για να πιάνει η sameItem() όταν
-    // ο δημοσιογράφος καρφιτσώνει βίντεο από το διαχειριστικό: χωρίς
-    // αυτόν το it.id ήταν «undefined» και η επιλογή του χανόταν σιωπηλά.
+    // The YouTube id. Needed for sameItem() when a journalist pins a
+    // video from the admin: without it it.id was "undefined" and the pick
+    // was silently lost.
     id: v.id,
     href: videoUrl(v),
     external: false,                // παίζει στη δική μας σελίδα, με embed
@@ -1134,8 +1126,8 @@ function itemFromArticle(a){
   return {
     kind: 'news',
     href: mine ? articleUrl(a) : a.url,
-    // Η διεύθυνση στο newshub.gr μένει μαζί, ώστε να αναγνωρίζεται η
-    // χειροκίνητη επιλογή του συντάκτη όπως κι αν τη γράψει.
+    // The newshub.gr URL travels with it, so a manual pick by the editor
+    // is recognised however they write it.
     source: a.url,
     external: !mine,                // χωρίς σώμα, ζει μόνο στο newshub.gr
     label: a.category || '',
@@ -1150,15 +1142,15 @@ function itemFromArticle(a){
   };
 }
 
-// Το rank μπαίνει ΜΟΝΟ στη ροή της αρχικής, που είναι η μόνη με φίλτρο
-// θεμάτων. Οι υπόλοιπες σειρές καρτών δεν το περνούν και δεν το γράφουν.
+// rank is written ONLY in the homepage flow, the only one with a topic
+// filter. Other card rows neither receive nor print it.
 function card(item, depth = 0, rank = null){
   const up = depth === 0 ? '' : '../';
   const href = item.external ? item.href : `${up}${item.href}`;
   const out = item.external ? ' target="_blank" rel="noopener"' : '';
 
-  // Τα θέματα γράφονται ως slug, χωρισμένα με κενό: data-topics="kriti ygeia".
-  // Έτσι η λωρίδα-φίλτρο βρίσκει τις κάρτες της χωρίς να ρωτήσει διακομιστή.
+  // Topics are written as slugs, space separated: data-topics="kriti ygeia".
+  // That lets the filter strip find its cards without asking a server.
   const topics = (item.topics || []).map(slugify).filter(Boolean).join(' ');
 
   const cls = ['card', item.extra ? 'is-extra' : '', item.lead ? 'card--lead' : '']
@@ -1193,8 +1185,8 @@ function inTopic(item, name){
   return { ...item, label: name, labelIsKind: false };
 }
 
-// Η μικρή οριζόντια κάρτα: μικρογραφία αριστερά, τίτλος δεξιά. Μπαίνει
-// δίπλα στη μεγάλη, στις ενότητες θεμάτων.
+// The small horizontal card: thumbnail left, title right. Sits next to
+// the big one in the topic sections.
 function rowCard(item, depth = 0){
   const up = depth === 0 ? '' : '../';
   const href = item.external ? item.href : `${up}${item.href}`;
@@ -1222,11 +1214,11 @@ function episodeCard(ep,depth= 0){
   return card(itemFromEpisode(ep), depth);
 }
 
-// ---- πρωτοσέλιδο ----
+// ---- hero ----
 
-// Το data/curation.json το γράφει το διαχειριστικό και το διαβάζουμε εδώ.
-// Αν δεν υπάρχει — και σήμερα δεν υπάρχει — το site δουλεύει κανονικά με
-// αυτόματες επιλογές. Το διαχειριστικό είναι βελτίωση, όχι προϋπόθεση.
+// data/curation.json is written by the admin and read here. If it does
+// not exist the site works normally with automatic picks. The admin is an
+// improvement, not a requirement.
 function loadCuration(){
   if (!fs.existsSync(CURATION_FILE)) return {};
   try {
@@ -1292,15 +1284,15 @@ function loadOwnArticles(){
   for (const a of list) {
     if (!a || !a.id || !a.title) continue;
 
-    // Πρόχειρο: ο συντάκτης δεν το έχει δημοσιεύσει ακόμα.
+    // Draft: the editor has not published it yet.
     if (a.status && a.status !== 'published') { drafts++; continue; }
 
-    // Προγραμματισμένο για αργότερα. Δεν το βγάζουμε εμείς πριν την ώρα
-    // του — ίδιος κανόνας με τις ειδήσεις του feed.
+    // Scheduled for later. We do not publish it early — same rule as the
+    // news feed.
     if (a.date && new Date(a.date) > now) { later++; continue; }
 
-    // Σώμα κάτω από μία παράγραφο δεν είναι άρθρο. Καλύτερα να λείπει
-    // παρά να βγει σελίδα με τίτλο και τίποτα από κάτω.
+    // A body under one paragraph is not an article. Better missing than a
+    // page with a title and nothing under it.
     const body = Array.isArray(a.body) ? a.body.filter((b) => b && b.type) : [];
     if (!body.length) {
       console.warn(`ΠΡΟΣΟΧΗ: το άρθρο «${a.title}» δεν έχει σώμα — δεν βγαίνει σελίδα.`);
@@ -1320,9 +1312,9 @@ function ownArticleUrl(a){
   return `arthro/${a.id}.html`;
 }
 
-// Το επεισόδιο με αυτόν τον κωδικό, για τις ενσωματώσεις μέσα στα
-// άρθρα. Δέχεται και «Buzzsprout-19907711» και σκέτο «19907711»: ο
-// συντάκτης αντιγράφει ό,τι βλέπει, και τα δύο κυκλοφορούν.
+// The episode with this id, for embeds inside articles. Accepts both
+// "Buzzsprout-19907711" and a bare "19907711": the editor copies what
+// they see, and both forms are in circulation.
 let episodeIndex;
 function episodeById(id){
   if (!episodeIndex) {
@@ -1356,9 +1348,9 @@ function itemFromOwnArticle(a){
 function pickFeatured(items, curation){
   const withImage = items.filter((it) => it.hero);
 
-  // 1) Η επιλογή του συντάκτη. Δέχεται ΚΑΙ διεύθυνση ΚΑΙ κωδικό, ώστε να
-  //    αρκεί να αντιγράψει τον σύνδεσμο από τον browser. Δουλεύει το ίδιο
-  //    για είδηση, podcast και βίντεο.
+  // 1) The editor's pick. Accepts a URL OR an id, so copying the link
+  //    from the browser is enough. Works the same for news, podcast and
+  //    video.
   const want = String(curation.featured || '').trim();
   if (want) {
     if (curationExpired(curation)) {
@@ -1380,17 +1372,17 @@ function pickFeatured(items, curation){
     }
   }
 
-  // 2) Ό,τι έβαλαν πρώτο στο newshub.gr.
+  // 2) Whatever they led with on newshub.gr.
   const flagged = withImage.find((it) => it.featured);
   if (flagged) return flagged;
 
-  // 3) Το πιο πρόσφατο με εικόνα.
+  // 3) The most recent one with an image.
   return withImage[0] || items[0];
 }
 
-// Ταιριάζει το αντικείμενο με ό,τι έγραψε ο συντάκτης. Δέχεται κωδικό,
-// πλήρη διεύθυνση του newshub.gr, ή διεύθυνση δικής μας σελίδας όπως
-// τη δίνει ο browser — με ή χωρίς http, localhost ή domain.
+// Matches an item against what the editor wrote. Accepts an id, a full
+// newshub.gr URL, or one of our own page URLs as the browser shows it —
+// with or without http, localhost or domain.
 function sameItem(it, want){
   const strip = (s) => String(s)
     .trim()
@@ -1409,8 +1401,8 @@ function sameItem(it, want){
 
   if (it.source && strip(it.source) === target) return true;
 
-  // Τελευταία ευκαιρία: μόνο το όνομα του αρχείου, χωρίς κατάληξη —
-  // «arthro/x.html» και «el/kriti/x» είναι το ίδιο πράγμα.
+  // Last resort: the filename alone, without extension — "arthro/x.html"
+  // and "el/kriti/x" are the same thing.
   const tail = (s) => s.split('/').pop().replace(/\.html?$/, '');
   return tail(mine) === tail(target);
 }
@@ -1433,13 +1425,13 @@ function refsDidimou(ref){
   return refs;
 }
 
-// Ταιριάζει με ό,τι ζήτησε ο συντάκτης — ή με το δίδυμό του.
+// Matches what the editor asked for — or its twin.
 function sameOrTwin(it, refs){
   return refs.some((r) => sameItem(it, r));
 }
 
-// Η χειροκίνητη επιλογή λήγει, αν έχει οριστεί ημερομηνία. Χωρίς αυτό,
-// μια ξεχασμένη γραμμή στο curation.json παγώνει την αρχική για πάντα.
+// A manual pick expires if a date was set. Without it a forgotten line in
+// curation.json freezes the homepage forever.
 function curationExpired(curation){
   if (!curation.featuredUntil) return false;
   const until = new Date(`${curation.featuredUntil}T23:59:59`);
@@ -1453,7 +1445,7 @@ const PIN_ZOI = {
   topics: 30,
 };
 
-// Ποιες από τις επιλογές μιας λίστας ισχύουν ακόμα.
+// Which picks in a list are still valid.
 function freshPins(lista, refs, kleidi){
   const life = PIN_ZOI[lista];
   if (!life) return refs;
@@ -1476,7 +1468,7 @@ function kryfa(lista, kleidi){
   for (const [ref, pote] of Object.entries(stamps)) {
     if (typeof ref !== 'string' || !ref.trim()) continue;
     const t = Date.parse(pote || '');
-    // Χωρίς ημερομηνία θεωρείται φρέσκο — ίδιος λόγος με το freshPins().
+    // No date means fresh — same reasoning as freshPins().
     if (orio !== null && !isNaN(t) && t < orio) continue;
     zonta.push(refsDidimou(ref.trim()));
   }
@@ -1509,8 +1501,8 @@ function pickSecondary(items, curation, featured){
 
   const taken = new Set([featured, ...chosen]);
 
-  // Μία ουρά ανά τύπο, και τις διατρέχουμε κυκλικά — ώστε να μη βγαίνουν
-  // τέσσερα ίδιου είδους, αλλά και να μη μένει τρύπα αν κάποιος λείπει.
+  // One queue per type, walked round-robin — so four of a kind do not
+  // come out together, and no hole is left if one type runs out.
   const queues = ['news', 'video', 'podcast']
     .map((kind) => items.filter((it) => it.kind === kind && !taken.has(it)));
 
@@ -1535,9 +1527,9 @@ function naturalWidth(url = ''){
   return 1200;
 }
 
-// Η ΑΝΑΛΟΓΙΑ της εικόνας, για να πάρει η λωρίδα το σχήμα της.
-// Το sddefault και το hqdefault είναι 4:3 ΜΕ μαύρες λωρίδες γύρω από
-// περιεχόμενο 16:9 — μετράει το περιεχόμενο, άρα 16/9 και αυτά.
+// The image ASPECT RATIO, so the row takes its shape. sddefault and
+// hqdefault are 4:3 WITH black bars around 16:9 content — the content is
+// what counts, so they are 16/9 too.
 function naturalRatio(url = ''){
   const nh = url.match(/static\.newshub\.gr\/(\d+)x(\d+)\//);
   if (nh) return Number(nh[1]) / Number(nh[2]);
@@ -1569,7 +1561,7 @@ function heroBanner(item){
   </section>`;
 }
 
-// ---- εκπομπές ----
+// ---- shows ----
 
 let videoCache;
 function loadVideos(){
@@ -1603,9 +1595,8 @@ function videosOnce(){
   return videosOnceCache;
 }
 
-// Βίντεο ή επεισόδιο; Τα δύο κυκλοφορούν πλέον μαζί στις ομάδες των
-// προσώπων, και κάπου πρέπει να ξεχωρίζουν: το βίντεο έχει embed, το
-// επεισόδιο έχει ήχο.
+// Video or episode? The two now travel together in the people groups and
+// have to be told apart: a video has an embed, an episode has audio.
 function einaiVideo(x){
   return !!(x && x.embed);
 }
@@ -1637,9 +1628,8 @@ function loadEpisodes(){
     return (episodeCache = []);
   }
 
-  // Η μνήμη μπαίνει ΠΡΙΝ τη διόρθωση: το airDate κατεβαίνει στο
-  // videoTwin, και χωρίς αυτό ένας μελλοντικός δρόμος πίσω στα
-  // επεισόδια θα γύριζε ατέρμονα.
+  // Caching happens BEFORE the fix: airDate descends into videoTwin, and
+  // without this a future path back to episodes would loop forever.
   episodeCache = list;
 
   for (const ep of list) {
@@ -1650,8 +1640,8 @@ function loadEpisodes(){
 
     if (fix.title) {
       const t = String(fix.title).trim();
-      // Ίδιος χωρισμός «Όνομα: θέμα» με το feed.js, ώστε ο διορθωμένος
-      // τίτλος να βγάζει καλεσμένο όπως και ο αυθεντικός.
+      // Same "Name: topic" split as feed.js, so a corrected title yields
+      // the same guest as the original.
       const m = t.match(/^([^:]{3,40}):\s*(.+)$/);
       const words = m ? m[1].trim().split(/\s+/) : [];
 
@@ -1692,15 +1682,15 @@ function videoUrl(v){
 function videoPage(v, category){
   const title = esc(decode(v.title));
 
-  // Το πάνελ του καλεσμένου υπάρχει μόνο όταν ο τίτλος έχει όνομα — στα
-  // δύο τρίτα των βίντεο δεν έχει.
+  // The guest panel exists only when the title carries a name — in two
+  // thirds of videos it does not.
   const gbox = videoGuestBox(v, 1);
 
   const cats = categoriesFor(v.id, v.title);
 
-  // Το δίδυμο επεισόδιο, αν υπάρχει. Όταν υπάρχει, η σελίδα βίντεο δίνει
-  // ΚΑΙ ήχο — ίδιος player, ίδιος διακόπτης «Βλέπω / Ακούω», ίδια
-  // συμπεριφορά με τη σελίδα επεισοδίου. Αυτό ήταν που διέφερε.
+  // The twin episode, if any. When it exists the video page offers audio
+  // too — same player, same "Βλέπω / Ακούω" switch, same behaviour as an
+  // episode page.
   const twin = episodeTwin(v);
 
   const keimeno = (twin && twin.summary) || v.summary || '';
@@ -1811,17 +1801,17 @@ ${showBannerBox(v.show, 1)}
     image: v.image,
     url: videoUrl(v),
     type: 'article',
-    // Το embedUrl είναι το YouTube, γιατί εκεί ζει το βίντεο — δεν το
-    // φιλοξενούμε. Η διάρκεια έρχεται από το δίδυμο επεισόδιο όταν
-    // υπάρχει: ίδια συζήτηση, ίδια διάρκεια.
+    // embedUrl points at YouTube, because that is where the video lives —
+    // we do not host it. Duration comes from the twin episode when there
+    // is one: same conversation, same length.
     jsonld: [
       {
         '@type': 'VideoObject',
         '@id': `${absUrl(videoUrl(v))}#video`,
         url: absUrl(videoUrl(v)),
         name: ldText(v.title),
-        // stripBoilerplate και εδώ: χωρίς αυτό η Google διάβαζε
-        // «🎙️(12/11/2026) Τα podcasts του Newshub.gr …» ως περιγραφή.
+        // stripBoilerplate here too: without it Google read the channel
+        // boilerplate as the description.
         description: ldText(keimeno ? stripBoilerplate(keimeno) : v.title, 300),
         uploadDate: ldDate(v.date),
         thumbnailUrl: absAsset(v.image),
@@ -1868,9 +1858,8 @@ function articleBodyHtml(body){
         </figure>`;
     }
 
-    // Οι ενσωματώσεις μπαίνουν ΜΟΝΟ με κωδικό, ποτέ με ελεύθερο HTML
-    // ή ελεύθερη διεύθυνση: αλλιώς το διαχειριστικό γίνεται τρόπος να
-    // μπει ξένο script στη σελίδα.
+    // Embeds accept an ID ONLY, never free HTML or a free URL: otherwise
+    // the admin becomes a way to put someone else's script on the page.
     if (p.type === 'embed' && p.id) {
       if (p.kind === 'youtube' && /^[\w-]{6,20}$/.test(p.id)) {
         return `        <div class="art-embed stage-media" data-embed="https://www.youtube.com/embed/${esc(p.id)}">
@@ -1914,9 +1903,9 @@ ${playerView({
     return '';
   });
 
-  // Η θέση μετριέται πάνω στις ΑΡΧΙΚΕΣ ενότητες, όχι στο αποτέλεσμα:
-  // όσες δεν βγάζουν HTML (π.χ. ενσωματωμένο επεισόδιο που σβήστηκε)
-  // θα μετατόπιζαν τη διαφήμιση σε άλλο σημείο από αυτό που κρίθηκε.
+  // The position is measured against the ORIGINAL sections, not the
+  // result: ones that render nothing (an embedded episode since deleted)
+  // would move the ad somewhere other than where it was judged to go.
   const out = [];
   parts.forEach((html, i) => {
     if (html) out.push(html);
@@ -2004,7 +1993,7 @@ function writerUrl(name){
   return `arthrografos/${slugify(name)}.html`;
 }
 
-// Ποιος έγραψε τι. Μόνο δημοσιευμένα — τα πρόχειρα δεν υπάρχουν.
+// Who wrote what. Published only — drafts do not exist here.
 function writersFrom(ownArticles){
   const groups = new Map();
 
@@ -2032,9 +2021,9 @@ function writerPage(name, list){
     dates.length ? `τελευταίο ${formatDate(new Date(Math.max(...dates)).toISOString())}` : '',
   ].filter(Boolean).join(' · ');
 
-  // Η φωτογραφία του, αν είναι και αρθρογράφος του newshub.gr: το
-  // διαχειριστικό κρατάει τα πορτρέτα σε ΕΝΑ σημείο, και δεν υπάρχει
-  // λόγος να ζητηθεί δεύτερη φορά για τον ίδιο άνθρωπο.
+  // Their photo, if they also write for newshub.gr: the admin keeps
+  // portraits in ONE place, and there is no reason to ask twice for the
+  // same person.
   const face = writersFile()[name] || '';
 
   const body = `${siteHeader(1)}
@@ -2069,8 +2058,8 @@ ${cards}
     description: `${name}: ${facts} στο ${SITE_NAME}.`,
     image: face,
     url: writerUrl(name),
-    // Η σελίδα ΕΙΝΑΙ προφίλ προσώπου, και το λέει. Το ίδιο @id που
-    // αναφέρουν τα άρθρα του: ένα πρόσωπο, μία ταυτότητα.
+    // The page IS a person profile, and says so. The same @id their
+    // articles reference: one person, one identity.
     jsonld: {
       '@type': 'ProfilePage',
       mainEntity: {
@@ -2097,7 +2086,7 @@ function ownSummary(a){
   const text = String(first.text).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
   if (text.length <= SUMMARY_CHARS) return text;
 
-  // Κόβουμε σε κενό, όχι στη μέση λέξης.
+  // Cut at a space, not mid-word.
   const cut = text.slice(0, SUMMARY_CHARS);
   return `${cut.slice(0, cut.lastIndexOf(' ')) || cut}…`;
 }
@@ -2173,8 +2162,8 @@ ${adSlot('article-end', 'leaderboard')}
         datePublished: ldDate(a.date),
         articleSection: a.category || '',
         inLanguage: 'el',
-        // Ο συντάκτης με τη ΔΙΚΗ του σελίδα: έτσι η Google δένει τα
-        // άρθρα του μεταξύ τους αντί να βλέπει ένα όνομα-κείμενο.
+        // The author with THEIR OWN page: that ties their articles
+        // together for Google instead of leaving a name as plain text.
         author: a.author ? {
           '@type': 'Person',
           name: a.author,
@@ -2213,27 +2202,27 @@ const CATEGORIES = [
   ['Απόψεις',     []],   // μόνο με το χέρι — δεν αναγνωρίζεται από λέξεις
 ];
 
-// Η ρίζα γραμμένη με το χέρι, μεταφρασμένη σε κανόνα που ελέγχεται γρήγορα.
-// Γίνεται μία φορά στο ξεκίνημα, όχι σε κάθε τίτλο.
+// The handwritten stem, compiled into a rule that checks fast. Done once
+// at startup, not per title.
 const CATEGORY_RULES = CATEGORIES.map(([name, roots]) => [
   name,
   roots.map((raw) => ({
-    // «τεχνητη νοημοσυν» = δύο λέξεις στη σειρά· το σημάδι αφορά την τελευταία.
+    // Two words in sequence; the marker concerns the last one.
     parts: (raw[0] === '~' || raw[0] === '=' ? raw.slice(1) : raw).split(' '),
     pou: raw[0] === '~' ? 'mesa' : raw[0] === '=' ? 'oli' : 'arxi',
   })),
 ]);
 
-// Ταιριάζει η ρίζα κάπου μέσα στις λέξεις του τίτλου;
+// Does the stem appear inside any word of the title?
 function rizaTairiazei(words, { parts, pou }){
   for (let i = 0; i + parts.length <= words.length; i++) {
     let ok = true;
     for (let j = 0; j < parts.length; j++) {
       const w = words[i + j];
       const p = parts[j];
-      // Σε φράση πολλών λέξεων, οι ενδιάμεσες πιάνονται από την αρχή
-      // τους — αλλιώς η «Μέσης Ανατολής» δεν θα ταίριαζε ποτέ με το
-      // «μεσ ανατολ». Το σημάδι ισχύει μόνο για την τελευταία λέξη.
+      // In a multi-word phrase the middle words match on their start —
+      // otherwise "Μέσης Ανατολής" would never match "μεσ ανατολ". The
+      // marker applies to the last word only.
       const good = j < parts.length - 1 ? w.startsWith(p)
         : pou === 'oli' ? w === p
         : pou === 'mesa' ? w.includes(p)
@@ -2252,20 +2241,20 @@ const SPOTLIGHT_TOPICS = [
   ['Tech-Hub', 'tech', 'Τεχνολογία, ψηφιακά και τεχνητή νοημοσύνη'],
 ];
 
-// Πόσες θέσεις υπάρχουν. Και οι δύο είναι όρια σχεδίασης, όχι τεχνικά:
-// πέντε λωρίδες κάνουν την αρχική κατάλογο, τρίτη ενότητα σε πλαίσιο
-// κάνει την ουρά της σελίδας μακρύτερη από το κυρίως σώμα της.
+// How many slots exist. Both are design limits, not technical ones: five
+// rows turn the homepage into a catalogue, and a third framed section
+// makes the tail of the page longer than its body.
 const FEATURED_MAX = 4;
 const SPOTLIGHT_MAX = 2;
 
-// Ο υπότιτλος κάθε ενότητας σε πλαίσιο. Όποιο θέμα δεν γράφεται εδώ
-// βγαίνει χωρίς υπότιτλο — καλύτερα τίποτα παρά λάθος λόγια.
+// The subtitle of each framed section. A topic not listed here comes out
+// without one — better nothing than wrong words.
 const SPOTLIGHT_BLURB = Object.fromEntries(
   SPOTLIGHT_TOPICS.map(([name, , blurb]) => [name, blurb]),
 );
 
-// Τα 4 θέματα με λωρίδα. Ό,τι διάλεξε το διαχειριστικό, αλλιώς η λίστα
-// του κώδικα.
+// The 4 topics with a row. Whatever the admin chose, otherwise the list in
+// the code.
 function featuredTopics(){
   const picked = curation().featuredTopics;
   const names = Array.isArray(picked) && picked.length ? picked : FEATURED_TOPICS;
@@ -2304,14 +2293,14 @@ function moiazeiOnoma(s){
 function themaKeimeno(title, guest){
   const words = katWords(decode(title));
 
-  // 1) Ρητό όνομα από το feed — το ξέρουμε, το βγάζουμε.
+  // 1) An explicit name from the feed — we know it, we use it.
   if (guest) {
     const out = new Set(katWords(guest).filter((w) => w.length >= 4));
     if (out.size) return words.filter((w) => !out.has(w));
     return words;
   }
 
-  // 2) Βίντεο: μόνο «Όνομα: θέμα», και μόνο όταν μοιάζει με όνομα.
+  // 2) Video: only "Name: topic", and only when it looks like a name.
   const raw = decode(title);
   const at = raw.indexOf(':');
   if (at > 0 && at <= 45 && moiazeiOnoma(raw.slice(0, at))) {
@@ -2332,7 +2321,7 @@ function categoryUrl(name){
   return `category/${slugify(name)}.html`;
 }
 
-// Το διαβάζουμε μία φορά και το κρατάμε, όπως και τον καιρό.
+// Read once and cached, like the weather.
 let curationCache;
 function curation(){
   if (curationCache === undefined) curationCache = loadCuration();
@@ -2363,14 +2352,14 @@ function katigoriaApoDidimo(epId){
       const v = loadVideos().find((x) => x.id === key);
       if (!v) continue;                    // δεν είναι βίντεο· είναι επεισόδιο
       const ep = episodeTwin(v);
-      // Η δική του διόρθωση, αν υπάρχει, κερδίζει πάντα.
+      // Their own correction, where it exists, always wins.
       if (ep && !manual[ep.id]) didimoKatigories[ep.id] = manual[key];
     }
   }
   return didimoKatigories[epId];
 }
 
-// Το επεισόδιο ξέρει ποιος μίλησε — δες themaKeimeno().
+// The episode knows who spoke — see themaKeimeno().
 function episodeCategories(ep){
   const apoDidimo = katigoriaApoDidimo(ep.id);
   if (apoDidimo) return Array.isArray(apoDidimo) ? apoDidimo : [apoDidimo];
@@ -2378,9 +2367,9 @@ function episodeCategories(ep){
   return categoriesFor(ep.id, ep.title, ep.guest);
 }
 
-// Σύντομα ονόματα ΜΟΝΟ για την ετικέτα της κάρτας. Με κεφαλαία και αραιά
-// γράμματα, το «Συνεντεύξεις και πρόσωπα της επικαιρότητας» έπιανε τρεις
-// γραμμές πάνω από κάθε κάρτα. Η σελίδα της εκπομπής κρατάει το πλήρες.
+// Short names ONLY for the card label. In spaced capitals the full show
+// name took three lines above every card. The show page keeps the full
+// one.
 const SHOW_SHORT = {
   'Συνεντεύξεις και πρόσωπα της επικαιρότητας': 'Συνεντεύξεις',
   'Αναλύσεις στο Newshub.gr': 'Αναλύσεις',
@@ -2437,9 +2426,9 @@ const SHOW_ORDER = [
   'Τα μονοπάτια ιστορίας του Newshub.gr',
 ].map(slugify);
 
-// Εκπομπές που ΔΕΝ εμφανίζονται στις λίστες. Η σελίδα τους εξακολουθεί
-// να χτίζεται και οι παλιοί σύνδεσμοι δουλεύουν — απλώς δεν τη δείχνουμε
-// πουθενά. Έτσι, αν το αφεντικό το ξανασκεφτεί, είναι μία γραμμή πίσω.
+// Shows that do NOT appear in the lists. Their page is still built and old
+// links still work — we just do not show it anywhere. One line brings it
+// back.
 const SHOW_HIDDEN = ['Αγροτική επικαιρότητα'].map(slugify);
 
 function orderedShowKeys(groups){
@@ -2457,9 +2446,9 @@ function showLabel(name){
   return SHOW_SHORT[name] || showName(name);
 }
 
-// Κλειδί σύγκρισης τίτλων ανάμεσα σε YouTube και Buzzsprout: πεζά, χωρίς
-// τόνους, χωρίς σημεία στίξης, τα πρώτα 60 γράμματα. Αρκετά χαλαρό για να
-// αντέχει μικροδιαφορές, αρκετά σφιχτό για να μη μπερδεύει επεισόδια.
+// Title comparison key between YouTube and Buzzsprout: lowercase, no
+// accents, no punctuation, first 60 letters. Loose enough to survive
+// small differences, tight enough not to confuse episodes.
 function matchKey(text){
   return decode(text).toLowerCase()
     .normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -2483,13 +2472,13 @@ function pairs(){
     for (const [id, rec] of Object.entries((raw && raw.pairs) || {})) {
       if (!rec || typeof rec !== 'object') continue;
       pairData.byEpisode[id] = rec;
-      // Ο ανάποδος δρόμος: από το βίντεο στο επεισόδιο. Τον χρειάζεται
-      // η σελίδα βίντεο, που προσφέρει τον ήχο του διδύμου της.
+      // The reverse path: from video to episode. The video page needs it,
+      // since it offers the twin's audio.
       if (rec.video) pairData.byVideo[rec.video] = id;
     }
   } catch (err) {
-    // Χαλασμένο αρχείο δεν ρίχνει το build — αλλά ΔΕΝ περνάει απαρατήρητο:
-    // σιωπηλά θα έσβηνε κάθε διόρθωση που έγινε με το χέρι.
+    // A corrupt file does not bring the build down — but it does NOT pass
+    // unnoticed: it would silently erase every manual fix.
     if (err.code !== 'ENOENT') {
       console.warn('ΠΡΟΣΟΧΗ: το data/pairs.json δεν διαβάζεται —', err.message);
     }
@@ -2507,8 +2496,8 @@ function episodeKeys(ep){
   return [matchKey(ep.title), headKey(ep.title)];
 }
 
-// Σε ποια εκπομπή ανήκει ένα επεισόδιο — το μαθαίνουμε από το βίντεό του.
-// Κλειδί σύγκρισης ετικέτας: χωρίς δίεση, τόνους και σημεία στίξης.
+// Which show an episode belongs to — learned from its video. Comparison
+// key: no hash, no accents, no punctuation.
 function tagKey(s){
   return String(decode(s)).replace(/^#/, '').toLowerCase()
     .normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -2531,7 +2520,7 @@ function showFromTags(ep){
   for (const raw of ep.keywords) {
     const t = decode(raw).replace(/^#/, '').trim();
 
-    // Με ρητή σήμανση δεχόμαστε και τη σύντομη μορφή.
+    // With an explicit marker we also accept the short form.
     const marked = t.match(/^εκπομπ[ήη]\s*[:\-–]\s*(.+)$/i);
     if (marked) {
       const hit = showByTag.get(tagKey(marked[1]));
@@ -2539,7 +2528,7 @@ function showFromTags(ep){
       continue;
     }
 
-    // Χωρίς σήμανση, μόνο αν ταιριάζει ΟΛΟΚΛΗΡΟ το όνομα της λίστας.
+    // Without a marker, only a FULL playlist name match counts.
     for (const v of showByTag.values()) {
       if (tagKey(v) === tagKey(t)) return v;
     }
@@ -2549,7 +2538,7 @@ function showFromTags(ep){
 }
 
 function episodeShow(ep){
-  // Πρώτα ό,τι δήλωσε ο δημοσιογράφος, μετά ό,τι βρίσκουμε μόνοι μας.
+  // First what the journalist declared, then what we work out ourselves.
   const tagged = showFromTags(ep);
   if (tagged) return tagged;
 
@@ -2557,9 +2546,9 @@ function episodeShow(ep){
   return v ? v.show : '';
 }
 
-// Μία ομάδα ανά εκπομπή, με βίντεο ΚΑΙ επεισόδια μαζί. Όπου ένα βίντεο
-// έχει δίδυμο επεισόδιο, κρατάμε το επεισόδιο: έχει δική μας σελίδα, οπότε
-// ο επισκέπτης μένει εδώ αντί να φύγει στο YouTube.
+// One group per show, with videos AND episodes together. Where a video
+// has a twin episode we keep the episode: it has a page of ours, so the
+// visitor stays here instead of leaving for YouTube.
 function buildShows(videos, episodes){
   const groups = {};
   for (const v of videos) {
@@ -2599,25 +2588,25 @@ function showArtMap(){
   return artMap;
 }
 
-// Η εγγραφή μιας εκπομπής, ή null. Το matchKey ισοπεδώνει τόνους και
-// κεφαλαία, ώστε «Newshub.gr» και «newshub.gr» να πέφτουν μαζί.
+// A show record, or null. matchKey flattens accents and case so
+// "Newshub.gr" and "newshub.gr" land together.
 function showArtOf(name){
   const m = showArtMap();
   return m[matchKey(showName(name))] || m[matchKey(name)] || null;
 }
 
-// Η εικόνα της εκπομπής για το θολό υπόβαθρο της κορυφής. Κενό όταν
-// δεν υπάρχει αφίσα — τότε η σελίδα πέφτει στο εξώφυλλο επεισοδίου.
+// The show image for the blurred backdrop at the top. Empty when there is
+// no poster — the page then falls back to the episode cover.
 function showHeroSrc(name){
   const art = showArtOf(name);
   if (!art) return '';
-  // Απόλυτη διαδρομή για την ανεβασμένη: το /uploads/ σερβίρεται από τη
-  // ρίζα και διαβάζεται ίδια από κάθε βάθος.
+  // Absolute path for an uploaded one: /uploads/ is served from the root
+  // and reads the same at any depth.
   if (art.url) return art.url;
   return art.file ? `../shows/${art.file}-800.webp` : '';
 }
 
-// Έχει ο τίτλος ψηθεί μέσα στην εικόνα; Τότε δεν τον ξαναγράφουμε.
+// Is the title baked into the image? Then we do not print it again.
 function artIsTitled(name){
   const a = showArtOf(name);
   return !!(a && a.titled);
