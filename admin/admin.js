@@ -1,17 +1,17 @@
 
 'use strict';
 
-// Πόσα δείχνουμε με τη μία. Τα επεισόδια είναι 1.059 και τα βίντεο
-// 3.759: όλα μαζί στην οθόνη θα κρέμαγαν τον browser.
+// How many we show at once. There are 1,094 episodes and 3,823 videos:
+// all of them on screen would hang the browser.
 var PAGE = 24;
 
 var state = {
   curation: null,
   items: [],        // όλα τα διαθέσιμα, ενωμένα και ταξινομημένα
-  // Οι πηγές όπως ήρθαν. Τις κρατάμε για να ξαναφτιαχτεί η παραπάνω
-  // λίστα όταν αλλάξει άρθρο, χωρίς να ξανακατέβουν 5 MB δεδομένων.
+  // The sources as they arrived. Kept so the list above can be rebuilt
+  // when an article changes, without re-downloading 5 MB.
   raw: { episodes: [], videos: [], news: [] },
-  // Η ροή της αρχικής όπως τη βρήκε το τελευταίο build — δες ltFlow().
+  // The homepage flow as the last build left it — see ltFlow().
   flow: null,
   shown: PAGE,
   find: '',
@@ -20,7 +20,7 @@ var state = {
 };
 
 // ---------------------------------------------------------------------
-// Μικρά βοηθητικά
+// Small helpers
 // ---------------------------------------------------------------------
 
 function $(sel, root){ return (root || document).querySelector(sel); }
@@ -40,8 +40,8 @@ function esc(s){
     .replace(/"/g, '&quot;');
 }
 
-// Για την αναζήτηση: πετάει τόνους και σημεία στίξης, ώστε το «Συριγος»
-// να βρίσκει τον «Συρίγος».
+// For search: drops accents and punctuation, so "Συριγος" finds
+// "Συρίγος".
 function flat(s){
   return String(s == null ? '' : s).toLowerCase()
     .normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -55,8 +55,8 @@ function when(iso){
   return d.toLocaleDateString('el-GR', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
-// Το μήνυμα κατάστασης. Οι δημοσιογράφοι έρχονται από εργαλείο όπου η
-// αποθήκευση είναι ακαριαία — χωρίς σαφές μήνυμα θα ξαναπατούν το κουμπί.
+// The status message. Journalists come from a tool where saving is
+// instant; without a clear message they will press the button again.
 var stateEl = $('[data-state]');
 
 function say(text, kind){
@@ -72,8 +72,8 @@ var LOST = 'Η σύνδεσή σου έληξε ή χάθηκε το δίκτυ�
   + 'Άνοιξε το διαχειριστικό σε ΝΕΑ καρτέλα, συνδέσου, '
   + 'γύρνα εδώ και ξαναπάτα Αποθήκευση.';
 
-// Είναι όντως JSON αυτό που ήρθε; Αν όχι, μας απάντησε κάποιος άλλος —
-// σχεδόν πάντα η σελίδα σύνδεσης του Access.
+// Is what came back actually JSON? If not, someone else answered — almost
+// always the Access sign-in page.
 function readJson(res){
   var type = res.headers.get('Content-Type') || '';
   if (type.indexOf('json') === -1) throw new Error(LOST);
@@ -84,9 +84,9 @@ function readJson(res){
   });
 }
 
-// Το fetch απορρίπτει ΜΟΝΟ σε δικτυακή αποτυχία ή μπλοκαρισμένη
-// ανακατεύθυνση — ποτέ για 404 ή 500. Άρα εδώ φτάνει ακριβώς η
-// περίπτωση «δεν έφυγε το αίτημα».
+// fetch rejects ONLY on a network failure or a blocked redirect — never
+// for a 404 or a 500. So what lands here is exactly "the request never
+// left".
 function netFail(err){
   if (err instanceof TypeError) throw new Error(LOST);
   throw err;
@@ -101,12 +101,12 @@ function api(name, method, body){
 }
 
 // ---------------------------------------------------------------------
-// Τα διαθέσιμα κομμάτια περιεχομένου
+// Available content
 // ---------------------------------------------------------------------
 
-// Ενώνουμε επεισόδια, βίντεο και ειδήσεις σε ΜΙΑ λίστα με κοινή μορφή.
-// Ο συντάκτης δεν θέλει να σκεφτεί «σε ποια καρτέλα είναι αυτό που
-// ψάχνω» — θέλει να γράψει δυο λέξεις και να το βρει.
+// Episodes, videos and news merged into ONE list with a common shape. The
+// editor does not want to think about which tab something is in — they
+// want to type two words and find it.
 function normalize(episodes, videos, news, articles){
   var out = [];
 
@@ -114,7 +114,7 @@ function normalize(episodes, videos, news, articles){
     out.push({
       kind: 'podcast',
       id: e.id,
-      // Ο κωδικός είναι ό,τι καταλαβαίνει το build — δες sameItem().
+      // The id is what the build understands — see sameItem().
       ref: e.id,
       title: unent(e.headline || e.title),
       who: unent(e.guest),
@@ -139,7 +139,7 @@ function normalize(episodes, videos, news, articles){
     out.push({
       kind: 'news',
       id: a.id,
-      // Για τις ειδήσεις το build δέχεται τη διεύθυνση του newshub.gr.
+      // For news the build accepts the newshub.gr URL.
       ref: a.url,
       title: unent(a.title),
       who: unent(a.category),
@@ -153,7 +153,7 @@ function normalize(episodes, videos, news, articles){
     out.push({
       kind: 'article',
       id: a.id,
-      // Ό,τι καταλαβαίνει το build για δικό μας άρθρο — δες sameItem().
+      // What the build understands for one of our articles — see sameItem().
       ref: 'arthro/' + a.id + '.html',
       title: unent(a.title),
       who: unent(a.category),
@@ -173,8 +173,8 @@ function normalize(episodes, videos, news, articles){
     once.push(it);
   });
 
-  // Το κλειδί αναζήτησης υπολογίζεται ΜΙΑ φορά: αλλιώς το flat() θα
-  // έτρεχε πάνω σε 4.800 εγγραφές σε κάθε πάτημα πλήκτρου.
+  // The search key is computed ONCE: otherwise flat() would run over 4,800
+  // entries on every keystroke.
   once.forEach(function (it) { it.key = flat(it.title + ' ' + it.who); });
 
   return once;
@@ -186,12 +186,12 @@ function matches(it){
   return it.key.indexOf(state.find) !== -1;
 }
 
-// Ταιριάζει η εγγραφή με ό,τι είναι γραμμένο στο curation; Η ίδια
-// χαλαρή λογική με το build.js: δέχεται κωδικό ή διεύθυνση.
+// Does this item match what curation says? The same loose logic as
+// build.js: accepts an id or a URL.
 function isChosen(it, want){
   if (!want) return false;
 
-  // Ίδιο ξεφλούδισμα με το strip() της sameItem στο build.js.
+  // Same stripping as strip() in sameItem() in build.js.
   var strip = function (s){
     return String(s == null ? '' : s).trim().toLowerCase()
       .replace(/^https?:\/\/[^/]+\//, '')
@@ -220,8 +220,8 @@ function isChosen(it, want){
   return !!num && (t === num || t.indexOf(num + '-') === 0);
 }
 
-// Το αντίστροφο: ποια εγγραφή κρύβεται πίσω από έναν κωδικό ή σύνδεσμο
-// του curation. Το ίδιο ψάξιμο γινόταν γραμμένο στο χέρι σε τρία σημεία.
+// The reverse: which item hides behind an id or link in curation. The same
+// lookup used to be written out by hand in three places.
 function findItemByRef(ref){
   for (var i = 0; i < state.items.length; i++) {
     if (isChosen(state.items[i], ref)) return state.items[i];
@@ -230,7 +230,7 @@ function findItemByRef(ref){
 }
 
 // ---------------------------------------------------------------------
-// Ζωγραφική
+// Rendering
 // ---------------------------------------------------------------------
 
 var TAGS ={ podcast: 'Podcast', video: 'Βίντεο', news: 'Είδηση', article: 'Άρθρο' };
@@ -255,9 +255,9 @@ function heroPush(ref, hero){
   state.curation.featuredPrev = ist.slice(0, PROTO_VATHOS);
 }
 
-// Το πιο πρόσφατο του ιστορικού που ΥΠΑΡΧΕΙ ακόμα. Ένα άρθρο που έγινε
-// πρόχειρο ή σβήστηκε δεν είναι υποψήφιο: θα γυρνούσαμε την αρχική σε
-// σελίδα που δεν υπάρχει.
+// The most recent history entry that STILL exists. An article turned back
+// to draft or deleted is not a candidate: we would point the homepage at
+// a page that is not there.
 function heroPrevIndex(){
   var ist = heroIstoria();
   for (var i = 0; i < ist.length; i++) {
@@ -305,8 +305,8 @@ function nowActs(){
 
   if (!out) return '';
 
-  // Το όνομα ΜΕΣΑ στην οθόνη, όχι μόνο στο μήνυμα μετά το πάτημα: αν
-  // δεν φαίνεται τι θα γυρίσει, το κουμπί είναι λαχείο.
+  // The name goes ON screen, not only in the message after the click: if
+  // you cannot see what will come back, the button is a lottery.
   if (prev) out += '<p class="now-prev">Προηγούμενο: ' + esc(heroTitlos(prev)) + '</p>';
 
   return '<div class="now-acts">' + out + '</div>';
@@ -325,9 +325,9 @@ function drawNow(){
   var hit = findItemByRef(want);
 
   if (!hit) {
-    // Εδώ το κουμπί χρειάζεται ΠΙΟ πολύ από οπουδήποτε: η επιλογή
-    // δείχνει σε κάτι που δεν υπάρχει, και χωρίς αυτό ο συντάκτης
-    // δεν έχει πώς να καθαρίσει μια γραμμή που δεν βλέπει.
+    // The button is needed here more than anywhere: the pick points at
+    // something that does not exist, and without it the editor has no way
+    // to clear a row they cannot see.
     box.innerHTML = '<p class="muted">Επιλεγμένο: <code>' + esc(want) + '</code><br>'
       + 'Δεν το βρήκα στη λίστα — μπορεί να είναι παλιό ή σβησμένο. '
       + 'Το site θα γυρίσει στην αυτόματη επιλογή.</p>' + nowActs();
@@ -379,29 +379,28 @@ function markDirty(on){
 }
 
 // ---------------------------------------------------------------------
-// Ενέργειες
+// Actions
 // ---------------------------------------------------------------------
 
 function choose(ref){
-  // Ό,τι έσπρωξε η νέα επιλογή πάει στο ιστορικό — εκεί θα γυρίσει το
-  // πρωτοσέλιδο όταν βγει αυτή. Μαζί του και η εικόνα του, πριν τη
-  // σβήσουμε παρακάτω.
+  // Whatever the new pick displaced goes into history — that is where the
+  // hero returns when this one expires. Its image goes with it, before we
+  // clear it below.
   if (state.curation.featured && state.curation.featured !== ref) {
     heroPush(state.curation.featured, state.curation.featuredHero);
   }
 
   state.curation.featured = ref;
 
-  // Αν δεν υπάρχει ημερομηνία λήξης, βάζουμε μία εβδομάδα μπροστά.
-  // Ο έλεγχος στο admin-api.js θα απέρριπτε την αποθήκευση χωρίς αυτήν,
-  // και ο συντάκτης δεν έχει λόγο να μάθει γιατί.
+  // With no expiry date we set one a week out. admin-api.js would reject
+  // the save without it, and the editor has no reason to learn why.
   if (!state.curation.featuredUntil || new Date(state.curation.featuredUntil) < new Date()) {
     state.curation.featuredUntil = metaApo(7);
     $('[data-until]').value = state.curation.featuredUntil;
   }
 
-  // Η χειροκίνητη εικόνα ανήκει στην ΠΡΟΗΓΟΥΜΕΝΗ επιλογή. Αν μείνει,
-  // η καινούρια είδηση θα εμφανιστεί με ξένη φωτογραφία.
+  // A manual image belongs to the PREVIOUS pick. Left behind, the new
+  // story would appear with someone else's photo.
   if (state.curation.featuredHero) state.curation.featuredHero = '';
 
   drawNow();
@@ -474,8 +473,8 @@ var KATHARISMA = {
     },
   },
 
-  // Μόνο το θέμα που είναι ανοιχτό. Καθάρισμα και των δεκαπέντε μαζί
-  // δεν το ζήτησε κανείς, και θα ήταν το πιο ακριβό λάθος της οθόνης.
+  // Only the topic that is open. Clearing all fifteen at once was never
+  // asked for, and would be the most expensive mistake on the screen.
   themata: {
     poso: function (){
       if (!th.open) return 0;
