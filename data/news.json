@@ -1,5 +1,17 @@
 [
   {
+    "id": "norvigia-kyvernoepithesi-sta-systimata-toy-megalyteroy-promitheyti-fysikoy-aerioy-tis-eyropis",
+    "title": "Νορβηγία: Κυβερνοεπίθεση στα συστήματα του μεγαλύτερου προμηθευτή φυσικού αερίου της Ευρώπης",
+    "url": "https://www.newshub.gr/el/kosmos/norvigia-kyvernoepithesi-sta-systimata-toy-megalyteroy-promitheyti-fysikoy-aerioy-tis-eyropis",
+    "date": "2026-11-17T21:40:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/equinor_lng_mk.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/equinor_lng_mk.jpg",
+    "summary": "Ο νορβηγικός ενεργειακός όμιλος πετρελαίου και φυσικού αερίου Equinor ανακοίνωσε την Τρίτη (17/11) ότι εντόπισε κυβερνοεπίθεση σε εξέλιξη σε κάποια συστήματα...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "ypothesi-giorgoy-mazonaki-o-michanismos-thanatoy-einai-dedomenos-monodromos-i-apodosi-katigorion-leei-o-dikigoros-tis-oikogeneias",
     "title": "Υπόθεση Γιώργου Μαζωνάκη: «Ο μηχανισμός θανάτου είναι δεδομένος -Μονόδρομος η απόδοση κατηγοριών» λέει ο δικηγόρος της οικογένειας",
     "url": "https://www.newshub.gr/el/ellada/ypothesi-giorgoy-mazonaki-o-michanismos-thanatoy-einai-dedomenos-monodromos-i-apodosi-katigorion-leei-o-dikigoros-tis-oikogeneias",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/mazonakisgiorgos.jpg",
     "summary": "Σε πλήρη εξέλιξη βρίσκεται η υπόθεση του θανάτου του Γιώργου Μαζωνάκη πριν από δύο και πλέον μήνες στο ιατρείο της οδού Καρνεάδου στο Κολωνάκι.\r\n\r\nΜετά το τε...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "synelifthisan-dyo-15chronoi-os-diakinites-metanaston-stin-palaiochora",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/7162824-1024x683.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/7162824-1024x683.jpg",
     "summary": "Στην ανάγκη συμμετοχής της Ευρώπης στις διαπραγματεύσεις για τον τερματισμό του πολέμου στην Ουκρανία, στις εξελίξεις στη Μέση Ανατολή, στην οικονομική ανθεκ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "tragodia-stin-toyrkia-tesseris-nekroi-apo-ti-syntrivi-stratiotikoy-elikopteroy-vinteo",
-    "title": "Τραγωδία στην Τουρκία: Τέσσερις νεκροί από τη συντριβή στρατιωτικού ελικοπτέρου (βίντεο)",
-    "url": "https://www.newshub.gr/el/kosmos/tragodia-stin-toyrkia-tesseris-nekroi-apo-ti-syntrivi-stratiotikoy-elikopteroy-vinteo",
-    "date": "2026-11-12T18:47:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/maketa-malatya.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/maketa-malatya.jpg",
-    "summary": "Τέσσερις στρατιωτικοί έχασαν τη ζωή τους από τη συντριβή στρατιωτικού ελικοπτέρου τύπου S-70 στην επαρχία Μαλάτεια, στην ανατολική Τουρκία, το απόγευμα της Π...",
     "author": null,
     "featured": false
   },
