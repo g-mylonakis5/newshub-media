@@ -6790,12 +6790,9 @@ ${near}
     url: `guest/${slugify(name)}.html`,
   });
 }
-// Το βίντεο-δίδυμο ενός επεισοδίου στο YouTube, αν υπάρχει. Το βρίσκουμε
-// με τον ίδιο κατάλογο τίτλων που δίνει και την εκπομπή.
-// Πόσα βίντεο έχει κάθε εκπομπή. Το χρειαζόμαστε επειδή ένα βίντεο
-// μπορεί να ανήκει σε πολλές λίστες — π.χ. και στις «Αναλύσεις» (310)
-// και στις «Συνεντεύξεις» (1367). Η μικρότερη λίστα είναι η πιο ειδική,
-// και αυτή θέλουμε να δείχνουμε ως εκπομπή του.
+// How many videos each show has. Needed because a video can belong to
+// several playlists — the smaller playlist is the more specific one, and
+// that is the show we want to display.
 let showSize;
 function sizeOf(show){
   if (!showSize) {
@@ -6805,14 +6802,14 @@ function sizeOf(show){
   return showSize[show] || 0;
 }
 
-// Από δύο εγγραφές του ίδιου βίντεο, κρατάμε αυτή με την ειδικότερη εκπομπή.
+// Of two entries for the same video, keep the one with the more specific show.
 function moreSpecific(a, b){
   if (!a) return b;
   if (!b) return a;
   return sizeOf(b.show) < sizeOf(a.show) ? b : a;
 }
 
-// Ο κατάλογος των βίντεο, με δύο κλειδιά: πλήρης τίτλος και σκέτο θέμα.
+// Video catalogue, keyed two ways: full title and bare topic.
 let videoIndex;
 function videoTwin(ep){
   if (!videoIndex) {
@@ -6826,40 +6823,39 @@ function videoTwin(ep){
     }
   }
 
-  // Η απάντηση του συντάκτη, πρώτη.
+  // The editor's answer comes first.
   const fix = pairOf(ep);
   if (fix && fix.novideo) return null;
   if (fix && fix.video) {
     const v = videoIndex.id[fix.video];
     if (v) return v;
-    // Διαλεγμένο βίντεο που δεν υπάρχει στον κατάλογο: σβήστηκε από το
-    // YouTube, ή το videos.json δεν έχει ξανακατέβει ακόμα. Λέγεται —
-    // αλλιώς ο συντάκτης βλέπει το επεισόδιο χωρίς βίντεο και νομίζει
-    // ότι δεν αποθηκεύτηκε η διόρθωσή του.
+    // A chosen video missing from the catalogue: deleted on YouTube, or
+    // videos.json has not been re-fetched. Said out loud — otherwise the
+    // editor sees the episode without video and thinks their fix was not
+    // saved.
     console.warn(`ΠΡΟΣΟΧΗ: το ${ep.id} δείχνει στο βίντεο ${fix.video}, `
       + 'που δεν υπάρχει στο data/videos.json');
-    // Δεν γυρνάμε στο μάντεμα: το episodeKeys έχει ήδη σωπάσει γι' αυτό
-    // το επεισόδιο, οπότε ένα βίντεο από τον τίτλο θα εμφανιζόταν ΚΑΙ
-    // εδώ ΚΑΙ μόνο του στις κατηγορίες.
+    // We do not fall back to guessing: episodeKeys has already gone quiet
+    // for this episode, so a title match would show up here AND on its own
+    // in the categories.
     return null;
   }
 
   return videoIndex.full[matchKey(ep.title)]
       || videoIndex.head[headKey(ep.title)]
-      // Το ίδιο ταίριασμα με όνομα και ημερομηνία, ανάποδα. Χωρίς
-      // αυτό, η ημερομηνία προβολής (airDate) δεν έβρισκε το βίντεο
-      // και το επεισόδιο κρατούσε την ώρα που ανέβηκε στο Buzzsprout:
-      // η ΙΔΙΑ συνέντευξη έβγαινε «σήμερα 20:00» στη ροή και «4 Νοε»
-      // στη λωρίδα της εκπομπής.
+      // The same name-and-date match, reversed. Without it the broadcast
+      // date never found the video and the episode kept its Buzzsprout
+      // upload time: the same interview showed as "today 20:00" in the
+      // flow and "4 Nov" in the show row.
       || videoApoOnomaTwin(ep)
       || null;
 }
 
-// Ο ανάποδος δρόμος του twinApoOnoma: από επεισόδιο βρες το βίντεο.
+// The reverse of twinApoOnoma: from an episode, find the video.
 //
-// Χτίζεται περνώντας ΜΙΑ φορά όλα τα βίντεο από τον ίδιο κανόνα —
-// όχι γράφοντάς τον δεύτερη φορά ανάποδα. Δύο αντίγραφα ενός κανόνα
-// αποκλίνουν πάντα· απλώς δεν ξέρεις πότε.
+// Built by running every video through the same rule ONCE, rather than
+// writing the rule a second time backwards. Two copies of a rule always
+// drift.
 let videoApoOnoma;
 function videoApoOnomaTwin(ep){
   if (!videoApoOnoma) {
@@ -6872,12 +6868,12 @@ function videoApoOnomaTwin(ep){
   return videoApoOnoma[ep.id] || null;
 }
 
-// Ευρετήρια για τις προτάσεις: ανά εκπομπή και ανά θέμα. Φτιάχνονται
-// μία φορά — αλλιώς κάθε μία από τις 1.053 σελίδες θα διάβαζε όλον τον
-// κατάλογο για να βρει τέσσερα επεισόδια.
+// Indexes for the suggestions: by show and by topic. Built once —
+// otherwise each of the 1,094 pages would scan the whole catalogue to
+// find four episodes.
 //
-// Ευρετήριο ανά καλεσμένο δεν κρατάμε: ο καλεσμένος έχει δική του
-// σελίδα με όλες τις εμφανίσεις του, και το πάνελ στο πλάι οδηγεί εκεί.
+// No guest index: a guest has their own page with every appearance, and
+// the side panel leads there.
 let relatedIndex = { byShow: {}, byCategory: {}, all: [] };
 function indexRelated(episodes){
   relatedIndex = { byShow: {}, byCategory: {}, all: episodes };
@@ -6891,12 +6887,11 @@ function indexRelated(episodes){
   }
 }
 
-// ΕΝΑ κριτήριο, και φαίνεται στον τίτλο της ενότητας.
+// ONE criterion, and the section heading says which.
 //
-// Πριν ανακάτευε τρία — ίδιος καλεσμένος, μετά ίδια εκπομπή, μετά
-// πρόσφατα — οπότε κάτω από το «Επόμενο στις Αναλύσεις» έβγαιναν
-// επεισόδια άλλης εκπομπής. Τώρα: ίδια εκπομπή όπου την ξέρουμε,
-// αλλιώς ίδιο θέμα· και ό,τι διαλέξαμε το λέει η επικεφαλίδα.
+// It used to mix three — same guest, then same show, then recent — so
+// under "Επόμενο στις Αναλύσεις" episodes from another show appeared.
+// Now: same show where we know it, otherwise same topic.
 function relatedEpisodes(ep, max = 4){
   const show = episodeShow(ep);
 
@@ -6918,12 +6913,9 @@ function relatedEpisodes(ep, max = 4){
   return { by: '', label: '', list: [] };
 }
 
-// Το τετράγωνο του καλεσμένου, πάνω αριστερά. Πορτρέτα δεν έχουμε, οπότε
-// δείχνουμε το εξώφυλλο του επεισοδίου — η ίδια εφεδρεία με την ενότητα
-// «πρόσωπα» της αρχικής.
-// Πορτρέτα καλεσμένων δεν έχουμε για κανέναν από τους 435, και το
-// εξώφυλλο του επεισοδίου είναι αφίσα, όχι πρόσωπο. Αντί γι' αυτό:
-// αρχικά πάνω σε σταθερό χρώμα — ίδιος άνθρωπος, ίδιο χρώμα παντού.
+// Guest square, top left. We have no portraits for any of the 435 guests,
+// and an episode cover is a poster, not a face. Instead: initials on a
+// fixed colour — same person, same colour everywhere.
 function initials(name){
   return String(name).trim().split(/\s+/).slice(0, 2)
     .map((w) => w[0] || '')
@@ -6931,8 +6923,8 @@ function initials(name){
     .toUpperCase();
 }
 
-// Το χρώμα βγαίνει από το ίδιο το όνομα, άρα δεν χρειάζεται να το
-// αποθηκεύσουμε πουθενά και δεν αλλάζει ποτέ μόνο του.
+// The colour comes from the name itself, so nothing needs storing and it
+// never changes on its own.
 function colorFor(name){
   let hue = 0;
   for (let i = 0; i < name.length; i++) hue = (hue * 31 + name.charCodeAt(i)) % 360;
@@ -6944,9 +6936,9 @@ function avatar(name, extra = ''){
   return `<span class="${cls}" style="background:${colorFor(name)}" aria-hidden="true">${esc(initials(name))}</span>`;
 }
 
-// Το ίδιο πάνελ το χρειάζονται και τα επεισόδια και τα βίντεο, οπότε
-// γράφεται μία φορά. Βιογραφικά δεν έχουμε για κανέναν — στη θέση τους
-// μπαίνει κάτι που ξέρουμε με βεβαιότητα: πόσες φορές έχει μιλήσει εδώ.
+// Both episodes and videos need this panel, so it is written once. We
+// have no biographies — in their place goes something we know for
+// certain: how many times this person has spoken here.
 function guestPanel(name, href, count = 0, last = ''){
   if (!name) return '';
 
@@ -6970,10 +6962,7 @@ function guestPanel(name, href, count = 0, last = ''){
     : `      <div class="gbox">\n${inner}\n      </div>`;
 }
 
-// Για επεισόδιο: ο καλεσμένος είναι γραμμένος στο ίδιο το πεδίο.
-
-// Banner εκπομπής στην πλαϊνή στήλη του player / επεισοδίου.
-// Οδηγεί κατευθείαν στη σελίδα της εκπομπής.
+// Show banner in the side column of the player / episode page.
 function showBannerBox(show, depth = 1){
   const targetShow = show || 'Συνεντεύξεις και πρόσωπα της επικαιρότητας';
   const up = depth === 0 ? '' : '../';
@@ -7002,9 +6991,9 @@ function guestBox(ep, depth = 1){
   return guestPanel(g.name, guestHref(ep, depth), g.count, g.last);
 }
 
-// Για βίντεο: δεν υπάρχει πεδίο καλεσμένου, οπότε ψάχνουμε στον τίτλο
-// ποιο από τα 435 γνωστά ονόματα αναφέρεται. Η φωτογραφία έρχεται από τα
-// επεισόδια του ίδιου ανθρώπου, όχι από τη μικρογραφία του βίντεο.
+// For a video: there is no guest field, so we look for one of the known
+// names in the title. The photo comes from that person's episodes, not
+// from the video thumbnail.
 function videoGuestBox(v, depth = 1){
   const g = videoGuest(v);
   if (!g) return '';
@@ -7013,11 +7002,11 @@ function videoGuestBox(v, depth = 1){
   return guestPanel(g.name, `${up}guest/${g.slug}.html`, g.count, g.last);
 }
 
-// Ποιος μιλάει, αμέσως κάτω από τον τίτλο.
+// Who is speaking, straight under the title.
 //
-// Το πάνελ στο πλάι το λέει κι αυτό, αλλά σε στενή οθόνη πέφτει κάτω
-// από όλο το κείμενο — οπότε στο κινητό ο αναγνώστης δεν μάθαινε ποιος
-// είναι ο καλεσμένος παρά αφού τελείωνε η σελίδα.
+// The side panel says it too, but on a narrow screen it falls below all
+// the text — so on mobile the reader learned the guest only after the
+// page ended.
 function guestLine(ep, depth = 1){
   const name = guestOf(ep);
   if (!name) return '';
