@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-prasino-fos-gia-1-2-ekat-eyro-sto-eaki-nea-pisina-25-metron-kai-anavathmisi-tis-yfistamenis",
+    "title": "Ηράκλειο: «Πράσινο φως» για 1,2 εκατ. ευρώ στο ΕΑΚΗ – Νέα πισίνα 25 μέτρων και αναβάθμιση της υφιστάμενης",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-prasino-fos-gia-1-2-ekat-eyro-sto-eaki-nea-pisina-25-metron-kai-anavathmisi-tis-yfistamenis",
+    "date": "2026-11-17T07:10:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/kolymbeterio-erakleio-apo-psela.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/kolymbeterio-erakleio-apo-psela.jpg",
+    "summary": "Σημαντική εξέλιξη για τις κολυμβητικές εγκαταστάσεις του Εθνικού Αθλητικού Κέντρου Ηρακλείου (ΕΑΚΗ), καθώς εγκρίθηκε η χρηματοδότηση ύψους 1.200.000 ευρώ για...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "kalesma-sti-sygkentrosi-apo-tin-enosi-giatron-esy-gia-tin-epeteio-toy-polytechneioy",
     "title": "Κάλεσμα στη συγκέντρωση από την Ένωση γιατρών ΕΣΥ για την επέτειο του Πολυτεχνείου",
     "url": "https://www.newshub.gr/el/kriti/kalesma-sti-sygkentrosi-apo-tin-enosi-giatron-esy-gia-tin-epeteio-toy-polytechneioy",
@@ -169,7 +181,7 @@
       "url": "https://www.newshub.gr/el/christoforos-papadakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "mystiriodes-radiosima-pros-ti-gi-apo-spanio-astriko-systima",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/dik.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/dik.jpg",
     "summary": "Ένοχο κατά πλειοψηφία κήρυξε σήμερα το Μικτό Ορκωτό Εφετείο Λάρισας κατηγορούμενο για τον βιασμό της ανιψιάς του στη Μαγνησία, καταδικάζοντάς τον σε κάθειρξη...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "theodorikakos-i-asfalis-kai-ischyri-ellada-perna-apo-tin-paragogiki-anasygkrotisi",
-    "title": "Θεοδωρικάκος: Η ασφαλής και ισχυρή Ελλάδα περνά από την παραγωγική ανασυγκρότηση",
-    "url": "https://www.newshub.gr/el/oikonomia/theodorikakos-i-asfalis-kai-ischyri-ellada-perna-apo-tin-paragogiki-anasygkrotisi",
-    "date": "2026-11-11T20:40:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/11-11/theod.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/11-11/theod.jpg",
-    "summary": "Η δημιουργία περισσότερων και καλύτερα αμειβόμενων θέσεων εργασίας, η ενίσχυση της ελληνικής βιομηχανίας και η παραγωγική ανασυγκρότηση της περιφέρειας αποτε...",
     "author": null,
     "featured": false
   },
