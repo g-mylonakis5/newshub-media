@@ -62,9 +62,9 @@
   "latest": [],
   "mustRead": [
     "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-paraskeyis-146",
-    "https://www.newshub.gr/el/ellada/marc-stis-14-7-monades-to-provadisma-tis-nd-i-elas-3-3-monades-mprosta-apo-to-pasok",
-    "https://www.newshub.gr/el/kriti/kriti-oi-ellinikes-perifereies-enonoyn-ti-foni-toys-gia-ta-proionta-proeleysis-kai-ti-nea-kgp-2028-2034",
-    "https://www.newshub.gr/el/kriti/epicheirisi-aposymforisi-gia-tis-fylakes-kai-stin-kriti-i-eikona-sta-sofronistika-katastimata-toy-nisioy"
+    "https://www.newshub.gr/el/oikonomia/i-oikonomia-anaptyssetai-alla-ta-noikokyria-chanoyn-eisodima",
+    "https://www.newshub.gr/el/kriti/stathera-ta-dimotika-teli-sto-irakleio-to-2027-ti-egkrithike-apo-to-dimotiko-symvoylio",
+    "https://www.newshub.gr/el/kriti/irakleio-prasino-fos-gia-1-2-ekat-eyro-sto-eaki-nea-pisina-25-metron-kai-anavathmisi-tis-yfistamenis"
   ],
   "categories": {
     "Buzzsprout-20066192": [
@@ -92,9 +92,10 @@
   "featuredHero": "",
   "pinnedAt": {
     "mustRead": {
-      "https://www.newshub.gr/el/ellada/marc-stis-14-7-monades-to-provadisma-tis-nd-i-elas-3-3-monades-mprosta-apo-to-pasok": "2026-11-12T22:39:24.539Z",
-      "https://www.newshub.gr/el/kriti/kriti-oi-ellinikes-perifereies-enonoyn-ti-foni-toys-gia-ta-proionta-proeleysis-kai-ti-nea-kgp-2028-2034": "2026-11-12T13:37:05.799Z",
-      "https://www.newshub.gr/el/kriti/epicheirisi-aposymforisi-gia-tis-fylakes-kai-stin-kriti-i-eikona-sta-sofronistika-katastimata-toy-nisioy": "2026-11-12T13:37:05.799Z"
+      "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-paraskeyis-146": "2026-11-17T08:32:09.948Z",
+      "https://www.newshub.gr/el/oikonomia/i-oikonomia-anaptyssetai-alla-ta-noikokyria-chanoyn-eisodima": "2026-11-17T08:32:09.948Z",
+      "https://www.newshub.gr/el/kriti/stathera-ta-dimotika-teli-sto-irakleio-to-2027-ti-egkrithike-apo-to-dimotiko-symvoylio": "2026-11-17T08:32:09.948Z",
+      "https://www.newshub.gr/el/kriti/irakleio-prasino-fos-gia-1-2-ekat-eyro-sto-eaki-nea-pisina-25-metron-kai-anavathmisi-tis-yfistamenis": "2026-11-17T08:32:09.948Z"
     },
     "opinions": {
       "https://www.newshub.gr/el/apopseis/i-moysiki-einai-oikoymeniki-den-gnorizei-teichi-kai-synora": "2026-11-15T12:55:14.421Z",
@@ -126,6 +127,13 @@
     "opinions": {
       "https://www.newshub.gr/el/apopseis/stoys-dromoys-ergazomenoi-kai-neolaia-tis-italias-enantia-ston-polemo-kai-tin-akriveia": "2026-11-15T11:38:54.193Z",
       "https://www.newshub.gr/el/apopseis/31-oktovrioy-giorti-toy-chalooyin": "2026-11-15T11:39:09.809Z"
+    },
+    "mustRead": {
+      "https://www.newshub.gr/el/ellada/marc-stis-14-7-monades-to-provadisma-tis-nd-i-elas-3-3-monades-mprosta-apo-to-pasok": "2026-11-17T08:31:27.715Z",
+      "https://www.newshub.gr/el/kriti/kriti-oi-ellinikes-perifereies-enonoyn-ti-foni-toys-gia-ta-proionta-proeleysis-kai-ti-nea-kgp-2028-2034": "2026-11-17T08:31:29.065Z",
+      "https://www.newshub.gr/el/kriti/epicheirisi-aposymforisi-gia-tis-fylakes-kai-stin-kriti-i-eikona-sta-sofronistika-katastimata-toy-nisioy": "2026-11-17T08:31:30.681Z",
+      "https://www.newshub.gr/el/kriti/palaiochora-entopistikan-33-metanastes-sti-vrachodi-periochi-toy-krioy": "2026-11-17T08:31:31.915Z",
+      "https://www.newshub.gr/el/ellada/mazonakis-porisma-apth-i-propofoli-eythynetai-gia-ton-thanato-toy-tragoydisti-pos-tha-mporoyse-na-eiche-sothei": "2026-11-17T08:31:41.365Z"
     }
   }
 }
