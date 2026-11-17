@@ -1,5 +1,17 @@
 [
   {
+    "id": "mark-royte-themito-to-oykraniko-chtypima-sti-gefyra-tis-krimaias-einai-simantiko-to-oti-amynetai-to-kievo",
+    "title": "Μαρκ Ρούτε: Θεμιτό το ουκρανικό χτύπημα στη γέφυρα της Κριμαίας – Είναι σημαντικό το ότι αμύνεται το Κίεβο",
+    "url": "https://www.newshub.gr/el/geopolitiki/mark-royte-themito-to-oykraniko-chtypima-sti-gefyra-tis-krimaias-einai-simantiko-to-oti-amynetai-to-kievo",
+    "date": "2026-11-17T19:49:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/route-rutte.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/route-rutte.jpg",
+    "summary": "Ο γενικός γραμματέας του ΝΑΤΟ Μαρκ Ρούτε και ο βρετανός υπουργός Άμυνας Γουές Στρίτινγκ δήλωσαν την Τρίτη (17/11) πως η ουκρανική επίθεση στη ρωσικής κατασκε...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "epeisodia-sti-leoforo-alexandras-meta-tin-poreia-toy-polytechneioy-dyo-traymaties-prosagoges-mesa-se-stathmo-toy-metro",
     "title": "Επεισόδια στη Λεωφόρο Αλεξάνδρας μετά την πορεία του Πολυτεχνείου -Δύο τραυματίες, προσαγωγές μέσα σε σταθμό του μετρό",
     "url": "https://www.newshub.gr/el/ellada/epeisodia-sti-leoforo-alexandras-meta-tin-poreia-toy-polytechneioy-dyo-traymaties-prosagoges-mesa-se-stathmo-toy-metro",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/epeisodia.jpg",
     "summary": "Επεισόδια μικρής έκτασης σημειώθηκαν στη Λεωφόρο Αλεξάνδρας, μετά την ολοκλήρωση της πορείας για την 53η επέτειο της εξέγερσης του Πολυτεχνείου.\r\n\r\nΑπό τα επ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "thessaloniki-poini-fylakisis-trion-chronon-se-25chrono-gia-diarroi-prosopikon-synomilion-apokalypse-ton-sexoyaliko-prosanatolismo-24chronoy",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/kill-jockey.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/kill-jockey.jpg",
     "summary": "Η Νέα Κινηματογραφική Λέσχη Ηρακλείου (ΝέΚΛΗ) υποδέχεται τη νέα κινηματογραφική σεζόν 2026-2027 και προσκαλεί το σινεφίλ κοινό της πόλης στην πρώτη επίσημη π...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "thessaloniki-profylakistea-archigika-meli-toy-kyklomatos-oi-apologies-gia-ti-forodiafygi-mamoyth-me-tis-etairies-vitrines-toys-achyranthropoys",
-    "title": "Θεσσαλονίκη: Προφυλακιστέα αρχηγικά μέλη του κυκλώματος - Οι απολογίες για τη φοροδιαφυγή-μαμούθ με τις εταιρίες-βιτρίνες & τους αχυράνθρωπους",
-    "url": "https://www.newshub.gr/el/ellada/thessaloniki-profylakistea-archigika-meli-toy-kyklomatos-oi-apologies-gia-ti-forodiafygi-mamoyth-me-tis-etairies-vitrines-toys-achyranthropoys",
-    "date": "2026-11-12T17:34:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/screenshot-2026-11-12-193014.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/screenshot-2026-11-12-193014.jpg",
-    "summary": "Ολοκληρώνεται ο κύκλος των απολογιών των κατηγορουμένων του κυκλώματος με τους &ldquo;αχυρανθρώπους&rdquo; που κατηγορείται για φοροδιαφυγή-&ldquo;μαμούθ&r...",
     "author": null,
     "featured": false
   },
