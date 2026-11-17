@@ -13,8 +13,9 @@ const WRITABLE = new Set([
   'ads',             // οι διαφημίσεις των συνεργατών
 ]);
 
-// Αρχεία που διαβάζονται αλλά ΔΕΝ γράφονται: τα παράγουν τα fetch-*.js
-// από τις πηγές, και ό,τι γράψουμε εδώ θα χανόταν στο επόμενο τρέξιμο.
+// Files that are read but NOT written: the fetch-*.js scripts produce
+// them from the sources, and anything written here would be lost on the
+// next run.
 const READABLE = new Set([
   ...WRITABLE,
   'episodes',
@@ -27,12 +28,12 @@ function isReadable(name){ return READABLE.has(name); }
 function isWritable(name){ return WRITABLE.has(name); }
 
 // ---------------------------------------------------------------------
-// Έλεγχοι περιεχομένου
+// Content checks
 // ---------------------------------------------------------------------
 
-// Το JSON που φτάνει από τον browser ΔΕΝ εμπιστευόμαστε ότι είναι σωστό.
-// Ένα χαλασμένο curation.json ρίχνει ολόκληρο το build, και το λάθος
-// φαίνεται μόνο όταν το site δεν ανανεωθεί.
+// JSON arriving from the browser is NOT trusted to be correct. A broken
+// curation.json takes the whole build down, and the mistake only shows
+// when the site fails to refresh.
 function validate(name, data){
   if (data === null || typeof data !== 'object') {
     return 'Το περιεχόμενο πρέπει να είναι αντικείμενο ή λίστα.';
@@ -41,9 +42,9 @@ function validate(name, data){
   if (name === 'curation') {
     if (Array.isArray(data)) return 'Το curation πρέπει να είναι αντικείμενο.';
 
-    // Η δικλείδα του curation.json: χειροκίνητη επιλογή ΧΩΡΙΣ ημερομηνία
-    // λήξης παγώνει την αρχική για πάντα, και κανείς δεν το προσέχει
-    // μέχρι να παραπονεθεί κάποιος ότι «το site κόλλησε».
+    // curation.json's safety catch: a manual pick WITHOUT an expiry
+    // freezes the homepage forever, and nobody notices until someone
+    // complains that "the site is stuck".
     if (data.featured && !data.featuredUntil) {
       return 'Η χειροκίνητη επιλογή πρωτοσέλιδου χρειάζεται ημερομηνία λήξης.';
     }
@@ -77,8 +78,8 @@ function validate(name, data){
       }
     }
 
-    // Η σειρά των Απόψεων. Ίδιος έλεγχος, ίδιος λόγος: ένα αντικείμενο
-    // εδώ μέσα θα έσκαγε στο sameItem() και θα έριχνε το build.
+    // The Opinion order. Same check, same reason: an object in here
+    // would throw in sameItem() and take the build down.
     if (data.opinions != null) {
       if (!Array.isArray(data.opinions)) {
         return 'Οι απόψεις πρέπει να είναι λίστα.';
@@ -88,9 +89,9 @@ function validate(name, data){
       }
     }
 
-    // Τα θέματα της αρχικής: ονόματα κατηγοριών, σε κείμενο. Ένα
-    // αντικείμενο εδώ μέσα θα περνούσε από το slugify() του build και
-    // θα έβγαζε λωρίδα με τίτλο «[object Object]».
+    // The homepage topics: category names, as text. An object in here
+    // would pass through the build's slugify() and produce a row titled
+    // "[object Object]".
     for (const key of ['featuredTopics', 'spotlightTopics']) {
       if (data[key] == null) continue;
       if (!Array.isArray(data[key])) return `Το ${key} πρέπει να είναι λίστα.`;
@@ -99,9 +100,9 @@ function validate(name, data){
       }
     }
 
-    // Τι καρφιτσώθηκε σε κάθε θέμα: «slug θέματος» -> λίστα κωδικών.
-    // Ίδιος έλεγχος με τα καρφιτσωμένα της ροής — ένα αντικείμενο εδώ
-    // μέσα θα έσκαγε στο sameItem() και θα έριχνε ολόκληρο το build.
+    // What is pinned under each topic: "topic slug" -> list of ids.
+    // Same check as the flow's pins — an object in here would throw in
+    // sameItem() and take the whole build down.
     if (data.categoryPicks != null) {
       if (typeof data.categoryPicks !== 'object' || Array.isArray(data.categoryPicks)) {
         return 'Το categoryPicks πρέπει να είναι αντικείμενο «θέμα: λίστα».';
@@ -114,9 +115,9 @@ function validate(name, data){
       }
     }
 
-    // Ό,τι βγήκε με το ✕: «λίστα» -> { κωδικός: πότε }. Η ημερομηνία
-    // είναι ο λόγος που υπάρχει το πεδίο — χωρίς αυτή το «όχι αυτό»
-    // θα κρατούσε για πάντα. Δες kryfa() στο build.js.
+    // What ✕ removed: "list" -> { id: when }. The date is the reason the
+    // field exists — without it a "not this" would hold forever. See
+    // kryfa() in build.js.
     if (data.hidden != null) {
       if (typeof data.hidden !== 'object' || Array.isArray(data.hidden)) {
         return 'Το hidden πρέπει να είναι αντικείμενο «λίστα: κρυμμένα».';
@@ -141,9 +142,9 @@ function validate(name, data){
       if (!Array.isArray(data.standard)) {
         return 'Οι στάνταρ φωτογραφίες πρέπει να είναι λίστα.';
       }
-      // Ονόματα αρχείων, τίποτα άλλο. Μια διαδρομή με «/» ή «..» εδώ
-      // δεν σπάει τίποτα σήμερα, αλλά η λίστα διαβάζεται για να βρεθεί
-      // αρχείο στο R2 — και δεν αφήνουμε να μπει τέτοιο σχήμα.
+      // Filenames, nothing else. A path with "/" or ".." in here breaks
+      // nothing today, but the list is read to find a file in R2 — and
+      // we do not let that shape in.
       for (const n of data.standard) {
         if (typeof n !== 'string' || !/^[\w.-]+$/.test(n)) {
           return 'Κάθε στάνταρ φωτογραφία πρέπει να είναι σκέτο όνομα αρχείου.';
@@ -227,9 +228,9 @@ function validate(name, data){
         return `Η διαφήμιση ${who} έχει τη μία μόνο διάσταση — χρειάζονται και οι δύο.`;
       }
 
-      // Ο ρυθμός εναλλαγής. Κάτω από 3 δευτερόλεπτα δεν προλαβαίνει να
-      // διαβαστεί τηλέφωνο ή διεύθυνση· πάνω από 20 δεν είναι πια
-      // slideshow.
+      // The slideshow interval. Under 3 seconds there is no time to read
+      // a phone number or an address; over 20 it is not a slideshow any
+      // more.
       if (a.every !== undefined) {
         const every = Number(a.every);
         if (!Number.isFinite(every) || every < 3 || every > 20) {
@@ -237,7 +238,7 @@ function validate(name, data){
         }
       }
 
-      // Ο σύνδεσμος φεύγει έξω, άρα μόνο http(s) — ποτέ javascript:
+      // The link goes out, so http(s) only — never javascript:
       if (typeof a.url !== 'string' || !/^https?:\/\/[^\s"']+$/.test(a.url)) {
         return `Ο σύνδεσμος ${who} πρέπει να ξεκινά με http:// ή https://`;
       }
@@ -286,8 +287,8 @@ function validate(name, data){
   if (name === 'show-art') {
     if (Array.isArray(data)) return 'Οι αφίσες πρέπει να είναι αντικείμενο.';
 
-    // Το build διαβάζει ΜΟΝΟ το data.art. Αν χαθεί, δεν σκάει τίποτα —
-    // απλώς κάθε εκπομπή μένει χωρίς αφίσα, σιωπηλά. Γι' αυτό ο έλεγχος.
+    // The build reads data.art ONLY. If it is lost nothing throws — each
+    // show is just left without a poster, silently. Hence the check.
     if (data.art == null || typeof data.art !== 'object' || Array.isArray(data.art)) {
       return 'Λείπει το «art» με την αντιστοίχιση εκπομπής σε αφίσα.';
     }
@@ -295,9 +296,9 @@ function validate(name, data){
       if (v === null || typeof v !== 'object' || Array.isArray(v)) {
         return `Η αφίσα της «${show}» πρέπει να είναι αντικείμενο.`;
       }
-      // Η ανεβασμένη φωτογραφία. Μόνο διεύθυνση του δικού μας /uploads/:
-      // ο,τιδήποτε αλλού θα έβαζε ξένο εικονοστοιχείο σε 4.700 σελίδες,
-      // και η αφίσα της εκπομπής φαίνεται σχεδόν παντού.
+      // The uploaded image. Only a URL under our own /uploads/:
+      // anything else would put a foreign pixel on 4,700 pages, and a
+      // show's poster appears almost everywhere.
       if (v.url != null && v.url !== '') {
         if (typeof v.url !== 'string' || !/^\/uploads\/[\w.-]+$/.test(v.url)) {
           return `Η φωτογραφία της «${show}» πρέπει να είναι αρχείο του /uploads/.`;
@@ -325,7 +326,7 @@ function validate(name, data){
         if (!Array.isArray(list)) {
           return `Οι γραφές του «${canonical}» πρέπει να είναι λίστα.`;
         }
-        // Όνομα ενωμένο με τον εαυτό του φτιάχνει βρόχο στο build.
+        // A name merged with itself makes a loop in the build.
         if (list.some((v) => v === canonical)) {
           return `Το «${canonical}» δεν ενώνεται με τον εαυτό του.`;
         }
@@ -365,8 +366,8 @@ function validate(name, data){
         return `Η εγγραφή «${id}» πρέπει να είναι αντικείμενο.`;
       }
 
-      // Ο κωδικός μπαίνει αυτούσιος σε διεύθυνση youtube.com/embed/… —
-      // ό,τι άλλο δεν σπάει μόνο το ζευγάρωμα, σπάει τη σελίδα.
+      // The id goes verbatim into a youtube.com/embed/… URL — anything
+      // else breaks not just the pairing but the page.
       if (rec.video != null
           && (typeof rec.video !== 'string' || !/^[\w-]{6,20}$/.test(rec.video))) {
         return `Άκυρος κωδικός βίντεο στο «${id}».`;
@@ -375,7 +376,7 @@ function validate(name, data){
       if (rec.guest != null && typeof rec.guest !== 'string') {
         return `Ο καλεσμένος του «${id}» πρέπει να είναι κείμενο.`;
       }
-      // Το όνομα γίνεται τίτλος και διεύθυνση σελίδας προσώπου.
+      // The name becomes a title and a person page's URL.
       if (rec.guest && rec.guest.length > 80) {
         return `Πολύ μακρύ όνομα καλεσμένου στο «${id}».`;
       }
@@ -383,8 +384,8 @@ function validate(name, data){
       if (rec.title != null && typeof rec.title !== 'string') {
         return `Ο τίτλος του «${id}» πρέπει να είναι κείμενο.`;
       }
-      // Ο τίτλος μπαίνει σε <title>, σε κάρτες και στα κοινωνικά. Πάνω
-      // από αυτό δεν είναι τίτλος, είναι περιγραφή.
+      // The title goes in <title>, in cards and in social. Beyond this
+      // it is not a title, it is a description.
       if (rec.title && rec.title.length > 300) {
         return `Πολύ μακρύς τίτλος στο «${id}» (${rec.title.length} χαρακτήρες, όριο 300).`;
       }
@@ -396,15 +397,16 @@ function validate(name, data){
         return `Πολύ μεγάλη περιγραφή στο «${id}».`;
       }
 
-      // Η φωτογραφία μπαίνει αυτούσια σε img src. Μόνο από τη δική μας
-      // βιβλιοθήκη — ίδιος κανόνας με τα πορτρέτα των προσώπων.
+      // The image goes verbatim into an img src. From our own library
+      // only — same rule as the people's portraits.
       if (rec.image != null && rec.image !== ''
           && (typeof rec.image !== 'string' || !/^\/uploads\/[\w.-]+$/.test(rec.image))) {
         return `Η φωτογραφία του «${id}» πρέπει να είναι από τη βιβλιοθήκη.`;
       }
 
-      // «Δεν υπάρχει» μαζί με ρητή επιλογή είναι αντίφαση: το build θα
-      // τιμούσε το ένα και ο συντάκτης θα κοίταζε το άλλο.
+      // "Does not exist" together with an explicit pick is a
+      // contradiction: the build would honour one and the editor would
+      // be looking at the other.
       if (rec.novideo && rec.video) {
         return `Το «${id}» λέει «χωρίς βίντεο» και δίνει βίντεο μαζί.`;
       }
@@ -418,7 +420,7 @@ function validate(name, data){
 }
 
 // ---------------------------------------------------------------------
-// Οι ενέργειες
+// The actions
 // ---------------------------------------------------------------------
 
 async function readData(store, name){
@@ -443,8 +445,8 @@ async function writeData(store, name, data, who){
   const problem = validate(name, data);
   if (problem) return { status: 400, body: { error: problem } };
 
-  // Δύο κενά, όπως γράφονται τα αρχεία με το χέρι: έτσι το git diff
-  // δείχνει ΤΙ άλλαξε, αντί για μία τεράστια γραμμή.
+  // Two spaces, as the hand-written files are: that way git diff shows
+  // WHAT changed instead of one enormous line.
   const text = JSON.stringify(data, null, 2) + '\n';
   const message = `${name}: αλλαγή από το διαχειριστικό${who ? ` (${who})` : ''}`;
 
@@ -467,8 +469,8 @@ const VIDEO_TYPES = {
   'video/mp4': 'mp4',
 };
 
-// 4MB μετά τη συμπίεση. Μια φωτογραφία ρεπορτάζ βγαίνει 150-400KB·
-// οτιδήποτε δεκαπλάσιο σημαίνει ότι κάτι δεν δούλεψε.
+// 4MB after compression. A reporting photo comes out at 150-400KB;
+// anything ten times that means something did not work.
 const MAX_IMAGE = 4 * 1024 * 1024;
 
 const MAX_VIDEO = 8 * 1024 * 1024;
@@ -521,9 +523,9 @@ async function saveImage(store, { bytes, type, name }){
     };
   }
 
-  // Η χρονοσφραγίδα μπροστά κρατάει τη βιβλιοθήκη ταξινομημένη και
-  // αποτρέπει δύο φωτογραφίες με το ίδιο όνομα να πατήσουν η μία την
-  // άλλη — συμβαίνει συνέχεια με «image.jpg» από κινητό.
+  // The leading timestamp keeps the library sorted and stops two images
+  // with the same name overwriting each other — which happens constantly
+  // with "image.jpg" from a phone.
   const stamp = new Date().toISOString().slice(0, 19).replace(/[-:T]/g, '');
   const file = `${imageName(name, stamp)}.${ext}`;
 

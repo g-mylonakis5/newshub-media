@@ -1,7 +1,7 @@
 
 const API = 'https://api.github.com';
 
-// Το GitHub θέλει User-Agent, αλλιώς απαντά 403 χωρίς εξήγηση.
+// GitHub wants a User-Agent, or it answers 403 with no explanation.
 function ghHeaders(env) {
   return {
     Authorization: `Bearer ${env.GITHUB_TOKEN}`,
@@ -14,8 +14,8 @@ function ghHeaders(env) {
 function toBase64(text) {
   const bytes = new TextEncoder().encode(text);
   let bin = '';
-  // Σε κομμάτια: με 600 άρθρα το news.json ξεπερνά το όριο ορισμάτων
-  // του apply() και ρίχνει «Maximum call stack size exceeded».
+  // In chunks: with 600 articles news.json exceeds apply()'s argument
+  // limit and throws "Maximum call stack size exceeded".
   const STEP = 0x8000;
   for (let i = 0; i < bytes.length; i += STEP) {
     bin += String.fromCharCode.apply(null, bytes.subarray(i, i + STEP));
@@ -47,7 +47,7 @@ async function readFile(env, path) {
 
   if (body.content) return { text: fromBase64(body.content), sha: body.sha };
 
-  // Άδειο content και μηδενικό μέγεθος σημαίνει πράγματι άδειο αρχείο.
+  // Empty content plus zero size really does mean an empty file.
   if (!body.size) return { text: '', sha: body.sha };
 
   const raw = await fetch(url, {
@@ -67,7 +67,7 @@ async function writeFile(env, path, text, message) {
   for (let attempt = 0; attempt < RETRIES; attempt++) {
     const current = await readFile(env, path);
 
-    // Ίδιο περιεχόμενο — μην κάνεις άδειο commit.
+    // Identical content — do not make an empty commit.
     if (current && current.text === text) return;
 
     const res = await fetch(`${API}/repos/${env.GITHUB_REPO}/contents/${encodeURI(path)}`, {
@@ -83,7 +83,7 @@ async function writeFile(env, path, text, message) {
 
     if (res.ok) return;
 
-    // 409 ή 422 = κάποιος πρόλαβε. Ξαναπροσπαθούμε με φρέσκο sha.
+    // 409 or 422 = someone got there first. We retry with a fresh sha.
     if ((res.status === 409 || res.status === 422) && attempt < RETRIES - 1) {
       await new Promise((r) => setTimeout(r, 300 * (attempt + 1)));
       continue;
@@ -95,15 +95,15 @@ async function writeFile(env, path, text, message) {
   throw new Error('Κάποιος άλλος σώζει την ίδια στιγμή — δοκίμασε ξανά.');
 }
 
-// Ο store που περιμένει το admin-api.js. Ίδιες τέσσερις μέθοδοι με
-// τον τοπικό του serve.js, ώστε η λογική από πάνω να μην ξέρει ποιος
-// από τους δύο τρέχει.
+// The store admin-api.js expects. The same four methods as serve.js's
+// local one, so the logic above does not know which of the two is
+// running.
 export function gitStore(env) {
   return {
     read: async (name) => {
       const hit = await readFile(env, dataPath(name));
       if (!hit) {
-        // Το admin-api.js περιμένει σφάλμα ENOENT για «δεν υπάρχει».
+        // admin-api.js expects an ENOENT error for "does not exist".
         const err = new Error('δεν υπάρχει');
         err.code = 'ENOENT';
         throw err;
@@ -124,7 +124,7 @@ export function gitStore(env) {
       if (!env.UPLOADS) return [];
       const out = [];
       let cursor;
-      // Το R2 δίνει 1.000 τη φορά· η βιβλιοθήκη θα τα ξεπεράσει.
+      // R2 gives 1,000 at a time; the library will outgrow that.
       do {
         const page = await env.UPLOADS.list({ limit: 1000, cursor });
         for (const o of page.objects) {
@@ -133,15 +133,15 @@ export function gitStore(env) {
         cursor = page.truncated ? page.cursor : null;
       } while (cursor);
 
-      // Νεότερα πρώτα: το όνομα ξεκινά με χρονοσφραγίδα, οπότε η
-      // ανάποδη αλφαβητική σειρά είναι και χρονολογική.
+      // Newest first: the name starts with a timestamp, so reverse
+      // alphabetical order is also chronological.
       return out.sort().reverse();
     },
 
     delImage: async (file) => {
       if (!env.UPLOADS) throw new Error('Δεν έχει ρυθμιστεί ο χώρος φωτογραφιών (R2).');
-      // Το R2 δεν σφάλλει για αρχείο που δεν υπάρχει. Μας βολεύει: δύο
-      // συντάκτες που πατούν διαγραφή στο ίδιο δεν βλέπουν σφάλμα.
+      // R2 does not error on a file that does not exist. That suits us:
+      // two editors deleting the same one see no error.
       await env.UPLOADS.delete(file);
     },
   };
@@ -152,7 +152,7 @@ function emailFromJwt(token){
     const part = String(token || '').split('.')[1];
     if (!part) return '';
 
-    // base64url -> base64, και συμπλήρωμα που το atob απαιτεί.
+    // base64url -> base64, plus the padding atob demands.
     const b64 = part.replace(/-/g, '+').replace(/_/g, '/');
     const full = b64 + '='.repeat((4 - (b64.length % 4)) % 4);
 
@@ -183,8 +183,8 @@ export function whoFrom(request) {
     || '';
 }
 
-// Δικλείδα: αν λείπει κάτι από τις ρυθμίσεις, το λέμε ΚΑΘΑΡΑ αντί να
-// σκάσουμε με «undefined» στη μέση ενός commit.
+// Safety catch: if something is missing from the settings we say so
+// CLEARLY instead of blowing up with "undefined" mid-commit.
 export function missingConfig(env) {
   const missing = [];
   if (!env.GITHUB_TOKEN) missing.push('GITHUB_TOKEN');

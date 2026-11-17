@@ -10,20 +10,20 @@ const CURATION = path.join(__dirname, 'data', 'curation.json');
 
 const BODY_DIR = path.join(__dirname, 'data', 'news-bodies');
 
-// Πόσα άρθρα κρατάμε συνολικά. Το sitemap είναι κυλιόμενο παράθυρο 3
-// ημερών — ό,τι δεν σώσουμε τώρα, χάνεται για πάντα. Γι' αυτό
-// συσσωρεύουμε αντί να αντικαθιστούμε.
+// How many articles we keep in total. Their sitemap is a rolling 3-day
+// window — whatever we do not save now is gone forever. Hence we
+// accumulate instead of replacing.
 const KEEP = 600;
 
 const BODY_FOR = 20;
 
-// Πόσα άρθρα κατεβάζουμε ταυτόχρονα. Το newshub.gr είναι μικρό site σε
-// κοινόχρηστο server — δεν του ρίχνουμε 250 αιτήσεις μαζί.
+// How many articles we fetch at once. newshub.gr is a small site on
+// shared hosting — we do not hit it with 250 requests together.
 const AT_ONCE = 4;
 
-// Οι κατηγορίες τους, από τη διαδρομή /el/<slug>/. Τα ονόματα στο μενού
-// τους είναι άτονα επειδή είναι σε κεφαλαία, οπότε τα γράφουμε σωστά εδώ.
-// Όπου ταιριάζει με δική μας κατηγορία, κρατάμε ΤΟ ΔΙΚΟ ΜΑΣ όνομα.
+// Their categories, from the /el/<slug>/ path. The names in their menu
+// are unaccented because they are uppercase, so we spell them properly
+// here. Where one matches a category of ours, we keep OUR name.
 const CATEGORY = {
   kriti: 'Κρήτη',
   ellada: 'Ελλάδα',
@@ -37,11 +37,11 @@ const CATEGORY = {
   'tech-hub': 'Tech-Hub',
   perivallon: 'Περιβάλλον',
   apopseis: 'Απόψεις',
-  // Το αφεντικό ζήτησε να χωρίσει σε Ιστορία και Πολιτισμό. Από τη
-  // διεύθυνση δεν φαίνεται ποιο από τα δύο είναι, οπότε μπαίνει στην
-  // Ιστορία και το διορθώνει το διαχειριστικό.
+  // The boss asked for this split into History and Culture. The URL does
+  // not say which of the two it is, so it goes to History and the admin
+  // corrects it.
   'istoria-politismos': 'Ιστορία',
-  // Δικές τους, χωρίς αντίστοιχη δική μας. Μένουν ως ετικέτα.
+  // Theirs, with no counterpart of ours. They stay as a tag.
   sugar: 'Sugar',
   'ta-en-oiko': 'Τα εν οίκω',
   exodos: 'Έξοδος',
@@ -51,8 +51,8 @@ const CATEGORY = {
   magazine: 'The Magazine',
 };
 
-// Τα δικά μας podcast, που ανεβάζουν και στο site τους. Δεν τα θέλουμε
-// ως «ειδήσεις» — τα έχουμε ήδη από το Buzzsprout, με ήχο και σελίδα.
+// Our own podcasts, which they also post on their site. We do not want
+// them as "news" — we have them from Buzzsprout, with audio and a page.
 const SKIP = new Set(['ta-podcasts-toy-newshub-gr-1']);
 
 function get(url, until = '') {
@@ -62,9 +62,9 @@ function get(url, until = '') {
         'User-Agent': 'newshub-media-build/1.0 (+https://newshubmedia.gr)',
         Connection: 'close',
       },
-      // Φρέσκια σύνδεση κάθε φορά. Κόβουμε τη λήψη στη μέση μόλις βρούμε
-      // ό,τι θέλουμε· αν η σύνδεση ξαναχρησιμοποιηθεί μετά από αυτό,
-      // σπάνε οι επόμενες αιτήσεις — έτσι χάθηκαν 58 άρθρα σε μία λήψη.
+      // A fresh connection each time. We cut the download off mid-way as
+      // soon as we have what we want; if the connection is reused after
+      // that, later requests break — that lost 58 articles in one run.
       agent: false,
       timeout: 20000,
     }, (res) => {
@@ -78,16 +78,16 @@ function get(url, until = '') {
       }
 
       let body = '';
-      // Αφού κόψουμε εμείς τη σύνδεση, το Node βγάζει κανονικά σφάλμα —
-      // δικό μας σφάλμα, όχι του διακομιστή. Χωρίς αυτό το σημάδι θα
-      // απορρίπταμε μια λήψη που πέτυχε.
+      // Once we cut the connection ourselves, Node duly raises an error —
+      // ours, not the server's. Without this marker we would reject a
+      // download that succeeded.
       let teleiose = false;
       res.setEncoding('utf8');
       res.on('data', (chunk) => {
         body += chunk;
-        // Δεν χρειαζόμαστε ολόκληρη τη σελίδα — μόνο μέχρι το σημάδι που
-        // μας ενδιαφέρει. Κόβουμε εκεί τη σύνδεση: λιγότερα δεδομένα για
-        // εμάς, λιγότερος φόρτος για τον δικό τους διακομιστή.
+        // We do not need the whole page — only up to the marker we care
+        // about. We cut the connection there: less data for us, less
+        // load for their server.
         if (until && body.includes(until)) {
           teleiose = true;
           res.destroy();
@@ -97,7 +97,7 @@ function get(url, until = '') {
 
       res.on('end', () => {
         if (teleiose) return;
-        // res.complete: το Node λέει αν ήρθε ΟΛΟ το σώμα της απάντησης.
+        // res.complete: Node tells us whether the WHOLE body arrived.
         if (!res.complete) {
           return reject(new Error(`κομμένη λήψη στο ${url}`));
         }
@@ -142,8 +142,8 @@ async function getStubborn(url, until = '', elegxos = null){
   throw last;
 }
 
-// Το <head> γράφει τα meta με διάφορες σειρές και με tabs ανάμεσα, οπότε
-// ψάχνουμε και τις δύο διατάξεις: content πριν ή μετά το όνομα.
+// Their <head> writes the metas in various orders and with tabs between,
+// so we match both layouts: content before or after the name.
 function meta(head, name) {
   const a = head.match(new RegExp(`<meta[^>]*(?:property|name)=["']${name}["'][^>]*content=["']([^"']*)["']`, 'i'));
   if (a) return a[1].trim();
@@ -185,7 +185,7 @@ function bigPhoto(img) {
   return `https://static.newshub.gr/${file}`;
 }
 
-// Οι διευθύνσεις είναι της μορφής /el/<κατηγορία>/<τίτλος>
+// URLs are of the form /el/<category>/<title>
 function partsOf(url) {
   const m = url.match(/\/el\/([a-z0-9-]+)\/([^/?#]+)/);
   return m ? { cat: m[1], slug: m[2] } : null;
@@ -219,7 +219,7 @@ async function frontPagePick() {
     const html = await get(HOMEPAGE);
     const m = html.match(/id=["']frontpage-title["'][^>]*>/) ? html : null;
     if (!m) return '';
-    // Ο πρώτος σύνδεσμος που φέρει το σημάδι του πρωτοσέλιδου.
+    // The first link carrying the lead marker.
     const link = html.match(/<a[^>]*href=["'](https:\/\/www\.newshub\.gr\/el\/[^"']+)["'][^>]*id=["']frontpage-title["']/);
     return link ? link[1] : '';
   } catch (err) {
@@ -251,7 +251,7 @@ function athensToISO(y, mo, d, h, mi) {
 }
 
 function when(html, fallbackDay) {
-  // Υπάρχει και μία ημερομηνία μέσα σε σχόλιο HTML, λίγο πιο κάτω.
+  // There is also a date inside an HTML comment, a little further down.
   const clean = html.replace(/<!--[\s\S]*?-->/g, '');
   const m = clean.match(/class="news-date"[^>]*>\s*(\d{1,2})\s+(\S+)\s+(\d{4})\s*[-–]\s*(\d{1,2}):(\d{2})/);
 
@@ -259,14 +259,14 @@ function when(html, fallbackDay) {
     const mo = MONTHS.indexOf(bareMonth(m[2]));
     if (mo > -1) {
       const iso = athensToISO(+m[3], mo, +m[1], +m[4], +m[5]);
-      // Άρθρα προγραμματισμένα για αργότερα: τα αφήνουμε. Δεν τα έχουν
-      // δημοσιεύσει ακόμα ούτε εκείνοι, και δεν θα τα βγάλουμε εμείς
-      // πρώτοι. Θα τα πάρουμε στο επόμενο τρέξιμο, όταν έρθει η ώρα τους.
+      // Articles scheduled for later: we leave them. They have not
+      // published them yet either, and we will not be the first to. We
+      // pick them up on the next run, when their time comes.
       return new Date(iso) > Date.now() ? null : iso;
     }
   }
 
-  // Εφεδρεία: η ημέρα από το sitemap, χωρίς ώρα.
+  // Fallback: the day from the sitemap, with no time.
   const d = new Date(fallbackDay);
   if (isNaN(d)) return new Date().toISOString();
   return d > Date.now() ? null : d.toISOString();
@@ -278,8 +278,8 @@ function articleBody(html) {
 
   let block = html.slice(start);
 
-  // Τέλος: το σημάδι των ετικετών, ή — αν λείπει — το μπλοκ «Ακολουθήστε
-  // μας», που είναι κολλημένο στο τέλος του κειμένου και δεν είναι άρθρο.
+  // The end: the tags marker, or — if missing — the "follow us" block,
+  // which is glued to the end of the text and is not article.
   for (const mark of ['news-tags', 'follow-news-social', 'news-related']) {
     const end = block.indexOf(mark);
     if (end > 0) block = block.slice(0, end);
@@ -291,7 +291,7 @@ function articleBody(html) {
     const text = decode(raw.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' '));
     if (text.length < 2) continue;
 
-    // Υπότιτλος: όλη η παράγραφος μέσα σε <strong>, χωρίς άλλο κείμενο.
+    // Standfirst: the whole paragraph inside <strong>, with no other text.
     const bold = raw.match(/^\s*<strong[^>]*>([\s\S]*?)<\/strong>\s*$/i);
     out.push({ type: bold ? 'h' : 'p', text });
   }
@@ -308,9 +308,9 @@ function trimTail(paras) {
 }
 
 async function details(item, wantBody = false) {
-  // Σταματάμε μόλις περάσουμε την ημερομηνία — είναι λίγο κάτω από τον
-  // τίτλο, άρα κατεβάζουμε ένα κλάσμα της σελίδας. Όταν θέλουμε και το
-  // σώμα, κατεβαίνουμε ως τις ετικέτες: ~45KB αντί 32KB, ίδια αίτηση.
+  // We stop once past the date — it sits just under the title, so we
+  // download a fraction of the page. When we want the body too, we go
+  // down to the tags: ~45KB instead of 32KB, same request.
   const html = await get(item.url, wantBody ? 'news-tags' : 'news-share-container');
   const head = html.split('</head>')[0];
   const img = meta(head, 'og:image');
@@ -324,18 +324,18 @@ async function details(item, wantBody = false) {
     url: item.url,
     date,
     category: CATEGORY[item.cat] || item.cat,
-    // Έχουν δύο μεγέθη. Το μικρό για τις κάρτες, το μεγάλο για το hero.
+    // They come in two sizes. Small for the cards, large for the hero.
     image_large: img,
     image_thumb: img.replace('/765x435/', '/400x227/'),
     summary: decode(meta(head, 'og:description')),
-    // Ποιος το υπογράφει. Υπάρχει σχεδόν πάντα· όπου λείπει, μένει null
-    // και το site απλώς δεν δείχνει πρόσωπο.
+    // Who signs it. Almost always present; where it is missing it stays
+    // null and the site simply shows no face.
     author: authorOf(html),
     featured: false,
   };
 }
 
-// ---- Τα σώματα ----
+// ---- The bodies ----
 
 function bodyPath(id) {
   return path.join(BODY_DIR, `${id}.json`);
@@ -359,8 +359,8 @@ function saveBody(article, paras) {
   return true;
 }
 
-// Ποια άρθρα ονομάζει το χέρι στο curation.json; Εκείνα θέλουν σώμα
-// όποια κι αν είναι η ημερομηνία τους — μπορεί να είναι μηνών.
+// Which articles does a human name in curation.json? Those need a body
+// whatever their date — it may be months old.
 function handPicked() {
   try {
     const c = JSON.parse(fs.readFileSync(CURATION, 'utf8'));
@@ -431,8 +431,8 @@ async function ensureAuthors(all) {
   for (const a of missing) {
     try {
       const html = await get(a.url, 'news-share-container');
-      // null, όχι undefined: αλλιώς θα το ξαναζητούσαμε σε κάθε λήψη για
-      // πάντα, σε άρθρο που απλώς δεν έχει υπογραφή.
+      // null, not undefined: otherwise we would ask for it again on
+      // every fetch, forever, for an article that simply has no byline.
       a.author = authorOf(html);
       if (a.author) got++;
     } catch (err) {
@@ -485,7 +485,7 @@ async function ensureBodies(all) {
   if (thin) console.log(`  ${thin} ήταν πολύ μικρά — μένουν σύνδεσμος προς το newshub.gr`);
 }
 
-// Τρέχουν λίγα μαζί, όχι όλα: AT_ONCE εργάτες που τραβούν από την ίδια ουρά.
+// A few run together, not all: AT_ONCE workers pulling from one queue.
 async function fetchAll(list) {
   const done = [];
   let next = 0;
@@ -502,8 +502,8 @@ async function fetchAll(list) {
         try {
           got = await details(item);
         } catch (first) {
-          // Μία δεύτερη ευκαιρία: οι περισσότερες αποτυχίες είναι
-          // στιγμιαίες και περνούν με μισό δευτερόλεπτο αναμονή.
+          // One second chance: most failures are momentary and clear
+          // with half a second's wait.
           await pause(600);
           got = await details(item);
         }
@@ -562,7 +562,7 @@ async function main() {
       + ` Δες το ${SITEMAP} και το https://www.newshub.gr/robots.txt`);
   }
 
-  // Ό,τι έχουμε ήδη μένει. Το sitemap κρατάει μόνο 3 μέρες.
+  // Whatever we already have stays. The sitemap holds only 3 days.
   let old = [];
   if (fs.existsSync(OUT)) {
     try {
@@ -572,7 +572,7 @@ async function main() {
     }
   }
 
-  // Τα δείγματα φεύγουν μόλις έρθουν αληθινά άρθρα.
+  // The samples go as soon as real articles arrive.
   old = old.filter((a) => a.url && !/\[ΔΕΙΓΜΑ\]/.test(a.title || ''));
 
   const have = new Set(old.map((a) => a.url));
@@ -581,7 +581,7 @@ async function main() {
 
   const added = fresh.length ? await fetchAll(fresh) : [];
 
-  // Και οι Απόψεις από τη δική τους σελίδα — δες seedOpinions().
+  // And Opinion from its own page — see seedOpinions().
   for (const a of added) have.add(a.url);
   const opinions = await seedOpinions(have);
 
@@ -589,9 +589,9 @@ async function main() {
     .filter((a) => a.title && a.url)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  // Το όριο των 600 κόβει κατά ημερομηνία — και οι Απόψεις είναι αραιές,
-  // οπότε μια άποψη τριών εβδομάδων θα έπεφτε έξω ενώ η ενότητά της στην
-  // αρχική τη χρειάζεται. Μένουν ΟΛΕΣ, και μετρούν κανονικά μέσα στα 600.
+  // The 600 cap cuts by date — and Opinion is sparse, so a three-week-old
+  // piece would fall out while its homepage section still needs it. ALL
+  // of them stay, and count normally inside the 600.
   const keep = sorted.slice(0, KEEP);
   const kept = new Set(keep.map((a) => a.url));
   const all = [
@@ -599,22 +599,22 @@ async function main() {
     ...sorted.filter((a) => a.category === 'Απόψεις' && !kept.has(a.url)),
   ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  // Το πρωτοσέλιδό τους γίνεται πρωτοσέλιδό μας.
+  // Their lead becomes our lead.
   const pick = await frontPagePick();
   let marked = '';
   for (const a of all) {
     a.featured = pick ? a.url === pick : false;
     if (a.featured) marked = a.title;
   }
-  // Αν δεν βρέθηκε (άλλαξαν το HTML τους), πέφτουμε στο πιο πρόσφατο με
-  // εικόνα — ώστε το hero να μη μείνει ποτέ άδειο.
+  // If it was not found (they changed their HTML) we fall back to the
+  // most recent one with an image — so the hero is never left empty.
   if (!marked) {
     const first = all.find((a) => a.image_large);
     if (first) { first.featured = true; marked = first.title; }
   }
 
-  // Πριν το γράψιμο: οι Απόψεις θέλουν πρόσωπο, και το θέλουν ΚΑΙ οι
-  // παλιές — αλλιώς η ενότητα της αρχικής θα ήταν μισή για μήνες.
+  // Before writing: Opinion needs a face, and the old ones need it TOO —
+  // otherwise the homepage section would be half empty for months.
   await ensureAuthors(all);
 
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
@@ -624,13 +624,13 @@ async function main() {
   console.log(`Γράφτηκαν ${all.length} άρθρα στο data/news.json`);
   if (marked) console.log(`Πρωτοσέλιδο: ${marked.slice(0, 70)}`);
 
-  // Τα σώματα έρχονται τελευταία: χρειάζονται τη ΣΕΙΡΑ των άρθρων, και
-  // αν κάτι πάει στραβά εδώ, το news.json έχει ήδη γραφτεί σωστά.
+  // The bodies come last: they need the ORDER of the articles, and if
+  // something goes wrong here, news.json has already been written right.
   console.log();
   await ensureBodies(all);
 
-  // Αν η ροή σταματήσει, πρέπει να το μάθουμε — όχι να σερβίρουμε
-  // χθεσινές ειδήσεις σαν σημερινές.
+  // If the flow stops we have to find out — not serve yesterday's news
+  // as today's.
   const newest = all.length ? new Date(all[0].date) : null;
   const hours = newest ? (Date.now() - newest.getTime()) / 36e5 : Infinity;
   if (hours > 24) {

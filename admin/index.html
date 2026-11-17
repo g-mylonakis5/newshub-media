@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Διαχειριστικό — Newshub Multimedia</title>
 
-<!-- Το διαχειριστικό ΔΕΝ μπαίνει στη Google. Είναι εσωτερικό εργαλείο. -->
+<!-- The admin does NOT go into Google. It is an internal tool. -->
 <meta name="robots" content="noindex, nofollow">
 
 <link rel="icon" href="../favicon.svg">
@@ -14,9 +14,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400..900&family=Source+Serif+4:wght@400..600&display=swap">
 <link rel="stylesheet" href="admin.css">
 </head>
-<!-- data-pagefind-ignore: το Pagefind σαρώνει ΟΛΟ το public/ και χωρίς
-     αυτό τα λόγια του διαχειριστικού θα έβγαιναν στην αναζήτηση του
-     site. Το noindex κρατάει έξω τη Google, αυτό τη δική μας. -->
+<!-- data-pagefind-ignore: Pagefind scans the WHOLE of public/ and
+     without this the admin's wording would turn up in the site's
+     search. noindex keeps Google out, this keeps our own search out. -->
 <body data-pagefind-ignore>
 
 <header class="top">
@@ -52,7 +52,7 @@
 
   <main class="work">
 
-    <!-- ========== ΠΡΩΤΟΣΕΛΙΔΟ ========== -->
+    <!-- ========== LEAD ========== -->
     <section class="panel is-on" data-panel="proto">
       <header class="panel-head">
         <div>
@@ -62,8 +62,9 @@
         <button type="button" class="btn btn--go" data-save="curation" disabled>Αποθήκευση</button>
       </header>
 
-      <!-- Η τρέχουσα επιλογή, μεγάλη. Πρώτα ΤΙ ισχύει τώρα, μετά η
-           αλλαγή: αλλιώς ο συντάκτης διαλέγει χωρίς να ξέρει τι χαλάει. -->
+      <!-- The current pick, large. WHAT applies now first, then the
+           change: otherwise the editor picks without knowing what they
+           are breaking. -->
       <div class="now" data-now-featured>
         <p class="now-label">Τώρα στο πρωτοσέλιδο</p>
         <div class="now-body" data-now-body>
@@ -104,7 +105,7 @@
       </p>
     </section>
 
-    <!-- ========== ΤΕΛΕΥΤΑΙΑ ========== -->
+    <!-- ========== LATEST ========== -->
     <section class="panel" data-panel="latest">
       <header class="panel-head">
         <div>
@@ -116,16 +117,15 @@
         <button type="button" class="btn btn--go" data-save="latest" disabled>Αποθήκευση</button>
       </header>
 
-      <!-- Οι εννιά θέσεις, με τη σειρά που βγαίνουν στην αρχική. Πρώτα
-           ΤΙ ισχύει, μετά η αλλαγή — ίδια λογική με το πρωτοσέλιδο
-           και το Must read. -->
+      <!-- The nine slots, in homepage order. WHAT applies first, then
+           the change — same logic as the lead and Must read. -->
       <div class="slots" data-lt-slots></div>
 
       <p class="hint" data-lt-note></p>
 
-      <!-- Το κουμπί φαίνεται ΜΟΝΟ όταν υπάρχει κάτι να καθαριστεί. Το
-           κρύβει και το δείχνει η drawLatest(), όπως και στις άλλες
-           τρεις καρτέλες. -->
+      <!-- The button shows ONLY when there is something to clear.
+           drawLatest() hides and shows it, as in the other three
+           tabs. -->
       <p class="auto-back">
         <button type="button" class="btn btn--ghost" data-auto-all="latest" hidden>
           Καθάρισε όλα — πίσω στο αυτόματο</button>
@@ -165,9 +165,8 @@
         <button type="button" class="btn btn--go" data-save="mustread" disabled>Αποθήκευση</button>
       </header>
 
-      <!-- Οι τέσσερις θέσεις, με τη σειρά που βγαίνουν στην αρχική.
-           Πρώτα ΤΙ ισχύει, μετά η αλλαγή — ίδια λογική με το
-           πρωτοσέλιδο. -->
+      <!-- The four slots, in homepage order. WHAT applies first, then
+           the change — same logic as the lead. -->
       <div class="slots" data-mr-slots></div>
 
       <p class="hint" data-mr-note></p>
@@ -210,8 +209,8 @@
 
       <p class="state" data-ad-state></p>
 
-      <!-- ΤΙ ΠΑΙΖΕΙ ΠΟΥ. Πρώτα η εικόνα της κατάστασης, μετά η αλλαγή —
-           ίδια λογική με το πρωτοσέλιδο και τα «Τελευταία». -->
+      <!-- WHAT RUNS WHERE. The state first, then the change — same
+           logic as the lead and Latest. -->
       <h2 class="sub">Οι θέσεις</h2>
       <div class="adplaces" data-ad-places></div>
 
@@ -265,7 +264,7 @@
       </div>
     </section>
 
-    <!-- ========== ΟΙ ΥΠΟΛΟΙΠΕΣ — έρχονται ========== -->
+    <!-- ========== THE REST — coming ========== -->
     <section class="panel" data-panel="arthra">
       <header class="panel-head">
         <div>
@@ -275,12 +274,12 @@
         <button type="button" class="btn btn--go" data-new-article>+ Νέο άρθρο</button>
       </header>
 
-      <!-- Η ΛΙΣΤΑ. Φαίνεται όταν δεν συντάσσουμε κάτι. -->
+      <!-- THE LIST. Shown when nothing is being edited. -->
       <div data-art-list>
         <p class="muted">Φόρτωση…</p>
       </div>
 
-      <!-- Ο ΣΥΝΤΑΚΤΗΣ. Κρυμμένος μέχρι να ανοίξει άρθρο. -->
+      <!-- THE EDITOR. Hidden until an article is opened. -->
       <div class="editor" data-art-editor hidden>
 
         <div class="editor-bar">
@@ -300,9 +299,9 @@
             <code data-art-slug>—</code></p>
         </div>
 
-        <!-- Η ΠΕΡΙΛΗΨΗ ΕΦΥΓΕ. Ο συντάκτης έγραφε δύο φορές το ίδιο
-             πράγμα και τη δεύτερη βιαστικά· τώρα τη βγάζει το site από
-             την πρώτη παράγραφο. Δες ownSummary() στο build.js. -->
+        <!-- THE SUMMARY IS GONE. The editor wrote the same thing twice
+             and the second time in a hurry; now the site derives it from
+             the first paragraph. See ownSummary() in build.js. -->
 
         <div class="row2">
           <div class="field">
@@ -375,8 +374,8 @@
         </div>
       </header>
 
-      <!-- Η ζώνη ρίψης. Δέχεται και σύρσιμο και κλικ: ο ένας συντάκτης
-           σέρνει από τον φάκελο, ο άλλος ψάχνει κουμπί. -->
+      <!-- The drop zone. Takes a drag and a click: one editor drags
+           from a folder, another looks for a button. -->
       <div class="drop" data-drop tabindex="0" role="button"
            aria-label="Ανέβασμα φωτογραφιών">
         <p class="drop-big">Σύρε φωτογραφίες εδώ</p>
@@ -388,9 +387,9 @@
 
       <h2 class="sub">Η βιβλιοθήκη</h2>
 
-      <!-- Η αναζήτηση μπαίνει ΠΑΝΩ από τους φακέλους, όχι μέσα τους.
-           Οι φάκελοι βολεύουν όταν ξέρεις πότε ανέβηκε κάτι· όταν δεν
-           ξέρεις, κρύβουν. Εδώ ψάχνει σε ΟΛΟΥΣ τους μήνες μαζί. -->
+      <!-- Search goes ABOVE the folders, not inside them. Folders help
+           when you know when something was uploaded; when you do not,
+           they hide it. Here it searches ALL the months at once. -->
       <div class="tools">
         <input type="search" class="find" data-shot-find
                placeholder="Βρες φωτογραφία σε όλους τους φακέλους…"
@@ -477,9 +476,9 @@
         <div class="slots" data-th-cat-slots></div>
         <p class="hint" data-th-cat-note></p>
 
-        <!-- Καθαρίζει ΜΟΝΟ το θέμα που είναι ανοιχτό — όχι και τα
-             δεκαπέντε. Το όνομά του μπαίνει μέσα στο κουμπί από τη
-             drawThCat(), για να μην υπάρχει αμφιβολία τι θα φύγει. -->
+        <!-- Clears ONLY the topic that is open — not all fifteen. Its
+             name is put inside the button by drawThCat(), so there is
+             no doubt about what will go. -->
         <p class="auto-back">
           <button type="button" class="btn btn--ghost" data-auto-all="themata" hidden></button>
         </p>
@@ -573,8 +572,8 @@
         </div>
       </div>
 
-      <!-- Η χρονιά. Χωρίς αυτήν, για να φτάσεις σε επεισόδιο του 2022
-           έπρεπε να θυμάσαι τον τίτλο του. -->
+      <!-- The season. Without it, reaching a 2022 episode meant
+           remembering its title. -->
       <div class="chips" data-pr-years></div>
 
       <p class="hint" data-pr-count></p>

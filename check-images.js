@@ -5,17 +5,17 @@ const { chromium } = require('playwright');
 
 const PUBLIC = path.join(__dirname, 'public');
 
-// Πόσο κομμένη εικόνα περνάει. Δεν είναι μηδέν επειδή το στρογγύλεμα
-// του browser αφήνει κλάσματα του pixel σε πλαίσιο που «δένει» σωστά.
+// How much cropping passes. Not zero, because the browser's rounding
+// leaves fractions of a pixel in a frame that fits correctly.
 const MAX_LOST = 3;
 
-// Τα δύο πλάτη που μετράμε. Το 390 είναι iPhone — εκεί κρύφτηκε το
-// σοβαρότερο σφάλμα, γιατί κανείς δεν ξαναμετράει το κινητό όταν
-// πειράζει μια κάρτα στο desktop.
+// The two widths we measure. 390 is an iPhone — that is where the worst
+// bug hid, because nobody re-measures the phone when tweaking a card on
+// the desktop.
 const WIDTHS = [1600, 390];
 
-// 1. Θολά υπόβαθρα και σκιασμένα φόντα. Δεν είναι εικόνες που κοιτάς·
-//    είναι χρώμα πίσω από κείμενο. Εκεί το κόψιμο δεν φαίνεται.
+// 1. Blurred and dimmed backdrops. These are not images you look at;
+//    they are colour behind text. Cropping does not show there.
 const DECORATIVE = [
   'card-bloom',     // το θολό πίσω από κάθε κάρτα
   'hero-bloom',     // το ίδιο, στο πρωτοσέλιδο
@@ -24,15 +24,15 @@ const DECORATIVE = [
   'tcard-media',    // φόντο κάρτας θέματος, στο 55% διαφάνεια
 ];
 
-// 2. Πρόσωπα. Το κόψιμο είναι ο ΣΚΟΠΟΣ: θέλουμε το κεφάλι σε κύκλο ή
-//    τετράγωνο, όχι ολόκληρη τη φωτογραφία.
+// 2. Faces. Cropping is the POINT: we want the head in a circle or a
+//    square, not the whole photo.
 const FACES = [
   'face-pic', 'plist-pic', 'pname-face', 'person',
   'apop-pic',
 ];
 
-// 3. Φωτογραφίες ειδήσεων. Είναι ρεπορτάζ χωρίς ψημένο κείμενο, οπότε
-//    αντέχουν κόψιμο όπως κάθε φωτογραφία εφημερίδας.
+// 3. News photos. Reporting shots with no baked-in text, so they take
+//    cropping like any newspaper photo.
 const PHOTOS = ['must-image', 'intro-photo'];
 
 function isBarTrim(natAR, boxAR, lost){
@@ -57,8 +57,8 @@ function sample(dir, n){
   return out;
 }
 
-// Σελίδα εκπομπής που είναι ΟΛΗ βίντεο: μόνο εκεί ζει το .grid--wide,
-// το φαρδύ πλαίσιο 16:9. Χωρίς αυτήν η θέση μένει αμέτρητη.
+// A show page that is ALL video: .grid--wide, the wide 16:9 frame, lives
+// only there. Without it the slot goes unmeasured.
 function wideShow(){
   const dir = path.join(PUBLIC, 'show');
   if (!fs.existsSync(dir)) return [];
@@ -99,17 +99,17 @@ function pages(){
   ];
 }
 
-// ---------- Η ΜΕΤΡΗΣΗ ----------
+// ---------- THE MEASUREMENT ----------
 
-// Τρέχει ΜΕΣΑ στη σελίδα. Για κάθε εικόνα: πόσο μέρος της πραγματικής
-// εικόνας δεν χωράει στο κουτί της;
+// Runs INSIDE the page. For each image: how much of the real image does
+// not fit in its box?
 function measure(){
   const out = [];
   for (const img of document.querySelectorAll('img')) {
     const box = img.getBoundingClientRect();
-    // Κρυφές ή μικροσκοπικές: δεν τις βλέπει κανείς.
+    // Hidden or tiny: nobody sees them.
     if (box.width < 8 || box.height < 8) continue;
-    // Δεν φόρτωσε — δεν ξέρουμε το πραγματικό της σχήμα, δεν κρίνουμε.
+    // Did not load — we do not know its real shape, so we do not judge.
     if (!img.naturalWidth) continue;
 
     const cs = getComputedStyle(img);
@@ -123,14 +123,14 @@ function measure(){
     let stretch = 0;
 
     if (fit === 'cover' || fit === 'none') {
-      // Το cover μεγαλώνει την εικόνα μέχρι να γεμίσει το κουτί· ό,τι
-      // περισσεύει πέφτει έξω.
+      // cover scales the image up until the box is full; whatever is
+      // left over falls outside.
       const scale = Math.max(box.width / nw, box.height / nh);
       const visible = (box.width / scale) * (box.height / scale);
       lost = Math.max(0, 1 - visible / (nw * nh)) * 100;
     } else if (fit === 'fill') {
-      // Το fill δεν κόβει, ΠΑΡΑΜΟΡΦΩΝΕΙ. Σωστό μόνο όταν το κουτί έχει
-      // ακριβώς το σχήμα της εικόνας — αλλιώς τα πρόσωπα τεντώνονται.
+      // fill does not crop, it DISTORTS. Correct only when the box has
+      // exactly the image's shape — otherwise faces stretch.
       stretch = Math.abs(Math.log((box.width / box.height) / (nw / nh)));
     }
 
@@ -150,9 +150,9 @@ function measure(){
   return out;
 }
 
-// Η μπάρα του player και το κάδρο του βίντεο δεν υπάρχουν στο HTML —
-// τα φτιάχνει το player.js όταν πατήσεις αναπαραγωγή. Χωρίς αυτό το
-// κλικ μένουν για πάντα αμέτρητα.
+// The player bar and the video frame are not in the HTML — player.js
+// builds them when you press play. Without this click they stay
+// unmeasured forever.
 async function wakePlayer(page){
   const btn = page.locator('[data-player="toggle"]').first();
   if (!(await btn.count())) return;
@@ -179,7 +179,7 @@ async function main(){
         await page.goto('file:///' + path.join(PUBLIC, file).split(path.sep).join('/'),
           { waitUntil: 'load', timeout: 30000 });
 
-        // Οι εικόνες είναι lazy: χωρίς αυτό μετράμε μόνο την πρώτη οθόνη.
+        // The images are lazy: without this we measure only the first screen.
         await page.evaluate(() => {
           document.querySelectorAll('img[loading="lazy"]').forEach((i) => { i.loading = 'eager'; });
         });
@@ -205,8 +205,8 @@ async function main(){
     return 0;
   }
 
-  // Ομαδοποίηση: ένα λάθος CSS χτυπάει σε εκατοντάδες εικόνες, και η
-  // λίστα πρέπει να δείχνει ΤΗ ΘΕΣΗ που φταίει, όχι κάθε εμφάνισή της.
+  // Grouping: one CSS mistake hits hundreds of images, and the list must
+  // show THE SLOT at fault, not every appearance of it.
   const groups = new Map();
   for (const b of bad) {
     const key = `${b.classes.join('.') || '(χωρίς κλάση)'}|${b.width}`;

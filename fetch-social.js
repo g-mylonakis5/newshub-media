@@ -8,16 +8,16 @@ const LINKS_FILE = path.join(__dirname, 'data/social-links.json');
 const CHANNEL = 'https://www.youtube.com/@newshubgr/shorts';
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)';
 
-// Πόσα Shorts κρατάμε. Η αρχική δείχνει λίγα· τα υπόλοιπα είναι για
-// μελλοντική σελίδα «όλα τα social».
+// How many Shorts we keep. The homepage shows a few; the rest are for a
+// future "all social" page.
 const MAX_SHORTS = 24;
 
 // ---------------------------------------------------------------------
-// Δίκτυο
+// Network
 // ---------------------------------------------------------------------
 
-// Απλό GET που ακολουθεί ανακατευθύνσεις. Το YouTube στέλνει 302 σε
-// σελίδα συγκατάθεσης, οπότε χωρίς αυτό παίρνουμε άδειο σώμα.
+// A plain GET that follows redirects. YouTube sends a 302 to a consent
+// page, so without this we get an empty body.
 function get(url, hops = 0) {
   const https = require('https');
   return new Promise((resolve) => {
@@ -56,7 +56,7 @@ function imageSize(url) {
       });
       res.on('close', () => {
         const buf = Buffer.concat(chunks);
-        // Περπατάμε τα τμήματα του JPEG ώσπου να βρούμε ένα SOF.
+        // We walk the JPEG's segments until we find an SOF.
         let i = 2;
         while (i < buf.length - 9) {
           if (buf[i] !== 0xff) {
@@ -98,9 +98,9 @@ async function fetchShorts() {
     return [];
   }
 
-  // Οι κωδικοί κάθονται μέσα στο ytInitialData, με τη σειρά που τους
-  // δείχνει το κανάλι: νεότερο πρώτο. Το Set πετάει τα διπλά, γιατί
-  // ο ίδιος κωδικός εμφανίζεται και στις μικρογραφίες και στα links.
+  // The ids sit inside ytInitialData, in the order the channel shows
+  // them: newest first. The Set drops duplicates, because the same id
+  // appears in both the thumbnails and the links.
   const ids = [...new Set([...page.body.matchAll(/"videoId":"([\w-]{11})"/g)].map((m) => m[1]))];
 
   if (!ids.length) {
@@ -145,7 +145,7 @@ async function fetchShorts() {
 }
 
 // ---------------------------------------------------------------------
-// TikTok και Instagram — από τα χειροκίνητα links
+// TikTok and Instagram — from the manual links
 // ---------------------------------------------------------------------
 
 function readLinks() {
@@ -159,7 +159,7 @@ function readLinks() {
   }
 }
 
-// Δέχεται είτε σκέτο link, είτε αντικείμενο με link + δικά μας στοιχεία.
+// Takes either a bare link or an object with link + details of our own.
 function normalizeLink(entry) {
   if (typeof entry === 'string') return { url: entry.trim() };
   if (entry && typeof entry.url === 'string') return { ...entry, url: entry.url.trim() };
@@ -194,7 +194,7 @@ async function fetchManual() {
     if (platform === 'tiktok') {
       const data = await oembed(`https://www.tiktok.com/oembed?url=${encodeURIComponent(entry.url)}`);
       if (data) {
-        // Ό,τι έγραψε ο συντάκτης υπερισχύει του αυτόματου.
+        // What the editor wrote wins over the automatic value.
         item.title = item.title || data.title || '';
         item.image = item.image || data.thumbnail_url || '';
       } else {
@@ -202,13 +202,13 @@ async function fetchManual() {
       }
     }
 
-    // Χωρίς εικόνα η κάρτα βγαίνει άδειο ορθογώνιο — καλύτερα να λείπει.
+    // With no image the card is an empty rectangle — better left out.
     if (!item.image) {
       console.warn(`ΠΡΟΣΟΧΗ: χωρίς εικόνα, το παραλείπω — ${entry.url.slice(0, 60)}`);
       continue;
     }
 
-    // Οι εικόνες του συντάκτη κάθονται στο public/, όχι στο δίκτυο.
+    // The editor's images sit in public/, not on the network.
     const size = /^https?:/i.test(item.image)
       ? await imageSize(item.image)
       : null;
@@ -222,7 +222,7 @@ async function fetchManual() {
   return out;
 }
 
-// Σταθερός κωδικός από το link, για να μην αλλάζει σε κάθε τρέξιμο.
+// A stable id from the link, so it does not change on every run.
 function slug(url) {
   return String(url)
     .replace(/[?#].*$/, '')
@@ -240,8 +240,8 @@ async function main() {
 
   const items = [...manual, ...shorts];
 
-  // Αν δεν μαζέψαμε τίποτα, ΔΕΝ πατάμε πάνω στο παλιό αρχείο: μια
-  // προσωρινή αλλαγή του YouTube δεν πρέπει να αδειάζει την αρχική.
+  // If we collected nothing we do NOT overwrite the old file: a
+  // temporary YouTube change must not empty the homepage.
   if (!items.length) {
     console.warn('Δεν μαζεύτηκε τίποτα — αφήνω το data/social.json ως έχει.');
     return;
@@ -251,8 +251,8 @@ async function main() {
   console.log(`Γράφτηκαν ${items.length} στο data/social.json`);
 }
 
-// Ποτέ δεν ρίχνουμε το workflow για τα social: είναι το στολίδι, όχι
-// το περιεχόμενο. Ό,τι πάει λάθος το λέμε και προχωράμε.
+// We never fail the workflow over social: it is the garnish, not the
+// content. Whatever goes wrong we report and move on.
 main().catch((err) => {
   console.warn(`ΠΡΟΣΟΧΗ: το fetch-social σταμάτησε — ${err.message}`);
 });

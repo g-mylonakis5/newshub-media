@@ -8,9 +8,9 @@ const ALIAS_FILE = path.join(__dirname, 'data/people-aliases.json');
 const asJson = process.argv.includes('--json');
 const willWrite = process.argv.includes('--write');
 
-// ---- ίδιος καθαρισμός με το build.js ----
-// Αν αλλάξει εκεί, αλλάζει κι εδώ: αλλιώς το σκριπτ βλέπει άλλα
-// ονόματα από αυτά που φτιάχνουν τις σελίδες.
+// ---- same cleanup as build.js ----
+// Change it there and it changes here: otherwise the script sees names
+// other than the ones that build the pages.
 function cleanGuestName(name){
   return String(name)
     .replace(/[\s,–-]*(στο|στον|στη|στην)?\s*new(s)?h(s)?ub\.?\s*(gr)?\b\.?/i, '')
@@ -33,7 +33,7 @@ function splitTitle(name){
   };
 }
 
-// Πεζά, χωρίς τόνους και διαλυτικά — μόνο για σύγκριση.
+// Lowercase, no accents or diaereses — for comparison only.
 function flat(text){
   return String(text).toLowerCase()
     .replace(/[ΐϊ]/g, 'ι').replace(/[ΰϋ]/g, 'υ')
@@ -41,7 +41,7 @@ function flat(text){
     .trim();
 }
 
-// «Α.» ή «Αλ.» ή «Ειρ.» -> αρχικό. Σκέτη λέξη -> ολόκληρο όνομα.
+// "Α." or "Αλ." or "Ειρ." -> an initial. A bare word -> a full name.
 function isInitial(word){
   return /\.$/.test(word) || /^[Α-ΩΆΈΉΊΌΎΏA-Z]$/.test(word);
 }
@@ -58,7 +58,7 @@ function parts(name){
 function suggestFamilies(counts){
   const names = Object.keys(counts);
 
-  // Ομαδοποίηση κατά επώνυμο.
+  // Grouped by surname.
   const byLast = {};
   for (const n of names) {
     const p = parts(n);
@@ -67,7 +67,7 @@ function suggestFamilies(counts){
     (byLast[key] = byLast[key] || []).push({ name: n, ...p, n: counts[n] });
   }
 
-  // Υποψήφια ζεύγη: ίδιο επώνυμο, το ένα με αρχικό που ταιριάζει.
+  // Candidate pairs: same surname, one with a matching initial.
   const pairs = [];
   for (const key of Object.keys(byLast)) {
     const group = byLast[key];
@@ -82,14 +82,14 @@ function suggestFamilies(counts){
 
         let why = '';
         if (aInit !== bInit) {
-          // Το ένα είναι αρχικό, το άλλο ολόκληρο.
+          // One is an initial, the other the full name.
           const short = aInit ? a : b;
           const full = aInit ? b : a;
           const stem = flat(short.first).replace(/\.$/, '');
           if (stem && flat(full.first).startsWith(stem)) why = 'αρχικό ↔ ολόκληρο';
         } else if (!aInit && !bInit && flat(a.first) === flat(b.first)) {
-          // Ίδιο μικρό και ίδιο επώνυμο, αλλά γράφτηκε αλλιώς
-          // (τόνοι, διαλυτικά) — τα ισοπεδώνει το flat().
+          // Same first name and surname, spelled differently (accents,
+          // diaereses) — flat() levels those out.
           if (a.name !== b.name) why = 'ίδιο όνομα, άλλη γραφή';
         }
 
@@ -113,9 +113,9 @@ function suggestFamilies(counts){
   const groups = {};
   for (const n of names) (groups[find(n)] = groups[find(n)] || []).push(n);
 
-  // Κανονικό όνομα: ποτέ αρχικό αν υπάρχει ολόκληρο· μετά όποιο έχει
-  // τα περισσότερα επεισόδια· στα ίσα, το πιο μακρύ («Κωνσταντίνος»
-  // πάνω από «Κώστας»).
+  // The canonical name: never an initial if a full one exists; then
+  // whichever has the most episodes; on a tie, the longer
+  // ("Κωνσταντίνος" over "Κώστας").
   const pick = (list) => {
     const full = list.filter((n) => !isInitial(parts(n).first));
     return (full.length ? full : list).sort((x, y) =>
@@ -134,7 +134,7 @@ function suggestFamilies(counts){
 function main(){
   const episodes = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
 
-  // όνομα -> πόσα επεισόδια
+  // name -> episode count
   const seen = {};
   for (const ep of episodes) {
     if (!ep.guest) continue;
@@ -150,8 +150,9 @@ function main(){
 
   const names = Object.keys(seen);
 
-  // Ίδιο όνομα με/χωρίς τίτλο δεν βγαίνει ως ζεύγος, γιατί το splitTitle
-  // τα έχει ήδη ενώσει — τα τυπώνουμε χωριστά για ενημέρωση.
+  // The same name with and without a title is not reported as a pair,
+  // because splitTitle has already merged them — we print those
+  // separately, for information.
   const titled = names.filter((n) => seen[n].titles.size);
 
   const counts = {};
@@ -164,8 +165,8 @@ function main(){
     const aliases = {};
     for (const f of families) aliases[f.canonical] = f.others;
 
-    // Κρατάμε ό,τι υπάρχει ήδη — σχόλια, τίτλους, και χειροκίνητες
-    // αντιστοιχίσεις που δεν βγαίνουν από κανέναν αυτόματο έλεγχο.
+    // We keep whatever is already there — notes, titles, and manual
+    // mappings that no automatic check would produce.
     let current = {};
     try {
       current = JSON.parse(fs.readFileSync(ALIAS_FILE, 'utf8'));
@@ -218,8 +219,8 @@ function main(){
   console.log(`Αν εγκριθούν όλα:  ${names.length - dropped}   (−${dropped})`);
 }
 
-// Τρέχει μόνο όταν το καλείς κατευθείαν. Όταν το φορτώνει το build.js,
-// δίνει μόνο τη λογική πρότασης — ΔΕΝ διαβάζει και δεν γράφει αρχεία.
+// Runs only when called directly. When build.js loads it, it supplies
+// the suggestion logic only — it neither reads nor writes files.
 if (require.main === module) {
   main();
 } else {

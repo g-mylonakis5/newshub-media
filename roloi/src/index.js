@@ -12,8 +12,8 @@ const PALIA = {
 
 const VARIA_LEPTA = 60;
 
-// Ο παλμός: κάθε πόσα λεπτά πατάμε το κουμπί ΑΚΟΜΑ ΚΙ ΑΝ δεν άλλαξε
-// τίποτα στο sitemap. Δες το σχόλιο στο koitaKaiPata για το γιατί.
+// The heartbeat: how often we press the button EVEN IF nothing changed
+// in the sitemap. See the comment in koitaKaiPata for why.
 const KARDIA_LEPTA = 5;
 
 const PATOMA_LEPTA = 1;
@@ -33,9 +33,9 @@ function apotyposi(xml) {
     }
   }
 
-  // Το πλήθος μπαίνει δίπλα στο άθροισμα: δύο διαφορετικές λίστες με
-  // το ίδιο άθροισμα είναι απίθανες, αλλά αν συμβεί, το πλήθος τις
-  // ξεχωρίζει — και δεν κοστίζει τίποτα.
+  // The count goes next to the sum: two different lists with the same
+  // sum are unlikely, but if it happens the count separates them — and
+  // it costs nothing.
   return `${plithos}:${(h >>> 0).toString(16)}`;
 }
 
@@ -51,8 +51,8 @@ async function diavase(env) {
         varia: Number(s.varia) || 0,
       };
     } catch (err) {
-      // Χαλασμένο σημείωμα. Δεν σταματάμε γι' αυτό — συνεχίζουμε στα
-      // παλιά, και το επόμενο πάτημα το ξαναγράφει σωστά.
+      // A corrupt note. We do not stop over it — we carry on with the
+      // old one, and the next press rewrites it correctly.
     }
   }
 
@@ -91,7 +91,7 @@ async function pataToKoumpi(env, varia = false) {
       : { ref: env.GITHUB_BRANCH || 'main' }),
   });
 
-  // Επιτυχία = 204 χωρίς σώμα.
+  // Success = 204 with no body.
   if (res.status === 204) return;
 
   const detail = (await res.text()).slice(0, 300);
@@ -101,9 +101,9 @@ async function pataToKoumpi(env, varia = false) {
 async function koitaKaiPata(env, anagkastika = false) {
   const res = await fetch(SITEMAP, {
     headers: { 'User-Agent': 'newshub-media-roloi' },
-    // Χωρίς αυτό, η Cloudflare μπορεί να μας σερβίρει δική της
-    // αποθηκευμένη αντιγραφή — και θα κοιτάζαμε χθεσινό sitemap
-    // νομίζοντας ότι δεν βγήκε τίποτα.
+    // Without this, Cloudflare may serve us its own cached copy — and we
+    // would be looking at yesterday's sitemap thinking nothing was
+    // published.
     cf: { cacheTtl: 0, cacheEverything: false },
   });
 
@@ -111,15 +111,15 @@ async function koitaKaiPata(env, anagkastika = false) {
 
   const tora = apotyposi(await res.text());
 
-  // Ένα διάβασμα για όλα όσα θυμόμαστε.
+  // One read for everything we remember.
   const simeioma = await diavase(env);
   const prin = simeioma.apotyposi;
 
   const perasanVaria = (Date.now() - simeioma.varia) / 60000;
   const thelouneVaria = perasanVaria >= VARIA_LEPTA;
 
-  // Πόση ώρα από το τελευταίο πάτημα. Διαβάζεται ΠΡΙΝ από τον έλεγχο
-  // αλλαγής, γιατί το χρειάζεται και ο παλμός παρακάτω.
+  // How long since the last press. Read BEFORE the change check,
+  // because the heartbeat below needs it too.
   const perasan = (Date.now() - simeioma.patima) / 60000;
 
   const kardia = perasan >= KARDIA_LEPTA;
@@ -128,8 +128,8 @@ async function koitaKaiPata(env, anagkastika = false) {
     return 'Τίποτα καινούριο — δεν ξύπνησα κανέναν.';
   }
 
-  // Το πάτωμα, μόνο για τις ειδήσεις. Τα βαριά και ο παλμός το
-  // ΠΡΟΣΠΕΡΝΟΥΝ: έρχονται ούτως ή άλλως πολύ πιο αραιά από αυτό.
+  // The floor, for news only. The heavy jobs and the heartbeat SKIP it:
+  // they come round far less often than that anyway.
   if (!anagkastika && !thelouneVaria && !kardia && perasan < PATOMA_LEPTA) {
     const meno = (PATOMA_LEPTA - perasan).toFixed(1);
     return `Υπάρχει καινούριο, αλλά πάτησα πριν ${perasan.toFixed(1)}'`
@@ -138,9 +138,9 @@ async function koitaKaiPata(env, anagkastika = false) {
 
   await pataToKoumpi(env, thelouneVaria);
 
-  // Σώζουμε ΜΟΝΟ μετά από επιτυχημένο πάτημα. Αν το GitHub αρνηθεί, το
-  // αποτύπωμα μένει παλιό και ξαναπροσπαθούμε στο επόμενο λεπτό —
-  // αλλιώς μια στιγμιαία άρνηση θα έθαβε τα άρθρα για πάντα.
+  // We save ONLY after a successful press. If GitHub refuses, the
+  // fingerprint stays old and we try again next minute — otherwise one
+  // momentary refusal would bury the articles forever.
   const stigmi = Date.now();
   await env.ROI.put(SIMEIOMA, JSON.stringify({
     apotyposi: tora,
@@ -169,9 +169,9 @@ async function grapseRoi(request, env) {
   }
 
   if (!data || !Array.isArray(data.items) || !data.items.length) {
-    // Ποτέ άδεια ροή: θα έσβηνε το πλαίσιο σε όλους, και μια στιγμιαία
-    // αστοχία της λήψης θα γινόταν ορατή βλάβη. Η προηγούμενη ροή,
-    // όσο παλιά κι αν είναι, είναι καλύτερη από το τίποτα.
+    // Never an empty ticker: it would blank the box for everyone, and a
+    // momentary fetch glitch would become a visible fault. The previous
+    // ticker, however old, beats nothing.
     return new Response('Άδεια ροή — δεν γράφω.\n', { status: 400 });
   }
 
@@ -179,8 +179,8 @@ async function grapseRoi(request, env) {
     if (!it || typeof it.t !== 'string' || typeof it.u !== 'string') {
       return new Response('Στοιχείο χωρίς τίτλο ή διεύθυνση.\n', { status: 400 });
     }
-    // Η διεύθυνση μπαίνει σε href. Μόνο newshub.gr, και μόνο https:
-    // ένα «javascript:» εκεί μέσα θα έτρεχε στον browser του αναγνώστη.
+    // The URL goes into an href. newshub.gr only, and https only: a
+    // "javascript:" in there would run in the reader's browser.
     if (!it.u.startsWith('https://www.newshub.gr/')) {
       return new Response(`Ξένη διεύθυνση: ${it.u.slice(0, 60)}\n`, { status: 400 });
     }
@@ -203,7 +203,7 @@ async function grapseRoi(request, env) {
         return new Response('Ίδιοι τίτλοι — δεν ξαναέγραψα.\n');
       }
     } catch (err) {
-      // Χαλασμένο· το ξαναγράφουμε από την αρχή.
+      // Corrupt; we write it again from scratch.
     }
   }
 

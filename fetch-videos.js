@@ -6,8 +6,8 @@ const OUT_FILE = path.join(__dirname, 'data/videos.json');
 const SHOWS_FILE = path.join(__dirname, 'data/shows.json');
 const ENV_FILE = path.join(__dirname, '.env');
 
-// Τα ονόματα των εκπομπών ΔΕΝ τα γράφουμε εδώ — τα δίνει το ίδιο το
-// YouTube. Έτσι αν μετονομαστεί μια λίστα, μας ακολουθεί μόνη της.
+// The show names are NOT written here — YouTube itself supplies them.
+// So if a playlist is renamed, we follow it automatically.
 const PLAYLISTS = [
   'PLeLPfJ0KGQSQ',                      // Εξ Απορρήτων
   'PLpwq9QIFWXEBxDudlG1tQG13CkwKq8CxF', // Παρασκήνιο
@@ -26,11 +26,11 @@ const PLAYLISTS = [
   'PLEWTnP9rz2So',                      // Αντίλογος στο Newshub.gr
   'PLpwq9QIFWXEA2GoQ07cap1MW7B8EbbQhB', // Τα μονοπάτια ιστορίας
 
-  // ΠΡΟΣΩΡΙΝΑ ΕΚΤΟΣ — ξεσχολίασέ τα όταν γεμίσουν:
-  // 'PLLcdtU9QLgvs',                   // Αθλητικά (2 βίντεο)
+  // TEMPORARILY OFF — uncomment once they fill up:
+  // 'PLLcdtU9QLgvs',                   // Αθλητικά (2 videos)
 ];
 
-// Διαβάζει το .env χωρίς βιβλιοθήκη: κάθε γραμμή ΟΝΟΜΑ=τιμή.
+// Reads .env without a library: one NAME=value per line.
 function readEnv() {
   if (!fs.existsSync(ENV_FILE)) return {};
   const out = {};
@@ -68,8 +68,8 @@ const SKOUPIDIA = [
   /^🎙/u,
 ];
 
-// Τα 👉 ▶ 🔴 • στην αρχή της γραμμής είναι στολίδι, όχι κείμενο — και
-// κρύβουν από τον έλεγχο τον σύνδεσμο που ακολουθεί.
+// The 👉 ▶ 🔴 • at the start of a line are decoration, not text — and
+// they hide the link that follows from the check.
 function xeguma(line) {
   return line.replace(/^[\s\p{Extended_Pictographic} -⯿️•·▪]+/u, '').trim();
 }
@@ -83,24 +83,24 @@ function perigrafi(text) {
   const lines = String(text || '').replace(/\r/g, '').split('\n')
     .map((l) => xeguma(l.replace(/[ \t]+/g, ' ')));
 
-  // Μπροστά: πετάμε όσες γραμμές είναι σκουπίδι ή κενές.
+  // At the front: drop the lines that are junk or empty.
   let a = 0;
   while (a < lines.length && (!lines[a] || skoupidi(lines[a]))) a++;
 
-  // Από εκεί και κάτω: κόβουμε στην ΠΡΩΤΗ γραμμή-σκουπίδι. Ό,τι
-  // ακολουθεί την ουρά είναι πάντα κι άλλη ουρά.
+  // From there down: cut at the FIRST junk line. Whatever follows the
+  // tail is always more tail.
   const keep = [];
   for (let i = a; i < lines.length; i++) {
     if (skoupidi(lines[i])) break;
     if (lines[i]) keep.push(lines[i]);
   }
 
-  // Υπογραφή συντάκτη στο τέλος: «Β.Β.», «Μ.Κ.».
+  // An editor's initials at the end: "Β.Β.", "Μ.Κ.".
   while (keep.length && keep[keep.length - 1].length <= 8
     && /^[Α-ΩA-Z][.\s]/.test(keep[keep.length - 1])) keep.pop();
 
-  // Το όριο μετριέται σε ΟΛΟΚΛΗΡΕΣ παραγράφους: μισή παράγραφος με
-  // αποσιωπητικά διαβάζεται σαν χαλασμένο κείμενο.
+  // The limit is measured in WHOLE paragraphs: half a paragraph with an
+  // ellipsis reads like broken text.
   const out = [];
   let len = 0;
   for (const p of keep) {
@@ -109,8 +109,8 @@ function perigrafi(text) {
     len += p.length + 1;
   }
 
-  // Οι αλλαγές γραμμής ΜΕΝΟΥΝ: είναι οι παράγραφοι, και το summaryHtml
-  // του build.js τις σέβεται όπως και στα επεισόδια.
+  // Line breaks STAY: they are the paragraphs, and build.js's
+  // summaryHtml respects them as it does for episodes.
   return out.join('\n');
 }
 
@@ -128,7 +128,7 @@ function makeVideo(id, show, playlist, title, date, image, summary) {
   };
 }
 
-// ---- δρόμος 1: χωρίς κλειδί, δημόσιο RSS (15 πιο πρόσφατα) ----
+// ---- route 1: no key, public RSS (15 most recent) ----
 
 async function viaRss(playlistId) {
   const url = 'https://www.youtube.com/feeds/videos.xml?playlist_id=' + playlistId;
@@ -154,7 +154,7 @@ async function viaRss(playlistId) {
   return { show, videos };
 }
 
-// ---- δρόμος 2: με κλειδί, YouTube Data API v3 (όλα τα βίντεο) ----
+// ---- route 2: with a key, YouTube Data API v3 (every video) ----
 
 async function api(endpoint, params, key) {
   const qs = new URLSearchParams({ ...params, key }).toString();
@@ -170,7 +170,7 @@ async function api(endpoint, params, key) {
 const showInfo = {};
 
 async function viaApi(playlistId, key) {
-  // Πρώτα το όνομα της λίστας...
+  // The playlist's name first...
   const info = await api('playlists', { part: 'snippet', id: playlistId }, key);
   const snip = info.items && info.items[0] ? info.items[0].snippet : null;
   const show = snip ? snip.title : '';
@@ -182,7 +182,7 @@ async function viaApi(playlistId, key) {
     };
   }
 
-  // ...μετά τα βίντεο, 50 τη φορά όσο υπάρχει επόμενη σελίδα.
+  // ...then the videos, 50 at a time while there is a next page.
   const videos = [];
   let pageToken = '';
 
@@ -196,7 +196,7 @@ async function viaApi(playlistId, key) {
 
     for (const item of page.items || []) {
       const s = item.snippet;
-      // Τα σβησμένα και τα ιδιωτικά μένουν στη λίστα ως κενά. Τα πετάμε.
+      // Deleted and private ones stay in the list as blanks. We drop them.
       if (!s || s.title === 'Deleted video' || s.title === 'Private video') continue;
 
       const thumbs = s.thumbnails || {};
@@ -272,7 +272,7 @@ async function check() {
 
   console.log(`Κλειδί: ${key.slice(0, 6)}…${key.slice(-4)} (${key.length} χαρακτήρες)\n`);
 
-  // Πρώτα το ίδιο το κλειδί, με ένα ερώτημα που δουλεύει πάντα.
+  // The key itself first, with a query that always works.
   try {
     const r = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&id=UCgI7vd72xX-ZNWb_x7zzWJg&key=${key}`);
     const j = await r.json();
@@ -310,9 +310,9 @@ async function check() {
   }
   console.log(`\n${ok} από ${PLAYLISTS.length} λίστες απαντούν.`);
 
-  // Ο έλεγχος απαντά «ποιες από τις δικές μας ζουν». Το ανάποδο —
-  // ποιες του καναλιού δεν είναι δικές μας — είναι η άλλη μισή
-  // απάντηση, και εδώ δεν κοστίζει τίποτα παραπάνω.
+  // The check answers "which of ours are alive". The reverse — which of
+  // the channel's are not ours — is the other half of the answer, and
+  // here it costs nothing extra.
   try {
     anaforaLipoyson(await lipoysesListes(key, { ids: new Set(PLAYLISTS), titloi }));
   } catch (err) {
@@ -337,9 +337,9 @@ async function main() {
     console.error('Το data/videos.json μένει ως έχει.');
     console.error('');
 
-    // ΔΕΝ βγαίνουμε με σφάλμα: το build πρέπει να συνεχίσει με τα
-    // δεδομένα που ήδη υπάρχουν στο repo. Αν σπάγαμε εδώ, ένα
-    // ξεχασμένο κλειδί θα μπλόκαρε κάθε δημοσίευση.
+    // We do NOT exit with an error: the build must carry on with the
+    // data already in the repo. Breaking here would let one forgotten
+    // key block every publish.
     const have = (() => {
       try { return JSON.parse(fs.readFileSync(OUT_FILE, 'utf8')).length; }
       catch { return 0; }
@@ -366,9 +366,9 @@ async function main() {
     }
   }
 
-  // Τα ονόματα τα ξέρουμε μόνο μετά τον βρόχο — τα γράφει το viaApi
-  // στο showInfo. Σε δικό της try: μια αστοχία εδώ είναι ενημέρωση που
-  // χάθηκε, όχι λόγος να πάνε χαμένα 1.500 βίντεο που ήδη κατέβηκαν.
+  // The names are known only after the loop — viaApi writes them into
+  // showInfo. In its own try: a miss here is a lost update, not a reason
+  // to throw away 1,500 videos already downloaded.
   try {
     anaforaLipoyson(await lipoysesListes(key, {
       ids: new Set(PLAYLISTS),
@@ -391,7 +391,7 @@ async function main() {
     all.splice(0, all.length, ...once);
   }
 
-  // Νεότερα πρώτα, όπως και τα επεισόδια.
+  // Newest first, as with the episodes.
   all.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const before = (() => {
@@ -402,7 +402,7 @@ async function main() {
     }
   })();
 
-  // Κάτω από το μισό = κάτι πήγε στραβά, όχι πραγματική μείωση.
+  // Under half = something went wrong, not a real drop.
   const SAFE_DROP = 0.5;
 
   if (before.length && all.length < before.length * SAFE_DROP) {
@@ -430,9 +430,9 @@ async function main() {
     console.warn(`ΠΡΟΣΟΧΗ: ${failed} λίστες απέτυχαν — το αρχείο γράφτηκε με ${all.length} βίντεο.`);
   }
 
-  // Οι περιγραφές των εκπομπών. Γράφονται μόνο αν μαζέψαμε κάποια —
-  // χωρίς κλειδί ο δρόμος του RSS δεν τις δίνει, και δεν θέλουμε να
-  // σβήσουμε ό,τι είχαμε από προηγούμενο τρέξιμο με κλειδί.
+  // The shows' descriptions. Written only if we collected any — without
+  // a key the RSS route does not supply them, and we do not want to wipe
+  // what a previous run with a key had.
   const names = Object.keys(showInfo);
   if (names.length) {
     const withText = names.filter((n) => showInfo[n].description).length;
