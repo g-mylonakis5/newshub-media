@@ -1764,6 +1764,11 @@ ${twin ? '          <span class="strip-note">Η θέση σου κρατιέτα
         ${cats[0] ? `<p class="card-label">${esc(cats[0])}</p>` : ''}
         <h1 class="episode-title">${title}</h1>
         <p class="episode-meta">${meta}</p>
+${/* THROUGH summaryHtml, never raw. With a plain esc() the hashtags and
+     every Apple/Spotify/YouTube/facebook/twitter/instagram/TikTok link
+     of Buzzsprout's tail arrived here — and as one slab at that, because
+     the paragraphs were lost too. The episode page got this right from
+     the start; the video page did not. */ ''}
 ${keimeno ? summaryHtml(keimeno) : ''}
 
         <p class="episode-links">
@@ -1771,6 +1776,10 @@ ${keimeno ? summaryHtml(keimeno) : ''}
           ${twin ? `<a href="../${episodeUrl(twin)}">Η σελίδα του επεισοδίου →</a>` : ''}
         </p>
 
+${/* Below the video, the description and the links, and before "Next".
+     That is, once the visitor has had what they came for and before the
+     next thing is offered — the natural pause. NEVER higher up: the
+     player sits at the top of this column. */ ''}
 ${adSlot('video-mid', 'leaderboard')}
 
         ${queue ? `<section class="queue">
@@ -4867,6 +4876,11 @@ ${latest}
       });
 
       try {
+        // Search from the URL: /search?q=κρήτη runs on its own.
+        //
+        // Two things come of it: the link to a search can be shared, and
+        // Google may show a search box inside our results (SearchAction
+        // on the homepage) — which points at exactly this address.
         var q = new URLSearchParams(location.search).get('q');
         if (q) ui.triggerSearch(q);
       } catch (e) {}
@@ -5166,8 +5180,8 @@ ${lead}${rest ? `\n${rest}` : ''}
       </div>
     </section>
 
-${/* After the person's conversations, before the "others". Same logic
-     με τη σελίδα επεισοδίου: πρώτα αυτό που ήρθε να δει ο αναγνώστης. */ ''}
+${/* After the person's conversations, before the "others". Same logic as
+     the episode page: first what the reader came to see. */ ''}
 ${adSlot('guest-mid', 'leaderboard')}
 
 ${near ? `    <section class="bio-near">
@@ -5879,7 +5893,10 @@ function main(){
   const list = flow.map((it) => card(it, 0, rank.get(it))).join('\n');
 
   const html = page({
-    title: 'NewsHub Media',
+    // The tab shows the first twenty characters or so, and the homepage
+    // title is the one Google leans on hardest. It was the bare name,
+    // which says nothing to anyone who has not been here before.
+    title: `${SITE_NAME} — podcast και βίντεο από την Κρήτη`,
     // Only here: the ticker exists only on the homepage, and we do not
     // load scripts on 4,700 pages that do not need them.
     scripts: ['roi.js'],
@@ -5942,6 +5959,10 @@ ${topicRows(catGroups)}
 
 ${namesSection(groups)}
 
+${/* The homepage's second slot. Between "Πρόσωπα" and "Και ακόμα":
+     that is where the main body ends and the page's tail begins — a
+     pause, not an interruption. The first slot (home-top) sits much
+     higher, so the two are not neighbours. */ ''}
 ${adSlot('home-mid', 'leaderboard')}
 
 ${moreTopics(catGroups)}
