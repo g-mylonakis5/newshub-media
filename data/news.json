@@ -1,5 +1,17 @@
 [
   {
+    "id": "zelenski-sti-diaskepsi-ramstain-chreiazomaste-pyrayloys-antiaeroporikis-amynas-kai-akomi-40-machitika-f-16",
+    "title": "Ζελένσκι στη Διάσκεψη Ράμσταϊν: Χρειαζόμαστε πυραύλους αντιαεροπορικής άμυνας και ακόμη 40 μαχητικά F-16",
+    "url": "https://www.newshub.gr/el/geopolitiki/zelenski-sti-diaskepsi-ramstain-chreiazomaste-pyrayloys-antiaeroporikis-amynas-kai-akomi-40-machitika-f-16",
+    "date": "2026-11-17T21:17:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/ap26321588527683.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/ap26321588527683.jpg",
+    "summary": "Ο Ουκρανός πρόεδρος Βολοντίμιρ Ζελένσκι, ο οποίος συμμετέχει μέσω βιντεοδιάσκεψης στην 37η διάσκεψη της Διεθνούς Ομάδας Επαφής για την Άμυνα της Ουκρανίας, τ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "synergasia-nato-kai-openai-gia-tin-antimetopisi-kyvernoepitheseon",
     "title": "Συνεργασία ΝΑΤΟ και Openai για την αντιμετώπιση κυβερνοεπιθέσεων",
     "url": "https://www.newshub.gr/el/kosmos/synergasia-nato-kai-openai-gia-tin-antimetopisi-kyvernoepitheseon",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/ap26272702716571-1024x683.jpg",
     "summary": "Η OpenAI ανακοίνωσε την Τρίτη, 17/11, τη σύναψη συνεργασίας με το ΝΑΤΟ, με στόχο την παροχή εργαλείων κυβερνοασφάλειας στη Βορειοατλαντική Συμμαχία και την υ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "giortes-gia-oloys-pote-kanei-premiera-to-programma-poia-proionta-tha-perilamvanei",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/pyrovolismoi-1024x576.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/pyrovolismoi-1024x576.jpg",
     "summary": "Νεκρός φαίνεται πως είναι ο ύποπτος για την αιματηρή επίθεση που έγινε νωρίς το πρωί στην Ουάσιγκτον, περίπου ενάμισι χιλιόμετρο από τον Λευκό Οίκο.\r\n\r\nΣύμφω...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "allages-sto-systima-moriodotisis-athliton-sta-aei-ti-provlepei-to-neo-plaisio-kai-apo-pote-tha-ischysei",
-    "title": "Αλλαγές στο σύστημα μοριοδότησης αθλητών στα ΑΕΙ: Τι προβλέπει το νέο πλαίσιο και από πότε θα ισχύσει",
-    "url": "https://www.newshub.gr/el/ellada/allages-sto-systima-moriodotisis-athliton-sta-aei-ti-provlepei-to-neo-plaisio-kai-apo-pote-tha-ischysei",
-    "date": "2026-11-12T18:25:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/gepedo-mpasket-ypaithrio.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/gepedo-mpasket-ypaithrio.jpg",
-    "summary": "Στην επανεξέταση του συνολικού πλαισίου αθλητικής μοριοδότησης για την εισαγωγή στην Τριτοβάθμια Εκπαίδευση προχωρεί το υπουργείο Παιδείας, μετά τις αντιδράσ...",
     "author": null,
     "featured": false
   },
