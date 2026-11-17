@@ -490,9 +490,9 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   <meta name="description" content="${desc}">
   <link rel="canonical" href="${canon}">
 ${prev ? `  <link rel="prev" href="${SITE_URL}/${prev}">\n` : ''}${next ? `  <link rel="next" href="${SITE_URL}/${next}">\n` : ''}
-  <!-- Η κάρτα που εμφανίζεται όταν μοιράζεται ο σύνδεσμος.
-       Ο τίτλος φτάνει εδώ ήδη περασμένος από esc() — δεν τον ξαναπερνάμε,
-       γιατί το &quot; θα γινόταν &amp;quot; και θα φαινόταν στην κάρτα. -->
+  <!-- The card shown when the link is shared.
+       The title arrives already passed through esc() — we do not escape it
+       again, or &quot; would become &amp;quot; and show in the card. -->
   <meta property="og:type" content="${type}">
   <meta property="og:site_name" content="${SITE_NAME}">
   <meta property="og:locale" content="el_GR">
@@ -1944,8 +1944,8 @@ ${breadcrumb(crumbs, 1)}
         ${writerLine(a)}
         <p class="art-meta">${formatDate(a.date)} · ${minutes}′ ανάγνωση</p>
 
-        <!-- Η προέλευση μπαίνει ΠΡΙΝ το κείμενο. Ο αναγνώστης πρέπει να
-             ξέρει ποιος το έγραψε προτού το διαβάσει, όχι αφού. -->
+        <!-- The source goes BEFORE the text. The reader should know who
+             wrote it before reading, not after. -->
         <p class="art-origin">
           Δημοσιεύτηκε πρώτα στο
           <a href="${a.url}" rel="noopener">newshub.gr</a>
@@ -1971,9 +1971,9 @@ ${text}
       </footer>
     </article>
 
-${/* Στο τέλος του άρθρου, έξω από τη στήλη ανάγνωσης: όποιος έφτασε ως
-     εδώ διάβασε ό,τι ήρθε να διαβάσει. Είναι η δεύτερη θέση της
-     σελίδας — η πρώτη μπαίνει μέσα στο κείμενο, πολύ πιο πάνω. */ ''}
+${/* At the end of the article, outside the reading column: whoever got
+     here read what they came for. It is the second slot on the page — the
+     first sits inside the text, much higher up. */ ''}
 ${adSlot('article-end', 'leaderboard')}
   </main>`;
 
@@ -2138,9 +2138,9 @@ ${articleBodyHtml(a.body)}
       </footer>
     </article>
 
-${/* Στο τέλος του άρθρου, έξω από τη στήλη ανάγνωσης: όποιος έφτασε ως
-     εδώ διάβασε ό,τι ήρθε να διαβάσει. Είναι η δεύτερη θέση της
-     σελίδας — η πρώτη μπαίνει μέσα στο κείμενο, πολύ πιο πάνω. */ ''}
+${/* At the end of the article, outside the reading column: whoever got
+     here read what they came for. It is the second slot on the page — the
+     first sits inside the text, much higher up. */ ''}
 ${adSlot('article-end', 'leaderboard')}
   </main>`;
 
@@ -2636,8 +2636,8 @@ function showAbout(name){
     .split(/\r?\n/)
     .map((line) => line.replace(/[ \t]+/g, ' ').trim())
     .filter(Boolean)
-    // Το YouTube γράφει άλλοτε «Παρουσίαση» και άλλοτε «παρουσίαση».
-    // Κεφαλαίο το πρώτο γράμμα κάθε γραμμής — είναι αρχή πρότασης.
+    // YouTube writes both "Παρουσίαση" and "παρουσίαση". Capitalise the
+    // first letter of each line — it is the start of a sentence.
     .map((line) => line.charAt(0).toLocaleUpperCase('el') + line.slice(1))
     .slice(0, 3);
 }
@@ -2687,9 +2687,9 @@ function showArtImg(name, { depth = 0, sizes, cls = '', eager = false, minWidth 
 
   const src = `${up}shows/${art.file}`;
 
-  // Το μεγάλο αρχείο ορίζει σχήμα και αναλογία· τα -800/-400 είναι
-  // σμικρύνσεις του ίδιου καρέ. Αν λείπει κάποιο, το παραλείπουμε από
-  // το srcset αντί να πούμε ψέματα για το πλάτος του.
+  // The large file defines shape and ratio; -800/-400 are downsizes of the
+  // same frame. If one is missing we leave it out of the srcset rather
+  // than lie about its width.
   const full = webpSize(`${art.file}.webp`);
   const srcset = [
     [`${src}-400.webp`, webpSize(`${art.file}-400.webp`)],
@@ -2718,15 +2718,15 @@ function showsSection(groups, depth = 0){
       const latest = g.items[0];
       const count = g.items.length;
 
-      // Με δικό της εξώφυλλο, η κάρτα ΔΕΝ γράφει τον τίτλο: είναι ήδη
-      // μέσα στην εικόνα. Χωρίς εξώφυλλο, το στιγμιότυπο του βίντεο
-      // δεν λέει τίποτα μόνο του, οπότε το όνομα μπαίνει από κάτω.
+      // With its own poster the card does NOT print the title: it is
+      // already in the image. Without one, a video still says nothing by
+      // itself, so the name goes underneath.
       const art = showArtImg(g.name, {
         depth,
         cls: 'card-image show-cover',
-        // Τέσσερις στήλες στο πλήρες πλάτος, δύο στα μεσαία, μία στο κινητό.
+        // Four columns at full width, two at medium, one on mobile.
         sizes: '(max-width: 560px) 90vw, (max-width: 1100px) 45vw, 23vw',
-        // Μετρημένο: 256px στα 1280, 290px στα 390 — το στενότερο είναι 256.
+        // Measured: 256px at 1280, 290px at 390 — the narrowest is 256.
         minWidth: 256,
       });
 
@@ -2741,9 +2741,9 @@ function showsSection(groups, depth = 0){
       </article>`;
     }).join('\n');
 
-  // Οι εκπομπές και οι πλατφόρμες μπαίνουν στο ΙΔΙΟ πλαίσιο: και τα δύο
-  // απαντούν στο ίδιο ερώτημα — «τι ακούω και πού». Χωριστά, ο κόσμος
-  // έβλεπε τις εκπομπές και έφτανε στις πλατφόρμες τρεις ενότητες μετά.
+  // Shows and platforms share ONE frame: both answer the same question —
+  // what do I listen to, and where. Separated, people saw the shows and
+  // reached the platforms three sections later.
   return `  <section class="spot spot--pod">
     <header class="spot-head spot-head--center">
       ${waveform()}
@@ -2765,26 +2765,26 @@ ${cards}
   </section>`;
 }
 
-// Το λογότυπο του newshub.gr, φτιαγμένο με γράμματα και CSS αντί για
-// εικόνα: μένει καθαρό σε κάθε οθόνη, παίρνει το μέγεθος του κειμένου
-// γύρω του, και δεν είναι ένα ακόμα αρχείο να κατέβει.
+// The newshub.gr logo, made from letters and CSS instead of an image: it
+// stays sharp on any screen, takes the size of the text around it, and is
+// not one more file to download.
 function nhLogo(){
   return `<span class="nh">news<b>hub</b><i>.gr</i></span>`;
 }
 
-// Το μικρόφωνο της ενότητας podcast.
+// The microphone for the podcast section.
 function micIcon(){
   return `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M8.5 21h7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`;
 }
 
-// ---- σελίδες κατηγορίας ----
+// ---- category pages ----
 
 function buildCategories(videos, episodes, ownArticles = []){
   const groups = {};
   const seen = new Set();
 
-  // Ένα επεισόδιο μπαίνει σε ΟΛΕΣ τις κατηγορίες του. Το seen εμποδίζει
-  // μόνο να μπει δύο φορές το ίδιο πράγμα — όχι να μπει σε πολλά θέματα.
+  // An episode goes into ALL of its categories. seen only prevents the
+  // same item appearing twice — not appearing under several topics.
   const add = (names, item, id) => {
     if (seen.has(id)) return;
     seen.add(id);
@@ -2817,10 +2817,10 @@ function buildCategories(videos, episodes, ownArticles = []){
   return groups;
 }
 
-// Υπάρχει επεισόδιο με τον ίδιο τίτλο; Τότε το βίντεο είναι διπλό.
+// Is there an episode with the same title? Then the video is a duplicate.
 let episodeTitles;
 function videoHasTwin(v){
-  // Ρητό ζευγάρωμα: το βίντεο ανήκει σε επεισόδιο ό,τι κι αν λέει ο τίτλος.
+  // Explicit pairing: the video belongs to an episode whatever the title says.
   if (pairs().byVideo[v.id]) return true;
 
   if (!episodeTitles) {
@@ -2839,7 +2839,7 @@ const TWIN_MERES = 10;     // πόσο μακριά επιτρέπεται να 
 const TWIN_KOINES = 2;     // πόσες λέξεις πρέπει να μοιράζονται τα θέματα
 const TWIN_MIKOS = 5;      // πόσο μεγάλη πρέπει να είναι μια λέξη για να μετρήσει
 
-// Το όνομα μπροστά από την άνω τελεία, κανονικοποιημένο.
+// The name before the colon, normalised.
 function onomaApoTitlo(text){
   const m = decode(text).match(/^([^:]{3,40}):/);
   return m ? matchKey(m[1]) : '';
@@ -2851,9 +2851,8 @@ function kleidiArxikou(onoma){
   return `${lexeis[0][0]} ${lexeis[lexeis.length - 1]}`;
 }
 
-// Οι λέξεις του θέματος — ό,τι είναι ΜΕΤΑ την άνω τελεία. Μόνο οι
-// μεγάλες: τα «στη», «και», «του» τα μοιράζονται όλοι οι τίτλοι του
-// κόσμου και δεν αποδεικνύουν τίποτα.
+// The topic words — whatever follows the colon. Long ones only: "στη",
+// "και", "του" are shared by every title in the world and prove nothing.
 function themaLexeis(text){
   const m = decode(text).match(/^([^:]{3,40}):\s*(.+)$/);
   return new Set(
@@ -2868,9 +2867,9 @@ function twinApoOnoma(v){
     epsAnaOnoma = {};
     epsAnaArxiko = {};
     for (const ep of loadEpisodes()) {
-      // Όπου μίλησε άνθρωπος, δεν μαντεύουμε. Το «novideo» σημαίνει
-      // «το έψαξα, δεν υπάρχει» — και το ρητό βίντεο σημαίνει ότι το
-      // επεισόδιο είναι ήδη πιασμένο αλλού.
+      // Where a human has spoken, we do not guess. "novideo" means "looked,
+      // none exists" — and an explicit video means the episode is already
+      // taken elsewhere.
       const fix = pairOf(ep);
       if (fix && (fix.video || fix.novideo)) continue;
 
@@ -2886,9 +2885,9 @@ function twinApoOnoma(v){
   const onoma = onomaApoTitlo(v.title);
   if (!onoma) return null;
 
-  // Πρώτα το ακριβές όνομα. Το αρχικό είναι ΕΦΕΔΡΕΙΑ, όχι ισότιμο:
-  // «Κ. Λουκόπουλος» ταιριάζει με «Κωνσταντίνος Λουκόπουλος» μόνο
-  // όταν δεν υπάρχει κανείς με το ίδιο ακριβώς όνομα.
+  // Exact name first. The initial is a FALLBACK, not an equal: "Κ.
+  // Λουκόπουλος" matches "Κωνσταντίνος Λουκόπουλος" only when nobody
+  // carries that exact name.
   const ypopsifia = epsAnaOnoma[onoma]
     || epsAnaArxiko[kleidiArxikou(onoma)]
     || null;
@@ -2908,15 +2907,15 @@ function twinApoOnoma(v){
     return koines >= TWIN_KOINES;
   });
 
-  // Δύο που ταιριάζουν σημαίνει ότι δεν ξέρουμε. Καλύτερα διπλή
-  // εμφάνιση παρά να κρύψουμε λάθος βίντεο — το διπλό το βλέπεις και
-  // το διορθώνεις, το κρυμμένο όχι.
+  // Two matches means we do not know. Better a duplicate than hiding the
+  // wrong video — you can see a duplicate and fix it; you cannot see
+  // something hidden.
   return tairiazoun.length === 1 ? tairiazoun[0] : null;
 }
 
-// Το αντίστροφο του videoTwin: από βίντεο βρες το επεισόδιο. Χρειάζεται
-// ώστε η σελίδα βίντεο να μπορεί να προσφέρει και τον ήχο — τον ίδιο
-// player, με τη θέση να κρατιέται, όπως κάνει η σελίδα επεισοδίου.
+// The inverse of videoTwin: from a video, find the episode. Needed so the
+// video page can also offer the audio — same player, position kept, like
+// the episode page.
 let episodeByKey;
 function episodeTwin(v){
   if (!episodeByKey) {
@@ -2934,15 +2933,15 @@ function episodeTwin(v){
 
   return episodeByKey.full[matchKey(v.title)]
       || episodeByKey.head[headKey(v.title)]
-      // Ίδιος κανόνας με το videoHasTwin, αλλιώς το βίντεο θα κρυβόταν
-      // από τη ροή ως «έχει δίδυμο» και η σελίδα του δεν θα πρόσφερε
-      // τον ήχο εκείνου του διδύμου.
+      // Same rule as videoHasTwin, otherwise the video would be hidden
+      // from the flow as "has a twin" while its page failed to offer that
+      // twin's audio.
       || twinApoOnoma(v)
       || null;
 }
 
-// Σχετικά βίντεο: από την ίδια εκπομπή, εκτός από το ίδιο. Όσα έχουν
-// δίδυμο επεισόδιο παραλείπονται — εκείνα τα δείχνει η σελίδα τους.
+// Related videos: same show, excluding itself. Ones with a twin episode
+// are skipped — their own page shows those.
 let videosByShow;
 function relatedVideos(v, how = 6){
   if (!videosByShow) {
@@ -2962,15 +2961,15 @@ function relatedVideos(v, how = 6){
     .slice(0, how);
 }
 
-// ---- σελιδοποίηση ----
+// ---- pagination ----
 
-// Πόσα αντικείμενα ανά σελίδα. Η Κρήτη έχει 1.082 και η ΕΠΙΚΑΙΡΟΤΗΤΑ
-// 1.532 — χωρίς σπάσιμο, το 74% των θεμάτων και το 86% των εκπομπών
-// ήταν απρόσιτα, ενώ η αρχική υποσχόταν «Όλα τα 1.082».
+// Items per page. Κρήτη has 1,082 and ΕΠΙΚΑΙΡΟΤΗΤΑ 1,532 — unpaginated,
+// 74% of topics and 86% of shows were unreachable while the homepage
+// promised "all 1,082".
 const PER_PAGE = 60;
 
-// Η ΠΡΩΤΗ σελίδα κρατάει το σκέτο όνομα. Έτσι καμία υπάρχουσα διεύθυνση
-// δεν αλλάζει και κανένας σύνδεσμος δεν σπάει.
+// The FIRST page keeps the bare name. That way no existing URL changes
+// and no link breaks.
 function pagedName(base, n){
   return n <= 1 ? `${base}.html` : `${base}-${n}.html`;
 }
@@ -2999,8 +2998,8 @@ function sectionHead(kind, name, line, key){
     </header>`;
 }
 
-// Η μπάρα πλοήγησης. Σε 26 σελίδες δεν τις γράφουμε όλες: δείχνουμε την
-// αρχή, το τέλος και τη γειτονιά της τρέχουσας, με «…» ανάμεσα.
+// The pager. Across 26 pages we do not list them all: first, last and the
+// neighbourhood of the current one, with ellipses between.
 function pager(base, page, pages){
   if (pages <= 1) return '';
 
@@ -3030,7 +3029,7 @@ function pager(base, page, pages){
     </nav>`;
 }
 
-// Τι γράφουμε πάνω από τις κάρτες, ώστε να ξέρει ο επισκέπτης πού είναι.
+// What we print above the cards so the visitor knows where they are.
 function pageCountLine(total, n, pages){
   const word = total === 1 ? '1 επεισόδιο' : `${total.toLocaleString('el')} επεισόδια`;
   return pages <= 1 ? word : `${word} · σελίδα ${n} από ${pages}`;
@@ -3047,7 +3046,7 @@ function categoryPage(group, n = 1){
     'category-list'
   );
 
-  // Το υπόβαθρο του θέματος: το εξώφυλλο του πιο πρόσφατου κομματιού του.
+  // The topic backdrop: the cover of its most recent item.
   const pic = group.items.find((it) => it.image);
 
   const body = `${siteHeader(1)}
@@ -3083,9 +3082,9 @@ function pagedShell({ name, body, base, n, pages, dir }){
   });
 }
 
-// Το αρχείο: όλα τα επεισόδια, σελίδα σελίδα. Ο σύνδεσμος της αρχικής
-// λέει «Όλα τα επεισόδια» και πρέπει να παραδίδει ακριβώς αυτό.
-// Ο μήνας στη γενική, για φράσεις όπως «από τον Δεκέμβριο 2021».
+// The archive: every episode, page by page. The homepage link says "Όλα
+// τα επεισόδια" and has to deliver exactly that.
+// The month in genitive, for phrases like "από τον Δεκέμβριο 2021".
 const MONTHS_OF = ['Ιανουάριο', 'Φεβρουάριο', 'Μάρτιο', 'Απρίλιο', 'Μάιο', 'Ιούνιο',
   'Ιούλιο', 'Αύγουστο', 'Σεπτέμβριο', 'Οκτώβριο', 'Νοέμβριο', 'Δεκέμβριο'];
 
@@ -3095,13 +3094,12 @@ function monthName(iso){
   return a ? MONTHS_OF[a.month] : '';
 }
 
-// Ονομαστική, για επικεφαλίδες μέσα στο αρχείο: «Οκτώβριος 2026».
+// Nominative, for headings inside the archive: "Οκτώβριος 2026".
 const MONTHS_NOM = ['Ιανουάριος', 'Φεβρουάριος', 'Μάρτιος', 'Απρίλιος', 'Μάιος', 'Ιούνιος',
   'Ιούλιος', 'Αύγουστος', 'Σεπτέμβριος', 'Οκτώβριος', 'Νοέμβριος', 'Δεκέμβριος'];
 
-// Σε ποια σελίδα αρχίζει κάθε χρονιά. Το αρχείο είναι ταξινομημένο από
-// το νεότερο προς το παλιότερο, οπότε η πρώτη εμφάνιση μιας χρονιάς
-// δείχνει και τη σελίδα της.
+// Which page each year starts on. The archive runs newest to oldest, so
+// the first appearance of a year also gives its page.
 function yearJumps(episodes){
   const seen = new Map();
   episodes.forEach((ep, i) => {
@@ -3115,9 +3113,9 @@ function episodesPage(episodes, n = 1){
   const total = episodes.length;
   const pages = pageCount(total);
 
-  // Οι κάρτες με επικεφαλίδα κάθε φορά που αλλάζει ο μήνας. Χωρίς αυτήν,
-  // το αρχείο είναι 18 σελίδες ίδιες κάρτες και χάνεις την αίσθηση του
-  // πού βρίσκεσαι μέσα στον χρόνο.
+  // A heading card every time the month changes. Without it the archive is
+  // 18 pages of identical cards and you lose any sense of where you are in
+  // time.
   const slice = episodes.slice((n - 1) * PER_PAGE, n * PER_PAGE);
 
   let lastMonth = '';
@@ -3141,9 +3139,9 @@ function episodesPage(episodes, n = 1){
     `      <a class="arch-year${page === n ? ' is-on' : ''}" href="${pagedName('episodes', page)}">${year}</a>`,
   ).join('\n');
 
-  // Το μέγεθος του αρχείου ΕΙΝΑΙ η ταυτότητα της σελίδας, οπότε γίνεται
-  // το γραφικό της: ο αριθμός μεγάλος, και δίπλα οι ώρες και η χρονιά
-  // που ξεκίνησαν όλα.
+  // The size of the archive IS the identity of the page, so it becomes its
+  // graphic: the number large, with the hours and the starting year
+  // beside it.
   const hours = Math.round(episodes.reduce((s, ep) => s + (ep.seconds || 0), 0) / 3600);
   const oldest = episodes.length ? episodes[episodes.length - 1].date : '';
 
@@ -3185,12 +3183,12 @@ ${pager('episodes', n, pages)}
   });
 }
 
-// Η σελίδα με όλα τα θέματα. Δείχνει και τις άδειες, ώστε να φαίνεται
-// τι λείπει και να ξέρει ο συντάκτης πού να δουλέψει.
-// Πόσα θέματα παίρνουν μεγάλη κάρτα με εικόνα στην κορυφή.
+// The all-topics page. Empty ones are shown too, so it is visible what is
+// missing and where to work.
+// How many topics get a large card with an image at the top.
 const TOPICS_LEAD = 4;
 
-// Πόσους τίτλους δείχνει η στήλη κάθε θέματος πιο κάτω.
+// How many titles each topic column shows further down.
 const TOPICS_PEEK = 3;
 
 function categoriesIndexPage(groups){
@@ -3266,7 +3264,7 @@ ${restCols}
   });
 }
 
-// ---- τα θέματα στην αρχική ----
+// ---- topics on the homepage ----
 
 function topicStrip(groups){
   const keys = Object.keys(groups)
@@ -3289,8 +3287,8 @@ ${chips}
   </nav>`;
 }
 
-// Το εικονίδιο κάθε θέματος, όπως κάνει και το newshub.gr. Όποιο θέμα
-// δεν έχει δικό του παίρνει το απλό σημάδι — δεν σπάει τίποτα.
+// Each topic's icon, as newshub.gr does. A topic without one gets the
+// plain mark — nothing breaks.
 const TOPIC_ICONS = {
   kriti:       '<path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/>',
   geopolitiki: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17" fill="none" stroke="currentColor" stroke-width="1.4"/>',
@@ -3314,12 +3312,12 @@ function topicIcon(key){
 
 const TOPIC_ROW = 4;
 
-// Πόσες κάρτες κάθε θέματος κρύβονται μέσα στη ροή της αρχικής, ώστε το
-// φιλτράρισμα να έχει πάντα τι να δείξει.
+// How many cards of each topic hide inside the homepage flow, so
+// filtering always has something to show.
 const FLOW_PER_TOPIC = 6;
 
-// Πόσα φαίνονται στη ροή «Τελευταία» πριν το «Όλα τα επεισόδια →».
-// Τα καρφιτσωμένα του διαχειριστικού πιάνουν θέσεις ΜΕΣΑ σε αυτά.
+// How many show in the "Τελευταία" flow before "Όλα τα επεισόδια →".
+// Admin pins take slots INSIDE that count.
 const FLOW_VISIBLE = 9;
 
 const FLOW_SKIP_SHOWS = new Set(['ΕΠΙΚΑΙΡΟΤΗΤΑ']);
@@ -3332,21 +3330,21 @@ function homeItems(group){
   const all = (curation().categoryPicks || {})[key];
   const picks = Array.isArray(all) ? freshPins('topics', all, `cat:${key}`) : null;
 
-  // Ό,τι βγήκε με το ✕ από ΑΥΤΟ το θέμα. Ξεχωριστό κλειδί ανά θέμα, όπως
-  // και τα καρφιτσωμένα: το ίδιο επεισόδιο μπορεί να μη χωράει στην
-  // «Κρήτη» και να έχει θέση στην «Οικονομία».
+  // What was removed with the ✕ from THIS topic. A separate key per topic,
+  // like the pins: the same episode can miss out in "Κρήτη" and deserve a
+  // place in "Οικονομία".
   const kryfoTh = kryfa('topics', `cat:${key}`);
   let out = group.items.filter((it) => !kryfoTh(it));
 
   if (Array.isArray(picks) && picks.length) {
-    // Ό,τι δεν βρέθηκε αγνοείται σιωπηλά: ένα καρφιτσωμένο επεισόδιο
-    // μπορεί να άλλαξε κατηγορία ή να σβήστηκε, και δεν είναι λόγος να
-    // μείνει κενή η θέση — τη γεμίζει το επόμενο αυτόματο.
+    // Anything not found is ignored silently: a pinned episode may have
+    // changed category or been deleted, and that is no reason to leave a
+    // slot empty — the next automatic pick fills it.
     const taken = new Set();
     const first = [];
 
-    // Το καρφιτσωμένο ψάχνεται σε ΟΛΟ το θέμα, όχι στο φιλτραρισμένο:
-    // αν κάποιος το έβγαλε και μετά το καρφίτσωσε, το εννοεί.
+    // A pinned item is searched across the WHOLE topic, not the filtered
+    // one: if someone removed it and then pinned it, they mean it.
     for (const ref of picks) {
       const refs = refsDidimou(ref);
       const hit = group.items.find((it) => !taken.has(it) && sameOrTwin(it, refs));
@@ -3361,21 +3359,20 @@ function homeItems(group){
   return out;
 }
 
-// Μία λωρίδα για ένα θέμα: όνομα, οι πιο πρόσφατες κάρτες του, και ο
-// δρόμος προς όλα τα υπόλοιπα.
+// One row for one topic: name, its most recent cards, and the way to the
+// rest.
 function topicRow(group){
   const key = slugify(group.name);
   const total = group.items.length;
 
-  // Μία μεγάλη και τρεις μικρές, αντί για τέσσερις ίδιες στη σειρά: το
-  // πιο πρόσφατο του θέματος παίρνει πραγματικό χώρο, και η ενότητα
-  // αποκτά ιεραρχία αντί να είναι τέσσερα πανομοιότυπα κουτιά.
+  // One large and three small, rather than four identical in a row: the
+  // most recent item gets real space and the section gains hierarchy.
   const items = homeItems(group).slice(0, TOPIC_ROW);
   const lead = items[0];
   const rest = items.slice(1);
 
-  // Ολόκληρη η μπάρα είναι ο σύνδεσμος — μεγάλος στόχος, και στο κινητό
-  // δεν χρειάζεται να πετύχει κανείς ένα μικρό «Όλα».
+  // The whole bar is the link — a large target, so on mobile nobody has to
+  // hit a small "Όλα".
   return `  <section class="topic-row" data-topic="${key}">
     <a class="topic-bar" href="${categoryUrl(group.name)}">
       <span class="topic-bar-icon">${topicIcon(key)}</span>
@@ -3392,8 +3389,8 @@ ${rest.map((it) => rowCard(inTopic(it, group.name))).join('\n')}
   </section>`;
 }
 
-// Οι τέσσερις λωρίδες μαζί. Ένα θέμα που δεν έχει ακόμα περιεχόμενο
-// απλώς παραλείπεται — δεν αφήνουμε κενή λωρίδα στη σελίδα.
+// The four rows together. A topic with no content yet is simply skipped —
+// we do not leave an empty row on the page.
 function topicRows(groups){
   return featuredTopics()
     .map((name) => groups[slugify(name)])
@@ -3444,12 +3441,12 @@ ${sub}
     </div>`;
 }
 
-// Πόσες κάρτες δείχνει η μικρή ενότητα κάθε θέματος.
+// How many cards the small section of each topic shows.
 const MORE_CARDS = 2;
 
-// Τα θέματα που δεν πήραν λωρίδα. Το καθένα παίρνει μικρό δικό του χώρο:
-// όνομα, πλήθος, και οι τρεις πιο πρόσφατοι τίτλοι του. Σκέτο όνομα με
-// έναν αριθμό δεν λέει σε κανέναν τι θα βρει μέσα.
+// Topics that did not get a row. Each gets a small space of its own: name,
+// count, and its three most recent titles. A bare name with a number tells
+// nobody what is inside.
 function moreTopics(groups){
   const used = new Set([
     ...featuredTopics().map(slugify),
@@ -3462,8 +3459,8 @@ function moreTopics(groups){
 
   if (!rest.length) return '';
 
-  // Κάθε θέμα παίρνει κανονική μικρή ενότητα: ίδια επικεφαλίδα με τις
-  // μεγάλες λωρίδες, απλώς σε μικρότερο μέγεθος, και δικές της κάρτες.
+  // Every topic gets a proper small section: same heading as the large
+  // rows, just smaller, with its own cards.
   const blocks = rest.map((key) => {
     const g = groups[key];
     const cards = homeItems(g).slice(0, MORE_CARDS).map((it) => card(inTopic(it, g.name))).join('\n');
@@ -3521,25 +3518,25 @@ function showStats(g){
     bars,
     aliveMonths,
     activeMonths,
-    // Πόσο συχνά βγάζει, σε σχέση με το πόσο καιρό υπάρχει.
+    // How often it publishes, relative to how long it has existed.
     steadiness: activeMonths / aliveMonths,
     fromYear: first.getFullYear(),
     perMonth: inWindow / aliveMonths,
   };
 }
 
-// Η λωρίδα ρυθμού. Τα ύψη είναι σχετικά με τον πιο γεμάτο μήνα της ΙΔΙΑΣ
-// εκπομπής — αλλιώς η Επικαιρότητα με 18 τον μήνα θα ισοπέδωνε οπτικά
-// την Ιστορία με 2, ενώ και οι δύο βγάζουν σταθερά.
+// The rhythm strip. Heights are relative to the busiest month of the SAME
+// show — otherwise ΕΠΙΚΑΙΡΟΤΗΤΑ with 18 a month would visually flatten
+// Ιστορία with 2, though both publish steadily.
 function sparkline(bars){
   const top = Math.max(...bars, 1);
   const cells = bars.map((n) => `<i style="--h:${(n / top).toFixed(2)}"${n ? '' : ' class="is-off"'}></i>`).join('');
   return `<span class="spark" aria-hidden="true">${cells}</span>`;
 }
 
-// Κυματομορφή για την επικεφαλίδα της σελίδας εκπομπών. Τα ύψη είναι
-// σταθερά και γραμμένα εδώ — όχι τυχαία — ώστε η σελίδα να βγαίνει ίδια
-// σε κάθε χτίσιμο και να μην αλλάζει χωρίς λόγο στο αποθετήριο.
+// Waveform for the shows page heading. The heights are fixed and written
+// here — not random — so the page builds identically every time and does
+// not churn in the repository.
 const WAVE = [3, 6, 11, 7, 14, 9, 18, 12, 22, 15, 26, 17, 30, 20, 34, 24,
   30, 18, 26, 14, 22, 11, 18, 9, 14, 7, 11, 5, 8, 4];
 
@@ -3640,16 +3637,16 @@ function showPage(group, n = 1){
   const page = group.items.slice((n - 1) * PER_PAGE, n * PER_PAGE);
   const cards = cardsWithAds(page.map((it) => card(it, 1)), 'show-list');
 
-  // Οι εκπομπές που ζουν στο YouTube βγάζουν σελίδα μόνο με βίντεο,
-  // οπότε οι μικρογραφίες τους μπορούν να γεμίσουν πλαίσιο 16:9.
+  // Shows that live on YouTube produce a page of videos only, so their
+  // thumbnails can fill a 16:9 frame.
   const wide = allVideo(page) ? ' grid--wide' : '';
 
   const art = showArtImg(group.name, {
     depth: 1,
-    // Η κλάση ΔΕΝ είναι διακοσμητική: δίνει contain και height:auto.
-    // Χωρίς αυτήν το height="900" του attribute κόβει την αφίσα.
+    // The class is NOT decorative: it sets contain and height:auto.
+    // Without it the height="900" attribute crops the poster.
     cls: 'show-cover',
-    // Το πλάτος της αφίσας, κλειδωμένο από το CSS — δες .show-head-art.
+    // The poster width, locked by CSS — see .show-head-art.
     sizes: '(max-width: 760px) 96vw, 840px',
     eager: true,
     minWidth: 360,
@@ -3730,8 +3727,8 @@ function pickMustRead(articles, curation, taken = new Set()){
 
   const kryfoMr = kryfa('mustRead');
 
-  // Δύο περάσματα: πρώτα ένα ανά κατηγορία, μετά ό,τι μένει — αλλιώς με
-  // λίγες κατηγορίες στο feed η ζώνη θα έβγαινε μισοάδεια.
+  // Two passes: one per category first, then whatever remains — otherwise
+  // with few categories in the feed the band came out half empty.
   for (const strict of [true, false]) {
     for (const a of articles) {
       if (chosen.length >= MUST_COUNT) break;
@@ -3807,8 +3804,8 @@ function writerLine(a){
     : inner}</p>`;
 }
 
-// Ποιες απόψεις βγαίνουν και με ποια σειρά: πρώτα όσες όρισε το
-// διαχειριστικό, μετά οι πιο πρόσφατες. Ίδια λογική με το Must read.
+// Which opinions appear and in what order: the admin's picks first, then
+// the most recent. Same logic as Must read.
 function pickOpinions(articles, curation){
   const all = articles
     .filter((a) => a.category === 'Απόψεις')
@@ -3841,8 +3838,8 @@ function pickOpinions(articles, curation){
     vale(a);
   }
 
-  // Δεύτερο πέρασμα, χαλαρό: αν οι αρθρογράφοι δεν φτάνουν για έξι
-  // θέσεις, καλύτερα δεύτερο κείμενο του ίδιου παρά τρύπα στη ζώνη.
+  // Second, looser pass: if there are not enough writers for six slots, a
+  // second piece by the same one beats a hole in the band.
   for (const a of all) {
     if (chosen.length >= OPINIONS_SHOWN) break;
     if (have.has(a.url)) continue;
@@ -3856,8 +3853,7 @@ function pickOpinions(articles, curation){
 function opinionsSection(articles, curation){
   const picks = pickOpinions(articles, curation);
 
-  // Με λιγότερα από τρία δεν στέκει η ζώνη — ίδιος κανόνας με το
-  // Must read, ένα σκέτο κείμενο μέσα σε πλαίσιο μοιάζει με λάθος.
+  // Under three the band does not hold — same rule as Must read.
   if (picks.length < 3) return '';
 
   const cards = picks.map((a) => {
@@ -3901,16 +3897,16 @@ ${cards}
 function mustReadSection(articles, curation, taken){
   const picks = pickMustRead(articles, curation, taken);
 
-  // Με λιγότερα από δύο η ζώνη δεν στέκει: ένα μοναχικό άρθρο μέσα σε
-  // κόκκινο πλαίσιο μοιάζει με διαφήμιση.
+  // Under two the band does not hold: one lone article in a red frame
+  // looks like an ad.
   if (picks.length < 2) return '';
 
   const cards = picks.map((a, i) => {
     const img = a.image_large || a.image_thumb || '';
 
-    // Τα must read ανοίγουν ΕΔΩ, όταν έχουμε το κείμενο — ρητή οδηγία
-    // του αφεντικού. Όσα δεν έχουν σώμα κρατούν την παλιά συμπεριφορά
-    // και φεύγουν για το newshub.gr, σε νέα καρτέλα.
+    // Must-read items open HERE when we have the text — explicit
+    // instruction. Those without a body keep the old behaviour and leave
+    // for newshub.gr in a new tab.
     const mine = !!articleBody(a.id);
     const href = mine ? articleUrl(a) : a.url;
     const out = mine ? '' : ' target="_blank" rel="noopener"';
@@ -3970,26 +3966,26 @@ ${rows}
 
 const ONOMA_STOP = /\s+(για|μιλ[άαεί]\S*|αναλύει|εξηγεί|σχολιάζει|απαντά|περιγράφει|αποκαλύπτει|προειδοποιεί|αφιέρωμα|ρίχνει|ανοίγει|στο|στον|στη|στην|σε)(?=\s|$|[,:«"'])/i;
 
-// Αρχικό και επώνυμο, με ή χωρίς κενό: «Δ.Δερβής-Μπουρνιάς», «Τρ.Καρατράντος».
+// Initial and surname, with or without a space.
 const ARXIKO = /^[Α-ΩΆΈΉΊΌΎΏA-Z][α-ωά-ώa-z]?\.\s*[Α-ΩΆΈΉΊΌΎΏA-Z][α-ωά-ώa-z]+(-[Α-ΩΆΈΉΊΌΎΏA-Z][α-ωά-ώa-z]+)?$/;
 
-// Κεφαλαίο αρχικό και μετά πεζά — μικρό όνομα, όχι ΟΛΟΚΕΦΑΛΑΙΑ εκπομπή.
+// Capital initial then lowercase — a first name, not an ALL-CAPS show.
 const KEFALAIO = /^[Α-ΩΆΈΉΊΌΎΏA-Z][α-ωά-ώa-z]/;
 
-// Ό,τι κολλάει η σύνταξη μπροστά από το όνομα και δεν είναι όνομα.
+// Whatever the editors stick in front of the name that is not a name.
 function tidyGuest(s){
   return cleanGuestName(String(s == null ? '' : s)
     .replace(/^\s*(μόνο|αποκλειστικά)\s+στο\s+new(s)?h(s)?ub\.?\s*(gr)?\s*[-–:]?\s*/i, '')
     .replace(/^\s*θέμα\s+new(s)?h(s)?ub\.?\s*(gr)?\s*[-–:]?\s*/i, '')
     .trim())
-    // «Γ.Καραμπελιάς» και «Γ. Καραμπελιάς» είναι η ίδια γραφή. Χωρίς το
-    // κενό γίνονταν δύο σελίδες, και καμία από τις δύο δεν ενωνόταν με
-    // το πλήρες όνομα.
+    // "Γ.Καραμπελιάς" and "Γ. Καραμπελιάς" are the same spelling. Without
+    // the space they became two pages, and neither merged with the full
+    // name.
     .replace(/^([Α-ΩΆΈΉΊΌΎΏA-Z][α-ωά-ώa-z]?\.)\s*(?=[Α-ΩΆΈΉΊΌΎΏA-Z])/, '$1 ');
 }
 
-// Ένα όνομα, ή κενό. Δέχεται και τη μορφή «αρχικό + επώνυμο», που ο
-// looksLikePerson τη δέχεται κι αυτός, αλλά όχι όταν λείπει το κενό.
+// One name, or empty. Also accepts "initial + surname", which
+// looksLikePerson accepts too, but not when the space is missing.
 function enaOnoma(s){
   const n = tidyGuest(s);
   if (!n) return '';
@@ -3998,18 +3994,17 @@ function enaOnoma(s){
   return '';
 }
 
-// Τα ονόματα που κρύβονται ΜΠΡΟΣΤΑ από την άνω τελεία (ή το κόμμα).
+// Names hiding BEFORE the colon (or the comma).
 function onomataApoProthema(prefix){
   let p = tidyGuest(prefix);
   if (!p) return [];
 
-  // «Όνομα Επώνυμο για το κάτι» -> κόψε στη λέξη που αρχίζει τη φράση.
+  // "Name Surname για το something" -> cut at the word starting the phrase.
   const cut = p.search(ONOMA_STOP);
   if (cut > 0) p = p.slice(0, cut).trim();
 
-  // Δύο πρόσωπα — «Α - Β», «Α και Β». Κρατάμε ό,τι είναι άνθρωπος:
-  // αριστερά κάθεται συχνά το όνομα της εκπομπής («ΘΕΜΑ NEWSHUB.GR -»,
-  // «Ιστορίες του Ηρακλείου -»), που δεν περνάει τον έλεγχο.
+  // Two people — "A - B", "A και B". We keep whichever is human: the left
+  // side is often the show name, which fails the check.
   const parts = p.split(/\s+(?:[-–]|και)\s+/).map(enaOnoma).filter(Boolean);
   if (parts.length) return [...new Set(parts)];
 
@@ -4017,7 +4012,7 @@ function onomataApoProthema(prefix){
   return one ? [one] : [];
 }
 
-// Πέρασμα 1: όσα βγαίνουν από τον ίδιο τον τίτλο.
+// Pass 1: names that come out of the title itself.
 function onomataApoTitlo(title){
   const t = decode(title);
 
@@ -4027,17 +4022,15 @@ function onomataApoTitlo(title){
     if (got.length) return got;
   }
 
-  // «Γιώργος Καραμπελιάς, «25 μαθήματα ελληνικής ιστορίας» Μέρος 8ο: …»
-  // Εδώ η άνω τελεία έρχεται πολύ αργότερα, μέσα στον τίτλο της σειράς.
+  // Here the colon comes much later, inside the title of the series.
   const c = t.match(/^([^,«»:]{3,45}),?\s*[«"]/);
   if (c) {
     const got = onomataApoProthema(c[1]);
     if (got.length) return got;
   }
 
-  // «Ελένη Αϊβαλιώτη - Θεραπεία ζεύγους - Γιατί οι σχέσεις δυσκολεύουν»:
-  // παύλα στη θέση της άνω τελείας. Ο έλεγχος looksLikePerson κρατάει
-  // έξω τα «Πνευμονική ίνωση - Οι νέες θεραπείες»: δεύτερη λέξη πεζή.
+  // A dash instead of a colon. looksLikePerson keeps out titles like
+  // "Πνευμονική ίνωση - Οι νέες θεραπείες": second word lowercase.
   const d = t.match(/^([^-–:]{3,45})\s[-–]\s/);
   if (d) {
     const got = onomataApoProthema(d[1]);
@@ -4066,7 +4059,7 @@ function valeProsopa(list){
     if (fix.guest) { vrethika.set(ep, [String(fix.guest).trim()]); continue; }
 
     let names = onomataApoTitlo(ep.title);
-    // Δίχτυ: ό,τι είχε βγάλει το feed.js και δεν το ξαναβρήκαμε εδώ.
+    // Safety net: what feed.js found and we did not find again here.
     if (!names.length && ep.guest) {
       const n = enaOnoma(decode(ep.guest));
       if (n) names = [n];
@@ -4074,7 +4067,7 @@ function valeProsopa(list){
     vrethika.set(ep, names);
   }
 
-  // ---- πέρασμα 2: λεξικό ----
+  // ---- pass 2: dictionary ----
   const gnosta = new Map();     // κλειδί ονόματος -> όνομα
   const epitheta = new Map();   // κλειδί επωνύμου -> σύνολο ονομάτων
 
@@ -4094,15 +4087,15 @@ function valeProsopa(list){
   function apoLexiko(title){
     const words = decode(title).split(/[\s,.:;!?«»"()\-–]+/).filter(Boolean);
 
-    // Ολόκληρο όνομα που ξέρουμε ήδη.
+    // A full name we already know.
     for (let i = 0; i < words.length - 1; i++) {
       const hit = gnosta.get(onomaKleidi(words[i] + ' ' + words[i + 1]));
       if (hit) return [hit];
     }
 
-    // Γνωστό ΕΠΩΝΥΜΟ μέσα στον τίτλο. Αν μπροστά του κάθεται μικρό
-    // όνομα, κρατάμε αυτό που γράφει ο τίτλος και ΟΧΙ το όνομα του
-    // λεξικού: ο «Βασίλης Λαμπρινός» δεν είναι ο «Φραγκίσκος Λαμπρινός».
+    // A known SURNAME inside the title. If a first name sits in front of
+    // it, we keep what the title says and NOT the dictionary name:
+    // "Βασίλης Λαμπρινός" is not "Φραγκίσκος Λαμπρινός".
     for (let i = 0; i < words.length; i++) {
       const hit = epitheta.get(onomaKleidi(words[i]));
       if (!hit) continue;
@@ -4124,9 +4117,9 @@ function valeProsopa(list){
     vrethika.set(ep, apoLexiko(ep.title));
   }
 
-  // ---- πέρασμα 3α: μία γραφή ανά όνομα ----
-  // «Αγγελος Συρίγος» και «Άγγελος Συρίγος» είναι ο ίδιος άνθρωπος:
-  // κερδίζει η γραφή που εμφανίζεται πιο συχνά.
+  // ---- pass 3a: one spelling per name ----
+  // "Αγγελος Συρίγος" and "Άγγελος Συρίγος" are the same person: the
+  // spelling that appears most often wins.
   const grafes = new Map();
   for (const names of vrethika.values()) {
     for (const n of names) {
@@ -4141,9 +4134,9 @@ function valeProsopa(list){
     kiria.set(k, [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'el'))[0][0]);
   }
 
-  // ---- πέρασμα 3β: αρχικό -> πλήρες όνομα ----
-  // Μόνο όταν η απάντηση είναι ΜΟΝΑΔΙΚΗ: ίδιο επώνυμο, ίδιο αρχικό,
-  // ένα μόνο πλήρες όνομα. Αλλιώς δύο αδέρφια γίνονται ένας άνθρωπος.
+  // ---- pass 3b: initial -> full name ----
+  // Only when the answer is UNIQUE: same surname, same initial, one full
+  // name. Otherwise two siblings become one person.
   const plires = new Map();
   for (const names of vrethika.values()) {
     for (const raw of names) {
@@ -4167,10 +4160,10 @@ function valeProsopa(list){
     if (!hit || hit.size !== 1) return name;
 
     const full = [...hit][0];
-    // Το αρχικό πρέπει να ταιριάζει: «Α. Συρίγος» δεν γίνεται
-    // «Βασίλης Συρίγος».
+    // The initial has to match: "Α. Συρίγος" does not become "Βασίλης
+    // Συρίγος".
     if (onomaKleidi(full[0]) !== onomaKleidi(name[0])) return name;
-    // Και ο άνθρωπος έχει τον τελευταίο λόγο.
+    // And the human has the final word.
     if (veto.has(`${guestKey(full)}|${guestKey(name)}`)) return name;
     if (veto.has(`${guestKey(name)}|${guestKey(full)}`)) return name;
     return full;
@@ -4186,17 +4179,17 @@ function valeProsopa(list){
 
 function cleanGuestName(name){
   return String(name)
-    // Το όνομα του site, με ή χωρίς «στο», και με τα ορθογραφικά που
-    // κυκλοφορούν στους τίτλους: newhub, newhsub, σκέτο newshub.
+    // The site name, with or without "στο", and with the misspellings
+    // circulating in titles: newhub, newhsub, bare newshub.
     .replace(/[\s,–-]*(στο|στον|στη|στην)?\s*new(s)?h(s)?ub\.?\s*(gr)?\b\.?/i, '')
-    // Ουρές που δεν είναι μέρος του ονόματος.
+    // Suffixes that are not part of the name.
     .replace(/[\s,–-]*(ιστορικό\s+αφιέρωμα|αποκλειστικ[όο])\s*!?$/i, '')
     .replace(/[\s,–-]*μέρος\s+\S+$/i, '')
-    // Αρχές που δεν είναι μέρος του ονόματος. Το «O» μπαίνει και λατινικό.
+    // Prefixes that are not part of the name. Latin "O" included.
     .replace(/^\s*αποκλειστικ[όο]\s*!?\s*/i, '')
     .replace(/^\s*(αποκαλυπτικ|συγκλονιστικ|συγκινητικ)[όοήηάαέεςσ]*\s+/i, '')
-    // Το «i» είναι απαραίτητο: οι τίτλοι γράφουν «Ο Αλέξανδρος», με
-    // κεφαλαίο άρθρο. Μπαίνει και λατινικό o, που ξεφεύγει στο γράψιμο.
+    // The "i" matters: titles write "Ο Αλέξανδρος" with a capital article.
+    // A Latin o is accepted too, since it slips in while typing.
     .replace(/^(ο|η|το|o)\s+/i, '')
     .replace(/\s*[,–-]\s*$/, '')
     .trim();
@@ -4217,8 +4210,8 @@ const ORGANISMOS = new RegExp('(^|\\s)(' + [
   'αρχιεπίσκοπος', 'αρχιεπισκόπου', 'μητρόπολη', 'εκκλησία', 'ενορία',
 ].join('|') + ')(\\s|$)', 'i');
 
-// Τοπωνύμια της Κρήτης και της επικαιρότητας, εκεί που θα περίμενες
-// επώνυμο. Μόνο στο ΤΕΛΟΣ: ο «Κρητικός» είναι επώνυμο, η «Κρήτης» όχι.
+// Place names of Crete and the news, where you would expect a surname.
+// Only at the END: "Κρητικός" is a surname, "Κρήτης" is not.
 const TOPOS_TELOS = new RegExp('(^|\\s)(' + [
   'κρήτη', 'κρήτης', 'ηράκλειο', 'ηρακλείου', 'χανιά', 'χανίων',
   'ρέθυμνο', 'ρεθύμνου', 'λασίθι', 'λασιθίου', 'αθήνα', 'αθηνών',
@@ -4226,15 +4219,15 @@ const TOPOS_TELOS = new RegExp('(^|\\s)(' + [
   'πεδιάδας', 'αλικαρνασσού', 'καστελίου', 'μεσαρά', 'μεσαράς',
 ].join('|') + ')$', 'i');
 
-// Πρόθεση ή άρθρο στην αρχή: ό,τι κι αν ακολουθεί, δεν είναι όνομα.
+// Preposition or article at the start: whatever follows is not a name.
 const ARXI_STOP = /^(σε|στο|στον|στη|στην|στους|στις|από|για|με|προς|κατά|μετά|πριν|ο|η|το|οι|τα|τον|την|του|της|των|νέα|νέο|νέος|νέες|νέοι|έκτακτο|μεγάλη|μεγάλο)$/i;
 
 function looksLikePerson(name){
   const n = String(name).trim();
   if (!n) return false;
 
-  // Εισαγωγικά, θαυμαστικά, και το κόμμα: «Γ. Καραμπελιάς, Ιστορικό»
-  // είναι όνομα ΚΑΙ ιδιότητα, όχι όνομα.
+  // Quotes, exclamation marks and the comma: "Γ. Καραμπελιάς, Ιστορικό"
+  // is a name AND a role, not a name.
   if (/[«»"!;?…:,]/.test(n)) return false;
   if (/\d/.test(n)) return false;           // «μέρος 9ο»
 
@@ -4245,18 +4238,17 @@ function looksLikePerson(name){
 
   if (ORGANISMOS.test(n)) return false;
 
-  // Τόπος στο τέλος: «Περιφέρεια Κρήτης», «Σε Ηράκλειο», «Φεστιβάλ
-  // Κρήτης». Κανένα επώνυμο δεν είναι τοπωνύμιο σε γενική.
+  // A place at the end: no surname is a place name in the genitive.
   if (TOPOS_TELOS.test(n)) return false;
 
-  // Πρόθεση ή άρθρο μπροστά: φράση που κόπηκε, όχι όνομα.
+  // Preposition or article in front: a cut phrase, not a name.
   if (ARXI_STOP.test(words[0])) return false;
 
   for (const w of words) {
-    // Κάθε κομμάτι ονόματος ξεκινά με κεφαλαίο. Το «και», «της», «στο»
-    // προδίδουν φράση, όχι όνομα.
+    // Every part of a name starts with a capital. "και", "της", "στο"
+    // give away a phrase, not a name.
     if (!/^[Α-ΩΆΈΉΊΌΎΏA-Z]/.test(w)) return false;
-    // ΟΛΟΚΕΦΑΛΑΙΑ λέξη = όνομα εκπομπής, όχι ανθρώπου.
+    // An ALL-CAPS word = a show name, not a person.
     if (/^[Α-ΩΆΈΉΊΌΎΏA-Z]{3,}$/.test(w)) return false;
   }
 
@@ -4274,25 +4266,24 @@ function aliases(){
     try {
       const raw = JSON.parse(fs.readFileSync(ALIAS_FILE, 'utf8'));
       aliasData.titles = Array.isArray(raw.titles) ? raw.titles : [];
-      // Αντιστρέφουμε: το αρχείο γράφεται «κανονικό -> παραλλαγές»,
-      // γιατί έτσι διαβάζεται· εδώ θέλουμε «παραλλαγή -> κανονικό».
+      // Inverted: the file is written "canonical -> variants" because that
+      // reads well; here we want "variant -> canonical".
       for (const [canonical, list] of Object.entries(raw.aliases || {})) {
         for (const variant of list) aliasData.map[guestKey(variant)] = canonical;
       }
-      // Με κλειδί, όχι με το όνομα όπως γράφτηκε: το σκουπίδι που
-      // σβήνει ο συντάκτης εμφανίζεται στους τίτλους και με άλλους
-      // τόνους, και θα ξαναγύριζε ως πρόσωπο.
+      // By key, not by the name as written: the junk an editor deletes
+      // appears in titles with different accents too, and would come back
+      // as a person.
       for (const name of raw.not_people || []) {
         aliasData.notPeople.add(guestKey(name));
       }
-      // Ιδιότητα ανά ΚΑΝΟΝΙΚΟ όνομα — μετά την ένωση, αλλιώς ο ίδιος
-      // άνθρωπος θα την ήθελε γραμμένη σε κάθε παραλλαγή.
+      // Role per CANONICAL name — after merging, otherwise the same person
+      // would need it written against every spelling.
       for (const [name, role] of Object.entries(raw.roles || {})) {
         if (role) aliasData.roles[guestKey(name)] = String(role);
       }
-      // Το πορτρέτο, με κλειδί το κανονικό όνομα — ίδια λογική με την
-      // ιδιότητα. Το διαλέγει άνθρωπος από το διαχειριστικό· δεν
-      // μπορούμε να το μαντέψουμε από πουθενά.
+      // The portrait, keyed by canonical name — same logic as the role. A
+      // human picks it in the admin; we cannot guess it from anywhere.
       for (const [name, url] of Object.entries(raw.photos || {})) {
         if (url) aliasData.photos[guestKey(name)] = String(url);
       }
@@ -4310,9 +4301,9 @@ function aliases(){
   return aliasData;
 }
 
-// Χωρίζει τον τίτλο από το όνομα: «Δρ. Αγγελική Ασημάκη» -> Δρ + το όνομα.
-// Ο τίτλος φεύγει από το όνομα ώστε να μην κάνει δεύτερο άνθρωπο, αλλά
-// κρατιέται για να φαίνεται στη σελίδα του.
+// Splits the honorific from the name: "Δρ. Αγγελική Ασημάκη" -> Δρ + the
+// name. It leaves the name so it does not create a second person, but is
+// kept so it can show on their page.
 function splitTitle(name){
   const titles = aliases().titles;
   if (!titles.length) return { title: '', name: String(name).trim() };
@@ -4323,15 +4314,14 @@ function splitTitle(name){
   return { title: m[1], name: String(name).slice(m[0].length).trim() };
 }
 
-// Ο τίτλος ενός προσώπου, αν έχει. Κενό για σχεδόν όλους.
+// A person's honorific, if any. Empty for almost everyone.
 function titleOf(ep){
   if (!ep.guest) return '';
   return splitTitle(cleanGuestName(decode(ep.guest))).title;
 }
 
-// Ο καλεσμένος του επεισοδίου, ή κενό αν δεν υπάρχει άνθρωπος μπροστά.
-// ΟΛΑ τα σημεία περνούν από εδώ, ώστε κάρτα, σελίδα προσώπου και
-// «σχετικά» να συμφωνούν μεταξύ τους.
+// The episode's guest, or empty if there is no person in front. EVERY
+// place goes through here, so card, person page and "related" agree.
 function guestOf(ep){
   const fix = pairOf(ep);
   if (fix && fix.noguest) return '';
@@ -4356,16 +4346,16 @@ function guestsOf(ep){
     const { name } = splitTitle(cleanGuestName(decode(raw)));
     if (!name || !looksLikePerson(name) || notGuest(name)) continue;
     const canonical = aliases().map[guestKey(name)] || name;
-    // Το σβήσιμο γίνεται και στο κανονικό όνομα: ο συντάκτης σβήνει
-    // αυτό που βλέπει στην καρτέλα, κι εκείνο είναι το ενωμένο.
+    // Deletion applies to the canonical name too: the editor deletes what
+    // they see on the card, and that is the merged one.
     if (notGuest(canonical)) continue;
     if (!out.some((n) => guestKey(n) === guestKey(canonical))) out.push(canonical);
   }
   return out;
 }
 
-// Η ιδιότητα ενός προσώπου («καθηγητής διεθνών σχέσεων»). Κενό για
-// όσους δεν την έβαλε κανείς — είναι σχόλιο, όχι απαίτηση.
+// A person's role ("professor of international relations"). Empty for
+// anyone nobody filled in — it is a note, not a requirement.
 function roleOf(name){
   return aliases().roles[guestKey(name)] || '';
 }
@@ -4374,9 +4364,9 @@ function photoOf(name){
   return aliases().photos[guestKey(name)] || '';
 }
 
-// Υπάρχει έστω ένα πορτρέτο; Από αυτό κρίνεται αν η ενότητα «Τα
-// πρόσωπα» στην αρχική δείχνει εικόνες — με μηδέν πορτρέτα θα ήταν 40
-// άδειοι κύκλοι, που είναι χειρότερο από σκέτα ονόματα.
+// Is there at least one portrait? That decides whether the homepage
+// "Πρόσωπα" section shows images — with zero portraits it would be 40
+// empty circles, worse than plain names.
 let facesKnown;
 function haveFaces(){
   if (facesKnown === undefined) {
@@ -4385,8 +4375,8 @@ function haveFaces(){
   return facesKnown;
 }
 
-// Ζεύγη που ο συντάκτης απέρριψε ρητά: «όχι, άλλος άνθρωπος». Μόνο
-// για τις προτάσεις — δεν αλλάζουν τίποτα στο site.
+// Pairs the editor explicitly rejected: "no, different person". For the
+// suggestions only — they change nothing on the site.
 function aliasNos(){
   return aliases().nos;
 }
@@ -4398,8 +4388,8 @@ function guestKey(name){
 function guestUrl(name){
   return `guest/${slugify(name)}.html`;
 }
-// Ομαδοποίηση ανά πρόσωπο. Μέσα μπαίνουν ΚΑΙ επεισόδια ΚΑΙ βίντεο —
-// για το πρόσωπο είναι το ίδιο πράγμα: μια φορά που μίλησε.
+// Grouping by person. Episodes AND videos go in — to the person they are
+// the same thing: one time they spoke.
 function groupByGuest(items){
   const groups ={};
 
@@ -4438,14 +4428,14 @@ function indexGuestSlugs(groups){
     });
   }
 
-  // Ο «Γιώργος Παπαδόπουλος» πρέπει να δοκιμαστεί πριν τον «Γιώργος Παπά»,
-  // αλλιώς το μικρότερο όνομα κλέβει το ταίριασμα.
+  // "Γιώργος Παπαδόπουλος" must be tried before "Γιώργος Παπά", or the
+  // shorter name steals the match.
   guestIndex.sort((a, b) => b.weight - a.weight);
 }
 
 function peopleForAdmin(episodes){
-  // Πρώτα η ωμή απογραφή: κάθε γραφή ονόματος όπως βγαίνει από τον
-  // τίτλο, ΠΡΙΝ την ένωση. Χωρίς αυτό δεν φαίνεται τι ενώθηκε με τι.
+  // The raw inventory first: every spelling as it comes out of the title,
+  // BEFORE merging. Without it you cannot see what merged with what.
   const raw = {};
   const katelixe = {};   // γραφή -> ο άνθρωπος στον οποίο ενώθηκε
   for (const ep of episodes) {
@@ -4454,13 +4444,13 @@ function peopleForAdmin(episodes){
 
     let name;
     if (fix && fix.guest) {
-      // Γραμμένο με το χέρι: δεν περνάει από looksLikePerson. Εκείνο
-      // κρίνει ΜΑΝΤΕΜΑ από τίτλο — εδώ κρίνει άνθρωπος.
+      // Handwritten: it does not go through looksLikePerson. That judges a
+      // GUESS from a title — here a human judged.
       name = String(fix.guest).trim();
     } else {
-      // Η γραφή ΠΡΙΝ την αυτόματη ένωση: «Γ. Καραμπελιάς», όχι
-      // «Γιώργος Καραμπελιάς». Αλλιώς η καρτέλα δεν θα έδειχνε ποτέ τι
-      // ενώθηκε με τι, και το × δίπλα στη γραφή δεν θα είχε τι να λύσει.
+      // The spelling BEFORE automatic merging: "Γ. Καραμπελιάς", not
+      // "Γιώργος Καραμπελιάς". Otherwise the tab would never show what
+      // merged with what, and the × beside it would have nothing to undo.
       name = ep.guestRaw || ep.guest;
       if (!name) continue;
       name = splitTitle(cleanGuestName(decode(name))).name;
@@ -4468,13 +4458,13 @@ function peopleForAdmin(episodes){
     }
     raw[name] = (raw[name] || 0) + 1;
 
-    // Πού κατέληξε αυτή η γραφή μετά την ένωση. Το κρατάμε από το ίδιο
-    // το επεισόδιο: η αυτόματη ένωση δεν περνάει από το aliases().map.
+    // Where this spelling ended up after merging. Taken from the episode
+    // itself: automatic merging does not pass through aliases().map.
     const final = guestsOf(ep)[0];
     if (final) katelixe[name] = final;
   }
 
-  // Ποιες γραφές κατέληξαν σε ποιον άνθρωπο, και ποιες σβήστηκαν.
+  // Which spellings ended up as which person, and which were deleted.
   const writings = {};   // κλειδί ανθρώπου -> [{ name, n }]
   const rejected = [];
   for (const [name, n] of Object.entries(raw)) {
@@ -4558,13 +4548,13 @@ function indexPeople(groups){
       slug: slugify(name),
       count: groups[key].items.length,
       cats,
-      // Σύνολο μόνο των θεμάτων, για να συγκρίνουμε δύο πρόσωπα.
+      // Topic totals only, so two people can be compared.
       topics: new Set(Object.keys(cats)),
     };
   });
 }
 
-// Τα θέματα ενός προσώπου, από το πιο συχνό προς το πιο σπάνιο.
+// A person's topics, most frequent first.
 function topicsOf(key){
   const me = peopleIndex.find((p) => p.key === key);
   if (!me) return [];
@@ -4573,9 +4563,9 @@ function topicsOf(key){
     .map(([name, n]) => ({ name, n }));
 }
 
-// Άλλοι που μιλούν για τα ίδια. Μετράμε πόσα θέματα μοιράζονται, και
-// σπάμε την ισοπαλία με το πλήθος εμφανίσεων: ανάμεσα σε δύο που έχουν
-// τα ίδια δύο θέματα, προτιμάμε αυτόν που μιλάει πιο συχνά εδώ.
+// Others who talk about the same things. We count shared topics and break
+// ties by appearance count: between two with the same two topics, prefer
+// the one who speaks here more often.
 function nearbyPeople(key, max = 4){
   const me = peopleIndex.find((p) => p.key === key);
   if (!me || !me.topics.size) return [];
@@ -4593,8 +4583,8 @@ function nearbyPeople(key, max = 4){
     .map((x) => x.p);
 }
 
-// Ποιος γνωστός καλεσμένος αναφέρεται μέσα σε ένα κείμενο. Το χρειάζονται
-// τα βίντεο, που δεν έχουν πεδίο καλεσμένου — μόνο τίτλο.
+// Which known guest is mentioned inside a text. Videos need it: they have
+// no guest field, only a title.
 function guestInText(text){
   const hay = matchKey(text);
   if (!hay) return null;
@@ -4613,8 +4603,8 @@ function guestFirstInText(text){
   for (const g of guestIndex) {
     if (!g.hay) continue;
     const at = hay.indexOf(g.hay);
-    // Ισοπαλία στη θέση: κερδίζει το μακρύτερο όνομα, όπως και στον
-    // τίτλο — ο «Γιώργος Παπαδόπουλος» πριν τον «Γιώργος Παπά».
+    // Tie on position: the longer name wins, as in the title —
+    // "Γιώργος Παπαδόπουλος" before "Γιώργος Παπά".
     if (at !== -1 && (at < bestAt || (at === bestAt && g.hay.length > best.hay.length))) {
       best = g;
       bestAt = at;
@@ -4624,26 +4614,26 @@ function guestFirstInText(text){
 }
 
 function videoGuest(v){
-  // Πρώτα ό,τι έβγαλε το κοινό πέρασμα προσώπων πάνω στον τίτλο του
-  // βίντεο — το ίδιο που βγάζει και τα πρόσωπα των επεισοδίων, με την
-  // ίδια ένωση γραφών και τις ίδιες διορθώσεις του συντάκτη.
+  // First, whatever the shared people pass found in the video title — the
+  // same one that produces episode guests, with the same merging and the
+  // same editor corrections.
   for (const onoma of guestsOf(v)) {
     const g = guestIndex.find((x) => x.key === guestKey(onoma));
     if (g) return g;
   }
 
-  // Μετά ο τίτλος ως κείμενο: πιάνει τα «μίλησε ο Χ» που δεν έχουν
-  // άνω τελεία, άρα δεν περνούν από το πέρασμα των προσώπων.
+  // Then the title as free text: this catches "μίλησε ο Χ" forms with no
+  // colon, which the people pass never sees.
   const apoTitlo = guestInText(v.title);
   if (apoTitlo) return apoTitlo;
 
-  // Τελευταία η ΠΡΩΤΗ παράγραφος της περιγραφής.
+  // Last, the FIRST paragraph of the description.
   const proti = String(v.summary || '').split('\n')[0];
   return proti ? guestFirstInText(proti) : null;
 }
 
-// Η διεύθυνση της σελίδας του καλεσμένου ενός επεισοδίου — κενό αν δεν
-// έχει καλεσμένο ή αν δεν του αντιστοιχεί σελίδα.
+// The URL of an episode guest's page — empty if there is no guest or no
+// page for them.
 function guestHref(ep, depth = 0){
   const name = guestOf(ep);
   if (!name) return '';
@@ -4666,8 +4656,8 @@ function mostCommon(list){
   return best;
 }
 
-// Σελίδα για διευθύνσεις που δεν υπάρχουν. Δεν αφήνουμε τον επισκέπτη
-// σε λευκή οθόνη του browser — του δίνουμε δρόμους να συνεχίσει.
+// Page for addresses that do not exist. We do not leave the visitor on a
+// blank browser screen — we give them ways to carry on.
 function notFoundPage(){
   const body = `${siteHeader()}
 
@@ -4799,11 +4789,11 @@ ${ADSENSE ? `      <p>Οι διαφημίσεις εδώ είναι δύο ει�
   });
 }
 
-// Οι μηχανές αναζήτησης χρειάζονται κατάλογο για να φτάσουν και στις
-// 4.500 σελίδες — ακολουθώντας μόνο συνδέσμους θα έχαναν τα περισσότερα.
+// Search engines need a sitemap to reach all 4,500 pages — following links
+// alone they would miss most of them.
 function sitemapXml(urls){
-  // Χωρίς .html, όπως και κάθε σύνδεσμος της σελίδας: αλλιώς ο κατάλογος
-  // στέλνει τη Google σε 4.700 διευθύνσεις που όλες ανακατευθύνουν.
+  // Without .html, like every link on the site: otherwise the sitemap
+  // sends Google to 4,700 URLs that all redirect.
   const rows = urls.map((u) => `  <url><loc>${SITE_URL}/${cleanUrl(u.loc)}</loc>${u.date ? `<lastmod>${u.date.slice(0, 10)}</lastmod>` : ''}</url>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -4812,13 +4802,13 @@ ${rows}
 `;
 }
 
-// Η σελίδα αναζήτησης. Το Pagefind φτιάχνει το ευρετήριο μετά το build
-// και το σερβίρει από το /pagefind/ — δεν υπάρχει διακομιστής αναζήτησης
-// και δεν χρεώνεται τίποτα ανά επισκέπτη.
+// The search page. Pagefind builds the index after the build and serves it
+// from /pagefind/ — there is no search server and nothing is billed per
+// visitor.
 function searchPage(episodes, catGroups){
-  // Η σελίδα δεν μένει άδεια όσο δεν έχει ψάξει κανείς: από κάτω τα θέματα
-  // και τα πιο πρόσφατα επεισόδια, ώστε να υπάρχει δρόμος ακόμα και αν
-  // δεν ξέρεις τι να γράψεις.
+  // The page is not empty before anyone searches: topics and the most
+  // recent episodes sit below, so there is a way forward even if you do
+  // not know what to type.
   const topics = Object.keys(catGroups || {})
     .filter((k) => catGroups[k].items.length)
     .sort((a, b) => catGroups[b].items.length - catGroups[a].items.length)
@@ -4886,19 +4876,19 @@ ${latest}
   return page({ title: 'Αναζήτηση — Newshub Media', body });
 }
 
-// Σελίδα με όλους τους καλεσμένους, αλφαβητικά.
-// Πόσες εμφανίσεις θεωρούνται «τακτικός». Πάνω από αυτό, το νούμερο
-// βάφεται κίτρινο στη λίστα.
+// All guests, alphabetically.
+// How many appearances count as "regular". Above that the number is
+// highlighted in the list.
 const OFTEN = 5;
 
-// Το αρχικό γράμμα για τις άγκυρες: κεφαλαίο, χωρίς τόνο, ώστε το
-// «Άγγελος» και το «Ανδρέας» να πέσουν στο ίδιο Α.
+// The initial letter for the anchors: capital, unaccented, so "Άγγελος"
+// and "Ανδρέας" land under the same Α.
 function firstLetter(name){
   return String(name).trim().charAt(0).toUpperCase()
     .normalize('NFD').replace(/[̀-ͯ]/g, '');
 }
 
-// Πόσα ονόματα δείχνει η ενότητα «Τα πρόσωπα» στην αρχική.
+// How many names the homepage "Πρόσωπα" section shows.
 const NAMES_SHOWN = 40;
 
 function peopleFaces(){ return haveFaces(); }
@@ -4915,8 +4905,8 @@ function namesSection(groups, depth = 0){
       return {
         name,
         n: groups[key].items.length,
-        // Μόνο αληθινό πορτρέτο. Παλιά έμπαινε εδώ το εξώφυλλο του
-        // επεισοδίου — δες photoOf().
+        // A real portrait only. This used to hold the episode cover — see
+        // photoOf().
         face: photoOf(name),
       };
     })
@@ -4944,7 +4934,7 @@ ${chips}
   </section>`;
 }
 
-// Εξαγωγή επωνύμου και ονόματος για αλφαβητική ταξινόμηση ανά επώνυμο
+// Surname and first name, for alphabetical sorting by surname.
 function parseGuestName(fullName) {
   const s = String(fullName || '').trim();
   if (s === 'Κ.Φίλης') return { surname: 'Φίλης', firstname: 'Κ.' };
@@ -4991,12 +4981,12 @@ function guestsIndexPage(groups){
   }
   const since = years.length ? Math.min(...years) : '';
 
-  // ---- οι πιο συχνοί ----
+  // ---- the most frequent ----
   const top = [...people].sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, 'el')).slice(0, 20);
 
-  // ΟΧΙ το p.image: εκείνο είναι το εξώφυλλο επεισοδίου, και κομμένο σε
-  // κύκλο έδειχνε μισό ψημένο γράμμα αντί για άνθρωπο. Είτε πορτρέτο
-  // που διάλεξε ο συντάκτης, είτε τα αρχικά του ονόματος.
+  // NOT p.image: that is an episode cover, and cropped to a circle it
+  // showed half a baked-in letter instead of a person. Either a portrait
+  // the editor chose, or the initials.
   const faces = top.map((p) => `      <a class="face" href="guest/${p.slug}.html">
         <span class="face-pic">${photoOf(p.name)
           ? `<img src="${esc(photoOf(p.name))}" alt="" loading="lazy">`
@@ -5005,7 +4995,7 @@ function guestsIndexPage(groups){
         <span class="face-n">${p.n === 1 ? '1 εμφάνιση' : `${p.n} εμφανίσεις`}</span>
       </a>`).join('\n');
 
-  // ---- όλοι αλφαβητικά ----
+  // ---- everyone, alphabetically ----
   const sorted = [...people].sort((a, b) => a.surname.localeCompare(b.surname, 'el') || a.firstname.localeCompare(b.firstname, 'el'));
 
   const letters = [];
@@ -5072,38 +5062,36 @@ ${rows.join('\n')}
   });
 }
 
-// Η γραμμή χρόνου με τις κουκκίδες ΒΓΗΚΕ στις 11 Νοεμβρίου 2026.
-// Οι ημερομηνίες της πρώτης και της τελευταίας εμφάνισης λένε ήδη ό,τι
-// χρειάζεται, στη γραμμή με τα στοιχεία από πάνω.
+// The first and last appearance dates in the stats line above say
+// everything the removed dotted timeline used to.
 
 function guestPage(name, list){
   const safe = esc(name);
 
-  // Χρονολογικά, πιο πρόσφατο πρώτο. Δεν βασιζόμαστε στη σειρά που
-  // ήρθαν: αν αλλάξει το feed ή η ομαδοποίηση, η σελίδα μένει σωστή.
+  // Chronological, newest first. We do not rely on arrival order: if the
+  // feed or the grouping changes, the page stays correct.
   const episodes = [...list].sort((a, b) => new Date(b.date) - new Date(a.date));
   const count = episodes.length;
 
   const key = guestKey(name);
-  // Η ιδιότητα («καθηγητής», «αντιναύαρχος ε.α.») βγαίνει από τον τίτλο
-  // του επεισοδίου — τα βίντεο δεν τη γράφουν με τον ίδιο τρόπο.
+  // The role ("καθηγητής", "αντιναύαρχος ε.α.") comes from the episode
+  // title — videos do not write it the same way.
   const title = episodes.filter((x) => !einaiVideo(x)).map((ep) => titleOf(ep)).find(Boolean) || '';
 
-  // Η ιδιότητα, αν τη γράψει κάποιος από το διαχειριστικό. Μπαίνει
-  // κάτω από το όνομα: «ποιος είναι αυτός» είναι η πρώτη ερώτηση του
-  // επισκέπτη, και σήμερα η σελίδα απαντά μόνο «πόσες φορές ήρθε».
+  // The role, if someone writes it in the admin. It goes under the name:
+  // "who is this" is the visitor's first question, and today the page
+  // only answers "how many times they came".
   const role = roleOf(name);
 
-  // Το θολό υπόβαθρο της κορυφής βγαίνει από το εξώφυλλο του πιο
-  // πρόσφατου επεισοδίου — εκεί το ψημένο κείμενο δεν ενοχλεί, γιατί
-  // είναι θολό και σκοτεινιασμένο.
+  // The blurred backdrop comes from the most recent episode cover — baked
+  // text does not matter there, because it is blurred and darkened.
   const pic = episodes.find((ep) => ep.image);
 
-  // Το πορτρέτο είναι άλλο πράγμα: μπαίνει καθαρό, δίπλα στο όνομα, και
-  // υπάρχει μόνο αν το διάλεξε άνθρωπος.
+  // The portrait is a different thing: shown sharp, next to the name, and
+  // only when a human chose it.
   const face = photoOf(name);
 
-  // ---- η γραμμή με τα στοιχεία ----
+  // ---- the stats line ----
   const dates = episodes.map((ep) => new Date(ep.date).getTime())
     .filter((t) => !Number.isNaN(t));
   const seconds = episodes.reduce((n, ep) => n + (ep.seconds || 0), 0);
@@ -5113,13 +5101,13 @@ function guestPage(name, list){
     count === 1 ? '1 εμφάνιση' : `${count} εμφανίσεις`,
     dates.length ? `πρώτη ${formatDate(new Date(dates[dates.length - 1]).toISOString())}` : '',
     dates.length > 1 ? `τελευταία ${formatDate(new Date(dates[0]).toISOString())}` : '',
-    // Κάτω από μία ώρα το «0 ώρες» δεν λέει τίποτα· λέμε λεπτά.
+    // Under an hour "0 hours" says nothing; we say minutes.
     hours >= 1
       ? `${hours.toFixed(hours < 10 ? 1 : 0).replace('.', ',')} ώρες συζήτησης`
       : (seconds ? `${Math.round(seconds / 60)} λεπτά συζήτησης` : ''),
   ].filter(Boolean).join(' · ');
 
-  // ---- μιλάει για ----
+  // ---- talks about ----
   const topics = topicsOf(key);
   const topicTags = topics.map((t) => `      <a class="ptag" href="../${categoryUrl(t.name)}" style="--tint: var(--t-${slugify(t.name)}, var(--t-default))">
         <span class="ptag-name">${esc(t.name)}</span>
@@ -5128,14 +5116,14 @@ function guestPage(name, list){
 
   const itemOf = (x) => (einaiVideo(x) ? itemFromVideo(x) : itemFromEpisode(x));
 
-  // Το πιο πρόσφατο παίρνει μεγάλη κάρτα: είναι ο λόγος που κάποιος
-  // ανοίγει τη σελίδα ενός προσώπου σήμερα.
+  // The most recent gets the large card: it is why someone opens a
+  // person's page today.
   const lead = episodes[0]
     ? card({ ...itemOf(episodes[0]), lead: true }, 1)
     : '';
   const rest = episodes.slice(1).map((x) => card(itemOf(x), 1)).join('\n');
 
-  // ---- άλλοι για τα ίδια θέματα ----
+  // ---- others on the same topics ----
   const near = nearbyPeople(key).map((p) => `      <a class="pnear" href="${p.slug}.html">
         ${avatar(p.name, 'avatar--round')}
         <span class="pnear-text">
@@ -5178,7 +5166,7 @@ ${lead}${rest ? `\n${rest}` : ''}
       </div>
     </section>
 
-${/* Μετά τις συζητήσεις του προσώπου, πριν τους «άλλους». Ίδια λογική
+${/* After the person's conversations, before the "others". Same logic
      με τη σελίδα επεισοδίου: πρώτα αυτό που ήρθε να δει ο αναγνώστης. */ ''}
 ${adSlot('guest-mid', 'leaderboard')}
 
@@ -5195,8 +5183,8 @@ ${near}
     body,
     depth: 1,
     description: `${name}: ${facts}. Όλες οι συμμετοχές στο ${SITE_NAME}.`,
-    // Στο μήνυμα που μοιράζεται κάποιος, το πορτρέτο λέει πολύ
-    // περισσότερα από το εξώφυλλο του επεισοδίου.
+    // In a shared message the portrait says far more than the episode
+    // cover.
     image: face || (pic ? pic.image : ''),
     url: `guest/${slugify(name)}.html`,
   });
@@ -6183,8 +6171,8 @@ ${intro(episodes[0], videos[0])}`,
     videosRemoved++;
   }
 
-  // Σελίδες θεμάτων — ίδιο μοτίβο. Οι ομάδες φτιάχτηκαν πιο πάνω, γιατί
-  // τις χρειάστηκε και η αρχική.
+  // Topic pages — same pattern. The groups were built earlier, because the
+  // homepage needed them too.
   fs.mkdirSync(CATEGORY_DIR, { recursive: true });
   const expectedCats = new Set();
   let catsWritten = 0;
@@ -6353,8 +6341,8 @@ ${intro(episodes[0], videos[0])}`,
       `google.com, ${ADSENSE.replace(/^ca-/, '')}, DIRECT, f08c47fec0942fa0\n`);
   }
 
-  // Κάθε σελίδα με περιεχόμενο μπαίνει στον κατάλογο. Η σελίδα αναζήτησης
-  // μένει έξω: δεν έχει τίποτα δικό της να δείξει στη Google.
+  // Every page with content goes into the sitemap. The search page stays
+  // out: it has nothing of its own to show Google.
   const sitemap = [
     { loc: '' },
     { loc: 'shows.html' },
