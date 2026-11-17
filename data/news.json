@@ -1,5 +1,17 @@
 [
   {
+    "id": "thermosifonas-poso-reyma-kaiei-se-15-30-kai-60-lepta-pote-symferei-na-ton-kleinoyme",
+    "title": "Θερμοσίφωνας: Πόσο ρεύμα καίει σε 15, 30 και 60 λεπτά – Πότε συμφέρει να τον κλείνουμε",
+    "url": "https://www.newshub.gr/el/oikonomia/thermosifonas-poso-reyma-kaiei-se-15-30-kai-60-lepta-pote-symferei-na-ton-kleinoyme",
+    "date": "2026-11-17T20:11:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/thermosifonas-iliakos.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/thermosifonas-iliakos.jpg",
+    "summary": "Πόση ώρα πρέπει να αφήνουμε αναμμένο τον ηλεκτρικό θερμοσίφωνα για να έχουμε αρκετό ζεστό νερό, χωρίς να πληρώνουμε περισσότερα από όσα χρειάζεται; Το ερώτημ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "vretania-synelifthi-ypsilovathmos-amerikanos-stratiotikos-os-ypoptos-gia-kataskopeia-yper-tis-rosias",
     "title": "Βρετανία: Συνελήφθη υψηλόβαθμος Αμερικανός στρατιωτικός, ως ύποπτος για κατασκοπεία υπέρ της Ρωσίας",
     "url": "https://www.newshub.gr/el/kosmos/vretania-synelifthi-ypsilovathmos-amerikanos-stratiotikos-os-ypoptos-gia-kataskopeia-yper-tis-rosias",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/us_army_flag.jpg",
     "summary": "Ένας 41χρονος ανώτερος αξιωματικός του αμερικανικού στρατού συνελήφθη και κρατείται στη Βρετανία ως ύποπτος για κατασκοπεία υπέρ της Ρωσίας, σύμφωνα με ανακο...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "mark-royte-themito-to-oykraniko-chtypima-sti-gefyra-tis-krimaias-einai-simantiko-to-oti-amynetai-to-kievo",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/aimodosia-1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/aimodosia-1.jpg",
     "summary": "Το Σάββατο 14 Νοεμβρίου 2026 θα πραγματοποιηθεί εθελοντική αιμοδοσία στο κέντρο της πόλης του Ηρακλείου και συγκεκριμένα στο αίθριο της Λότζια από τις 09:30 ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "epta-paraviaseis-kai-mia-eikoniki-aeromachia-pano-apo-to-aigaio-anachaitistikan-oplismena-toyrkika-machitika",
-    "title": "Επτά παραβιάσεις και μία εικονική αερομαχία πάνω από το Αιγαίο, αναχαιτίστηκαν οπλισμένα τουρκικά μαχητικά",
-    "url": "https://www.newshub.gr/el/geopolitiki/epta-paraviaseis-kai-mia-eikoniki-aeromachia-pano-apo-to-aigaio-anachaitistikan-oplismena-toyrkika-machitika",
-    "date": "2026-11-12T17:49:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/tourkiko-ntrooun.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/tourkiko-ntrooun.jpg",
-    "summary": "Επτά παραβιάσεις του ελληνικού εθνικού εναέριου χώρου και μία εικονική αερομαχία (εμπλοκή) σημειώθηκαν την Πέμπτη (12/11) στο βορειοανατολικό Αιγαίο, όπου ...",
     "author": null,
     "featured": false
   },
