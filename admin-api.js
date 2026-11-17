@@ -2,15 +2,15 @@
 'use strict';
 
 const WRITABLE = new Set([
-  'curation',        // πρωτοσέλιδο, δευτερεύοντα, κατηγορίες, θέματα
-  'people-aliases',  // ποια ονόματα είναι ο ίδιος άνθρωπος
-  'shows',           // οι εκπομπές
-  'show-art',        // οι αφίσες τους
-  'articles',        // τα δικά μας άρθρα
-  'pairs',           // ποιο βίντεο και ποιος καλεσμένος πάει σε ποιο επεισόδιο
-  'photos',          // ποιες φωτογραφίες είναι «στάνταρ»
-  'writers',         // τα πορτρέτα των αρθρογράφων του newshub.gr
-  'ads',             // οι διαφημίσεις των συνεργατών
+  'curation',        // lead, secondaries, categories, topics
+  'people-aliases',  // which names are the same person
+  'shows',           // the shows
+  'show-art',        // their posters
+  'articles',        // our own articles
+  'pairs',           // which video and which guest go with which episode
+  'photos',          // which images are "standard"
+  'writers',         // the portraits of newshub.gr's columnists
+  'ads',             // the partners' ads
 ]);
 
 // Files that are read but NOT written: the fetch-*.js scripts produce
@@ -347,7 +347,7 @@ function validate(name, data){
         return 'Τα πορτρέτα πρέπει να είναι αντικείμενο.';
       }
       for (const [who, url] of Object.entries(data.photos)) {
-        if (url === '' || url === null) continue;   // «βγάλ' την»
+        if (url === '' || url === null) continue;   // "take it out"
         if (typeof url !== 'string' || !/^\/uploads\/[\w.-]+$/.test(url)) {
           return `Η φωτογραφία του «${who}» πρέπει να είναι από τη βιβλιοθήκη.`;
         }
@@ -488,7 +488,7 @@ const GREEK_MAP = {
 function imageName(original, stamp){
   const base = String(original || 'foto')
     .replace(/\.[^.]*$/, '')
-    .normalize('NFD').replace(/[̀-ͯ]/g, '')   // πρώτα οι τόνοι
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')   // accents first
     .toLowerCase()
     .split('').map((ch) => GREEK_MAP[ch] || ch).join('')
     .replace(/[^a-z0-9]+/g, '-')

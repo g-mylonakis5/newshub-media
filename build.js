@@ -87,8 +87,8 @@ function slugify(text){
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-  if (full.length <= 55) return full;              // χωράει ολόκληρο, δεν κόβουμε
-  return full.slice(0, 55).replace(/-[^-]*$/, ''); // κόπηκε -> φεύγει η μισή λέξη
+  if (full.length <= 55) return full;              // fits whole, no cutting
+  return full.slice(0, 55).replace(/-[^-]*$/, ''); // cut -> drop the half word
 }
 
 function episodeUrl(ep) {
@@ -106,7 +106,7 @@ const athensFmt = new Intl.DateTimeFormat('en-GB', {
   timeZone: ATHENS,
   year: 'numeric', month: '2-digit', day: '2-digit',
   hour: '2-digit', minute: '2-digit',
-  hourCycle: 'h23',          // αλλιώς τα μεσάνυχτα βγαίνουν «24:00»
+  hourCycle: 'h23',          // or midnight comes out as "24:00"
   weekday: 'short',
 });
 
@@ -122,9 +122,9 @@ function athens(iso){
 
   return {
     year: +p.year,
-    month: +p.month - 1,        // 0-11, όπως το getMonth()
+    month: +p.month - 1,        // 0-11, as getMonth() has it
     day: +p.day,
-    hour: p.hour,               // κείμενο, ήδη με μηδενικό μπροστά
+    hour: p.hour,               // text, already zero-padded
     minute: p.minute,
     weekday: DAY_INDEX[p.weekday] ?? 0,
   };
@@ -1085,7 +1085,7 @@ function itemFromVideo(v){
     // was silently lost.
     id: v.id,
     href: videoUrl(v),
-    external: false,                // παίζει στη δική μας σελίδα, με embed
+    external: false,                // plays on our own page, embedded
     label: categoriesFor(v.id, v.title)[0] || '',
     name: '',
     title: v.title,
@@ -1129,7 +1129,7 @@ function itemFromArticle(a){
     // The newshub.gr URL travels with it, so a manual pick by the editor
     // is recognised however they write it.
     source: a.url,
-    external: !mine,                // χωρίς σώμα, ζει μόνο στο newshub.gr
+    external: !mine,                // no body, lives only on newshub.gr
     label: a.category || '',
     name: '',
     title: a.title,
@@ -1332,7 +1332,7 @@ function itemFromOwnArticle(a){
   return {
     kind: 'news',
     href: ownArticleUrl(a),
-    external: false,                // δικό μας, ζει εδώ
+    external: false,                // ours, lives here
     label: a.category || '',
     name: a.author || '',
     title: a.title,
@@ -1386,9 +1386,9 @@ function pickFeatured(items, curation){
 function sameItem(it, want){
   const strip = (s) => String(s)
     .trim()
-    .replace(/^https?:\/\/[^/]+\//i, '')   // πετάμε το http://κάτι/
+    .replace(/^https?:\/\/[^/]+\//i, '')   // drop the http://something/
     .replace(/^\/+/, '')
-    .replace(/[?#].*$/, '')                 // και ό,τι κρέμεται στο τέλος
+    .replace(/[?#].*$/, '')                 // and whatever hangs off the end
     .toLowerCase();
 
   const target = strip(want);
@@ -1610,8 +1610,8 @@ function airDate(ep){
   const pod = new Date(ep.date).getTime();
   const vid = new Date(twin.date).getTime();
   if (!vid || isNaN(vid) || isNaN(pod)) return ep.date;
-  if (vid >= pod) return ep.date;                              // ήδη σωστή
-  if (pod - vid > AIR_WINDOW_DAYS * 86400000) return ep.date;  // επανέκδοση
+  if (vid >= pod) return ep.date;                              // already right
+  if (pod - vid > AIR_WINDOW_DAYS * 86400000) return ep.date;  // a re-release
 
   return new Date(vid).toISOString();
 }
@@ -1663,7 +1663,7 @@ function loadEpisodes(){
   for (const ep of list) {
     const when = airDate(ep);
     if (when === ep.date) continue;
-    ep.published = ep.date;   // πότε ανέβηκε το podcast, αν χρειαστεί ποτέ
+    ep.published = ep.date;   // when the podcast went up, should it ever be needed
     ep.date = when;
   }
 
@@ -1838,7 +1838,7 @@ function articleAdAt(body){
     if (++seen < AD_AFTER_PARAS) continue;
 
     const next = body[i + 1];
-    if (next && next.type === 'embed') continue;   // κολλητά στον player, όχι
+    if (next && next.type === 'embed') continue;   // against the player, not this
     return i + 1;
   }
   return -1;
@@ -2199,7 +2199,7 @@ const CATEGORIES = [
   ['Κόσμος',      ['διεθν', 'ευρωπ', '=ηπα', 'κινα', '~ρωσι', 'γερμανι', 'γαλλι', 'βρεταν',
     'τραμπ', 'πουτιν', 'αλβανι', 'σερβια', 'βαλκανι', '~αιγυπτ', 'ινδια']],
   ['Ελλάδα',      ['~ελλαδ', 'αθηνα', 'θεσσαλονικ']],
-  ['Απόψεις',     []],   // μόνο με το χέρι — δεν αναγνωρίζεται από λέξεις
+  ['Απόψεις',     []],   // by hand only — no words identify it
 ];
 
 // The handwritten stem, compiled into a rule that checks fast. Done once
@@ -2350,7 +2350,7 @@ function katigoriaApoDidimo(epId){
 
     for (const key of Object.keys(manual)) {
       const v = loadVideos().find((x) => x.id === key);
-      if (!v) continue;                    // δεν είναι βίντεο· είναι επεισόδιο
+      if (!v) continue;                    // not a video; it is an episode
       const ep = episodeTwin(v);
       // Their own correction, where it exists, always wins.
       if (ep && !manual[ep.id]) didimoKatigories[ep.id] = manual[key];
@@ -2512,8 +2512,8 @@ function showFromTags(ep){
     showByTag = new Map();
     for (const v of loadVideos()) {
       if (!v.show) continue;
-      showByTag.set(tagKey(v.show), v.show);           // πλήρες όνομα λίστας
-      showByTag.set(tagKey(showLabel(v.show)), v.show); // και η σύντομη μορφή
+      showByTag.set(tagKey(v.show), v.show);           // the playlist's full name
+      showByTag.set(tagKey(showLabel(v.show)), v.show); // and the short form
     }
   }
 
@@ -2632,7 +2632,7 @@ function showAbout(name){
   if (!text) return [];
 
   return text
-    .split(/\s*https?:\/\//)[0]          // ό,τι ακολουθεί σύνδεσμο φεύγει
+    .split(/\s*https?:\/\//)[0]          // whatever follows a link goes
     .split(/\r?\n/)
     .map((line) => line.replace(/[ \t]+/g, ' ').trim())
     .filter(Boolean)
@@ -2801,7 +2801,7 @@ function buildCategories(videos, episodes, ownArticles = []){
   }
 
   for (const v of videos) {
-    if (videoHasTwin(v)) continue;          // το podcast του μπήκε ήδη
+    if (videoHasTwin(v)) continue;          // its podcast is already in
     add(categoriesFor(v.id, v.title), itemFromVideo(v), v.id);
   }
 
@@ -2835,9 +2835,9 @@ function videoHasTwin(v){
   return !!twinApoOnoma(v);
 }
 
-const TWIN_MERES = 10;     // πόσο μακριά επιτρέπεται να είναι οι δύο ημερομηνίες
-const TWIN_KOINES = 2;     // πόσες λέξεις πρέπει να μοιράζονται τα θέματα
-const TWIN_MIKOS = 5;      // πόσο μεγάλη πρέπει να είναι μια λέξη για να μετρήσει
+const TWIN_MERES = 10;     // how far apart the two dates may be
+const TWIN_KOINES = 2;     // how many words the subjects must share
+const TWIN_MIKOS = 5;      // how long a word must be to count
 
 // The name before the colon, normalised.
 function onomaApoTitlo(text){
@@ -4068,8 +4068,8 @@ function valeProsopa(list){
   }
 
   // ---- pass 2: dictionary ----
-  const gnosta = new Map();     // κλειδί ονόματος -> όνομα
-  const epitheta = new Map();   // κλειδί επωνύμου -> σύνολο ονομάτων
+  const gnosta = new Map();     // name key -> name
+  const epitheta = new Map();   // surname key -> set of names
 
   for (const [ep, names] of vrethika) {
     if (einaiVideo(ep)) continue;
@@ -4143,7 +4143,7 @@ function valeProsopa(list){
       const n = kiria.get(onomaKleidi(raw)) || raw;
       const w = n.split(/\s+/);
       if (w.length < 2) continue;
-      if (/\.$/.test(w[0]) || w[0].length <= 2) continue;   // αρχικό, όχι όνομα
+      if (/\.$/.test(w[0]) || w[0].length <= 2) continue;   // an initial, not a name
       const k = onomaKleidi(w[w.length - 1]);
       if (!plires.has(k)) plires.set(k, new Set());
       plires.get(k).add(n);
@@ -4154,7 +4154,7 @@ function valeProsopa(list){
   function enose(name){
     const w = name.split(/\s+/);
     if (w.length < 2) return name;
-    if (!/\.$/.test(w[0]) && w[0].length > 2) return name;   // ήδη πλήρες
+    if (!/\.$/.test(w[0]) && w[0].length > 2) return name;   // already full
 
     const hit = plires.get(onomaKleidi(w[w.length - 1]));
     if (!hit || hit.size !== 1) return name;
@@ -4229,7 +4229,7 @@ function looksLikePerson(name){
   // Quotes, exclamation marks and the comma: "Γ. Καραμπελιάς, Ιστορικό"
   // is a name AND a role, not a name.
   if (/[«»"!;?…:,]/.test(n)) return false;
-  if (/\d/.test(n)) return false;           // «μέρος 9ο»
+  if (/\d/.test(n)) return false;           // "μέρος 9ο"
 
   const words = n.split(/[\s.\-–]+/).filter(Boolean);
   if (words.length < 2 || words.length > 4) return false;
@@ -4424,7 +4424,7 @@ function indexGuestSlugs(groups){
       count: groups[key].items.length,
       last: groups[key].items[0] ? groups[key].items[0].date : '',
       hay: matchKey(name),
-      weight: name.length,          // τα μεγαλύτερα ονόματα ταιριάζουν πρώτα
+      weight: name.length,          // longer names match first
     });
   }
 
@@ -4437,7 +4437,7 @@ function peopleForAdmin(episodes){
   // The raw inventory first: every spelling as it comes out of the title,
   // BEFORE merging. Without it you cannot see what merged with what.
   const raw = {};
-  const katelixe = {};   // γραφή -> ο άνθρωπος στον οποίο ενώθηκε
+  const katelixe = {};   // spelling -> the person it merged into
   for (const ep of episodes) {
     const fix = pairOf(ep);
     if (fix && fix.noguest) continue;
@@ -4465,7 +4465,7 @@ function peopleForAdmin(episodes){
   }
 
   // Which spellings ended up as which person, and which were deleted.
-  const writings = {};   // κλειδί ανθρώπου -> [{ name, n }]
+  const writings = {};   // person key -> [{ name, n }]
   const rejected = [];
   for (const [name, n] of Object.entries(raw)) {
     const canonical = katelixe[name] || aliases().map[guestKey(name)] || name;
@@ -5821,7 +5821,7 @@ function main(){
   const inFlow = new Set();
   const pushFlow = (item) => {
     if (inFlow.has(item.href)) return;
-    if (onTop.has(item.href)) return;      // μπήκε ήδη στα banners
+    if (onTop.has(item.href)) return;      // already in the banners
     inFlow.add(item.href);
     flow.push(item);
   };
@@ -5861,14 +5861,14 @@ function main(){
   const room = Math.max(FLOW_VISIBLE, flow.length);
   const kryfoFlow = kryfa('latest');
   for (const it of recent) {
-    if (kryfoFlow(it)) continue;        // το έβγαλε άνθρωπος με το ✕
+    if (kryfoFlow(it)) continue;        // a human took it out with the ✕
     pushFlow(it);
     if (flow.length >= room) break;
   }
 
   for (const key of Object.keys(catGroups)) {
     for (const it of catGroups[key].items.slice(0, FLOW_PER_TOPIC)) {
-      pushFlow({ ...it, extra: true });    // κρυμμένο όσο δείχνουμε «Όλα»
+      pushFlow({ ...it, extra: true });    // hidden while we show "all"
     }
   }
 
@@ -6110,8 +6110,8 @@ ${intro(episodes[0], videos[0])}`,
   let guestsWritten = 0;
   for (const key of Object.keys(groups)){
     const group = groups[key];
-    const name = mostCommon(group.names);   // η γραφή που εμφανίζεται πιο συχνά
-    const slug = slugify(name);             // ...και από αυτήν βγαίνει η διεύθυνση
+    const name = mostCommon(group.names);   // the spelling that appears most often
+    const slug = slugify(name);             // ...and the URL comes from it
 
     // The loose key merges, the slug names — so two groups can in theory
     // ask for the same file. We say so instead of silently writing one

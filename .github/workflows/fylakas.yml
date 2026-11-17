@@ -3,7 +3,7 @@ name: Φύλακας
 
 on:
   schedule:
-    - cron: '20 5-22/3 * * *'   # κάθε 3 ώρες, μέσα στη μέρα
+    - cron: '20 5-22/3 * * *'   # every 3 hours, during the day
   workflow_dispatch:
 
 permissions:

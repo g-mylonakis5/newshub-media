@@ -3,9 +3,9 @@ name: Φρέσκο υλικό
 
 on:
   schedule:
-    - cron: '*/30 * * * *'      # ειδήσεις + επεισόδια — κάθε μισή ώρα
-    - cron: '40 4,10,16 * * *'  # βίντεο, απομαγνητοφωνήσεις — 3 φορές τη μέρα
-  workflow_dispatch:            # και με το χέρι, από την καρτέλα Actions
+    - cron: '*/30 * * * *'      # news + episodes — every half hour
+    - cron: '40 4,10,16 * * *'  # videos, transcripts — 3 times a day
+  workflow_dispatch:            # and by hand, from the Actions tab
     inputs:
       # Fire drill. The safety catch will fire for the first time in six
       # months, when nobody remembers how it was set up — and an alarm
@@ -22,7 +22,7 @@ on:
 
 permissions:
   contents: write
-  issues: write     # για την ειδοποίηση όταν παγώσει η ροή
+  issues: write     # for the alert when the flow freezes
 
 # Two runs at once would clobber each other's push.
 concurrency:

@@ -316,7 +316,7 @@ async function details(item, wantBody = false) {
   const img = meta(head, 'og:image');
 
   const date = when(html, item.date);
-  if (!date) return null;               // δημοσιεύεται αργότερα — όχι ακόμα
+  if (!date) return null;               // published later — not yet
 
   return {
     id: item.id,
@@ -512,7 +512,7 @@ async function fetchAll(list) {
         failed++;
         if (failed <= 3) console.warn('  παραλείπεται:', item.id, '—', err.code || err.message || 'άγνωστο σφάλμα');
       }
-      await pause(120);   // ανάσα, για να μην πιέζουμε τον διακομιστή τους
+      await pause(120);   // a breather, so we do not lean on their server
       if (done.length % 20 === 0 && done.length) process.stdout.write(`  ${done.length}/${list.length}\r`);
     }
   }
@@ -536,7 +536,7 @@ async function main() {
   }
   console.log(`  ${listed.length} άρθρα στη ροή τους`);
 
-  const FRESH_HOURS = 3;   // ίδιο όριο με το check-fresh.js
+  const FRESH_HOURS = 3;   // the same threshold as check-fresh.js
 
   if (!listed.length) {
     let ores = Infinity;

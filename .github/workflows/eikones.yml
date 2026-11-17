@@ -15,7 +15,7 @@ on:
       - 'public/player.js'
       - 'build.js'
       - 'check-images.js'
-  workflow_dispatch:   # και με το χέρι, από την καρτέλα Actions
+  workflow_dispatch:   # and by hand, from the Actions tab
 
 concurrency:
   group: eikones-${{ github.ref }}

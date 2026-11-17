@@ -40,8 +40,8 @@
   }
 
   var SYN_KEY = 'synexeia';
-  var SYN_MAX = 6;            // πόσα θυμόμαστε
-  var SYN_DEIXNE = 4;         // πόσα δείχνει η αρχική
+  var SYN_MAX = 6;            // how many we remember
+  var SYN_DEIXNE = 4;         // how many the homepage shows
 
   function synApolyto(href) {
     try {
@@ -240,7 +240,7 @@
 
   function openTranscript(details) {
     if (details.dataset.loaded) return;
-    details.dataset.loaded = '1';            // μία φορά, ακόμα κι αν αποτύχει
+    details.dataset.loaded = '1';            // once, even if it fails
 
     var box = details.querySelector('[data-transcript-body]');
     var note = box && box.querySelector('.transcript-load');
@@ -256,7 +256,7 @@
       })
       .catch(function () {
         if (note) note.textContent = 'Η απομαγνητοφώνηση δεν φορτώθηκε. Δοκίμασε ξανά.';
-        details.dataset.loaded = '';         // άσε τον να ξαναπροσπαθήσει
+        details.dataset.loaded = '';         // let it try again
       });
   }
 
@@ -547,7 +547,7 @@
     var head = e.target.closest('.transcript-head');
     if (head) {
       openTranscript(head.closest('.transcript'));
-      return;                      // το <details> ανοίγει μόνο του
+      return;                      // the <details> opens by itself
     }
 
     // d) a transcript timestamp: move the audio there
@@ -708,7 +708,7 @@
 
   function listaDeixe() {
     var box = document.querySelector('[data-lista]');
-    if (!box) return;                       // δεν είμαστε στην αρχική
+    if (!box) return;                       // we are not on the homepage
 
     var grid = box.querySelector('[data-lista-grid]');
     if (!grid) return;
@@ -857,7 +857,7 @@
       if (!res.ok) throw new Error('HTTP ' + res.status);
       html = await res.text();
     } catch (err) {
-      location.href = url;          // αν κάτι πάει στραβά, κανονική πλοήγηση
+      location.href = url;          // if anything goes wrong, navigate normally
       return;
     }
 
@@ -909,7 +909,7 @@
 
   window.addEventListener('popstate', function () {
     var tora = location.href.split('#')[0];
-    if (tora === edo) return;     // μόνο η άγκυρα άλλαξε — άσ' το στον browser
+    if (tora === edo) return;     // only the anchor changed — leave it to the browser
     edo = tora;
     go(location.href, false);
   });
@@ -984,7 +984,7 @@
 
   function synDeixe() {
     var box = document.querySelector('[data-synexeia]');
-    if (!box) return;                       // δεν είμαστε στην αρχική
+    if (!box) return;                       // we are not on the homepage
 
     var grid = box.querySelector('[data-synexeia-grid]');
     if (!grid) return;

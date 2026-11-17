@@ -17,11 +17,11 @@ const WIDTHS = [1600, 390];
 // 1. Blurred and dimmed backdrops. These are not images you look at;
 //    they are colour behind text. Cropping does not show there.
 const DECORATIVE = [
-  'card-bloom',     // το θολό πίσω από κάθε κάρτα
-  'hero-bloom',     // το ίδιο, στο πρωτοσέλιδο
-  'page-hero-img',  // θολή κορυφή σελίδας επεισοδίου/εκπομπής
-  'intro-bg',       // φόντο της εισαγωγής
-  'tcard-media',    // φόντο κάρτας θέματος, στο 55% διαφάνεια
+  'card-bloom',     // the blur behind every card
+  'hero-bloom',     // the same, on the lead
+  'page-hero-img',  // blurred top of an episode/show page
+  'intro-bg',       // the intro's background
+  'tcard-media',    // topic card background, at 55% opacity
 ];
 
 // 2. Faces. Cropping is the POINT: we want the head in a circle or a

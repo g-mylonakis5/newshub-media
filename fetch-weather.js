@@ -36,7 +36,7 @@ async function main() {
   const out = {
     city: CITY,
     temp: Math.round(data.current.temperature_2m),
-    code: data.current.weather_code,          // για να διαλέξει εικονίδιο το build
+    code: data.current.weather_code,          // so the build can pick an icon
     condition: CONDITIONS[data.current.weather_code] || '',
     high: Math.round(data.daily.temperature_2m_max[0]),
     low: Math.round(data.daily.temperature_2m_min[0]),

@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  var POSA = 8;            // όσα δείχνει το πλαίσιο· το /roi στέλνει 12
+  var POSA = 8;            // what the box shows; /roi sends 12
 
   function grapse(ul, items) {
     var frag = document.createDocumentFragment();
@@ -43,7 +43,7 @@
 
   async function anaveosi() {
     var ul = document.querySelector('[data-roi]');
-    if (!ul) return;                      // δεν είμαστε στην αρχική
+    if (!ul) return;                      // we are not on the homepage
 
     try {
       var res = await fetch('/roi', { headers: { Accept: 'application/json' } });

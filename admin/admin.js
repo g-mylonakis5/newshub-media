@@ -7,7 +7,7 @@ var PAGE = 24;
 
 var state = {
   curation: null,
-  items: [],        // όλα τα διαθέσιμα, ενωμένα και ταξινομημένα
+  items: [],        // everything available, merged and sorted
   // The sources as they arrived. Kept so the list above can be rebuilt
   // when an article changes, without re-downloading 5 MB.
   raw: { episodes: [], videos: [], news: [] },
@@ -795,8 +795,8 @@ function upload(files, ctx){
 }
 
 var lib = {
-  files: [],        // ό,τι γύρισε το /api/images
-  standard: [],     // τα ονόματα που έχουν αστεράκι
+  files: [],        // whatever /api/images returned
+  standard: [],     // the names that carry a star
   rest: {},
   loaded: false,
   // Where each of the two grids is. null = the root.
@@ -1130,7 +1130,7 @@ function wireShots(){
 
   input.addEventListener('change', function () {
     upload(input.files);
-    input.value = '';   // ώστε η ίδια φωτογραφία να ξαναδέχεται επιλογή
+    input.value = '';   // so the same image can be picked again
   });
 
   // Without preventDefault the browser OPENS the image in a new tab and
@@ -1427,11 +1427,11 @@ function kryEpanafora(poio, ref){
 }
 
 var cat = {
-  auto: {},        // id -> [κατηγορίες] όπως τις βγάζει το site
+  auto: {},        // id -> [categories] as the site derives them
   shown: PAGE,
   find: '',
   filter: '',
-  openId: null,    // ποια γραμμή είναι ανοιχτή για επεξεργασία
+  openId: null,    // which row is open for editing
 };
 
 function catItems(){
@@ -1559,7 +1559,7 @@ function wireCats(){
     var id = row.dataset.cid;
 
     if (e.target.closest('[data-cat-reset]')) { catReset(id); return; }
-    if (e.target.closest('.catpick')) return;      // τα κουτάκια τα πιάνει το change
+    if (e.target.closest('.catpick')) return;      // the boxes are handled by change
 
     // Click on the row: open or close.
     cat.openId = cat.openId === id ? null : id;
@@ -1604,13 +1604,13 @@ function loadAutoCats(){
   }).catch(function () { return {}; });
 }
 
-var TH_ROWS = 4;      // όσες λωρίδες δείχνει η αρχική
-var TH_SPOTS = 2;     // όσες ενότητες σε πλαίσιο
+var TH_ROWS = 4;      // rows the homepage shows
+var TH_SPOTS = 2;     // sections in a spotlight
 
 var th = {
-  list: [],                                  // [{name, key, n}] φθίνουσα
-  defaults: { featured: [], spotlight: [] }, // οι προεπιλογές του κώδικα
-  open: '',                                  // ποιο θέμα είναι ανοιχτό για καρφίτσωμα
+  list: [],                                  // [{name, key, n}] descending
+  defaults: { featured: [], spotlight: [] }, // the code's defaults
+  open: '',                                  // which topic is open for pinning
   find: '',
   shown: PAGE,
 };
@@ -1950,7 +1950,7 @@ function thcToggle(ref){
     list.splice(at, 1);
     kryvo(key, ref);
   } else {
-    kryXanaOles(key, ref);              // το διάλεξε ο ίδιος, το εννοεί
+    kryXanaOles(key, ref);              // they picked it themselves, they mean it
     list.push(ref);
   }
 
@@ -2156,7 +2156,7 @@ function ltAuto(){
   var epi = ltEpisodeTitles();
   state.items.forEach(function (it) {
     if (it.kind === 'news') return;
-    if (it.kind === 'video' && epi[ltTitleKey(it.title)]) return;   // έχει δίδυμο
+    if (it.kind === 'video' && epi[ltTitleKey(it.title)]) return;   // has a twin
     var key = it.kind + ':' + it.id;
     if (seen[key]) return;
     seen[key] = true;
@@ -2173,7 +2173,7 @@ function ltAuto(){
 function ltTitleKey(t){
   var s = String(t == null ? '' : t);
   var at = s.indexOf(':');
-  if (at > 0 && at < 40) s = s.slice(at + 1);   // πετάμε το όνομα μπροστά
+  if (at > 0 && at < 40) s = s.slice(at + 1);   // drop the name in front
   return flat(s).slice(0, 60);
 }
 
@@ -2370,7 +2370,7 @@ function ltToggle(ref){
 
   if (at > -1) {
     list.splice(at, 1);
-    kryvo('latest', ref);            // ίδιος λόγος με το ✕ — δες kryvo()
+    kryvo('latest', ref);            // same reason as the ✕ — see kryvo()
   } else {
     // Pinned by hand again: the "not this" no longer applies.
     kryXanaOles('latest', ref);
@@ -2521,7 +2521,7 @@ function mrPreview(){
       if (taken[it.ref]) continue;
       // What ✕ removed does not come back on its own — see kryvo().
       if (kryfoIt('mustRead', 'mustRead', it)) continue;
-      if (pass === 0 && cats[it.who]) continue;   // πρώτο πέρασμα: μία ανά κατηγορία
+      if (pass === 0 && cats[it.who]) continue;   // first pass: one per category
       taken[it.ref] = true;
       cats[it.who] = true;
       chosen.push({ ref: it.ref, item: it, auto: true });
@@ -2608,14 +2608,14 @@ function mrToggle(ref){
   list.forEach(function (r, i) { if (r === ref) at = i; });
 
   if (at > -1) {
-    list.splice(at, 1);                 // ήταν μέσα — βγαίνει
+    list.splice(at, 1);                 // it was in — it comes out
     kryvo('mustRead', ref);
   } else {
     if (list.length >= MUST) {
       say('Οι τέσσερις θέσεις είναι γεμάτες. Αφαίρεσε μία πρώτα.', 'bad');
       return;
     }
-    kryXanaOles('mustRead', ref);       // το διάλεξε ο ίδιος, το εννοεί
+    kryXanaOles('mustRead', ref);       // they picked it themselves, they mean it
     list.push(ref);
   }
 
@@ -2985,7 +2985,7 @@ function adRemeasure(i){
   if (!first) { delete a.w; delete a.h; return; }
 
   adMeasure(first).then(function (size) {
-    if (ad.list[i] !== a) return;          // άλλαξε στο μεταξύ
+    if (ad.list[i] !== a) return;          // changed meanwhile
     if (size) { a.w = size.w; a.h = size.h; }
     else { delete a.w; delete a.h; }
     drawAds();
@@ -3240,7 +3240,7 @@ function opToggle(url){
     list.splice(at, 1);
     kryvo('opinions', url);
   } else {
-    kryXanaOles('opinions', url);       // το διάλεξε ο ίδιος, το εννοεί
+    kryXanaOles('opinions', url);       // they picked it themselves, they mean it
     list.push(url);
   }
   state.curation.opinions = list;
@@ -3560,13 +3560,13 @@ function fromLocalInput(v){
 }
 
 var art = {
-  list: [],        // όλα τα άρθρα
-  open: null,      // αυτό που συντάσσεται τώρα
-  index: -1,       // η θέση του στη list, ή -1 για καινούριο
+  list: [],        // every article
+  open: null,      // the one being written now
+  index: -1,       // its place in list, or -1 for a new one
   dirty: false,
-  pending: null,   // πού πάει η φωτογραφία που θα διαλέξει ο επιλογέας
-  finding: null,   // ποιο μπλοκ περιμένει επεισόδιο ή βίντεο
-  ready: false,    // φόρτωσαν τα άρθρα; πριν από αυτό δεν αγγίζουμε λίστα
+  pending: null,   // where the picked image goes
+  finding: null,   // which block is waiting for an episode or a video
+  ready: false,    // have the articles loaded? before that we do not touch the list
 };
 
 function artSay(text, kind){
@@ -3577,7 +3577,7 @@ function artSay(text, kind){
 
 function artDirty(on){
   art.dirty = on;
-  state.dirty = on;      // μπαίνει στην ίδια δικλείδα «μη φύγεις»
+  state.dirty = on;      // goes through the same "do not leave" catch
   if (on) artSay('Μη αποθηκευμένες αλλαγές', 'warn');
 
   // Every change goes straight to the browser's copy. It costs nothing —
@@ -4217,7 +4217,7 @@ function pickUpload(files){
   });
 }
 
-var FINDER_MAX = 60;     // όσα δείχνουμε· παραπάνω δεν τα κοιτάζει κανείς
+var FINDER_MAX = 60;     // as many as we show; beyond that nobody looks
 
 function findItem(target){
   art.finding = target;
@@ -4534,15 +4534,15 @@ function wireArticles(){
 }
 
 var pp = {
-  list: [],        // τα πρόσωπα όπως τα βλέπει το site
-  out: [],         // όσα έχουν σβηστεί ως «δεν είναι άνθρωπος»
-  sug: [],         // προτάσεις ένωσης
-  file: null,      // το people-aliases.json, όπως θα σωθεί
+  list: [],        // the people as the site sees them
+  out: [],         // those struck out as "not a person"
+  sug: [],         // merge suggestions
+  file: null,      // people-aliases.json, as it will be saved
   shown: PAGE,
   find: '',
   filter: '',
   openName: null,
-  mfind: '',       // η αναζήτηση μέσα στο «ένωσε με…»
+  mfind: '',       // the search inside "merge with…"
 };
 
 // The file may not have the keys we are touching yet.
@@ -5035,9 +5035,9 @@ function loadPeople(){
 }
 
 var sh = {
-  shows: {},     // ό,τι λέει το shows.json
-  art: null,     // ΟΛΟΚΛΗΡΟ το show-art.json, με τα σχόλιά του
-  files: [],     // τα διαθέσιμα αρχεία αφίσας
+  shows: {},     // whatever shows.json says
+  art: null,     // the WHOLE show-art.json, comments and all
+  files: [],     // the poster files available
   dirty: false,
 };
 
@@ -5198,7 +5198,7 @@ function wireShows(){
         if (!sh.art.art[name]) sh.art.art[name] = { file: '', titled: false };
         sh.art.art[name].file = f.value;
       }
-      drawShows();        // για να ανανεωθεί η μικρογραφία
+      drawShows();        // so the thumbnail refreshes
     }
 
     if (key === 'titled') {
@@ -5234,11 +5234,11 @@ function saveShows(){
 var PR_PAGE = 20;
 
 var pr = {
-  file: null,    // το data/pairs.json, όπως θα σωθεί
-  rows: [],      // η απογραφή από το build
+  file: null,    // data/pairs.json, as it will be saved
+  rows: [],      // the inventory from the build
   filter: 'gaps',
   find: '',
-  year: '',      // '' = όλες οι χρονιές
+  year: '',      // '' = every season
   shown: PR_PAGE,
 };
 
