@@ -31,7 +31,7 @@ body{
   line-height: 1.5;
 }
 
-/* ---- πάνω μπάρα ---- */
+/* ---- top bar ---- */
 
 .top{
   position: sticky;
@@ -67,7 +67,7 @@ body{
   font-size: 0.8rem;
 }
 
-/* Η κατάσταση αποθήκευσης. Τρεις μορφές: δουλεύει / έγινε / χάλασε. */
+/* Save state. Three forms: working / done / failed. */
 .state{
   margin: 0;
   padding: 0.3rem 0.8rem;
@@ -81,7 +81,7 @@ body{
 .state[data-kind="ok"]{ background: rgba(46,158,107,0.18); color: #7BD9AC; }
 .state[data-kind="bad"]{ background: rgba(207,34,51,0.18); color: #FF9AA5; }
 
-/* ---- σκελετός ---- */
+/* ---- frame ---- */
 
 .shell{
   display: grid;
@@ -138,7 +138,7 @@ body{
 
 .hint{ margin: 0.2rem 0 0; color: var(--muted); font-size: 0.85rem; }
 
-/* Διακόπτης μέσα σε μπλοκ του άρθρου — π.χ. «να ακούγεται εδώ». */
+/* A switch inside an article block — e.g. "play it here". */
 .blockopt{
   display: flex;
   align-items: center;
@@ -152,7 +152,7 @@ body{
 .muted{ color: var(--muted); }
 .soon{ color: var(--muted); font-style: italic; }
 
-/* ---- κουμπιά ---- */
+/* ---- buttons ---- */
 
 .btn{
   padding: 0.5rem 1.1rem;
@@ -175,7 +175,7 @@ body{
 
 .btn--ghost{ background: transparent; }
 
-/* ---- τι ισχύει τώρα ---- */
+/* ---- what applies now ---- */
 
 .now{
   padding: 1rem;
@@ -205,13 +205,13 @@ body{
   background: var(--raise);
 }
 
-/* Δεξιά άκρη του κουτιού, μακριά από τον τίτλο: ακυρώνει, δεν είναι
-   η κύρια ενέργεια. */
+/* Right edge of the box, away from the title: it cancels, it is not
+   the primary action. */
 .now-auto{ margin-left: auto; flex: none; align-self: center; }
 
-/* Οι ενέργειες ακύρωσης του πρωτοσέλιδου, σε στήλη: δύο κουμπιά και η
-   γραμμή που λέει ποιο είναι το προηγούμενο. Σε σειρά δεν χωρούσαν
-   δίπλα στην εικόνα και στον τίτλο. */
+/* The lead's cancel actions, in a column: two buttons and the line
+   saying which one is previous. In a row they did not fit next to the
+   image and the title. */
 .now-acts{
   margin-left: auto;
   flex: none;
@@ -237,19 +237,19 @@ body{
   .now-prev{ text-align: left; }
 }
 
-/* Το «Καθάρισε όλα» των τεσσάρων λιστών. Κάθεται κάτω από τη σημείωση,
-   όχι δίπλα στην Αποθήκευση: ακυρώνει δουλειά, και δεν θέλουμε να
-   πατιέται κατά λάθος αντί για εκείνη. */
+/* The four lists' "clear all". It sits below the note, not next to
+   Save: it undoes work, and we do not want it hit by mistake instead
+   of Save. */
 .auto-back{ margin: 0 0 1.25rem; }
 
-/* Κρυμμένο κουμπί = κρυμμένη γραμμή. Χωρίς αυτό έμενε το κενό της
-   παραγράφου και η σημείωση φαινόταν να κρέμεται. */
+/* Hidden button = hidden row. Without this the paragraph's gap stayed
+   and the note looked like it was dangling. */
 .auto-back:has(button[hidden]){ display: none; }
 
 .now-title{ margin: 0 0 0.25rem; font-family: var(--serif); font-size: 1.05rem; font-weight: 600; }
 .now-meta{ margin: 0; font-size: 0.8rem; color: var(--muted); }
 
-/* ---- πεδία ---- */
+/* ---- fields ---- */
 
 .field{ margin-bottom: 1.25rem; max-width: 460px; }
 
@@ -274,7 +274,7 @@ body{
 
 .field input:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
 
-/* ---- εργαλεία αναζήτησης ---- */
+/* ---- search tools ---- */
 
 .tools{
   display: flex;
@@ -298,11 +298,11 @@ body{
 
 .find:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
 
-/* Τυλίγουν: τα ονόματα των δημοσιογράφων μεγαλώνουν με τον καιρό και
-   σε μία σειρά θα έβγαιναν έξω από το πεδίο. */
+/* They wrap: journalists' names grow over time and on one line would
+   run out of the field. */
 .chips{ display: flex; flex-wrap: wrap; gap: 0.3rem; }
 
-/* Κάτω από το πεδίο της υπογραφής, όχι δίπλα σε τίτλο ενότητας. */
+/* Below the byline field, not next to a section heading. */
 [data-art-ipografes]{ margin-top: 0.45rem; }
 [data-art-ipografes]:empty{ display: none; }
 
@@ -321,7 +321,7 @@ body{
 .chip:hover{ color: var(--text); }
 .chip.is-on{ background: var(--raise); color: var(--text); border-color: var(--sky); }
 
-/* ---- η λίστα επιλογής ---- */
+/* ---- the picker list ---- */
 
 .picks{
   display: grid;
@@ -345,8 +345,8 @@ body{
 
 .pick:hover{ border-color: var(--sky); }
 
-/* Η τρέχουσα επιλογή ξεχωρίζει: αλλιώς ο συντάκτης ξαναδιαλέγει αυτό
-   που ήδη ισχύει και νομίζει ότι άλλαξε κάτι. */
+/* The current pick stands out: otherwise the editor re-picks what
+   already applies and thinks something changed. */
 .pick.is-on{ border-color: var(--news); background: var(--raise); }
 
 .pick img{
@@ -357,9 +357,9 @@ body{
   background: var(--raise);
 }
 
-/* block, όχι inline: είναι <span> μέσα σε <button> επειδή ένα <button>
-   δεν επιτρέπεται να περιέχει <p>. Χωρίς αυτό η ταμπέλα «ΕΙΔΗΣΗ»
-   κολλούσε στο τέλος του τίτλου αντί να πάει στη γραμμή από κάτω. */
+/* block, not inline: it is a <span> inside a <button> because a
+   <button> may not contain a <p>. Without this the "ΕΙΔΗΣΗ" tag stuck
+   to the end of the title instead of dropping to the next line. */
 .pick-title,
 .pick-meta{ display: block; }
 
@@ -373,8 +373,8 @@ body{
 
 .pick-meta{ margin: 0; font-size: 0.76rem; color: var(--muted); }
 
-/* Η ταμπέλα του είδους. Ίδιος κώδικας χρώματος με το site: κόκκινο
-   είδηση, κίτρινο ήχος — ώστε να μη μαθαίνουν δεύτερο σύστημα. */
+/* The kind tag. Same colour code as the site: red news, yellow audio —
+   so nobody has to learn a second system. */
 .tag{
   display: inline-block;
   margin-right: 0.4rem;
@@ -389,8 +389,8 @@ body{
 .tag--video{ color: var(--sky); }
 .tag--article{ color: var(--ok); }
 
-/* Κουτάκι επιλογής με ετικέτα δίπλα. Ολόκληρη η ετικέτα είναι στόχος
-   κλικ — στο κινητό το σκέτο τετραγωνάκι είναι πολύ μικρό. */
+/* A checkbox with its label beside it. The whole label is a click
+   target — on a phone the bare box is far too small. */
 .check{
   display: flex;
   align-items: center;
@@ -404,7 +404,7 @@ body{
 
 .check[hidden]{ display: none; }
 
-/* ---- εκπομπές ---- */
+/* ---- shows ---- */
 
 .showlist{
   display: grid;
@@ -412,10 +412,10 @@ body{
   gap: 1rem;
 }
 
-/* ---- Διαφημίσεις ---- */
+/* ---- Ads ---- */
 
-/* Ο πίνακας των θέσεων: ποια είναι γεμάτη και από ποιον. Πρώτα ΤΙ
-   ισχύει, μετά η αλλαγή — ίδια λογική με το πρωτοσέλιδο. */
+/* The slot board: which is filled and by whom. What applies first,
+   then the change — same logic as the lead. */
 .adplaces{
   display: grid;
   gap: 0.4rem;
@@ -434,8 +434,8 @@ body{
   background: var(--surface);
 }
 
-/* Γεμάτη θέση: πράσινη ακμή αριστερά. Με μια ματιά φαίνεται πόσες από
-   τις επτά πουλήθηκαν. */
+/* A filled slot: green edge on the left. At a glance you see how many
+   of the seven are sold. */
 .adplace.is-on{ border-left-color: var(--ok, #3F7D58); }
 
 .adplace-name{ margin: 0; font-weight: 600; }
@@ -457,7 +457,7 @@ body{
   background: var(--surface);
 }
 
-/* Ανενεργή ή εκτός ημερομηνιών: σβηστή, αλλά όχι κρυμμένη. */
+/* Inactive or out of its dates: dimmed, but not hidden. */
 .adcard--off{ opacity: 0.6; }
 
 .adcard-head{
@@ -467,8 +467,8 @@ body{
   align-items: center;
 }
 
-/* contain, όχι cover: η μικρογραφία πρέπει να δείχνει ΑΚΡΙΒΩΣ ό,τι θα
-   δει ο αναγνώστης — ένα κομμένο creative εδώ θα έκρυβε το πρόβλημα. */
+/* contain, not cover: the thumbnail must show EXACTLY what the reader
+   will see — a cropped creative here would hide the problem. */
 .adcard-pic{
   width: 120px;
   height: 60px;
@@ -482,8 +482,8 @@ body{
 .adcard-meta{ margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--muted); }
 .adcard-acts{ display: flex; gap: 0.35rem; align-items: center; }
 
-/* Η σειρά των εικόνων ενός slideshow. Με τη σειρά που φαίνονται εδώ
-   εναλλάσσονται και στο site — γι' αυτό υπάρχει το βελάκι. */
+/* A slideshow's image order. The order shown here is the order they
+   alternate in on the site — hence the arrow. */
 .adpics{
   display: flex;
   flex-direction: column;
@@ -508,9 +508,8 @@ body{
   flex: none;
 }
 
-/* Η μικρογραφία μπορεί να είναι και βίντεο — ίδιο κουτί, ίδιο
-   contain, ώστε ο συντάκτης να βλέπει ΑΚΡΙΒΩΣ ό,τι θα δει ο
-   αναγνώστης. */
+/* The thumbnail can be a video too — same box, same contain, so the
+   editor sees EXACTLY what the reader will see. */
 video.adcard-pic,
 video.adpic-thumb{ background: var(--bg); }
 
@@ -534,7 +533,7 @@ video.adpic-thumb{ background: var(--bg); }
 .check--tight{ font-size: 0.85rem; }
 .check--tight small{ color: var(--muted); }
 
-/* ---- Προεπισκόπηση άρθρου ---- */
+/* ---- Article preview ---- */
 
 .preview-box{
   width: min(1180px, 94vw);
@@ -545,8 +544,8 @@ video.adpic-thumb{ background: var(--bg); }
 
 .preview-sizes{ display: flex; gap: 0.4rem; margin-left: auto; margin-right: 1rem; }
 
-/* Το iframe κουβαλάει το styles.css του site, άρα και το δικό του
-   φόντο — δεν του βάζουμε εμείς χρώμα. */
+/* The iframe carries the site's styles.css, and so its background too —
+   we do not set a colour on it. */
 .preview-frame{
   flex: 1;
   width: 100%;
@@ -555,21 +554,20 @@ video.adpic-thumb{ background: var(--bg); }
   background: #121010;
 }
 
-/* Το «κινητό»: πλάτος τηλεφώνου, κεντραρισμένο. Το iframe είναι
-   πραγματικό παράθυρο, οπότε τα media queries του site ενεργοποιούνται
-   κανονικά — δεν είναι ζουμ. */
+/* "Phone": phone width, centred. The iframe is a real viewport, so the
+   site's media queries fire normally — this is not a zoom. */
 .preview-frame--phone{
   width: 390px;
   margin: 0 auto;
   flex: 1;
 }
 
-/* ---- Αρθρογράφοι (καρτέλα «Απόψεις») ---- */
+/* ---- Columnists (Opinion tab) ---- */
 
 .writers{
   display: grid;
-  /* 420px: στα 320 το όνομα έσπαγε στα δύο και το κουμπί έπεφτε πάνω
-     στη γραμμή με το πλήθος. Η κάρτα είναι τρεις στήλες, θέλει χώρο. */
+  /* 420px: at 320 the name broke in two and the button landed on the
+     count line. The card is three columns and needs room. */
   grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
   gap: 0.75rem;
 }
@@ -603,9 +601,9 @@ video.adpic-thumb{ background: var(--bg); }
   color: var(--muted);
 }
 
-/* Τα δύο κουμπιά το ένα κάτω από το άλλο: στα 320px η κάρτα δεν
-   χωράει «Άλλαξε» και «Επαναφορά» στη σειρά χωρίς να στριμωχτεί το
-   όνομα, που είναι το σημαντικό. */
+/* The two buttons stacked: at 320px the card cannot fit "Άλλαξε" and
+   "Επαναφορά" in a row without squeezing the name, which is the part
+   that matters. */
 .writer-acts{ display: flex; flex-direction: column; gap: 0.35rem; }
 
 .show{
@@ -632,9 +630,9 @@ video.adpic-thumb{ background: var(--bg); }
   font-weight: 600;
 }
 
-/* Μικρή και σταθερού ύψους: η αφίσα είναι υπενθύμιση ποια εκπομπή
-   κοιτάς, όχι το θέμα της κάρτας. Οι αναλογίες διαφέρουν — άλλες
-   τετράγωνες, άλλες πλατιές — γι' αυτό contain και όχι cover. */
+/* Small and fixed height: the poster is a reminder of which show you
+   are looking at, not the subject of the card. Aspect ratios differ —
+   some square, some wide — hence contain and not cover. */
 .show-art{
   flex: none;
   width: 96px;
@@ -656,12 +654,12 @@ video.adpic-thumb{ background: var(--bg); }
   gap: 0.7rem;
 }
 
-/* Χωρίς αυτό η στήλη φαρδαίνει όσο το μακρύτερο κείμενο του select, και
-   το διπλανό πεδίο στριμώχνεται σε λωρίδα. */
+/* Without this the column widens to the select's longest option and the
+   field beside it is squeezed to a strip. */
 .pair > *{ min-width: 0; }
 
-/* Μέσα στην κάρτα τα πεδία πιάνουν όλο το πλάτος — δεν είναι φόρμα
-   ρυθμίσεων, είναι μία εκπομπή τη φορά. */
+/* Inside the card the fields take the full width — this is not a
+   settings form, it is one show at a time. */
 .show .field{ max-width: none; margin-bottom: 0; }
 
 @media (max-width: 560px){
@@ -670,7 +668,7 @@ video.adpic-thumb{ background: var(--bg); }
 
 .more{ margin: 1.25rem 0 0; text-align: center; }
 
-/* ---- φωτογραφίες ---- */
+/* ---- images ---- */
 
 .drop{
   display: flex;
@@ -690,8 +688,8 @@ video.adpic-thumb{ background: var(--bg); }
 .drop:hover,
 .drop:focus-visible{ border-color: var(--sky); outline: none; }
 
-/* Όσο κρατάς αρχείο από πάνω. Χωρίς αυτό ο συντάκτης δεν ξέρει αν η
-   σελίδα κατάλαβε το σύρσιμο και αφήνει το αρχείο στο κενό. */
+/* While a file is held over it. Without this the editor cannot tell
+   whether the page registered the drag and drops the file into space. */
 .drop.is-over{ border-color: var(--sky); background: var(--raise); }
 
 .drop-big{
@@ -737,8 +735,8 @@ video.adpic-thumb{ background: var(--bg); }
 
 .shot-day{ color: var(--muted); }
 
-/* Κουμπί αντιγραφής διεύθυνσης — φαίνεται στο hover, και πάντα σε
-   οθόνη αφής όπου δεν υπάρχει hover. */
+/* Copy-URL button — visible on hover, and always on a touch screen,
+   where there is no hover. */
 .shot-copy{
   position: absolute;
   top: 0.4rem;
@@ -758,9 +756,9 @@ video.adpic-thumb{ background: var(--bg); }
 .shot:hover .shot-copy,
 .shot-copy:focus-visible{ opacity: 1; }
 
-/* Κουμπί διαγραφής — αριστερά, μακριά από την «Αντιγραφή», ώστε να μην
-   πατηθεί κατά λάθος. Κόκκινο: είναι οριστικό, οι φωτογραφίες δεν
-   μπαίνουν στο git και δεν επαναφέρονται. */
+/* Delete button — on the left, away from "Copy", so it is not hit by
+   mistake. Red: it is final, images are not in git and cannot be
+   restored. */
 .shot-del{
   position: absolute;
   top: 0.4rem;
@@ -785,9 +783,9 @@ video.adpic-thumb{ background: var(--bg); }
 
 .shot-del:hover{ background: var(--news); color: #fff; }
 
-/* Το αστεράκι: κάτω αριστερά, μακριά και από τη διαγραφή και από την
-   αντιγραφή. Όταν είναι αναμμένο μένει ΠΑΝΤΑ ορατό — αλλιώς δεν
-   ξεχωρίζεις ποια είναι στάνταρ χωρίς να περάσεις από πάνω τους. */
+/* The star: bottom left, away from both delete and copy. When it is on
+   it stays ALWAYS visible — otherwise you cannot tell which ones are
+   standard without hovering over them. */
 .shot-star{
   position: absolute;
   left: 0.4rem;
@@ -845,7 +843,7 @@ video.adpic-thumb{ background: var(--bg); }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Σβησμένο: είναι ένδειξη περιεχομένου, όχι η ίδια η φωτογραφία. */
+  /* Dimmed: it marks content, it is not the photo itself. */
   opacity: 0.55;
 }
 
@@ -867,7 +865,7 @@ video.adpic-thumb{ background: var(--bg); }
 
 .folder--std .folder-name{ color: var(--audio); }
 
-/* ---- η μπάρα διαδρομής ---- */
+/* ---- the breadcrumb bar ---- */
 .crumbs{
   display: flex;
   flex-wrap: wrap;
@@ -891,7 +889,7 @@ video.adpic-thumb{ background: var(--bg); }
 .crumb-sep{ color: var(--muted); }
 .crumb-now{ color: var(--muted); }
 
-/* ---- ο επιλογέας φωτογραφίας ---- */
+/* ---- the image picker ---- */
 
 .picker{
   position: fixed;
@@ -950,11 +948,11 @@ video.adpic-thumb{ background: var(--bg); }
 
 .picker-x:hover{ color: var(--text); }
 
-/* Μέσα στο παράθυρο η ζώνη ρίψης είναι βοηθητική, όχι το κύριο θέμα:
-   τις περισσότερες φορές ο συντάκτης διαλέγει κάτι που υπάρχει ήδη. */
+/* Inside the dialog the drop zone is secondary, not the main subject:
+   most of the time the editor picks something that already exists. */
 .drop--slim{ min-height: 86px; padding: 0.9rem; }
 
-/* Οι μικρογραφίες εδώ είναι κουμπιά, όχι απλές εικόνες. */
+/* The thumbnails here are buttons, not plain images. */
 .picker-shots .shot{ cursor: pointer; }
 
 .picker-shots .shot:hover,
@@ -963,8 +961,8 @@ video.adpic-thumb{ background: var(--bg); }
   outline: none;
 }
 
-/* Η λίστα επεισοδίων/βίντεο: μία στήλη, ώστε να χωράει ο τίτλος
-   ολόκληρος. Σε πλέγμα όπως του πρωτοσέλιδου κόβονται στη μέση. */
+/* The episode/video list: one column, so the whole title fits. In a
+   grid like the lead's they get cut in half. */
 .finder-list{
   grid-template-columns: 1fr;
   align-content: start;
@@ -976,16 +974,16 @@ video.adpic-thumb{ background: var(--bg); }
 
 
 /* =====================================================================
-   ΑΡΘΡΑ
+   ARTICLES
    ===================================================================== */
 
-/* Τα πεδία του συντάκτη θέλουν περισσότερο πλάτος από τα 460px των
-   υπολοίπων: εδώ γράφεται κείμενο, δεν συμπληρώνεται ρύθμιση. */
+/* The editor's fields need more width than the 460px of the rest: text
+   is written here, not a setting filled in. */
 .editor .field{ max-width: 760px; }
 
-/* Ίδια εμφάνιση με τα input, παντού. Ήταν γραμμένο μόνο για τον
-   συντάκτη άρθρου, οπότε στην καρτέλα Εκπομπές τα ίδια πεδία έβγαιναν
-   με τη γραμματοσειρά μηχανής του browser και σε σταθερό πλάτος. */
+/* Same look as the inputs, everywhere. It was written only for the
+   article editor, so on the Shows tab the same fields came out in the
+   browser's monospace font and at a fixed width. */
 .field textarea,
 .field select{
   width: 100%;
@@ -1011,9 +1009,9 @@ video.adpic-thumb{ background: var(--bg); }
   max-width: 760px;
 }
 
-/* Η μπάρα του συντάκτη κολλάει στην κορυφή. Ένα μεγάλο άρθρο είναι
-   πολλές οθόνες — χωρίς αυτό, η «Αποθήκευση» χάνεται στο σκρολ και ο
-   συντάκτης δεν ξέρει αν έχει σωθεί η δουλειά του. */
+/* The editor bar sticks to the top. A long article is many screens —
+   without this, Save is lost in the scroll and the editor cannot tell
+   whether their work is saved. */
 .editor-bar{
   position: sticky;
   top: var(--top);
@@ -1034,7 +1032,7 @@ video.adpic-thumb{ background: var(--bg); }
 .editor-state[data-kind="bad"]{ color: #FF9AA5; }
 .editor-state[data-kind="warn"]{ color: var(--audio); }
 
-/* ---- η λίστα ---- */
+/* ---- the list ---- */
 
 .artrow{
   display: flex;
@@ -1076,7 +1074,7 @@ video.adpic-thumb{ background: var(--bg); }
 .pill--later{ background: rgba(217,164,65,0.18); color: var(--audio); }
 .pill--live{ background: rgba(46,158,107,0.18); color: #7BD9AC; }
 
-/* ---- τα μπλοκ κειμένου ---- */
+/* ---- the text blocks ---- */
 
 .blocks{ max-width: 760px; }
 
@@ -1173,10 +1171,10 @@ video.adpic-thumb{ background: var(--bg); }
   margin-bottom: 0.5rem;
 }
 
-/* Οι αυτόματες θέσεις πιο σβηστές: είναι πρόταση του site, όχι
-   απόφαση κάποιου. */
-/* Αυτόματη θέση: ίδιο περιεχόμενο, αλλά διακριτικά σβησμένη και με
-   διάστικτο περίγραμμα — δεν είναι επιλογή ανθρώπου, ακόμα. */
+/* Automatic slots are dimmer: they are the site's suggestion, not
+   anyone's decision. */
+/* Automatic slot: same content, but discreetly dimmed and with a
+   dashed outline — not a human's choice, not yet. */
 .slot--auto{ opacity: 0.78; border-style: dashed; }
 
 .slot-no{
@@ -1225,7 +1223,7 @@ video.adpic-thumb{ background: var(--bg); }
 
 
 /* =====================================================================
-   ΚΑΤΗΓΟΡΙΕΣ
+   CATEGORIES
    ===================================================================== */
 
 .cats{ max-width: 860px; }
@@ -1263,8 +1261,8 @@ video.adpic-thumb{ background: var(--bg); }
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.35;
-  /* Δύο γραμμές και κόβει: οι τίτλοι των podcast φτάνουν τις 140
-     γραμμές χαρακτήρες και η λίστα γινόταν αδιάβαστη. */
+  /* Two lines then clipped: podcast titles reach 140 characters and the
+     list became unreadable. */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1282,8 +1280,8 @@ video.adpic-thumb{ background: var(--bg); }
   max-width: 220px;
 }
 
-/* Η αυτόματη πρόταση σβηστή, η ανθρώπινη επιλογή έντονη. Με μια ματιά
-   φαίνεται τι έχει πειραχτεί και τι όχι. */
+/* The automatic suggestion dim, the human pick bold. At a glance you
+   see what has been touched and what has not. */
 .catchip{
   padding: 0.12rem 0.45rem;
   border-radius: 999px;
@@ -1325,12 +1323,12 @@ video.adpic-thumb{ background: var(--bg); }
 
 
 /* =====================================================================
-   ΘΕΜΑΤΑ ΑΡΧΙΚΗΣ
+   HOMEPAGE TOPICS
    ===================================================================== */
 
-/* Οι ετικέτες επιλογής. Ίδιο σχήμα με τα κουτάκια των κατηγοριών
-   (.catopt) — ο συντάκτης τα έχει ήδη δει εκεί· εδώ είναι κουμπιά,
-   όχι checkbox, γιατί η θέση κρατάει και σειρά. */
+/* The pick chips. Same shape as the category boxes (.catopt) — the
+   editor has seen them there; here they are buttons, not checkboxes,
+   because position carries order too. */
 .thpick{
   display: flex;
   flex-wrap: wrap;
@@ -1342,19 +1340,19 @@ video.adpic-thumb{ background: var(--bg); }
 .thpick .catopt{ background: var(--surface); }
 .thpick .catopt:disabled{ opacity: 0.4; cursor: default; border-color: var(--line); }
 
-/* Το πλήθος δίπλα στο όνομα: δείχνει τι θα βρει μέσα ο αναγνώστης.
-   Ένα θέμα με 12 κομμάτια δεν σηκώνει λωρίδα. */
+/* The count next to the name: it shows what the reader will find
+   inside. A topic with 12 items cannot carry a row. */
 .thnum{ color: var(--muted); font-size: 0.72rem; }
 
-/* Καρφιτσωμένο πέρα από τις θέσεις που έχει το θέμα στην αρχική.
-   Δεν το κρύβουμε — ο συντάκτης πρέπει να βλέπει ότι το διάλεξε και
-   ότι δεν θα φανεί, αλλιώς θα ψάχνει γιατί «δεν μπήκε». */
+/* Pinned beyond the slots the topic has on the homepage. We do not hide
+   it — the editor must see that they picked it and that it will not
+   appear, or they will hunt for why "it did not go in". */
 .slot--extra{ opacity: 0.45; }
 .slot--extra .slot-no{ color: var(--muted); }
 
-/* ---- πότε λήγει μια χειροκίνητη επιλογή ----
-   Μικρό και διακριτικό όσο όλα πάνε καλά· όταν λήξει, γίνεται κόκκινο
-   και δίπλα του εμφανίζεται το κουμπί της επαναφοράς. */
+/* ---- when a manual pick expires ----
+   Small and discreet while all is well; once expired it turns red and
+   the renew button appears beside it. */
 .pinok,
 .pinx{
   font-size: 0.7rem;
@@ -1386,15 +1384,15 @@ video.adpic-thumb{ background: var(--bg); }
   line-height: 2;
 }
 
-/* Ληγμένη επιλογή: το site ΔΕΝ τη δείχνει πια. Σβήνει όπως οι
-   αυτόματες θέσεις, αλλιώς η αρίθμηση «01» λέει ότι είναι πρώτη στην
-   αρχική ενώ εκεί κάθεται κάτι άλλο. */
+/* An expired pick: the site no longer shows it. It dims like the
+   automatic slots, otherwise the "01" numbering claims it is first on
+   the homepage while something else sits there. */
 .slot--lixe{ opacity: 0.5; border-style: dashed; }
 .slot--lixe .slot-no{ color: var(--muted); }
 
 
 /* =====================================================================
-   ΠΡΟΣΩΠΑ
+   PEOPLE
    ===================================================================== */
 
 .people{ max-width: 860px; }
@@ -1410,8 +1408,8 @@ video.adpic-thumb{ background: var(--bg); }
 .prow:hover{ border-color: var(--sky); }
 .prow.is-open{ border-color: var(--sky); }
 
-/* Σβησμένος ή ενωμένος: υπάρχει στη λίστα για να μπορεί να γυρίσει
-   πίσω, αλλά δεν τραβάει το μάτι. */
+/* Deleted or merged: it is in the list so it can come back, but it does
+   not draw the eye. */
 .prow.is-pale .prow-name,
 .prow.is-pale .prow-meta{ opacity: 0.55; }
 
@@ -1432,8 +1430,8 @@ video.adpic-thumb{ background: var(--bg); }
   background: var(--raise);
 }
 
-/* Αρχικά, όταν δεν έχει μπει πορτρέτο. Το ίδιο βγαίνει και στο site —
-   έτσι η γραμμή εδώ δείχνει ακριβώς τι θα δει ο επισκέπτης. */
+/* Initials, when no portrait has been set. The site shows the same —
+   so the row here shows exactly what the visitor will see. */
 .pface{
   display: grid;
   place-items: center;
@@ -1524,9 +1522,9 @@ video.adpic-thumb{ background: var(--bg); }
 
 .pfield input[type="text"]:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
 
-/* Το πορτρέτο μέσα στον επεξεργαστή. Μεγαλύτερο από τη μικρογραφία της
-   γραμμής: εδώ αποφασίζεις αν η φωτογραφία είναι καλή, και στα 42px
-   δεν φαίνεται αν το πρόσωπο είναι κομμένο. */
+/* The portrait inside the editor. Larger than the row's thumbnail: this
+   is where you decide whether the photo is good, and at 42px you cannot
+   see whether the face is cropped. */
 .pphoto{
   display: flex;
   align-items: center;
@@ -1578,9 +1576,9 @@ video.adpic-thumb{ background: var(--bg); }
 
 .pacts{ display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
-/* ---- οι προτάσεις ένωσης ----
-   Δύο ονόματα και δύο κουμπιά. Η απόφαση είναι ΠΑΝΤΑ ανθρώπου, οπότε
-   τα δύο κουμπιά έχουν το ίδιο βάρος — κανένα δεν είναι «το προφανές». */
+/* ---- the merge suggestions ----
+   Two names and two buttons. The decision is ALWAYS a human's, so both
+   buttons carry the same weight — neither is "the obvious one". */
 
 .psug{
   border: 1px solid var(--line);
@@ -1645,8 +1643,8 @@ video.adpic-thumb{ background: var(--bg); }
   background: var(--raise);
 }
 
-/* min-width: 0 — αλλιώς ένας μακρύς τίτλος φουσκώνει το flex και
-   σπρώχνει τα κουμπιά έξω από την κάρτα. */
+/* min-width: 0 — otherwise a long title inflates the flex item and
+   pushes the buttons out of the card. */
 .pair-body{ min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 0.25rem; }
 
 .pair-title{ font-size: 0.92rem; font-weight: 600; line-height: 1.3; }
@@ -1669,8 +1667,8 @@ video.adpic-thumb{ background: var(--bg); }
   flex: none;
 }
 
-/* Τέσσερις καταστάσεις, τέσσερα χρώματα. Ο συντάκτης σαρώνει τη λίστα
-   με το μάτι — το κόκκινο «λείπει» πρέπει να ξεχωρίζει από μέτρο. */
+/* Four states, four colours. The editor scans the list by eye — a red
+   "missing" has to stand out from a metre away. */
 .pair-ok{ font-size: 0.85rem; color: var(--ok); min-width: 0; overflow-wrap: anywhere; }
 .pair-auto{ font-size: 0.78rem; color: var(--muted); min-width: 0; overflow-wrap: anywhere; }
 .pair-no{ font-size: 0.82rem; color: var(--muted); font-style: italic; }
@@ -1690,9 +1688,9 @@ video.adpic-thumb{ background: var(--bg); }
 
 .pair-name:focus{ outline: none; border-color: var(--sky); }
 
-/* Η περιγραφή. Ίδιο ντύσιμο με το πεδίο ονόματος — είναι η ίδια
-   δουλειά, απλώς χωράει παραγράφους. Σπάει σε δική της γραμμή γιατί
-   δίπλα σε ετικέτα και κουμπί δεν της μένει πλάτος να διαβαστεί. */
+/* The description. Dressed like the name field — it is the same job,
+   it just holds paragraphs. It breaks onto its own line because next to
+   a label and a button it has no width left to be read in. */
 .pair-text{
   flex: 1 1 100%;
   min-width: 0;
@@ -1709,8 +1707,8 @@ video.adpic-thumb{ background: var(--bg); }
 
 .pair-text:focus{ outline: none; border-color: var(--sky); }
 
-/* Η διαλεγμένη φωτογραφία, σε μέγεθος που δείχνει αν είναι η σωστή
-   χωρίς να σπρώχνει τη γραμμή σε δεύτερη σειρά. */
+/* The selected image, at a size that shows whether it is the right one
+   without pushing the row onto a second line. */
 .pair-pic{
   width: 4rem;
   height: 2.25rem;
@@ -1721,8 +1719,8 @@ video.adpic-thumb{ background: var(--bg); }
 
 .btn--tiny{ padding: 0.3rem 0.6rem; font-size: 0.78rem; }
 
-/* Το btn--go έχει margin-left: auto για την κεφαλίδα του πάνελ — εδώ
-   θα έσπρωχνε το κουμπί στην άλλη άκρη της γραμμής. */
+/* btn--go has margin-left: auto for the panel header — here it would
+   push the button to the far end of the row. */
 .btn--pick{ border-color: var(--sky); color: var(--text); }
 
 
@@ -1737,8 +1735,8 @@ video.adpic-thumb{ background: var(--bg); }
     border-bottom: 1px solid var(--line);
   }
 
-  /* Χωρίς αυτό το «Must read» σπάει σε δύο αράδες και η μπάρα
-     ξεχειλίζει σε ύψος αντί να κυλάει στο πλάι. */
+  /* Without this "Must read" breaks onto two lines and the bar
+     overflows in height instead of scrolling sideways. */
   .tab{ flex: none; white-space: nowrap; }
 
   .work{ padding: 1rem; }
@@ -1757,7 +1755,7 @@ video.adpic-thumb{ background: var(--bg); }
     border-radius: var(--radius);
   }
 
-  /* Το «Φέρε τα νέα τώρα» έσπαγε σε τρεις αράδες δίπλα στο λογότυπο. */
+  /* "Φέρε τα νέα τώρα" broke onto three lines next to the logo. */
   .who{ gap: 0.6rem; }
   .who .btn{ white-space: nowrap; padding: 0.35rem 0.7rem; font-size: 0.78rem; }
   .who [data-who]{ display: none; }   /* το email χωράει στην οθόνη του υπολογιστή */
@@ -1770,22 +1768,22 @@ video.adpic-thumb{ background: var(--bg); }
   .pair-name,
   .find{ font-size: 16px; }
 
-  /* Η ετικέτα «ΒΙΝΤΕΟ / ΚΑΛΕΣΜΕΝΟΣ» έτρωγε 6,5rem από τα 320px και τα
-     κουμπιά έπεφταν ένα κάτω από το άλλο. Στο στενό πάει πάνω, μόνη. */
+  /* The "ΒΙΝΤΕΟ / ΚΑΛΕΣΜΕΝΟΣ" label ate 6.5rem of the 320px and the
+     buttons stacked. On narrow it goes above, on its own. */
   .pair-what{ width: 100%; }
   .pair-shot{ width: 48px; height: 48px; }
   .pair-row{ gap: 0.6rem; }
   .btn--tiny{ padding: 0.45rem 0.7rem; }
 
-  /* Μία στήλη. Θα συνέβαινε και μόνο του μόλις φύγει το ζουμ, αλλά
-     δεν το αφήνουμε να εξαρτάται από αυτό. */
+  /* One column. It would happen by itself once the zoom goes, but we do
+     not leave it depending on that. */
   .row2{ grid-template-columns: 1fr; }
 
   .panel-head{ flex-wrap: wrap; }
 
-  /* --- η Αποθήκευση στον αντίχειρα ---
-     Ήταν κολλημένη στην κορυφή: έγραφες τρεις παραγράφους και έπρεπε
-     να γυρίσεις πάνω για να σώσεις. Στο κινητό πάει κάτω, σταθερή. */
+  /* --- Save under the thumb ---
+     It was stuck to the top: you wrote three paragraphs and had to go
+     back up to save. On a phone it goes to the bottom, fixed. */
   .editor{ padding-bottom: 5.5rem; }
 
   .editor-bar{
@@ -1798,7 +1796,7 @@ video.adpic-thumb{ background: var(--bg); }
     flex-wrap: wrap;
     gap: 0.5rem;
     margin: 0;
-    /* env(): ο χώρος της μπάρας χειρονομιών στα iPhone χωρίς κουμπί. */
+    /* env(): room for the gesture bar on iPhones with no button. */
     padding: 0.6rem 1rem calc(0.6rem + env(safe-area-inset-bottom));
     background: var(--surface);
     border-top: 1px solid var(--line);
@@ -1806,21 +1804,21 @@ video.adpic-thumb{ background: var(--bg); }
     box-shadow: 0 -6px 18px rgba(0,0,0,0.35);
   }
 
-  /* Το μήνυμα πάνω από τα κουμπιά, σε δική του σειρά: δίπλα τους θα
-     στρίμωχνε την Αποθήκευση σε δύο αράδες. */
+  /* The message above the buttons, on its own line: beside them it
+     would squeeze Save onto two lines. */
   .editor-state{ order: -1; width: 100%; }
 
-  /* --- στόχοι για δάχτυλο ---
-     Τα ↑ ↓ ✕ των μπλοκ ήταν 26 εικονοστοιχεία. Με το δάχτυλο πατάς
-     λάθος και σβήνεις παράγραφο που μόλις έγραψες. */
+  /* --- finger targets ---
+     The blocks' ↑ ↓ ✕ were 26 pixels. With a finger you hit the wrong
+     one and delete the paragraph you just wrote. */
   .block-acts{ gap: 0.1rem; }
   .block-acts button{ width: 40px; height: 40px; font-size: 1.05rem; }
 
   .btn{ padding: 0.6rem 1rem; }
 
-  /* --- τα παράθυρα επιλογής σε πλήρη οθόνη ---
-     Κουτί στη μέση μικρής οθόνης αφήνει μια λωρίδα για το περιεχόμενο
-     και μεγάλα κενά γύρω του. */
+  /* --- picker dialogs full screen ---
+     A box in the middle of a small screen leaves a strip for the
+     content and large gaps around it. */
   .picker{ padding: 0; }
 
   .picker-box{
@@ -1855,7 +1853,7 @@ video.adpic-thumb{ background: var(--bg); }
   line-height: 1.1;
 }
 
-/* Η περίοδος δεν είναι μέτρηση — δεν διεκδικεί το ίδιο μέγεθος. */
+/* The period is not a measurement — it does not claim the same size. */
 .stnum--soft .stnum-n{ font-size: 1.05rem; color: var(--muted); padding-top: 0.6rem; }
 
 .stnum-t{
@@ -1867,9 +1865,9 @@ video.adpic-thumb{ background: var(--bg); }
   color: var(--muted);
 }
 
-/* --- οι μέρες ---
-   Στήλες με ύψος. Οι μέρες χωρίς κίνηση κρατούν τη θέση τους: ένα κενό
-   που λείπει δείχνει συνεχή επισκεψιμότητα εκεί που δεν υπήρχε. */
+/* --- the days ---
+   Columns with height. Days with no traffic keep their place: a missing
+   gap would suggest steady traffic where there was none. */
 .stdays{
   display: flex;
   align-items: flex-end;
@@ -1911,9 +1909,9 @@ video.adpic-thumb{ background: var(--bg); }
   gap: 0 2rem;
 }
 
-/* --- οι λίστες με μπάρα ---
-   Το σκέτο νούμερο δεν λέει αν είναι πολύ ή λίγο. Η μπάρα το λέει
-   χωρίς λέξεις. */
+/* --- the lists with a bar ---
+   A bare number does not say whether it is a lot or a little. The bar
+   says it without words. */
 .stbars{ list-style: none; margin: 0 0 1.5rem; padding: 0; }
 
 .stbars li{
