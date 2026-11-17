@@ -1,5 +1,17 @@
 [
   {
+    "id": "giortes-gia-oloys-pote-kanei-premiera-to-programma-poia-proionta-tha-perilamvanei",
+    "title": "Γιορτές για Όλους: Πότε κάνει πρεμιέρα το πρόγραμμα – Ποια προϊόντα θα περιλαμβάνει",
+    "url": "https://www.newshub.gr/el/oikonomia/giortes-gia-oloys-pote-kanei-premiera-to-programma-poia-proionta-tha-perilamvanei",
+    "date": "2026-11-17T20:55:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/giortes-ne-1-1536x679.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/giortes-ne-1-1536x679.jpg",
+    "summary": "Κλείδωσε η ημερομηνία για την έναρξη του προγράμματος  «Γιορτές για Όλους».\r\n\r\nΌπως ανακοίνωσε σήμερα ο υφυπουργός Ανάπτυξης Βασίλης Σπανάκη...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "soyidia-telesigrafo-sta-kommata-gia-ton-schimatismo-kyvernisis-prin-apo-ta-christoygenna",
     "title": "Σουηδία: Τελεσίγραφο στα κόμματα για τον σχηματισμό κυβέρνησης πριν από τα Χριστούγεννα",
     "url": "https://www.newshub.gr/el/geopolitiki/soyidia-telesigrafo-sta-kommata-gia-ton-schimatismo-kyvernisis-prin-apo-ta-christoygenna",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/7ea09d19-1b4f-4f18-bd8b-c3e84905def0.jpg",
     "summary": "Σε ένα παρατεταμένο πολιτικό θρίλερ εξελίσσεται η προσπάθεια σχηματισμού κυβέρνησης στη Σουηδία.\r\n\r\nΜέχρι στιγμής, οι διαπραγματεύσεις μεταξύ των κομμάτων δε...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "omada-endynamosis-kai-aytofrontidas-gia-goneis-paidion-me-anapiria-apo-ton-dimo-chanion-aitiseis-symmetochis-eos-tis-30-11",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/2-airbnb-1536x848.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/2-airbnb-1536x848.jpg",
     "summary": "Αύξηση των μέσων τιμών διανυκτέρευσης, αλλά ουσιαστική στασιμότητα στις πληρότητες καταγράφει η ελληνική αγορά βραχυχρόνιας μίσθωσης το 2026, σύμφωνα με νέα ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "dyo-simantika-entos-edras-paichnidia-gia-ton-agio-nikolao-europlan-to-savvatokyriako",
-    "title": "Δύο σημαντικά εντός έδρας παιχνίδια για τον Άγιο Νικόλαο Europlan το Σαββατοκύριακο",
-    "url": "https://www.newshub.gr/el/athlitika/dyo-simantika-entos-edras-paichnidia-gia-ton-agio-nikolao-europlan-to-savvatokyriako",
-    "date": "2026-11-12T18:17:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/12-11-26-agwnas-basket.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/12-11-26-agwnas-basket.jpg",
-    "summary": "Με δύο αναμετρήσεις στο κλειστό γυμναστήριο Αγίου Νικολάου συνεχίζονται το Σαββατοκύριακο 14 και 15 Νοεμβρίου οι αγωνιστικές υποχρεώσεις των τμημάτων μπάσκ...",
     "author": null,
     "featured": false
   },
