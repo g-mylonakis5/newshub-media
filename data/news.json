@@ -1,5 +1,29 @@
 [
   {
+    "id": "chania-synechizontai-oi-psekasmoi-se-dimotikoys-choroys-prasinoy",
+    "title": "Χανιά: Συνεχίζονται οι ψεκασμοί σε δημοτικούς χώρους πρασίνου",
+    "url": "https://www.newshub.gr/el/kriti/chania-synechizontai-oi-psekasmoi-se-dimotikoys-choroys-prasinoy",
+    "date": "2026-11-18T12:08:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/psekasmos.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/psekasmos.jpg",
+    "summary": "Ο Δήμος Χανίων, στο πλαίσιο της προστασίας του αστικού πρασίνου και της αντιμετώπισης της πιτυοκάμπης (κάμπιας των πεύκων &ndash; Thaumetopoea pityocampa), σ...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "platanias-ekdosi-psifismatos-schetika-me-tis-proothoymenes-rythmiseis-gia-tin-ektos-schedioy-domisi",
+    "title": "Πλατανιάς: Έκδοση ψηφίσματος σχετικά με τις προωθούμενες ρυθμίσεις για την εκτός σχεδίου δόμηση",
+    "url": "https://www.newshub.gr/el/kriti/platanias-ekdosi-psifismatos-schetika-me-tis-proothoymenes-rythmiseis-gia-tin-ektos-schedioy-domisi",
+    "date": "2026-11-18T12:01:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/demarcheio-platania-2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/demarcheio-platania-2.jpg",
+    "summary": "Με αφορμή τις προωθούμενες ρυθμίσεις για την εκτός σχεδίου δόμηση και την αναγνώριση του κοινόχρηστου οδικού δικτύου, καθώς και τις συνέπειές τους στην οικοδ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "timi-stoys-agonistes-tis-ethnikis-antistasis-ekdilosi-tin-tetarti-25-noemvrioy-sto-arkalochori",
     "title": "Τιμή στους αγωνιστές της Εθνικής Αντίστασης- Εκδήλωση την Τετάρτη 25 Νοεμβρίου στο Αρκαλοχώρι",
     "url": "https://www.newshub.gr/el/kriti/timi-stoys-agonistes-tis-ethnikis-antistasis-ekdilosi-tin-tetarti-25-noemvrioy-sto-arkalochori",
@@ -7228,30 +7252,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/ekdelose-.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/ekdelose-.jpg",
     "summary": "Εκδήλωση &ndash; Συζήτηση της ΚΝΕ Ηρακλείου με αφορμή την 53η επέτειο του Πολυτεχνείου,  με τίτλο «Συζητώντας με τον Στέλιο Ορφανό» , θα πρα...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "pagkosmio-mplakaoyt-sti-microsoft-edo-kai-20-ores-ti-tha-ginei-me-ta-email-poy-den-paradothikan",
-    "title": "Παγκόσμιο μπλακάουτ στη Microsoft εδώ και 20 ώρες: Τι θα γίνει με τα Email που δεν παραδόθηκαν",
-    "url": "https://www.newshub.gr/el/kosmos/pagkosmio-mplakaoyt-sti-microsoft-edo-kai-20-ores-ti-tha-ginei-me-ta-email-poy-den-paradothikan",
-    "date": "2026-11-13T11:08:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/maketa-microsoft.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/maketa-microsoft.jpg",
-    "summary": "Σχεδόν 20 ώρες κοντεύουν να συμπληρωθούν από την έναρξη του παγκόσμιου μπλακάουτ της Microsoft, που έχει προκαλέσει σοβαρά προβλήματα σε υπηρεσίες ηλεκτρονικ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "irakleio-oi-eligmoi-tis-omadas-daidalos-tis-polemikis-aeroporias-pano-apo-tin-poli-vinteo",
-    "title": "Ηράκλειο: Οι ελιγμοί της ομάδας Δαίδαλος της Πολεμικής Αεροπορίας πάνω από την πόλη - βίντεο",
-    "url": "https://www.newshub.gr/el/kriti/irakleio-oi-eligmoi-tis-omadas-daidalos-tis-polemikis-aeroporias-pano-apo-tin-poli-vinteo",
-    "date": "2026-11-13T11:01:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/screenshot-2026-11-13-114734.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/screenshot-2026-11-13-114734.jpg",
-    "summary": "Την ευκαιρία να βρεθεί κανείς μέσα στο κόκπιτ του αεροσκάφους επιδείξεων της ομάδας Δαίδαλος της Πολεμικής Αεροπορίας δίνει βίντεο που αναρτήθηκε στον επίσ...",
     "author": null,
     "featured": false
   },
