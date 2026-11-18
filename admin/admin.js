@@ -2686,6 +2686,25 @@ function socReady(file){
   soc.file = (file && typeof file === 'object' && Array.isArray(file.posts))
     ? file
     : { posts: [] };
+
+  // Only tick what can actually go out. Both ticked with keys for one of
+  // them means every entry sits in the queue untouched — post-social.js
+  // refuses to send half a post, and rightly: the editor would have to
+  // remember which half.
+  Object.keys(SOC_NAMES).forEach(function (t) {
+    soc.targets[t] = socCan(t);
+  });
+}
+
+// Whether a platform has its keys. post-social.js writes this into the
+// queue file every time it runs, so nobody has to tell the admin twice
+// — the day the missing keys arrive, it ticks itself.
+//
+// Until it has run once there is no answer, and we assume yes: a brand
+// new install should not look broken.
+function socCan(t){
+  var r = soc.file && soc.file.ready;
+  return !r || r[t] !== false;
 }
 
 // The photo, as an address X and Facebook can actually fetch. Our own
@@ -2807,10 +2826,15 @@ function drawSocChosen(){
 
     + '<div class="soc-targets">'
     + ['facebook', 'x'].map(function (t) {
-      return '<label class="check"><input type="checkbox" data-soc-target="' + t + '"'
-        + (soc.targets[t] ? ' checked' : '') + '> ' + SOC_NAMES[t]
-        + (up[t] ? ' <span class="soc-up">' + (up[t] === 'pending' ? 'στην ουρά' : 'ανέβηκε ήδη')
-          + '</span>' : '')
+      var can = socCan(t);
+      return '<label class="check' + (can ? '' : ' check--off') + '">'
+        + '<input type="checkbox" data-soc-target="' + t + '"'
+        + (can && soc.targets[t] ? ' checked' : '') + (can ? '' : ' disabled') + '> '
+        + SOC_NAMES[t]
+        + (can
+          ? (up[t] ? ' <span class="soc-up">' + (up[t] === 'pending' ? 'στην ουρά' : 'ανέβηκε ήδη')
+            + '</span>' : '')
+          : ' <span class="soc-up">λείπουν κλειδιά</span>')
         + '</label>';
     }).join('')
     + '</div>'

@@ -335,10 +335,25 @@ async function main() {
     return 0;
   }
 
+  // Which platforms have their keys, written into the file so the admin
+  // can grey out the rest. The browser cannot see GitHub Secrets, and
+  // hard-coding the answer there would mean a second place to remember
+  // on the day the missing keys arrive. This way it finds out by itself
+  // within a quarter of an hour — the cron is enough to refresh it.
+  const ready = {};
+  Object.keys(NEEDS).forEach((t) => { ready[t] = missingKeys(t).length === 0; });
+
+  let readyChanged = false;
+  if (!DRY && JSON.stringify(data.ready) !== JSON.stringify(ready)) {
+    data.ready = ready;
+    readyChanged = true;
+  }
+
   const pending = data.posts.filter((p) => p.status === 'pending');
 
   if (!pending.length) {
     console.log('Η ουρά είναι άδεια.');
+    if (readyChanged) writeQueue(data);
     return 0;
   }
 
@@ -433,7 +448,7 @@ async function main() {
     }
   }
 
-  if (touched && !DRY) writeQueue(data);
+  if ((touched || readyChanged) && !DRY) writeQueue(data);
 
   if (waiting) {
     console.log(`\n${waiting} περιμένουν κλειδιά. Μόλις μπουν τα secrets, `

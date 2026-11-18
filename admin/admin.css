@@ -400,6 +400,10 @@ body{
   user-select: none;
 }
 
+/* Shown but not available — the reason sits next to it, so it is clear
+   this is waiting for something and not broken. */
+.check--off{ cursor: not-allowed; color: var(--muted); }
+
 .check input{ width: 1.05rem; height: 1.05rem; accent-color: var(--news); }
 
 .check[hidden]{ display: none; }
