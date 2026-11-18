@@ -40,6 +40,7 @@
     <a class="tab" href="#mustread" data-tab="mustread">Must read</a>
     <a class="tab" href="#apopseis" data-tab="apopseis">Απόψεις</a>
     <a class="tab" href="#arthra" data-tab="arthra">Άρθρα</a>
+    <a class="tab" href="#social" data-tab="social">Social</a>
     <a class="tab" href="#diafimiseis" data-tab="diafimiseis">Διαφημίσεις</a>
     <a class="tab" href="#fotos" data-tab="fotos">Φωτογραφίες</a>
     <a class="tab" href="#katigories" data-tab="katigories">Κατηγορίες</a>
@@ -260,6 +261,48 @@
         Όποια αλλάξεις εδώ, ισχύει παντού στο newshubmedia.</p>
 
       <div class="writers" data-writers>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+    </section>
+
+    <!-- ========== SOCIAL ========== -->
+    <section class="panel" data-panel="social">
+      <header class="panel-head">
+        <div>
+          <h1>Social</h1>
+          <p class="hint">Διάλεξε είδηση, podcast ή βίντεο και ανέβα στο Facebook
+            και στο X. Η φωτογραφία και ο τίτλος μπαίνουν μόνα τους — εσύ γράφεις
+            μόνο τα δύο λόγια από πάνω.</p>
+        </div>
+      </header>
+
+      <!-- WHAT WAS PICKED. Hidden until something is clicked below. -->
+      <div class="soc-box" data-soc-chosen hidden></div>
+
+      <h2 class="sub">Διάλεξε τι θα ανεβεί</h2>
+
+      <div class="tools">
+        <input type="search" class="find" data-soc-find placeholder="Βρες τίτλο…"
+               aria-label="Αναζήτηση περιεχομένου">
+        <div class="chips" data-soc-kind>
+          <button type="button" class="chip is-on" data-kind="">Όλα</button>
+          <button type="button" class="chip" data-kind="news">Ειδήσεις</button>
+          <button type="button" class="chip" data-kind="podcast">Podcast</button>
+          <button type="button" class="chip" data-kind="video">Βίντεο</button>
+          <button type="button" class="chip" data-kind="article">Άρθρα</button>
+        </div>
+      </div>
+
+      <div class="picks" data-soc-picks>
+        <p class="muted">Φόρτωση…</p>
+      </div>
+
+      <p class="more">
+        <button type="button" class="btn btn--ghost" data-soc-more hidden>Δείξε περισσότερα</button>
+      </p>
+
+      <h2 class="sub">Τι ανέβηκε</h2>
+      <div class="soc-log" data-soc-log>
         <p class="muted">Φόρτωση…</p>
       </div>
     </section>

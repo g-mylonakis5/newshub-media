@@ -1,0 +1,59 @@
+name: Social — Facebook και X
+
+# Τρέχει ΜΟΛΙΣ πατήσει ο δημοσιογράφος το κουμπί στο διαχειριστικό
+# (το /api/social το ξεκινά). Το cron είναι μόνο δικλείδα: αν το κουμπί
+# δεν προλάβει ή πέσει το δίκτυο, η ουρά φεύγει μέσα σε ένα τέταρτο.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'
+
+permissions:
+  contents: write
+
+# Δύο τρεξίματα μαζί θα ποστάριζαν τα ίδια δύο φορές.
+concurrency:
+  group: social
+  cancel-in-progress: false
+
+jobs:
+  social:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Ανέβασμα στις πλατφόρμες
+        id: post
+        env:
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: node post-social.js
+
+      # Το αποτέλεσμα γράφεται ΠΑΝΤΑ, ακόμα κι αν κάποιο post απέτυχε:
+      # αλλιώς το διαχειριστικό δεν έχει πώς να δείξει το σφάλμα.
+      - name: Commit και push
+        if: always()
+        run: |
+          git config user.name  'newshub-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/social-queue.json
+          if git diff --cached --quiet; then
+            echo 'Καμία αλλαγή στην ουρά.'
+            exit 0
+          fi
+          git commit -m "Social: ανέβασμα — $(date -u '+%Y-%m-%d %H:%M UTC')"
+
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "Το push απορρίφθηκε ($i από 3) — τραβάω και ξαναδοκιμάζω."
+            git pull --rebase --autostash origin main || git rebase --abort || true
+          done
+          git push

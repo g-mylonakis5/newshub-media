@@ -11,6 +11,7 @@ const WRITABLE = new Set([
   'photos',          // which images are "standard"
   'writers',         // the portraits of newshub.gr's columnists
   'ads',             // the partners' ads
+  'social-queue',    // what is waiting to go up on Facebook and X
 ]);
 
 // Files that are read but NOT written: the fetch-*.js scripts produce
@@ -262,6 +263,88 @@ function validate(name, data){
       if (a.status && a.status !== 'on' && a.status !== 'off') {
         return `Άγνωστη κατάσταση στη διαφήμιση ${who}.`;
       }
+    }
+  }
+
+  if (name === 'social-queue') {
+    if (Array.isArray(data)) return 'Η ουρά πρέπει να είναι αντικείμενο με «posts».';
+    if (!Array.isArray(data.posts)) return 'Λείπει η λίστα «posts».';
+
+    // Each entry leaves the building: the text goes to Facebook and X,
+    // the link goes in front of readers. So the shape is checked tightly
+    // — a javascript: link posted from our Page is our problem, not the
+    // browser's.
+    if (data.posts.length > 300) return 'Η ουρά ξεπέρασε τις 300 εγγραφές.';
+
+    const TARGETS = new Set(['facebook', 'x']);
+    const STATUS = new Set(['pending', 'done', 'error']);
+
+    for (const p of data.posts) {
+      if (p === null || typeof p !== 'object' || Array.isArray(p)) {
+        return 'Κάθε εγγραφή της ουράς πρέπει να είναι αντικείμενο.';
+      }
+
+      const who = p.title ? `«${String(p.title).slice(0, 40)}»` : 'μιας εγγραφής';
+
+      if (typeof p.id !== 'string' || !p.id.trim()) {
+        return 'Κάθε εγγραφή της ουράς χρειάζεται κωδικό.';
+      }
+
+      // The link is given whole ONLY for a newshub.gr article. For our
+      // own pages the address holds a slug the browser cannot build
+      // correctly, so the admin sends kind + ref and post-social.js
+      // looks the address up in the live sitemap.
+      const KINDS = new Set(['news', 'podcast', 'video', 'article']);
+
+      if (!KINDS.has(p.kind)) {
+        return `Άγνωστο είδος ${who}.`;
+      }
+
+      if (p.link != null && p.link !== '') {
+        if (typeof p.link !== 'string' || !/^https?:\/\/[^\s"']+$/.test(p.link)) {
+          return `Ο σύνδεσμος ${who} πρέπει να ξεκινά με http:// ή https://`;
+        }
+      } else if (p.kind === 'news') {
+        return `Η είδηση ${who} χρειάζεται τον σύνδεσμό της στο newshub.gr.`;
+      } else if (typeof p.ref !== 'string' || !p.ref.trim()) {
+        return `Η εγγραφή ${who} δεν έχει ούτε σύνδεσμο ούτε κωδικό περιεχομένου.`;
+      }
+
+      if (p.image != null && p.image !== ''
+          && (typeof p.image !== 'string' || !/^https?:\/\/[^\s"']+$/.test(p.image))) {
+        return `Η φωτογραφία ${who} πρέπει να είναι πλήρης διεύθυνση http(s).`;
+      }
+
+      if (p.text != null && typeof p.text !== 'string') {
+        return `Το κείμενο ${who} πρέπει να είναι κείμενο.`;
+      }
+      // Facebook takes far more, but past this it is not a post, it is
+      // the article itself — and X cuts it anyway.
+      if (p.text && p.text.length > 1000) {
+        return `Πολύ μεγάλο κείμενο ${who} (όριο 1000 χαρακτήρες).`;
+      }
+
+      if (!Array.isArray(p.targets) || !p.targets.length) {
+        return `Η εγγραφή ${who} δεν έχει καμία πλατφόρμα.`;
+      }
+      if (p.targets.some((t) => !TARGETS.has(t))) {
+        return `Άγνωστη πλατφόρμα ${who} — δεκτά μόνο facebook και x.`;
+      }
+
+      if (!STATUS.has(p.status)) {
+        return `Άγνωστη κατάσταση ${who}.`;
+      }
+
+      if (p.at != null && (typeof p.at !== 'string' || isNaN(Date.parse(p.at)))) {
+        return `Η ώρα ${who} θέλει ημερομηνία ISO σε κείμενο.`;
+      }
+    }
+
+    // Two entries with the same code would be posted twice — the one
+    // thing this whole file exists to prevent.
+    const ids = data.posts.map((p) => p.id);
+    if (new Set(ids).size !== ids.length) {
+      return 'Δύο εγγραφές της ουράς έχουν τον ίδιο κωδικό.';
     }
   }
 

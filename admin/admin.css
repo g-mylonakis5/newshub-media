@@ -1964,3 +1964,137 @@ video.adpic-thumb{ background: var(--bg); }
   .stdays{ height: 110px; }
   .stday-t{ font-size: 0.58rem; }
 }
+
+/* ---- Social: Facebook και X ---- */
+
+.soc-box{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.soc-box[hidden]{ display: none; }
+
+.soc-head{ display: flex; gap: 1rem; align-items: flex-start; }
+
+.soc-head img{
+  width: 128px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--raise);
+  flex: none;
+}
+
+.soc-head > div{ min-width: 0; flex: 1; }
+
+.soc-head > .btn{ flex: none; padding: 0.2rem 0.55rem; }
+
+.soc-title{
+  margin: 0 0 0.25rem;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.soc-meta{
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.soc-label{
+  display: block;
+  margin: 1rem 0 0.35rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.soc-text{
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: inherit;
+  resize: vertical;
+}
+
+.soc-text:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
+
+.soc-targets{ display: flex; gap: 1.5rem; margin: 0.9rem 0 0; }
+
+/* Ό,τι έχει ήδη ανεβεί. Σβηστό, όχι κόκκινο: πληροφορία, όχι σφάλμα. */
+.soc-up{
+  margin-left: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.soc-warn{
+  margin: 0.9rem 0 0;
+  padding: 0.55rem 0.7rem;
+  background: rgba(207, 34, 51, 0.14);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #FF9AA5;
+}
+
+.soc-acts{ margin: 1rem 0 0; display: flex; }
+
+.soc-acts .btn{ margin-left: auto; }
+
+/* ---- τι ανέβηκε ---- */
+
+.soc-log{ display: grid; gap: 0.5rem; }
+
+.soc-row{
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr) auto auto;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.55rem 0.7rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.soc-row--ok{ border-left-color: var(--ok); }
+.soc-row--bad{ border-left-color: var(--news); }
+.soc-row--wait{ border-left-color: var(--audio); }
+
+.soc-row-when{ color: var(--muted); font-size: 0.78rem; }
+
+.soc-row-title{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.soc-row-where a{ color: var(--sky); }
+
+.soc-row-state{
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Το σφάλμα πιάνει όλη τη γραμμή από κάτω: χωράει να διαβαστεί. */
+.soc-row-note{
+  grid-column: 1 / -1;
+  color: #FF9AA5;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 700px){
+  .soc-head img{ width: 88px; height: 50px; }
+  .soc-row{ grid-template-columns: minmax(0, 1fr) auto; }
+  .soc-row-when{ grid-column: 1 / -1; }
+}

@@ -230,6 +230,34 @@ async function handleRefresh(req, res){
   }
 }
 
+// "Put it up on Facebook and X, now."
+//
+// In production this starts the social.yml workflow — see
+// functions/api/social.js. Locally we run the same script on this
+// machine. Without keys in the environment it posts NOTHING and says so,
+// which is exactly what we want while testing the buttons.
+let posting = false;
+
+async function handleSocial(req, res){
+  if (req.method !== 'POST') return sendJson(res, 405, { error: 'Μόνο POST' });
+
+  if (posting) return sendJson(res, 409, { error: 'Τρέχει ήδη.' });
+  posting = true;
+
+  execFile(process.execPath, [path.join(__dirname, 'post-social.js')], (err, out, errOut) => {
+    posting = false;
+
+    // Exit code 1 means "some post failed", not "the script broke". The
+    // queue file holds the reason, and the admin reads it from there —
+    // so either way the answer is ok, with the log attached.
+    sendJson(res, 200, {
+      ok: true,
+      who: 'τοπικά',
+      log: String(out || '') + String(errOut || ''),
+    });
+  });
+}
+
 const server = http.createServer((req, res) => {
   // Strip the query string and decode Greek characters in the path.
   let rel = decodeURIComponent(req.url.split('?')[0]);
@@ -246,6 +274,11 @@ const server = http.createServer((req, res) => {
 
   if (rel === '/api/refresh') {
     handleRefresh(req, res).catch((err) => sendJson(res, 500, { error: String(err.message) }));
+    return;
+  }
+
+  if (rel === '/api/social') {
+    handleSocial(req, res).catch((err) => sendJson(res, 500, { error: String(err.message) }));
     return;
   }
 

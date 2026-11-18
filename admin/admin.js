@@ -2657,6 +2657,385 @@ function saveMustRead(){
   });
 }
 
+// ---------------------------------------------------------------------
+// Social — Facebook and X
+// ---------------------------------------------------------------------
+
+// The live site. NOT location.origin: locally that is localhost:8080,
+// and a photo address pointing there would be sent to X, which cannot
+// reach it.
+var SITE = 'https://newshubmedia.gr';
+
+// X counts any link as 23 characters and allows 280 in all. The same
+// numbers as post-social.js — see xText() there.
+var X_LIMIT = 280;
+var X_LINK_COST = 23;
+
+var soc = {
+  shown: PAGE,
+  find: '',
+  kind: '',
+  pick: null,                      // the chosen item, or null
+  text: '',
+  targets: { facebook: true, x: true },
+  file: { posts: [] },
+  busy: false,
+};
+
+function socReady(file){
+  soc.file = (file && typeof file === 'object' && Array.isArray(file.posts))
+    ? file
+    : { posts: [] };
+}
+
+// The photo, as an address X and Facebook can actually fetch. Our own
+// uploads live under /uploads/ — that needs the site in front.
+function socImage(it){
+  var img = it.image || '';
+  if (!img) return '';
+  if (/^https?:\/\//.test(img)) return img;
+  return SITE + (img.charAt(0) === '/' ? '' : '/') + img;
+}
+
+// Everything already queued for this item, newest first. This is what
+// stops the same thing going up twice — the commonest mistake when two
+// people are on shift.
+function socHistory(it){
+  return soc.file.posts.filter(function (p) {
+    return p.kind === it.kind && (p.ref === it.ref || p.link === it.ref);
+  });
+}
+
+function socUp(it){
+  var out = {};
+  socHistory(it).forEach(function (p) {
+    if (p.status === 'error') return;
+    (p.targets || []).forEach(function (t) {
+      // Pending counts as up: it is on its way, and a second click
+      // would double it.
+      if (!out[t]) out[t] = p.status;
+    });
+  });
+  return out;
+}
+
+var SOC_NAMES = { facebook: 'Facebook', x: 'X' };
+
+function drawSocPicks(){
+  var box = $('[data-soc-picks]');
+
+  var hits = state.items.filter(function (it) {
+    if (soc.kind && it.kind !== soc.kind) return false;
+    if (!soc.find) return true;
+    return it.key.indexOf(soc.find) > -1;
+  });
+
+  if (!hits.length) {
+    box.innerHTML = '<p class="muted">Τίποτα δεν ταιριάζει.</p>';
+    $('[data-soc-more]').hidden = true;
+    return;
+  }
+
+  box.innerHTML = hits.slice(0, soc.shown).map(function (it) {
+    var up = socUp(it);
+    var marks = Object.keys(up).map(function (t) {
+      return '<span class="soc-up">' + SOC_NAMES[t]
+        + (up[t] === 'pending' ? ' ⏳' : ' ✓') + '</span>';
+    }).join('');
+
+    return '<button type="button" class="pick'
+      + (soc.pick && soc.pick.kind === it.kind && soc.pick.id === it.id ? ' is-on' : '') + '"'
+      + ' data-soc-add="' + esc(it.kind + ':' + it.id) + '">'
+      + (it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy">' : '<img alt="">')
+      + '<span><span class="pick-title">' + esc(it.title) + '</span>'
+      + '<span class="pick-meta">'
+      + '<span class="tag tag--' + it.kind + '">' + TAGS[it.kind] + '</span>'
+      + (it.who ? esc(it.who) + ' · ' : '') + when(it.date)
+      + marks
+      + '</span></span></button>';
+  }).join('');
+
+  $('[data-soc-more]').hidden = hits.length <= soc.shown;
+}
+
+// The text that will really go up on X, so the editor sees the cut
+// BEFORE pressing, not after.
+function socXText(){
+  var room = X_LIMIT - X_LINK_COST - 2;
+  var text = String(soc.text || (soc.pick && soc.pick.title) || '').trim();
+  if (text.length > room) text = text.slice(0, room - 1).replace(/\s+$/, '') + '…';
+  return text;
+}
+
+function drawSocChosen(){
+  var box = $('[data-soc-chosen]');
+
+  if (!soc.pick) {
+    box.hidden = true;
+    box.innerHTML = '';
+    return;
+  }
+
+  var it = soc.pick;
+  var up = socUp(it);
+  var img = socImage(it);
+
+  // What the reader will see. For a news item the card comes from
+  // newshub.gr's own OG tags; for our pages, from ours.
+  var link = it.kind === 'news'
+    ? it.ref
+    : 'το λινκ της σελίδας μας — μπαίνει μόνο του';
+
+  var over = Object.keys(up).filter(function (t) { return soc.targets[t]; });
+
+  box.hidden = false;
+  box.innerHTML = '<div class="soc-head">'
+    + (img ? '<img src="' + esc(img) + '" alt="">' : '<img alt="">')
+    + '<div>'
+    + '<p class="soc-title">' + esc(it.title) + '</p>'
+    + '<p class="soc-meta"><span class="tag tag--' + it.kind + '">' + TAGS[it.kind] + '</span>'
+    + (it.who ? esc(it.who) + ' · ' : '') + when(it.date) + '</p>'
+    + '<p class="soc-meta">' + esc(link) + '</p>'
+    + '</div>'
+    + '<button type="button" class="btn btn--ghost" data-soc-clear>✕</button>'
+    + '</div>'
+
+    + '<label class="soc-label" for="soc-text">Τα δύο λόγια από πάνω</label>'
+    + '<textarea id="soc-text" class="soc-text" data-soc-text rows="3"'
+    + ' placeholder="Αν το αφήσεις κενό, μπαίνει ο τίτλος.">' + esc(soc.text) + '</textarea>'
+    + '<p class="hint" data-soc-count></p>'
+
+    + '<div class="soc-targets">'
+    + ['facebook', 'x'].map(function (t) {
+      return '<label class="check"><input type="checkbox" data-soc-target="' + t + '"'
+        + (soc.targets[t] ? ' checked' : '') + '> ' + SOC_NAMES[t]
+        + (up[t] ? ' <span class="soc-up">' + (up[t] === 'pending' ? 'στην ουρά' : 'ανέβηκε ήδη')
+          + '</span>' : '')
+        + '</label>';
+    }).join('')
+    + '</div>'
+
+    + (over.length
+      ? '<p class="soc-warn">Προσοχή: έχει ήδη ανέβει σε ' + over.map(function (t) {
+        return SOC_NAMES[t];
+      }).join(' και ') + '. Αν συνεχίσεις, θα μπει δεύτερη φορά.</p>'
+      : '')
+
+    + '<p class="soc-acts">'
+    + '<button type="button" class="btn btn--go" data-soc-send'
+    + (soc.busy ? ' disabled' : '') + '>'
+    + (soc.busy ? 'Ανεβαίνει…' : 'Ανέβασέ το') + '</button>'
+    + '</p>';
+
+  drawSocCount();
+}
+
+function drawSocCount(){
+  var el = $('[data-soc-count]');
+  if (!el) return;
+
+  var full = socXText();
+  var left = X_LIMIT - X_LINK_COST - 2 - String(soc.text || '').trim().length;
+
+  el.textContent = soc.targets.x
+    ? (left < 0
+      ? 'Στο X θα κοπεί — περισσεύουν ' + (-left) + ' χαρακτήρες. Θα μπει: «' + full + '»'
+      : 'Στο X μένουν ' + left + ' χαρακτήρες. Στο Facebook δεν υπάρχει όριο.')
+    : 'Στο Facebook δεν υπάρχει όριο.';
+}
+
+function socPick(key){
+  var hit = null;
+  state.items.forEach(function (it) {
+    if (!hit && it.kind + ':' + it.id === key) hit = it;
+  });
+  if (!hit) return;
+
+  soc.pick = hit;
+  // The title as the starting text: nine times out of ten that is what
+  // they want, and an empty box asks a question nobody needs asked.
+  soc.text = hit.title;
+  soc.targets = { facebook: true, x: true };
+
+  drawSocChosen();
+  drawSocPicks();
+  $('[data-soc-chosen]').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function socClear(){
+  soc.pick = null;
+  soc.text = '';
+  drawSocChosen();
+  drawSocPicks();
+}
+
+function drawSocLog(){
+  var box = $('[data-soc-log]');
+  var rows = soc.file.posts.slice(0, 20);
+
+  if (!rows.length) {
+    box.innerHTML = '<p class="muted">Δεν έχει ανέβει τίποτα ακόμα.</p>';
+    return;
+  }
+
+  box.innerHTML = rows.map(function (p) {
+    var state_ = p.status === 'done' ? 'ok' : (p.status === 'error' ? 'bad' : 'wait');
+
+    var label = p.status === 'done' ? 'ανέβηκε'
+      : (p.status === 'error' ? 'σφάλμα' : 'στην ουρά');
+
+    var where = (p.targets || []).map(function (t) {
+      var r = (p.results || {})[t];
+      if (r && r.url) {
+        return '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">'
+          + SOC_NAMES[t] + '</a>';
+      }
+      if (r && r.error) return SOC_NAMES[t] + ' ✗';
+      return SOC_NAMES[t];
+    }).join(' · ');
+
+    // Whatever came back from the platform — a note about a photo that
+    // did not upload, or the reason it failed.
+    var notes = [p.error, p.note].concat((p.targets || []).map(function (t) {
+      var r = (p.results || {})[t];
+      return r && r.note ? SOC_NAMES[t] + ': ' + r.note : '';
+    })).filter(Boolean);
+
+    return '<div class="soc-row soc-row--' + state_ + '">'
+      + '<span class="soc-row-when">' + when(p.at) + '</span>'
+      + '<span class="soc-row-title">' + esc(p.title || p.link || p.ref || '') + '</span>'
+      + '<span class="soc-row-where">' + where + '</span>'
+      + '<span class="soc-row-state">' + label + '</span>'
+      + (notes.length ? '<span class="soc-row-note">' + esc(notes.join(' · ')) + '</span>' : '')
+      + '</div>';
+  }).join('');
+}
+
+// Reads the queue again, to show what the workflow wrote back. Called
+// after sending and from the refresh button.
+function socReload(){
+  return api('social-queue').then(function (file) {
+    socReady(file);
+    drawSocLog();
+    drawSocPicks();
+    if (soc.pick) drawSocChosen();
+  }, function () { /* the file may not exist yet — nothing to show */ });
+}
+
+function socSend(){
+  if (!soc.pick || soc.busy) return;
+
+  var it = soc.pick;
+  var targets = ['facebook', 'x'].filter(function (t) { return soc.targets[t]; });
+
+  if (!targets.length) {
+    say('Διάλεξε Facebook ή X.', 'bad');
+    return;
+  }
+
+  var entry = {
+    // The clock plus the item: unique, and readable in the file.
+    id: new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14) + '-' + it.kind + '-' + it.id,
+    kind: it.kind,
+    ref: it.ref,
+    title: it.title,
+    image: socImage(it),
+    text: String(soc.text || '').trim(),
+    targets: targets,
+    status: 'pending',
+    at: new Date().toISOString(),
+    by: me.email || '',
+  };
+
+  // For a news item the address IS the ref. For our own pages the
+  // address holds a slug built by the build — post-social.js looks it up
+  // in the sitemap, because a second copy of that logic here would
+  // sooner or later produce a dead link.
+  if (it.kind === 'news') entry.link = it.ref;
+
+  soc.busy = true;
+  drawSocChosen();
+  say('Μπαίνει στην ουρά…');
+
+  soc.file.posts.unshift(entry);
+
+  api('social-queue', 'PUT', soc.file).then(function () {
+    // Saved. From here on the post WILL go up, on this run of the
+    // workflow or the next — so the editor is told that much even if the
+    // start below fails.
+    return fetch('/api/social', { method: 'POST' }).then(readJson, netFail).then(function () {
+      say('Μπήκε στην ουρά και ξεκίνησε. Ανεβαίνει σε ένα-δύο λεπτά.', 'ok');
+    }, function (err) {
+      say('Μπήκε στην ουρά, αλλά δεν ξεκίνησε αμέσως (' + err.message
+        + '). Θα ανέβει μόνο του μέσα σε ένα τέταρτο.', 'bad');
+    });
+  }).catch(function (err) {
+    // It was NOT saved — take it back out, or the list would show
+    // something that is not in the file.
+    soc.file.posts = soc.file.posts.filter(function (p) { return p.id !== entry.id; });
+    say('Δεν μπήκε στην ουρά: ' + err.message, 'bad');
+  }).then(function () {
+    soc.busy = false;
+    socClear();
+    drawSocLog();
+
+    // The workflow writes the result back into the same file. Half a
+    // minute is about when the first answer lands.
+    setTimeout(socReload, 30000);
+  });
+}
+
+function wireSocial(){
+  $('[data-soc-picks]').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-soc-add]');
+    if (btn) socPick(btn.dataset.socAdd);
+  });
+
+  $('[data-soc-find]').addEventListener('input', function (e) {
+    soc.find = flat(e.target.value);
+    soc.shown = PAGE;
+    drawSocPicks();
+  });
+
+  $('[data-soc-kind]').addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    soc.kind = chip.dataset.kind;
+    soc.shown = PAGE;
+    $$('[data-soc-kind] .chip').forEach(function (c) { c.classList.toggle('is-on', c === chip); });
+    drawSocPicks();
+  });
+
+  $('[data-soc-more]').addEventListener('click', function () {
+    soc.shown += PAGE;
+    drawSocPicks();
+  });
+
+  // One listener on the box: everything inside it is rewritten by
+  // drawSocChosen() and would lose its own.
+  var box = $('[data-soc-chosen]');
+
+  box.addEventListener('click', function (e) {
+    if (e.target.closest('[data-soc-clear]')) socClear();
+    else if (e.target.closest('[data-soc-send]')) socSend();
+  });
+
+  box.addEventListener('input', function (e) {
+    if (e.target.matches('[data-soc-text]')) {
+      soc.text = e.target.value;
+      drawSocCount();
+    }
+  });
+
+  box.addEventListener('change', function (e) {
+    var t = e.target.closest('[data-soc-target]');
+    if (!t) return;
+    soc.targets[t.dataset.socTarget] = t.checked;
+    // Redrawn in full: the warning about a second post depends on it.
+    drawSocChosen();
+  });
+}
+
 var AD_PLACES = [
   { id: 'home-hero', name: 'Αρχική — κάτω από την κύρια είδηση', size: 'Leaderboard' },
   { id: 'home-top', name: 'Αρχική — κάτω από τη ροή', size: 'Billboard' },
@@ -3516,6 +3895,8 @@ function wireMustRead(){
   });
 
   $('[data-save="mustread"]').addEventListener('click', saveMustRead);
+
+  wireSocial();
 }
 
 // The site's categories. Same as the build's — change them there and
@@ -5756,6 +6137,10 @@ function wire(){
       if (name === 'arthra') draftOffer();
       // Stats download the first time the tab opens.
       if (name === 'metriseis' && !st.loaded) stLoad();
+      // The queue is rewritten by the workflow, not by us — so it is
+      // read again every time the tab opens, or the editor would be
+      // looking at yesterday's answer.
+      if (name === 'social') socReload();
     });
   });
 
@@ -5999,6 +6384,9 @@ function boot(){
     // FORGIVING: the build writes this file — before the first run it
     // does not exist.
     loadTopics(),
+    // What has gone up on Facebook and X. FORGIVING: an empty queue is
+    // the normal state, and the Social tab must not take the admin down.
+    api('social-queue').catch(function () { return null; }),
   ]).then(function (r) {
     // The file may not exist yet — then the API returns null.
     var photos = r[12] && typeof r[12] === 'object' ? r[12] : {};
@@ -6020,6 +6408,7 @@ function boot(){
     adReady(r[15]);
     me.email = (r[16] && typeof r[16].email === 'string') ? r[16].email : '';
     thReady(r[17]);
+    socReady(r[18]);
 
     pp.file = ppReady(r[6]);
     var census = r[7] || {};
@@ -6040,6 +6429,8 @@ function boot(){
     drawLtPicks();
     drawMustRead();
     drawMrPicks();
+    drawSocPicks();
+    drawSocLog();
     drawOpinions();
     drawOpPicks();
     drawWriters();
