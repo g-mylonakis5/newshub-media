@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/patriot_kuwait.jpg",
     "summary": "Νέος γύρος στρατιωτικών επιθέσεων σημειώθηκε στη Μέση Ανατολή τα ξημερώματα της Τετάρτης (18/11), με το Μπαχρέιν να ανακοινώνει ότι αναχαίτισε ιρανικές αεροπ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "simera-i-ekdilosi-gia-tin-prasini-metavasi-sto-epimelitirio-irakleioy",
@@ -185,7 +185,7 @@
       "url": "https://www.newshub.gr/el/christoforos-papadakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "chalandri-andras-epitethike-stin-aderfi-toy-kai-tin-tyflose-me-ta-cheria-moy-tis-evgala-ta-matia",
