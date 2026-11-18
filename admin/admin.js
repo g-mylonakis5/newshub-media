@@ -6234,6 +6234,7 @@ function wire(){
   wirePeople();
   wirePairs();
   wireDrag();
+  wireResize();
 
   // Safety catch: leaving the page with unsaved work in it.
   window.addEventListener('beforeunload', function (e) {
@@ -6339,6 +6340,115 @@ function wireDrag(){
       if (p.hidden) return;
       var b = p.querySelector('.picker-box');
       if (b) place(b, 0, 0);
+    }).observe(p, { attributes: true, attributeFilter: ['hidden'] });
+  });
+}
+
+// ---------------------------------------------------------------------
+// Resizing the dialogs
+// ---------------------------------------------------------------------
+
+// Smaller than this the dialog is no use: the header and the search box
+// alone want more than that.
+var SIZE_MIN_W = 320;
+var SIZE_MIN_H = 200;
+
+// A grip in the bottom-right corner, the same one every window on this
+// machine has. It is put there from here and not written into the HTML,
+// so a dialog added later gets it too — the same reason wireDrag()
+// listens on the document instead of on each header.
+function wireResize(){
+  var box = null;
+  var from = null;   // where the pointer started
+  var size = null;   // the size the box had then
+  var at = null;     // the offset it was sitting at
+  var corner = null; // its top-left corner — this must NOT move
+
+  function grip(b){
+    if (!b.querySelector('.picker-grip')) {
+      var g = document.createElement('div');
+      g.className = 'picker-grip';
+      g.title = 'Σύρε για μέγεθος';
+      b.appendChild(g);
+    }
+  }
+
+  document.addEventListener('pointerdown', function (e) {
+    if (window.innerWidth < DRAG_MIN_W) return;
+
+    var g = e.target.closest('.picker-grip');
+    if (!g) return;
+
+    box = g.closest('.picker-box');
+    if (!box) return;
+
+    var r = box.getBoundingClientRect();
+    from = { x: e.clientX, y: e.clientY };
+    size = { w: r.width, h: r.height };
+    corner = { left: r.left, top: r.top };
+    at = { x: Number(box.dataset.dx || 0), y: Number(box.dataset.dy || 0) };
+
+    // The stylesheet caps the box at min(900px, 100%) wide and 80vh
+    // tall. Those caps are what it opens at, not what it is stuck with.
+    box.style.maxWidth = 'none';
+    box.style.maxHeight = 'none';
+
+    g.setPointerCapture(e.pointerId);
+    box.classList.add('is-sizing');
+    e.preventDefault();
+  });
+
+  document.addEventListener('pointermove', function (e) {
+    if (!box) return;
+
+    // Never past the bottom-right of the screen. The corner we measured
+    // stays put, so these two ceilings stay true all the way through.
+    var w = Math.min(window.innerWidth - corner.left, size.w + (e.clientX - from.x));
+    var h = Math.min(window.innerHeight - corner.top, size.h + (e.clientY - from.y));
+
+    w = Math.max(SIZE_MIN_W, w);
+    h = Math.max(SIZE_MIN_H, h);
+
+    box.style.width = w + 'px';
+    box.style.height = h + 'px';
+
+    // Flexbox keeps the box centred, so widening it by 100 moves its
+    // left edge 50 to the left and the grip only follows half the
+    // pointer. Pushing it back by half of what it grew nails the
+    // top-left corner down and the grip tracks the finger exactly.
+    var x = at.x + (w - size.w) / 2;
+    var y = at.y + (h - size.h) / 2;
+
+    box.dataset.dx = x;
+    box.dataset.dy = y;
+    box.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+  });
+
+  function stop(){
+    if (!box) return;
+    box.classList.remove('is-sizing');
+    box = null;
+  }
+
+  document.addEventListener('pointerup', stop);
+  document.addEventListener('pointercancel', stop);
+
+  // Its own size back every time it opens, for the same reason
+  // wireDrag() puts it back in the middle: a dialog that reopens as a
+  // sliver someone left behind looks broken.
+  $$('.picker').forEach(function (p) {
+    var b = p.querySelector('.picker-box');
+    if (!b) return;
+
+    grip(b);
+
+    new MutationObserver(function () {
+      if (p.hidden) return;
+      grip(b);
+      b.style.width = '';
+      b.style.height = '';
+      b.style.maxWidth = '';
+      b.style.maxHeight = '';
     }).observe(p, { attributes: true, attributeFilter: ['hidden'] });
   });
 }

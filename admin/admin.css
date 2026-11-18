@@ -948,6 +948,44 @@ video.adpic-thumb{ background: var(--bg); }
   .picker-box.is-moving{ cursor: move; }
 }
 
+/* The grip the dialog is resized by — see wireResize(). Below 761px the
+   dialogs fill the screen, so there is no size to choose. */
+.picker-grip{ display: none; }
+
+@media (min-width: 761px){
+  .picker-grip{
+    display: block;
+    width: 16px;
+    height: 16px;
+
+    /* margin-top: auto pushes it to the floor of a half-empty dialog;
+       sticky keeps it on the floor of a full one, which scrolls. The
+       negative margins pull it into the padding instead of adding a
+       row of its own. */
+    margin: auto -0.55rem -0.7rem 0;
+    position: sticky;
+    bottom: 0;
+    align-self: flex-end;
+    flex: 0 0 auto;
+
+    cursor: nwse-resize;
+    touch-action: none;
+    opacity: 0.45;
+
+    /* Three short diagonal lines — the corner every window has. */
+    background: linear-gradient(-45deg,
+      transparent 0 4px, var(--muted) 4px 5px,
+      transparent 5px 8px, var(--muted) 8px 9px,
+      transparent 9px 12px, var(--muted) 12px 13px,
+      transparent 13px);
+  }
+
+  .picker-grip:hover{ opacity: 0.9; }
+
+  /* Or the pointer selects the text it passes over while resizing. */
+  .picker-box.is-sizing{ user-select: none; }
+}
+
 .picker-head h2{
   margin: 0;
   font-family: var(--serif);
