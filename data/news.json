@@ -1,5 +1,21 @@
 [
   {
+    "id": "ellada-kypros-me-aera-ischyos-tis-athinas-i-diakyvernitiki-sti-leykosia",
+    "title": "Ελλάδα-Κύπρος: Με αέρα ισχύος της Αθήνας η διακυβερνητική στη Λευκωσία",
+    "url": "https://www.newshub.gr/el/geopolitiki/ellada-kypros-me-aera-ischyos-tis-athinas-i-diakyvernitiki-sti-leykosia",
+    "date": "2026-11-18T09:04:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/mitsotakis-christodoulidis.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/mitsotakis-christodoulidis.jpg",
+    "summary": "Στη Λευκωσία βρίσκεται ήδη το μεγαλύτερο ίσως μέρος της ελληνικής κυβέρνησης, με πρώτο ασφαλώς τον ίδιο τον πρωθυπουργό. Τον Κυριάκο Μητσοτάκη συνοδεύουν 13 ...",
+    "author": {
+      "name": "Γιάννης Χαραλαμπίδης",
+      "url": "https://www.newshub.gr/el/giannis-charalampidis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/dedphnphgn.jpg"
+    },
+    "featured": false
+  },
+  {
     "id": "enas-chronos-choris-ton-rafail-galyfianaki-i-sparaktiki-mantinada-toy-patera-toy",
     "title": "Ένας χρόνος χωρίς τον Ραφαήλ Γαλυφιανάκη-Η σπαρακτική μαντινάδα του πατέρα του",
     "url": "https://www.newshub.gr/el/kriti/enas-chronos-choris-ton-rafail-galyfianaki-i-sparaktiki-mantinada-toy-patera-toy",
@@ -9,7 +25,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/raphael.jpg",
     "summary": "Ένας χρόνος συμπληρώνεται σε λίγες ημέρες από την τραγωδία που συγκλόνισε την Κρήτη αλλά και ολόκληρη την Ελλάδα, όταν  ο 19χρονος στρατιώτης Ραφαήλ Γαλ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "toyrkia-koritsaki-epaize-tyflomyga-kai-epese-sto-keno-sothike-apo-thayma",
@@ -225,7 +241,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/phylake-agyias.jpg",
     "summary": "Συναγερμός σήμανε το απόγευμα της Τρίτης στο Σωφρονιστικό Κατάστημα Χανίων, όταν μη επανδρωμένο αεροσκάφος πλησίασε τις εγκαταστάσεις και έριξε αντικείμενο σ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "iranikes-epitheseis-se-mpachrein-kai-koyveit-neo-amerikaniko-pligma-se-nisi-toy-iran",
@@ -7236,18 +7252,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/moro-ankalia-aspromaure-pexels-okkkk.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/moro-ankalia-aspromaure-pexels-okkkk.jpg",
     "summary": "Μια σοκαριστική υπόθεση με θύμα ένα βρέφος 4 μηνών αποκαλύφθηκε στην Πάτρα όταν το μωρό μεταφέρθηκε στο Καραμανδάνειο νοσοκομείο τα ξημερώματα της Τετάρτης.\r...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "athlites-kai-somateia-metakomizoyn-sto-arkalochori-ti-symvainei-me-to-kolymvitirio-sto-irakleio",
-    "title": "Αθλητές και σωματεία μετακομίζουν στο… Αρκαλοχώρι - Τι συμβαίνει με το κολυμβητήριο στο Ηράκλειο;",
-    "url": "https://www.newshub.gr/el/kriti/athlites-kai-somateia-metakomizoyn-sto-arkalochori-ti-symvainei-me-to-kolymvitirio-sto-irakleio",
-    "date": "2026-11-13T07:11:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/kolymbese-pisina-athletes-pexels-photo-863988.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/kolymbese-pisina-athletes-pexels-photo-863988.jpg",
-    "summary": "Τα ατελείωτα προβλήματα που έχουν δημιουργηθεί με αποκορύφωμα την προπόνηση σε πολικές θερμοκρασίες ωθούν αθλητές και σωματεία να μετακομίζουν στο Αρκαλοχώρι...",
     "author": null,
     "featured": false
   },
