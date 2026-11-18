@@ -1,5 +1,17 @@
 [
   {
+    "id": "gnoseis-poy-sozoyn-zoes-gia-deyteri-chronia-oi-polites-toy-agioy-nikolaoy-ekpaideyontai-stis-protes-voitheies",
+    "title": "Γνώσεις που σώζουν ζωές: Για δεύτερη χρονιά οι πολίτες του Αγίου Νικολάου εκπαιδεύονται στις Πρώτες Βοήθειες",
+    "url": "https://www.newshub.gr/el/kriti/gnoseis-poy-sozoyn-zoes-gia-deyteri-chronia-oi-polites-toy-agioy-nikolaoy-ekpaideyontai-stis-protes-voitheies",
+    "date": "2026-11-18T12:50:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/eikona_viber_2026-11-18_12-22-25-300.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/eikona_viber_2026-11-18_12-22-25-300.jpg",
+    "summary": "Με μεγάλη συμμετοχή και επιτυχία πραγματοποιήθηκε την Κυριακή 15 Νοεμβρίου 2026 η πρώτη εκπαιδευτική ενημέρωση πολιτών της φετινής περιόδου στη Βασική Υποστή...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "euroleague-i-amyna-prodose-xana-ton-panathinaiko-itta-84-79-apo-ti-virtoys-mpolonia",
     "title": "Euroleague: Η άμυνα πρόδωσε ξανά τον Παναθηναϊκό, ήττα 84-79 από τη Βίρτους Μπολόνια",
     "url": "https://www.newshub.gr/el/athlitika/euroleague-i-amyna-prodose-xana-ton-panathinaiko-itta-84-79-apo-ti-virtoys-mpolonia",
@@ -129,7 +141,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/eikona_viber_2026-11-18_13-06-04-405.jpg",
     "summary": "Συναγερμός σημανε στην Πυροσβεστική Υπηρεσία του Ηρακλείου, όταν υπηρξε ενημέρωση για ένα αυτοκίνητο, το οποίο άρπαξε φωτιά μέσα σε συνεργείο οχημάτων!\r\n\r\nΣυ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "olympiakos-agonia-gia-ton-traymatismo-toy-gkoystavo-poyerta",
@@ -7240,18 +7252,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/7163398.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/7163398.jpg",
     "summary": "Ολοκληρώθηκε το μεσημέρι της Παρασκευής (13/11) στο Προεδρικό Μέγαρο η ορκωμοσία των νέων μελών της κυβέρνησης, μετά τις αλλαγές στο κυβερνητικό σχήμα που ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "omofono-psifisma-dimotikoy-symvoylioy-chanion-gia-ta-provlimata-kai-tis-diekdikiseis-ton-ergazomenon-sti-scholiki-kathariotita",
-    "title": "Ομόφωνο ψήφισμα Δημοτικού Συμβουλίου Χανίων για τα προβλήματα και τις διεκδικήσεις των εργαζομένων στη σχολική καθαριότητα",
-    "url": "https://www.newshub.gr/el/kriti/omofono-psifisma-dimotikoy-symvoylioy-chanion-gia-ta-provlimata-kai-tis-diekdikiseis-ton-ergazomenon-sti-scholiki-kathariotita",
-    "date": "2026-11-13T12:00:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/scholike-katharioteta.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/scholike-katharioteta.jpg",
-    "summary": "Το Δημοτικό Συμβούλιο Χανίων κατά τη συνεδρίαση της 11ης Noεμβρίου 2026 με την υπ΄ αριθμ. 442 Απόφαση, που έλαβε ομόφωνα, εξέδωσε ψήφισμα για τα προβλήματα...",
     "author": null,
     "featured": false
   },
