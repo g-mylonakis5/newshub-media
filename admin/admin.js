@@ -2821,6 +2821,8 @@ function drawSocChosen(){
       }).join(' και ') + '. Αν συνεχίσεις, θα μπει δεύτερη φορά.</p>'
       : '')
 
+    + '<div data-soc-prev></div>'
+
     + '<p class="soc-acts">'
     + '<button type="button" class="btn btn--go" data-soc-send'
     + (soc.busy ? ' disabled' : '') + '>'
@@ -2828,6 +2830,8 @@ function drawSocChosen(){
     + '</p>';
 
   drawSocCount();
+  socRead(it);
+  drawSocPreview();
 }
 
 function drawSocCount(){
@@ -2842,6 +2846,186 @@ function drawSocCount(){
       ? 'Στο X θα κοπεί — περισσεύουν ' + (-left) + ' χαρακτήρες. Θα μπει: «' + full + '»'
       : 'Στο X μένουν ' + left + ' χαρακτήρες. Στο Facebook δεν υπάρχει όριο.')
     : 'Στο Facebook δεν υπάρχει όριο.';
+}
+
+// ---------------------------------------------------------------------
+// How it will look
+// ---------------------------------------------------------------------
+
+// Nothing is asked of Facebook or X here, and nothing needs to be:
+// Facebook builds its card out of the OG tags of the page we link to,
+// and X shows the photo we upload. Both of those are ours already — so
+// the preview works with no keys, no app and no approval from anyone.
+//
+// Two things it cannot know, and says so under the cards: where exactly
+// Facebook trims a long title, and whether Facebook is still holding a
+// picture from an older share of the same address.
+
+var socMap = null;   // the sitemap, read once
+var socMeta = {};    // kind:id -> { title, desc, image, … } | { wait } | { err }
+
+// Our own addresses, as paths and not whole URLs: on this machine the
+// admin talks to serve.js and on the site to the site, and a path is
+// right for both.
+function socPaths(){
+  if (socMap) return socMap;
+
+  socMap = fetch('/sitemap.xml')
+    .then(function (r) { return r.ok ? r.text() : ''; })
+    .then(function (t) {
+      return (t.match(/<loc>[^<]+<\/loc>/g) || []).map(function (m) {
+        return m.slice(5, -6).replace(SITE, '');
+      });
+    })
+    .catch(function () { return []; });
+
+  return socMap;
+}
+
+// The same rule as findLink() in post-social.js: the code, a dash, then
+// a slug the build made. We do not rebuild that slug here — a second
+// copy of it would sooner or later make an address that 404s. We look
+// the page up, and not finding it is itself the answer.
+function socPathOf(it){
+  if (it.kind === 'news') return Promise.resolve(it.ref);
+
+  var prefix;
+
+  if (it.kind === 'podcast') prefix = '/episode/' + String(it.ref).replace(/\D/g, '') + '-';
+  else if (it.kind === 'video') prefix = '/video/' + it.ref + '-';
+  else prefix = '/arthro/' + String(it.ref).replace(/^arthro\//, '').replace(/\.html$/, '');
+
+  return socPaths().then(function (all) {
+    var hit = null;
+    all.forEach(function (u) {
+      if (!hit && (u === prefix || u.indexOf(prefix) === 0)) hit = u;
+    });
+    return hit;
+  });
+}
+
+// Reads the tags off the real page — our own pages only. newshub.gr is
+// another origin and the browser will not hand us its HTML; for a news
+// item we hold the same fields ourselves anyway.
+function socRead(it){
+  var key = it.kind + ':' + it.id;
+  if (socMeta[key]) return;
+
+  if (it.kind === 'news') {
+    socMeta[key] = {
+      title: it.title,
+      desc: '',
+      image: socImage(it),
+      url: it.ref,
+      site: 'NEWSHUB.GR',
+    };
+    drawSocPreview();
+    return;
+  }
+
+  socMeta[key] = { wait: true };
+
+  socPathOf(it).then(function (path) {
+    if (!path) throw new Error('άχτιστη');
+
+    // On the site the address carries no .html — Pages adds it. On this
+    // machine serve.js hands the files out as they are on disk.
+    return fetch(path).then(function (r) {
+      if (r.ok) return r.text();
+      return fetch(path + '.html').then(function (r2) {
+        if (!r2.ok) throw new Error('άχτιστη');
+        return r2.text();
+      });
+    }).then(function (html) {
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+
+      function tag(p){
+        var el = doc.querySelector('meta[property="' + p + '"]')
+          || doc.querySelector('meta[name="' + p + '"]');
+        return el ? el.getAttribute('content') : '';
+      }
+
+      socMeta[key] = {
+        title: tag('og:title'),
+        desc: tag('og:description'),
+        image: tag('og:image'),
+        url: tag('og:url') || SITE + path,
+        site: 'NEWSHUBMEDIA.GR',
+      };
+      drawSocPreview();
+    });
+  }).catch(function () {
+    socMeta[key] = { err: true };
+    drawSocPreview();
+  });
+}
+
+function prevWho(handle){
+  return '<p class="prev-who"><span class="prev-av">N</span>'
+    + '<span><b>Newshub.gr</b>'
+    + '<small>' + (handle || 'Τώρα · Δημόσιο') + '</small></span></p>';
+}
+
+function prevFb(m, text){
+  return '<article class="prev">'
+    + '<p class="prev-tag">Facebook</p>'
+    + prevWho('')
+    + (text ? '<p class="prev-text">' + esc(text) + '</p>' : '')
+    + '<div class="prev-card">'
+    + (m.image ? '<img src="' + esc(m.image) + '" alt="">' : '<div class="prev-noimg"></div>')
+    + '<div class="prev-card-t">'
+    + '<small class="prev-dom">' + esc(m.site) + '</small>'
+    + '<b>' + esc(m.title) + '</b>'
+    + (m.desc ? '<small class="prev-desc">' + esc(m.desc) + '</small>' : '')
+    + '</div></div>'
+    + '</article>';
+}
+
+// X puts the photo IN the post and the link stays as words in the text.
+// That is why the two look so different for the same item.
+function prevX(m, text, img){
+  return '<article class="prev">'
+    + '<p class="prev-tag">X</p>'
+    + prevWho('@newshubgr')
+    + '<p class="prev-text">' + esc(socXText())
+    + '<br><span class="prev-link">' + esc(m.url) + '</span></p>'
+    + (img ? '<img class="prev-x-img" src="' + esc(img) + '" alt="">' : '')
+    + '</article>';
+}
+
+function drawSocPreview(){
+  var el = $('[data-soc-prev]');
+  if (!el) return;
+
+  var it = soc.pick;
+  if (!it) { el.innerHTML = ''; return; }
+
+  var m = socMeta[it.kind + ':' + it.id];
+
+  if (!m || m.wait) {
+    el.innerHTML = '<p class="hint">Διαβάζω τη σελίδα…</p>';
+    return;
+  }
+
+  // Not built yet. Worth saying HERE and not after the attempt: it is
+  // the one failure the editor can do something about — wait.
+  if (m.err) {
+    el.innerHTML = '<p class="soc-warn">Η σελίδα δεν υπάρχει ακόμα στο site, άρα δεν '
+      + 'μπορώ να δείξω την κάρτα — και το ανέβασμα θα κολλήσει για τον ίδιο λόγο. '
+      + 'Ξαναδοκίμασε σε λίγα λεπτά, μόλις τρέξει το χτίσιμο.</p>';
+    return;
+  }
+
+  var text = String(soc.text || it.title || '').trim();
+  var cards = (soc.targets.facebook ? prevFb(m, text) : '')
+    + (soc.targets.x ? prevX(m, text, socImage(it)) : '');
+
+  el.innerHTML = cards
+    ? '<p class="soc-label">Έτσι θα φανεί</p>'
+      + '<div class="prevs">' + cards + '</div>'
+      + '<p class="hint">Κατά προσέγγιση. Το Facebook μπορεί να κόψει τον τίτλο αλλού, '
+      + 'και αν η σελίδα έχει ξαναμοιραστεί μπορεί να κρατά ακόμα παλιά φωτογραφία.</p>'
+    : '';
 }
 
 function socPick(key){
@@ -3024,6 +3208,9 @@ function wireSocial(){
     if (e.target.matches('[data-soc-text]')) {
       soc.text = e.target.value;
       drawSocCount();
+      // Only the preview box is redrawn, never the whole panel: redrawing
+      // that would take the textarea out from under the cursor.
+      drawSocPreview();
     }
   });
 

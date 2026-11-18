@@ -2090,6 +2090,116 @@ video.adpic-thumb{ background: var(--bg); }
 
 .soc-acts .btn{ margin-left: auto; }
 
+/* ---- έτσι θα φανεί ---- */
+
+/* Side by side while there is room: the whole point is comparing the
+   two, and Facebook's card and X's post differ a lot for the same
+   item. */
+.prevs{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1rem;
+  margin: 0.6rem 0 0.5rem;
+}
+
+/* These are mock-ups of someone else's interface, so they do not take
+   the admin's own colours: a preview in our palette would not be
+   telling the truth about what the reader sees. */
+.prev{
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 0.85rem;
+  font-size: 0.86rem;
+  overflow: hidden;
+}
+
+.prev-tag{
+  margin: 0 0 0.6rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.prev-who{
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 0.6rem;
+}
+
+.prev-who b{ font-size: 0.88rem; }
+.prev-who small{ display: block; color: var(--muted); font-size: 0.74rem; }
+
+.prev-av{
+  width: 34px;
+  height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--news);
+  color: #fff;
+  font-weight: 700;
+}
+
+.prev-text{ margin: 0 0 0.7rem; white-space: pre-wrap; word-break: break-word; }
+
+.prev-link{ color: var(--sky); }
+
+/* Facebook's link card: picture on top, a grey strip of text under it,
+   the whole thing one rectangle. */
+.prev-card{
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--raise);
+}
+
+.prev-card img,
+.prev-noimg{
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.91 / 1;
+  object-fit: cover;
+  background: var(--bg);
+}
+
+.prev-card-t{ display: grid; gap: 0.15rem; padding: 0.6rem 0.7rem; }
+
+.prev-dom{ color: var(--muted); font-size: 0.7rem; letter-spacing: 0.06em; }
+
+/* Both platforms cut these off. Showing them whole would make the
+   preview a worse guide than no preview at all. */
+.prev-card-t b{
+  font-size: 0.9rem;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.prev-desc{
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* X uploads the photo into the post itself — no strip of text under
+   it, and the address stays in the words above. */
+.prev-x-img{
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+  background: var(--bg);
+}
+
 /* ---- τι ανέβηκε ---- */
 
 .soc-log{ display: grid; gap: 0.5rem; }
