@@ -102,4 +102,12 @@ function parseEpisodes(xml) {
   });
 }
 
-module.exports = { loadFeed, parseEpisodes, FEED_URL };
+// The podcast's own artwork, from the channel and not from an episode.
+// 19 of 1,095 episodes carry no itunes:image of their own, and the site
+// needs something to put in their place.
+function parseChannelImage(xml) {
+  const head = xml.slice(0, xml.indexOf('<item>'));
+  return attr(head, 'itunes:image', 'href');
+}
+
+module.exports = { loadFeed, parseEpisodes, parseChannelImage, FEED_URL };

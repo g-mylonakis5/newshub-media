@@ -3,7 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { loadFeed, parseEpisodes } = require('./feed');
+const { loadFeed, parseEpisodes, parseChannelImage } = require('./feed');
 
 async function main() {
   console.log('Κατεβάζω το feed...');
@@ -19,6 +19,20 @@ async function main() {
     JSON.stringify(episodes, null, 2),
     'utf8'
   );
+
+  // The podcast's own artwork, kept apart from the episodes: the build
+  // puts it where an episode has no cover of its own. Written only if we
+  // found one, so a bad fetch does not wipe what we had.
+  const cover = parseChannelImage(xml);
+  if (cover) {
+    fs.writeFileSync(
+      path.join(outDir, 'podcast.json'),
+      JSON.stringify({ image: cover }, null, 2),
+      'utf8'
+    );
+  } else {
+    console.warn('ΠΡΟΣΟΧΗ: δεν βρέθηκε εξώφυλλο καναλιού — κρατάω το παλιό.');
+  }
 
   const withGuest = episodes.filter((e) => e.guest).length;
   const guests = new Set(episodes.map((e) => e.guest).filter(Boolean));

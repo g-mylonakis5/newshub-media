@@ -9,6 +9,8 @@ const GUEST_DIR = path.join(PUBLIC_DIR,'guest');
 // How many cards show in the homepage flow. Deliberately small: a link to
 // the full archive sits underneath.
 const HOW_MANY = 9;
+// The podcast's own artwork, written by fetch-episodes.js.
+const PODCAST_FILE = path.join(__dirname, 'data/podcast.json');
 const CURATION_FILE = path.join(__dirname, 'data/curation.json');
 const NEWS_FILE = path.join(__dirname, 'data/news.json');
 const VIDEO_FILE = path.join(__dirname, 'data/videos.json');
@@ -1144,6 +1146,37 @@ function itemFromArticle(a){
 
 // rank is written ONLY in the homepage flow, the only one with a topic
 // filter. Other card rows neither receive nor print it.
+// The podcast's own artwork, for episodes that carry none.
+//
+// 19 of 1,095 have no itunes:image — the producer never attached one —
+// and an empty frame on the homepage reads as a broken site rather than
+// as a missing cover.
+//
+// Applied at RENDER time and never written into ep.image, on purpose: the
+// topic and show pages choose their picture with "the first item that has
+// an image", and a fallback everywhere would hand them this generic
+// artwork instead of a real photograph.
+let podcastCover = null;
+
+function podcastArt(){
+  if (podcastCover !== null) return podcastCover;
+
+  try {
+    podcastCover = String(JSON.parse(fs.readFileSync(PODCAST_FILE, 'utf8')).image || '');
+  } catch {
+    // Not fetched yet. The frame stays empty, exactly as before.
+    podcastCover = '';
+  }
+
+  return podcastCover;
+}
+
+// Videos are left out: a YouTube video always has a thumbnail, so a
+// missing one means something is wrong and should look wrong.
+function coverOf(item){
+  return item.image || (item.kind === 'podcast' ? podcastArt() : '');
+}
+
 function card(item, depth = 0, rank = null){
   const up = depth === 0 ? '' : '../';
   const href = item.external ? item.href : `${up}${item.href}`;
@@ -1156,15 +1189,16 @@ function card(item, depth = 0, rank = null){
   const cls = ['card', item.extra ? 'is-extra' : '', item.lead ? 'card--lead' : '']
     .filter(Boolean).join(' ');
 
-  const letterbox = /\/(sddefault|hqdefault)\.jpg/.test(item.image || '');
+  const img = coverOf(item);
+  const letterbox = /\/(sddefault|hqdefault)\.jpg/.test(img);
   const imgCls = `card-image${letterbox ? ' card-image--letterbox' : ''}`;
   const hide = item.extra ? ' hidden' : '';
 
   return `<article class="${cls}"${hide} data-kind="${item.kind}"${topics ? ` data-topics="${topics}"` : ''}${rank === null ? '' : ` data-rank="${rank}"`}>
     <a class="card-link" href="${href}"${out}>
     <span class="card-media">
-      ${item.image ? `<img class="card-bloom${letterbox ? ' card-bloom--letterbox' : ''}" src="${item.image}" alt="" aria-hidden="true" loading="lazy">
-      <img class="${imgCls}" src="${item.image}" alt="" loading="lazy">` : '<span class="card-image card-image--empty"></span>'}
+      ${img ? `<img class="card-bloom${letterbox ? ' card-bloom--letterbox' : ''}" src="${img}" alt="" aria-hidden="true" loading="lazy">
+      <img class="${imgCls}" src="${img}" alt="" loading="lazy">` : '<span class="card-image card-image--empty"></span>'}
       ${item.kind === 'news' ? '' : `<span class="card-play" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M9 7.5v9l7.5-4.5z" fill="currentColor"/></svg>
       </span>`}
@@ -1192,12 +1226,15 @@ function rowCard(item, depth = 0){
   const href = item.external ? item.href : `${up}${item.href}`;
   const out = item.external ? ' target="_blank" rel="noopener"' : '';
 
+  const img = coverOf(item);
+  const letterbox = /\/(sddefault|hqdefault)\.jpg/.test(img);
+
   return `        <article class="row-card" data-kind="${item.kind}">
           <a class="row-card-link" href="${href}"${out}>
             <span class="row-card-media">
-              ${item.image
-                ? `<img class="card-bloom${/\/(sddefault|hqdefault)\.jpg/.test(item.image) ? ' card-bloom--letterbox' : ''}" src="${item.image}" alt="" aria-hidden="true" loading="lazy">
-              <img class="row-card-art${/\/(sddefault|hqdefault)\.jpg/.test(item.image) ? ' row-card-art--letterbox' : ''}" src="${item.image}" alt="" loading="lazy">`
+              ${img
+                ? `<img class="card-bloom${letterbox ? ' card-bloom--letterbox' : ''}" src="${img}" alt="" aria-hidden="true" loading="lazy">
+              <img class="row-card-art${letterbox ? ' row-card-art--letterbox' : ''}" src="${img}" alt="" loading="lazy">`
                 : ''}
             </span>
             <span class="row-card-text">
@@ -5551,16 +5588,21 @@ function episodePage(ep){
     ...cats.map((c) => `<a href="../${categoryUrl(c)}">${esc(c)}</a>`),
   ].filter(Boolean).join(' · ');
 
+  // The podcast's artwork stands in where the episode has none — see
+  // podcastArt(). The page is about audio: with no picture at all the
+  // player sits over a hole.
+  const art = ep.image || podcastArt();
+
   const stage = twin
     ? `        <div class="stage-media" data-embed="${twin.embed}" hidden>
           <img src="${twin.image}" alt="" loading="lazy">
           <button type="button" class="video-play" aria-label="Αναπαραγωγή">▶</button>
         </div>
         <div class="stage-art">
-          ${ep.image ? `<img src="${ep.image}" alt="" loading="lazy">` : ''}
+          ${art ? `<img src="${art}" alt="" loading="lazy">` : ''}
         </div>`
     : `        <div class="stage-art">
-          ${ep.image ? `<img src="${ep.image}" alt="" loading="lazy">` : ''}
+          ${art ? `<img src="${art}" alt="" loading="lazy">` : ''}
         </div>`;
 
   // One criterion, stated in the heading. Show names come in every gender
@@ -5598,12 +5640,12 @@ function episodePage(ep){
   ];
 
   const body = `${siteHeader(1)}
-${pageHero(ep.image || '')}
+${pageHero(art)}
 
 ${breadcrumb(crumbs, 1)}
 
   <main class="episode" data-pagefind-body
-        data-pagefind-meta="image:${ep.image || ''},type:Podcast,date:${formatDate(ep.date)},duration:${formatDuration(ep.seconds)}"
+        data-pagefind-meta="image:${art},type:Podcast,date:${formatDate(ep.date)},duration:${formatDuration(ep.seconds)}"
         data-pagefind-filter="Είδος:Podcast${show ? `,Εκπομπή:${esc(showLabel(show))}` : ''}${cats.map((c) => `,Κατηγορία:${esc(c)}`).join('')}">
     <div class="episode-grid">
       <div class="episode-main">
@@ -5685,7 +5727,7 @@ ${showBannerBox(show, 1)}
     body,
     depth: 1,
     description: ep.summary,
-    image: ep.image,
+    image: art,
     url: episodeUrl(ep),
     type: 'article',
     // A podcast episode, not an article: it has audio, duration and a
@@ -5699,7 +5741,7 @@ ${showBannerBox(show, 1)}
         name: ldText(ep.headline),
         description: ldText(stripBoilerplate(ep.summary), 300),
         datePublished: ldDate(ep.date),
-        image: absAsset(ep.image),
+        image: absAsset(art),
         inLanguage: 'el',
         timeRequired: ldDuration(ep.seconds),
         associatedMedia: {
