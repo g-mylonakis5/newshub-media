@@ -1,5 +1,21 @@
 [
   {
+    "id": "stayros-arachovitis-kato-toy-kostoys-paragogis-oi-times-paragogoy-sto-elaiolado-kai-echoyn-terasties-eythynes-i-kyvernisi-alla-kai-i-e-e",
+    "title": "Σταύρος Αραχωβίτης: «Κάτω του κόστους παραγωγής οι τιμές παραγωγού στο ελαιόλαδο και έχουν τεράστιες ευθύνες η κυβέρνηση αλλά και η Ε.Ε».",
+    "url": "https://www.newshub.gr/el/kriti/stayros-arachovitis-kato-toy-kostoys-paragogis-oi-times-paragogoy-sto-elaiolado-kai-echoyn-terasties-eythynes-i-kyvernisi-alla-kai-i-e-e",
+    "date": "2026-11-18T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/elaiotribeiooo.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/elaiotribeiooo.jpg",
+    "summary": "Στις εισαγωγές λαδιών από τρίτες χώρες προς την Ευρωπαϊκή Ένωση &ndash; κυρίως το αδασμολόγητο λάδι της Τυνησίας &ndash; αλλά και στην παντελή έλλειψη ελαϊκή...",
+    "author": {
+      "name": "Χριστόφορος Παπαδάκης",
+      "url": "https://www.newshub.gr/el/christoforos-papadakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "chalandri-andras-epitethike-stin-aderfi-toy-kai-tin-tyflose-me-ta-cheria-moy-tis-evgala-ta-matia",
     "title": "Χαλάνδρι: Άνδρας επιτέθηκε στην αδερφή του και την τύφλωσε – «Με τα χέρια μου της έβγαλα τα μάτια»",
     "url": "https://www.newshub.gr/el/ellada/chalandri-andras-epitethike-stin-aderfi-toy-kai-tin-tyflose-me-ta-cheria-moy-tis-evgala-ta-matia",
@@ -9,7 +25,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/kakopoihsh.jpg",
     "summary": "Μία σοκαριστική επίθεση που προκαλεί αποτροπιασμό σημειώθηκε τον Ιανουάριο του 2026 στο Χαλάνδρι, έπειτα από άγριο τσακωμό μεταξύ δύο αδερφών, που είχε ως απ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "norvigia-kyvernoepithesi-sta-systimata-toy-megalyteroy-promitheyti-fysikoy-aerioy-tis-eyropis",
@@ -7228,18 +7244,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/super-market1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/super-market1.jpg",
     "summary": "Market Pass 1.000 ευρώ πριν από τα Χριστούγεννα για 190.000 δικαιούχους του Ελάχιστου Εγγυημένου Εισοδήματος ανακοίνωσε η Δόμνα Μιχαηλίδου.\r\n\r\nΠαράλληλα, τόν...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kontra-androylaki-pierrakaki-epimenei-stin-epanafora-13oy-misthoy-sto-dimosio-to-pasok-mono-7-apo-tis-exaggelies-kostizoyn-6-49-dis-eyro",
-    "title": "Κόντρα Ανδρουλάκη-Πιερρακάκη: Επιμένει στην επαναφορά 13ου μισθού στο Δημόσιο το ΠΑΣΟΚ -«Μόνο 7 από τις εξαγγελίες κοστίζουν 6,49 δισ. ευρώ»",
-    "url": "https://www.newshub.gr/el/ellada/kontra-androylaki-pierrakaki-epimenei-stin-epanafora-13oy-misthoy-sto-dimosio-to-pasok-mono-7-apo-tis-exaggelies-kostizoyn-6-49-dis-eyro",
-    "date": "2026-11-12T19:09:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/12-11/pierrakakhs-androylakhs.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/12-11/pierrakakhs-androylakhs.jpg",
-    "summary": "Με αιχμή τη 13η σύνταξη, την επαναφορά του 13ου μισθού στο Δημόσιο και τη μείωση του ΦΠΑ σε βασικά είδη, ο πρόεδρος του ΠΑΣΟΚ και ο υπουργός Οικονομικών διασ...",
     "author": null,
     "featured": false
   },
