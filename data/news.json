@@ -1,5 +1,17 @@
 [
   {
+    "id": "se-dimosia-diavoyleysi-i-anadiamorfosi-tis-plateias-18-agglon-katargeitai-o-kyklikos-komvos",
+    "title": "Σε δημόσια διαβούλευση η αναδιαμόρφωση της Πλατείας 18 Άγγλων- Καταργείται ο κυκλικός κόμβος",
+    "url": "https://www.newshub.gr/el/kriti/se-dimosia-diavoyleysi-i-anadiamorfosi-tis-plateias-18-agglon-katargeitai-o-kyklikos-komvos",
+    "date": "2026-11-18T16:01:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/plateia.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/plateia.jpg",
+    "summary": "Ξεκίνησε η δημόσια διαβούλευση για τη συγκοινωνιακή μελέτη αναδιαμόρφωσης της Πλατείας 18 Άγγλων, καθώς και για άλλα κυκλοφοριακά ζητήματα που περιλαμβάνοντα...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "black-friday-tesseris-symvoyles-apo-ton-synigoro-toy-katanaloti-gia-asfaleis-agores",
     "title": "Black Friday: Τέσσερις συμβουλές από τον Συνήγορο του Καταναλωτή για ασφαλείς αγορές",
     "url": "https://www.newshub.gr/el/oikonomia/black-friday-tesseris-symvoyles-apo-ton-synigoro-toy-katanaloti-gia-asfaleis-agores",
@@ -297,7 +309,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/technetos-nephros.jpg",
     "summary": "Στο επίκεντρο της ιατρικής Κοινότητας έχει βρεθεί το ζήτημα της Μονάδας Τεχνητού Νεφρού του Βενιζελείου Νοσοκομείου. Ένα Τμήμα, το οποίο αντιμετωπίζει σειρά ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "o-ntorsei-anamesa-stoys-eklektoys-toy-spanoyli-gia-tis-maches-me-georgia-kai-ispania",
@@ -7240,18 +7252,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/kefalogiannhs.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/kefalogiannhs.jpg",
     "summary": "Ο Μανώλης Κ. Κεφαλογιάννης ως πρόεδρος της Μικτής Κοινοβουλευτικής Επιτροπής Ευρωπαϊκής Ένωσης &ndash; Τουρκίας με επιστολή που είχε απευθύνει στον πρόεδρο τ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "odysseas-dimas-oi-oysies-den-einai-anavolika-leei-o-dikigoros-toy",
-    "title": "Οδυσσέας Δήμας: «Οι ουσίες δεν είναι αναβολικά» λέει ο δικηγόρος του",
-    "url": "https://www.newshub.gr/el/ellada/odysseas-dimas-oi-oysies-den-einai-anavolika-leei-o-dikigoros-toy",
-    "date": "2026-11-13T15:14:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/b66a62b9-odysseasdimas-1200x700.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/b66a62b9-odysseasdimas-1200x700.jpg",
-    "summary": "Αντιμέτωπος με κατηγορίες για παράνομη προμήθεια, αποθήκευση και εμπορία αναβολικών ουσιών βρίσκεται ο πρώην προπονητής της άρσης βαρών Οδυσσέας Δήμας, αδελφ...",
     "author": null,
     "featured": false
   },
