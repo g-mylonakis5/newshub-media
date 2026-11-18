@@ -5848,10 +5848,113 @@ function wire(){
   wireThemata();
   wirePeople();
   wirePairs();
+  wireDrag();
 
   // Safety catch: leaving the page with unsaved work in it.
   window.addEventListener('beforeunload', function (e) {
     if (state.dirty) { e.preventDefault(); e.returnValue = ''; }
+  });
+}
+
+// ---------------------------------------------------------------------
+// Moving the dialogs
+// ---------------------------------------------------------------------
+
+// Below this the dialogs already fill the screen — see the media query
+// in admin.css. There is nowhere to move them to.
+var DRAG_MIN_W = 761;
+
+// The dialog stays WHOLE on screen. Keeping only a part of it visible
+// was not enough: the ✕ sits at the right end of the header, so dragging
+// right pushed the close button off the screen and the only way out of
+// the dialog with it. The box is never wider or taller than the viewport
+// — width min(900px, 100%), max-height 80vh — so it always fits.
+
+// Every dialog has the same skeleton — .picker-box with a .picker-head —
+// so one listener covers the image picker, the episode/video finder and
+// the article preview, and anything added later.
+//
+// Pointer events and not mouse: the same code then works with a finger
+// and with a pen, on the touchscreen laptops in the newsroom.
+function wireDrag(){
+  var box = null;      // what is being moved
+  var from = null;     // where the pointer started
+  var at = null;       // where the box was when it started
+  var base = null;     // where it sits with no transform at all
+
+  function placeOf(el){
+    return {
+      x: Number(el.dataset.dx || 0),
+      y: Number(el.dataset.dy || 0),
+    };
+  }
+
+  function place(el, x, y){
+    el.dataset.dx = x;
+    el.dataset.dy = y;
+    el.style.transform = x || y ? 'translate(' + x + 'px, ' + y + 'px)' : '';
+  }
+
+  document.addEventListener('pointerdown', function (e) {
+    if (window.innerWidth < DRAG_MIN_W) return;
+
+    var head = e.target.closest('.picker-head');
+    if (!head) return;
+    // The ✕ and anything else clickable in the header keeps its job.
+    if (e.target.closest('button, a, input, select')) return;
+
+    box = head.closest('.picker-box');
+    if (!box) return;
+
+    from = { x: e.clientX, y: e.clientY };
+    at = placeOf(box);
+
+    // Measured ONCE, here: the rectangle already carries the offset the
+    // box is sitting at, so taking it away leaves the untransformed
+    // position. Measuring it again on every move would read a rectangle
+    // that has already shifted, and the limits would creep inwards as
+    // you dragged.
+    var r0 = box.getBoundingClientRect();
+    base = { left: r0.left - at.x, top: r0.top - at.y, w: r0.width, h: r0.height };
+
+    head.setPointerCapture(e.pointerId);
+    box.classList.add('is-moving');
+    // Or the pointer selects the heading's text while dragging.
+    e.preventDefault();
+  });
+
+  document.addEventListener('pointermove', function (e) {
+    if (!box) return;
+
+    var x = at.x + (e.clientX - from.x);
+    var y = at.y + (e.clientY - from.y);
+
+    var minX = -base.left;
+    var maxX = window.innerWidth - base.left - base.w;
+    var minY = -base.top;
+    var maxY = window.innerHeight - base.top - base.h;
+
+    place(box, Math.max(minX, Math.min(maxX, x)), Math.max(minY, Math.min(maxY, y)));
+  });
+
+  function stop(){
+    if (!box) return;
+    box.classList.remove('is-moving');
+    box = null;
+  }
+
+  document.addEventListener('pointerup', stop);
+  document.addEventListener('pointercancel', stop);
+
+  // Back to the middle every time a dialog opens. Without this it would
+  // reopen wherever it was left — possibly off to one side, looking like
+  // it opened in the wrong place.
+  $$('.picker').forEach(function (p) {
+    new MutationObserver(function () {
+      if (p.hidden) return;
+      var b = p.querySelector('.picker-box');
+      if (b) place(b, 0, 0);
+    }).observe(p, { attributes: true, attributeFilter: ['hidden'] });
   });
 }
 

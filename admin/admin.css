@@ -930,6 +930,24 @@ video.adpic-thumb{ background: var(--bg); }
   gap: 1rem;
 }
 
+/* The header is the handle the dialog is dragged by — see wireDrag().
+   touch-action: none so a finger moves the window instead of scrolling
+   the page under it. */
+@media (min-width: 761px){
+  .picker-head{
+    cursor: move;
+    touch-action: none;
+    user-select: none;
+  }
+
+  /* The ✕ keeps its own cursor: it is a button, not a handle. */
+  .picker-head button{ cursor: pointer; }
+
+  /* While it is being dragged. No transition on the transform — the box
+     has to follow the pointer exactly, not chase it. */
+  .picker-box.is-moving{ cursor: move; }
+}
+
 .picker-head h2{
   margin: 0;
   font-family: var(--serif);
