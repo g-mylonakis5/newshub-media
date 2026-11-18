@@ -1,5 +1,17 @@
 [
   {
+    "id": "o-ntorsei-anamesa-stoys-eklektoys-toy-spanoyli-gia-tis-maches-me-georgia-kai-ispania",
+    "title": "Ο Ντόρσεϊ ανάμεσα στους «εκλεκτούς» του Σπανούλη για τις μάχες με Γεωργία και Ισπανία",
+    "url": "https://www.newshub.gr/el/athlitika/o-ntorsei-anamesa-stoys-eklektoys-toy-spanoyli-gia-tis-maches-me-georgia-kai-ispania",
+    "date": "2026-11-18T13:00:00.000Z",
+    "category": "Αθλητικά",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/dorsey-1166x800.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/dorsey-1166x800.jpg",
+    "summary": "Γνωστά έγιναν, μέσω της FIBA, τα ονόματα των παικτών που βρίσκονται στις προεπιλογές του Βασίλη Σπανούλη για το επερχόμενο «παράθυρο» του Νο...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "gnoseis-poy-sozoyn-zoes-gia-deyteri-chronia-oi-polites-toy-agioy-nikolaoy-ekpaideyontai-stis-protes-voitheies",
     "title": "Γνώσεις που σώζουν ζωές: Για δεύτερη χρονιά οι πολίτες του Αγίου Νικολάου εκπαιδεύονται στις Πρώτες Βοήθειες",
     "url": "https://www.newshub.gr/el/kriti/gnoseis-poy-sozoyn-zoes-gia-deyteri-chronia-oi-polites-toy-agioy-nikolaoy-ekpaideyontai-stis-protes-voitheies",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/eikona_viber_2026-11-18_12-22-25-300.jpg",
     "summary": "Με μεγάλη συμμετοχή και επιτυχία πραγματοποιήθηκε την Κυριακή 15 Νοεμβρίου 2026 η πρώτη εκπαιδευτική ενημέρωση πολιτών της φετινής περιόδου στη Βασική Υποστή...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "euroleague-i-amyna-prodose-xana-ton-panathinaiko-itta-84-79-apo-ti-virtoys-mpolonia",
@@ -22,6 +34,18 @@
     "summary": "Τα επιθετικά ριμπάουντ (10 έναντι 17) αποτέλεσαν «Αχίλλειο πτέρνα» για τον Παναθηναϊκό στην Μπολόνια, με τη Βίρτους να κάμπτει και την αντίσταση ...",
     "author": null,
     "featured": false
+  },
+  {
+    "id": "diloseis-christodoylidi-mitsotaki-prochora-omala-i-ilektriki-diasyndesi-stochos-i-epanenarxi-ton-diapragmateyseon-gia-to-kypriako",
+    "title": "Δηλώσεις Χριστοδουλίδη-Μητσοτάκη: «Προχωρά ομαλά η ηλεκτρική διασύνδεση» – Στόχος η επανέναρξη των διαπραγματεύσεων για το Κυπριακό",
+    "url": "https://www.newshub.gr/el/ellada/diloseis-christodoylidi-mitsotaki-prochora-omala-i-ilektriki-diasyndesi-stochos-i-epanenarxi-ton-diapragmateyseon-gia-to-kypriako",
+    "date": "2026-11-18T12:44:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/reerbrph.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/reerbrph.jpg",
+    "summary": "Την προσήλωσή τους στην υλοποίηση της ηλεκτρικής διασύνδεσης Ελλάδας &ndash; Κύπρου και στην προσπάθεια επανέναρξης των συνομιλιών για το Κυπριακό επαναβεβαί...",
+    "author": null,
+    "featured": true
   },
   {
     "id": "entyposiase-to-prototypo-seminario-beatbox-kai-aerofonon-me-ton-niko-diminaki-ston-agio-nikolao",
@@ -7228,30 +7252,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/epithese-skylou.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/epithese-skylou.jpg",
     "summary": "Τρόμος και αναστάτωση επικράτησε νωρίς το μεσημέρι της Παρασκευής στις Μοίρες, όταν σκύλος που κυκλοφορούσε ελεύθερος, πιθανόν αδέσποτος, επιτέθηκε και δάγκω...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "poiniki-dioxi-gia-ena-kakoyrgima-kai-ena-plimmelima-ston-proponiti-arsis-varon-odyssea-dima-eiche-chorigisei-anavolika-ston-10chrono-gio-toy",
-    "title": "Ποινική δίωξη για ένα κακούργημα και ένα πλημμέλημα στον προπονητή άρσης βαρών, Οδυσσέα Δήμα – Είχε χορηγήσει αναβολικά στον 10χρονο γιο του",
-    "url": "https://www.newshub.gr/el/ellada/poiniki-dioxi-gia-ena-kakoyrgima-kai-ena-plimmelima-ston-proponiti-arsis-varon-odyssea-dima-eiche-chorigisei-anavolika-ston-10chrono-gio-toy",
-    "date": "2026-11-13T12:16:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/odisseas-dimas.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/odisseas-dimas.jpg",
-    "summary": "Ακόμα και στον ανήλικο γιο του, ηλικίας 10 ετών φέρεται σύμφωνα με πληροφορίες του ΕΡΤnews να είχε χορηγήσει αναβολικά o 58χρονος προπονητής της άρσης βαρών,...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "orkistikan-oi-treis-neoi-yfypoyrgoi-spanakis-liakos-kai-vartzopoylos-meta-tis-allages-stin-kyvernisi",
-    "title": "Ορκίστηκαν οι τρεις νέοι υφυπουργοί Σπανάκης, Λιάκος και Βαρτζόπουλος μετά τις αλλαγές στην κυβέρνηση",
-    "url": "https://www.newshub.gr/el/ellada/orkistikan-oi-treis-neoi-yfypoyrgoi-spanakis-liakos-kai-vartzopoylos-meta-tis-allages-stin-kyvernisi",
-    "date": "2026-11-13T12:08:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/7163398.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/7163398.jpg",
-    "summary": "Ολοκληρώθηκε το μεσημέρι της Παρασκευής (13/11) στο Προεδρικό Μέγαρο η ορκωμοσία των νέων μελών της κυβέρνησης, μετά τις αλλαγές στο κυβερνητικό σχήμα που ...",
     "author": null,
     "featured": false
   },
