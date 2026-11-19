@@ -157,7 +157,10 @@ async function makeCard(photo, file, opts){
 
   const layers = [{ input: band, top: 0, left: 0 }];
 
-  const mark = await logo(o.logo || LOGO_NEWS, o.logoHeight || 54);
+  // o.logo === null σημαίνει «καθόλου σήμα»: τα εξώφυλλα των podcast
+  // και τα καρέ των βίντεο έχουν ήδη τυπωμένο το Newshub Multimedia
+  // πάνω τους, και δεύτερο σήμα από πάνω είναι σκέτη ακαταστασία.
+  const mark = o.logo === null ? null : await logo(o.logo || LOGO_NEWS, o.logoHeight || 54);
   if (mark) {
     const meta = await sharp(mark).metadata();
     layers.push({ input: mark, top: 44, left: W - 56 - (meta.width || 150) });
@@ -208,7 +211,7 @@ function wanted(){
       title: ep.title,
       // Το εξώφυλλο του Buzzsprout είναι τετράγωνο και έχει τον τίτλο
       // τυπωμένο πάνω του: ολόκληρο, ποτέ κομμένο.
-      opts: { label: 'PODCAST', logo: LOGO_MEDIA, logoHeight: 46, whole: true },
+      opts: { label: 'PODCAST', logo: null, whole: true },
     });
   }
 
@@ -218,7 +221,7 @@ function wanted(){
       name: `vid-${v.id}.jpg`,
       photo: v.image,
       title: v.title,
-      opts: { label: 'ΒΙΝΤΕΟ', logo: LOGO_MEDIA, logoHeight: 46 },
+      opts: { label: 'ΒΙΝΤΕΟ', logo: null },
     });
   }
 
