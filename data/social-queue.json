@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261119120837-news-synantisi-tramp-poytin-si-kanenas-allos-den-mporei-na-kanei-osa-emeis-mazi-oi-geopolitikes-isorropies-oi-prosdokies-kai-oi-diafonies",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/geopolitiki/synantisi-tramp-poytin-si-kanenas-allos-den-mporei-na-kanei-osa-emeis-mazi-oi-geopolitikes-isorropies-oi-prosdokies-kai-oi-diafonies",
+      "title": "Συνάντηση Τραμπ, Πούτιν, Σι – «Κανένας άλλος δεν μπορεί να κάνει όσα εμείς μαζί» – Οι γεωπολιτικές ισορροπίες, οι προσδοκίες και οι διαφωνίες",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/china.jpg",
+      "text": "Συνάντηση Τραμπ, Πούτιν, Σι – «Κανένας άλλος δεν μπορεί να κάνει όσα εμείς μαζί» – Οι γεωπολιτικές ισορροπίες, οι προσδοκίες και οι διαφωνίες",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-19T12:08:37.136Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/geopolitiki/synantisi-tramp-poytin-si-kanenas-allos-den-mporei-na-kanei-osa-emeis-mazi-oi-geopolitikes-isorropies-oi-prosdokies-kai-oi-diafonies"
+    },
+    {
       "id": "20261119120545-news-vretania-anazopyronetai-i-machi-gia-to-brexit-nea-ekstrateia-kata-tis-epistrofis-stin-ee-to-71-thelei-stenoteroys-desmoys",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/vretania-anazopyronetai-i-machi-gia-to-brexit-nea-ekstrateia-kata-tis-epistrofis-stin-ee-to-71-thelei-stenoteroys-desmoys",
