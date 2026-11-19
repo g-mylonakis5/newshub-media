@@ -1,5 +1,33 @@
 [
   {
+    "id": "diageneakes-geitonies-otan-i-stegastiki-politiki-synanta-tin-koinoniki-anagki",
+    "title": "Διαγενεακές γειτονιές: Όταν η στεγαστική πολιτική συναντά την κοινωνική ανάγκη",
+    "url": "https://www.newshub.gr/el/apopseis/diageneakes-geitonies-otan-i-stegastiki-politiki-synanta-tin-koinoniki-anagki",
+    "date": "2026-11-19T05:34:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/chania-palia-pole.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/chania-palia-pole.jpg",
+    "summary": "Προσιτή κατοικία, κοινόχρηστο πράσινο και κοινωνική συνύπαρξη. Τι μας διδάσκουν οι διεθνείς καλές πρακτικές;\r\n\r\nΗ στέγαση αποτελεί μία από τις σημαντικότερες...",
+    "author": {
+      "name": "Μαρία Πετραντωνάκη",
+      "url": "https://www.newshub.gr/el/maria-petrantonaki",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/maria.jpg"
+    },
+    "featured": false
+  },
+  {
+    "id": "konstantinoypoli-pos-zoyn-simera-oi-ellines-tis-polis",
+    "title": "Κωνσταντινούπολη: Πως ζουν σήμερα οι Έλληνες της Πόλης;",
+    "url": "https://www.newshub.gr/el/ellada/konstantinoypoli-pos-zoyn-simera-oi-ellines-tis-polis",
+    "date": "2026-11-19T05:27:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/konstantinoupole.01_30_06_12.still002-2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/konstantinoupole.01_30_06_12.still002-2.jpg",
+    "summary": "Μια διαφορετική πλευρά της Κωνσταντινούπολης, γεμάτη ιστορία, μνήμες και ζωντανές παραδόσεις, ανακαλύπτει το KatsounaDES TOUR στο δεύτερο μέρος του ταξιδιού ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "chania-enarxi-ypovolis-aitiseon-gia-ti-chorigisi-vouchers-vrefikoi-vrefonipiakoi-paidikoi-stathmoi-k-d-a-p-k-d-a-p-a-m-e-a",
     "title": "Χανιά: Έναρξη υποβολής αιτήσεων για τη χορήγηση Vouchers (Βρεφικοί, Βρεφονηπιακοί, Παιδικοί Σταθμοί, Κ.Δ.Α.Π. & Κ.Δ.Α.Π. Α.Μ.Ε.Α.)",
     "url": "https://www.newshub.gr/el/kriti/chania-enarxi-ypovolis-aitiseon-gia-ti-chorigisi-vouchers-vrefikoi-vrefonipiakoi-paidikoi-stathmoi-k-d-a-p-k-d-a-p-a-m-e-a",
@@ -7228,30 +7256,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/5442291-1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/5442291-1.jpg",
     "summary": "Εφιαλτικές στιγμές έζησε η εθνική μας ομάδα στο Αμστερνταμ.\r\n\r\nΤις εντυπωσιακές εμφανίσεις στις πρώτες 4 αγωνιστικές της League Α του Nations League, διαδέχθ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "i-real-madritis-tha-kanei-pagkosmio-rekor-esodon-ti-sezon-2026-27",
-    "title": "Η Ρεάλ Μαδρίτης θα κάνει παγκόσμιο ρεκόρ εσόδων τη σεζόν 2026-27",
-    "url": "https://www.newshub.gr/el/athlitika/i-real-madritis-tha-kanei-pagkosmio-rekor-esodon-ti-sezon-2026-27",
-    "date": "2026-11-13T21:40:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/7153262.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/7153262.jpg",
-    "summary": "Η Ρεάλ Μαδρίτης δείχνει και με νούμερα πως πρόκειται για ένα από τα μεγαλύτερα παγκόσμια brands. \r\n\r\nΗ «Βασίλισσα» αναμένεται να κάνει παγκό...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "oyrsoyla-fon-nter-laien-i-eyropi-den-prepei-na-kanei-lathos-me-tin-techniti-noimosyni",
-    "title": "Ούρσουλα φον ντερ Λάιεν: Η Ευρώπη δεν πρέπει να κάνει λάθος με την Τεχνητή Νοημοσύνη",
-    "url": "https://www.newshub.gr/el/kosmos/oyrsoyla-fon-nter-laien-i-eyropi-den-prepei-na-kanei-lathos-me-tin-techniti-noimosyni",
-    "date": "2026-11-13T21:30:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/13-11/f643e2b5f7fb4149a996c347bbde361a.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/13-11/f643e2b5f7fb4149a996c347bbde361a.jpg",
-    "summary": "Η Ευρώπη \"δεν πρέπει να κάνει λάθος\" όσον αφορά την τεχνητή νοημοσύνη, προειδοποίησε σήμερα η πρόεδρος της Ευρωπαϊκής Επιτροπής Ούρσουλα φον ντερ Λ...",
     "author": null,
     "featured": false
   },
