@@ -1365,8 +1365,14 @@ function sharePage(a){
 ${size ? `  <meta property="og:image:width" content="${size[1]}">
   <meta property="og:image:height" content="${size[2]}">
 ` : ''}  <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="${esc(target)}">
-  <meta http-equiv="refresh" content="0; url=${esc(target)}">
+  <meta name="twitter:title" content="${esc(title)}">
+  <meta name="twitter:description" content="${esc(summary)}">
+  <meta name="twitter:image" content="${esc(mirrored)}">
+  <!-- ΟΧΙ canonical και ΟΧΙ meta refresh προς το άρθρο. Ο scraper του
+       Facebook ακολουθεί και τα δύο: πήγαινε στο newshub.gr, έτρωγε το
+       403 του Cloudflare τους και η κάρτα έβγαινε «Just a moment...».
+       Η προώθηση γίνεται με JavaScript, που ο scraper δεν τρέχει —
+       το ρομπότ βλέπει την κάρτα, ο άνθρωπος το άρθρο. -->
   <style>
     body{background:#121010;color:#F0EDE8;font-family:system-ui,sans-serif;
          display:grid;place-items:center;min-height:100vh;margin:0;padding:2rem;
