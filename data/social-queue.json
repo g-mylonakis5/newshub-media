@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261119121126-news-chania-2-15-ekat-eyro-gia-nea-diktya-ydreysis-se-oikismoys-toy-dimoy-platania",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/chania-2-15-ekat-eyro-gia-nea-diktya-ydreysis-se-oikismoys-toy-dimoy-platania",
+      "title": "Χανιά: 2,15 εκατ. ευρώ για νέα δίκτυα ύδρευσης σε οικισμούς του Δήμου Πλατανιά",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/ydrometra.jpg",
+      "text": "Χανιά: 2,15 εκατ. ευρώ για νέα δίκτυα ύδρευσης σε οικισμούς του Δήμου Πλατανιά",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-19T12:11:26.741Z",
+      "by": "g.mylonakis5@outlook.com",
+      "link": "https://www.newshub.gr/el/kriti/chania-2-15-ekat-eyro-gia-nea-diktya-ydreysis-se-oikismoys-toy-dimoy-platania"
+    },
+    {
       "id": "20261119120851-news-fasoylas-theoro-oti-mas-eklepsan-stis-dyo-ekloges-poy-eginan-emeis-eimaste-edo-kai-oi-nikites-sti-fylaki",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/athlitika/fasoylas-theoro-oti-mas-eklepsan-stis-dyo-ekloges-poy-eginan-emeis-eimaste-edo-kai-oi-nikites-sti-fylaki",
