@@ -1,5 +1,29 @@
 [
   {
+    "id": "oi-agrotes-tis-ierapetras-zitoyn-tin-enischysi-toys-gia-tin-agora-lipasmaton",
+    "title": "Οι αγρότες της Ιεράπετρας ζητούν την ενίσχυση τους για την αγορά λιπασμάτων",
+    "url": "https://www.newshub.gr/el/kriti/oi-agrotes-tis-ierapetras-zitoyn-tin-enischysi-toys-gia-tin-agora-lipasmaton",
+    "date": "2026-11-19T20:30:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/agrotes-lephtaa.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/agrotes-lephtaa.jpg",
+    "summary": "Ο Ενιαίος Αγροτικός Σύλλογος Ιεράπετρας επανέρχεται στο ζήτημα της ενίσχυσης για την αγορά λιπασμάτων, όπως αυτή εφαρμόστηκε κατά την πρώτη φάση το καλοκαίρι...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "kifisia-paristanan-toys-logistes-kai-arpaxan-chrimata-kai-40-chryses-lires-apo-spiti",
+    "title": "Κηφισιά: Παρίσταναν τους λογιστές και άρπαξαν χρήματα και 40 χρυσές λίρες από σπίτι",
+    "url": "https://www.newshub.gr/el/ellada/kifisia-paristanan-toys-logistes-kai-arpaxan-chrimata-kai-40-chryses-lires-apo-spiti",
+    "date": "2026-11-19T20:22:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/cheiropedesoer.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/cheiropedesoer.jpg",
+    "summary": "Με το πρόσχημα ότι ήταν λογιστές, κατάφεραν να εξαπατήσουν έναν άνδρα στην Κηφισιά και να αποσπάσουν από το σπίτι του μεγάλο χρηματικό ποσό και 40 χρυσές λίρ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "gaydos-synelifthi-16chronos-os-diakinitis-59-metanaston-sto-nosokomeio-tria-atoma",
     "title": "Γαύδος: Συνελήφθη 16χρονος ως διακινητής 59 μεταναστών-Στο νοσοκομείο τρία άτομα",
     "url": "https://www.newshub.gr/el/kriti/gaydos-synelifthi-16chronos-os-diakinitis-59-metanaston-sto-nosokomeio-tria-atoma",
@@ -27,6 +51,18 @@
     "id": "agrotikes-kinitopoiiseis-stis-6-dekemvrioy-sti-nikaia-tis-larisas-i-panelladiki-syskepsi",
     "title": "Αγροτικές κινητοποιήσεις: Στις 6 Δεκεμβρίου στη Νίκαια της Λάρισας η πανελλαδική σύσκεψη",
     "url": "https://www.newshub.gr/el/ellada/agrotikes-kinitopoiiseis-stis-6-dekemvrioy-sti-nikaia-tis-larisas-i-panelladiki-syskepsi",
+    "date": "2026-11-19T19:58:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/7010540.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/7010540.jpg",
+    "summary": "Με σταδιακά βήματα προς την κλιμάκωση των κινητοποιήσεων κινούνται οι αγρότες, με στόχο να έχουν βγει στους δρόμους πριν από τις γιορτές των Χριστουγέννων, ε...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "vgainoyn-xana-stoys-dromoys-oi-agrotes-stis-6-dekemvrioy-sti-nikaia-tis-larisas-i-panelladiki-syskepsi",
+    "title": "Βγαίνουν ξανά στους δρόμους οι αγρότες- Στις 6 Δεκεμβρίου στη Νίκαια της Λάρισας η πανελλαδική σύσκεψη",
+    "url": "https://www.newshub.gr/el/ellada/vgainoyn-xana-stoys-dromoys-oi-agrotes-stis-6-dekemvrioy-sti-nikaia-tis-larisas-i-panelladiki-syskepsi",
     "date": "2026-11-19T19:58:00.000Z",
     "category": "Ελλάδα",
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/7010540.jpg",
@@ -7205,42 +7241,6 @@
       "url": "https://www.newshub.gr/el/charis-tsiokas",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/chares-tsiokas.jpg"
     },
-    "featured": false
-  },
-  {
-    "id": "yp-ergasias-o-chartis-ton-pliromon-apo-e-efka-dypa-eos-tis-20-noemvrioy",
-    "title": "Υπ. Εργασίας: Ο «χάρτης» των πληρωμών από E-ΕΦΚΑ, ΔΥΠΑ έως τις 20 Νοεμβρίου",
-    "url": "https://www.newshub.gr/el/oikonomia/yp-ergasias-o-chartis-ton-pliromon-apo-e-efka-dypa-eos-tis-20-noemvrioy",
-    "date": "2026-11-15T05:51:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/plerome.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/plerome.jpg",
-    "summary": "Κατά την περίοδο 16 έως 20 Νοεμβρίου, θα καταβληθούν συνολικά 71.051.797,98 ευρώ σε 78.003 δικαιούχους, στο πλαίσιο των προγραμματισμένων καταβολών του e-ΕΦΚ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "syntagi-gia-psito-cheesecake-neas-yorkis",
-    "title": "Συνταγή για ψητό Cheesecake Νέας Υόρκης",
-    "url": "https://www.newshub.gr/el/to-piato-tis-imeras/syntagi-gia-psito-cheesecake-neas-yorkis",
-    "date": "2026-11-15T05:43:00.000Z",
-    "category": "Το πιάτο της ημέρας",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/tjtjjyhjh.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/tjtjjyhjh.jpg",
-    "summary": "Βάσκικο, ιαπωνικό, γερμανικό, ακόμα και πολωνικό, κρύο, ζεστό, σοκολατένιο, σε ποτήρι και σφηνάκι είναι μόνο μερικές από τις εκδοχές του τσιζκέικ που έχουμε ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "telos-sta-asfalistika-kena-gia-toys-neoys-ano-ton-18-eton",
-    "title": "Τέλος στα ασφαλιστικά κενά για τους νέους άνω των 18 ετών",
-    "url": "https://www.newshub.gr/el/oikonomia/telos-sta-asfalistika-kena-gia-toys-neoys-ano-ton-18-eton",
-    "date": "2026-11-15T05:34:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/shutterstock_office_work_2-768x480.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/shutterstock_office_work_2-768x480.jpg",
-    "summary": "Τρεις σημαντικές παρεμβάσεις που αφορούν άμεσα νέους, εργαζόμενους γονείς και μητέρες περιλαμβάνει το νέο νομοσχέδιο του υπουργείου Εργασίας και Κοινωνικής Α...",
-    "author": null,
     "featured": false
   },
   {
