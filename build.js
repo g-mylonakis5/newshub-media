@@ -27,6 +27,8 @@ const ADS_FILE = path.join(__dirname, 'data/ads.json');
 const SHOWS_FILE = path.join(__dirname, 'data/shows.json');
 const SHOW_DIR = path.join(PUBLIC_DIR, 'show');
 const ARTICLE_DIR = path.join(PUBLIC_DIR, 'arthro');
+// Share pages for Facebook only — see sharePage().
+const SHARE_DIR = path.join(PUBLIC_DIR, 'mf');
 // Bodies of newshub.gr news. NOT data/articles.json — that one is written
 // by the admin and holds our own articles.
 const NEWS_BODY_DIR = path.join(__dirname, 'data/news-bodies');
@@ -1295,6 +1297,81 @@ function loadNews(){
     console.warn('ΠΡΟΣΟΧΗ: το data/news.json δεν διαβάζεται —', err.message);
     return [];
   }
+}
+
+// ---------------------------------------------------------------------
+// Share pages for Facebook — public/mf/<id>.html
+// ---------------------------------------------------------------------
+//
+// Cloudflare at newshub.gr answers 403 to facebookexternalhit, and so
+// does static.newshub.gr. Everything else — Googlebot, Twitterbot, a
+// real browser — gets 200. So Facebook cannot read their OG tags and
+// shows a bare link with no photo.
+//
+// Until someone fixes that rule on THEIR side, a news link posted to
+// Facebook points here instead: a page on our own domain that carries
+// the same title, description and photo, and sends the reader on to the
+// article. Facebook reads us; the reader still lands on newshub.gr.
+//
+// The photo goes through /mf/img — see functions/mf/img.js — for the
+// same reason: Facebook cannot fetch it from static.newshub.gr either.
+//
+// noindex: this is the same article twice, and the one that belongs in
+// Google is theirs, not ours.
+// Buzzsprout serves every artwork square — 1400×1400. In a 16:9 frame
+// that loses 44% of it, and what is lost is the show's title: it is
+// printed on the picture. Where such a picture stands in for a missing
+// cover, it must be shown WHOLE, which is what .show-cover already does.
+function isSquareArt(url){
+  return /storage\.buzzsprout\.com/.test(String(url || ''));
+}
+
+function shareUrl(a){
+  return `mf/${a.id}.html`;
+}
+
+function sharePage(a){
+  const title = decode(a.title || '');
+  const summary = decode(a.summary || '');
+  const target = a.url || '';
+  const photo = a.image_large || a.image_thumb || '';
+  const mirrored = photo
+    ? `${SITE_URL}/mf/img?u=${encodeURIComponent(photo)}`
+    : `${SITE_URL}/share.jpg`;
+
+  // The sizes are in the path they serve them from: .../765x435/...
+  const size = /\/(\d{2,4})x(\d{2,4})\//.exec(photo);
+
+  return `<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${esc(title)}</title>
+  <meta name="robots" content="noindex, follow">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="newshub.gr">
+  <meta property="og:title" content="${esc(title)}">
+  <meta property="og:description" content="${esc(summary)}">
+  <meta property="og:url" content="${SITE_URL}/${shareUrl(a)}">
+  <meta property="og:image" content="${esc(mirrored)}">
+${size ? `  <meta property="og:image:width" content="${size[1]}">
+  <meta property="og:image:height" content="${size[2]}">
+` : ''}  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="${esc(target)}">
+  <meta http-equiv="refresh" content="0; url=${esc(target)}">
+  <style>
+    body{background:#121010;color:#F0EDE8;font-family:system-ui,sans-serif;
+         display:grid;place-items:center;min-height:100vh;margin:0;padding:2rem;
+         text-align:center;line-height:1.6}
+    a{color:#CF2233}
+  </style>
+</head>
+<body>
+  <p>Πάμε στο άρθρο…<br><a href="${esc(target)}">${esc(title)}</a></p>
+  <script>location.replace(${JSON.stringify(target)});</script>
+</body>
+</html>`;
 }
 
 function loadOwnArticles(){
@@ -2779,7 +2856,7 @@ function showsSection(groups, depth = 0){
       return `      <article class="show-card${art ? ' show-card--art' : ''}">
         <a class="card-link" href="${up}${showUrl(g.name)}">
           ${art || (latest && latest.image
-            ? `<img class="card-image" src="${latest.image}" alt="" loading="lazy">`
+            ? `<img class="card-image${isSquareArt(latest.image) ? ' show-cover' : ''}" src="${latest.image}" alt="" loading="lazy">`
             : '<div class="card-image card-image--empty"></div>')}
           <h3 class="show-name">${esc(showName(g.name))}</h3>
           <p class="card-meta">${count === 1 ? '1 επεισόδιο' : `${count.toLocaleString('el')} επεισόδια`}</p>
@@ -3619,7 +3696,7 @@ function showsIndexPage(groups){
         <a class="show-tile-art" href="${showUrl(g.name)}">
           ${showArtImg(g.name, { cls: 'show-cover', sizes: '(max-width: 760px) 92vw, 30vw', minWidth: 360 })
             || (latest && latest.image
-              ? `<img src="${latest.image}" alt="" loading="lazy">`
+              ? `<img${isSquareArt(latest.image) ? ' class="show-cover"' : ''} src="${latest.image}" alt="" loading="lazy">`
               : '<span class="show-tile-blank"></span>')}
         </a>
 
@@ -6133,6 +6210,27 @@ ${intro(episodes[0], videos[0])}`,
     written++;
   }
   
+  // Facebook share pages, one per news item. Tiny files, written only
+  // when they change, and the ones whose article fell out of the rolling
+  // window are deleted — the queue may still hold a link to them, but a
+  // dead share page is better than a stale one.
+  fs.mkdirSync(SHARE_DIR, { recursive: true });
+  const expectedShare = new Set();
+  let shareWritten = 0;
+  for (const a of articles) {
+    if (!a.id || !a.url) continue;
+    expectedShare.add(`${a.id}.html`);
+    if (writeIfChanged(path.join(PUBLIC_DIR, shareUrl(a)), sharePage(a))) shareWritten++;
+  }
+  let shareRemoved = 0;
+  for (const file of fs.readdirSync(SHARE_DIR)) {
+    if (!file.endsWith('.html')) continue;
+    if (expectedShare.has(file)) continue;
+    fs.unlinkSync(path.join(SHARE_DIR, file));
+    shareRemoved++;
+  }
+  console.log(`Σελίδες μοιράσματος: ${expectedShare.size} συνολικά, ${shareWritten} γράφτηκαν, ${shareRemoved} σβήστηκαν`);
+
   const expected = new Set(episodes.map((ep) => path.basename(episodeUrl(ep))));
   let removed = 0;
   for(const file of fs.readdirSync(EPISODE_DIR)){

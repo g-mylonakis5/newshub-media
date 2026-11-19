@@ -46,6 +46,42 @@ const X_LINK_COST = 23;
 // Facebook from the OG tags of the page we link to. We do NOT upload a
 // photo here: a photo post makes the link un-clickable, which is the
 // opposite of what we want.
+// Cloudflare at newshub.gr answers 403 to facebookexternalhit — their
+// pages AND their photos. Everyone else gets 200. So a link straight to
+// an article gives a bare card: no photo, title "Just a moment...".
+//
+// build.js writes a share page per news item at /mf/<id>.html with the
+// same title, photo and summary, which forwards the reader on. Facebook
+// can read that one, because it is ours.
+//
+// Only for Facebook, and only for newshub.gr links: our own pages are
+// posted as they are. The moment the rule changes on their side, delete
+// this function and the call below.
+//
+// If the share page is not up yet (the build runs on its own clock), we
+// post the real link anyway — a card without a photo beats a link to a
+// 404.
+async function facebookLink(post) {
+  const link = String(post.link || '');
+  if (!/^https:\/\/(www\.)?newshub\.gr\//.test(link)) return link;
+
+  const id = link.split('?')[0].replace(/\/$/, '').split('/').pop();
+  if (!id) return link;
+
+  const mirror = `${SITE_URL}/mf/${id}.html`;
+
+  try {
+    const res = await fetch(mirror, { method: 'HEAD', headers: { 'user-agent': 'newshub-media' } });
+    if (res.ok) return mirror;
+    console.warn(`  ⚠ η σελίδα μοιράσματος δεν είναι ακόμα στον αέρα (HTTP ${res.status}) — `
+      + 'πάει το κανονικό λινκ, χωρίς φωτογραφία στην κάρτα.');
+  } catch (err) {
+    console.warn(`  ⚠ δεν ελέγχθηκε η σελίδα μοιράσματος — ${err.message}`);
+  }
+
+  return link;
+}
+
 async function postFacebook(post) {
   const pageId = process.env.FB_PAGE_ID;
   const token = process.env.FB_PAGE_TOKEN;
@@ -54,7 +90,7 @@ async function postFacebook(post) {
 
   const body = new URLSearchParams({
     message: post.text || post.title || '',
-    link: post.link,
+    link: await facebookLink(post),
     access_token: token,
   });
 
@@ -459,7 +495,7 @@ async function main() {
       if (DRY) {
         console.log(`  ${NAMES[target]} ←`);
         console.log(`    κείμενο: ${target === 'x' ? xText(post) : (post.text || post.title)}`);
-        console.log(`    λινκ:    ${post.link}`);
+        console.log(`    λινκ:    ${target === 'facebook' ? await facebookLink(post) : post.link}`);
         if (post.image) console.log(`    φωτό:    ${post.image}`);
         continue;
       }
