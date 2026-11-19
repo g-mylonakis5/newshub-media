@@ -10,10 +10,17 @@
       "targets": [
         "x"
       ],
-      "status": "pending",
+      "status": "error",
       "at": "2026-11-19T12:08:51.530Z",
       "by": "g.mylonakis5@outlook.com",
-      "link": "https://www.newshub.gr/el/athlitika/fasoylas-theoro-oti-mas-eklepsan-stis-dyo-ekloges-poy-eginan-emeis-eimaste-edo-kai-oi-nikites-sti-fylaki"
+      "link": "https://www.newshub.gr/el/athlitika/fasoylas-theoro-oti-mas-eklepsan-stis-dyo-ekloges-poy-eginan-emeis-eimaste-edo-kai-oi-nikites-sti-fylaki",
+      "results": {
+        "x": {
+          "error": "X: credits depleted",
+          "at": "2026-11-19T12:09:13.013Z"
+        }
+      },
+      "error": "X: credits depleted"
     },
     {
       "id": "20261118214256-news-vretania-anazopyronetai-i-machi-gia-to-brexit-nea-ekstrateia-kata-tis-epistrofis-stin-ee-to-71-thelei-stenoteroys-desmoys",
