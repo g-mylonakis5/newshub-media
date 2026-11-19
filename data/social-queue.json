@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261119120545-news-vretania-anazopyronetai-i-machi-gia-to-brexit-nea-ekstrateia-kata-tis-epistrofis-stin-ee-to-71-thelei-stenoteroys-desmoys",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/geopolitiki/vretania-anazopyronetai-i-machi-gia-to-brexit-nea-ekstrateia-kata-tis-epistrofis-stin-ee-to-71-thelei-stenoteroys-desmoys",
+      "title": "Βρετανία: Αναζωπυρώνεται η μάχη για το Brexit – Νέα εκστρατεία κατά της επιστροφής στην ΕΕ, το 71% θέλει στενότερους δεσμούς",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/brexit.jpg",
+      "text": "Βρετανία: Αναζωπυρώνεται η μάχη για το Brexit – Νέα εκστρατεία κατά της επιστροφής στην ΕΕ, το 71% θέλει στενότερους δεσμούς",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-19T12:05:45.645Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/geopolitiki/vretania-anazopyronetai-i-machi-gia-to-brexit-nea-ekstrateia-kata-tis-epistrofis-stin-ee-to-71-thelei-stenoteroys-desmoys"
+    },
+    {
       "id": "20261118214256-news-vretania-anazopyronetai-i-machi-gia-to-brexit-nea-ekstrateia-kata-tis-epistrofis-stin-ee-to-71-thelei-stenoteroys-desmoys",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/vretania-anazopyronetai-i-machi-gia-to-brexit-nea-ekstrateia-kata-tis-epistrofis-stin-ee-to-71-thelei-stenoteroys-desmoys",
