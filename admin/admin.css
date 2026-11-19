@@ -2070,7 +2070,12 @@ video.adpic-thumb{ background: var(--bg); }
 
 .soc-text:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
 
-.soc-targets{ display: flex; gap: 1.5rem; margin: 0.9rem 0 0; }
+.soc-targets{ display: flex; gap: 1.5rem; margin: 0.9rem 0 0; align-items: center; }
+
+/* A platform posted by hand: a button, not a tick. */
+.soc-hand{ display: flex; align-items: center; gap: 0.55rem; }
+
+.soc-hand .btn{ padding: 0.25rem 0.6rem; font-size: 0.82rem; }
 
 /* Ό,τι έχει ήδη ανεβεί. Σβηστό, όχι κόκκινο: πληροφορία, όχι σφάλμα. */
 .soc-up{

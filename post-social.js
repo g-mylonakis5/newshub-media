@@ -293,8 +293,27 @@ const SENDERS = { facebook: postFacebook, x: postX };
 
 const NAMES = { facebook: 'Facebook', x: 'X' };
 
+// Platforms we do NOT send to from here, however good the keys are.
+//
+// X stopped letting anyone post for free in February 2026 and charges
+// per request — $0.20 for a post that carries a link, and every post of
+// ours carries one. Until that is paid for, the admin opens X with the
+// post already written and a person presses the last button. The reader
+// sees the same thing either way; see ΔΙΑΧΕΙΡΙΣΤΙΚΟ-ΣΤΗΣΙΜΟ.md.
+//
+// This is the ONE place that decides it. Take 'x' out of this list and
+// the admin starts sending automatically again — it reads the answer
+// out of the queue file, so nothing else has to be changed.
+const MANUAL = ['x'];
+
 function missingKeys(target) {
   return (NEEDS[target] || []).filter((k) => !process.env[k]);
+}
+
+// true, false, or 'manual' — what the admin shows for this platform.
+function readyOf(target) {
+  if (MANUAL.includes(target)) return 'manual';
+  return missingKeys(target).length === 0;
 }
 
 // ---------------------------------------------------------------------
@@ -341,7 +360,7 @@ async function main() {
   // on the day the missing keys arrive. This way it finds out by itself
   // within a quarter of an hour — the cron is enough to refresh it.
   const ready = {};
-  Object.keys(NEEDS).forEach((t) => { ready[t] = missingKeys(t).length === 0; });
+  Object.keys(NEEDS).forEach((t) => { ready[t] = readyOf(t); });
 
   let readyChanged = false;
   if (!DRY && JSON.stringify(data.ready) !== JSON.stringify(ready)) {
@@ -361,14 +380,43 @@ async function main() {
 
   let failed = 0;
   let waiting = 0;
+  let hands = 0;
   let touched = false;
 
   for (const post of pending) {
     console.log(`\n• ${post.title || post.link}`);
 
-    const targets = (post.targets || []).filter((t) => SENDERS[t]);
+    // A platform that is posted by hand never belongs to this script,
+    // even if an older entry still names it: the editor has already
+    // been shown the button for it.
+    const byHand = (post.targets || []).filter((t) => MANUAL.includes(t));
+    const targets = (post.targets || []).filter((t) => SENDERS[t] && !MANUAL.includes(t));
+
+    if (byHand.length) {
+      console.log(`  ⤴ ${byHand.map((t) => NAMES[t]).join(', ')}: με το χέρι, το προσπερνώ.`);
+    }
 
     if (!targets.length) {
+      // Only hand-posted platforms were asked for. This script will
+      // never send it and must not pretend it did — the entry stays
+      // pending, which is the truth: it is waiting for a person.
+      //
+      // Entries made by the admin's own button are written as done the
+      // moment the window opens, so they never reach this line. What
+      // does reach it is an older entry, queued back when the platform
+      // still went out by itself.
+      if (byHand.length) {
+        const note = `Το ${byHand.map((t) => NAMES[t]).join(' και το ')} ανεβαίνει πλέον `
+          + 'με το χέρι. Άνοιξέ το από το διαχειριστικό.';
+        if (post.note !== note) {
+          post.note = note;
+          delete post.error;
+          touched = true;
+        }
+        hands++;
+        continue;
+      }
+
       post.status = 'error';
       post.error = 'Δεν ορίστηκε πλατφόρμα.';
       failed++;
@@ -453,6 +501,10 @@ async function main() {
   if (waiting) {
     console.log(`\n${waiting} περιμένουν κλειδιά. Μόλις μπουν τα secrets, `
       + 'ξανατρέχει και φεύγουν μόνα τους.');
+  }
+
+  if (hands) {
+    console.log(`\n${hands} περιμένουν άνθρωπο — ανεβαίνουν από το διαχειριστικό.`);
   }
 
   if (failed) {

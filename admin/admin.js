@@ -2692,7 +2692,7 @@ function socReady(file){
   // refuses to send half a post, and rightly: the editor would have to
   // remember which half.
   Object.keys(SOC_NAMES).forEach(function (t) {
-    soc.targets[t] = socCan(t);
+    soc.targets[t] = socCan(t) && !socByHand(t);
   });
 }
 
@@ -2705,6 +2705,28 @@ function socReady(file){
 function socCan(t){
   var r = soc.file && soc.file.ready;
   return !r || r[t] !== false;
+}
+
+// Posted by a person, from a window we open for them with the post
+// already written. X charges per post since February 2026 and every one
+// of ours carries a link, which is its dearest kind — so until that is
+// paid for, the last button is pressed by hand. post-social.js decides
+// this and writes it here; see MANUAL there.
+function socByHand(t){
+  var r = soc.file && soc.file.ready;
+  return !!r && r[t] === 'manual';
+}
+
+// The address X opens with everything filled in. No keys, no cost, no
+// limit — it is an ordinary link.
+//
+// We send the link and NOT a photo: X then builds its own card from the
+// page, which carries the picture, the headline and the domain, and the
+// whole card is one big button to the site. An uploaded photo would
+// leave the address as bare text next to it.
+function socIntent(text, url){
+  return 'https://x.com/intent/tweet?text=' + encodeURIComponent(text)
+    + '&url=' + encodeURIComponent(url);
 }
 
 // The photo, as an address X and Facebook can actually fetch. Our own
@@ -2826,15 +2848,24 @@ function drawSocChosen(){
 
     + '<div class="soc-targets">'
     + ['facebook', 'x'].map(function (t) {
+      var was = up[t] ? ' <span class="soc-up">'
+        + (up[t] === 'pending' ? 'στην ουρά' : 'ανέβηκε ήδη') + '</span>' : '';
+
+      // Hand-posted: a button, not a tick. A tick would promise that
+      // pressing Ανέβασέ το sends it, and it does not.
+      if (socByHand(t)) {
+        return '<span class="soc-hand">' + SOC_NAMES[t]
+          + '<button type="button" class="btn btn--ghost" data-soc-open="' + t + '">'
+          + 'Άνοιξέ το ↗</button>' + was + '</span>';
+      }
+
       var can = socCan(t);
+
       return '<label class="check' + (can ? '' : ' check--off') + '">'
         + '<input type="checkbox" data-soc-target="' + t + '"'
         + (can && soc.targets[t] ? ' checked' : '') + (can ? '' : ' disabled') + '> '
         + SOC_NAMES[t]
-        + (can
-          ? (up[t] ? ' <span class="soc-up">' + (up[t] === 'pending' ? 'στην ουρά' : 'ανέβηκε ήδη')
-            + '</span>' : '')
-          : ' <span class="soc-up">λείπουν κλειδιά</span>')
+        + (can ? was : ' <span class="soc-up">λείπουν κλειδιά</span>')
         + '</label>';
     }).join('')
     + '</div>'
@@ -3005,15 +3036,27 @@ function prevFb(m, text){
     + '</article>';
 }
 
-// X puts the photo IN the post and the link stays as words in the text.
-// That is why the two look so different for the same item.
-function prevX(m, text, img){
+// Two different posts, depending on how it goes up.
+//
+// By hand, through the window we open, X gets only the link and builds
+// its own card: picture, headline, domain, all of it one button to the
+// site. Sending a photo through the paid API instead leaves the address
+// as bare text beside it — which is why the hand-posted one is, if
+// anything, the better post.
+function prevX(m, img, byHand){
   return '<article class="prev">'
     + '<p class="prev-tag">X</p>'
     + prevWho('@newshubgr')
     + '<p class="prev-text">' + esc(socXText())
-    + '<br><span class="prev-link">' + esc(m.url) + '</span></p>'
-    + (img ? '<img class="prev-x-img" src="' + esc(img) + '" alt="">' : '')
+    + (byHand ? '' : '<br><span class="prev-link">' + esc(m.url) + '</span>') + '</p>'
+    + (byHand
+      ? '<div class="prev-card">'
+        + (m.image ? '<img src="' + esc(m.image) + '" alt="">' : '<div class="prev-noimg"></div>')
+        + '<div class="prev-card-t">'
+        + '<small class="prev-dom">' + esc(m.site) + '</small>'
+        + '<b>' + esc(m.title) + '</b>'
+        + '</div></div>'
+      : (img ? '<img class="prev-x-img" src="' + esc(img) + '" alt="">' : ''))
     + '</article>';
 }
 
@@ -3041,8 +3084,11 @@ function drawSocPreview(){
   }
 
   var text = String(soc.text || it.title || '').trim();
+
+  // X is shown whenever it is posted by hand: there is no tick to turn
+  // it off, and the editor is about to press a button for it.
   var cards = (soc.targets.facebook ? prevFb(m, text) : '')
-    + (soc.targets.x ? prevX(m, text, socImage(it)) : '');
+    + ((soc.targets.x || socByHand('x')) ? prevX(m, socImage(it), socByHand('x')) : '');
 
   el.innerHTML = cards
     ? '<p class="soc-label">Έτσι θα φανεί</p>'
@@ -3128,6 +3174,59 @@ function socReload(){
     drawSocPicks();
     if (soc.pick) drawSocChosen();
   }, function () { /* the file may not exist yet — nothing to show */ });
+}
+
+// Opens X with the post written, then writes it into the queue as done.
+//
+// The window is opened FIRST and straight from the click: a browser
+// only allows that while it is still handling the press, so waiting for
+// the save would get it blocked as a pop-up.
+//
+// What we cannot know is whether the editor really pressed Post over
+// there or closed the tab. The entry says so in as many words, so that
+// the "already up" warning is read for what it is — a reminder, not a
+// receipt.
+function socOpenX(t){
+  if (!soc.pick) return;
+
+  var it = soc.pick;
+  var m = socMeta[it.kind + ':' + it.id];
+
+  if (!m || m.wait || m.err || !m.url) {
+    say('Δεν ξέρω ακόμα τη διεύθυνση της σελίδας. Περίμενε να φορτώσει η προεπισκόπηση.', 'bad');
+    return;
+  }
+
+  window.open(socIntent(socXText(), m.url), '_blank', 'noopener');
+
+  var entry = {
+    id: new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14) + '-' + it.kind + '-' + it.id,
+    kind: it.kind,
+    ref: it.ref,
+    link: m.url,
+    title: it.title,
+    image: socImage(it),
+    text: String(soc.text || '').trim(),
+    targets: [t],
+    status: 'done',
+    note: 'Άνοιξε ' + SOC_NAMES[t] + ' με το ποστ έτοιμο. Δεν επιβεβαιώνεται από εδώ '
+      + 'ότι πατήθηκε η δημοσίευση.',
+    at: new Date().toISOString(),
+    by: me.email || '',
+  };
+
+  soc.file.posts.unshift(entry);
+
+  api('social-queue', 'PUT', soc.file).then(function () {
+    say('Άνοιξε το ' + SOC_NAMES[t] + '. Έλεγξε ότι είσαι ο Newshub.gr και πάτα δημοσίευση.',
+      'ok');
+  }).catch(function (err) {
+    soc.file.posts = soc.file.posts.filter(function (p) { return p.id !== entry.id; });
+    say('Άνοιξε, αλλά δεν γράφτηκε στο ιστορικό: ' + err.message, 'bad');
+  }).then(function () {
+    socClear();
+    drawSocLog();
+  });
 }
 
 function socSend(){
@@ -3224,7 +3323,9 @@ function wireSocial(){
   var box = $('[data-soc-chosen]');
 
   box.addEventListener('click', function (e) {
-    if (e.target.closest('[data-soc-clear]')) socClear();
+    var open = e.target.closest('[data-soc-open]');
+    if (open) socOpenX(open.dataset.socOpen);
+    else if (e.target.closest('[data-soc-clear]')) socClear();
     else if (e.target.closest('[data-soc-send]')) socSend();
   });
 
