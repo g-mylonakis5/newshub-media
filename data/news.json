@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/energeiakes.jpg",
     "summary": "Την ενεργή του παρουσία στις εξελίξεις που αφορούν την ενεργειακή μετάβαση και τη βιώσιμη ανάπτυξη επιβεβαίωσε ο Δήμος Χερσονήσου, συμμετέχοντας στην ενημερω...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "neo-kykloma-me-etaireies-vitrina-exarthrose-i-aade-ekryvan-forologitea-yli-ano-ton-28-ekatommyrion-eyro",
+    "title": "Νέο κύκλωμα με εταιρείες-βιτρίνα εξάρθρωσε η ΑΑΔΕ-Έκρυβαν φορολογητέα ύλη άνω των 28 εκατομμυρίων ευρώ",
+    "url": "https://www.newshub.gr/el/oikonomia/neo-kykloma-me-etaireies-vitrina-exarthrose-i-aade-ekryvan-forologitea-yli-ano-ton-28-ekatommyrion-eyro",
+    "date": "2026-11-19T19:34:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/aade.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/aade.jpg",
+    "summary": "Στην εξάρθρωση οργανωμένου κυκλώματος εταιρειών &ndash; βιτρίνα, το οποίο φέρεται να απέκρυπτε φορολογητέα ύλη άνω των 28 εκατ. ευρώ και να εισέπραττε παράνο...",
+    "author": null,
     "featured": true
   },
   {
@@ -7232,22 +7244,6 @@
       "name": "Ελένη Βασιλάκη",
       "url": "https://www.newshub.gr/el/eleni-vasilaki",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/basilake.jpg"
-    },
-    "featured": false
-  },
-  {
-    "id": "g-athanasakis-se-kalo-dromo-oi-diadikasies-gia-tin-apozimiosi-ton-paragogon-toy-oropedioy-ti-leei-sto-newshub-gr-o-dimarchos",
-    "title": "Γ. Αθανασάκης: «Σε καλό δρόμο οι διαδικασίες για την αποζημίωση των παραγωγών του Οροπεδίου» - Τι λέει στο Newshub.gr ο δήμαρχος",
-    "url": "https://www.newshub.gr/el/kriti/g-athanasakis-se-kalo-dromo-oi-diadikasies-gia-tin-apozimiosi-ton-paragogon-toy-oropedioy-ti-leei-sto-newshub-gr-o-dimarchos",
-    "date": "2026-11-15T05:00:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/oropedio-lasithiou-zemies.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/oropedio-lasithiou-zemies.jpg",
-    "summary": "Επαφές στην Αθήνα, διαπιστώνοντας όπως λέει στο newshub.gr  ότι οι διαδικασίες βρίσκονται σε καλό δρόμο, είχε ο Δήμαρχος Οροπεδίου Λασθίου Γιώργος Αθανα...",
-    "author": {
-      "name": "Χριστόφορος Παπαδάκης",
-      "url": "https://www.newshub.gr/el/christoforos-papadakis",
-      "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
     "featured": false
   },
