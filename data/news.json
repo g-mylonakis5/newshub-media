@@ -1,5 +1,17 @@
 [
   {
+    "id": "mesara-ektos-fylakis-o-54chronos-poy-eiche-katigorithei-gia-ton-viasmo-ton-dyo-koron-toy",
+    "title": "Μεσαρά: Εκτός φυλακής ο 54χρονος που είχε κατηγορηθεί για τον βιασμό των δυο κορών του",
+    "url": "https://www.newshub.gr/el/kriti/mesara-ektos-fylakis-o-54chronos-poy-eiche-katigorithei-gia-ton-viasmo-ton-dyo-koron-toy",
+    "date": "2026-11-19T15:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/phylake.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/phylake.jpg",
+    "summary": "Εκτός φυλακής αναμένεται να βρεθεί άμεσα ο 54χρονος άνδρας, ο οποίος στις αρχές του έτους είχε συλληφθεί μετά από καταγγελίες που είχαν γίνει σε βάρος του απ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "theloyme-synergasia-me-tin-ellada-leei-o-fintan-alla-stin-kypro-yparchoyn-dyo-krati",
     "title": "Θέλουμε συνεργασία με την Ελλάδα λέει ο Φιντάν, αλλά στην Κύπρο υπάρχουν δύο κράτη",
     "url": "https://www.newshub.gr/el/geopolitiki/theloyme-synergasia-me-tin-ellada-leei-o-fintan-alla-stin-kypro-yparchoyn-dyo-krati",
@@ -117,7 +129,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/eikona_viber_2026-11-19_14-51-14-499.jpg",
     "summary": "Σοβαρή υπόθεση παράνομης οπλοκατοχής αποκαλύφθηκε σε περιοχή του Δήμου Γόρτυνας, στο Ηράκλειο, έπειτα από αστυνομική επιχείρηση που πραγματοποιήθηκε το πρωί ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "rethymno-entachthike-sto-ethniko-programma-anaptyxis-to-neo-kolymvitiko-sygkrotima-ston-gallo-proypologismoy-4-09-ekat-eyro",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/4ebrtrtrt.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/4ebrtrtrt.jpg",
     "summary": "Σε επιφυλακή βρίσκεται ήδη η τοπική ΕΛ.ΑΣ. λόγω της πορείας που θα πραγματοποιηθεί στο κέντρο του Ηρακλείου στις 17 Νοεμβρίου.\r\n\r\nΣύμφωνα με τα όσα έχουν γ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "oyggaria-me-ftyaria-xethavan-ta-ekatommyria-poy-eiche-krypsei-se-dasi-o-proin-ypoyrgos-toy-ormpan-vinteo",
-    "title": "Ουγγαρία: Με φτυάρια ξέθαβαν τα εκατομμύρια που είχε κρύψει σε δάση ο πρώην υπουργός του Όρμπαν (βίντεο)",
-    "url": "https://www.newshub.gr/el/kosmos/oyggaria-me-ftyaria-xethavan-ta-ekatommyria-poy-eiche-krypsei-se-dasi-o-proin-ypoyrgos-toy-ormpan-vinteo",
-    "date": "2026-11-14T15:55:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/maketa-sesztak.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/maketa-sesztak.jpg",
-    "summary": "Εικόνες και βίντεο από τις έρευνες των ουγγρικών αρχών αποκαλύπτουν τον τρόπο με τον οποίο εντοπίστηκαν εκατομμύρια ευρώ σε μετρητά, θαμμένα μέσα σε δάση και...",
     "author": null,
     "featured": false
   },
