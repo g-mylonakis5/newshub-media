@@ -2717,6 +2717,19 @@ function socByHand(t){
   return !!r && r[t] === 'manual';
 }
 
+// Whether the page we link to will give X and Facebook a card.
+//
+// They build it from tags on the page itself. Our own pages carry
+// <meta name="twitter:card"> — the newshub.gr article pages do not, and
+// that is their site, not ours. So a news post goes out as bare text
+// however good our photo is.
+//
+// Until that one line appears on their side, the editor pastes the
+// photo into the window by hand and the post looks right anyway.
+function socNoCard(it){
+  return !!it && it.kind === 'news';
+}
+
 // The address X opens with everything filled in. No keys, no cost, no
 // limit — it is an ordinary link.
 //
@@ -2856,7 +2869,12 @@ function drawSocChosen(){
       if (socByHand(t)) {
         return '<span class="soc-hand">' + SOC_NAMES[t]
           + '<button type="button" class="btn btn--ghost" data-soc-open="' + t + '">'
-          + 'Άνοιξέ το ↗</button>' + was + '</span>';
+          + 'Άνοιξέ το ↗</button>'
+          + (socNoCard(it) && socImage(it)
+            ? '<button type="button" class="btn btn--ghost" data-soc-photo>'
+              + 'Πάρε τη φωτογραφία</button>'
+            : '')
+          + was + '</span>';
       }
 
       var can = socCan(t);
@@ -3043,13 +3061,20 @@ function prevFb(m, text){
 // site. Sending a photo through the paid API instead leaves the address
 // as bare text beside it — which is why the hand-posted one is, if
 // anything, the better post.
-function prevX(m, img, byHand){
+//
+// And when the page carries no twitter:card there is no card to draw.
+// Showing one anyway would be the prettiest lie in the admin: the
+// editor would press Post expecting a picture and get a line of text.
+function prevX(m, img, byHand, noCard){
   return '<article class="prev">'
     + '<p class="prev-tag">X</p>'
     + prevWho('@newshubgr')
     + '<p class="prev-text">' + esc(socXText())
-    + (byHand ? '' : '<br><span class="prev-link">' + esc(m.url) + '</span>') + '</p>'
-    + (byHand
+    + (byHand && !noCard ? '' : '<br><span class="prev-link">' + esc(m.url) + '</span>')
+    + '</p>'
+    + (byHand && noCard
+      ? ''
+      : byHand
       ? '<div class="prev-card">'
         + (m.image ? '<img src="' + esc(m.image) + '" alt="">' : '<div class="prev-noimg"></div>')
         + '<div class="prev-card-t">'
@@ -3087,12 +3112,23 @@ function drawSocPreview(){
 
   // X is shown whenever it is posted by hand: there is no tick to turn
   // it off, and the editor is about to press a button for it.
+  // Only X is hurt by it. Facebook builds its card off og:image, which
+  // their pages do carry.
+  var noCard = socNoCard(it) && (soc.targets.x || socByHand('x'));
+
   var cards = (soc.targets.facebook ? prevFb(m, text) : '')
-    + ((soc.targets.x || socByHand('x')) ? prevX(m, socImage(it), socByHand('x')) : '');
+    + ((soc.targets.x || socByHand('x'))
+      ? prevX(m, socImage(it), socByHand('x'), noCard)
+      : '');
 
   el.innerHTML = cards
     ? '<p class="soc-label">Έτσι θα φανεί</p>'
       + '<div class="prevs">' + cards + '</div>'
+      + (noCard
+        ? '<p class="soc-warn">Η σελίδα του newshub.gr δεν λέει στο X να φτιάξει κάρτα, '
+          + 'άρα το ποστ βγαίνει σκέτο κείμενο. Πάτα <b>Πάρε τη φωτογραφία</b> και '
+          + 'επικόλλησέ τη μέσα στο παράθυρο του X με Ctrl+V.</p>'
+        : '')
       + '<p class="hint">Κατά προσέγγιση. Το Facebook μπορεί να κόψει τον τίτλο αλλού, '
       + 'και αν η σελίδα έχει ξαναμοιραστεί μπορεί να κρατά ακόμα παλιά φωτογραφία.</p>'
     : '';
@@ -3229,6 +3265,85 @@ function socOpenX(t){
   });
 }
 
+// The photo, ready to paste into the window we opened.
+//
+// Pasting beats attaching a file: no folder to hunt through, nothing
+// left behind in Downloads. It only works with PNG, which is a rule of
+// the browsers and not ours, so we repaint the jpeg through a canvas
+// first. static.newshub.gr answers with access-control-allow-origin: *,
+// which is what lets us read its bytes at all.
+//
+// Older browsers have no clipboard for pictures. Those get the file
+// downloaded instead and a line telling them to drag it over — the slow
+// way, but never a dead button.
+function socPhoto(){
+  var it = soc.pick;
+  if (!it) return;
+
+  var url = socImage(it);
+  if (!url) { say('Αυτό δεν έχει φωτογραφία.', 'bad'); return; }
+
+  say('Παίρνω τη φωτογραφία…', 'ok');
+
+  fetch(url).then(function (r) {
+    if (!r.ok) throw new Error('δεν κατέβηκε (' + r.status + ')');
+    return r.blob();
+  }).then(function (blob) {
+    return socPng(blob).then(function (png) {
+      if (!navigator.clipboard || !window.ClipboardItem) throw new Error('χωρίς πρόχειρο');
+      var bag = {};
+      bag['image/png'] = png;
+      return navigator.clipboard.write([new ClipboardItem(bag)]);
+    }).then(function () {
+      say('Η φωτογραφία είναι στο πρόχειρο. Πήγαινε στο παράθυρο του X και πάτα Ctrl+V.',
+        'ok');
+    }).catch(function () {
+      socSave(blob, url);
+    });
+  }).catch(function (err) {
+    say('Δεν πήρα τη φωτογραφία: ' + err.message, 'bad');
+  });
+}
+
+// jpeg in, png out. The clipboard of every browser takes png and
+// nothing else.
+function socPng(blob){
+  return new Promise(function (ok, no) {
+    var src = URL.createObjectURL(blob);
+    var img = new Image();
+
+    img.onload = function () {
+      var c = document.createElement('canvas');
+      c.width = img.naturalWidth;
+      c.height = img.naturalHeight;
+      c.getContext('2d').drawImage(img, 0, 0);
+      URL.revokeObjectURL(src);
+      c.toBlob(function (out) {
+        if (out) ok(out); else no(new Error('άδειο'));
+      }, 'image/png');
+    };
+
+    img.onerror = function () {
+      URL.revokeObjectURL(src);
+      no(new Error('δεν διαβάστηκε'));
+    };
+
+    img.src = src;
+  });
+}
+
+function socSave(blob, url){
+  var href = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = href;
+  a.download = (String(url).split('/').pop() || 'fotografia.jpg').split('?')[0];
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function () { URL.revokeObjectURL(href); }, 10000);
+  say('Κατέβηκε η φωτογραφία. Σύρε την από τα Λήψεις μέσα στο παράθυρο του X.', 'ok');
+}
+
 function socSend(){
   if (!soc.pick || soc.busy) return;
 
@@ -3325,6 +3440,8 @@ function wireSocial(){
   box.addEventListener('click', function (e) {
     var open = e.target.closest('[data-soc-open]');
     if (open) socOpenX(open.dataset.socOpen);
+
+    if (e.target.closest('[data-soc-photo]')) socPhoto();
     else if (e.target.closest('[data-soc-clear]')) socClear();
     else if (e.target.closest('[data-soc-send]')) socSend();
   });
