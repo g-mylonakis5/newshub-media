@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-19T23:23:19.937Z",
       "by": "g.mylonakis5@outlook.com",
-      "link": "https://www.newshub.gr/el/ellada/kit-epiviosis-72-oron-ti-apothikeyoyn-oi-ellines-sta-spitia-toys-ektoxeythikan-kai-stin-ellada-oi-poliseis"
+      "link": "https://www.newshub.gr/el/ellada/kit-epiviosis-72-oron-ti-apothikeyoyn-oi-ellines-sta-spitia-toys-ektoxeythikan-kai-stin-ellada-oi-poliseis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290023974156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290023974156174",
+          "at": "2026-11-19T23:23:35.124Z"
+        }
+      }
     },
     {
       "id": "20261119230931-news-zalgkiris-panathinaikos-72-87-terastio-diplo-gia-toys-prasinoys-sto-kaoynas",
