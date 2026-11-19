@@ -1335,12 +1335,19 @@ function sharePage(a){
   const summary = decode(a.summary || '');
   const target = a.url || '';
   const photo = a.image_large || a.image_thumb || '';
-  const mirrored = photo
-    ? `${SITE_URL}/mf/img?u=${encodeURIComponent(photo)}`
-    : `${SITE_URL}/share.jpg`;
+
+  // First choice: the card make-cards.js drew — their photo with the
+  // headline printed on it, the way the boss asked for. It is already
+  // 1200×630 and lives on our domain, so nothing needs mirroring.
+  const card = path.join(PUBLIC_DIR, 'mf/kartes', `${a.id}.jpg`);
+  const hasCard = fs.existsSync(card);
+
+  const mirrored = hasCard
+    ? `${SITE_URL}/mf/kartes/${a.id}.jpg`
+    : (photo ? `${SITE_URL}/mf/img?u=${encodeURIComponent(photo)}` : `${SITE_URL}/share.jpg`);
 
   // The sizes are in the path they serve them from: .../765x435/...
-  const size = /\/(\d{2,4})x(\d{2,4})\//.exec(photo);
+  const size = hasCard ? [null, '1200', '630'] : /\/(\d{2,4})x(\d{2,4})\//.exec(photo);
 
   return `<!DOCTYPE html>
 <html lang="el">

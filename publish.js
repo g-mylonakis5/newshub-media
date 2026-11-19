@@ -12,6 +12,7 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 
 const { main: build } = require('./build.js');
+const { main: makeCards } = require('./make-cards.js');
 
 const INDEX_DIR = path.join(__dirname, 'public/pagefind');
 
@@ -100,8 +101,23 @@ function countFiles(dir) {
   return n;
 }
 
-function main() {
+async function main() {
   const started = Date.now();
+
+  // ΠΡΙΝ το χτίσιμο: οι κάρτες των social. Το build κοιτάζει ποιες
+  // υπάρχουν και δείχνει εκεί το og:image της σελίδας μοιράσματος, άρα
+  // αν τρέξουν μετά, η πρώτη φορά κάθε είδησης θα έχανε την κάρτα της.
+  //
+  // Ποτέ δεν σταματά το ανέβασμα: μια κάρτα που δεν βγήκε σημαίνει
+  // κάρτα χωρίς τίτλο στο Facebook, όχι σελίδα που λείπει.
+  console.log('— Κάρτες για τα social —');
+  try {
+    await makeCards();
+  } catch (err) {
+    console.warn(`ΠΡΟΣΟΧΗ: οι κάρτες των social δεν φτιάχτηκαν — ${err.message}`);
+  }
+
+  console.log('');
 
   console.log('— Χτίσιμο σελίδων —');
   const changed = build();
@@ -134,4 +150,7 @@ function main() {
   console.log(`Τελείωσε σε ${Math.round((Date.now() - started) / 1000)} δευτερόλεπτα.`);
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

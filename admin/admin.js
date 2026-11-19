@@ -2737,6 +2737,20 @@ function socNoCard(it){
 // page, which carries the picture, the headline and the domain, and the
 // whole card is one big button to the site. An uploaded photo would
 // leave the address as bare text next to it.
+// Για τις ειδήσεις, το λινκ που πάει στα social ΔΕΝ είναι του
+// newshub.gr αλλά η δική μας σελίδα μοιράσματος: εκεί ζει η κάρτα με
+// τον τίτλο τυπωμένο πάνω στη φωτογραφία, που ζήτησε το αφεντικό. Από
+// εκεί ο αναγνώστης προωθείται αμέσως στο άρθρο.
+//
+// Το ίδιο κάνει και το post-social.js για το Facebook — δες εκεί το
+// facebookLink(). Για δικά μας επεισόδια, βίντεο και άρθρα δεν αλλάζει
+// τίποτα: η διεύθυνσή τους είναι ήδη δική μας.
+function socShareUrl(it, url){
+  if (it.kind !== 'news') return url;
+  var id = String(url).split('?')[0].replace(/\/$/, '').split('/').pop();
+  return id ? SITE + '/mf/' + id : url;
+}
+
 function socIntent(text, url){
   return 'https://x.com/intent/tweet?text=' + encodeURIComponent(text)
     + '&url=' + encodeURIComponent(url);
@@ -3298,7 +3312,7 @@ function socOpenX(t){
     return;
   }
 
-  window.open(socIntent(socXText(), m.url), '_blank', 'noopener');
+  window.open(socIntent(socXText(), socShareUrl(it, m.url)), '_blank', 'noopener');
 
   var entry = {
     id: new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14) + '-' + it.kind + '-' + it.id,

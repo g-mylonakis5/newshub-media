@@ -28,9 +28,12 @@ jobs:
         with:
           node-version: '22'
 
-      # NO npm ci. The build has no dependencies — package.json holds
-      # only playwright, and that only for the image check. npx fetches
-      # Pagefind when it is needed.
+      # Μόνο τα απαραίτητα: sharp και resvg, για τις κάρτες των social.
+      # Το playwright (devDependency, για τον έλεγχο εικόνων) μένει έξω —
+      # κατεβάζει browser και θα τριπλασίαζε τον χρόνο. Το Pagefind το
+      # φέρνει το npx όταν χρειαστεί.
+      - name: Οι δύο βιβλιοθήκες εικόνας
+        run: npm ci --omit=dev
 
       - name: Η ώρα, για το κλειδί της μνήμης
         id: ora
