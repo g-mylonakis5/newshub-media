@@ -23,8 +23,14 @@ const sharp = require('sharp');
 const { Resvg } = require('@resvg/resvg-js');
 
 const NEWS_FILE = path.join(__dirname, 'data/news.json');
+const EPISODES_FILE = path.join(__dirname, 'data/episodes.json');
+const VIDEOS_FILE = path.join(__dirname, 'data/videos.json');
 const OUT_DIR = path.join(__dirname, 'public/mf/kartes');
-const LOGO = path.join(__dirname, 'public/shows/logo-newshub.png');
+
+// Οι ειδήσεις είναι δικές τους — φέρουν το σήμα του newshub.gr. Τα
+// podcast και τα βίντεο είναι δικά μας, άρα το Newshub Multimedia.
+const LOGO_NEWS = path.join(__dirname, 'public/shows/logo-newshub.png');
+const LOGO_MEDIA = path.join(__dirname, 'public/shows/logo-full-dark.png');
 
 const FONT_TITLE = path.join(__dirname, 'assets/fonts/SourceSerif4-SemiBold.ttf');
 const FONT_LABEL = path.join(__dirname, 'assets/fonts/Commissioner-SemiBold.ttf');
@@ -61,119 +67,32 @@ function esc(text){
 }
 
 // ---------------------------------------------------------------------
-// Πόσο πιάνει μια αράδα
-// ---------------------------------------------------------------------
-//
-// Δεν το μαντεύουμε: ζητάμε από τον ίδιο μηχανισμό που θα τη ζωγραφίσει
-// να μας πει το πλάτος της. Αλλιώς τα ελληνικά κεφαλαία ξεχειλίζουν και
-// ο τίτλος βγαίνει κομμένος.
-const widthCache = new Map();
-
-function textWidth(text, size, font){
-  const key = `${font}|${size}|${text}`;
-  if (widthCache.has(key)) return widthCache.get(key);
-
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="4000" height="400">
-    <text x="0" y="200" font-family="${font}" font-size="${size}">${esc(text)}</text>
-  </svg>`;
-
-  let w = 0;
-  try {
-    const box = new Resvg(svg, {
-      font: { fontFiles: [FONT_TITLE, FONT_LABEL], loadSystemFonts: false },
-    }).getBBox();
-    w = box ? box.width : text.length * size * 0.5;
-  } catch {
-    w = text.length * size * 0.5;
-  }
-
-  widthCache.set(key, w);
-  return w;
-}
-
-function wrap(text, size, font, maxWidth, maxLines){
-  const words = String(text).split(/\s+/).filter(Boolean);
-  const lines = [];
-  let line = '';
-
-  for (const word of words) {
-    const next = line ? `${line} ${word}` : word;
-    if (line && textWidth(next, size, font) > maxWidth) {
-      lines.push(line);
-      line = word;
-      if (lines.length === maxLines) break;
-    } else {
-      line = next;
-    }
-  }
-
-  if (lines.length < maxLines && line) lines.push(line);
-
-  // Δεν χώρεσε: η τελευταία αράδα κόβεται με αποσιωπητικά, ποτέ στη μέση
-  // λέξης αν μπορεί να αποφευχθεί.
-  const used = lines.join(' ');
-  if (used.length < String(text).replace(/\s+/g, ' ').trim().length) {
-    let last = lines[lines.length - 1] || '';
-    while (last && textWidth(`${last}…`, size, font) > maxWidth) {
-      last = last.replace(/\s*\S+$/, '');
-    }
-    lines[lines.length - 1] = `${last}…`;
-  }
-
-  return lines;
-}
-
-// ---------------------------------------------------------------------
 // Η ίδια η κάρτα
 // ---------------------------------------------------------------------
-
-// Το κείμενο σμικρύνεται μέχρι να χωρέσει σε τρεις αράδες. Κάτω από 38
-// δεν κατεβαίνουμε — σε κινητό δεν διαβάζεται.
-function fitTitle(title){
-  for (const size of [54, 50, 46, 42, 38]) {
-    const lines = wrap(title, size, 'Source Serif 4', W - 112, 3);
-    const whole = lines.join(' ').replace('…', '');
-    if (lines.length <= 3 && String(title).startsWith(whole.slice(0, 20))) {
-      if (!lines.join('').includes('…') || size === 38) return { size, lines };
-    }
-  }
-  return { size: 38, lines: wrap(title, 38, 'Source Serif 4', W - 112, 3) };
-}
-
-function overlay(title, label){
-  const { size, lines } = fitTitle(title);
-  const leading = Math.round(size * 1.22);
-  const bottom = H - 54;
-
-  // Από κάτω προς τα πάνω: η τελευταία αράδα κάθεται πάνω από το κάτω
-  // περιθώριο και οι προηγούμενες στοιβάζονται από πάνω της.
-  const texts = lines.map((line, i) => {
-    const y = bottom - (lines.length - 1 - i) * leading;
-    return `<text x="56" y="${y}" font-family="Source Serif 4" font-size="${size}"
-      fill="${INK}">${esc(line)}</text>`;
-  }).join('\n');
-
-  const bandTop = bottom - lines.length * leading - 48;
+//
+// ΧΩΡΙΣ τίτλο πάνω στη φωτογραφία. Δοκιμάστηκε στον αέρα στις 20 Νοε
+// 2026 και ο τίτλος φαινόταν τρεις φορές — στο κείμενο του post, πάνω
+// στην εικόνα και στη λωρίδα της πλατφόρμας. Μένει η φωτογραφία, η
+// ετικέτα με την κόκκινη γραμμή, και το σήμα.
+function overlay(label){
+  // Μια ελαφριά σκίαση μόνο στο κάτω μέρος, για να διαβάζεται η ετικέτα
+  // πάνω σε φωτεινές φωτογραφίες. Όχι άλλη — η φωτογραφία είναι το θέμα.
+  const bandTop = H - 190;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
   <defs>
     <linearGradient id="skia" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="${DARK}" stop-opacity="0"/>
-      <stop offset="0.3" stop-color="${DARK}" stop-opacity="0.58"/>
-      <stop offset="0.6" stop-color="${DARK}" stop-opacity="0.86"/>
-      <stop offset="1" stop-color="${DARK}" stop-opacity="0.96"/>
+      <stop offset="0.55" stop-color="${DARK}" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="${DARK}" stop-opacity="0.82"/>
     </linearGradient>
   </defs>
 
-  <rect x="0" y="${Math.max(0, bandTop)}" width="${W}" height="${H - Math.max(0, bandTop)}"
-    fill="url(#skia)"/>
+  <rect x="0" y="${bandTop}" width="${W}" height="${H - bandTop}" fill="url(#skia)"/>
 
-  <rect x="56" y="${Math.max(24, bandTop - 6)}" width="54" height="4" fill="${RED}"/>
-
-  ${label ? `<text x="56" y="${Math.max(24, bandTop - 24)}" font-family="Commissioner"
-    font-size="22" letter-spacing="4" fill="${INK}" fill-opacity="0.82">${esc(label)}</text>` : ''}
-
-  ${texts}
+  ${label ? `<text x="56" y="${H - 86}" font-family="Commissioner"
+    font-size="24" letter-spacing="4.5" fill="${INK}">${esc(label)}</text>
+  <rect x="56" y="${H - 66}" width="60" height="4" fill="${RED}"/>` : ''}
 </svg>`;
 }
 
@@ -183,32 +102,62 @@ async function grab(url){
   return Buffer.from(await res.arrayBuffer());
 }
 
-let logoBuffer = null;
-async function logo(){
-  if (logoBuffer) return logoBuffer;
-  if (!fs.existsSync(LOGO)) return null;
-  logoBuffer = await sharp(LOGO).resize({ height: 54 }).png().toBuffer();
-  return logoBuffer;
+const logoCache = new Map();
+async function logo(file, height){
+  const key = `${file}|${height}`;
+  if (logoCache.has(key)) return logoCache.get(key);
+  if (!fs.existsSync(file)) return null;
+  const buf = await sharp(file).resize({ height }).png().toBuffer();
+  logoCache.set(key, buf);
+  return buf;
 }
 
-async function makeCard(item, file){
-  const photo = item.image_large || item.image_thumb;
-  if (!photo) throw new Error('χωρίς φωτογραφία');
-
-  const base = await sharp(await grab(photo))
-    .resize(W, H, { fit: 'cover', position: 'attention' })
+// Τετράγωνο εξώφυλλο podcast σε κάρτα 1200×630: αν το κόψουμε, χάνεται
+// ο τίτλος που είναι τυπωμένος πάνω του. Οπότε η ίδια εικόνα μπαίνει
+// δύο φορές — θολή και μεγεθυμένη για φόντο, και ολόκληρη από πάνω.
+async function fitWhole(buffer){
+  const back = await sharp(buffer)
+    .resize(W, H, { fit: 'cover' })
+    .blur(42)
+    .modulate({ brightness: 0.55 })
     .toBuffer();
 
-  const svg = overlay(item.title || '', (item.category || '').toUpperCase());
+  const front = await sharp(buffer)
+    .resize({ height: H - 48, fit: 'inside' })
+    .toBuffer();
 
-  const band = new Resvg(svg, {
+  const meta = await sharp(front).metadata();
+
+  return sharp(back)
+    .composite([{
+      input: front,
+      top: 24,
+      left: Math.round((W - (meta.width || W)) / 2),
+    }])
+    .toBuffer();
+}
+
+// opts.label — η μικρή ετικέτα κάτω αριστερά (ΕΛΛΑΔΑ, PODCAST, ΒΙΝΤΕΟ)
+// opts.logo  — ποιο σήμα μπαίνει πάνω δεξιά
+// opts.whole — true όταν η εικόνα δεν αντέχει κόψιμο (τετράγωνα εξώφυλλα)
+async function makeCard(photo, file, opts){
+  const o = opts || {};
+  if (!photo) throw new Error('χωρίς φωτογραφία');
+
+  const raw = await grab(photo);
+
+  const base = o.whole
+    ? await fitWhole(raw)
+    : await sharp(raw).resize(W, H, { fit: 'cover', position: 'attention' }).toBuffer();
+
+  const band = new Resvg(overlay(o.label || ''), {
     fitTo: { mode: 'width', value: W },
     font: { fontFiles: [FONT_TITLE, FONT_LABEL], loadSystemFonts: false },
   }).render().asPng();
 
   const layers = [{ input: band, top: 0, left: 0 }];
 
-  const mark = await logo();
+  const mark = await logo(o.logo || LOGO_NEWS, o.logoHeight || 54);
   if (mark) {
     const meta = await sharp(mark).metadata();
     layers.push({ input: mark, top: 44, left: W - 56 - (meta.width || 150) });
@@ -219,23 +168,74 @@ async function makeCard(item, file){
 
 // ---------------------------------------------------------------------
 
-async function main(){
-  if (!fs.existsSync(NEWS_FILE)) {
-    console.log('Κάρτες social: δεν υπάρχει data/news.json — τίποτα να φτιάξω.');
-    return 0;
+function read(file){
+  if (!fs.existsSync(file)) return [];
+  try {
+    const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+    return Array.isArray(data) ? data : [];
+  } catch (err) {
+    console.warn(`ΠΡΟΣΟΧΗ: το ${path.basename(file)} δεν διαβάζεται — ${err.message}`);
+    return [];
+  }
+}
+
+// Τι θέλει κάρτα, από τις τρεις πηγές. Το όνομα του αρχείου έχει
+// πρόθεμα ανά είδος, ώστε μια είδηση και ένα επεισόδιο να μην
+// πέσουν ποτέ πάνω στο ίδιο όνομα.
+function wanted(){
+  const limit = Date.now() - DAYS * 24 * 60 * 60 * 1000;
+  const fresh = (date) => ALL || !date || new Date(date).getTime() >= limit;
+
+  const out = [];
+
+  for (const a of read(NEWS_FILE)) {
+    if (!a || !a.id || !fresh(a.date)) continue;
+    const photo = a.image_large || a.image_thumb;
+    if (!photo) continue;
+    out.push({
+      name: `${a.id}.jpg`,
+      photo,
+      title: a.title,
+      opts: { label: String(a.category || 'ΕΙΔΗΣΕΙΣ').toUpperCase(), logo: LOGO_NEWS },
+    });
   }
 
+  for (const ep of read(EPISODES_FILE)) {
+    if (!ep || !ep.id || !ep.image || !fresh(ep.date)) continue;
+    out.push({
+      name: `ep-${String(ep.id).replace(/\D/g, '')}.jpg`,
+      photo: ep.image,
+      title: ep.title,
+      // Το εξώφυλλο του Buzzsprout είναι τετράγωνο και έχει τον τίτλο
+      // τυπωμένο πάνω του: ολόκληρο, ποτέ κομμένο.
+      opts: { label: 'PODCAST', logo: LOGO_MEDIA, logoHeight: 46, whole: true },
+    });
+  }
+
+  for (const v of read(VIDEOS_FILE)) {
+    if (!v || !v.id || !v.image || !fresh(v.date)) continue;
+    out.push({
+      name: `vid-${v.id}.jpg`,
+      photo: v.image,
+      title: v.title,
+      opts: { label: 'ΒΙΝΤΕΟ', logo: LOGO_MEDIA, logoHeight: 46 },
+    });
+  }
+
+  return out;
+}
+
+async function main(){
   if (!fs.existsSync(FONT_TITLE) || !fs.existsSync(FONT_LABEL)) {
     console.warn('ΠΡΟΣΟΧΗ: λείπουν οι γραμματοσειρές στο assets/fonts/ — καμία κάρτα.');
     return 0;
   }
 
-  const list = JSON.parse(fs.readFileSync(NEWS_FILE, 'utf8'));
-  const limit = Date.now() - DAYS * 24 * 60 * 60 * 1000;
-
-  const wanted = list
-    .filter((a) => a && a.id && a.title && (a.image_large || a.image_thumb))
-    .filter((a) => ALL || !a.date || new Date(a.date).getTime() >= limit);
+  const list = wanted();
+  if (!list.length) {
+    console.log('Κάρτες social: δεν υπάρχει υλικό — τίποτα να φτιάξω.');
+    return 0;
+  }
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
@@ -243,21 +243,27 @@ async function main(){
   let skipped = 0;
   let failed = 0;
 
-  for (const item of wanted) {
-    const file = path.join(OUT_DIR, `${item.id}.jpg`);
+  for (const item of list) {
+    const file = path.join(OUT_DIR, item.name);
     if (!FORCE && fs.existsSync(file)) { skipped++; continue; }
 
     try {
-      await makeCard(item, file);
+      await makeCard(item.photo, file, item.opts);
       made++;
     } catch (err) {
       failed++;
-      console.warn(`  ⚠ κάρτα «${String(item.title).slice(0, 40)}…» — ${err.message}`);
+      console.warn(`  ⚠ κάρτα «${String(item.title || item.name).slice(0, 40)}…» — ${err.message}`);
     }
   }
 
-  // Ό,τι δεν είναι πια στο news.json δεν μοιράζεται ποτέ ξανά.
-  const keep = new Set(list.map((a) => `${a.id}.jpg`));
+  // Ό,τι δεν είναι πια στα δεδομένα δεν μοιράζεται ποτέ ξανά. Μετράει
+  // ΟΛΗ η λίστα, όχι μόνο οι πρόσφατες: αλλιώς κάθε τρέξιμο θα έσβηνε
+  // ό,τι έφτιαξε το προηγούμενο.
+  const keep = new Set();
+  for (const a of read(NEWS_FILE)) if (a && a.id) keep.add(`${a.id}.jpg`);
+  for (const ep of read(EPISODES_FILE)) if (ep && ep.id) keep.add(`ep-${String(ep.id).replace(/\D/g, '')}.jpg`);
+  for (const v of read(VIDEOS_FILE)) if (v && v.id) keep.add(`vid-${v.id}.jpg`);
+
   let removed = 0;
   for (const file of fs.readdirSync(OUT_DIR)) {
     if (!file.endsWith('.jpg') || keep.has(file)) continue;

@@ -469,7 +469,9 @@ function ldBlock(nodes){
   return `  <script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>\n`;
 }
 
-function page({ title, body, depth = 0, scripts = [], description = '', image = '', url = '', type = 'website', prev = '', next = '', canonical = '', jsonld = null }){
+// share — η εικόνα ΜΟΝΟ για τα social, όταν διαφέρει από αυτήν της
+// σελίδας. Δες cardFor().
+function page({ title, body, depth = 0, scripts = [], description = '', image = '', share = '', url = '', type = 'website', prev = '', next = '', canonical = '', jsonld = null }){
   const up = depth === 0 ? '' : '../';
   const vasika = (GA4 || ADSENSE) ? ['player.js', 'synainesi.js'] : ['player.js'];
 
@@ -481,7 +483,7 @@ function page({ title, body, depth = 0, scripts = [], description = '', image = 
   // With a trailing slash — the same spelling as in sitemap.xml, so
   // Google does not see two URLs for one homepage.
   const full = `${SITE_URL}/${cleanUrl(url)}`;
-  const pic = absAsset(image) || `${SITE_URL}/share.jpg`;
+  const pic = share || absAsset(image) || `${SITE_URL}/share.jpg`;
 
   const canon = canonical || full;
 
@@ -1322,6 +1324,14 @@ function loadNews(){
 // that loses 44% of it, and what is lost is the show's title: it is
 // printed on the picture. Where such a picture stands in for a missing
 // cover, it must be shown WHOLE, which is what .show-cover already does.
+// Η κάρτα που έφτιαξε το make-cards.js για ένα επεισόδιο ή βίντεο, αν
+// υπάρχει. Μπαίνει ΜΟΝΟ στο og:image/twitter:image — η σελίδα δείχνει
+// ό,τι έδειχνε πάντα, η κάρτα είναι μόνο για τα social.
+function cardFor(name){
+  const file = path.join(PUBLIC_DIR, 'mf/kartes', `${name}.jpg`);
+  return fs.existsSync(file) ? `${SITE_URL}/mf/kartes/${name}.jpg` : '';
+}
+
 function isSquareArt(url){
   return /storage\.buzzsprout\.com/.test(String(url || ''));
 }
@@ -1935,6 +1945,7 @@ ${showBannerBox(v.show, 1)}
     depth: 1,
     description: keimeno ? clip(keimeno) : `${decode(v.title)} — ${v.show}`,
     image: v.image,
+    share: cardFor(`vid-${v.id}`),
     url: videoUrl(v),
     type: 'article',
     // embedUrl points at YouTube, because that is where the video lives —
@@ -5818,6 +5829,7 @@ ${showBannerBox(show, 1)}
     depth: 1,
     description: ep.summary,
     image: art,
+    share: cardFor(`ep-${String(ep.id).replace(/\D/g, '')}`),
     url: episodeUrl(ep),
     type: 'article',
     // A podcast episode, not an article: it has audio, duration and a
