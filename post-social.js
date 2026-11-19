@@ -68,7 +68,9 @@ async function facebookLink(post) {
   const id = link.split('?')[0].replace(/\/$/, '').split('/').pop();
   if (!id) return link;
 
-  const mirror = `${SITE_URL}/mf/${id}.html`;
+  // Χωρίς .html: το Cloudflare Pages απαντά 308 στην κατάληξη και δεν
+  // θέλουμε να στέλνουμε στο Facebook διεύθυνση που ανακατευθύνει.
+  const mirror = `${SITE_URL}/mf/${id}`;
 
   try {
     const res = await fetch(mirror, { method: 'HEAD', headers: { 'user-agent': 'newshub-media' } });

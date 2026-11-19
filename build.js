@@ -1353,7 +1353,7 @@ function sharePage(a){
   <meta property="og:site_name" content="newshub.gr">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(summary)}">
-  <meta property="og:url" content="${SITE_URL}/${shareUrl(a)}">
+  <meta property="og:url" content="${SITE_URL}/mf/${a.id}">
   <meta property="og:image" content="${esc(mirrored)}">
 ${size ? `  <meta property="og:image:width" content="${size[1]}">
   <meta property="og:image:height" content="${size[2]}">
