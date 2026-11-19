@@ -2070,10 +2070,16 @@ video.adpic-thumb{ background: var(--bg); }
 
 .soc-text:focus{ outline: 2px solid var(--sky); outline-offset: 1px; }
 
-.soc-targets{ display: flex; gap: 1.5rem; margin: 0.9rem 0 0; align-items: center; }
+.soc-targets{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.5rem;
+  margin: 0.9rem 0 0;
+  align-items: center;
+}
 
 /* A platform posted by hand: a button, not a tick. */
-.soc-hand{ display: flex; align-items: center; gap: 0.55rem; }
+.soc-hand{ display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem; }
 
 .soc-hand .btn{ padding: 0.25rem 0.6rem; font-size: 0.82rem; }
 
@@ -2104,9 +2110,13 @@ video.adpic-thumb{ background: var(--bg); }
 /* Side by side while there is room: the whole point is comparing the
    two, and Facebook's card and X's post differ a lot for the same
    item. */
+/* min() and not a bare 290px: on a 360px phone the bare one makes a
+   column wider than the screen, the whole page scrolls sideways, and
+   the sticky top bar slides off with it — which is what "the little
+   bar has bugged" looks like. */
 .prevs{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr));
   gap: 1rem;
   margin: 0.6rem 0 0.5rem;
 }
@@ -2249,6 +2259,20 @@ video.adpic-thumb{ background: var(--bg); }
   color: #FF9AA5;
   font-size: 0.8rem;
 }
+
+/* Ανέβηκε; — η μόνη ερώτηση που δεν απαντιέται μόνη της. */
+.soc-ask{
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.soc-ask .btn{ padding: 0.2rem 0.65rem; font-size: 0.8rem; }
 
 @media (max-width: 700px){
   .soc-head img{ width: 88px; height: 50px; }

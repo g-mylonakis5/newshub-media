@@ -2767,10 +2767,23 @@ function socUp(it){
     (p.targets || []).forEach(function (t) {
       // Pending counts as up: it is on its way, and a second click
       // would double it.
-      if (!out[t]) out[t] = p.status;
+      if (!out[t]) out[t] = socState(p);
     });
   });
   return out;
+}
+
+// 'open' is the state nobody else has: we opened X with the post
+// written and then lost sight of it. Whether Post was pressed is known
+// to one person on earth, and they are holding the mouse.
+//
+// Everything that went out through an API left a receipt in results.
+// Anything marked done without one was opened, not posted, and must
+// not read as "already up" — that warning is only worth anything while
+// it is true.
+function socState(p){
+  if (p.status === 'done' && !p.results) return 'open';
+  return p.status;
 }
 
 var SOC_NAMES = { facebook: 'Facebook', x: 'X' };
@@ -2794,7 +2807,7 @@ function drawSocPicks(){
     var up = socUp(it);
     var marks = Object.keys(up).map(function (t) {
       return '<span class="soc-up">' + SOC_NAMES[t]
-        + (up[t] === 'pending' ? ' ⏳' : ' ✓') + '</span>';
+        + (up[t] === 'pending' ? ' ⏳' : up[t] === 'open' ? ' ?' : ' ✓') + '</span>';
     }).join('');
 
     return '<button type="button" class="pick'
@@ -2840,7 +2853,9 @@ function drawSocChosen(){
     ? it.ref
     : 'το λινκ της σελίδας μας — μπαίνει μόνο του';
 
-  var over = Object.keys(up).filter(function (t) { return soc.targets[t]; });
+  var over = Object.keys(up).filter(function (t) {
+    return soc.targets[t] && up[t] !== 'open';
+  });
 
   box.hidden = false;
   box.innerHTML = '<div class="soc-head">'
@@ -2862,7 +2877,9 @@ function drawSocChosen(){
     + '<div class="soc-targets">'
     + ['facebook', 'x'].map(function (t) {
       var was = up[t] ? ' <span class="soc-up">'
-        + (up[t] === 'pending' ? 'στην ουρά' : 'ανέβηκε ήδη') + '</span>' : '';
+        + (up[t] === 'pending' ? 'στην ουρά'
+          : up[t] === 'open' ? 'το άνοιξες — ανέβηκε;'
+          : 'ανέβηκε ήδη') + '</span>' : '';
 
       // Hand-posted: a button, not a tick. A tick would promise that
       // pressing Ανέβασέ το sends it, and it does not.
@@ -3169,10 +3186,14 @@ function drawSocLog(){
   }
 
   box.innerHTML = rows.map(function (p) {
-    var state_ = p.status === 'done' ? 'ok' : (p.status === 'error' ? 'bad' : 'wait');
+    var st = socState(p);
 
-    var label = p.status === 'done' ? 'ανέβηκε'
-      : (p.status === 'error' ? 'σφάλμα' : 'στην ουρά');
+    var state_ = st === 'done' ? 'ok' : (st === 'error' ? 'bad' : 'wait');
+
+    var label = st === 'done' ? 'ανέβηκε'
+      : st === 'error' ? 'σφάλμα'
+      : st === 'open' ? 'άνοιξε'
+      : 'στην ουρά';
 
     var where = (p.targets || []).map(function (t) {
       var r = (p.results || {})[t];
@@ -3197,8 +3218,52 @@ function drawSocLog(){
       + '<span class="soc-row-where">' + where + '</span>'
       + '<span class="soc-row-state">' + label + '</span>'
       + (notes.length ? '<span class="soc-row-note">' + esc(notes.join(' · ')) + '</span>' : '')
+
+      // The one question the admin cannot answer by itself. Asked once,
+      // in the row it belongs to, and the answer is what every "already
+      // up" warning afterwards is built on.
+      + (st === 'open'
+        ? '<span class="soc-ask">Ανέβηκε;'
+          + '<button type="button" class="btn btn--ghost" data-soc-yes="' + esc(p.id) + '">'
+          + 'Ναι</button>'
+          + '<button type="button" class="btn btn--ghost" data-soc-no="' + esc(p.id) + '">'
+          + 'Όχι</button></span>'
+        : '')
       + '</div>';
   }).join('');
+}
+
+// The editor's answer to "did it go up?". Yes writes the receipt the
+// hand-posted route cannot produce by itself — from then on the entry
+// counts as up, and the next person is warned before posting it twice.
+// No throws the entry away: nothing happened, so nothing should be
+// remembered.
+function socAnswer(id, yes){
+  var hit = null;
+  soc.file.posts.forEach(function (p) { if (p.id === id) hit = p; });
+  if (!hit) return;
+
+  if (yes) {
+    hit.status = 'done';
+    hit.results = {};
+    (hit.targets || []).forEach(function (t) {
+      hit.results[t] = { at: new Date().toISOString(), by: me.email || '' };
+    });
+    hit.note = 'Ανέβηκε με το χέρι. Το επιβεβαίωσε ο συντάκτης.';
+  } else {
+    soc.file.posts = soc.file.posts.filter(function (p) { return p.id !== id; });
+  }
+
+  drawSocLog();
+  if (soc.pick) drawSocChosen();
+  drawSocPicks();
+
+  api('social-queue', 'PUT', soc.file).then(function () {
+    say(yes ? 'Καταγράφηκε ως ανεβασμένο.' : 'Σβήστηκε.', 'ok');
+  }).catch(function (err) {
+    say('Δεν γράφτηκε: ' + err.message, 'bad');
+    socReload();
+  });
 }
 
 // Reads the queue again, to show what the workflow wrote back. Called
@@ -3244,9 +3309,9 @@ function socOpenX(t){
     image: socImage(it),
     text: String(soc.text || '').trim(),
     targets: [t],
-    status: 'done',
-    note: 'Άνοιξε ' + SOC_NAMES[t] + ' με το ποστ έτοιμο. Δεν επιβεβαιώνεται από εδώ '
-      + 'ότι πατήθηκε η δημοσίευση.',
+    status: 'open',
+    note: 'Άνοιξε ' + SOC_NAMES[t] + ' με το ποστ έτοιμο. Απάντησε στο «Ανέβηκε;» '
+      + 'για να μετρήσει ως ανεβασμένο.',
     at: new Date().toISOString(),
     by: me.email || '',
   };
@@ -3254,8 +3319,8 @@ function socOpenX(t){
   soc.file.posts.unshift(entry);
 
   api('social-queue', 'PUT', soc.file).then(function () {
-    say('Άνοιξε το ' + SOC_NAMES[t] + '. Έλεγξε ότι είσαι ο Newshub.gr και πάτα δημοσίευση.',
-      'ok');
+    say('Άνοιξε το ' + SOC_NAMES[t] + '. Έλεγξε ότι είσαι ο Newshub.gr, πάτα δημοσίευση '
+      + 'και μετά απάντησε «Ανέβηκε;» εδώ κάτω.', 'ok');
   }).catch(function (err) {
     soc.file.posts = soc.file.posts.filter(function (p) { return p.id !== entry.id; });
     say('Άνοιξε, αλλά δεν γράφτηκε στο ιστορικό: ' + err.message, 'bad');
@@ -3442,6 +3507,12 @@ function wireSocial(){
     if (open) socOpenX(open.dataset.socOpen);
 
     if (e.target.closest('[data-soc-photo]')) socPhoto();
+
+    var yes = e.target.closest('[data-soc-yes]');
+    if (yes) { socAnswer(yes.dataset.socYes, true); return; }
+
+    var no = e.target.closest('[data-soc-no]');
+    if (no) { socAnswer(no.dataset.socNo, false); return; }
     else if (e.target.closest('[data-soc-clear]')) socClear();
     else if (e.target.closest('[data-soc-send]')) socSend();
   });
