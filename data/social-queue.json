@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261119121503-video-VKbnuIwUluk",
+      "kind": "video",
+      "ref": "VKbnuIwUluk",
+      "link": "https://newshubmedia.gr/video/VKbnuIwUluk-petros-ioannou-ta-simerina-antiviotika-einai-daneika",
+      "title": "Πέτρος Ιωάννου: Τα σημερινά αντιβιοτικά είναι δανεικά απ'το μέλλον! Γιατί γίνονται επιβλαβή σε ίωση",
+      "image": "https://i.ytimg.com/vi/VKbnuIwUluk/maxresdefault.jpg",
+      "text": "Πέτρος Ιωάννου: Τα σημερινά αντιβιοτικά είναι δανεικά απ'το μέλλον! Γιατί γίνονται επιβλαβή σε ίωση",
+      "targets": [
+        "x"
+      ],
+      "status": "done",
+      "note": "Άνοιξε X με το ποστ έτοιμο. Δεν επιβεβαιώνεται από εδώ ότι πατήθηκε η δημοσίευση.",
+      "at": "2026-11-19T12:15:03.961Z",
+      "by": "g.mylonakis5@outlook.com"
+    },
+    {
       "id": "20261119121341-news-chania-2-15-ekat-eyro-gia-nea-diktya-ydreysis-se-oikismoys-toy-dimoy-platania",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/chania-2-15-ekat-eyro-gia-nea-diktya-ydreysis-se-oikismoys-toy-dimoy-platania",
