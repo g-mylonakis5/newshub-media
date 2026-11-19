@@ -1,5 +1,17 @@
 [
   {
+    "id": "kriti-pige-sto-liofyto-toy-kai-eide-ton-elaiokarpo-na-echei-kanei-ftera",
+    "title": "Κρήτη: Πήγε στο λιόφυτο του και είδε τον ελαιόκαρπο να έχει κάνει φτερά",
+    "url": "https://www.newshub.gr/el/kriti/kriti-pige-sto-liofyto-toy-kai-eide-ton-elaiokarpo-na-echei-kanei-ftera",
+    "date": "2026-11-19T17:31:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/liophyto.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/liophyto.jpg",
+    "summary": "Σοκ για ελαιοπαραγωγό στο Δήμο Βιάννου καθώς είδε τον ελαιόκαρπο που είχε μαζέψει με κόπο να γίνεται...καπνός.\r\n\r\nΣύμφωνα με όλα όσα έγιναν γνωστά, άγνωστοι ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "florina-kolona-tis-dei-epese-se-leoforeio-poy-metefere-mathites-trypise-tzami",
     "title": "Φλώρινα: Κολόνα της ΔΕΗ έπεσε σε λεωφορείο που μετέφερε μαθητές – Τρύπησε τζάμι",
     "url": "https://www.newshub.gr/el/ellada/florina-kolona-tis-dei-epese-se-leoforeio-poy-metefere-mathites-trypise-tzami",
@@ -225,7 +237,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/phylake.jpg",
     "summary": "Εκτός φυλακής αναμένεται να βρεθεί άμεσα ο 54χρονος άνδρας, ο οποίος στις αρχές του έτους είχε συλληφθεί μετά από καταγγελίες που είχαν γίνει σε βάρος του απ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "theloyme-synergasia-me-tin-ellada-leei-o-fintan-alla-stin-kypro-yparchoyn-dyo-krati",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/u2.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/u2.jpg",
     "summary": "Το ντουέτο του Μπόνο με την Ντόλι Πάρτον, «Torn» περιλαμβάνεται στο νέο άλμπουμ των U2 που κυκλοφόρησε πριν λίγες ώρες, ως φόρος τιμής στη βασίλι...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "i-nasa-kalei-olo-ton-planiti-na-strepsei-fakoys-kai-kinita-ston-oyrano-stis-17-noemvrioy",
-    "title": "Η Nasa καλεί όλο τον πλανήτη να στρέψει φακούς και κινητά στον ουρανό στις 17 Νοεμβρίου",
-    "url": "https://www.newshub.gr/el/tech-hub/i-nasa-kalei-olo-ton-planiti-na-strepsei-fakoys-kai-kinita-ston-oyrano-stis-17-noemvrioy",
-    "date": "2026-11-14T18:48:00.000Z",
-    "category": "Tech-Hub",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/screenshot-2026-11-14-173804.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/screenshot-2026-11-14-173804.jpg",
-    "summary": "Το Voyager 1 της NASA ετοιμάζεται να γράψει ιστορία, φτάνοντας σε απόσταση μίας ημέρας φωτός από τη Γη, εκεί όπου δεν έχει φτάσει κανένα ανθρώπινο κατασκεύ...",
     "author": null,
     "featured": false
   },
