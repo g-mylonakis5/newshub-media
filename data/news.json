@@ -1,5 +1,17 @@
 [
   {
+    "id": "myariadni-i-nea-dorean-psifiaki-efarmogi-tis-ellinikis-antikarkinikis-etaireias-gia-ogkologikoys-astheneis-kai-frontistes",
+    "title": "Myariadni: Η νέα δωρεάν ψηφιακή εφαρμογή της Ελληνικής Αντικαρκινικής Εταιρείας για ογκολογικούς ασθενείς και φροντιστές",
+    "url": "https://www.newshub.gr/el/ygeia/myariadni-i-nea-dorean-psifiaki-efarmogi-tis-ellinikis-antikarkinikis-etaireias-gia-ogkologikoys-astheneis-kai-frontistes",
+    "date": "2026-11-19T11:03:00.000Z",
+    "category": "Υγεία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/asthenes-gynaika-krebati-nosokomeio-prosopo-pexels.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/asthenes-gynaika-krebati-nosokomeio-prosopo-pexels.jpg",
+    "summary": "Μία νέα δωρεάν εφαρμογή μπορούν πλέον να αποκτήσουν οι ογκολογικοί ασθενείς και οι οικογένειές τους, ώστε να διευκολύνονται για την ανεύρεση νοσοκομειακών δο...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "ktimatologiko-grafeio-sto-irakleio-anagkaia-i-paremvasi-gia-tin-eyrythmi-leitoyrgia-toy",
     "title": "Κτηματολογικό Γραφείο στο Ηράκλειο - Αναγκαία η παρέμβαση για την εύρυθμη λειτουργία του",
     "url": "https://www.newshub.gr/el/kriti/ktimatologiko-grafeio-sto-irakleio-anagkaia-i-paremvasi-gia-tin-eyrythmi-leitoyrgia-toy",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/ktimatologio_irakleiou.jpg",
     "summary": "Ειδικό σχέδιο για την αποκατάσταση της λειτουργίας του Κτηματολογικού Γραφείου στο Ηράκλειο, με συγκεκριμένο χρονοδιάγραμμα και μετρήσιμους στόχους ζητάει με...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "pasok-paraitithike-aifnidiastika-apo-voyleytis-o-apostolos-panas-aichmes-gia-tin-igesia-toy-kommatos",
@@ -81,7 +93,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/hrthrth.jpg",
     "summary": "Το ενδεχόμενο να τεθούν περιορισμοί στη νέα δόμηση σε νησιά, όπως η Σαντορίνη, μέσω του νέου χωροταξικού σχεδιασμού για τον τουρισμό, ανέφερε ο πρωθυπουργός ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "na-valei-telos-sto-seri-tis-zalgkiris-thelei-o-panathinaikos",
@@ -7232,18 +7244,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/boak-erga.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/boak-erga.jpg",
     "summary": "Έκτακτες κυκλοφοριακές ρυθμίσεις τίθενται σε εφαρμογή από την Κυριακή 15 έως και την Τετάρτη 18 Νοεμβρίου 2026 στον κόμβο Μουρνιών του Βόρειου Οδικού Άξονα Κ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "fyli-fotia-se-egkataleleimmeno-ktirio-ypochorise-tmima-sto-esoteriko-dyo-pyrosvestes-choris-tis-aisthiseis-toys",
-    "title": "Φυλή: Φωτιά σε εγκαταλελειμμένο κτίριο – Υποχώρησε τμήμα στο εσωτερικό, δύο πυροσβέστες χωρίς τις αισθήσεις τους",
-    "url": "https://www.newshub.gr/el/ellada/fyli-fotia-se-egkataleleimmeno-ktirio-ypochorise-tmima-sto-esoteriko-dyo-pyrosvestes-choris-tis-aisthiseis-toys",
-    "date": "2026-11-14T12:33:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/pyrosbestike.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/pyrosbestike.jpg",
-    "summary": "Πυρκαγιά εκδηλώθηκε το πρωί σε εγκαταλελειμμένο κτίριο, επί της οδού Κατσαντώνη στον δήμο Φυλής. Σύμφωνα με τις πληροφορίες της ΕΡΤ, κατά τη διάρκεια της κατ...",
     "author": null,
     "featured": false
   },
