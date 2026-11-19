@@ -1,5 +1,17 @@
 [
   {
+    "id": "anavrasmos-stis-taxeis-ton-ktinotrofon-stin-kriti-anoikto-to-endechomeno-neon-mplokon-akomi-kai-prin-ta-christoygenna",
+    "title": "Αναβρασμός στις τάξεις των κτηνοτρόφων στην Κρήτη - Ανοικτό το ενδεχόμενο νέων μπλόκων ακόμη και πριν τα Χριστούγεννα",
+    "url": "https://www.newshub.gr/el/kriti/anavrasmos-stis-taxeis-ton-ktinotrofon-stin-kriti-anoikto-to-endechomeno-neon-mplokon-akomi-kai-prin-ta-christoygenna",
+    "date": "2026-11-19T07:20:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/agrotes-kinetopoiese-erakleioo.gif",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/agrotes-kinetopoiese-erakleioo.gif",
+    "summary": "Γενική Συνέλευση πραγματοποίησαν στα γραφεία της Ένωσης Ηρακλειου οι κτηνοτρόφοι στο Ηράκλειο χθες, προκειμένου να πάρουν αποφάσεις για το πώς θα κινηθούν απ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "italia-ayxanei-ta-kondylia-gia-tin-katapolemisi-ton-yvridikon-kai-ton-gnostikon-apeilon",
     "title": "Ιταλία: Αυξάνει τα κονδύλια για την καταπολέμηση των υβριδικών και των γνωστικών απειλών",
     "url": "https://www.newshub.gr/el/kosmos/italia-ayxanei-ta-kondylia-gia-tin-katapolemisi-ton-yvridikon-kai-ton-gnostikon-apeilon",
@@ -229,7 +241,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/archiepiskopou-makariou1.jpg",
     "summary": "Σάλος έχει προκληθεί από την περασμένη Δευτέρα, οπότε και ο Περιφερειάρχης Κρήτης κ. Σταύρος Αρναουτάκης έριξε τη «βόμβα» για τη Μονάδα του Εθνικ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "polemos-kato-apo-ti-gi-stin-oykrania-kryvontai-apo-ta-rosika-drones-mesa-se-agogo-fysikoy-aerioy-ti-apokalyptei-reporter-toy-bbc",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/nxnxe.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/nxnxe.jpg",
     "summary": "Ένα γαλλικό Comt&eacute;, που χρειάστηκε 24 μήνες ωρίμανσης για να αποκτήσει την ιδιαίτερη γεύση και υφή του, αναδείχθηκε το καλύτερο τυρί στον κόσμο για το ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "microsoft-telos-sto-pagkosmio-mplak-aoyt-epanilthan-teams-outlook-kai-copilot-oikonomikes-epiptoseis-kai-stin-ellada",
-    "title": "Microsoft: Τέλος στο παγκόσμιο μπλακ άουτ – Επανήλθαν Teams, Outlook και Copilot  - Οικονομικές επιπτώσεις και στην Ελλάδα",
-    "url": "https://www.newshub.gr/el/tech-hub/microsoft-telos-sto-pagkosmio-mplak-aoyt-epanilthan-teams-outlook-kai-copilot-oikonomikes-epiptoseis-kai-stin-ellada",
-    "date": "2026-11-14T06:00:00.000Z",
-    "category": "Tech-Hub",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/14-11/microsoft.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/14-11/microsoft.jpg",
-    "summary": "Η Microsoft ανακοίνωσε ότι αποκαταστάθηκε πλήρως η λειτουργία των υπηρεσιώνκατανάλωσης (όχι όλων των υπηρεσιών) που είχαν επηρεαστεί από την παγκόσμια διακοπ...",
     "author": null,
     "featured": false
   },
