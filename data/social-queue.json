@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-20T12:44:34.419Z",
       "by": "g.mylonakis5@outlook.com",
-      "link": "https://www.newshub.gr/el/kriti/lasithi-sta-cheria-tis-el-as-melos-egklimatikis-omadas-me-panelladiki-drasi-poy-exapatoyse-ilikiomenoys"
+      "link": "https://www.newshub.gr/el/kriti/lasithi-sta-cheria-tis-el-as-melos-egklimatikis-omadas-me-panelladiki-drasi-poy-exapatoyse-ilikiomenoys",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290096100156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290096100156174",
+          "at": "2026-11-20T12:44:51.704Z"
+        }
+      }
     },
     {
       "id": "20261120103544-news-katatethike-sti-voyli-o-kratikos-proypologismos-toy-2027",
