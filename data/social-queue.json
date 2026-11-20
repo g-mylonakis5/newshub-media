@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261120230426-news-kalodio-kritis-kyproy-ti-apanta-o-giorgos-gerapetritis-stis-kataggelies-peri-mystikis-diplomatias",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/kalodio-kritis-kyproy-ti-apanta-o-giorgos-gerapetritis-stis-kataggelies-peri-mystikis-diplomatias",
+      "title": "Καλώδιο Κρήτης – Κύπρου: Τι απαντά ο Γιώργος Γεραπετρίτης στις καταγγελίες περί «μυστικής διπλωματίας»",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/abeille-marengo-ploio-arxeio-1024x635.jpg",
+      "text": "Καλώδιο Κρήτης – Κύπρου: Τι απαντά ο Γιώργος Γεραπετρίτης στις καταγγελίες περί «μυστικής διπλωματίας»",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-20T23:04:26.510Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kriti/kalodio-kritis-kyproy-ti-apanta-o-giorgos-gerapetritis-stis-kataggelies-peri-mystikis-diplomatias"
+    },
+    {
       "id": "20261120230313-news-synagermos-gia-technologiko-sell-off-sti-wall-street-ola-ta-kerdi-toy-2026-echase-o-nasdaq",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/synagermos-gia-technologiko-sell-off-sti-wall-street-ola-ta-kerdi-toy-2026-echase-o-nasdaq",
