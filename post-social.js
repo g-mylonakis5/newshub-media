@@ -50,17 +50,21 @@ const X_LINK_COST = 23;
 // pages AND their photos. Everyone else gets 200. So a link straight to
 // an article gives a bare card: no photo, title "Just a moment...".
 //
-// build.js writes a share page per news item at /mf/<id>.html with the
-// same title, photo and summary, which forwards the reader on. Facebook
-// can read that one, because it is ours.
+// Πρώτη επιλογή: η δική μας σελίδα του άρθρου, /arthro/<id>. Έχει
+// ολόκληρο το κείμενο, δικά μας og tags και canonical προς το newshub.gr,
+// και καμία ανακατεύθυνση — ο crawler και ο αναγνώστης βλέπουν το ίδιο
+// πράγμα. Γι' αυτό προηγείται: η /mf/<id> δείχνει στον crawler μια
+// σελίδα και στέλνει τον άνθρωπο αλλού, που το Facebook το διαβάζει ως
+// cloaking και κόβει τη διανομή.
 //
-// Only for Facebook, and only for newshub.gr links: our own pages are
-// posted as they are. The moment the rule changes on their side, delete
-// this function and the call below.
+// Δεύτερη: η /mf/<id>, για όσα άρθρα δεν έχουμε σώμα και άρα δεν
+// παίρνουν σελίδα.
 //
-// If the share page is not up yet (the build runs on its own clock), we
-// post the real link anyway — a card without a photo beats a link to a
-// 404.
+// Τρίτη: το σκέτο λινκ τους. Κάρτα χωρίς φωτογραφία, αλλά ποτέ 404.
+//
+// Μόνο για το Facebook και μόνο για λινκ του newshub.gr: τα δικά μας
+// ανεβαίνουν όπως είναι. Μόλις ξεμπλοκάρουν το facebookexternalhit από
+// τη μεριά τους, όλη αυτή η συνάρτηση σβήνεται.
 async function facebookLink(post) {
   const link = String(post.link || '');
   if (!/^https:\/\/(www\.)?newshub\.gr\//.test(link)) return link;
@@ -70,16 +74,21 @@ async function facebookLink(post) {
 
   // Χωρίς .html: το Cloudflare Pages απαντά 308 στην κατάληξη και δεν
   // θέλουμε να στέλνουμε στο Facebook διεύθυνση που ανακατευθύνει.
-  const mirror = `${SITE_URL}/mf/${id}`;
-
-  try {
-    const res = await fetch(mirror, { method: 'HEAD', headers: { 'user-agent': 'newshub-media' } });
-    if (res.ok) return mirror;
-    console.warn(`  ⚠ η σελίδα μοιράσματος δεν είναι ακόμα στον αέρα (HTTP ${res.status}) — `
-      + 'πάει το κανονικό λινκ, χωρίς φωτογραφία στην κάρτα.');
-  } catch (err) {
-    console.warn(`  ⚠ δεν ελέγχθηκε η σελίδα μοιράσματος — ${err.message}`);
+  for (const url of [`${SITE_URL}/arthro/${id}`, `${SITE_URL}/mf/${id}`]) {
+    try {
+      const res = await fetch(url, {
+        method: 'HEAD',
+        redirect: 'manual',
+        headers: { 'user-agent': 'newshub-media' },
+      });
+      if (res.status >= 200 && res.status < 300) return url;
+    } catch (err) {
+      console.warn(`  ⚠ δεν ελέγχθηκε η ${url} — ${err.message}`);
+    }
   }
+
+  console.warn('  ⚠ ούτε σελίδα άρθρου ούτε σελίδα μοιράσματος στον αέρα — '
+    + 'πάει το κανονικό λινκ, χωρίς φωτογραφία στην κάρτα.');
 
   return link;
 }

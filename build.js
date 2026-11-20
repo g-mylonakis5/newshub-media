@@ -2066,6 +2066,13 @@ function articlePage(a, body, hasCat = false){
   const title = esc(a.title);
   const img = a.image_large || a.image_thumb || '';
 
+  // Το Cloudflare τους απαντά 403 στο facebookexternalhit — και για τις
+  // σελίδες τους και για τις φωτογραφίες τους. Άρα στην κάρτα δεν
+  // στέλνουμε ποτέ σκέτο static.newshub.gr: πρώτα η δική μας κάρτα, και
+  // αλλιώς το proxy μας, που ο crawler το διαβάζει κανονικά.
+  const share = cardFor(a.id)
+    || (img ? `${SITE_URL}/mf/img?u=${encodeURIComponent(img)}` : '');
+
   const text = articleBodyHtml(body);
 
   const words = body.reduce((n, p) => n + p.text.split(/\s+/).length, 0);
@@ -2130,6 +2137,7 @@ ${adSlot('article-end', 'leaderboard')}
     depth: 1,
     description: a.summary || a.title,
     image: img,
+    share,
     url: articleUrl(a),
     type: 'article',
     canonical: a.url,
