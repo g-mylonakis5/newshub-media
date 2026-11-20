@@ -534,7 +534,10 @@
       var xorismos = stage.dataset.embed.indexOf('?') < 0 ? '?' : '&';
       frame.src = stage.dataset.embed + xorismos + 'autoplay=1&rel=0';
       frame.title = document.title;
-      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture';
+      // Το fullscreen θέλει ΚΑΙ τα δύο: το allow, που είναι ο σημερινός
+      // τρόπος, και το allowFullscreen, που είναι ο παλιός. Χωρίς το
+      // πρώτο, το κουμπί πλήρους οθόνης του Facebook δεν κάνει τίποτα.
+      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen';
       frame.allowFullscreen = true;
       stage.appendChild(frame);
       audio.pause();

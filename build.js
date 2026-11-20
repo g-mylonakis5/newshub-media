@@ -4109,30 +4109,31 @@ function socialSection(){
     const title = decode(item.title || '');
     const pigi = item.platform === 'facebook' ? 'Facebook' : 'YouTube';
 
-    // Τα Reels δεν έχουν χωριστό τίτλο: όταν η περιγραφή είναι κενή,
-    // μένουμε χωρίς. Τότε δεν βγάζουμε άδεια γραμμή κάτω από την κάρτα,
-    // και το κουμπί λέει τουλάχιστον από πού είναι το βίντεο.
-    const label = title || `Βίντεο από ${pigi}`;
+    // Τα Reels δεν έχουν χωριστό τίτλο, μόνο περιγραφή — και αυτή είναι
+    // συχνά κενή. Τότε μπαίνει η ημερομηνία: κάτι να διαβάσει το μάτι,
+    // ώστε να μη στέκει η κάρτα κουτσή δίπλα στις άλλες.
+    const grammi = title || (item.date ? `Βίντεο της ${formatDate(item.date)}` : `Βίντεο από ${pigi}`);
 
     return `      <article class="reel-card">
         <div class="reel-stage stage-media" data-embed="${esc(reelEmbed(item))}"
-             role="button" tabindex="0" aria-label="Παίξε: ${esc(label)}">
+             role="button" tabindex="0" aria-label="Παίξε: ${esc(grammi)}">
           <img class="reel-pic" src="${esc(item.image)}" alt="${esc(title)}"
                loading="lazy" width="270" height="480">
           <span class="reel-play" aria-hidden="true"></span>
           <span class="reel-where">${pigi}</span>
         </div>
-${title ? `        <p class="reel-title"><a class="reel-link" href="${esc(item.url)}"
-           target="_blank" rel="noopener">${esc(title)}</a></p>` : ''}
+        <a class="reel-out" href="${esc(item.url)}" target="_blank" rel="noopener"
+           title="Άνοιγμα στο ${pigi}" aria-label="Άνοιγμα στο ${pigi}: ${esc(grammi)}">↗</a>
+        <p class="reel-title"><a class="reel-link" href="${esc(item.url)}"
+           target="_blank" rel="noopener">${esc(grammi)}</a></p>
       </article>`;
   }).join('\n');
 
   return `  <section class="must reels" aria-labelledby="reels-head">
     <div class="must-head">
       <p class="must-mark" id="reels-head">
+        <img class="reels-icon" src="shows/logo-icon.png" alt="" loading="lazy" width="512" height="512">
         <span class="must-word reels-word">Reels <em>and socials</em></span>
-        <span class="must-by">στο</span>
-        <img class="must-logo" src="shows/logo-newshub.png" alt="Newshub.gr" loading="lazy">
       </p>
       <a class="must-all" href="https://www.youtube.com/@newshubgr/shorts" target="_blank" rel="noopener">Όλα τα Shorts →</a>
     </div>
