@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-20T13:51:06.659Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/irakleio-ioannina-me-gemata-aeroplana-i-proti-pilotiki-syndesi"
+      "link": "https://www.newshub.gr/el/kriti/irakleio-ioannina-me-gemata-aeroplana-i-proti-pilotiki-syndesi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290103450156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290103450156174",
+          "at": "2026-11-20T13:51:56.481Z"
+        }
+      }
     },
     {
       "id": "20261120131452-news-ee-proeidopoiitiki-epistoli-stin-ellada-gia-mi-symmorfosi-me-ton-kanonismo-kata-tis-apopsilosis-ton-dason",
