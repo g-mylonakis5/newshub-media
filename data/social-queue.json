@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-20T15:22:20.908Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/oikonomia/ypoik-i-ellada-aporrofise-to-100-ton-poron-toy-tameioy-anakampsis-prasino-fos-komision-gia-ektamieysi-11-32-dis-eyro"
+      "link": "https://www.newshub.gr/el/oikonomia/ypoik-i-ellada-aporrofise-to-100-ton-poron-toy-tameioy-anakampsis-prasino-fos-komision-gia-ektamieysi-11-32-dis-eyro",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290113050156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290113050156174",
+          "at": "2026-11-20T15:22:40.351Z"
+        }
+      }
     },
     {
       "id": "20261120135227-news-anaptyxiaki-irakleioy-anoichtes-enimerotikes-synantiseis-gia-tin-1i-prosklisi-idiotikon-ergon-toy-programmatos-leader-2023-2027-1",
