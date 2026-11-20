@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-20T13:14:52.145Z",
       "by": "g.mylonakis5@outlook.com",
-      "link": "https://www.newshub.gr/el/perivallon/ee-proeidopoiitiki-epistoli-stin-ellada-gia-mi-symmorfosi-me-ton-kanonismo-kata-tis-apopsilosis-ton-dason"
+      "link": "https://www.newshub.gr/el/perivallon/ee-proeidopoiitiki-epistoli-stin-ellada-gia-mi-symmorfosi-me-ton-kanonismo-kata-tis-apopsilosis-ton-dason",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290098848156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290098848156174",
+          "at": "2026-11-20T13:15:18.054Z"
+        }
+      }
     },
     {
       "id": "20261120124434-news-lasithi-sta-cheria-tis-el-as-melos-egklimatikis-omadas-me-panelladiki-drasi-poy-exapatoyse-ilikiomenoys",
