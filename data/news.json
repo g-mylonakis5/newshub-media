@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-stin-anamoni-giatroi-kai-katoikoi-gia-ta-asfalistika-metra-gia-ti-monada-exartimenon-atomon-stin-archiepiskopoy-makarioy",
+    "title": "Ηράκλειο: Στην αναμονή γιατροί και κάτοικοι για τα ασφαλιστικά μέτρα για τη Μονάδα Εξαρτημένων ατόμων στην Αρχιεπισκόπου Μακαρίου",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-stin-anamoni-giatroi-kai-katoikoi-gia-ta-asfalistika-metra-gia-ti-monada-exartimenon-atomon-stin-archiepiskopoy-makarioy",
+    "date": "2026-11-20T14:33:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/gdrepheph.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/gdrepheph.jpg",
+    "summary": "Εν αναμονή της απόφασης για τα ασφαλιστικά μέτρα που κατατέθηκαν ενάντια στη δημιουργία της νέας δομής του Εθνικού Οργανισμού Πρόληψης και Αντιμετώπισης Εξαρ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "archaiologiko-moyseio-irakleioy-anavalletai-i-ekdilosi-toy-savvatoy-gia-ti-noimatodotisi-sti-chartografia-tis-kritis",
     "title": "Αρχαιολογικό Μουσείο Ηρακλείου: Αναβάλλεται η εκδήλωση του Σαββάτου για τη νοηματοδότηση στη χαρτογραφία της Κρήτης",
     "url": "https://www.newshub.gr/el/kriti/archaiologiko-moyseio-irakleioy-anavalletai-i-ekdilosi-toy-savvatoy-gia-ti-noimatodotisi-sti-chartografia-tis-kritis",
@@ -21,7 +33,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/kostas-achil-karamanles.jpg",
     "summary": "Κλήση σε απολογία για την Παρασκευή 27 Νοεμβρίου έλαβε ο πρώην υπουργός Μεταφορών και Υποδομών Κώστας Αχιλλέα Καραμανλής, από τον αρεοπαγίτη ανακριτή Ηλία Γι...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "poiniki-dioxi-gia-kakoyrgimata-stoys-15-syllifthentes-toy-kyklomatos-me-etaireies-vitrina",
@@ -7220,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/analyseis-27.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/analyseis-27.jpg",
     "summary": "Ο Τάσος Τσιπλάκος, γεωπολιτικός αναλυτής και σύμβουλος στρατηγικής, υπεύθυνος της πλατφόρμας ενημέρωσης South East Med Energy and Defence, μίλησε  ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "irakleio-synelifthisan-oi-goneis-toy-1-5-etoys-paidioy-poy-pethane-meta-apo-kataposi-venzinis",
-    "title": "Ηράκλειο: Συνελήφθησαν οι γονείς του 1,5 έτους παιδιού που πέθανε μετά από κατάποση βενζίνης",
-    "url": "https://www.newshub.gr/el/kriti/irakleio-synelifthisan-oi-goneis-toy-1-5-etoys-paidioy-poy-pethane-meta-apo-kataposi-venzinis",
-    "date": "2026-11-16T05:07:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/moro-1024x577.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/moro-1024x577.jpg",
-    "summary": "Με χειροπέδες βρέθηκαν οι γονείς του 1,5 έτους παιδιού που έσβησε μετά από κατάποση βενζίνης στο Ηράκλειο.\r\n\r\nΗ τραγωδία με το άτυχο παιδί συγκλονίζει από χθ...",
     "author": null,
     "featured": false
   },
