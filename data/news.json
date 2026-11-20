@@ -1,5 +1,17 @@
 [
   {
+    "id": "archaiologiko-moyseio-irakleioy-anavalletai-i-ekdilosi-toy-savvatoy-gia-ti-noimatodotisi-sti-chartografia-tis-kritis",
+    "title": "Αρχαιολογικό Μουσείο Ηρακλείου: Αναβάλλεται η εκδήλωση του Σαββάτου για τη νοηματοδότηση στη χαρτογραφία της Κρήτης",
+    "url": "https://www.newshub.gr/el/kriti/archaiologiko-moyseio-irakleioy-anavalletai-i-ekdilosi-toy-savvatoy-gia-ti-noimatodotisi-sti-chartografia-tis-kritis",
+    "date": "2026-11-20T14:24:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/enxgthxg.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/enxgthxg.jpg",
+    "summary": "Αναβάλλεται η προγραμματισμένη για το Σάββατο 21 Νοεμβρίου, εκδήλωση του Αρχαιολογικού Μουσείου Ηρακλείου, για τη νοηματοδότηση στη χαρτογραφία της Κρήτης.\r\n...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "poiniki-dioxi-gia-kakoyrgimata-stoys-15-syllifthentes-toy-kyklomatos-me-etaireies-vitrina",
     "title": "Ποινική δίωξη για κακουργήματα στους 15 συλληφθέντες του κυκλώματος με εταιρείες-βιτρίνα",
     "url": "https://www.newshub.gr/el/ellada/poiniki-dioxi-gia-kakoyrgimata-stoys-15-syllifthentes-toy-kyklomatos-me-etaireies-vitrina",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/aade.jpg",
     "summary": "Κακουργηματική ποινική δίωξη ασκήθηκε σε βάρος των 15 συλληφθέντων που φέρονται ως μέλη του νέου κυκλώματος φοροδιαφυγής που εξάρθρωσε η υπηρεσία ΔΕΟΣ της ΑΑ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "paraitithike-o-anexartitos-voyleytis-giorgos-psychogios-eiche-eklegei-me-syriza-kai-odeyei-pros-tsipra",
@@ -7225,18 +7237,6 @@
       "url": "https://www.newshub.gr/el/christoforos-papadakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
-    "featured": false
-  },
-  {
-    "id": "ypothesi-giorgoy-mazonaki-63chroni-ypnotherapeytria-ekane-minysi-stin-56chroni-giatro-ta-sovara-provlimata-meta-tin-plasmafairesi",
-    "title": "Υπόθεση Γιώργου Μαζωνάκη: 63χρονη υπνοθεραπεύτρια έκανε μήνυση στην 56χρονη γιατρό – Τα σοβαρά προβλήματα μετά την πλασμαφαίρεση",
-    "url": "https://www.newshub.gr/el/kriti/ypothesi-giorgoy-mazonaki-63chroni-ypnotherapeytria-ekane-minysi-stin-56chroni-giatro-ta-sovara-provlimata-meta-tin-plasmafairesi",
-    "date": "2026-11-15T21:50:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/iatreio-kolonaki-mazonakis.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/iatreio-kolonaki-mazonakis.jpg",
-    "summary": "Νέα μήνυση κατατέθηκε κατά της 56χρονης προφυλακισμένης γιατρού της Καρνεάδου, η οποία βρίσκεται στο επίκεντρο της έρευνας μετά τον θάνατο του Γιώργου Μαζωνά...",
-    "author": null,
     "featured": false
   },
   {
