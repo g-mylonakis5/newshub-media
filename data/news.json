@@ -1,5 +1,17 @@
 [
   {
+    "id": "thema-newshub-gr-chamiles-oi-times-ladioy-sto-chorafi-ypsiles-sto-rafi-poso-kostizei-se-soyper-market-toy-exoterikoy-foto",
+    "title": "Θέμα Newshub.gr: Χαμηλές οι τιμές λαδιού στο χωράφι, υψηλές στο ράφι - Πόσο κοστίζει σε σούπερ μάρκετ του εξωτερικού (Φωτο)",
+    "url": "https://www.newshub.gr/el/kriti/thema-newshub-gr-chamiles-oi-times-ladioy-sto-chorafi-ypsiles-sto-rafi-poso-kostizei-se-soyper-market-toy-exoterikoy-foto",
+    "date": "2026-11-20T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/ladaki2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/ladaki2.jpg",
+    "summary": "Μόνο προβληματισμό, απογοήτευση και ανησυχία προκαλούν οι χαμηλες τιμές του ελαιολάδου, στις τάξεις των ελαιοπαραγωγών στην Κρήτη.\r\n\r\nΟπως έχει γράψει το new...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "kit-epiviosis-72-oron-ti-apothikeyoyn-oi-ellines-sta-spitia-toys-ektoxeythikan-kai-stin-ellada-oi-poliseis",
     "title": "Κιτ επιβίωσης 72 ωρών: Τι αποθηκεύουν οι Έλληνες στα σπίτια τους-Εκτοξεύθηκαν και στην Ελλάδα οι πωλήσεις",
     "url": "https://www.newshub.gr/el/ellada/kit-epiviosis-72-oron-ti-apothikeyoyn-oi-ellines-sta-spitia-toys-ektoxeythikan-kai-stin-ellada-oi-poliseis",
@@ -45,7 +57,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/ramford-990x660mi7y.jpg",
     "summary": "Ξεκλείδωσαν οι σεισμικές έρευνες της Chevron για τον εντοπισμό πιθανών κοιτασμάτων με υδρογονάνθρακες στην Ελλάδα. Οι Τεξανοί του αμερικανικού πετρελαϊκού κο...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "marlon-tzakson-apokalypse-oti-paschei-apo-karkino-toy-prostati-sto-stadio-4-1",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/tra.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/tra.jpg",
     "summary": "Αυξημένα μέτρα ασφαλείας φέρονται να έχουν ενεργοποιήσει οι αμερικανικές αρχές, μετά από πληροφορίες για ενδεχόμενο σχέδιο επίθεσης του Ιράν με drones εναντί...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "pos-mia-anavathmisi-toy-systimatos-tis-faa-parelyse-tis-aerometafores-stis-ipa-pote-anamenetai-apokatastasi-ton-ptiseon",
-    "title": "Πώς μια αναβάθμιση του συστήματος της Faa παρέλυσε τις αερομεταφορές στις ΗΠΑ: Πότε αναμένεται αποκατάσταση των πτήσεων",
-    "url": "https://www.newshub.gr/el/kosmos/pos-mia-anavathmisi-toy-systimatos-tis-faa-parelyse-tis-aerometafores-stis-ipa-pote-anamenetai-apokatastasi-ton-ptiseon",
-    "date": "2026-11-15T07:20:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/usa_aerodromia_mk.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/usa_aerodromia_mk.jpg",
-    "summary": "Οι εργασίες συντήρησης και αναβάθμισης του απαρχαιωμένου συστήματος τηλεπικοινωνιών της αμερικανικής Υπηρεσίας Πολιτικής Αεροπορίας (FAA) βρίσκονται πίσω από...",
     "author": null,
     "featured": false
   },
