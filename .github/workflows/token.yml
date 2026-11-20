@@ -1,0 +1,32 @@
+name: Έλεγχος token
+
+# Λέει πότε λήγει το FB_PAGE_TOKEN, χωρίς να το αποκαλύψει. Τα Secrets
+# είναι μονόδρομα — αυτό είναι ο μόνος τρόπος να μάθουμε τι έχουμε.
+#
+# Τρέχει μόνο με το χέρι: Actions → Έλεγχος token → Run workflow.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  elegchos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Τι ξέρει το Facebook για το token μας
+        env:
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          # Προαιρετικά. Χωρίς αυτά το token ρωτάει για τον εαυτό του,
+          # που συνήθως φτάνει.
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+        run: node fb-token.js
