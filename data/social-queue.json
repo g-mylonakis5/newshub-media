@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-20T23:04:26.510Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/kalodio-kritis-kyproy-ti-apanta-o-giorgos-gerapetritis-stis-kataggelies-peri-mystikis-diplomatias"
+      "link": "https://www.newshub.gr/el/kriti/kalodio-kritis-kyproy-ti-apanta-o-giorgos-gerapetritis-stis-kataggelies-peri-mystikis-diplomatias",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290152596156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290152596156174",
+          "at": "2026-11-20T23:04:44.610Z"
+        }
+      }
     },
     {
       "id": "20261120230313-news-synagermos-gia-technologiko-sell-off-sti-wall-street-ola-ta-kerdi-toy-2026-echase-o-nasdaq",
