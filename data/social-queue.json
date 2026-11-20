@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261120131452-news-ee-proeidopoiitiki-epistoli-stin-ellada-gia-mi-symmorfosi-me-ton-kanonismo-kata-tis-apopsilosis-ton-dason",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/perivallon/ee-proeidopoiitiki-epistoli-stin-ellada-gia-mi-symmorfosi-me-ton-kanonismo-kata-tis-apopsilosis-ton-dason",
+      "title": "ΕΕ: Προειδοποιητική επιστολή στην Ελλάδα για μη συμμόρφωση με τον κανονισμό κατά της αποψίλωσης των δασών",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/ymittos1-1000x800.jpg",
+      "text": "ΕΕ: Προειδοποιητική επιστολή στην Ελλάδα για μη συμμόρφωση με τον κανονισμό κατά της αποψίλωσης των δασών",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-20T13:14:52.145Z",
+      "by": "g.mylonakis5@outlook.com",
+      "link": "https://www.newshub.gr/el/perivallon/ee-proeidopoiitiki-epistoli-stin-ellada-gia-mi-symmorfosi-me-ton-kanonismo-kata-tis-apopsilosis-ton-dason"
+    },
+    {
       "id": "20261120124434-news-lasithi-sta-cheria-tis-el-as-melos-egklimatikis-omadas-me-panelladiki-drasi-poy-exapatoyse-ilikiomenoys",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/lasithi-sta-cheria-tis-el-as-melos-egklimatikis-omadas-me-panelladiki-drasi-poy-exapatoyse-ilikiomenoys",
