@@ -4109,16 +4109,21 @@ function socialSection(){
     const title = decode(item.title || '');
     const pigi = item.platform === 'facebook' ? 'Facebook' : 'YouTube';
 
+    // Τα Reels δεν έχουν χωριστό τίτλο: όταν η περιγραφή είναι κενή,
+    // μένουμε χωρίς. Τότε δεν βγάζουμε άδεια γραμμή κάτω από την κάρτα,
+    // και το κουμπί λέει τουλάχιστον από πού είναι το βίντεο.
+    const label = title || `Βίντεο από ${pigi}`;
+
     return `      <article class="reel-card">
         <div class="reel-stage stage-media" data-embed="${esc(reelEmbed(item))}"
-             role="button" tabindex="0" aria-label="Παίξε: ${esc(title)}">
+             role="button" tabindex="0" aria-label="Παίξε: ${esc(label)}">
           <img class="reel-pic" src="${esc(item.image)}" alt="${esc(title)}"
                loading="lazy" width="270" height="480">
           <span class="reel-play" aria-hidden="true"></span>
           <span class="reel-where">${pigi}</span>
         </div>
-        <p class="reel-title"><a class="reel-link" href="${esc(item.url)}"
-           target="_blank" rel="noopener">${esc(title)}</a></p>
+${title ? `        <p class="reel-title"><a class="reel-link" href="${esc(item.url)}"
+           target="_blank" rel="noopener">${esc(title)}</a></p>` : ''}
       </article>`;
   }).join('\n');
 

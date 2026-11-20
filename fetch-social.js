@@ -12,6 +12,14 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)';
 // future "all social" page.
 const MAX_SHORTS = 24;
 
+// Το ίδιο, για τα Reels της σελίδας μας στο Facebook.
+const MAX_REELS = 24;
+
+// Το Facebook αποσύρει έκδοση του Graph API περίπου δύο χρόνια μετά την
+// κυκλοφορία της. Αν σταματήσει να απαντάει, ανέβασε τον αριθμό — ή
+// δώσε FB_API_VERSION και μην πειράξεις το αρχείο. Ίδιο με post-social.js.
+const FB_VERSION = process.env.FB_API_VERSION || 'v23.0';
+
 // ---------------------------------------------------------------------
 // Network
 // ---------------------------------------------------------------------
@@ -161,6 +169,24 @@ async function imerominies(ids) {
 // Ό,τι ημερομηνία ξέρουμε ήδη από το αρχείο της προηγούμενης φοράς. Ένα
 // Short βγαίνει από τα 15 του RSS μέσα σε λίγες μέρες· χωρίς αυτό θα
 // έχανε την ημερομηνία του και θα ξανάπεφτε στο τέλος της λωρίδας.
+// Οι εγγραφές μιας πλατφόρμας όπως τις είχε το αρχείο την προηγούμενη
+// φορά. Δίχτυ για όταν η πηγή δεν απαντήσει — δες το main.
+function apoPalio(platform) {
+  try {
+    const raw = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8'));
+    if (!Array.isArray(raw)) return [];
+
+    const palia = raw.filter((x) => x && x.platform === platform);
+    if (palia.length) {
+      console.warn(`ΠΡΟΣΟΧΗ: τίποτα από ${platform} — κρατάω τα ${palia.length} `
+        + 'της προηγούμενης φοράς.');
+    }
+    return palia;
+  } catch {
+    return [];
+  }
+}
+
 function palies() {
   const map = new Map();
   try {
@@ -233,6 +259,125 @@ async function fetchShorts() {
   }
 
   console.log(`YouTube Shorts: ${out.length} από ${ids.length} που βρέθηκαν`);
+  return out;
+}
+
+// ---------------------------------------------------------------------
+// Facebook Reels
+// ---------------------------------------------------------------------
+
+// Τα Reels της δικής μας σελίδας, μέσω Graph API. Θέλει τα ίδια δύο
+// κλειδιά με το post-social.js — χωρίς αυτά απλώς δεν μπαίνει τίποτα.
+//
+// Η τεκμηρίωση του /{page-id}/video_reels δεν λέει ποια πεδία διαβάζονται:
+// το δικό τους παράδειγμα δείχνει μόνο id και updated_time. Ζητάμε όσα
+// μας χρειάζονται και, αν το API τα απορρίψει, ξαναρωτάμε με λιγότερα.
+// Έτσι δεν χρειάζεται να μαντέψουμε σωστά με την πρώτη.
+const REEL_FIELDS = [
+  'id,created_time,updated_time,description,permalink_url,picture,thumbnails{uri,width,height}',
+  'id,created_time,description,permalink_url,picture',
+  'id,updated_time,description,permalink_url',
+  'id,updated_time',
+];
+
+async function graph(url) {
+  const res = await get(url);
+
+  let data = null;
+  try {
+    data = JSON.parse(res.body);
+  } catch {
+    data = null;
+  }
+
+  return { code: res.code, data };
+}
+
+async function fetchReels() {
+  const env = readEnv();
+  const pageId = env.FB_PAGE_ID || process.env.FB_PAGE_ID || '';
+  const token = env.FB_PAGE_TOKEN || process.env.FB_PAGE_TOKEN || '';
+
+  if (!pageId || !token) {
+    console.log('Facebook Reels: χωρίς FB_PAGE_ID/FB_PAGE_TOKEN, τα προσπερνώ.');
+    return [];
+  }
+
+  let data = null;
+
+  for (const fields of REEL_FIELDS) {
+    const url = `https://graph.facebook.com/${FB_VERSION}/${pageId}/video_reels`
+      + `?fields=${encodeURIComponent(fields)}&limit=${MAX_REELS}`
+      + `&access_token=${encodeURIComponent(token)}`;
+
+    const res = await graph(url);
+
+    if (res.code === 200 && res.data && Array.isArray(res.data.data)) {
+      data = res.data.data;
+      break;
+    }
+
+    const minima = res.data && res.data.error && res.data.error.message;
+
+    // 400 με παράπονο για πεδίο σημαίνει «ζήτησες κάτι που δεν υπάρχει»
+    // — δοκιμάζουμε πιο φτωχό σύνολο. Οτιδήποτε άλλο είναι αληθινό
+    // πρόβλημα (ληγμένο token, δικαιώματα) και δεν το κρύβουμε.
+    if (res.code === 400 && /field|nonexisting|parse/i.test(String(minima))) {
+      console.warn(`  δοκιμάζω λιγότερα πεδία — ${minima}`);
+      continue;
+    }
+
+    console.warn(`ΠΡΟΣΟΧΗ: τα Facebook Reels δεν ήρθαν (HTTP ${res.code})`
+      + (minima ? ` — ${minima}` : ''));
+    return [];
+  }
+
+  if (!data) {
+    console.warn('ΠΡΟΣΟΧΗ: το video_reels δεν δέχτηκε κανένα σύνολο πεδίων.');
+    return [];
+  }
+
+  const out = [];
+
+  for (const reel of data) {
+    if (!reel || !reel.id) continue;
+
+    // Η μικρογραφία: πρώτα ό,τι έδωσε το thumbnails, που είναι σε κανονικό
+    // μέγεθος, και αλλιώς το picture, που είναι μικρό αλλά υπάρχει πάντα.
+    const thumbs = (reel.thumbnails && reel.thumbnails.data) || [];
+    const kalyteri = thumbs.slice().sort((a, b) => (b.width || 0) - (a.width || 0))[0];
+    const image = (kalyteri && kalyteri.uri) || reel.picture || '';
+
+    if (!image) {
+      console.warn(`ΠΡΟΣΟΧΗ: Reel χωρίς εικόνα, το παραλείπω — ${reel.id}`);
+      continue;
+    }
+
+    // Το permalink_url έρχεται σχετικό, της μορφής /reel/123.
+    const url = reel.permalink_url
+      ? new URL(reel.permalink_url, 'https://www.facebook.com').href
+      : `https://www.facebook.com/reel/${reel.id}`;
+
+    // Η πρώτη γραμμή της περιγραφής κάνει για τίτλο. Τα Reels δεν έχουν
+    // χωριστό τίτλο, και η περιγραφή είναι συχνά ολόκληρη παράγραφος.
+    const title = String(reel.description || '')
+      .split('\n')
+      .map((s) => s.trim())
+      .find(Boolean) || '';
+
+    out.push({
+      id: `fb-${reel.id}`,
+      platform: 'facebook',
+      title: title.slice(0, 160),
+      url,
+      image,
+      width: (kalyteri && kalyteri.width) || 0,
+      height: (kalyteri && kalyteri.height) || 0,
+      date: reel.created_time || reel.updated_time || '',
+    });
+  }
+
+  console.log(`Facebook Reels: ${out.length} από ${data.length} που ήρθαν`);
   return out;
 }
 
@@ -328,9 +473,17 @@ function slug(url) {
 
 async function main() {
   const shorts = await fetchShorts();
+  const reels = await fetchReels();
   const manual = await fetchManual();
 
-  const items = [...manual, ...shorts];
+  // Με δύο πηγές, η μία μπορεί να πέσει ενώ η άλλη απαντάει — και τότε
+  // η λωρίδα θα γέμιζε μόνο με τη μισή. Ό,τι λείπει, το δανειζόμαστε
+  // από το αρχείο της προηγούμενης φοράς: καλύτερα παλιό Short παρά
+  // λωρίδα μόνο με Facebook επειδή το YouTube είχε κακή μέρα.
+  const shortsTeliko = shorts.length ? shorts : apoPalio('youtube');
+  const reelsTeliko = reels.length ? reels : apoPalio('facebook');
+
+  const items = [...manual, ...reelsTeliko, ...shortsTeliko];
 
   // Οι ημερομηνίες: ό,τι λέει το API σήμερα, πάνω σε ό,τι είχαμε μάθει
   // τις προηγούμενες φορές. Το API κερδίζει, γιατί είναι η πηγή — το

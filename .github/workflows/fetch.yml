@@ -70,6 +70,10 @@ jobs:
         continue-on-error: true
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          # Για τα Facebook Reels στο fetch-social.js. Αν λείπουν,
+          # μαζεύονται μόνο τα YouTube Shorts και δεν σπάει τίποτα.
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
         run: |
           node fetch-videos.js
           node fetch-transcripts.js
