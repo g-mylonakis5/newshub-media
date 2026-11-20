@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261120135227-news-anaptyxiaki-irakleioy-anoichtes-enimerotikes-synantiseis-gia-tin-1i-prosklisi-idiotikon-ergon-toy-programmatos-leader-2023-2027-1",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/anaptyxiaki-irakleioy-anoichtes-enimerotikes-synantiseis-gia-tin-1i-prosklisi-idiotikon-ergon-toy-programmatos-leader-2023-2027-1",
+      "title": "Αναπτυξιακή Ηρακλείου: Ανοιχτές ενημερωτικές συναντήσεις για την 1η πρόσκληση ιδιωτικών έργων του προγράμματος Leader 2023-2027",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/anaptyxiake-erakleiou555phd.jpg",
+      "text": "Αναπτυξιακή Ηρακλείου: Ανοιχτές ενημερωτικές συναντήσεις για την 1η πρόσκληση ιδιωτικών έργων του προγράμματος Leader 2023-2027",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-20T13:52:27.893Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kriti/anaptyxiaki-irakleioy-anoichtes-enimerotikes-synantiseis-gia-tin-1i-prosklisi-idiotikon-ergon-toy-programmatos-leader-2023-2027-1"
+    },
+    {
       "id": "20261120135106-news-irakleio-ioannina-me-gemata-aeroplana-i-proti-pilotiki-syndesi",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/irakleio-ioannina-me-gemata-aeroplana-i-proti-pilotiki-syndesi",
@@ -11,17 +27,10 @@
         "facebook",
         "x"
       ],
-      "status": "done",
+      "status": "pending",
       "at": "2026-11-20T13:51:06.659Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/irakleio-ioannina-me-gemata-aeroplana-i-proti-pilotiki-syndesi",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290103450156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290103450156174",
-          "at": "2026-11-20T13:51:56.481Z"
-        }
-      }
+      "link": "https://www.newshub.gr/el/kriti/irakleio-ioannina-me-gemata-aeroplana-i-proti-pilotiki-syndesi"
     },
     {
       "id": "20261120131452-news-ee-proeidopoiitiki-epistoli-stin-ellada-gia-mi-symmorfosi-me-ton-kanonismo-kata-tis-apopsilosis-ton-dason",
