@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/enxgthxg.jpg",
     "summary": "Αναβάλλεται η προγραμματισμένη για το Σάββατο 21 Νοεμβρίου, εκδήλωση του Αρχαιολογικού Μουσείου Ηρακλείου, για τη νοηματοδότηση στη χαρτογραφία της Κρήτης.\r\n...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": " tempi-se-apologia-27-noemvrioy-kaleitai-o-kostas-achillea-karamanlis-apo-ton-areio-pago",
+    "title": "Τέμπη: Σε απολογία στις 27 Νοεμβρίου καλείται ο Κώστας Αχιλλέα Καραμανλής από τον Άρειο Πάγο",
+    "url": "https://www.newshub.gr/el/ellada/ tempi-se-apologia-27-noemvrioy-kaleitai-o-kostas-achillea-karamanlis-apo-ton-areio-pago",
+    "date": "2026-11-20T14:17:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/kostas-achil-karamanles.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/kostas-achil-karamanles.jpg",
+    "summary": "Κλήση σε απολογία για την Παρασκευή 27 Νοεμβρίου έλαβε ο πρώην υπουργός Μεταφορών και Υποδομών Κώστας Αχιλλέα Καραμανλής, από τον αρεοπαγίτη ανακριτή Ηλία Γι...",
+    "author": null,
     "featured": true
   },
   {
@@ -7221,22 +7233,6 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/moro-1024x577.jpg",
     "summary": "Με χειροπέδες βρέθηκαν οι γονείς του 1,5 έτους παιδιού που έσβησε μετά από κατάποση βενζίνης στο Ηράκλειο.\r\n\r\nΗ τραγωδία με το άτυχο παιδί συγκλονίζει από χθ...",
     "author": null,
-    "featured": false
-  },
-  {
-    "id": "krisimi-pagkritia-syneleysi-agroton-kai-ktinotrofon-organonetai-gia-tin-erchomeni-tetarti-kai-isos-apofasistoyn-kinitopoiiseis",
-    "title": "Κρίσιμη παγκρήτια συνέλευση αγροτών και κτηνοτρόφων οργανώνεται για την ερχόμενη Τετάρτη και ίσως αποφασιστούν κινητοποιήσεις",
-    "url": "https://www.newshub.gr/el/kriti/krisimi-pagkritia-syneleysi-agroton-kai-ktinotrofon-organonetai-gia-tin-erchomeni-tetarti-kai-isos-apofasistoyn-kinitopoiiseis",
-    "date": "2026-11-16T05:00:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/agrotes-kinetopoiese-3.gif",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/agrotes-kinetopoiese-3.gif",
-    "summary": "Όλο τον πρωτογενή τομέα θα καλύψει σε θεματολογία η εκδήλωση του Κτηνοτροφικού Συλλόγου Ηρακλείου, που ορίστηκε για την ερχόμενη Τετάρτη 18 Νοεμβρίου, με στό...",
-    "author": {
-      "name": "Χριστόφορος Παπαδάκης",
-      "url": "https://www.newshub.gr/el/christoforos-papadakis",
-      "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
-    },
     "featured": false
   },
   {
