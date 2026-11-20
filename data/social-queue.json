@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261120230313-news-synagermos-gia-technologiko-sell-off-sti-wall-street-ola-ta-kerdi-toy-2026-echase-o-nasdaq",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/synagermos-gia-technologiko-sell-off-sti-wall-street-ola-ta-kerdi-toy-2026-echase-o-nasdaq",
+      "title": "Συναγερμός για τεχνολογικό Sell Off στη Wall Street – Ολα τα κέρδη του 2026 έχασε ο Nasdaq",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/maketa-wall-street.jpg",
+      "text": "Συναγερμός για τεχνολογικό Sell Off στη Wall Street – Ολα τα κέρδη του 2026 έχασε ο Nasdaq",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-20T23:03:13.629Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/oikonomia/synagermos-gia-technologiko-sell-off-sti-wall-street-ola-ta-kerdi-toy-2026-echase-o-nasdaq"
+    },
+    {
       "id": "20261120230256-news-alvertos-kai-charlene-gia-proti-fora-me-ton-jacques-kai-tin-gabriella-sti-giorti-toy-monako-vinteo",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/sugar/alvertos-kai-charlene-gia-proti-fora-me-ton-jacques-kai-tin-gabriella-sti-giorti-toy-monako-vinteo",
@@ -11,17 +27,10 @@
         "facebook",
         "x"
       ],
-      "status": "done",
+      "status": "pending",
       "at": "2026-11-20T23:02:56.237Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/sugar/alvertos-kai-charlene-gia-proti-fora-me-ton-jacques-kai-tin-gabriella-sti-giorti-toy-monako-vinteo",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290152416156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290152416156174",
-          "at": "2026-11-20T23:03:13.011Z"
-        }
-      }
+      "link": "https://www.newshub.gr/el/sugar/alvertos-kai-charlene-gia-proti-fora-me-ton-jacques-kai-tin-gabriella-sti-giorti-toy-monako-vinteo"
     },
     {
       "id": "20261120152220-news-ypoik-i-ellada-aporrofise-to-100-ton-poron-toy-tameioy-anakampsis-prasino-fos-komision-gia-ektamieysi-11-32-dis-eyro",
