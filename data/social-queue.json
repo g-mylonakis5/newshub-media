@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-20T23:03:13.629Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/oikonomia/synagermos-gia-technologiko-sell-off-sti-wall-street-ola-ta-kerdi-toy-2026-echase-o-nasdaq"
+      "link": "https://www.newshub.gr/el/oikonomia/synagermos-gia-technologiko-sell-off-sti-wall-street-ola-ta-kerdi-toy-2026-echase-o-nasdaq",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290152446156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290152446156174",
+          "at": "2026-11-20T23:03:31.332Z"
+        }
+      }
     },
     {
       "id": "20261120230256-news-alvertos-kai-charlene-gia-proti-fora-me-ton-jacques-kai-tin-gabriella-sti-giorti-toy-monako-vinteo",
@@ -27,10 +34,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-20T23:02:56.237Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/sugar/alvertos-kai-charlene-gia-proti-fora-me-ton-jacques-kai-tin-gabriella-sti-giorti-toy-monako-vinteo"
+      "link": "https://www.newshub.gr/el/sugar/alvertos-kai-charlene-gia-proti-fora-me-ton-jacques-kai-tin-gabriella-sti-giorti-toy-monako-vinteo",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290152476156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290152476156174",
+          "at": "2026-11-20T23:03:35.555Z"
+        }
+      }
     },
     {
       "id": "20261120152220-news-ypoik-i-ellada-aporrofise-to-100-ton-poron-toy-tameioy-anakampsis-prasino-fos-komision-gia-ektamieysi-11-32-dis-eyro",
