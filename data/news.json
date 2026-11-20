@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-kakoyrgimatikes-dioxeis-ston-17chrono-kai-ton-patera-toy-gia-tis-cheirovomvides-kai-ta-opla",
+    "title": "Ηράκλειο: Κακουργηματικές διώξεις στον 17χρονο και τον πατέρα του για τις χειροβομβίδες και τα όπλα",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-kakoyrgimatikes-dioxeis-ston-17chrono-kai-ton-patera-toy-gia-tis-cheirovomvides-kai-ta-opla",
+    "date": "2026-11-20T18:01:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/touph.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/touph.jpg",
+    "summary": "Ποινικές διώξεις σε βαθμό κακουργήματος ασκήθηκαν νωρίτερα σήμερα 20/11 σε βάρος του 68χρονου άνδρα και του 17χρονου γιου του, που συνελήφθησαν σε αστυνομική...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "eyvoia-gynaikes-egklovistikan-apo-kopadi-agriogoyroynon-kai-kalesan-to-112",
     "title": "Εύβοια: Γυναίκες εγκλωβίστηκαν από κοπάδι αγριογούρουνων και κάλεσαν το 112",
     "url": "https://www.newshub.gr/el/ellada/eyvoia-gynaikes-egklovistikan-apo-kopadi-agriogoyroynon-kai-kalesan-to-112",
@@ -93,7 +105,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/aerodromio-erakleiou2.jpg",
     "summary": "Διεθνή αναγνώριση για την ελληνική αεροπορική αγορά φέρνει η νέα αξιολόγηση «World&rsquo;s Best Airports 2027» του περιοδικού TIME, σε συνεργασία...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "tte-epimones-oi-plithoristikes-pieseis-me-kaysimo-tis-times-tis-energeias",
@@ -7220,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/polike-dine.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/polike-dine.jpg",
     "summary": "Κάτι ασυνήθιστο συμβαίνει ψηλά πάνω από την Αρκτική, σε ύψος δεκάδων χιλιομέτρων από την επιφάνεια της Γης.\r\n\r\nΕνα τεράστιο σύστημα ισχυρών ανέμων, που συγκρ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "apologeitai-simera-o-odysseas-dimas-gia-tin-ypothesi-ntopingk",
-    "title": "Απολογείται σήμερα ο Οδυσσέας Δήμας για την υπόθεση ντόπινγκ",
-    "url": "https://www.newshub.gr/el/ellada/apologeitai-simera-o-odysseas-dimas-gia-tin-ypothesi-ntopingk",
-    "date": "2026-11-16T08:30:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/eeee.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/eeee.jpg",
-    "summary": "Ενώπιον του ανακριτή αναμένεται να βρεθεί σήμερα (16.11.2026) ο Οδυσσέας Δήμας με σκοπό να απολογηθεί για την υπόθεση ντόπινγκ σε αθλητές. Τόσο ο προπονητής ...",
     "author": null,
     "featured": false
   },
