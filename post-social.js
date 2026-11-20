@@ -27,6 +27,11 @@ const SITE_URL = 'https://newshubmedia.gr';
 // version, bump this — or set FB_API_VERSION and do not touch the file.
 const FB_VERSION = process.env.FB_API_VERSION || 'v23.0';
 
+// Πόσο περιμένουμε να χτιστεί η σελίδα ενός άρθρου πριν το ποστάρουμε
+// χωρίς αυτήν. Το «Ανέβασμα» τελειώνει σε ένα-δυο λεπτά· η μισή ώρα
+// είναι περιθώριο για ουρά στα Actions, όχι εκτίμηση.
+const ANAMONI_SELIDAS = 30 * 60 * 1000;
+
 // How many entries stay in the file. The rest are history nobody reads.
 const KEEP = 200;
 
@@ -65,12 +70,15 @@ const X_LINK_COST = 23;
 // Μόνο για το Facebook και μόνο για λινκ του newshub.gr: τα δικά μας
 // ανεβαίνουν όπως είναι. Μόλις ξεμπλοκάρουν το facebookexternalhit από
 // τη μεριά τους, όλη αυτή η συνάρτηση σβήνεται.
-async function facebookLink(post) {
-  const link = String(post.link || '');
-  if (!/^https:\/\/(www\.)?newshub\.gr\//.test(link)) return link;
+// Η δική μας διεύθυνση για ένα άρθρο τους, αν είναι στον αέρα. Κενό αν
+// δεν υπάρχει — είτε γιατί το build δεν πρόλαβε, είτε γιατί το άρθρο
+// δεν έχει σώμα και δεν θα πάρει ποτέ σελίδα. Ο καλών ξεχωρίζει τα δύο
+// από την ηλικία του ποστ.
+async function dikiMasSelida(link) {
+  if (!/^https:\/\/(www\.)?newshub\.gr\//.test(link)) return '';
 
   const id = link.split('?')[0].replace(/\/$/, '').split('/').pop();
-  if (!id) return link;
+  if (!id) return '';
 
   // Χωρίς .html: το Cloudflare Pages απαντά 308 στην κατάληξη και δεν
   // θέλουμε να στέλνουμε στο Facebook διεύθυνση που ανακατευθύνει.
@@ -87,10 +95,17 @@ async function facebookLink(post) {
     }
   }
 
-  console.warn('  ⚠ ούτε σελίδα άρθρου ούτε σελίδα μοιράσματος στον αέρα — '
-    + 'πάει το κανονικό λινκ, χωρίς φωτογραφία στην κάρτα.');
+  return '';
+}
 
-  return link;
+// Ό,τι βρήκε ο έλεγχος του main, ώστε να μη ρωτήσουμε δεύτερη φορά το
+// δίκτυο για το ίδιο πράγμα. Κλειδί το id του ποστ.
+const etoimoLink = new Map();
+
+async function facebookLink(post) {
+  const link = String(post.link || '');
+  if (etoimoLink.has(post.id)) return etoimoLink.get(post.id) || link;
+  return (await dikiMasSelida(link)) || link;
 }
 
 async function postFacebook(post) {
@@ -499,6 +514,38 @@ async function main() {
       }
     }
 
+    // Το build τρέχει με δικό του ρολόι. Ένα ολόφρεσκο άρθρο μπαίνει
+    // στην ουρά πριν προλάβει να χτιστεί η σελίδα του, και τότε το ποστ
+    // φεύγει με το σκέτο λινκ τους — κάρτα χωρίς φωτογραφία, γιατί το
+    // Cloudflare τους κόβει τον crawler του Facebook. Μέχρι τώρα αυτό
+    // γινόταν σιωπηλά.
+    //
+    // Μισή ώρα αναμονή το λύνει: το cron ξανατρέχει κάθε τέταρτο και το
+    // στέλνει μόλις η σελίδα βγει. Αν περάσει και δεν έχει βγει, το
+    // άρθρο δεν έχει σώμα και δεν θα πάρει ποτέ σελίδα — οπότε φεύγει
+    // όπως είναι, γιατί ένα ποστ χωρίς φωτογραφία είναι καλύτερο από
+    // ποστ που δεν έγινε ποτέ.
+    if (!DRY && targets.includes('facebook')) {
+      const diki = await dikiMasSelida(post.link);
+      etoimoLink.set(post.id, diki);
+
+      if (!diki && /^https:\/\/(www\.)?newshub\.gr\//.test(post.link)) {
+        const ilikia = Date.now() - new Date(post.at || 0).getTime();
+
+        if (ilikia < ANAMONI_SELIDAS) {
+          post.note = 'Η σελίδα του άρθρου δεν είναι ακόμα στον αέρα. Μένει '
+            + 'στην ουρά και φεύγει μόλις χτιστεί.';
+          console.log(`  ⏸ ${post.note}`);
+          waiting++;
+          touched = true;
+          continue;
+        }
+
+        console.warn('  ⚠ η σελίδα του άρθρου δεν βγήκε ποτέ — πάει το λινκ '
+          + 'τους, χωρίς φωτογραφία στην κάρτα.');
+      }
+    }
+
     post.results = post.results || {};
     const errors = [];
 
@@ -546,8 +593,8 @@ async function main() {
   if ((touched || readyChanged) && !DRY) writeQueue(data);
 
   if (waiting) {
-    console.log(`\n${waiting} περιμένουν κλειδιά. Μόλις μπουν τα secrets, `
-      + 'ξανατρέχει και φεύγουν μόνα τους.');
+    console.log(`\n${waiting} μένουν στην ουρά — κλειδιά που λείπουν ή σελίδα `
+      + 'που δεν χτίστηκε ακόμα. Το cron ξανατρέχει και φεύγουν μόνα τους.');
   }
 
   if (hands) {
