@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-20T10:35:44.785Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/oikonomia/katatethike-sti-voyli-o-kratikos-proypologismos-toy-2027"
+      "link": "https://www.newshub.gr/el/oikonomia/katatethike-sti-voyli-o-kratikos-proypologismos-toy-2027",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290079246156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290079246156174",
+          "at": "2026-11-20T10:36:01.765Z"
+        }
+      }
     },
     {
       "id": "20261120085604-podcast-Buzzsprout-20154621",
