@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/30250844.jpg",
     "summary": "Ρωσική επίθεση με βαλλιστικούς πυραύλους και drones είχε στόχο τρεις γέφυρες στο Κίεβο και προκάλεσε τον θάνατο έξι ανθρώπων, ανακοίνωσε σήμερα, Παρασκευή, ο...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "paroysiasi-tis-ekdosis-epistrefontas-tin-kara-toy-agioy-titoy-stin-kriti",
@@ -24,6 +24,18 @@
     "featured": false
   },
   {
+    "id": "chania-ypo-drakonteia-metra-asfaleias-sta-dikastiria-o-38chronos-varypoinitis-foto-vinteo",
+    "title": "Χανιά: Υπό δρακόντεια μέτρα ασφαλείας στα Δικαστήρια ο 38χρονος βαρυποινίτης (Φωτο + Βίντεο)",
+    "url": "https://www.newshub.gr/el/kriti/chania-ypo-drakonteia-metra-asfaleias-sta-dikastiria-o-38chronos-varypoinitis-foto-vinteo",
+    "date": "2026-11-20T11:15:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/dikastiria-xanion.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/dikastiria-xanion.jpg",
+    "summary": "Το κατώφλι του ανακριτή Χανίων πέρασε το πρωί της Παρασκευής ο 38χρονος Βούλγαρος, ο οποίος απολογείται για την υπόθεση της εισαγωγής όπλου στο Κατ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "ase-me-na-fygo-patera-nea-ektelesi-vasanistirio-thanatopoiniti-stis-ipa",
     "title": "«Άσε με να φύγω Πατέρα»: Νέα εκτέλεση–βασανιστήριο θανατοποινίτη στις ΗΠΑ",
     "url": "https://www.newshub.gr/el/kosmos/ase-me-na-fygo-patera-nea-ektelesi-vasanistirio-thanatopoiniti-stis-ipa",
@@ -34,6 +46,18 @@
     "summary": "Ο Ρεϊνάλντο Ντένες εκτελέστηκε την Πέμπτη στο Τέξας, σε μια διαδικασία που διήρκησε περισσότερο από μια ώρα, καθώς το προσωπικό των φυλακών δυσκολευόταν να β...",
     "author": null,
     "featured": false
+  },
+  {
+    "id": "ierapetra-apomakrynthikan-oloi-oi-metanastes-apo-tin-agrex-den-tha-filoxenoyntai-se-dimotikoys-choroys-diaminyei-o-dimarchos",
+    "title": "Ιεράπετρα: Απομακρύνθηκαν όλοι οι μετανάστες από την ΑΓΡΕΞ-Δεν θα φιλοξενούνται σε δημοτικούς χώρους, διαμηνύει ο δήμαρχος",
+    "url": "https://www.newshub.gr/el/kriti/ierapetra-apomakrynthikan-oloi-oi-metanastes-apo-tin-agrex-den-tha-filoxenoyntai-se-dimotikoys-choroys-diaminyei-o-dimarchos",
+    "date": "2026-11-20T11:04:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/845975944_1621802392742947_4173928579393910005_n.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/845975944_1621802392742947_4173928579393910005_n.jpg",
+    "summary": "Τέλος στη χρήση της πρώην ΑΓΡΕΞ ως χώρου προσωρινής φιλοξενίας μεταναστών βάζει η δημοτική αρχή Ιεράπετρας, η οποία έχει αποκλείσει εδώ και καιρό το ενδεχόμε...",
+    "author": null,
+    "featured": true
   },
   {
     "id": "apo-ton-vytho-stin-endochora-nees-thematikes-toyristikes-diadromes-stin-kriti-kai-tin-kypro",
@@ -7212,30 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/maketa-metagogi-roma.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/maketa-metagogi-roma.jpg",
     "summary": "Στην άσκηση ποινικής δίωξης σε βαθμό κακουργήματος σε βάρος της 34χρονης Ρομά για εμπρησμό που είχε σαν αποτέλεσμα το θάνατο άλλου, προχώρησε η Εισαγγελία Πρ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kykloma-ekviaston-organone-epitheseis-me-cheirovomvides-mesa-apo-tis-fylakes-oi-synomilies-oi-kodikes-kai-oi-apeiles-se-epicheirimaties",
-    "title": "Κύκλωμα εκβιαστών οργάνωνε επιθέσεις με χειροβομβίδες μέσα από τις φυλακές: Οι συνομιλίες, οι κώδικες και οι απειλές σε επιχειρηματίες",
-    "url": "https://www.newshub.gr/el/ellada/kykloma-ekviaston-organone-epitheseis-me-cheirovomvides-mesa-apo-tis-fylakes-oi-synomilies-oi-kodikes-kai-oi-apeiles-se-epicheirimaties",
-    "date": "2026-11-15T16:16:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/fylakikoridalos-mkt.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/fylakikoridalos-mkt.jpg",
-    "summary": "Μία ανώνυμη καταγγελία, τέσσερις επιθέσεις σε καταστήματα της Αθήνας, χειροβομβίδες που εκτοξεύονταν μέσα στη νύχτα και πρόσωπα που, αν και βρίσκονταν πίσω α...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "k-chatzidakis-se-antipoliteysi-tha-plironame-arage-fthinotero-reyma-me-ti-chreokopimeni-dei-kai-ton-ligniti",
-    "title": "Κ. Χατζηδάκης σε αντιπολίτευση: Θα πληρώναμε άραγε φθηνότερο ρεύμα με τη χρεοκοπημένη ΔΕΗ και τον λιγνίτη;",
-    "url": "https://www.newshub.gr/el/ellada/k-chatzidakis-se-antipoliteysi-tha-plironame-arage-fthinotero-reyma-me-ti-chreokopimeni-dei-kai-ton-ligniti",
-    "date": "2026-11-15T16:00:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/xatzidakis.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/xatzidakis.jpg",
-    "summary": "Στις παρεμβάσεις της κυβέρνησης στην αγορά ηλεκτρικής ενέργειας, στη διάσωση της ΔΕΗ, στην απολιγνιτοποίηση και στην ανάπτυξη των Ανανεώσιμων Πηγών Ενέργειας...",
     "author": null,
     "featured": false
   },
