@@ -3981,7 +3981,10 @@ function pickOpinions(articles, curation){
     if (chosen.length >= OPINIONS_SHOWN) break;
     if (have.has(a.url)) continue;
     if (kryfoOp({ id: a.id, href: a.url, source: a.url })) continue;
-    if (onoma(a) && prosopa.has(onoma(a))) continue;
+    // Άποψη χωρίς υπογραφή δεν στέκει στη ζώνη: μένει για τον δεύτερο
+    // βρόχο, όπου μπαίνει μόνο αν αλλιώς θα έμενε τρύπα.
+    if (!onoma(a)) continue;
+    if (prosopa.has(onoma(a))) continue;
     vale(a);
   }
 
@@ -4011,7 +4014,12 @@ function opinionsSection(articles, curation){
     const href = mine ? articleUrl(a) : esc(a.url);
     const out = mine ? '' : ' target="_blank" rel="noopener"';
 
-    return `      <article class="apop-card">
+    // Χωρίς φωτογραφία και χωρίς όνομα δεν μπαίνει κύκλος, οπότε η κάρτα
+    // δεν πρέπει να κρατήσει τη στήλη των 72px — αλλιώς το κείμενο
+    // στριμώχνεται σε μία-δυο λέξεις ανά γραμμή.
+    const anonymo = !face && !name;
+
+    return `      <article class="apop-card${anonymo ? ' apop-card--anonymo' : ''}">
         <a class="apop-link" href="${href}"${out}>
           ${face
             ? `<span class="apop-face"><img class="apop-pic" src="${esc(face)}" alt="${esc(name)}" loading="lazy" width="120" height="120"></span>`

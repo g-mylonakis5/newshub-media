@@ -5585,6 +5585,9 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   text-decoration: none;
 }
 
+/* Κάρτα χωρίς πρόσωπο: δεν υπάρχει κύκλος, άρα ούτε πρώτη στήλη. */
+.apop-card--anonymo .apop-link{ grid-template-columns: minmax(0, 1fr); }
+
 .apop-face{
   width: 72px;
   height: 72px;
