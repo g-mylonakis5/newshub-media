@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261120103544-news-katatethike-sti-voyli-o-kratikos-proypologismos-toy-2027",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/katatethike-sti-voyli-o-kratikos-proypologismos-toy-2027",
+      "title": "Κατατέθηκε στη Βουλή ο κρατικός προϋπολογισμός του 2027",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/opekepe-vouli-1200x700.jpg",
+      "text": "Κατατέθηκε στη Βουλή ο κρατικός προϋπολογισμός του 2027",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-20T10:35:44.785Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/oikonomia/katatethike-sti-voyli-o-kratikos-proypologismos-toy-2027"
+    },
+    {
       "id": "20261120085604-podcast-Buzzsprout-20154621",
       "kind": "podcast",
       "ref": "Buzzsprout-20154621",
