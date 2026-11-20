@@ -73,6 +73,7 @@ jobs:
         run: |
           node fetch-videos.js
           node fetch-transcripts.js
+          node fetch-social.js
 
       - name: Commit και push
         id: push

@@ -88,6 +88,97 @@ async function oembed(endpoint) {
 }
 
 // ---------------------------------------------------------------------
+// Ημερομηνίες
+// ---------------------------------------------------------------------
+
+// Η σελίδα /shorts δίνει τα βίντεο με σειρά αλλά ΧΩΡΙΣ ημερομηνία, και
+// ούτε το oembed δίνει. Το RSS του καναλιού δίνει <published>, αλλά μόνο
+// για τα 15 πιο πρόσφατα ΑΝΕΒΑΣΜΑΤΑ — και με 3.800 κανονικά βίντεο στο
+// κανάλι, κανένα Short δεν προλαβαίνει να μπει εκεί. Δοκιμάστηκε: 0/24.
+//
+// Το API το λύνει με μία κλήση ανά 50 βίντεο, κόστους 1 μονάδας. Το
+// κλειδί υπάρχει ήδη — ο fetcher τρέχει στο ίδιο βήμα με τα βίντεο.
+// Χωρίς κλειδί δεν σπάει τίποτα: μένει η σειρά του καναλιού, που είναι
+// ούτως ή άλλως νεότερα πρώτα.
+
+// Διαβάζει το .env χωρίς βιβλιοθήκη — ένα NAME=value ανά γραμμή.
+function readEnv() {
+  const file = path.join(__dirname, '.env');
+  if (!fs.existsSync(file)) return {};
+  const out = {};
+  for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
+    const clean = line.trim();
+    if (!clean || clean.startsWith('#')) continue;
+    const at = clean.indexOf('=');
+    if (at === -1) continue;
+    out[clean.slice(0, at).trim()] = clean.slice(at + 1).trim();
+  }
+  return out;
+}
+
+async function imerominies(ids) {
+  const map = new Map();
+  if (!ids.length) return map;
+
+  const key = readEnv().YOUTUBE_API_KEY || process.env.YOUTUBE_API_KEY || '';
+  if (!key) {
+    console.warn('ΠΡΟΣΟΧΗ: χωρίς YOUTUBE_API_KEY — τα Shorts μένουν στη σειρά '
+      + 'που τα δίνει το κανάλι, χωρίς ημερομηνία.');
+    return map;
+  }
+
+  // Το API δέχεται μέχρι 50 id ανά κλήση.
+  for (let i = 0; i < ids.length; i += 50) {
+    const fasa = ids.slice(i, i + 50);
+    const url = 'https://www.googleapis.com/youtube/v3/videos'
+      + `?part=snippet&maxResults=50&id=${fasa.join(',')}&key=${key}`;
+
+    const res = await get(url);
+    if (res.code !== 200) {
+      console.warn(`ΠΡΟΣΟΧΗ: το YouTube API απάντησε ${res.code} — `
+        + 'συνεχίζω χωρίς ημερομηνίες.');
+      break;
+    }
+
+    let data;
+    try {
+      data = JSON.parse(res.body);
+    } catch (err) {
+      console.warn(`ΠΡΟΣΟΧΗ: το YouTube API δεν διαβάστηκε — ${err.message}`);
+      break;
+    }
+
+    for (const item of data.items || []) {
+      const pub = item.snippet && item.snippet.publishedAt;
+      if (item.id && pub) map.set(item.id, pub);
+    }
+  }
+
+  console.log(`YouTube API: ${map.size} ημερομηνίες από ${ids.length} Shorts`);
+  return map;
+}
+
+// Ό,τι ημερομηνία ξέρουμε ήδη από το αρχείο της προηγούμενης φοράς. Ένα
+// Short βγαίνει από τα 15 του RSS μέσα σε λίγες μέρες· χωρίς αυτό θα
+// έχανε την ημερομηνία του και θα ξανάπεφτε στο τέλος της λωρίδας.
+function palies() {
+  const map = new Map();
+  try {
+    const raw = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8'));
+    if (Array.isArray(raw)) {
+      for (const item of raw) {
+        if (item && item.id && item.date) map.set(item.id, item.date);
+      }
+    }
+  } catch (err) {
+    if (err.code !== 'ENOENT') {
+      console.warn(`ΠΡΟΣΟΧΗ: το παλιό ${path.basename(OUT_FILE)} δεν διαβάστηκε — ${err.message}`);
+    }
+  }
+  return map;
+}
+
+// ---------------------------------------------------------------------
 // YouTube Shorts
 // ---------------------------------------------------------------------
 
@@ -137,6 +228,7 @@ async function fetchShorts() {
       image,
       width: size ? size.width : 0,
       height: size ? size.height : 0,
+      date: '',
     });
   }
 
@@ -239,6 +331,33 @@ async function main() {
   const manual = await fetchManual();
 
   const items = [...manual, ...shorts];
+
+  // Οι ημερομηνίες: ό,τι λέει το API σήμερα, πάνω σε ό,τι είχαμε μάθει
+  // τις προηγούμενες φορές. Το API κερδίζει, γιατί είναι η πηγή — το
+  // παλιό αρχείο είναι μόνο δίχτυ για μέρες που δεν απαντάει.
+  const potes = palies();
+  const ytIds = shorts.map((x) => String(x.id).replace(/^yt-/, ''));
+  for (const [id, date] of await imerominies(ytIds)) potes.set(`yt-${id}`, date);
+
+  for (const item of items) {
+    if (!item.date) item.date = potes.get(item.id) || '';
+  }
+
+  // Νεότερα πρώτα. Όσα δεν έχουν ημερομηνία — χειροκίνητα links, ή
+  // Shorts που βγήκαν από τα 15 του RSS πριν προλάβουμε — κρατούν τη
+  // σειρά που ήρθαν και πάνε στο τέλος. Σταθερή ταξινόμηση: χωρίς αυτό
+  // η λωρίδα θα κουνιόταν σε κάθε τρέξιμο χωρίς λόγο.
+  items.forEach((item, i) => { item.seira = i; });
+  items.sort((a, b) => {
+    if (a.date && b.date) return new Date(b.date) - new Date(a.date);
+    if (a.date) return -1;
+    if (b.date) return 1;
+    return a.seira - b.seira;
+  });
+  items.forEach((item) => { delete item.seira; });
+
+  const me = items.filter((x) => x.date).length;
+  console.log(`Με ημερομηνία: ${me} από ${items.length}`);
 
   // If we collected nothing we do NOT overwrite the old file: a
   // temporary YouTube change must not empty the homepage.

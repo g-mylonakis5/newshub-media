@@ -508,6 +508,18 @@
     }
   }
 
+  // Τα Reels είναι role="button" με tabindex, άρα πρέπει να ανοίγουν και
+  // με Enter ή κενό. Ένα div δεν το κάνει μόνο του, όπως το <button>.
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+
+    var reel = e.target.closest && e.target.closest('.reel-stage[data-embed]');
+    if (!reel || reel.querySelector('iframe')) return;
+
+    e.preventDefault();
+    reel.click();
+  });
+
   // ---------- clicks, with one listener for everything ----------
 
   document.addEventListener('click', function (e) {
@@ -517,7 +529,10 @@
     var stage = e.target.closest('[data-embed]');
     if (stage && !stage.querySelector('iframe')) {
       var frame = document.createElement('iframe');
-      frame.src = stage.dataset.embed + '?autoplay=1&rel=0';
+      // Τα Facebook Reels φέρνουν ήδη ?href=..., το YouTube όχι. Χωρίς
+      // αυτό θα έβγαινε δεύτερο ερωτηματικό και το embed δεν θα άνοιγε.
+      var xorismos = stage.dataset.embed.indexOf('?') < 0 ? '?' : '&';
+      frame.src = stage.dataset.embed + xorismos + 'autoplay=1&rel=0';
       frame.title = document.title;
       frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture';
       frame.allowFullscreen = true;

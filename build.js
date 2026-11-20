@@ -4057,6 +4057,87 @@ ${cards}
   </section>`;
 }
 
+// ---------------------------------------------------------------------
+// Reels and socials
+// ---------------------------------------------------------------------
+
+const REELS_SHOWN = 8;
+
+// Τα κάθετα βίντεο των κοινωνικών, όπως τα άφησε ο fetcher. Το πεδίο
+// platform ξεχωρίζει από πού ήρθε το καθένα, ώστε να μπουν αργότερα και
+// τα Facebook Reels χωρίς να αλλάξει τίποτα εδώ.
+let socialCache;
+function loadSocial(){
+  if (socialCache === undefined) {
+    socialCache = [];
+    try {
+      const raw = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/social.json'), 'utf8'));
+      if (Array.isArray(raw)) socialCache = raw;
+    } catch (err) {
+      if (err.code !== 'ENOENT') {
+        console.warn('ΠΡΟΣΟΧΗ: το data/social.json δεν διαβάζεται —', err.message);
+      }
+    }
+  }
+  return socialCache;
+}
+
+// Η διεύθυνση που μπαίνει στο iframe όταν το πατήσει κάποιος. Μέχρι
+// τότε δεν φορτώνει τίποτα: ούτε κώδικας του YouTube, ούτε του Facebook.
+function reelEmbed(item){
+  const id = String(item.id || '').replace(/^yt-/, '');
+
+  if (item.platform === 'youtube') {
+    // nocookie: δεν μπαίνει τίποτα στη συσκευή πριν πατηθεί play.
+    return `https://www.youtube-nocookie.com/embed/${id}`;
+  }
+
+  if (item.platform === 'facebook') {
+    return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(item.url || '')}`;
+  }
+
+  return '';
+}
+
+function socialSection(){
+  const picks = loadSocial().filter((x) => x && x.url && x.image && reelEmbed(x)).slice(0, REELS_SHOWN);
+
+  // Κάτω από τέσσερα η λωρίδα δεν στέκει — ίδιος κανόνας με τις Απόψεις.
+  if (picks.length < 4) return '';
+
+  const cards = picks.map((item) => {
+    const title = decode(item.title || '');
+    const pigi = item.platform === 'facebook' ? 'Facebook' : 'YouTube';
+
+    return `      <article class="reel-card">
+        <div class="reel-stage stage-media" data-embed="${esc(reelEmbed(item))}"
+             role="button" tabindex="0" aria-label="Παίξε: ${esc(title)}">
+          <img class="reel-pic" src="${esc(item.image)}" alt="${esc(title)}"
+               loading="lazy" width="270" height="480">
+          <span class="reel-play" aria-hidden="true"></span>
+          <span class="reel-where">${pigi}</span>
+        </div>
+        <p class="reel-title"><a class="reel-link" href="${esc(item.url)}"
+           target="_blank" rel="noopener">${esc(title)}</a></p>
+      </article>`;
+  }).join('\n');
+
+  return `  <section class="must reels" aria-labelledby="reels-head">
+    <div class="must-head">
+      <p class="must-mark" id="reels-head">
+        <span class="must-word reels-word">Reels <em>and socials</em></span>
+        <span class="must-by">στο</span>
+        <img class="must-logo" src="shows/logo-newshub.png" alt="Newshub.gr" loading="lazy">
+      </p>
+      <a class="must-all" href="https://www.youtube.com/@newshubgr/shorts" target="_blank" rel="noopener">Όλα τα Shorts →</a>
+    </div>
+
+    <div class="reel-row">
+${cards}
+    </div>
+  </section>`;
+}
+
 function mustReadSection(articles, curation, taken){
   const picks = pickMustRead(articles, curation, taken);
 
@@ -6117,6 +6198,10 @@ ${/* Opinions right below: same source, same box, different kind of
      reading. News says what happened, opinion says who claims it — hence
      the article photo there and the face here. */ ''}
 ${opinionsSection(articles, curation)}
+
+${/* Αμέσως μετά τις Απόψεις: από το μακρύ κείμενο στα δεκαπέντε
+     δευτερόλεπτα. Η αλλαγή ρυθμού είναι σκόπιμη. */ ''}
+${socialSection()}
 
 ${/* After Must read, before the topics: whoever left something half-read
      finds it before the deep part of the page. For everyone else the
