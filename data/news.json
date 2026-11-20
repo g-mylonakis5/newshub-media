@@ -1,5 +1,17 @@
 [
   {
+    "id": "oykrania-toylachiston-okto-nekroi-apo-rosikes-epitheseis-se-kievo-kai-lviv",
+    "title": "Ουκρανία: Τουλάχιστον οκτώ νεκροί από ρωσικές επιθέσεις σε Κίεβο και Λβιβ",
+    "url": "https://www.newshub.gr/el/geopolitiki/oykrania-toylachiston-okto-nekroi-apo-rosikes-epitheseis-se-kievo-kai-lviv",
+    "date": "2026-11-20T11:25:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/30250844.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/30250844.jpg",
+    "summary": "Ρωσική επίθεση με βαλλιστικούς πυραύλους και drones είχε στόχο τρεις γέφυρες στο Κίεβο και προκάλεσε τον θάνατο έξι ανθρώπων, ανακοίνωσε σήμερα, Παρασκευή, ο...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "paroysiasi-tis-ekdosis-epistrefontas-tin-kara-toy-agioy-titoy-stin-kriti",
     "title": "Παρουσίαση της έκδοσης  «Επιστρέφοντας την Κάρα του Αγίου Τίτου στην Κρήτη»",
     "url": "https://www.newshub.gr/el/kriti/paroysiasi-tis-ekdosis-epistrefontas-tin-kara-toy-agioy-titoy-stin-kriti",
@@ -141,7 +153,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/69d760bd-0162-47e4-bd71-6670cbf8e31a.jpg",
     "summary": "Εκδικάζονται σήμερα, Παρασκευή 20 Νοεμβρίου, οι πρώτες αιτήσεις ασφαλιστικών μέτρων ενάντια στη δημιουργία της νέας δομής του Εθνικού Οργανισμού Πρόληψης και...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "katatethike-sti-voyli-o-kratikos-proypologismos-toy-2027",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/xatzidakis.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/xatzidakis.jpg",
     "summary": "Στις παρεμβάσεις της κυβέρνησης στην αγορά ηλεκτρικής ενέργειας, στη διάσωση της ΔΕΗ, στην απολιγνιτοποίηση και στην ανάπτυξη των Ανανεώσιμων Πηγών Ενέργειας...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "doro-christoygennon-2026-mechri-pote-prepei-na-katavlithei-pos-ypologizetai",
-    "title": "Δώρο Χριστουγέννων 2026: Μέχρι πότε πρέπει να καταβληθεί - Πώς υπολογίζεται",
-    "url": "https://www.newshub.gr/el/oikonomia/doro-christoygennon-2026-mechri-pote-prepei-na-katavlithei-pos-ypologizetai",
-    "date": "2026-11-15T15:44:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/dwro_xristougennwn.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/dwro_xristougennwn.jpg",
-    "summary": "Μέχρι τη Δευτέρα 21 Δεκεμβρίου 2026 θα πρέπει να έχει καταβληθεί το δώρο Χριστουγέννων στους εργαζομένους του ιδιωτικού τομέα, καθώς αυτή είναι η καταληκτική...",
     "author": null,
     "featured": false
   },
