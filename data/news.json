@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-astynomiki-epicheirisi-apokalypse-schedon-8-kila-kannavis-dyo-syllipseis",
+    "title": "Ηράκλειο: Αστυνομική επιχείρηση αποκάλυψε σχεδόν 8 κιλά κάνναβης-Δύο συλλήψεις",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-astynomiki-epicheirisi-apokalypse-schedon-8-kila-kannavis-dyo-syllipseis",
+    "date": "2026-11-20T08:04:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/narkotikaher.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/narkotikaher.jpg",
+    "summary": "Στη σύλληψη δύο ανδρών, ηλικίας 23 και 44 ετών, προχώρησαν οι Αστυνομικές Αρχές το πρωί της Πέμπτης, μετά από συντονισμένη επιχείρηση.\r\n\r\nΜετά από αξιοπ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "chania-nees-kykloforiakes-rythmiseis-ston-voak",
     "title": "Χανιά: Νέες κυκλοφοριακές ρυθμίσεις στον ΒΟΑΚ",
     "url": "https://www.newshub.gr/el/kriti/chania-nees-kykloforiakes-rythmiseis-ston-voak",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/boak-ergasies.jpg",
     "summary": "Ανακοινώνεται, με απόφαση της Διεύθυνσης Αστυνομίας Χανίων, η λήψη έκτακτων κυκλοφοριακών ρυθμίσεων για εκτέλεση εργασιών στο Β.Ο.Α.Κ Περιφερειακής Ενότητας ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "polonia-ekrixi-konta-sta-synora-me-tin-oykrania-exetazetai-pithani-ptosi-pyrayloy-i-drone",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/gianna.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/gianna.jpg",
     "summary": "Μία ανάρτηση του ιδιοκτήτη της ΚΑΕ Παναθηναϊκός, Δημήτρη Γιαννακόπουλου, το βράδυ του Σαββάτου στα social media, για περιστατικό το οποίο αφορά σε συγγενικό ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kalodio-kritis-kyproy-oi-epomenes-kiniseis-gia-ti-diasyndesi",
-    "title": "Καλώδιο Κρήτης-Κύπρου: Οι επόμενες κινήσεις για τη διασύνδεση",
-    "url": "https://www.newshub.gr/el/oikonomia/kalodio-kritis-kyproy-oi-epomenes-kiniseis-gia-ti-diasyndesi",
-    "date": "2026-11-15T11:00:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/15-11/ilektriki_diadindesi_admie.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/15-11/ilektriki_diadindesi_admie.jpg",
-    "summary": "Η ηλεκτρική διασύνδεση Ελλάδας - Κύπρου, Great Sea Interconnector (GSI), επιστρέφει στο προσκήνιο, όχι μόνο ως ένα από τα σημαντικότερα ενεργειακά έργα της Α...",
     "author": null,
     "featured": false
   },
