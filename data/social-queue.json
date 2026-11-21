@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261121142204-news-stis-30-noemvrioy-anamenetai-sti-chora-mas-i-fregata-nearchos-ta-charaktiristika-tis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/geopolitiki/stis-30-noemvrioy-anamenetai-sti-chora-mas-i-fregata-nearchos-ta-charaktiristika-tis",
+      "title": "Στις 30 Νοεμβρίου αναμένεται στη χώρα μας η φρεγάτα «Νέαρχος» -Τα χαρακτηριστικά της",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/knnk.jpg",
+      "text": "Στις 30 Νοεμβρίου αναμένεται στη χώρα μας η φρεγάτα «Νέαρχος» -Τα χαρακτηριστικά της",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-21T14:22:04.968Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/geopolitiki/stis-30-noemvrioy-anamenetai-sti-chora-mas-i-fregata-nearchos-ta-charaktiristika-tis"
+    },
+    {
       "id": "20261121082306-news-ayxisi-kata-1-5-tis-dynamis-toy-emporikoy-stoloy-ton-septemvrio",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/ayxisi-kata-1-5-tis-dynamis-toy-emporikoy-stoloy-ton-septemvrio",
