@@ -1,5 +1,17 @@
 [
   {
+    "id": "chania-sti-fylaki-58chronos-poy-odigoyse-methysmenos-prokalese-trochaio-kai-egkateleipse-to-simeio",
+    "title": "Χανιά: Στη φυλακή 58χρονος που οδηγούσε μεθυσμένος, προκάλεσε τροχαίο και εγκατέλειψε το σημείο",
+    "url": "https://www.newshub.gr/el/kriti/chania-sti-fylaki-58chronos-poy-odigoyse-methysmenos-prokalese-trochaio-kai-egkateleipse-to-simeio",
+    "date": "2026-11-21T15:40:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/dikastiria-xanion.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/dikastiria-xanion.jpg",
+    "summary": "Βαριά ήταν η «καμπάνα» για τον Ουκρανό οδηγό που ενεπλάκη στο τροχαίο ατύχημα χθες στον Σταλό Χανίων, όταν προσέκρουσε με το όχημά του σε δύο αυτ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "efodos-tis-elas-stis-fylakes-malandrinoy-entopistikan-kinita-narkotika-kai-poyrokoftis",
     "title": "Έφοδος της ΕΛΑΣ στις φυλακές Μαλανδρίνου - Εντοπίστηκαν κινητά, ναρκωτικά και πουροκόφτης",
     "url": "https://www.newshub.gr/el/ellada/efodos-tis-elas-stis-fylakes-malandrinoy-entopistikan-kinita-narkotika-kai-poyrokoftis",
@@ -57,7 +69,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/kibotos-ethinikis-mnimis-geetha-1200x675etd.jpg",
     "summary": "Με αφορμή των εορτασμών των Ενόπλων Δυνάμεων το υπουργείο Εθνικής Άμυνας άνοιξε τις πύλες του και για πρώτη φορά ο κόσμος να επισκεφτεί τις αναβαθμισμένες υπ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "finlandia-o-finlandikos-stratos-entopise-epithesi-me-drone-enantion-rosikoy-fortigoy-ploioy",
@@ -7216,18 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/pasok.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/pasok.jpg",
     "summary": "«Η παρέμβαση του πρωθυπουργού για τις Ζώνες Υποδοχής Συντελεστή Δόμησης, αναδεικνύει για ακόμη μία φορά τον τρόπο με τον οποίο η κυβέρνηση αντιλαμβάνετ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "dimoskopisi-pulse-13-monades-i-diafora-nd-elas-stin-prothesi-psifoy",
-    "title": "Δημοσκόπηση Pulse: 13 μονάδες η διαφορά ΝΔ-ΕΛΑΣ στην πρόθεση ψήφου",
-    "url": "https://www.newshub.gr/el/ellada/dimoskopisi-pulse-13-monades-i-diafora-nd-elas-stin-prothesi-psifoy",
-    "date": "2026-11-17T06:41:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/ekloges-kalpeeee.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/ekloges-kalpeeee.jpg",
-    "summary": "Η μέτρηση της Pulse φέρνει και αυτή στην πρώτη θέση τη Νέα Δημοκρατία, με 13 ποσοστιαίες μονάδες διαφορά από τη δεύτερη Ελληνική Αριστερή Συμπαράταξη.\r\n\r\nΤα ...",
     "author": null,
     "featured": false
   },
