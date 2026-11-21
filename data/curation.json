@@ -59,7 +59,9 @@
   "featured": "arthro/to-newshubmedia-gr-einai-ston-aera.html",
   "featuredUntil": "2026-11-23",
   "secondary": [],
-  "latest": [],
+  "latest": [
+    "Buzzsprout-19366511"
+  ],
   "mustRead": [
     "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-tetartis-126",
     "https://www.newshub.gr/el/kriti/apokleistiko-stoicheia-vomva-gia-katafani-paratypia-gia-ti-monada-exartimenon-atomon-edose-o-perifereiarchis",
@@ -108,6 +110,9 @@
     "cat:kriti": {
       "4clF6NWNtso": "2026-11-12T22:46:09.499Z",
       "3CZp2A-sKeM": "2026-11-12T22:46:09.499Z"
+    },
+    "latest": {
+      "Buzzsprout-19366511": "2026-11-21T18:37:01.655Z"
     }
   },
   "opinions": [
