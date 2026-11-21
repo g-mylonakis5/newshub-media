@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261121082306-news-ayxisi-kata-1-5-tis-dynamis-toy-emporikoy-stoloy-ton-septemvrio",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/ayxisi-kata-1-5-tis-dynamis-toy-emporikoy-stoloy-ton-septemvrio",
+      "title": "Αύξηση κατά 1,5% της δύναμης του εμπορικού στόλου τον Σεπτέμβριο",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/ploia-7-768x480.jpg",
+      "text": "Αύξηση κατά 1,5% της δύναμης του εμπορικού στόλου τον Σεπτέμβριο",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-21T08:23:06.170Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/oikonomia/ayxisi-kata-1-5-tis-dynamis-toy-emporikoy-stoloy-ton-septemvrio"
+    },
+    {
       "id": "20261120230426-news-kalodio-kritis-kyproy-ti-apanta-o-giorgos-gerapetritis-stis-kataggelies-peri-mystikis-diplomatias",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/kalodio-kritis-kyproy-ti-apanta-o-giorgos-gerapetritis-stis-kataggelies-peri-mystikis-diplomatias",
