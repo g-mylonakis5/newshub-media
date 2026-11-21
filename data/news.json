@@ -1,5 +1,17 @@
 [
   {
+    "id": "asfyktiki-i-katastasi-gia-toys-ampeloyrgoys-tis-kritis-me-tis-times-kai-toys-ellipeis-elegchoys-stis-eisagoges",
+    "title": "Ασφυκτική η κατάσταση για τους αμπελουργούς της Κρήτης με τις τιμές και τους ελλιπείς ελέγχους στις εισαγωγές",
+    "url": "https://www.newshub.gr/el/kriti/asfyktiki-i-katastasi-gia-toys-ampeloyrgoys-tis-kritis-me-tis-times-kai-toys-ellipeis-elegchoys-stis-eisagoges",
+    "date": "2026-11-21T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/ampeli-elene.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/ampeli-elene.jpg",
+    "summary": "Σε οριακό σημείο βρίσκεται η αμπελουργία της Κρήτης, με τους παραγωγούς επιτραπέζιων σταφυλιών να εκπέμπουν σήμα κινδύνου για το μέλλον του κλάδου. Η ε...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "myagro-schedon-500-000-agrotes-oristikopoiisan-tis-aitiseis-toys-stis-30-noemvrioy-i-proti-pliromi-mechri-pote-tha-einai-anoichti-i-platforma",
     "title": "Μyagro: Σχεδόν 500.000 αγρότες οριστικοποίησαν τις αιτήσεις τους - Στις 30 Νοεμβρίου η πρώτη πληρωμή, μέχρι πότε θα είναι ανοιχτή η πλατφόρμα",
     "url": "https://www.newshub.gr/el/oikonomia/myagro-schedon-500-000-agrotes-oristikopoiisan-tis-aitiseis-toys-stis-30-noemvrioy-i-proti-pliromi-mechri-pote-tha-einai-anoichti-i-platforma",
@@ -201,7 +213,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/phphphphphphphtye.jpg",
     "summary": "Κακουργηματικές διώξεις ασκήθηκαν σήμερα Παρασκευή 20/11 σε βάρος των δυο συλληφθέντων που φέρονται να εμπλέκονται στην υπόθεση με την ποσότητα των σχεδόν 8 ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "kalokairines-thermokrasies-sta-mesa-noemvrioy-stin-kriti-ti-kategrapse-to-ethniko-asteroskopeio-athinon",
@@ -7220,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/pharmaka.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/pharmaka.jpg",
     "summary": "Η αυξανόμενη αντίσταση στα αντιβιοτικά και σε άλλα φάρμακα απειλεί να καταστήσει επικίνδυνες για τη ζωή επεμβάσεις ρουτίνας και τοκετούς και να θέσει σε κίνδ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "ergazomenoi-pagni-zitoyn-na-stamatisei-i-peitharchiki-dioxi-toy-giatroy-leyteri-kritsotaki",
-    "title": "Εργαζόμενοι ΠΑΓΝΗ: Ζητούν να σταματήσει η πειθαρχική δίωξη του γιατρού Λευτέρη Κρητσωτάκη",
-    "url": "https://www.newshub.gr/el/ygeia/ergazomenoi-pagni-zitoyn-na-stamatisei-i-peitharchiki-dioxi-toy-giatroy-leyteri-kritsotaki",
-    "date": "2026-11-16T11:29:00.000Z",
-    "category": "Υγεία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/giatrossssss.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/giatrossssss.jpg",
-    "summary": "Την άμεση παύση της πειθαρχικής δίωξης σε βάρος του γιατρού Λευτέρη Κρητσωτάκη ζητά το Σωματείο Εργαζομένων του ΠΑΓΝΗ, εκφράζοντας τη συμπαράστασή του στον σ...",
     "author": null,
     "featured": false
   },
