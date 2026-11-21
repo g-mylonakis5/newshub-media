@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-21T08:23:06.170Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/oikonomia/ayxisi-kata-1-5-tis-dynamis-toy-emporikoy-stoloy-ton-septemvrio"
+      "link": "https://www.newshub.gr/el/oikonomia/ayxisi-kata-1-5-tis-dynamis-toy-emporikoy-stoloy-ton-septemvrio",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290195574156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290195574156174",
+          "at": "2026-11-21T08:23:22.387Z"
+        }
+      }
     },
     {
       "id": "20261120230426-news-kalodio-kritis-kyproy-ti-apanta-o-giorgos-gerapetritis-stis-kataggelies-peri-mystikis-diplomatias",
