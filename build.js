@@ -4058,7 +4058,7 @@ ${cards}
 }
 
 // ---------------------------------------------------------------------
-// Reels and socials
+// Reels and shorts
 // ---------------------------------------------------------------------
 
 const REELS_SHOWN = 8;
@@ -4133,7 +4133,7 @@ function socialSection(){
     <div class="must-head">
       <p class="must-mark" id="reels-head">
         <img class="reels-icon" src="shows/logo-icon.png" alt="" loading="lazy" width="512" height="512">
-        <span class="must-word reels-word">Reels <em>and socials</em></span>
+        <span class="must-word reels-word">Reels <em>and shorts</em></span>
       </p>
       <a class="must-all" href="https://www.youtube.com/@newshubgr/shorts" target="_blank" rel="noopener">Όλα τα Shorts →</a>
     </div>
