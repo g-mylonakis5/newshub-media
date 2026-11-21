@@ -1,5 +1,17 @@
 [
   {
+    "id": "anoixiatikos-o-kairos-mesa-ston-noemvri-stin-kriti-oi-ypsiloteres-thermokrasies-tis-choras",
+    "title": "Ανοιξιάτικος ο καιρός μέσα στον Νοέμβρη-Στην Κρήτη οι υψηλότερες θερμοκρασίες της χώρας",
+    "url": "https://www.newshub.gr/el/kriti/anoixiatikos-o-kairos-mesa-ston-noemvri-stin-kriti-oi-ypsiloteres-thermokrasies-tis-choras",
+    "date": "2026-11-21T16:40:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/kairoshtd.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/kairoshtd.jpg",
+    "summary": "Σχετικά υψηλές θερμοκρασίες σημειώθηκαν σε τμήματα της Κρήτης το Σάββατο 21 Νοεμβρίου, ενώ οι πολύ υψηλές θερμοκρασίες των προηγούμενων ημερών σε τμήματα κυρ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "ipa-enochos-o-30chronos-gia-ti-foniki-pyrkagia-sto-palisades-toy-los-antzeles",
     "title": "ΗΠΑ: Ένοχος ο 30χρονος για τη φονική πυρκαγιά στο Palisades του Λος Άντζελες",
     "url": "https://www.newshub.gr/el/kosmos/ipa-enochos-o-30chronos-gia-ti-foniki-pyrkagia-sto-palisades-toy-los-antzeles",
@@ -69,7 +81,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/dikastiria-xanion.jpg",
     "summary": "Βαριά ήταν η «καμπάνα» για τον Ουκρανό οδηγό που ενεπλάκη στο τροχαίο ατύχημα χθες στον Σταλό Χανίων, όταν προσέκρουσε με το όχημά του σε δύο αυτ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "efodos-tis-elas-stis-fylakes-malandrinoy-entopistikan-kinita-narkotika-kai-poyrokoftis",
@@ -7216,18 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/chrema-euro.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/chrema-euro.jpg",
     "summary": "Στη ρύθμιση μπορούν να ενταχθούν και όσοι συμμετέχουν ήδη στη ρύθμιση των 72 δόσεων, ενώ η πλατφόρμα θα παραμείνει ενεργή έως τις 30 Ιουνίου 2027\r\n\r\nΑντίστρο...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "matt-damon-i-odysseia-itan-to-kalesma-poy-perimene-oli-toy-ti-zoi",
-    "title": "Matt Damon: Η Οδύσσεια ήταν το κάλεσμα που περίμενε όλη του τη ζωή",
-    "url": "https://www.newshub.gr/el/sugar/matt-damon-i-odysseia-itan-to-kalesma-poy-perimene-oli-toy-ti-zoi",
-    "date": "2026-11-17T07:40:00.000Z",
-    "category": "Sugar",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/matt-damon.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/matt-damon.jpg",
-    "summary": "Ο Matt Damon υποστηρίζει ότι, ακόμη και έπειτα από σχεδόν τέσσερις δεκαετίες στο Χόλιγουντ, εξακολουθεί να του δίνονται ευκαιρίες που κάποτε μόνο ονειρευόταν...",
     "author": null,
     "featured": false
   },
