@@ -5711,7 +5711,7 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   /* Κάθετο βίντεο σε στενή στήλη δεν διαβάζεται: το πρόσωπο γίνεται
      κουκκίδα. Η στήλη δεν πέφτει κάτω από αυτό το πλάτος — προτιμάμε να
      κυλήσει η λωρίδα παρά να μικρύνουν οι κάρτες. */
-  grid-auto-columns: minmax(230px, 1fr);
+  grid-auto-columns: minmax(300px, 1fr);
   gap: var(--gap);
   /* Οι κάρτες ξεκινούν όλες από πάνω. Χωρίς αυτό, μια κάρτα με τίτλο
      μιας γραμμής τεντωνόταν για να φτάσει τις διπλές. */
@@ -5859,7 +5859,7 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   /* Στο κινητό η λωρίδα φτάνει ως την άκρη της οθόνης, για να φαίνεται
      ότι συνεχίζει — αλλιώς μοιάζει με τελειωμένη σειρά. */
   .reel-row{
-    grid-auto-columns: 42vw;
+    grid-auto-columns: 54vw;
     margin-right: calc(-1 * var(--edge));
     padding-right: var(--edge);
   }
