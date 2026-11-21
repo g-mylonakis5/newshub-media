@@ -4132,13 +4132,27 @@ function socialSection(){
       </article>`;
   }).join('\n');
 
+  // Η λωρίδα δεν είναι πια μόνο Shorts, άρα ούτε ένα «όλα» δεν στέκει:
+  // δύο κουμπιά, ένα για κάθε πλατφόρμα, με το δικό της σήμα. Τα σχέδια
+  // των εικονιδίων είναι ήδη γραμμένα στο SOCIAL — δεν τα ξαναγράφουμε.
+  const simaPath = (name) => (SOCIAL.find((s) => s[0] === name) || [])[2] || '';
+  const pigiLink = (name, url, leksi) =>
+    `        <a class="reel-go reel-go--${name.toLowerCase()}" href="${url}"
+           target="_blank" rel="noopener" title="${leksi} στο ${name}"
+           aria-label="Όλα τα ${leksi} στο ${name}"
+           ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${simaPath(name)}"/></svg
+           ><span>${leksi}</span></a>`;
+
   return `  <section class="must reels" aria-labelledby="reels-head">
     <div class="must-head">
       <p class="must-mark" id="reels-head">
         <img class="reels-icon" src="shows/logo-icon.png" alt="" loading="lazy" width="512" height="512">
         <span class="must-word reels-word">Reels <em>and shorts</em></span>
       </p>
-      <a class="must-all" href="https://www.youtube.com/@newshubgr/shorts" target="_blank" rel="noopener">Όλα τα Shorts →</a>
+      <p class="reel-all">
+${pigiLink('YouTube', 'https://www.youtube.com/@newshubgr/shorts', 'Shorts')}
+${pigiLink('Facebook', 'https://www.facebook.com/newshub.gr/reels/', 'Reels')}
+      </p>
     </div>
 
     <div class="reel-row">

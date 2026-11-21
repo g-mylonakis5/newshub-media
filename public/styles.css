@@ -5671,6 +5671,40 @@ body:has(.bar:not([hidden])) #page{ padding-bottom: 5.5rem; }
   margin-right: 0.1em;
 }
 
+/* Δύο προορισμοί αντί για έναν: η λωρίδα ανακατεύει δύο πλατφόρμες, και
+   το «όλα» δεν μπορεί να δείχνει μόνο στη μία. Το σήμα της καθεμιάς λέει
+   πού πας πριν διαβάσεις τη λέξη. */
+.reel-all{
+  display: flex;
+  gap: 1.1rem;
+  margin: 0;
+  align-items: center;
+}
+
+.reel-go{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.reel-go svg{
+  width: 1.5em;
+  height: 1.5em;
+  fill: currentColor;
+  flex: none;
+}
+
+.reel-go:hover{ color: var(--text); }
+.reel-go--youtube:hover{ color: var(--news-red, #CF2233); }
+.reel-go--facebook:hover{ color: var(--video-light, #7FA3D1); }
+
 .reel-row{
   display: grid;
   grid-auto-flow: column;
