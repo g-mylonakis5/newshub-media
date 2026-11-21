@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-21T14:22:04.968Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/geopolitiki/stis-30-noemvrioy-anamenetai-sti-chora-mas-i-fregata-nearchos-ta-charaktiristika-tis"
+      "link": "https://www.newshub.gr/el/geopolitiki/stis-30-noemvrioy-anamenetai-sti-chora-mas-i-fregata-nearchos-ta-charaktiristika-tis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290223252156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290223252156174",
+          "at": "2026-11-21T14:22:24.154Z"
+        }
+      }
     },
     {
       "id": "20261121082306-news-ayxisi-kata-1-5-tis-dynamis-toy-emporikoy-stoloy-ton-septemvrio",
