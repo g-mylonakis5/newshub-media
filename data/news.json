@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/fragma-mpramianon-25-e.jpg",
     "summary": "Ύστερα από 872 ημέρες, το φράγμα των Μπραμιανών ξαναβρίσκει την ποσότητα νερού που είχε το καλοκαίρι του 2024 ξεπερνώντας τα 6 εκατομμύρια κυβικά μέτρα νερού...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "kakao-dyo-tachytiton-giati-i-eyropi-plironei-akrivotera-apo-tis-ipa",
@@ -153,7 +153,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/limani.jpg",
     "summary": "Πιο επίκαιρη από ποτέ είναι πλέον η διεκδίκηση του μεταφορικού ισοδύναμου, για την ενίσχυση του επιχειρηματικού κόσμου της Κρήτης και την καταπολέμηση του αθ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "poies-allages-erchontai-ston-kodika-odikis-kykloforias",
