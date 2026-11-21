@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261121202317-news-i-christina-gkentzoy-pagkosmia-protathlitria-sto-para-taekvonto",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/athlitika/i-christina-gkentzoy-pagkosmia-protathlitria-sto-para-taekvonto",
+      "title": "Η Χριστίνα Γκέντζου παγκόσμια πρωταθλήτρια στο παρα-ταεκβοντό",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/5f130115-gkentzou.jpg",
+      "text": "Η Χριστίνα Γκέντζου παγκόσμια πρωταθλήτρια στο παρα-ταεκβοντό",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-21T20:23:17.050Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/athlitika/i-christina-gkentzoy-pagkosmia-protathlitria-sto-para-taekvonto"
+    },
+    {
       "id": "20261121142204-news-stis-30-noemvrioy-anamenetai-sti-chora-mas-i-fregata-nearchos-ta-charaktiristika-tis",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/stis-30-noemvrioy-anamenetai-sti-chora-mas-i-fregata-nearchos-ta-charaktiristika-tis",
