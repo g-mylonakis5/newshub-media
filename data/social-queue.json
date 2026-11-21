@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-21T20:23:17.050Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/athlitika/i-christina-gkentzoy-pagkosmia-protathlitria-sto-para-taekvonto"
+      "link": "https://www.newshub.gr/el/athlitika/i-christina-gkentzoy-pagkosmia-protathlitria-sto-para-taekvonto",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290256954156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290256954156174",
+          "at": "2026-11-21T20:23:33.497Z"
+        }
+      }
     },
     {
       "id": "20261121142204-news-stis-30-noemvrioy-anamenetai-sti-chora-mas-i-fregata-nearchos-ta-charaktiristika-tis",
