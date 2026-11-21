@@ -1,5 +1,17 @@
 [
   {
+    "id": "return-hubs-pote-tha-ginoyn-oi-protes-epistrofes-metanaston-oi-leptomereies-ton-diapragmateyseon-me-ti-royanta",
+    "title": "Return Hubs: Πότε θα γίνουν οι πρώτες επιστροφές μεταναστών – Οι λεπτομέρειες των διαπραγματεύσεων με τη Ρουάντα",
+    "url": "https://www.newshub.gr/el/ellada/return-hubs-pote-tha-ginoyn-oi-protes-epistrofes-metanaston-oi-leptomereies-ton-diapragmateyseon-me-ti-royanta",
+    "date": "2026-11-21T12:30:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/metanastes-nauagio.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/metanastes-nauagio.jpg",
+    "summary": "Σε φάση εξειδίκευσης περνά ο σχεδιασμός για τη λειτουργία των return hubs (κόμβων επιστροφής μεταναστών), με τις πέντε ευρωπαϊκές χώρες που συμμετέχουν στην ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "mexiko-cheiropedes-se-archigo-kartel-poy-itan-sti-lista-ton-10-pleon-katazitoymenon-toy-fbi",
     "title": "Μεξικό: Χειροπέδες σε αρχηγό καρτέλ που ήταν στη λίστα των 10 πλέον καταζητούμενων του Fbi",
     "url": "https://www.newshub.gr/el/kosmos/mexiko-cheiropedes-se-archigo-kartel-poy-itan-sti-lista-ton-10-pleon-katazitoymenon-toy-fbi",
@@ -69,7 +81,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/fragma-mpramianon-25-e.jpg",
     "summary": "Ύστερα από 872 ημέρες, το φράγμα των Μπραμιανών ξαναβρίσκει την ποσότητα νερού που είχε το καλοκαίρι του 2024 ξεπερνώντας τα 6 εκατομμύρια κυβικά μέτρα νερού...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "kakao-dyo-tachytiton-giati-i-eyropi-plironei-akrivotera-apo-tis-ipa",
@@ -7220,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/screenshot-2026-11-16-214853.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/screenshot-2026-11-16-214853.jpg",
     "summary": "Αναστάτωση προκλήθηκε κατά την αποχαιρετιστήρια παρουσία του πάπα Λέοντα ΙΔ΄ στο Περού, όταν ένα ροζάριο που εκτοξεύτηκε από το πλήθος τον πέτυχε στο δεξί μά...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "financial-times-i-ellada-aprosmeno-ependytiko-katafygio-giati-oi-xenoi-den-mporoyn-pleon-na-tin-agnooyn",
-    "title": "Financial Times: Η Ελλάδα απρόσμενο επενδυτικό καταφύγιο – Γιατί οι ξένοι δεν μπορούν πλέον να την αγνοούν",
-    "url": "https://www.newshub.gr/el/oikonomia/financial-times-i-ellada-aprosmeno-ependytiko-katafygio-giati-oi-xenoi-den-mporoyn-pleon-na-tin-agnooyn",
-    "date": "2026-11-16T20:41:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/16-11/euro-semaia.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/16-11/euro-semaia.jpg",
-    "summary": "Από μια χώρα που οι διεθνείς επενδυτές απέφευγαν για χρόνια, η Ελλάδα μετατρέπεται σε μια αγορά την οποία σύντομα ενδέχεται να μην έχουν την πολυτέλεια να αγ...",
     "author": null,
     "featured": false
   },
