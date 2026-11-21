@@ -2719,15 +2719,20 @@ function socByHand(t){
 
 // Whether the page we link to will give X and Facebook a card.
 //
-// They build it from tags on the page itself. Our own pages carry
-// <meta name="twitter:card"> — the newshub.gr article pages do not, and
-// that is their site, not ours. So a news post goes out as bare text
-// however good our photo is.
+// Όσο οι ειδήσεις πήγαιναν κατευθείαν στο newshub.gr η απάντηση ήταν
+// «καμία»: οι σελίδες τους δεν έχουν <meta name="twitter:card">, άρα το
+// ποστ έβγαινε σκέτο κείμενο και ο δημοσιογράφος κολλούσε τη φωτογραφία
+// με το χέρι.
 //
-// Until that one line appears on their side, the editor pastes the
-// photo into the window by hand and the post looks right anyway.
-function socNoCard(it){
-  return !!it && it.kind === 'news';
+// Από τότε ο σύνδεσμος περνάει από τη δική μας /mf/, που έχει κανονική
+// κάρτα με τον τίτλο τυπωμένο πάνω στη φωτογραφία — δες socShareUrl().
+// Άρα κάρτα βγαίνει πάντα, και στο κινητό και στον υπολογιστή, χωρίς
+// να πατήσει κανείς τίποτα.
+//
+// Η συνάρτηση μένει γιατί η μέρα που θα μοιραζόμαστε ξένη σελίδα χωρίς
+// κάρτα θα ξαναέρθει. Σήμερα απαντά «όχι» σε όλα.
+function socNoCard(){
+  return false;
 }
 
 // The address X opens with everything filled in. No keys, no cost, no
@@ -3008,6 +3013,16 @@ function socPathOf(it){
   });
 }
 
+// Υπάρχει αυτή η σελίδα μας στον αέρα; Στο site η διεύθυνση δεν έχει
+// .html — το Pages το προσθέτει μόνο του· σε αυτό το μηχάνημα ο serve.js
+// δίνει τα αρχεία όπως είναι στον δίσκο. Δοκιμάζουμε και τα δύο.
+function socLive(path){
+  return fetch(path).then(function (r) {
+    if (r.ok) return true;
+    return fetch(path + '.html').then(function (r2) { return r2.ok; });
+  }).catch(function () { return false; });
+}
+
 // Reads the tags off the real page — our own pages only. newshub.gr is
 // another origin and the browser will not hand us its HTML; for a news
 // item we hold the same fields ourselves anyway.
@@ -3015,15 +3030,32 @@ function socRead(it){
   var key = it.kind + ':' + it.id;
   if (socMeta[key]) return;
 
+  // Είδηση: τα στοιχεία τα έχουμε ήδη, το newshub.gr είναι άλλη περιοχή
+  // και ο browser δεν θα μας δώσει το HTML του ούτως ή άλλως.
+  //
+  // Αυτό που ΔΕΝ ξέρουμε είναι αν η δική μας σελίδα μοιράσματος έχει
+  // προλάβει να χτιστεί. Από εκεί διαβάζει το X την κάρτα: αν δεν την
+  // βρει, δεν φτιάχνει καμία — και κρατά την άρνηση στη μνήμη του για
+  // ώρες, οπότε δεν σώζεται ούτε με δεύτερο ποστ. Γι' αυτό ρωτάμε πριν,
+  // και όχι αφού ανοίξει το παράθυρο.
   if (it.kind === 'news') {
-    socMeta[key] = {
-      title: it.title,
-      desc: '',
-      image: socImage(it),
-      url: it.ref,
-      site: 'NEWSHUB.GR',
-    };
-    drawSocPreview();
+    socMeta[key] = { wait: true };
+
+    var mfPath = socShareUrl(it, it.ref).replace(SITE, '');
+
+    socLive(mfPath).then(function (zontani) {
+      if (!zontani) throw new Error('άχτιστη');
+      socMeta[key] = {
+        title: it.title,
+        desc: '',
+        image: socImage(it),
+        url: it.ref,
+        site: 'NEWSHUB.GR',
+      };
+    }).catch(function () {
+      socMeta[key] = { err: true };
+    }).then(drawSocPreview);
+
     return;
   }
 
@@ -3101,7 +3133,8 @@ function prevX(m, img, byHand, noCard){
     + '<p class="prev-tag">X</p>'
     + prevWho('@newshubgr')
     + '<p class="prev-text">' + esc(socXText())
-    + (byHand && !noCard ? '' : '<br><span class="prev-link">' + esc(m.url) + '</span>')
+    + (byHand && !noCard ? '' : '<br><span class="prev-link">'
+      + esc(soc.pick ? socShareUrl(soc.pick, m.url) : m.url) + '</span>')
     + '</p>'
     + (byHand && noCard
       ? ''
