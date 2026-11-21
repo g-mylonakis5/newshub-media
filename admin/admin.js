@@ -3364,23 +3364,52 @@ function socPhoto(){
 
   say('Παίρνω τη φωτογραφία…', 'ok');
 
-  fetch(url).then(function (r) {
+  // Κρατάμε και το αρχικό jpeg: αν το πρόχειρο αρνηθεί, κατεβαίνει αυτό.
+  var efedriko = null;
+
+  // Το κατέβασμα ξεκινά, ΔΕΝ το περιμένουμε.
+  var png = fetch(url).then(function (r) {
     if (!r.ok) throw new Error('δεν κατέβηκε (' + r.status + ')');
     return r.blob();
   }).then(function (blob) {
-    return socPng(blob).then(function (png) {
-      if (!navigator.clipboard || !window.ClipboardItem) throw new Error('χωρίς πρόχειρο');
-      var bag = {};
-      bag['image/png'] = png;
-      return navigator.clipboard.write([new ClipboardItem(bag)]);
-    }).then(function () {
-      say('Η φωτογραφία είναι στο πρόχειρο. Πήγαινε στο παράθυρο του X και πάτα Ctrl+V.',
-        'ok');
-    }).catch(function () {
-      socSave(blob, url);
-    });
+    efedriko = blob;
+    return socPng(blob);
+  });
+
+  if (!navigator.clipboard || !window.ClipboardItem) {
+    png.then(function () { socSave(efedriko, url); })
+      .catch(function (err) { say('Δεν πήρα τη φωτογραφία: ' + err.message, 'bad'); });
+    return;
+  }
+
+  // Η άδεια για το πρόχειρο ζει όσο ο browser «θυμάται» το πάτημα —
+  // μερικές εκατοντάδες χιλιοστά. Αν περιμέναμε πρώτα να κατέβει η
+  // φωτογραφία και να ξαναβαφτεί σε png, η άδεια είχε λήξει σε αργό
+  // δίκτυο και η εγγραφή απορριπτόταν: τρεις στις δέκα φορές η
+  // φωτογραφία δεν έφτανε ποτέ στο X.
+  //
+  // Το ClipboardItem δέχεται ΥΠΟΣΧΕΣΗ αντί για έτοιμη εικόνα. Έτσι το
+  // write φεύγει αμέσως, μέσα στο ίδιο το πάτημα, και ο browser κρατά
+  // τη θέση στο πρόχειρο μέχρι να έρθει η εικόνα.
+  var bag = {};
+  bag['image/png'] = png;
+
+  navigator.clipboard.write([new ClipboardItem(bag)]).then(function () {
+    say('Η φωτογραφία είναι στο πρόχειρο. Άνοιξε το X και πάτα επικόλληση '
+      + '(στον υπολογιστή: Ctrl+V).', 'ok');
   }).catch(function (err) {
-    say('Δεν πήρα τη φωτογραφία: ' + err.message, 'bad');
+    // Δεύτερη ευκαιρία: κάποιοι browser δεν δέχονται υπόσχεση. Εκεί η
+    // εικόνα έχει ήδη κατέβει, οπότε η σύγχρονη εγγραφή πετυχαίνει.
+    png.then(function (etoimi) {
+      var bag2 = {};
+      bag2['image/png'] = etoimi;
+      return navigator.clipboard.write([new ClipboardItem(bag2)]);
+    }).then(function () {
+      say('Η φωτογραφία είναι στο πρόχειρο. Άνοιξε το X και πάτα επικόλληση.', 'ok');
+    }).catch(function () {
+      if (efedriko) socSave(efedriko, url);
+      else say('Δεν πήρα τη φωτογραφία: ' + err.message, 'bad');
+    });
   });
 }
 
