@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-22T22:39:25.630Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/insete-sto-9-1-i-toyristiki-empeiria-stin-ellada-pano-apo-ton-eyropaiko-meso-oro-poso-sygkentrose-i-kriti"
+      "link": "https://www.newshub.gr/el/kriti/insete-sto-9-1-i-toyristiki-empeiria-stin-ellada-pano-apo-ton-eyropaiko-meso-oro-poso-sygkentrose-i-kriti",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290398692156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290398692156174",
+          "at": "2026-11-22T22:39:42.581Z"
+        }
+      }
     },
     {
       "id": "20261122223834-news-panathinaikos-ofi-2-0-astochi-i-kritiki-omada-o-penia-esose-ton-pao-livai-kai-giagkoysits-katharisan-kai-ton-apomakrynan-stin-koryfi",
