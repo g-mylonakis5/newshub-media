@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261122223739-news-melomakarona-mystika-gia-sigoyri-epitychia",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/sugar/melomakarona-mystika-gia-sigoyri-epitychia",
+      "title": "Μελομακάρονα: Μυστικά για σίγουρη επιτυχία",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/melomakarono-bikipaideia.jpg",
+      "text": "Μελομακάρονα: Μυστικά για σίγουρη επιτυχία",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-22T22:37:39.891Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/sugar/melomakarona-mystika-gia-sigoyri-epitychia"
+    },
+    {
       "id": "20261122180154-news-kyvernoasfaleia-stis-epicheiriseis-ta-vasika-vimata-prostasias",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/tech-hub/kyvernoasfaleia-stis-epicheiriseis-ta-vasika-vimata-prostasias",
