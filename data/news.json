@@ -1,5 +1,21 @@
 [
   {
+    "id": "anasa-gia-seismoplikto-to-spti-toy-opoioy-evgaine-se-pleistiriasmo-se-kindyno-polla-akinita-toy-arkalochorioy",
+    "title": "«Ανάσα» για σεισμόπληκτο το σπτι του οποίου έβγαινε σε πλειστηριασμό - Σε κίνδυνο πολλά ακίνητα του Αρκαλοχωρίου",
+    "url": "https://www.newshub.gr/el/kriti/anasa-gia-seismoplikto-to-spti-toy-opoioy-evgaine-se-pleistiriasmo-se-kindyno-polla-akinita-toy-arkalochorioy",
+    "date": "2026-11-22T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/seismos-arkalochori-erepei.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/seismos-arkalochori-erepei.jpg",
+    "summary": "Μια μικρή «ανάσα» πήρε ένας άνεργος οικογενειάρχης, το σπιτι του οποίου επρόκειτο να βγει σε πλειστηριασμό στις 13 Νοεμβρίου. Συμφωνα με πληροφορ...",
+    "author": {
+      "name": "Ανδρέας Κριτσωτάκης",
+      "url": "https://www.newshub.gr/el/andreas-kritsotakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "farmakeio-aytokinitoy-ti-allazei-apo-to-2027-oi-nees-prodiagrafes",
     "title": "Φαρμακείο αυτοκινήτου: Τι αλλάζει από το 2027-Οι νέες προδιαγραφές",
     "url": "https://www.newshub.gr/el/ellada/farmakeio-aytokinitoy-ti-allazei-apo-to-2027-oi-nees-prodiagrafes",
@@ -129,7 +145,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/raphaelhr.jpg",
     "summary": "Ενας χρόνος συμπληρώνεται σε λίγες ημέρες από την τραγωδία που συγκλόνισε την Κρήτη αλλά και ολόκληρη την Ελλάδα, όταν  ο 19χρονος στρατιώτης Ραφαήλ Γαλ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "sti-dikaiosyni-kai-sto-esr-prosfeygei-o-yfypoyrgos-esoterikon-eyaggelos-liakos",
@@ -7212,18 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/att.dwm2-bxyjzzzflroyy9y_x_7vrp8m9tqrhn-nynafqq.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/att.dwm2-bxyjzzzflroyy9y_x_7vrp8m9tqrhn-nynafqq.jpg",
     "summary": "Η ομάδα της Τεχναλουμίν στέφθηκε πρωταθλήτρια στο Εργασιακό Πρωτάθλημα Μπάσκετ Ηρακλείου «Νίκος Τούλης» που διοργανώνει η Αντιδημαρχία Αθλητισμού...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "g-chalkiadakis-dioikitis-pagni-oi-giatroi-prospathoysan-na-sosoyn-to-paidi-gia-1-5-ora",
-    "title": "Γ. Χαλκιαδάκης, διοικητής ΠΑΓΝΗ: «Οι γιατροί προσπαθούσαν να σώσουν το παιδί για 1,5 ώρα»",
-    "url": "https://www.newshub.gr/el/kriti/g-chalkiadakis-dioikitis-pagni-oi-giatroi-prospathoysan-na-sosoyn-to-paidi-gia-1-5-ora",
-    "date": "2026-11-17T11:33:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/nhygb.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/nhygb.jpg",
-    "summary": "«Παγωμένη» παραμένει η κοινωνία από το θάνατο του 18 μηνών παιδιού, που έφυγε από τη ζωή μετά την κατάποση βενζίνης στο σπίτι της οικογένειας, στ...",
     "author": null,
     "featured": false
   },
