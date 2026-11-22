@@ -1,5 +1,17 @@
 [
   {
+    "id": "ipa-archimandritis-se-kykloma-poy-poyloyse-plasta-erga-technis-gnoston-ellinon-kai-xenon-kallitechnon",
+    "title": "ΗΠΑ: Αρχιμανδρίτης σε κύκλωμα που πουλούσε πλαστά έργα τέχνης γνωστών Ελλήνων και ξένων καλλιτεχνών",
+    "url": "https://www.newshub.gr/el/kosmos/ipa-archimandritis-se-kykloma-poy-poyloyse-plasta-erga-technis-gnoston-ellinon-kai-xenon-kallitechnon",
+    "date": "2026-11-22T16:28:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/plasta_erga_texnis_arthrou.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/plasta_erga_texnis_arthrou.jpg",
+    "summary": "Στη σύλληψη ενός 44χρονου που φέρεται να εμπλεκόταν στην πώληση πλαστών έργων τέχνης στην Αττική προχώρησε η αστυνομία, έπειτα από καταγγελία για πίνακες γνω...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "israil-deyteros-gyros-synomilion-gia-schimatismo-kyvernisis-oroi-apo-netaniachoy-kai-pyra-toy-aizenkot-gia-ti-dytiki-ochthi",
     "title": "Iσραήλ: Δεύτερος γύρος συνομιλιών για σχηματισμό κυβέρνησης – Όροι από Νετανιάχου και πυρά του Άιζενκοτ για τη Δυτική Όχθη",
     "url": "https://www.newshub.gr/el/geopolitiki/israil-deyteros-gyros-synomilion-gia-schimatismo-kyvernisis-oroi-apo-netaniachoy-kai-pyra-toy-aizenkot-gia-ti-dytiki-ochthi",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/thumbs-b-c-73d35cbd836791d725cdabaa1a239131a.jpg",
     "summary": "Τα κόμματα του Μπενιαμίν Νετανιάχου και του αντιπάλου του Γκάντι Άιζενκοτ, που έχει λάβει εντολή σχηματισμού της επόμενης κυβέρνησης του Ισραήλ, ξεκίνησαν νέ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "vretania-nea-politiki-thyella-meta-ti-symfonia-mpernam-me-tis-vryxelles",
@@ -7220,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/jensen-huang.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/jensen-huang.jpg",
     "summary": "Ο πρώην διευθύνων σύμβουλος της Nvidia, Τζένσεν Χουάνγκ, έλυσε τη σιωπή του την Τρίτη (17/11), εκδίδοντας μια δήλωση οποία αναφέρει ότι θα ήταν «τιμή&r...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "imerida-gia-to-efarmosmeno-montelo-toy-kentroy-koinotitas-toy-dimoy-irakleioy",
-    "title": "Ημερίδα για το εφαρμοσμένο μοντέλο του Κέντρου Κοινότητας του Δήμου Ηρακλείου",
-    "url": "https://www.newshub.gr/el/kriti/imerida-gia-to-efarmosmeno-montelo-toy-kentroy-koinotitas-toy-dimoy-irakleioy",
-    "date": "2026-11-17T18:10:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/kentro-koinotetas.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/kentro-koinotetas.jpg",
-    "summary": "Ο Δήμος Ηρακλείου, μέσω της Αντιδημαρχίας Κοινωνικής Μέριμνας και της Διεύθυνσης Κοινωνικής Ανάπτυξης, διοργανώνει ειδική ενημερωτική Ημερίδα με θέ...",
     "author": null,
     "featured": false
   },
