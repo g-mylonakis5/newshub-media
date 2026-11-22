@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/kalpe-pexels.jpg",
     "summary": "Σταθερά διψήφιο προβάδισμα της ΝΔ έναντι της δεύτερης ΕΛΑΣ καταγράφεται στη δημοσκόπηση της Palmos Analysis που δημοσιεύεται στην εφημερίδα «Ελεύθερος ...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "irakleio-enopion-ton-archon-o-17chronos-kai-o-pateras-toy-gia-tis-cheirovomvides-kai-ta-opla",
+    "title": "Ηράκλειο: Ενώπιον των Αρχών  ο 17χρονος και ο πατέρας του για τις χειροβομβίδες και τα όπλα",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-enopion-ton-archon-o-17chronos-kai-o-pateras-toy-gia-tis-cheirovomvides-kai-ta-opla",
+    "date": "2026-11-22T10:12:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/dikasetrio-erakleio-apo-plai-genike-kale.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/dikasetrio-erakleio-apo-plai-genike-kale.jpg",
+    "summary": "Ποινικές διώξεις σε βαθμό κακουργήματος ασκήθηκαν στις 20/11 σε βάρος του 68χρονου άνδρα και του 17χρονου γιου του, που συνελήφθησαν σε αστυνομική επιχείρηση...",
+    "author": null,
     "featured": true
   },
   {
@@ -7216,18 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/ab.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/ab.jpg",
     "summary": "Στην πρεσβεία των ΗΠΑ, στη Βασιλίσσης Σοφίας, έφτασε λίγο πριν από τις 17:00 η αιματοβαμμένη σημαία- σύμβολο της εξέγερσης της 17ης Νοέμβρη, την οποία μετέφε...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "ekrixeis-sto-iraniko-nisi-kesm-anafores-gia-amerikanika-pligmata",
-    "title": "Εκρήξεις στο ιρανικό νησί Κεσμ-Αναφορές για αμερικανικά πλήγματα",
-    "url": "https://www.newshub.gr/el/geopolitiki/ekrixeis-sto-iraniko-nisi-kesm-anafores-gia-amerikanika-pligmata",
-    "date": "2026-11-17T15:20:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/qeshm-bomb.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/qeshm-bomb.jpg",
-    "summary": "Εκρήξεις σημειώθηκαν το μεσημέρι της Τρίτης στο ιρανικό νησί Κεσμ, στα Στενά του Ορμούζ, με πυκνούς καπνούς να υψώνονται από την περιοχή, λίγες ώρες μετά την...",
     "author": null,
     "featured": false
   },
