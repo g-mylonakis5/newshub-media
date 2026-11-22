@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/plasta_erga_texnis_arthrou.jpg",
     "summary": "Στη σύλληψη ενός 44χρονου που φέρεται να εμπλεκόταν στην πώληση πλαστών έργων τέχνης στην Αττική προχώρησε η αστυνομία, έπειτα από καταγγελία για πίνακες γνω...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "fotia-se-spiti-sta-chania-epicheirei-i-pyrosvestiki",
+    "title": "Φωτιά σε σπίτι στα Χανιά – Επιχειρεί η πυροσβεστική",
+    "url": "https://www.newshub.gr/el/kriti/fotia-se-spiti-sta-chania-epicheirei-i-pyrosvestiki",
+    "date": "2026-11-22T16:20:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/pyrosbestikh-brady.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/pyrosbestikh-brady.jpg",
+    "summary": "«Συναγερμός» σήμανε σήμερα στην πυροσβεστική εξαιτίας φωτιάς που εκδηλώθηκε σε σπίτι.\r\n\r\nΣύμφωνα με πληροφορίες του newshub.gr, όλα συνέβησ...",
+    "author": null,
     "featured": true
   },
   {
@@ -7220,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/paraviaseis_3.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/paraviaseis_3.jpg",
     "summary": "Σε νέες παραβιάσεις του εθνικού εναέριου χώρου προχώρησε σήμερα η τουρκική πολεμική αεροπορία η οποία συντηρεί την ένταση στις ελληνοτουρκικές σχέσεις.\r\n\r\nΠά...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "espase-ti-siopi-toy-meta-tin-paraitisi-apo-ti-nvidia-o-choyangk-tha-itan-timi-moy-na-epistrepso-sti-thesi-moy-analamvano-tin-eythyni-gia-ta-lathi-moy",
-    "title": "Έσπασε τη σιωπή του μετά την παραίτηση από τη Nvidia ο Χουάνγκ: Θα ήταν τιμή μου να επιστρέψω στη θέση μου – Αναλαμβάνω την ευθύνη για τα λάθη μου",
-    "url": "https://www.newshub.gr/el/kosmos/espase-ti-siopi-toy-meta-tin-paraitisi-apo-ti-nvidia-o-choyangk-tha-itan-timi-moy-na-epistrepso-sti-thesi-moy-analamvano-tin-eythyni-gia-ta-lathi-moy",
-    "date": "2026-11-17T18:21:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/jensen-huang.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/jensen-huang.jpg",
-    "summary": "Ο πρώην διευθύνων σύμβουλος της Nvidia, Τζένσεν Χουάνγκ, έλυσε τη σιωπή του την Τρίτη (17/11), εκδίδοντας μια δήλωση οποία αναφέρει ότι θα ήταν «τιμή&r...",
     "author": null,
     "featured": false
   },
