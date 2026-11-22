@@ -73,7 +73,7 @@
       "url": "https://www.newshub.gr/el/valia-mpoyi",
       "photo": "https://static.newshub.gr/files/2025-fotografies-gia-roh/maios/18-5/mpoue.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "irakleio-gemise-paidia-i-plateia-anaxagora-sto-atsalenio-stin-paradosi-tis-neas-paidikis-charas-fotografies",
@@ -289,7 +289,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/chrema-ape.jpg",
     "summary": "Ένα εκτεταμένο πακέτο οικονομικών ενισχύσεωνκαι φορολογικών ελαφρύνσεων τίθεται σταδιακά σε εφαρμογή, με ορίζοντα τα μέσα του 2027. Η αρχή έγινε με την καταβ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "kriti-dyo-epicheiriseis-diasosis-me-98-metanastes-stoys-kaloys-limenes-synelifthisan-dyo-anilikoi-os-diakinites",
