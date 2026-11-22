@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-22T22:38:34.615Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/athlitika/panathinaikos-ofi-2-0-astochi-i-kritiki-omada-o-penia-esose-ton-pao-livai-kai-giagkoysits-katharisan-kai-ton-apomakrynan-stin-koryfi"
+      "link": "https://www.newshub.gr/el/athlitika/panathinaikos-ofi-2-0-astochi-i-kritiki-omada-o-penia-esose-ton-pao-livai-kai-giagkoysits-katharisan-kai-ton-apomakrynan-stin-koryfi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290398602156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290398602156174",
+          "at": "2026-11-22T22:38:55.828Z"
+        }
+      }
     },
     {
       "id": "20261122223739-news-melomakarona-mystika-gia-sigoyri-epitychia",
