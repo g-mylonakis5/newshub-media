@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-22T17:38:49.830Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/politiki/dimoskopisi-palmos-analysis-stathera-dipsifio-provadisma-tis-nd-enanti-tis-deyteris-elas-koryfaio-provlima-i-akriveia"
+      "link": "https://www.newshub.gr/el/politiki/dimoskopisi-palmos-analysis-stathera-dipsifio-provadisma-tis-nd-enanti-tis-deyteris-elas-koryfaio-provlima-i-akriveia",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290375358156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290375358156174",
+          "at": "2026-11-22T17:39:09.493Z"
+        }
+      }
     },
     {
       "id": "20261121202317-news-i-christina-gkentzoy-pagkosmia-protathlitria-sto-para-taekvonto",
