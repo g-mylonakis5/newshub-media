@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/chrema-ape.jpg",
     "summary": "Ένα εκτεταμένο πακέτο οικονομικών ενισχύσεωνκαι φορολογικών ελαφρύνσεων τίθεται σταδιακά σε εφαρμογή, με ορίζοντα τα μέσα του 2027. Η αρχή έγινε με την καταβ...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "kriti-dyo-epicheiriseis-diasosis-me-98-metanastes-stoys-kaloys-limenes-synelifthisan-dyo-anilikoi-os-diakinites",
+    "title": "Κρήτη: Δύο επιχειρήσεις διάσωσης με 98 μετανάστες στους Καλούς Λιμένες – Συνελήφθησαν δύο ανήλικοι ως διακινητές",
+    "url": "https://www.newshub.gr/el/kriti/kriti-dyo-epicheiriseis-diasosis-me-98-metanastes-stoys-kaloys-limenes-synelifthisan-dyo-anilikoi-os-diakinites",
+    "date": "2026-11-22T08:24:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/metanastes-genike.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/metanastes-genike.jpg",
+    "summary": "Δύο επιχειρήσεις εντοπισμού και διάσωσης μεταναστών πραγματοποιήθηκαν στη θαλάσσια περιοχή νοτιοανατολικά των Καλών Λιμένων, με συνολικά 98 αλλοδαπούς να δια...",
+    "author": null,
     "featured": true
   },
   {
@@ -7216,18 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/18130.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/18130.jpg",
     "summary": "Στη διεθνή έκθεση Enlit Europe 2026, που πραγματοποιήθηκε από τις 10 έως τις 12 Νοεμβρίου 2026 στη Βιέννη της Αυστρίας, συμμετείχε το Επιμελητήριο Ηρακλείου,...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "dimos-chanion-kai-dedisa-enonoyn-tis-dynameis-toys-stin-eyropaiki-evdomada-meiosis-apovliton",
-    "title": "Δήμος Χανίων και ΔΕΔΙΣΑ ενώνουν τις δυνάμεις τους στην Ευρωπαϊκή Εβδομάδα Μείωσης Αποβλήτων",
-    "url": "https://www.newshub.gr/el/kriti/dimos-chanion-kai-dedisa-enonoyn-tis-dynameis-toys-stin-eyropaiki-evdomada-meiosis-apovliton",
-    "date": "2026-11-17T14:00:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/8bb95083-2664-41ea-a72e-4f9736cdb556.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/8bb95083-2664-41ea-a72e-4f9736cdb556.jpg",
-    "summary": "Με το μήνυμα «Επανεξετάζουμε τις επιλογές μας, σεβόμαστε τους πόρους μας», ο Δήμος Χανίων και η ΔΕΔΙΣΑ Α.Ε. (ΟΤΑ) συμμετέχουν από κοινού στην Ευρ...",
     "author": null,
     "featured": false
   },
