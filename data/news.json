@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/dikasteria-ape.jpg",
     "summary": "Αύριο, Δευτέρα, 23 Νοεμβρίου ξεκινούν οι απολογίες των 15 συλληφθέντων για την υπόθεση του κυκλώματος με τα εικονικά τιμολόγια, ενώ η διαδικασία θα συνεχιστε...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "tramp-gia-kyvernoepithesi-sto-fbi-den-moy-aresei-alla-isos-mathoyme-pragmata-poy-den-gnorizame-aichmes-gia-ti-rosia",
@@ -209,7 +209,7 @@
       "url": "https://www.newshub.gr/el/andreas-kritsotakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "farmakeio-aytokinitoy-ti-allazei-apo-to-2027-oi-nees-prodiagrafes",
