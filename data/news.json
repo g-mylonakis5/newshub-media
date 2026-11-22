@@ -60,6 +60,22 @@
     "featured": false
   },
   {
+    "id": "dimitra-liapi-i-pio-epikindyni-lexi-stin-endooikogeneiaki-via-einai-i-siopi-o-rolos-tis-el-as-kai-ta-462-fetina-peristatika-sto-irakleio-podcast",
+    "title": "Δήμητρα Λιάπη «Η πιο επικίνδυνη λέξη στην ενδοοικογενειακή βία είναι η σιωπή» – Ο ρόλος της ΕΛ.ΑΣ. και τα 462 φετινά περιστατικά στο Ηράκλειο (podcast)",
+    "url": "https://www.newshub.gr/el/kriti/dimitra-liapi-i-pio-epikindyni-lexi-stin-endooikogeneiaki-via-einai-i-siopi-o-rolos-tis-el-as-kai-ta-462-fetina-peristatika-sto-irakleio-podcast",
+    "date": "2026-11-22T11:57:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/koinonia-se-1o-prosopo-3.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/koinonia-se-1o-prosopo-3.jpg",
+    "summary": "«Η πιο επικίνδυνη λέξη στη βία είναι η σιωπή». Με αυτό το ξεκάθαρο μήνυμα, η κα Δήμητρα Λιάπη, Υ/Α,  προϊσταμένη του Γραφείου Αντιμετώπ...",
+    "author": {
+      "name": "Βάλια Μπούη",
+      "url": "https://www.newshub.gr/el/valia-mpoyi",
+      "photo": "https://static.newshub.gr/files/2025-fotografies-gia-roh/maios/18-5/mpoue.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "irakleio-gemise-paidia-i-plateia-anaxagora-sto-atsalenio-stin-paradosi-tis-neas-paidikis-charas-fotografies",
     "title": "Ηράκλειο: Γέμισε παιδιά η πλατεία Αναξαγόρα στο Ατσαλένιο στην παράδοση της νέας παιδικής χαράς (φωτογραφίες)",
     "url": "https://www.newshub.gr/el/ta-en-oiko/irakleio-gemise-paidia-i-plateia-anaxagora-sto-atsalenio-stin-paradosi-tis-neas-paidikis-charas-fotografies",
@@ -105,7 +121,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/asthenophoro-intime.jpg",
     "summary": "Τροχαίο ατύχημα σημειώθηκε στην περιοχή του Κουμπελή στα Χανιά, όταν ΙΧ αυτοκίνητο εξετράπη της πορείας του, προσέκρουσε σε στύλο και κατέληξε αναποδογυρισμέ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "exafanisi-mantlin-omologise-oti-skotose-ena-mikro-xantho-koritsi-o-vasikos-ypoptos-kristian-mprikner-symfona-me-sygkratoymeno-toy",
@@ -7216,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/elpi.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/elpi.jpg",
     "summary": "Η Εθνική Ελπίδων τα&hellip; έδωσε όλα, μπροστά σε 8.000 φίλους της που βρέθηκαν το βράδυ της Δευτέρας (16.11.2026) στη Λεωφόρο και επέστρεψε μετά από 25 χρόν...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "se-exelixi-sygkentrosi-stin-plateia-eleytherias-gia-tin-53i-epeteio-exegersis-sto-polytechneio-foto",
-    "title": "Σε εξέλιξη συγκέντρωση στην πλατεία Ελευθερίας για την 53η Επέτειο εξέγερσης στο Πολυτεχνείο (Φωτο)",
-    "url": "https://www.newshub.gr/el/kriti/se-exelixi-sygkentrosi-stin-plateia-eleytherias-gia-tin-53i-epeteio-exegersis-sto-polytechneio-foto",
-    "date": "2026-11-17T16:35:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/910316836_1707947923998533_118012546106572218_n.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/910316836_1707947923998533_118012546106572218_n.jpg",
-    "summary": "Συγκέντρωση πραγματοποιούν αυτή την ώρα στο κέντρο του Ηρακλείου φορείς και σωματεία με αφορμή τη σημερινή 53η Επέτειο της εξέγερσης του Πολυτεχνείου.\r\n\r\nΤο ...",
     "author": null,
     "featured": false
   },
