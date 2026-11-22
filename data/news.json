@@ -1,5 +1,17 @@
 [
   {
+    "id": "mparaz-enischyseon-kai-foroelafrynseon-eos-kai-to-2027-oi-mines-me-ta-dora-poioys-aforoyn",
+    "title": "Μπαράζ ενισχύσεων και φοροελαφρύνσεων έως και το 2027: Οι μήνες με τα «δώρα» - Ποιους αφορούν",
+    "url": "https://www.newshub.gr/el/oikonomia/mparaz-enischyseon-kai-foroelafrynseon-eos-kai-to-2027-oi-mines-me-ta-dora-poioys-aforoyn",
+    "date": "2026-11-22T08:24:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/chrema-ape.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/chrema-ape.jpg",
+    "summary": "Ένα εκτεταμένο πακέτο οικονομικών ενισχύσεωνκαι φορολογικών ελαφρύνσεων τίθεται σταδιακά σε εφαρμογή, με ορίζοντα τα μέσα του 2027. Η αρχή έγινε με την καταβ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "irakleio-ethelontiki-aimodosia-kai-eggrafi-sto-mitroo-doton-myeloy-ton-oston-tin-triti-24-noemvrioy",
     "title": "Ηράκλειο: Εθελοντική αιμοδοσία και εγγραφή στο Μητρώο Δοτών Μυελού των Οστών την Τρίτη 24 Νοεμβρίου",
     "url": "https://www.newshub.gr/el/ygeia/irakleio-ethelontiki-aimodosia-kai-eggrafi-sto-mitroo-doton-myeloy-ton-oston-tin-triti-24-noemvrioy",
@@ -45,7 +57,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/20261122_081251.jpg",
     "summary": "Σε εξέλιξη βρίσκεται από τις 8 το πρωί της Κυριακής 22 Νοεμβρίου η εκλογική διαδικασία για την ανάδειξη των νέων οργάνων διοίκησης του Γεωτεχνικού Επιμελητηρ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "ypothesi-kyklomatos-me-eikonika-timologia-apo-ayrio-oi-apologies-ton-15-syllifthenton-ton-syntrofo-tis-deichnei-i-logistria",
@@ -7216,18 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/8bb95083-2664-41ea-a72e-4f9736cdb556.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/8bb95083-2664-41ea-a72e-4f9736cdb556.jpg",
     "summary": "Με το μήνυμα «Επανεξετάζουμε τις επιλογές μας, σεβόμαστε τους πόρους μας», ο Δήμος Χανίων και η ΔΕΔΙΣΑ Α.Ε. (ΟΤΑ) συμμετέχουν από κοινού στην Ευρ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "i-dieythynsi-protovathmias-ekpaideysis-irakleioy-enonei-tin-eyropi-gia-tin-prostasia-tis-thalassas-mesa-apo-to-erasmus-aqua-mind",
-    "title": "Η Διεύθυνση Πρωτοβάθμιας Εκπαίδευσης Ηρακλείου ενώνει την Ευρώπη για την προστασία της θάλασσας μέσα από το Erasmus+ «aqua Mind»",
-    "url": "https://www.newshub.gr/el/kriti/i-dieythynsi-protovathmias-ekpaideysis-irakleioy-enonei-tin-eyropi-gia-tin-prostasia-tis-thalassas-mesa-apo-to-erasmus-aqua-mind",
-    "date": "2026-11-17T13:53:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/stigmiotypo-othones-2026-11-17-134949.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/stigmiotypo-othones-2026-11-17-134949.jpg",
-    "summary": "Η Διεύθυνση Πρωτοβάθμιας Εκπαίδευσης Ηρακλείου, ως εταίρος του ευρωπαϊκού προγράμματος Erasmus+ KA210-SCH «AQUA MIND», φιλοξένησε στο Ηράκλειο τη...",
     "author": null,
     "featured": false
   },
