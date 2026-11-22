@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261122223925-news-insete-sto-9-1-i-toyristiki-empeiria-stin-ellada-pano-apo-ton-eyropaiko-meso-oro-poso-sygkentrose-i-kriti",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/insete-sto-9-1-i-toyristiki-empeiria-stin-ellada-pano-apo-ton-eyropaiko-meso-oro-poso-sygkentrose-i-kriti",
+      "title": "ΙΝΣΕΤΕ: Στο 9,1 η τουριστική εμπειρία στην Ελλάδα, πάνω από τον ευρωπαϊκό μέσο όρο – Πόσο συγκέντρωσε η Κρήτη",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/toyrismos-krhth-exo-1200ch.jpg",
+      "text": "ΙΝΣΕΤΕ: Στο 9,1 η τουριστική εμπειρία στην Ελλάδα, πάνω από τον ευρωπαϊκό μέσο όρο – Πόσο συγκέντρωσε η Κρήτη",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-22T22:39:25.630Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kriti/insete-sto-9-1-i-toyristiki-empeiria-stin-ellada-pano-apo-ton-eyropaiko-meso-oro-poso-sygkentrose-i-kriti"
+    },
+    {
       "id": "20261122223834-news-panathinaikos-ofi-2-0-astochi-i-kritiki-omada-o-penia-esose-ton-pao-livai-kai-giagkoysits-katharisan-kai-ton-apomakrynan-stin-koryfi",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/athlitika/panathinaikos-ofi-2-0-astochi-i-kritiki-omada-o-penia-esose-ton-pao-livai-kai-giagkoysits-katharisan-kai-ton-apomakrynan-stin-koryfi",
