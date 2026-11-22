@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261122223834-news-panathinaikos-ofi-2-0-astochi-i-kritiki-omada-o-penia-esose-ton-pao-livai-kai-giagkoysits-katharisan-kai-ton-apomakrynan-stin-koryfi",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/athlitika/panathinaikos-ofi-2-0-astochi-i-kritiki-omada-o-penia-esose-ton-pao-livai-kai-giagkoysits-katharisan-kai-ton-apomakrynan-stin-koryfi",
+      "title": "Παναθηναϊκός – ΟΦΗ 2-0: Άστοχη η κρητική ομάδα, ο Πένια «έσωσε» τον ΠΑΟ, Λιβάι και Γιάγκουσιτς “καθάρισαν” και τον απομάκρυναν στην κορυφή",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/pao-5.jpg",
+      "text": "Παναθηναϊκός – ΟΦΗ 2-0: Άστοχη η κρητική ομάδα, ο Πένια «έσωσε» τον ΠΑΟ, Λιβάι και Γιάγκουσιτς “καθάρισαν” και τον απομάκρυναν στην κορυφή",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-22T22:38:34.615Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/athlitika/panathinaikos-ofi-2-0-astochi-i-kritiki-omada-o-penia-esose-ton-pao-livai-kai-giagkoysits-katharisan-kai-ton-apomakrynan-stin-koryfi"
+    },
+    {
       "id": "20261122223739-news-melomakarona-mystika-gia-sigoyri-epitychia",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/sugar/melomakarona-mystika-gia-sigoyri-epitychia",
