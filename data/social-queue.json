@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261122180154-news-kyvernoasfaleia-stis-epicheiriseis-ta-vasika-vimata-prostasias",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/tech-hub/kyvernoasfaleia-stis-epicheiriseis-ta-vasika-vimata-prostasias",
+      "title": "Κυβερνοασφάλεια στις επιχειρήσεις: Τα βασικά βήματα προστασίας",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/ypologistes-ape.jpg",
+      "text": "Κυβερνοασφάλεια στις επιχειρήσεις: Τα βασικά βήματα προστασίας",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-22T18:01:54.245Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/tech-hub/kyvernoasfaleia-stis-epicheiriseis-ta-vasika-vimata-prostasias"
+    },
+    {
       "id": "20261122173849-news-dimoskopisi-palmos-analysis-stathera-dipsifio-provadisma-tis-nd-enanti-tis-deyteris-elas-koryfaio-provlima-i-akriveia",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/politiki/dimoskopisi-palmos-analysis-stathera-dipsifio-provadisma-tis-nd-enanti-tis-deyteris-elas-koryfaio-provlima-i-akriveia",
