@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-22T18:01:54.245Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/tech-hub/kyvernoasfaleia-stis-epicheiriseis-ta-vasika-vimata-prostasias"
+      "link": "https://www.newshub.gr/el/tech-hub/kyvernoasfaleia-stis-epicheiriseis-ta-vasika-vimata-prostasias",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290377602156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290377602156174",
+          "at": "2026-11-22T18:02:11.541Z"
+        }
+      }
     },
     {
       "id": "20261122173849-news-dimoskopisi-palmos-analysis-stathera-dipsifio-provadisma-tis-nd-enanti-tis-deyteris-elas-koryfaio-provlima-i-akriveia",
