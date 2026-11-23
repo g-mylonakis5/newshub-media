@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261123163212-news-christoygenna-sto-parisi-fotagogisi-ton-ilysion-pedion-vinteo",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/christoygenna-sto-parisi-fotagogisi-ton-ilysion-pedion-vinteo",
+      "title": "Χριστούγεννα στο Παρίσι: Φωταγώγηση των Ηλυσίων Πεδίων (βίντεο)",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/ilisia-pedia-xmas6.jpg",
+      "text": "Χριστούγεννα στο Παρίσι: Φωταγώγηση των Ηλυσίων Πεδίων (βίντεο)",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-23T16:32:12.653Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kosmos/christoygenna-sto-parisi-fotagogisi-ton-ilysion-pedion-vinteo"
+    },
+    {
       "id": "20261123162019-news-osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ygeia/osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton",
