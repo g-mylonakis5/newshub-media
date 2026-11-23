@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261123155625-news-stis-30-noemvrioy-tha-dothoyn-schedon-450-ekat-eyro-os-prokatavoli-tis-vasikis-enischysis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/agronews/stis-30-noemvrioy-tha-dothoyn-schedon-450-ekat-eyro-os-prokatavoli-tis-vasikis-enischysis",
+      "title": "Στις 30 Νοεμβρίου θα δοθούν σχεδόν 450 εκατ. ευρώ ως προκαταβολή της βασικής ενίσχυσης",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/epido.jpg",
+      "text": "Στις 30 Νοεμβρίου θα δοθούν σχεδόν 450 εκατ. ευρώ ως προκαταβολή της βασικής ενίσχυσης",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-23T15:56:25.033Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/agronews/stis-30-noemvrioy-tha-dothoyn-schedon-450-ekat-eyro-os-prokatavoli-tis-vasikis-enischysis"
+    },
+    {
       "id": "20261123155234-news-synedriasi-perifereiakoy-symvoylioy-kritis-tin-triti-i-atzenta",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/synedriasi-perifereiakoy-symvoylioy-kritis-tin-triti-i-atzenta",
