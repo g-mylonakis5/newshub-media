@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261123152530-news-fos-proigmena-ylika-kai-nees-technologies-to-ite-sto-timoni-eyropaikoy-ereynitikoy-ergoy-dine",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/fos-proigmena-ylika-kai-nees-technologies-to-ite-sto-timoni-eyropaikoy-ereynitikoy-ergoy-dine",
+      "title": "Φως, προηγμένα υλικά και νέες τεχνολογίες: Το ΙΤΕ στο τιμόνι ευρωπαϊκού ερευνητικού έργου Dine",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/image-3.jpg",
+      "text": "Φως, προηγμένα υλικά και νέες τεχνολογίες: Το ΙΤΕ στο τιμόνι ευρωπαϊκού ερευνητικού έργου Dine",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-23T15:25:30.499Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kriti/fos-proigmena-ylika-kai-nees-technologies-to-ite-sto-timoni-eyropaikoy-ereynitikoy-ergoy-dine"
+    },
+    {
       "id": "20261123152506-news-inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi",
@@ -11,17 +27,10 @@
         "facebook",
         "x"
       ],
-      "status": "done",
+      "status": "pending",
       "at": "2026-11-23T15:25:06.399Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/oikonomia/inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290482710156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290482710156174",
-          "at": "2026-11-23T15:25:23.085Z"
-        }
-      }
+      "link": "https://www.newshub.gr/el/oikonomia/inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi"
     },
     {
       "id": "20261123151847-news-pasok-ta-onomata-poy-akoygontai-gia-ta-prasina-psifodeltia-se-oli-ti-chora",
