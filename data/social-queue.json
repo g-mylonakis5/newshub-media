@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T15:10:38.584Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/chania-to-programma-eortasmoy-tis-113is-epeteioy-enosis-tis-kritis-me-tin-ellada"
+      "link": "https://www.newshub.gr/el/kriti/chania-to-programma-eortasmoy-tis-113is-epeteioy-enosis-tis-kritis-me-tin-ellada",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290481534156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290481534156174",
+          "at": "2026-11-23T15:10:58.651Z"
+        }
+      }
     },
     {
       "id": "20261123145935-news-voles-sto-kentro-tis-deyteras-156",
