@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-kykloforoysan-sto-limani-me-ochima-me-klemmenes-pinakides-dyo-syllipseis",
+    "title": "Ηράκλειο: Κυκλοφορούσαν στο λιμάνι με όχημα με κλεμμένες πινακίδες-Δύο συλλήψεις",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-kykloforoysan-sto-limani-me-ochima-me-klemmenes-pinakides-dyo-syllipseis",
+    "date": "2026-11-23T19:53:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/limeniko-soma-ich.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/limeniko-soma-ich.jpg",
+    "summary": "Στη σύλληψη ενός 62χρονου άνδρα και μιας 58χρονης γυναίκας προχώρησαν οι Λιμενικές Αρχές στο Ηράκλειο το πρωί της Δευτέρας, στο πλαίσιο τροχονομικών ελέγχων ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "se-stasi-ergasias-prochoroyn-oi-eforiakoi-tis-anatolikis-kritis-enantia-stin-katargisi-ton-topikon-doy",
     "title": "Σε στάση εργασίας προχωρούν οι εφοριακοί της Ανατολικής Κρήτης ενάντια στην κατάργηση των τοπικών ΔΟΥ",
     "url": "https://www.newshub.gr/el/kriti/se-stasi-ergasias-prochoroyn-oi-eforiakoi-tis-anatolikis-kritis-enantia-stin-katargisi-ton-topikon-doy",
@@ -165,7 +177,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/pske.jpg",
     "summary": "Σε αύξηση μετοχικού κεφαλαίου περίπου 560.000 ευρώ πρόκειται να προχωρήσει η ΔΕΠΑΝΑΛ ΑΕ, προκειμένου να ανταποκριθεί σε δικαστική απόφαση έπειτα από προσφυγή...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "merts-lathos-poy-den-mpike-i-oykrania-sto-nato-to-2008",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/morooooooooooo.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/morooooooooooo.jpg",
     "summary": "Μια αδιανόητη υπόθεση παράνομης υιοθεσίας νεογέννητου παιδιού εξιχνίασαν οι αστυνομικοί της Υποδιεύθυνσης Δίωξης και Εξιχνίασης Εγκλημάτων Πύργου.\r\n\r\nΣύμφωνα...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "oi-moysoylmanoi-anamenetai-na-xeperasoyn-toys-christianoys-eos-to-2035-symfona-me-nea-ereyna-toy-pew-research-center",
-    "title": "Οι μουσουλμάνοι αναμένεται να ξεπεράσουν τους χριστιανούς έως το 2035, σύμφωνα με νέα έρευνα του Pew Research Center",
-    "url": "https://www.newshub.gr/el/kosmos/oi-moysoylmanoi-anamenetai-na-xeperasoyn-toys-christianoys-eos-to-2035-symfona-me-nea-ereyna-toy-pew-research-center",
-    "date": "2026-11-18T20:28:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/muslims1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/muslims1.jpg",
-    "summary": "Οι μουσουλμάνοι βρίσκονται κοντά στο να ξεπεράσουν τους χριστιανούς ως ο μεγαλύτερος θρησκευτικός πληθυσμός παγκοσμίως, ενώ η Λαϊκή Δημοκρατία του Κονγκό ανα...",
     "author": null,
     "featured": false
   },
