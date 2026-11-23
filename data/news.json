@@ -1,5 +1,21 @@
 [
   {
+    "id": "perifereia-kritis-organomena-kai-tekmiriomena-archizei-me-oloys-toys-foreis-tis-diekdikiseis-tis-gia-ti-stirixi-toy-elaiokomikoy-tomea-vinteo",
+    "title": "Περιφέρεια Κρήτης: Οργανωμένα και τεκμηριωμένα αρχίζει με όλους τους φορείς τις διεκδικήσεις της για τη στήριξη του ελαιοκομικού τομέα (ΒΙΝΤΕΟ)",
+    "url": "https://www.newshub.gr/el/kriti/perifereia-kritis-organomena-kai-tekmiriomena-archizei-me-oloys-toys-foreis-tis-diekdikiseis-tis-gia-ti-stirixi-toy-elaiokomikoy-tomea-vinteo",
+    "date": "2026-11-23T14:01:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/agrot2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/agrot2.jpg",
+    "summary": "Ουσιαστικά μέτρα  στήριξης και όχι «αερολογίες» διεκδικούν από την κυβέρνηση για τον τομέα του ελαιολάδου όλοι οι εμπλεκόμενοι φορείς της ...",
+    "author": {
+      "name": "Χριστόφορος Παπαδάκης",
+      "url": "https://www.newshub.gr/el/christoforos-papadakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "chania-soos-entopistike-agnooymenos-psaras-eiche-vythistei-to-skafos-toy",
     "title": "Χανιά: Σώος εντοπίστηκε αγνοούμενος ψαράς, είχε βυθιστεί το σκάφος του",
     "url": "https://www.newshub.gr/el/kriti/chania-soos-entopistike-agnooymenos-psaras-eiche-vythistei-to-skafos-toy",
@@ -93,7 +109,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/tttttt.jpg",
     "summary": "Φρένο στη συνέχιση των εργασιών στη Μονάδα του Εθνικού Οργανισμού Πρόληψης και Αντιμετώπισης Εξαρτήσεων ατόμων στην λεωφόρο Αρχιεπισκόπου Μακαρίου, από το αρ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "rethymno-synelifthi-28chronos-gia-katochi-narkotikon-oysion-fotovolidon-kai-pyrotechnimaton",
@@ -7220,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/astynomia-3.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/astynomia-3.jpg",
     "summary": "Τέλος στη ζωή του φαίνεται πως έβαλε ένας 88χρονος σε χωράφι κοντά στις Μαλάδες Ηρακλείου, σημερα το μεσημέρι. Συμφωνα με πληροφορίες, ο ηλικιωμένος άνδρας, ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "parastasi-sygchronoy-choroy-sto-irakleio",
-    "title": "Παράσταση σύγχρονου χορού στο Ηράκλειο",
-    "url": "https://www.newshub.gr/el/exodos/parastasi-sygchronoy-choroy-sto-irakleio",
-    "date": "2026-11-18T13:38:00.000Z",
-    "category": "Έξοδος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/nikos-paliouras.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/nikos-paliouras.jpg",
-    "summary": "Μια παράσταση για την ανάγκη της επαφής και τη διαρκή αναζήτηση ενός κοινού τόπου&middot; εκεί όπου το ατομικό συναντά το συλλογικό.\r\n\r\nΗ παράσταση σύγχρονου...",
     "author": null,
     "featured": false
   },
