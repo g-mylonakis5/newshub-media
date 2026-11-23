@@ -1,5 +1,29 @@
 [
   {
+    "id": "i-elas-anakoinonei-pano-apo-toys-misoys-ypopsifioys-stin-perifereia-odeyontas-pros-to-idrytiko-synedrio-tis",
+    "title": "Η ΕΛΑΣ ανακοινώνει πάνω από τους μισούς υποψηφίους στην περιφέρεια οδεύοντας προς το ιδρυτικό συνέδριο της",
+    "url": "https://www.newshub.gr/el/ellada/i-elas-anakoinonei-pano-apo-toys-misoys-ypopsifioys-stin-perifereia-odeyontas-pros-to-idrytiko-synedrio-tis",
+    "date": "2026-11-23T06:50:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/e1bda184-6984524.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/e1bda184-6984524.jpg",
+    "summary": "Το Εθνικό Συμβούλιο του Σαββάτου 28 Νοεμβρίου ανοίγει την οργανωτική και εκλογική προετοιμασία της ΕΛ.Α.Σ. για την επόμενη φάση. Θα χαράξει την πορεία προς τ...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "chrei-stin-eforia-perissoteres-eispraxeis-alla-chamiloteri-eispraximotita-stis-nees-ofeiles",
+    "title": "Χρέη στην εφορία: Περισσότερες εισπράξεις, αλλά χαμηλότερη εισπραξιμότητα στις νέες οφειλές",
+    "url": "https://www.newshub.gr/el/oikonomia/chrei-stin-eforia-perissoteres-eispraxeis-alla-chamiloteri-eispraximotita-stis-nees-ofeiles",
+    "date": "2026-11-23T06:50:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/aade.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/aade.jpg",
+    "summary": "Περισσότερα χρήματα εισέπραξε η εφορία από τα νέα χρέη το 2025, όμως οι οφειλές αυξήθηκαν ακόμη ταχύτερα, με αποτέλεσμα να περιοριστεί το μέρος τους που εξοφ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "super-league-o-atsalinos-panathinaikos-apenanti-ston-ofi-to-xespasma-toy-olympiakoy-kai-o-peripatos-toy-paok",
     "title": "Super League: Ο «ατσάλινος» Παναθηναϊκός απέναντι στον ΟΦΗ-Το «ξέσπασμα» του Ολυμπιακού και ο «περίπατος» του ΠΑΟΚ",
     "url": "https://www.newshub.gr/el/athlitika/super-league-o-atsalinos-panathinaikos-apenanti-ston-ofi-to-xespasma-toy-olympiakoy-kai-o-peripatos-toy-paok",
@@ -7204,30 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/b114de2a-mary-peltola.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/b114de2a-mary-peltola.jpg",
     "summary": "Ανατροπή στην Αλάσκα έφερε η ολοκλήρωση της καταμέτρησης των ψήφων για τις ενδιάμεσες εκλογές στις ΗΠΑ.\r\n\r\nΟι δημοκρατικοί εξασφάλισαν και την τελευταία έδρα...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "eyp-pos-xeskepase-to-iraniko-diktyo-kai-apetrepse-to-schedio-dolofonias-stin-ellada",
-    "title": "ΕΥΠ: Πώς ξεσκέπασε το ιρανικό δίκτυο και απέτρεψε το σχέδιο δολοφονίας στην Ελλάδα",
-    "url": "https://www.newshub.gr/el/ellada/eyp-pos-xeskepase-to-iraniko-diktyo-kai-apetrepse-to-schedio-dolofonias-stin-ellada",
-    "date": "2026-11-18T07:25:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/antitromokratike4.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/antitromokratike4.jpg",
-    "summary": "Με έναν άνδρα από το Ιράν, που φέρεται να είχε διασυνδέσεις με τις υπηρεσίες πληροφοριών της χώρας του, δρούσε το εγκληματικό δίκτυο που εξαρθρώθηκε στη Βόρε...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "me-prosopiko-asfaleias-doy-kai-ypiresies-se-irakleio-kai-lasithi-tin-paraskeyi",
-    "title": "Με προσωπικό ασφαλείας ΔΟΥ και υπηρεσίες σε Ηράκλειο και Λασίθι την Παρασκευή",
-    "url": "https://www.newshub.gr/el/kriti/me-prosopiko-asfaleias-doy-kai-ypiresies-se-irakleio-kai-lasithi-tin-paraskeyi",
-    "date": "2026-11-18T07:18:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/dou-erakleiou.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/dou-erakleiou.jpg",
-    "summary": "Με προσωπικό ασφαλείας θα λειτουργήσουν την Παρασκευή 20 Νοεμβρίου οι ΔΟΥ και άλλες υπηρεσίες σε Ηράκλειο και Λασίθι, λόγω της πραγματοποίησης της ετήσιας τα...",
     "author": null,
     "featured": false
   },
