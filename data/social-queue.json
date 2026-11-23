@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T21:21:30.197Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ygeia/karkinos-toy-mastoy-megali-meleti-exetazei-ton-rolo-tis-ai-stin-egkairi-diagnosi"
+      "link": "https://www.newshub.gr/el/ygeia/karkinos-toy-mastoy-megali-meleti-exetazei-ton-rolo-tis-ai-stin-egkairi-diagnosi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290519832156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290519832156174",
+          "at": "2026-11-23T21:21:46.784Z"
+        }
+      }
     },
     {
       "id": "20261123181849-news-i-ellinida-ypopsifia-sta-kallisteia-miss-universe-vinteo",
