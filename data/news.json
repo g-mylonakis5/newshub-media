@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-simera-i-proti-apofasi-gia-ta-asfalistika-metra-gia-ti-monada-exartimenon-atomon-stin-archiepiskopoy-makarioy",
+    "title": "Ηράκλειο: Σήμερα η πρώτη απόφαση για τα ασφαλιστικά μέτρα για τη Μονάδα Εξαρτημένων ατόμων στην Αρχιεπισκόπου Μακαρίου",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-simera-i-proti-apofasi-gia-ta-asfalistika-metra-gia-ti-monada-exartimenon-atomon-stin-archiepiskopoy-makarioy",
+    "date": "2026-11-23T07:10:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/d33bc783-eaa3-4f8e-94f9-83936325d290.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/d33bc783-eaa3-4f8e-94f9-83936325d290.jpg",
+    "summary": "Σημερα αναμένεται να εκδοθεί η απόφαση του Δικαστηρίου για μια ααπό τις αιτήσεις που κατατέθηκαν την περασμένη Παρασκευή από την πλευρά των διαμαρτυρόμενων γ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "symmetechei-stin-panelladiki-apergia-tis-tetartis-o-syllogos-dep-elmepa",
     "title": "Συμμετέχει στην πανελλαδική απεργία της Τετάρτης ο Σύλλογος ΔΕΠ ΕΛΜΕΠΑ",
     "url": "https://www.newshub.gr/el/kriti/symmetechei-stin-panelladiki-apergia-tis-tetartis-o-syllogos-dep-elmepa",
@@ -217,7 +229,7 @@
       "url": "https://www.newshub.gr/el/andreas-kritsotakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "ioannina-thanatiforo-trochaio-meta-to-kalpaki-enas-nekros-kai-enas-traymatias",
@@ -7216,18 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/paidikos-stathmos.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/paidikos-stathmos.jpg",
     "summary": "Ανοίγει σήμερα (18.11.2026) η πλατφόρμα υποβολής αιτήσεων για τη δεύτερη πρόσκληση του προγράμματος Προσχολικής Αγωγής και Δημιουργικής Απασχόλησης 2026-2027...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "goyatemala-pyrovolisan-kai-traymatisan-eisaggelea-poy-ereynoyse-eklogika-adikimata",
-    "title": "Γουατεμάλα: Πυροβόλησαν και τραυμάτισαν εισαγγελέα που ερευνούσε εκλογικά αδικήματα",
-    "url": "https://www.newshub.gr/el/kosmos/goyatemala-pyrovolisan-kai-traymatisan-eisaggelea-poy-ereynoyse-eklogika-adikimata",
-    "date": "2026-11-18T07:39:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/mixcollage-18-nov-2026-05-12-am-4657.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/mixcollage-18-nov-2026-05-12-am-4657.jpg",
-    "summary": "Στόχος ένοπλης επίθεσης έγινε εισαγγελέας αρμόδια για τη διερεύνηση εκλογικών αδικημάτων στη Γουατεμάλα, με αποτέλεσμα να τραυματιστεί από πυροβολισμούς στην...",
     "author": null,
     "featured": false
   },
