@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261123155234-news-synedriasi-perifereiakoy-symvoylioy-kritis-tin-triti-i-atzenta",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/synedriasi-perifereiakoy-symvoylioy-kritis-tin-triti-i-atzenta",
+      "title": "Συνεδρίαση Περιφερειακού Συμβουλίου Κρήτης την Τρίτη-Η ατζέντα",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/archeio.jpg",
+      "text": "Συνεδρίαση Περιφερειακού Συμβουλίου Κρήτης την Τρίτη-Η ατζέντα",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-23T15:52:34.863Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kriti/synedriasi-perifereiakoy-symvoylioy-kritis-tin-triti-i-atzenta"
+    },
+    {
       "id": "20261123152530-news-fos-proigmena-ylika-kai-nees-technologies-to-ite-sto-timoni-eyropaikoy-ereynitikoy-ergoy-dine",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/fos-proigmena-ylika-kai-nees-technologies-to-ite-sto-timoni-eyropaikoy-ereynitikoy-ergoy-dine",
