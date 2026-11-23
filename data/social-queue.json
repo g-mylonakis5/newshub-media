@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261123212130-news-karkinos-toy-mastoy-megali-meleti-exetazei-ton-rolo-tis-ai-stin-egkairi-diagnosi",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ygeia/karkinos-toy-mastoy-megali-meleti-exetazei-ton-rolo-tis-ai-stin-egkairi-diagnosi",
+      "title": "Καρκίνος του μαστού: Μεγάλη μελέτη εξετάζει τον ρόλο της ΑΙ στην έγκαιρη διάγνωση",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/pexels-cottonbro-5701007-1024x682.jpg",
+      "text": "Καρκίνος του μαστού: Μεγάλη μελέτη εξετάζει τον ρόλο της ΑΙ στην έγκαιρη διάγνωση",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-23T21:21:30.197Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/ygeia/karkinos-toy-mastoy-megali-meleti-exetazei-ton-rolo-tis-ai-stin-egkairi-diagnosi"
+    },
+    {
       "id": "20261123181849-news-i-ellinida-ypopsifia-sta-kallisteia-miss-universe-vinteo",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/sugar/i-ellinida-ypopsifia-sta-kallisteia-miss-universe-vinteo",
