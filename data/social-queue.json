@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T16:20:19.887Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ygeia/osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton"
+      "link": "https://www.newshub.gr/el/ygeia/osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290488086156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290488086156174",
+          "at": "2026-11-23T16:20:38.076Z"
+        }
+      }
     },
     {
       "id": "20261123161333-news-st-papastayroy-mechri-to-telos-tis-evdomadas-xekinoyn-oi-seismikes-ereynes-sto-notio-ionio",
