@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T14:59:35.923Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-deyteras-156"
+      "link": "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-deyteras-156",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290480634156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290480634156174",
+          "at": "2026-11-23T14:59:53.693Z"
+        }
+      }
     },
     {
       "id": "20261122223925-news-insete-sto-9-1-i-toyristiki-empeiria-stin-ellada-pano-apo-ton-eyropaiko-meso-oro-poso-sygkentrose-i-kriti",
