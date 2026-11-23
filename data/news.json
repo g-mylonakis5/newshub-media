@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-eleytheroi-me-oroys-o-17chronos-ki-o-pateras-toy-gia-tis-cheirovomvides-kai-ta-opla",
+    "title": "Ηράκλειο: Ελεύθεροι με όρους ο 17χρονος κι ο πατέρας του για τις χειροβομβίδες και τα όπλα",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-eleytheroi-me-oroys-o-17chronos-ki-o-pateras-toy-gia-tis-cheirovomvides-kai-ta-opla",
+    "date": "2026-11-23T16:22:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/dikasthrio-hrakleioy.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/dikasthrio-hrakleioy.jpg",
+    "summary": "Ελεύθεροι με περιοριστικούς όρους αφέθηκαν νωρίτερa σήμερα 23/11 οι δύο άνδρες (πατέρας και γιος), οι οποίοι συνελήφθησαν προ ημερών, καθώς φέρονται να εμπλέ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "ispania-kerdi-gia-toys-sosialistes-alla-aneti-pleiopsifia-se-dexia-kai-akrodexia-ti-deichnoyn-oi-dimoskopiseis",
     "title": "Ισπανία: Κέρδη για τους Σοσιαλιστές, αλλά άνετη πλειοψηφία σε δεξιά και ακροδεξιά - Τι δείχνουν οι δημοσκοπήσεις",
     "url": "https://www.newshub.gr/el/geopolitiki/ispania-kerdi-gia-toys-sosialistes-alla-aneti-pleiopsifia-se-dexia-kai-akrodexia-ti-deichnoyn-oi-dimoskopiseis",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/dimoskopisi_ispania_santseth.jpg",
     "summary": "Τα δύο κύρια δεξιά κόμματα της Ισπανίας φαίνεται πως θα εξασφαλίσουν από κοινού κοινοβουλευτική πλειοψηφία στις εκλογές της Κυριακής, παρά τα πρόσφατα κέρδη ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "o-noemvrios-feygei-me-black-friday-cyber-monday-kai-me-anoichta-katastimata-tin-kyriaki",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/screenshot-2026-11-18-161714.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/screenshot-2026-11-18-161714.jpg",
     "summary": "Ο Ουκρανός πρόεδρος Βολοντίμιρ Ζελένσκι δήλωσε ότι η νέα οικονομική στήριξη της ΕΕ προς την Ουκρανία θα «βοηθήσει σε μεγάλο βαθμό τη χώρα, την ανθεκτικ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "atp-finals-o-alkarath-anevazei-tachytita-kai-plisiazei-tin-tetrada",
-    "title": "Atp Finals: Ο Αλκαράθ ανεβάζει ταχύτητα και πλησιάζει την τετράδα",
-    "url": "https://www.newshub.gr/el/athlitika/atp-finals-o-alkarath-anevazei-tachytita-kai-plisiazei-tin-tetrada",
-    "date": "2026-11-18T16:18:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/screenshot-2026-11-18-165325.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/screenshot-2026-11-18-165325.jpg",
-    "summary": "Με σταθερά βήματα προς την κορυφή του ATP Finals συνεχίζει ο Κάρλος Αλκαράθ.\r\n\r\nΟ Ισπανός, Νο3 στην παγκόσμια κατάταξη, ξεπέρασε και το εμπόδιο του Ντανίλ Με...",
     "author": null,
     "featured": false
   },
