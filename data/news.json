@@ -1,5 +1,17 @@
 [
   {
+    "id": "ekthesi-zografikis-chronotopia-tis-tanias-christoforatoy-sti-dimotiki-pinakothiki-irakleioy",
+    "title": "Έκθεση ζωγραφικής «Χρονοτόπια» της Τάνιας Χριστοφοράτου στη Δημοτική Πινακοθήκη Ηρακλείου",
+    "url": "https://www.newshub.gr/el/istoria-politismos/ekthesi-zografikis-chronotopia-tis-tanias-christoforatoy-sti-dimotiki-pinakothiki-irakleioy",
+    "date": "2026-11-23T12:00:00.000Z",
+    "category": "Ιστορία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/aphisa.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/aphisa.jpg",
+    "summary": "Την Τετάρτη 2 Δεκεμβρίου στις 18:00 θα πραγματοποιηθούν τα εγκαίνια της έκθεσης ζωγραφικής της Τάνιας Χριστοφοράτου & guests «Χρονοτόπια» στο...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "germania-apeiles-gia-vomva-se-450-scholeia-dania-astynomiki-ereyna-gia-vomves-se-scholeia",
     "title": "Γερμανία: Απειλές για βόμβα σε 450 σχολεία- Δανία: Αστυνομική έρευνα  για βόμβες σε σχολεία",
     "url": "https://www.newshub.gr/el/kosmos/germania-apeiles-gia-vomva-se-450-scholeia-dania-astynomiki-ereyna-gia-vomves-se-scholeia",
@@ -21,7 +33,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/kleronomies.jpg",
     "summary": "Μια ακόμα ευκαιρία προτίθεται να δώσει το υπουργείο Δικαιοσύνης σε όσους κληρονόμησαν&hellip; χρέη και δεν πρόλαβαν να ολοκληρώσουν τη διαδικασία αποδοχής με...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "rethymno-pyrkagia-xespase-sto-velonado-tethike-grigora-ypo-elegcho",
@@ -301,7 +313,7 @@
       "url": "https://www.newshub.gr/el/eleni-vasilaki",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/basilake.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "oloklirothike-kai-paradothike-i-meleti-gia-kykliko-komvo-stin-eisodo-toy-oropedio-lasithioy",
@@ -7216,18 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/pasok-scaled-2-1165x800.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/pasok-scaled-2-1165x800.jpg",
     "summary": "Την υπερψήφιση της πρότασης του ΣΥΡΙΖΑ για σύσταση εξεταστικής επιτροπής στην υπόθεση των funds και της προστασίας των καταναλωτών προανήγγειλε - με άτυπη εν...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "chania-synechizontai-oi-psekasmoi-se-dimotikoys-choroys-prasinoy",
-    "title": "Χανιά: Συνεχίζονται οι ψεκασμοί σε δημοτικούς χώρους πρασίνου",
-    "url": "https://www.newshub.gr/el/kriti/chania-synechizontai-oi-psekasmoi-se-dimotikoys-choroys-prasinoy",
-    "date": "2026-11-18T12:08:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/psekasmos.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/psekasmos.jpg",
-    "summary": "Ο Δήμος Χανίων, στο πλαίσιο της προστασίας του αστικού πρασίνου και της αντιμετώπισης της πιτυοκάμπης (κάμπιας των πεύκων &ndash; Thaumetopoea pityocampa), σ...",
     "author": null,
     "featured": false
   },
