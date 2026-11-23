@@ -1,5 +1,17 @@
 [
   {
+    "id": "ispania-kerdi-gia-toys-sosialistes-alla-aneti-pleiopsifia-se-dexia-kai-akrodexia-ti-deichnoyn-oi-dimoskopiseis",
+    "title": "Ισπανία: Κέρδη για τους Σοσιαλιστές, αλλά άνετη πλειοψηφία σε δεξιά και ακροδεξιά - Τι δείχνουν οι δημοσκοπήσεις",
+    "url": "https://www.newshub.gr/el/geopolitiki/ispania-kerdi-gia-toys-sosialistes-alla-aneti-pleiopsifia-se-dexia-kai-akrodexia-ti-deichnoyn-oi-dimoskopiseis",
+    "date": "2026-11-23T16:20:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/dimoskopisi_ispania_santseth.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/dimoskopisi_ispania_santseth.jpg",
+    "summary": "Τα δύο κύρια δεξιά κόμματα της Ισπανίας φαίνεται πως θα εξασφαλίσουν από κοινού κοινοβουλευτική πλειοψηφία στις εκλογές της Κυριακής, παρά τα πρόσφατα κέρδη ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "o-noemvrios-feygei-me-black-friday-cyber-monday-kai-me-anoichta-katastimata-tin-kyriaki",
     "title": "Ο Νοέμβριος φεύγει με Black Friday, Cyber Monday και με ανοιχτά καταστήματα την Κυριακή",
     "url": "https://www.newshub.gr/el/oikonomia/o-noemvrios-feygei-me-black-friday-cyber-monday-kai-me-anoichta-katastimata-tin-kyriaki",
@@ -69,7 +81,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/fylakh2.jpg",
     "summary": "Τον δρόμο για τη φυλακή πήραν νωρίτερα σήμερα 23/11 οι δύο άνδρες που συνελήφθησαν το πρωί της περασμένης Πέμπτης 19/11, καθώς φέρονται να εμπλέκονται στην υ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "le-monde-sigoyra-stin-proti-thesi-i-lepen-anevainei-o-melanson-i-eikona-tis-machis-gia-to-elize-symfona-me-tis-dimoskopiseis",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/screenshot-2026-11-18-165325.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/screenshot-2026-11-18-165325.jpg",
     "summary": "Με σταθερά βήματα προς την κορυφή του ATP Finals συνεχίζει ο Κάρλος Αλκαράθ.\r\n\r\nΟ Ισπανός, Νο3 στην παγκόσμια κατάταξη, ξεπέρασε και το εμπόδιο του Ντανίλ Με...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "aerodromio-el-venizelos-oi-valitses-eichan-35-kila-chasis",
-    "title": "Αεροδρόμιο «Ελ. Βενιζέλος»: Οι βαλίτσες είχαν 35 κιλά χασίς",
-    "url": "https://www.newshub.gr/el/ellada/aerodromio-el-venizelos-oi-valitses-eichan-35-kila-chasis",
-    "date": "2026-11-18T16:10:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/screenshot-2026-11-18-170606.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/screenshot-2026-11-18-170606.jpg",
-    "summary": "Την εισαγωγή μέσω του Διεθνούς Αερολιμένα Αθηνών «Ελευθέριος Βενιζέλος» μεγάλης ποσότητας ακατέργαστης κάνναβης υδροπονικής καλλιέργειας (skunk...",
     "author": null,
     "featured": false
   },
