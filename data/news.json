@@ -1,5 +1,29 @@
 [
   {
+    "id": "fotia-se-treis-kloyves-tis-el-as-stoy-goydi",
+    "title": "Φωτιά σε τρεις κλούβες της ΕΛ.ΑΣ. στου Γουδή",
+    "url": "https://www.newshub.gr/el/ellada/fotia-se-treis-kloyves-tis-el-as-stoy-goydi",
+    "date": "2026-11-23T15:59:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/maketa-polytexneioupoli.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/maketa-polytexneioupoli.jpg",
+    "summary": "Συναγερμός σήμανε το απόγευμα της Δευτέρας (23/11), καθώς ξέσπασε φωτιά σε τρεις κλούβες μέσα στις εγκαταστάσεις του στρατοπέδου Νικολάου Ζορμπά, στην οδό Κο...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "iordania-epistrefoyn-apo-ti-dania-spania-agalmatidia-10-000-eton-anakalyfthikan-konta-stin-petra",
+    "title": "Ιορδανία: Επιστρέφουν από τη Δανία σπάνια αγαλματίδια 10.000 ετών - Ανακαλύφθηκαν κοντά στην Πέτρα",
+    "url": "https://www.newshub.gr/el/istoria-politismos/iordania-epistrefoyn-apo-ti-dania-spania-agalmatidia-10-000-eton-anakalyfthikan-konta-stin-petra",
+    "date": "2026-11-23T15:58:00.000Z",
+    "category": "Ιστορία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/agalmata.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/agalmata.jpg",
+    "summary": "Η Ιορδανία ανέκτησε επίσημα από τη Δανία δύο σπάνια οστέινα αγαλματίδια ηλικίας περίπου 10.000 ετών, τα οποία θεωρούνται από τις αρχαιότερες γνωστές καλλιτεχ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "chaniamas-me-dekades-ekdiloseis-giortazoyn-ta-christoygenna-kai-tin-protochronia-ta-chania-to-eortastiko-programma",
     "title": "«Χανιάmas»: Με δεκάδες εκδηλώσεις γιορτάζουν τα Χριστούγεννα και την Πρωτοχρονιά τα Χανιά – Το εορταστικό πρόγραμμα",
     "url": "https://www.newshub.gr/el/exodos/chaniamas-me-dekades-ekdiloseis-giortazoyn-ta-christoygenna-kai-tin-protochronia-ta-chania-to-eortastiko-programma",
@@ -7212,30 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/plateia.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/plateia.jpg",
     "summary": "Ξεκίνησε η δημόσια διαβούλευση για τη συγκοινωνιακή μελέτη αναδιαμόρφωσης της Πλατείας 18 Άγγλων, καθώς και για άλλα κυκλοφοριακά ζητήματα που περιλαμβάνοντα...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "black-friday-tesseris-symvoyles-apo-ton-synigoro-toy-katanaloti-gia-asfaleis-agores",
-    "title": "Black Friday: Τέσσερις συμβουλές από τον Συνήγορο του Καταναλωτή για ασφαλείς αγορές",
-    "url": "https://www.newshub.gr/el/oikonomia/black-friday-tesseris-symvoyles-apo-ton-synigoro-toy-katanaloti-gia-asfaleis-agores",
-    "date": "2026-11-18T15:53:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/screenshot-2026-11-18-160649.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/screenshot-2026-11-18-160649.jpg",
-    "summary": "Ενόψει της Black Friday, ο Συνήγορος του Καταναλωτή και o εποπτευόμενος φορέας του, το Ευρωπαϊκό Κέντρο Καταναλωτή Ελλάδος προτρέπουν τους καταναλωτές να προ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "stin-athina-o-dimarchos-chanion-gia-tin-epitropi-parakoloythisis-toy-programmatos-perivallon-kai-klimatiki-allagi",
-    "title": "Στην Αθήνα ο Δήμαρχος Χανίων για την Επιτροπή Παρακολούθησης του Προγράμματος «Περιβάλλον και Κλιματική Αλλαγή»",
-    "url": "https://www.newshub.gr/el/kriti/stin-athina-o-dimarchos-chanion-gia-tin-epitropi-parakoloythisis-toy-programmatos-perivallon-kai-klimatiki-allagi",
-    "date": "2026-11-18T15:43:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/semanderakes.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/semanderakes.jpg",
-    "summary": "Στην Αθήνα βρίσκεται σήμερα, Τετάρτη 18, και αύριο, Πέμπτη 19 Νοεμβρίου 2026, ο Δήμαρχος Χανίων, κ. Παναγιώτης Σημανδηράκης, προκειμένου να συμμετάσχει στην ...",
     "author": null,
     "featured": false
   },
