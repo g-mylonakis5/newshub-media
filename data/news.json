@@ -1,5 +1,17 @@
 [
   {
+    "id": "tragodia-ston-kroysona-echase-ti-zoi-toy-44chronos-meta-apo-ptosi-apo-taratsa",
+    "title": "Τραγωδία στον Κρουσώνα: Έχασε τη ζωή του 44χρονος μετά από πτώση από ταράτσα",
+    "url": "https://www.newshub.gr/el/kriti/tragodia-ston-kroysona-echase-ti-zoi-toy-44chronos-meta-apo-ptosi-apo-taratsa",
+    "date": "2026-11-23T20:24:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/ekav-ape_2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/ekav-ape_2.jpg",
+    "summary": "Τραγωδία σημειώθηκε στην περιοχή του Κρουσώνα το βράδυ της Δευτέρας, όπου ένας 44χρονος άνδρας έχασε τη ζωή του ύστερα από πτώση από ταράτσα.\r\n\r\nΣτο σημείο έ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "toxiki-erimia-i-gaza-apo-tis-israilines-epitheseis-to-99-tis-gis-molysmeno-symfona-me-nea-ereyna",
     "title": "«Τοξική ερημιά» η Γάζα από τις ισραηλινές επιθέσεις - Το 99% της γης μολυσμένο σύμφωνα με νέα έρευνα",
     "url": "https://www.newshub.gr/el/kosmos/toxiki-erimia-i-gaza-apo-tis-israilines-epitheseis-to-99-tis-gis-molysmeno-symfona-me-nea-ereyna",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/d75fb915-ap26323347328636.jpg",
     "summary": "Σε μία απέραντη «τοξική ερημιά» έχουν μετατρέψει οι ισραηλινές επιθέσεις τη Γάζα, με περισσότερο από το 99% των παλαιστινιακών εδαφών να εμφανίζε...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "karystos-thriler-me-exafanisi-90chronis-se-exelixi-epicheirisi-gia-ton-entopismo-tis",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/ap24189587962650-1024x683.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/ap24189587962650-1024x683.jpg",
     "summary": "Εκατόν πενήντα ημέρες πριν από τον πρώτο γύρο των γαλλικών προεδρικών εκλογών, η Μαρίν Λεπέν, υποψήφια του ακροδεξιού Εθνικού Συναγερμού, εμφανίζεται να προη...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "toyrkia-katadiki-imamogloy-se-dyo-eti-kai-enan-mina-fylakisis-gia-to-synedrio-toy-chp",
-    "title": "Τουρκία: Καταδίκη Ιμάμογλου σε δύο έτη και έναν μήνα φυλάκισης για το συνέδριο του Chp",
-    "url": "https://www.newshub.gr/el/kosmos/toyrkia-katadiki-imamogloy-se-dyo-eti-kai-enan-mina-fylakisis-gia-to-synedrio-toy-chp",
-    "date": "2026-11-18T21:01:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/maketa-imamoglou.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/maketa-imamoglou.jpg",
-    "summary": "Ποινή φυλάκισης δύο ετών και ενός μήνα επέβαλε σήμερα Τετάρτη δικαστήριο της Άγκυρας στον Εκρέμ Ιμάμογλου για νόθευση της ψηφοφορίας στο 38ο συνέδριο του Ρεπ...",
     "author": null,
     "featured": false
   },
