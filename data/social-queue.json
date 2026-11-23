@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T15:25:30.499Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/fos-proigmena-ylika-kai-nees-technologies-to-ite-sto-timoni-eyropaikoy-ereynitikoy-ergoy-dine"
+      "link": "https://www.newshub.gr/el/kriti/fos-proigmena-ylika-kai-nees-technologies-to-ite-sto-timoni-eyropaikoy-ereynitikoy-ergoy-dine",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290482764156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290482764156174",
+          "at": "2026-11-23T15:25:47.308Z"
+        }
+      }
     },
     {
       "id": "20261123152506-news-inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi",
@@ -27,10 +34,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T15:25:06.399Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/oikonomia/inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi"
+      "link": "https://www.newshub.gr/el/oikonomia/inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290482782156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290482782156174",
+          "at": "2026-11-23T15:25:50.171Z"
+        }
+      }
     },
     {
       "id": "20261123151847-news-pasok-ta-onomata-poy-akoygontai-gia-ta-prasina-psifodeltia-se-oli-ti-chora",
