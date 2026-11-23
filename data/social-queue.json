@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T16:32:12.653Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kosmos/christoygenna-sto-parisi-fotagogisi-ton-ilysion-pedion-vinteo"
+      "link": "https://www.newshub.gr/el/kosmos/christoygenna-sto-parisi-fotagogisi-ton-ilysion-pedion-vinteo",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290490354156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290490354156174",
+          "at": "2026-11-23T16:32:33.559Z"
+        }
+      }
     },
     {
       "id": "20261123162019-news-osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton",
