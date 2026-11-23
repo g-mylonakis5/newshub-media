@@ -1,5 +1,21 @@
 [
   {
+    "id": "thema-newshub-gr-zitoyn-apo-seismopliktoys-poy-echoyn-lavei-chrimata-apo-to-exoikonomo-na-ta-epistrepsoyn",
+    "title": "Θέμα Newshub.gr: Ζητούν από σεισμόπληκτους που έχουν λάβει χρήματα από το «Εξοικονομώ», να τα επιστρέψουν!",
+    "url": "https://www.newshub.gr/el/kriti/thema-newshub-gr-zitoyn-apo-seismopliktoys-poy-echoyn-lavei-chrimata-apo-to-exoikonomo-na-ta-epistrepsoyn",
+    "date": "2026-11-23T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/seismos-arkalochori-iii.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/seismos-arkalochori-iii.jpg",
+    "summary": "Σε απόγνωση βρίσκονται για μια ακόμη φορά πολλοί σεισμόπληκτοι του Αρκαλοχωρίου, που βλεπουν το ένα «χτύπημα» μετά το άλλο σε βάρος τους, τη στιγ...",
+    "author": {
+      "name": "Ανδρέας Κριτσωτάκης",
+      "url": "https://www.newshub.gr/el/andreas-kritsotakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "ioannina-thanatiforo-trochaio-meta-to-kalpaki-enas-nekros-kai-enas-traymatias",
     "title": "Ιωάννινα: Θανατηφόρο τροχαίο μετά το Καλπάκι– Ένας νεκρός και ένας τραυματίας",
     "url": "https://www.newshub.gr/el/ellada/ioannina-thanatiforo-trochaio-meta-to-kalpaki-enas-nekros-kai-enas-traymatias",
@@ -165,7 +181,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/oropedio-lasithiou-nera.jpg",
     "summary": "Σε καθεστώς οικονομικής ασφυξίας εξακολουθούν να βρίσκονται οι παραγωγοί του Οροπεδίου Λασιθίου, ενάμιση μήνα μετά τις καταστροφικές πλημμύρες της 1ης Οκτωβρ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "panathinaikos-ofi-2-0-astochi-i-kritiki-omada-o-penia-esose-ton-pao-livai-kai-giagkoysits-katharisan-kai-ton-apomakrynan-stin-koryfi",
@@ -7216,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/kospi_shutterstock_-768x480.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/kospi_shutterstock_-768x480.jpg",
     "summary": "Οι ασιατικές μετοχές υποχωρούν, καθώς η Ουάσιγκτον ενέτεινε τους ελέγχους στην πρόσβαση της Κίνας σε προηγμένα τσιπ τεχνητής νοημοσύνης, ενισχύοντας κατ&rsqu...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "marios-eythymiopoylos-i-ypochorisi-tis-kasoy-to-2024-anoixe-ton-dromo-gia-ti-galliki-diakoinosi-podcast",
-    "title": "Μάριος Ευθυμιόπουλος: Η υποχώρηση της Κάσου το 2024 άνοιξε τον δρόμο για τη γαλλική διακοίνωση (podcast)",
-    "url": "https://www.newshub.gr/el/geopolitiki/marios-eythymiopoylos-i-ypochorisi-tis-kasoy-to-2024-anoixe-ton-dromo-gia-ti-galliki-diakoinosi-podcast",
-    "date": "2026-11-18T05:19:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/anonymo-2048-x-1152-px-binteo-8.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/anonymo-2048-x-1152-px-binteo-8.jpg",
-    "summary": "Ιστορικά λάθη στα Ελληνοτουρκικά\r\n\r\nΗ Τουρκία δεν μας παίρνει στα σοβαρά&hellip;\r\n\r\nΙστορικά λάθη στη διαχείριση των Ελληνοτουρκικών σχέσεων, με σοβαρές συνέ...",
     "author": null,
     "featured": false
   },
