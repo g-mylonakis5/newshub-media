@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261123151847-news-pasok-ta-onomata-poy-akoygontai-gia-ta-prasina-psifodeltia-se-oli-ti-chora",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ellada/pasok-ta-onomata-poy-akoygontai-gia-ta-prasina-psifodeltia-se-oli-ti-chora",
+      "title": "ΠΑΣΟΚ: Τα ονόματα που ακούγονται για τα «πράσινα» ψηφοδέλτια σε όλη τη χώρα",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/pasok.jpg",
+      "text": "ΠΑΣΟΚ: Τα ονόματα που ακούγονται για τα «πράσινα» ψηφοδέλτια σε όλη τη χώρα",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-23T15:18:47.800Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/ellada/pasok-ta-onomata-poy-akoygontai-gia-ta-prasina-psifodeltia-se-oli-ti-chora"
+    },
+    {
       "id": "20261123151038-news-chania-to-programma-eortasmoy-tis-113is-epeteioy-enosis-tis-kritis-me-tin-ellada",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/chania-to-programma-eortasmoy-tis-113is-epeteioy-enosis-tis-kritis-me-tin-ellada",
