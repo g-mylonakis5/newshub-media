@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T15:52:34.863Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/synedriasi-perifereiakoy-symvoylioy-kritis-tin-triti-i-atzenta"
+      "link": "https://www.newshub.gr/el/kriti/synedriasi-perifereiakoy-symvoylioy-kritis-tin-triti-i-atzenta",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290485650156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290485650156174",
+          "at": "2026-11-23T15:52:52.998Z"
+        }
+      }
     },
     {
       "id": "20261123152530-news-fos-proigmena-ylika-kai-nees-technologies-to-ite-sto-timoni-eyropaikoy-ereynitikoy-ergoy-dine",
