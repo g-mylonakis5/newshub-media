@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-profylakisteoi-oi-dyo-emplekomenoi-stin-ypothesi-me-ta-8-kila-chasis",
+    "title": "Ηράκλειο: Προφυλακιστέοι οι δυο εμπλεκόμενοι στην υπόθεση με τα 8 κιλά χασίς",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-profylakisteoi-oi-dyo-emplekomenoi-stin-ypothesi-me-ta-8-kila-chasis",
+    "date": "2026-11-23T15:27:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/fylakh2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/fylakh2.jpg",
+    "summary": "Τον δρόμο για τη φυλακή πήραν νωρίτερα σήμερα 23/11 οι δύο άνδρες που συνελήφθησαν το πρωί της περασμένης Πέμπτης 19/11, καθώς φέρονται να εμπλέκονται στην υ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "le-monde-sigoyra-stin-proti-thesi-i-lepen-anevainei-o-melanson-i-eikona-tis-machis-gia-to-elize-symfona-me-tis-dimoskopiseis",
     "title": "Le Monde: Σίγουρα στην πρώτη θέση η Λεπέν -Ανεβαίνει ο Μελανσόν, η εικόνα της μάχης για το Ελιζέ σύμφωνα με τις δημοσκοπήσεις",
     "url": "https://www.newshub.gr/el/geopolitiki/le-monde-sigoyra-stin-proti-thesi-i-lepen-anevainei-o-melanson-i-eikona-tis-machis-gia-to-elize-symfona-me-tis-dimoskopiseis",
@@ -169,7 +181,7 @@
       "url": "https://www.newshub.gr/el/christoforos-papadakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "chania-soos-entopistike-agnooymenos-psaras-eiche-vythistei-to-skafos-toy",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/narkotika-irakleio-1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/narkotika-irakleio-1.jpg",
     "summary": "Στη σύλληψη ενός 57χρονου άνδρα για διακίνηση ναρκωτικών ουσιών προχώρησαν στο Ηράκλειο, οι αστυνομικοί της Υποδιεύθυνσης Αντιμετώπισης Οργανωμένου Εγκλήματο...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "tramp-poytin-kai-si-mazi-stin-kina-i-megaloprepis-ypodochi-i-proti-cheirapsia-kai-ta-krisima-metopa",
-    "title": "Τραμπ, Πούτιν και Σι μαζί στην Κίνα: Η μεγαλοπρεπής υποδοχή, η πρώτη χειραψία και τα κρίσιμα μέτωπα",
-    "url": "https://www.newshub.gr/el/geopolitiki/tramp-poytin-kai-si-mazi-stin-kina-i-megaloprepis-ypodochi-i-proti-cheirapsia-kai-ta-krisima-metopa",
-    "date": "2026-11-18T15:26:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/aaaa.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/aaaa.jpg",
-    "summary": "Την πρώτη τους χειραψία αντάλλαξαν ο Αμερικανός πρόεδρος Ντόναλντ Τραμπ και ο Ρώσος πρόεδρος Βλαντίμιρ Πούτιν στη Σενζέν της Κίνας, λίγες ώρες πριν από την π...",
     "author": null,
     "featured": false
   },
