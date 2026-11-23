@@ -13,7 +13,7 @@
       "url": "https://www.newshub.gr/el/eleni-vasilaki",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/basilake.jpg"
     },
-    "featured": false
+    "featured": true
   },
   {
     "id": "oloklirothike-kai-paradothike-i-meleti-gia-kykliko-komvo-stin-eisodo-toy-oropedio-lasithioy",
@@ -193,7 +193,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/d33bc783-eaa3-4f8e-94f9-83936325d290.jpg",
     "summary": "Σημερα αναμένεται να εκδοθεί η απόφαση του Δικαστηρίου για μια ααπό τις αιτήσεις που κατατέθηκαν την περασμένη Παρασκευή από την πλευρά των διαμαρτυρόμενων γ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "symmetechei-stin-panelladiki-apergia-tis-tetartis-o-syllogos-dep-elmepa",
