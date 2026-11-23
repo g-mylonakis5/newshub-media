@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/ydee-rethymnou.jpg",
     "summary": "Ένας 28χρονος συνελήφθη σήμερα Δευτέρα στο Ρέθυμνο από αστυνομικούς του Τμήματος Δίωξης Ναρκωτικών της Υποδιεύθυνσης Δίωξης και Εξιχνίασης Εγκλημάτων Ρεθύμνο...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "irakleio-moysikotheatriki-parastasi-gia-tin-pagkosmia-imera-exaleipsis-tis-vias-kata-ton-gynaikon",
@@ -73,7 +73,7 @@
       "url": "https://www.newshub.gr/el/christoforos-papadakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "ekthesi-zografikis-chronotopia-tis-tanias-christoforatoy-sti-dimotiki-pinakothiki-irakleioy",
