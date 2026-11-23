@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261123152506-news-inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi",
+      "title": "ΙΝΚΑ: Ακριβότερο κατά σχεδόν 18% το φετινό χριστουγεννιάτικο τραπέζι",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/3f1ce361b0e74fe88c6d32e1ac670a7f.jpg",
+      "text": "ΙΝΚΑ: Ακριβότερο κατά σχεδόν 18% το φετινό χριστουγεννιάτικο τραπέζι",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-23T15:25:06.399Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/oikonomia/inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi"
+    },
+    {
       "id": "20261123151847-news-pasok-ta-onomata-poy-akoygontai-gia-ta-prasina-psifodeltia-se-oli-ti-chora",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ellada/pasok-ta-onomata-poy-akoygontai-gia-ta-prasina-psifodeltia-se-oli-ti-chora",
