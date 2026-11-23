@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T18:18:49.503Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/sugar/i-ellinida-ypopsifia-sta-kallisteia-miss-universe-vinteo"
+      "link": "https://www.newshub.gr/el/sugar/i-ellinida-ypopsifia-sta-kallisteia-miss-universe-vinteo",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290501346156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290501346156174",
+          "at": "2026-11-23T18:19:11.203Z"
+        }
+      }
     },
     {
       "id": "20261123163212-news-christoygenna-sto-parisi-fotagogisi-ton-ilysion-pedion-vinteo",
