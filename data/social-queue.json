@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261123145935-news-voles-sto-kentro-tis-deyteras-156",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-deyteras-156",
+      "title": "Βολές στο κέντρο... της Δευτέρας!",
+      "image": "https://static.newshub.gr/765x435/img_8831.jpg",
+      "text": "Βολές στο κέντρο... της Δευτέρας!",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-23T14:59:35.923Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-deyteras-156"
+    },
+    {
       "id": "20261122223925-news-insete-sto-9-1-i-toyristiki-empeiria-stin-ellada-pano-apo-ton-eyropaiko-meso-oro-poso-sygkentrose-i-kriti",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/insete-sto-9-1-i-toyristiki-empeiria-stin-ellada-pano-apo-ton-eyropaiko-meso-oro-poso-sygkentrose-i-kriti",
