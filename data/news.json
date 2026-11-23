@@ -1,5 +1,17 @@
 [
   {
+    "id": "paysi-ergasion-mechri-tis-8-ianoyarioy-gia-ti-domi-exartimenon-atomon-stin-archiepiskopoy-makarioy",
+    "title": "Παύση εργασιών μέχρι τις 8 Ιανουαρίου για τη δομή εξαρτημένων ατόμων στην Αρχιεπισκόπου Μακαρίου",
+    "url": "https://www.newshub.gr/el/kriti/paysi-ergasion-mechri-tis-8-ianoyarioy-gia-ti-domi-exartimenon-atomon-stin-archiepiskopoy-makarioy",
+    "date": "2026-11-23T12:55:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/tttttt.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/tttttt.jpg",
+    "summary": "Φρένο στη συνέχιση των εργασιών στη Μονάδα του Εθνικού Οργανισμού Πρόληψης και Αντιμετώπισης Εξαρτήσεων ατόμων στην λεωφόρο Αρχιεπισκόπου Μακαρίου, από το αρ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "rethymno-synelifthi-28chronos-gia-katochi-narkotikon-oysion-fotovolidon-kai-pyrotechnimaton",
     "title": "Ρέθυμνο: Συνελήφθη 28χρονος για κατοχή ναρκωτικών ουσιών, φωτοβολίδων και πυροτεχνημάτων",
     "url": "https://www.newshub.gr/el/kriti/rethymno-synelifthi-28chronos-gia-katochi-narkotikon-oysion-fotovolidon-kai-pyrotechnimaton",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/ydee-rethymnou.jpg",
     "summary": "Ένας 28χρονος συνελήφθη σήμερα Δευτέρα στο Ρέθυμνο από αστυνομικούς του Τμήματος Δίωξης Ναρκωτικών της Υποδιεύθυνσης Δίωξης και Εξιχνίασης Εγκλημάτων Ρεθύμνο...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "irakleio-moysikotheatriki-parastasi-gia-tin-pagkosmia-imera-exaleipsis-tis-vias-kata-ton-gynaikon",
@@ -7220,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/dorsey-1166x800.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/dorsey-1166x800.jpg",
     "summary": "Γνωστά έγιναν, μέσω της FIBA, τα ονόματα των παικτών που βρίσκονται στις προεπιλογές του Βασίλη Σπανούλη για το επερχόμενο «παράθυρο» του Νο...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "gnoseis-poy-sozoyn-zoes-gia-deyteri-chronia-oi-polites-toy-agioy-nikolaoy-ekpaideyontai-stis-protes-voitheies",
-    "title": "Γνώσεις που σώζουν ζωές: Για δεύτερη χρονιά οι πολίτες του Αγίου Νικολάου εκπαιδεύονται στις Πρώτες Βοήθειες",
-    "url": "https://www.newshub.gr/el/kriti/gnoseis-poy-sozoyn-zoes-gia-deyteri-chronia-oi-polites-toy-agioy-nikolaoy-ekpaideyontai-stis-protes-voitheies",
-    "date": "2026-11-18T12:50:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/eikona_viber_2026-11-18_12-22-25-300.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/eikona_viber_2026-11-18_12-22-25-300.jpg",
-    "summary": "Με μεγάλη συμμετοχή και επιτυχία πραγματοποιήθηκε την Κυριακή 15 Νοεμβρίου 2026 η πρώτη εκπαιδευτική ενημέρωση πολιτών της φετινής περιόδου στη Βασική Υποστή...",
     "author": null,
     "featured": false
   },
