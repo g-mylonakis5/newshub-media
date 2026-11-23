@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T15:56:25.033Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/agronews/stis-30-noemvrioy-tha-dothoyn-schedon-450-ekat-eyro-os-prokatavoli-tis-vasikis-enischysis"
+      "link": "https://www.newshub.gr/el/agronews/stis-30-noemvrioy-tha-dothoyn-schedon-450-ekat-eyro-os-prokatavoli-tis-vasikis-enischysis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290485902156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290485902156174",
+          "at": "2026-11-23T15:56:44.381Z"
+        }
+      }
     },
     {
       "id": "20261123155234-news-synedriasi-perifereiakoy-symvoylioy-kritis-tin-triti-i-atzenta",
