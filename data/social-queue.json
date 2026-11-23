@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261123151038-news-chania-to-programma-eortasmoy-tis-113is-epeteioy-enosis-tis-kritis-me-tin-ellada",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/chania-to-programma-eortasmoy-tis-113is-epeteioy-enosis-tis-kritis-me-tin-ellada",
+      "title": "Χανιά: Το πρόγραμμα εορτασμού της 113ης Επετείου Ένωσης της Κρήτης με την Ελλάδα",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/krhth.jpg",
+      "text": "Χανιά: Το πρόγραμμα εορτασμού της 113ης Επετείου Ένωσης της Κρήτης με την Ελλάδα",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-23T15:10:38.584Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kriti/chania-to-programma-eortasmoy-tis-113is-epeteioy-enosis-tis-kritis-me-tin-ellada"
+    },
+    {
       "id": "20261123145935-news-voles-sto-kentro-tis-deyteras-156",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-deyteras-156",
