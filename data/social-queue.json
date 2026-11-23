@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261123181849-news-i-ellinida-ypopsifia-sta-kallisteia-miss-universe-vinteo",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/sugar/i-ellinida-ypopsifia-sta-kallisteia-miss-universe-vinteo",
+      "title": "Η Ελληνίδα υποψήφια στα καλλιστεία Miss Universe (βίντεο)",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/miss-universe-mak.jpg",
+      "text": "Η Ελληνίδα υποψήφια στα καλλιστεία Miss Universe (βίντεο)",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-23T18:18:49.503Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/sugar/i-ellinida-ypopsifia-sta-kallisteia-miss-universe-vinteo"
+    },
+    {
       "id": "20261123163212-news-christoygenna-sto-parisi-fotagogisi-ton-ilysion-pedion-vinteo",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kosmos/christoygenna-sto-parisi-fotagogisi-ton-ilysion-pedion-vinteo",
