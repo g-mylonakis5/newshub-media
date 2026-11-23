@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-23T15:25:06.399Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/oikonomia/inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi"
+      "link": "https://www.newshub.gr/el/oikonomia/inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290482710156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290482710156174",
+          "at": "2026-11-23T15:25:23.085Z"
+        }
+      }
     },
     {
       "id": "20261123151847-news-pasok-ta-onomata-poy-akoygontai-gia-ta-prasina-psifodeltia-se-oli-ti-chora",
