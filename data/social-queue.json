@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261124081612-news-osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton-1",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ygeia/osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton-1",
+      "title": "Οστεοπόρωση: 6 τροφές που δυναμώνουν τα οστά και μειώνουν τον κίνδυνο καταγμάτων",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/salata.jpg",
+      "text": "Οστεοπόρωση: 6 τροφές που δυναμώνουν τα οστά και μειώνουν τον κίνδυνο καταγμάτων",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-24T08:16:12.625Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/ygeia/osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton-1"
+    },
+    {
       "id": "20261123212130-news-karkinos-toy-mastoy-megali-meleti-exetazei-ton-rolo-tis-ai-stin-egkairi-diagnosi",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ygeia/karkinos-toy-mastoy-megali-meleti-exetazei-ton-rolo-tis-ai-stin-egkairi-diagnosi",
