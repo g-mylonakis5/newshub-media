@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261124100650-news-bbc-gia-epithesi-sti-rosiki-korveta-sti-livyi-o-polemos-stin-oykrania-exaplonetai-stin-eyropi",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/geopolitiki/bbc-gia-epithesi-sti-rosiki-korveta-sti-livyi-o-polemos-stin-oykrania-exaplonetai-stin-eyropi",
+      "title": "Bbc για επίθεση στη ρωσική κορβέτα στη Λιβύη: Ο πόλεμος στην Ουκρανία εξαπλώνεται στην Ευρώπη;",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/2d4680f8707e4843b5dc772443a3155d.jpg",
+      "text": "Bbc για επίθεση στη ρωσική κορβέτα στη Λιβύη: Ο πόλεμος στην Ουκρανία εξαπλώνεται στην Ευρώπη;",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-24T10:06:50.968Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/geopolitiki/bbc-gia-epithesi-sti-rosiki-korveta-sti-livyi-o-polemos-stin-oykrania-exaplonetai-stin-eyropi"
+    },
+    {
       "id": "20261124084258-news-spania-agalmatidia-10-000-eton-epistrefoyn-apo-ti-dania-stin-iordania",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/istoria-politismos/spania-agalmatidia-10-000-eton-epistrefoyn-apo-ti-dania-stin-iordania",
