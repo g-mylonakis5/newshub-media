@@ -1,5 +1,21 @@
 [
   {
+    "id": "i-kentro-dexia-simera",
+    "title": "Η Κεντρο-Δεξιά σήμερα",
+    "url": "https://www.newshub.gr/el/apopseis/i-kentro-dexia-simera",
+    "date": "2026-11-24T06:30:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/d3lrko7cccjpqf4f4stt_3.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/d3lrko7cccjpqf4f4stt_3.jpg",
+    "summary": "Η κατάρρευση του υπαρκτού σοσιαλισμού σήμανε το \"τέλος των ιδεολογιών\". Εκεί βασίστηκε η διαπίστωση ότι \"δεν υπάρχει πια Δεξιά και Αριστερά&rd...",
+    "author": {
+      "name": "Γρηγόρης Πασπάτης",
+      "url": "https://www.newshub.gr/el/grigoris-paspatis",
+      "photo": "https://static.newshub.gr/files/images-1.jpg"
+    },
+    "featured": false
+  },
+  {
     "id": "nea-ionia-ischyri-ekrixi-se-kafeteria-prokalese-megales-zimies-stin-epicheirisi",
     "title": "Νέα Ιωνία: Ισχυρή έκρηξη σε καφετέρια προκάλεσε μεγάλες ζημιές στην επιχείρηση",
     "url": "https://www.newshub.gr/el/ellada/nea-ionia-ischyri-ekrixi-se-kafeteria-prokalese-megales-zimies-stin-epicheirisi",
@@ -7224,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/vrefos.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/vrefos.jpg",
     "summary": "Ένα αδιανόητο περιστατικό έρχεται στο φως της δημοσιότητας από τον Πύργο, όπου μία οικογένεια Ρομά από την περιοχή του Λαμπετίου, φέρεται να πούλησε βρέφος μ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "aisthanomai-poly-anoitos-o-mask-metanionei-gia-to-miso-dis-dolaria-poy-xodepse-gia-toys-repoymplikanoys-stis-endiameses-ekloges",
-    "title": "«Αισθάνομαι πολύ ανόητος»: Ο Μασκ μετανιώνει για το μισό δισ. δολάρια που ξόδεψε για τους Ρεπουμπλικάνους στις ενδιάμεσες εκλογές",
-    "url": "https://www.newshub.gr/el/kosmos/aisthanomai-poly-anoitos-o-mask-metanionei-gia-to-miso-dis-dolaria-poy-xodepse-gia-toys-repoymplikanoys-stis-endiameses-ekloges",
-    "date": "2026-11-19T07:30:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/musk-elon-1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/musk-elon-1.jpg",
-    "summary": "Ο Έλον Μασκ αναγνώρισε πως «αισθάνεται πολύ ανόητος» που δαπάνησε σχεδόν μισό δισεκατομμύριο δολάρια για να χρηματοδοτήσει τις εκστρατείες ρεπουμ...",
     "author": null,
     "featured": false
   },
