@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/tsipras.jpg",
     "summary": "Για «εικόνα απόγνωσης στον πρωτογενή τομέα», μίλησε ο πρόεδρος της Ελληνικής Αριστερής Συμπαράταξης, Αλέξης Τσίπρας, στη συνάντηση που είχε με εκ...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "irakleio-alyto-to-provlima-me-ti-zimia-ston-agogo-ton-malion-sta-kagkela-oi-katoikoi",
+    "title": "Ηράκλειο: Άλυτο το πρόβλημα με τη ζημιά στον αγωγό των Μαλίων - Στα «κάγκελα» οι κάτοικοι",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-alyto-to-provlima-me-ti-zimia-ston-agogo-ton-malion-sta-kagkela-oi-katoikoi",
+    "date": "2026-11-24T16:04:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/diakopi-nerou.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/diakopi-nerou.jpg",
+    "summary": "Στα «κάγκελα» βρίσκονται, όπως έχει γράψει το newshub.gr (ΔΕΙΤΕ ΕΔΩ) οι κάτοικοι μιας ολόκληρης περιοχής στο Δήμο Χερσονήσου, αλλά και οι κάτοικο...",
+    "author": null,
     "featured": true
   },
   {
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/screenshot-2026-11-19-164623.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/screenshot-2026-11-19-164623.jpg",
     "summary": "Μικρορομπότ που ελέγχονται μέσω μαγνητών μπορούν να κατευθύνουν φάρμακα προς θρόμβους αίματος που βρίσκονται σε δυσπρόσιτα σημεία του σώματος ενισχύοντας την...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "thanatos-diasostrias-sti-syro-pros-apofylakisi-kai-kat-oikon-periorismo-me-vrachiolaki-o-41chronos-katigoroymenos",
-    "title": "Θάνατος διασώστριας στη Σύρο: Προς αποφυλάκιση και κατ' οίκον περιορισμό με βραχιολάκι ο 41χρονος κατηγορούμενος",
-    "url": "https://www.newshub.gr/el/ellada/thanatos-diasostrias-sti-syro-pros-apofylakisi-kai-kat-oikon-periorismo-me-vrachiolaki-o-41chronos-katigoroymenos",
-    "date": "2026-11-19T18:44:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/maketa-suros1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/maketa-suros1.jpg",
-    "summary": "Αναμένεται να αποφυλακιστεί και να τεθεί σε κατ&rsquo; οίκον περιορισμό με ηλεκτρονική επιτήρηση, το γνωστό «βραχιολάκι» ο 41χρονος κατηγορούμενο...",
     "author": null,
     "featured": false
   },
