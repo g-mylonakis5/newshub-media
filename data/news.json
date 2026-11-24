@@ -1,5 +1,17 @@
 [
   {
+    "id": "dimos-chanion-draseis-enimerosis-prolipsis-kai-eyaisthitopoiisis-gia-tin-exaleipsi-tis-vias-kata-ton-gynaikon",
+    "title": "Δήμος Χανίων: Δράσεις ενημέρωσης, πρόληψης και ευαισθητοποίησης για την εξάλειψη της βίας κατά των γυναικών",
+    "url": "https://www.newshub.gr/el/kriti/dimos-chanion-draseis-enimerosis-prolipsis-kai-eyaisthitopoiisis-gia-tin-exaleipsi-tis-vias-kata-ton-gynaikon",
+    "date": "2026-11-24T11:41:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/chania.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/chania.jpg",
+    "summary": "Με επίκεντρο την ενημέρωση, την πρόληψη και την ενδυνάμωση των γυναικών, ο Ξενώνας Φιλοξενίας Γυναικών αναπτύσσει ένα ευρύ πλέγμα δράσεων, με αφορμή την 25η ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "irakleio-sygklonizei-i-istoria-tis-40chronis-elenis-poy-vrethike-nekri-stin-kampina-toy-ploioy",
     "title": "Ηράκλειο: Συγκλονίζει η ιστορία της 40χρονης Ελένης που βρέθηκε νεκρή στην καμπίνα του πλοίου",
     "url": "https://www.newshub.gr/el/kriti/irakleio-sygklonizei-i-istoria-tis-40chronis-elenis-poy-vrethike-nekri-stin-kampina-toy-ploioy",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/penthos-v.jpg",
     "summary": "Μια ιστορία που ξεκίνησε με την ελπίδα μιας δεύτερης ευκαιρίας στη ζωή, γράφτηκε τελικά με τον πιο τραγικό τρόπο. Η 40χρονη Ελένη, μητέρα τριών παιδιών, άφησ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "oyggaria-stin-oykrania-o-piter-magiar-tha-synantithei-me-ton-zelenski",
@@ -189,7 +201,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/msnnnnng.jpg",
     "summary": "Στην τελευταία του κατοικία οδηγειται σήμερα στις 3 μμ ο 44χρονος Μιχάλης Μακριδάκης που έχασε τη ζωή του χθες πέφτοντας από την ταράτσα του σπιτιού του στον...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "synelifthisan-tesseris-anilikoi-gia-ton-agrio-xylodarmo-17chronoy-sto-goydi",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/boule-genike.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/boule-genike.jpg",
     "summary": "Αύριο κατατίθεται στην Ολομέλεια της Βουλής ο κρατικός προϋπολογισμός για το 2027 από τον υπουργό Εθνικής Οικονομίας και Οικονομικών, Κυριάκο Πιερρακάκη. Τον...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "gortyna-oplostasio-se-spitia-kai-poimniostasio-2-polemika-tyfekia-3-cheirovomvides-kai-590-fysiggia-fotos",
-    "title": "Γόρτυνα: Οπλοστάσιο σε σπίτια και ποιμνιοστάσιο – 2 πολεμικά τυφέκια, 3 χειροβομβίδες και 590 φυσίγγια (Φωτος)",
-    "url": "https://www.newshub.gr/el/kriti/gortyna-oplostasio-se-spitia-kai-poimniostasio-2-polemika-tyfekia-3-cheirovomvides-kai-590-fysiggia-fotos",
-    "date": "2026-11-19T13:30:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/eikona_viber_2026-11-19_14-51-14-499.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/eikona_viber_2026-11-19_14-51-14-499.jpg",
-    "summary": "Σοβαρή υπόθεση παράνομης οπλοκατοχής αποκαλύφθηκε σε περιοχή του Δήμου Γόρτυνας, στο Ηράκλειο, έπειτα από αστυνομική επιχείρηση που πραγματοποιήθηκε το πρωί ...",
     "author": null,
     "featured": false
   },
