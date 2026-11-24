@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-24T08:16:12.625Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ygeia/osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton-1"
+      "link": "https://www.newshub.gr/el/ygeia/osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton-1",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290574480156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290574480156174",
+          "at": "2026-11-24T08:16:31.327Z"
+        }
+      }
     },
     {
       "id": "20261123212130-news-karkinos-toy-mastoy-megali-meleti-exetazei-ton-rolo-tis-ai-stin-egkairi-diagnosi",
