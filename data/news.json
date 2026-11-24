@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/pierakakis2-xrm.jpg",
     "summary": "Την προς τα πάνω αναθεώρηση των προβλέψεων για τους ρυθμούς ανάπτυξης της ελληνικής οικονομίας έως το 2030, καθώς και την αποκλιμάκωση του δημόσιου χρέους σε...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "ypothesi-kataskopeias-sti-soyda-noikiasa-tychaia-ayto-to-spiti-ti-ischyrizetai-o-36chroos-georgianos-ypikoos",
+    "title": "Υπόθεση κατασκοπείας στη Σούδα: «Νοίκιασα τυχαία αυτό το σπίτι»-Τι ισχυρίζεται ο 36χροος Γεωργιανός υπήκοος",
+    "url": "https://www.newshub.gr/el/kriti/ypothesi-kataskopeias-sti-soyda-noikiasa-tychaia-ayto-to-spiti-ti-ischyrizetai-o-36chroos-georgianos-ypikoos",
+    "date": "2026-11-24T17:05:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/soyda.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/soyda.jpg",
+    "summary": "«Εάν στην Ελλάδα θεωρούν ότι είμαι επικίνδυνος κατάσκοπος, τότε γιατί με κρατούν σε αγροτική φυλακή; Εχω στείλει κάποια βίντεο με το κινητό στην ...",
+    "author": null,
     "featured": true
   },
   {
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/ymittos1-1000x800.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/ymittos1-1000x800.jpg",
     "summary": "Η Ευρωπαϊκή Επιτροπή ανακοίνωσε σήμερα ότι κινεί διαδικασία επί παραβάσει κατά της Ελλάδας, αποστέλλοντας προειδοποιητική επιστολή για τη μη ορθή εφαρμογή το...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "energi-paroysia-toy-dimoy-chersonisoy-stis-energeiakes-exelixeis-me-stocho-ti-stirixi-politon-kai-epicheiriseon",
-    "title": "Ενεργή παρουσία του Δήμου Χερσονήσου στις ενεργειακές εξελίξεις με στόχο τη στήριξη πολιτών και επιχειρήσεων",
-    "url": "https://www.newshub.gr/el/kriti/energi-paroysia-toy-dimoy-chersonisoy-stis-energeiakes-exelixeis-me-stocho-ti-stirixi-politon-kai-epicheiriseon",
-    "date": "2026-11-19T19:42:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/energeiakes.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/energeiakes.jpg",
-    "summary": "Την ενεργή του παρουσία στις εξελίξεις που αφορούν την ενεργειακή μετάβαση και τη βιώσιμη ανάπτυξη επιβεβαίωσε ο Δήμος Χερσονήσου, συμμετέχοντας στην ενημερω...",
     "author": null,
     "featured": false
   },
