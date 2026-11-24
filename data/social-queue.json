@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-24T10:06:50.968Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/geopolitiki/bbc-gia-epithesi-sti-rosiki-korveta-sti-livyi-o-polemos-stin-oykrania-exaplonetai-stin-eyropi"
+      "link": "https://www.newshub.gr/el/geopolitiki/bbc-gia-epithesi-sti-rosiki-korveta-sti-livyi-o-polemos-stin-oykrania-exaplonetai-stin-eyropi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290583996156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290583996156174",
+          "at": "2026-11-24T10:07:10.936Z"
+        }
+      }
     },
     {
       "id": "20261124084258-news-spania-agalmatidia-10-000-eton-epistrefoyn-apo-ti-dania-stin-iordania",
