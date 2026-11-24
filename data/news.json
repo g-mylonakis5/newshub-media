@@ -1,5 +1,17 @@
 [
   {
+    "id": "yf-agrotikis-anaptyxis-dinoyme-machi-gia-tin-alieia-xana-desmeysi-gia-pilotiko-programma-alieysis-lagokefaloy-stin-kriti",
+    "title": "Υφ. Αγροτικής Ανάπτυξης: «Δίνουμε μάχη για την αλιεία»-Ξανά δέσμευση για πιλοτικό πρόγραμμα αλίευσης λαγοκέφαλου στην Κρήτη",
+    "url": "https://www.newshub.gr/el/kriti/yf-agrotikis-anaptyxis-dinoyme-machi-gia-tin-alieia-xana-desmeysi-gia-pilotiko-programma-alieysis-lagokefaloy-stin-kriti",
+    "date": "2026-11-24T07:20:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/psaradika-koules-2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/psaradika-koules-2.jpg",
+    "summary": "Τα προβλήματα και τα αιτήματα των επαγγελματιών της παράκτιας αλιείας βρέθηκαν στο επίκεντρο συνάντησης του υφυπουργού Αγροτικής Ανάπτυξης και Τροφίμων, Θανά...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "bbc-gia-epithesi-sti-rosiki-korveta-sti-livyi-o-polemos-stin-oykrania-exaplonetai-stin-eyropi",
     "title": "Bbc για επίθεση στη ρωσική κορβέτα στη Λιβύη: Ο πόλεμος στην Ουκρανία εξαπλώνεται στην Ευρώπη;",
     "url": "https://www.newshub.gr/el/geopolitiki/bbc-gia-epithesi-sti-rosiki-korveta-sti-livyi-o-polemos-stin-oykrania-exaplonetai-stin-eyropi",
@@ -209,7 +221,7 @@
       "url": "https://www.newshub.gr/el/eleni-vasilaki",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/basilake.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "o-patriarchis-alexandreias-egkainiase-to-anakainismeno-ktiriako-sygkrotima-tis-orthodoxoy-akadimias-kritis",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/peripoliko-9.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/peripoliko-9.jpg",
     "summary": "Ακόμη μία γυναικοκτονία σοκάρει την ελληνική κοινωνία, καθώς μία 61χρονη γυναίκα εντοπίστηκε νεκρή μέσα σε διαμέρισμα στην περιοχή της Ακρόπολης, τα ξημερώμα...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "sto-verolino-i-synodos-tis-symmachias-ton-prothymon-gia-tin-oykrania-me-ti-symmetochi-mitsotaki",
-    "title": "Στο Βερολίνο η Σύνοδος της «Συμμαχίας των Προθύμων» για την Ουκρανία, με τη συμμετοχή Μητσοτάκη",
-    "url": "https://www.newshub.gr/el/kosmos/sto-verolino-i-synodos-tis-symmachias-ton-prothymon-gia-tin-oykrania-me-ti-symmetochi-mitsotaki",
-    "date": "2026-11-19T08:06:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/berlinukraine.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/berlinukraine.jpg",
-    "summary": "Υπό το σύνθημα «Ενωμένοι για την ειρήνη στην Ουκρανία και την ευρωπαϊκή ασφάλεια», με κεντρικό μήνυμα την επαναβεβαίωση της στήριξης της Ουκρανία...",
     "author": null,
     "featured": false
   },
