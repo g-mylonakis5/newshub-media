@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-24T21:42:58.784Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kosmos/agkyra-anoixe-i-gi-kai-katapie-fortigo-vinteo"
+      "link": "https://www.newshub.gr/el/kosmos/agkyra-anoixe-i-gi-kai-katapie-fortigo-vinteo",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290640078156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290640078156174",
+          "at": "2026-11-24T21:43:15.632Z"
+        }
+      }
     },
     {
       "id": "20261124205814-news-poso-kalo-mas-kanei-i-mayri-sokolata-ti-deichnoyn-oi-ereynes-gia-entero-kardia-sakcharo-kai-diathesi",
