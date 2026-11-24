@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-24T10:57:00.596Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ellada/ch-mamoylakis-gia-na-pareis-epidoma-40-dikaiologitika-gia-dimosies-symvaseis-ekatommyrion-mia-prosfora-arkei-vinteo"
+      "link": "https://www.newshub.gr/el/ellada/ch-mamoylakis-gia-na-pareis-epidoma-40-dikaiologitika-gia-dimosies-symvaseis-ekatommyrion-mia-prosfora-arkei-vinteo",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290587794156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290587794156174",
+          "at": "2026-11-24T10:57:17.855Z"
+        }
+      }
     },
     {
       "id": "20261124100650-news-bbc-gia-epithesi-sti-rosiki-korveta-sti-livyi-o-polemos-stin-oykrania-exaplonetai-stin-eyropi",
