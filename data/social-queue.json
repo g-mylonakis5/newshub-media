@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-24T20:58:14.835Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ygeia/poso-kalo-mas-kanei-i-mayri-sokolata-ti-deichnoyn-oi-ereynes-gia-entero-kardia-sakcharo-kai-diathesi"
+      "link": "https://www.newshub.gr/el/ygeia/poso-kalo-mas-kanei-i-mayri-sokolata-ti-deichnoyn-oi-ereynes-gia-entero-kardia-sakcharo-kai-diathesi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290637192156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290637192156174",
+          "at": "2026-11-24T20:58:32.974Z"
+        }
+      }
     },
     {
       "id": "20261124131719-news-oi-agrotes-to-megalo-stoichima-tis-kyvernisis-sti-thessalia-o-kyriakos-mitsotakis",
