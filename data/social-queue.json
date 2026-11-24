@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261124084258-news-spania-agalmatidia-10-000-eton-epistrefoyn-apo-ti-dania-stin-iordania",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/istoria-politismos/spania-agalmatidia-10-000-eton-epistrefoyn-apo-ti-dania-stin-iordania",
+      "title": "Σπάνια αγαλματίδια 10.000 ετών επιστρέφουν από τη Δανία στην Ιορδανία",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/agalmata-768x406.jpg",
+      "text": "Σπάνια αγαλματίδια 10.000 ετών επιστρέφουν από τη Δανία στην Ιορδανία",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-24T08:42:58.584Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/istoria-politismos/spania-agalmatidia-10-000-eton-epistrefoyn-apo-ti-dania-stin-iordania"
+    },
+    {
       "id": "20261124081612-news-osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton-1",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ygeia/osteoporosi-6-trofes-poy-dynamonoyn-ta-osta-kai-meionoyn-ton-kindyno-katagmaton-1",
