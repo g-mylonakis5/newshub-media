@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261124214258-news-agkyra-anoixe-i-gi-kai-katapie-fortigo-vinteo",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/agkyra-anoixe-i-gi-kai-katapie-fortigo-vinteo",
+      "title": "Άγκυρα: Άνοιξε η γη και «κατάπιε» φορτηγό (βίντεο)",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/maketa-fortigo.jpg",
+      "text": "Άγκυρα: Άνοιξε η γη και «κατάπιε» φορτηγό (βίντεο)",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-24T21:42:58.784Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kosmos/agkyra-anoixe-i-gi-kai-katapie-fortigo-vinteo"
+    },
+    {
       "id": "20261124205814-news-poso-kalo-mas-kanei-i-mayri-sokolata-ti-deichnoyn-oi-ereynes-gia-entero-kardia-sakcharo-kai-diathesi",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ygeia/poso-kalo-mas-kanei-i-mayri-sokolata-ti-deichnoyn-oi-ereynes-gia-entero-kardia-sakcharo-kai-diathesi",
