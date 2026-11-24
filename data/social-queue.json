@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-24T13:17:19.519Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/agronews/oi-agrotes-to-megalo-stoichima-tis-kyvernisis-sti-thessalia-o-kyriakos-mitsotakis"
+      "link": "https://www.newshub.gr/el/agronews/oi-agrotes-to-megalo-stoichima-tis-kyvernisis-sti-thessalia-o-kyriakos-mitsotakis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290600670156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290600670156174",
+          "at": "2026-11-24T13:17:38.288Z"
+        }
+      }
     },
     {
       "id": "20261124100650-news-bbc-gia-epithesi-sti-rosiki-korveta-sti-livyi-o-polemos-stin-oykrania-exaplonetai-stin-eyropi",
