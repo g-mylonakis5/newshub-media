@@ -1,5 +1,17 @@
 [
   {
+    "id": "kyriakos-pierrakakis-anatheoroyme-pros-ta-pano-oles-tis-provlepseis-tis-ellinikis-oikonomias-os-to-2030",
+    "title": "Κυριάκος Πιερρακάκης: Aναθεωρούμε προς τα πάνω όλες τις προβλέψεις της ελληνικής οικονομίας ως το 2030",
+    "url": "https://www.newshub.gr/el/oikonomia/kyriakos-pierrakakis-anatheoroyme-pros-ta-pano-oles-tis-provlepseis-tis-ellinikis-oikonomias-os-to-2030",
+    "date": "2026-11-24T17:13:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/pierakakis2-xrm.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/pierakakis2-xrm.jpg",
+    "summary": "Την προς τα πάνω αναθεώρηση των προβλέψεων για τους ρυθμούς ανάπτυξης της ελληνικής οικονομίας έως το 2030, καθώς και την αποκλιμάκωση του δημόσιου χρέους σε...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "oi-72-ores-poy-apokatestisan-ton-choyangk-i-kitrini-karta-toy-tramp-stin-epidoxi-diadocho-toy-stin-nvidia-ta-kala-logia-toy-si-i-paremvasi-vans",
     "title": "Οι 72 ώρες που αποκατέστησαν τον Χουάνγκ: Η «κίτρινη κάρτα» του Τραμπ στην επίδοξη διάδοχό του στην Nvidia, τα καλά λόγια του Σι, η παρέμβαση Βανς",
     "url": "https://www.newshub.gr/el/geopolitiki/oi-72-ores-poy-apokatestisan-ton-choyangk-i-kitrini-karta-toy-tramp-stin-epidoxi-diadocho-toy-stin-nvidia-ta-kala-logia-toy-si-i-paremvasi-vans",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/maketa-trump-huang2.jpg",
     "summary": "Τέσσερις ημέρες πριν ανακοινώσει την επιστροφή του Τζένσεν Χουάνγκ, το διοικητικό συμβούλιο της Nvidia εξηγούσε στους επενδυτές γιατί είχε αποκλείσει αυτό το...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "glyfada-me-vary-poiniko-parelthon-oi-dolofonoi-toy-52chronoy-oi-kameres-edeixan-kare-kare-ti-diadromi-toys-prin-kai-meta-to-egklima",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/energeiakes.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/energeiakes.jpg",
     "summary": "Την ενεργή του παρουσία στις εξελίξεις που αφορούν την ενεργειακή μετάβαση και τη βιώσιμη ανάπτυξη επιβεβαίωσε ο Δήμος Χερσονήσου, συμμετέχοντας στην ενημερω...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "neo-kykloma-me-etaireies-vitrina-exarthrose-i-aade-ekryvan-forologitea-yli-ano-ton-28-ekatommyrion-eyro",
-    "title": "Νέο κύκλωμα με εταιρείες-βιτρίνα εξάρθρωσε η ΑΑΔΕ-Έκρυβαν φορολογητέα ύλη άνω των 28 εκατομμυρίων ευρώ",
-    "url": "https://www.newshub.gr/el/oikonomia/neo-kykloma-me-etaireies-vitrina-exarthrose-i-aade-ekryvan-forologitea-yli-ano-ton-28-ekatommyrion-eyro",
-    "date": "2026-11-19T19:34:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/aade.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/aade.jpg",
-    "summary": "Στην εξάρθρωση οργανωμένου κυκλώματος εταιρειών &ndash; βιτρίνα, το οποίο φέρεται να απέκρυπτε φορολογητέα ύλη άνω των 28 εκατ. ευρώ και να εισέπραττε παράνο...",
     "author": null,
     "featured": false
   },
