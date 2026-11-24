@@ -1,5 +1,17 @@
 [
   {
+    "id": "kriti-kai-ipeiros-apo-tin-toyristiki-exostrefeia-stin-koinoniki-exostrefeia",
+    "title": "Κρήτη και Ήπειρος: «Από την τουριστική εξωστρέφεια στην κοινωνική εξωστρέφεια»",
+    "url": "https://www.newshub.gr/el/kriti/kriti-kai-ipeiros-apo-tin-toyristiki-exostrefeia-stin-koinoniki-exostrefeia",
+    "date": "2026-11-24T09:55:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/9d845fb8-bebf-4939-8e64-a9bc831de601.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/9d845fb8-bebf-4939-8e64-a9bc831de601.jpg",
+    "summary": "Με τις καλύτερες εντυπώσεις και ιδιαίτερα αισιόδοξες προοπτικές συνεργασίας επέστρεψε από τα Ιωάννινα η οκταμελής αποστολή του «Συνδέσμου Μελ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "synelifthisan-tesseris-anilikoi-gia-ton-agrio-xylodarmo-17chronoy-sto-goydi",
     "title": "Συνελήφθησαν τέσσερις ανήλικοι για τον άγριο ξυλοδαρμό 17χρονου στο Γουδή",
     "url": "https://www.newshub.gr/el/ellada/synelifthisan-tesseris-anilikoi-gia-ton-agrio-xylodarmo-17chronoy-sto-goydi",
@@ -177,7 +189,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/kampina-plois.jpg",
     "summary": "Νεκρή μέσα στην καμπίνα πλοίου της γραμμής εντοπίστηκε σήμερα το πρωί στο λιμάνι του Ηρακλείου μια 40χρονη γυναίκα μητέρα τριών ανήλικων παιδιών\r\n\r\nΜέλος του...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "kato-apo-ta-90-dolaria-to-brent-oriaki-diorthosi-gia-to-fysiko-aerio-ypo-to-fovo-ayxisis-tis-zitisis",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/apostolos-panas.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/apostolos-panas.jpg",
     "summary": "Την απόφασή του να παραιτηθεί από την ΚΟ του ΠΑΣΟΚ ανακοίνωσε από το βήμα της Βουλής ο βουλευτής Χαλκιδικής, Απόστολος Πάνας.\r\n\r\nΟ Απόστολος Πάνας προχώρησε ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "to-fyllo-poy-ithele-na-kanei-filoys-mia-tryferi-istoria-gia-ti-diaforetikotita-kai-tin-apodochi-apo-tin-athanasia-katsoyraki",
-    "title": "«Το φύλλο που ήθελε να κάνει φίλους»: Μια τρυφερή ιστορία για τη διαφορετικότητα και την αποδοχή από την Αθανασία Κατσουράκη",
-    "url": "https://www.newshub.gr/el/ta-en-oiko/to-fyllo-poy-ithele-na-kanei-filoys-mia-tryferi-istoria-gia-ti-diaforetikotita-kai-tin-apodochi-apo-tin-athanasia-katsoyraki",
-    "date": "2026-11-19T10:49:00.000Z",
-    "category": "Τα εν οίκω",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/91f04bf9-a3ea-44c0-9b8a-7ca72e563148.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/91f04bf9-a3ea-44c0-9b8a-7ca72e563148.jpg",
-    "summary": "Μερικές φορές, μια ιστορία γεννιέται από μια εικόνα που συναντάμε τυχαία στον δρόμο. Για την Αθανασία Κατσουράκη, η έμπνευση ήρθε μπροστά από ένα παγκάκι σε ...",
     "author": null,
     "featured": false
   },
