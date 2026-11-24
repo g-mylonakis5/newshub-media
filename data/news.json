@@ -1,5 +1,17 @@
 [
   {
+    "id": "thanasis-kontogeorgis-erga-kai-ependyseis-se-oli-ti-chora-me-stocho-ti-veltiosi-tis-kathimerinotitas-ton-politon",
+    "title": "Θανάσης Κοντογεώργης: Έργα και επενδύσεις σε όλη τη χώρα με στόχο τη βελτίωση της καθημερινότητας των πολιτών",
+    "url": "https://www.newshub.gr/el/ellada/thanasis-kontogeorgis-erga-kai-ependyseis-se-oli-ti-chora-me-stocho-ti-veltiosi-tis-kathimerinotitas-ton-politon",
+    "date": "2026-11-24T18:08:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/kontogeorgis.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/kontogeorgis.jpg",
+    "summary": "«Η ανάπτυξη της περιφέρειας δεν έχει μόνο μία διάσταση», αναφέρει στην εβδομαδιαία ανάρτησή του ο υφυπουργός παρά τω πρωθυπουργώ Θανάσης Κοντογεώ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "perissoteroi-apo-220-000-prooroi-thanatoi-stin-ee-to-2024-apodidontai-stin-atmosfairiki-rypansi",
     "title": "Περισσότεροι από 220.000 πρόωροι θάνατοι στην ΕΕ το 2024 αποδίδονται στην ατμοσφαιρική ρύπανση",
     "url": "https://www.newshub.gr/el/kosmos/perissoteroi-apo-220-000-prooroi-thanatoi-stin-ee-to-2024-apodidontai-stin-atmosfairiki-rypansi",
@@ -81,7 +93,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/soyda.jpg",
     "summary": "«Εάν στην Ελλάδα θεωρούν ότι είμαι επικίνδυνος κατάσκοπος, τότε γιατί με κρατούν σε αγροτική φυλακή; Εχω στείλει κάποια βίντεο με το κινητό στην ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "oi-72-ores-poy-apokatestisan-ton-choyangk-i-kitrini-karta-toy-tramp-stin-epidoxi-diadocho-toy-stin-nvidia-ta-kala-logia-toy-si-i-paremvasi-vans",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/agrotes-lephtaa.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/agrotes-lephtaa.jpg",
     "summary": "Ο Ενιαίος Αγροτικός Σύλλογος Ιεράπετρας επανέρχεται στο ζήτημα της ενίσχυσης για την αγορά λιπασμάτων, όπως αυτή εφαρμόστηκε κατά την πρώτη φάση το καλοκαίρι...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kifisia-paristanan-toys-logistes-kai-arpaxan-chrimata-kai-40-chryses-lires-apo-spiti",
-    "title": "Κηφισιά: Παρίσταναν τους λογιστές και άρπαξαν χρήματα και 40 χρυσές λίρες από σπίτι",
-    "url": "https://www.newshub.gr/el/ellada/kifisia-paristanan-toys-logistes-kai-arpaxan-chrimata-kai-40-chryses-lires-apo-spiti",
-    "date": "2026-11-19T20:22:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/cheiropedesoer.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/cheiropedesoer.jpg",
-    "summary": "Με το πρόσχημα ότι ήταν λογιστές, κατάφεραν να εξαπατήσουν έναν άνδρα στην Κηφισιά και να αποσπάσουν από το σπίτι του μεγάλο χρηματικό ποσό και 40 χρυσές λίρ...",
     "author": null,
     "featured": false
   },
