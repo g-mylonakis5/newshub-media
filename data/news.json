@@ -1,5 +1,17 @@
 [
   {
+    "id": "alexis-tsipras-apo-kastoria-an-den-yparchei-protogenis-paragogi-den-yparchei-ypaithros",
+    "title": "Αλέξης Τσίπρας από Καστοριά: Αν δεν υπάρχει πρωτογενής παραγωγή, δεν υπάρχει ύπαιθρος",
+    "url": "https://www.newshub.gr/el/ellada/alexis-tsipras-apo-kastoria-an-den-yparchei-protogenis-paragogi-den-yparchei-ypaithros",
+    "date": "2026-11-24T16:07:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/tsipras.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/tsipras.jpg",
+    "summary": "Για «εικόνα απόγνωσης στον πρωτογενή τομέα», μίλησε ο πρόεδρος της Ελληνικής Αριστερής Συμπαράταξης, Αλέξης Τσίπρας, στη συνάντηση που είχε με εκ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "ta-minymata-mitsotaki-ayrio-sto-ypoyrgiko-strofi-stin-kathimerinotita-exetazetai-neo-paketo-enischyseon",
     "title": "Τα μηνύματα Μητσοτάκη αύριο στο Υπουργικό: Στροφή στην καθημερινότητα, εξετάζεται νέο πακέτο ενισχύσεων",
     "url": "https://www.newshub.gr/el/ellada/ta-minymata-mitsotaki-ayrio-sto-ypoyrgiko-strofi-stin-kathimerinotita-exetazetai-neo-paketo-enischyseon",
@@ -81,7 +93,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/10956707-f899-49a9-a05c-92953b922ebd.jpg",
     "summary": "Ένα ακόμη τροχαίο ατύχημα σημειώθηκε στα στενά του Μασταμπά, τα οποία είναι γεμάτα διασταυρώσεις και «θολά» σημεία.\r\n\r\nΔρόμοι που έχουν καθρέφτες...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "sto-perifereiako-symvoylio-oi-foitites-gia-tin-egkatastasis-data-center-sto-varypetro-chanion-ti-anaferoyn-se-psifisma-toys",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/maketa-suros1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/maketa-suros1.jpg",
     "summary": "Αναμένεται να αποφυλακιστεί και να τεθεί σε κατ&rsquo; οίκον περιορισμό με ηλεκτρονική επιτήρηση, το γνωστό «βραχιολάκι» ο 41χρονος κατηγορούμενο...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "treis-ektos-edras-anametriseis-gia-ta-tmimata-toy-agioy-nikolaoy-europlan",
-    "title": "Τρεις εκτός έδρας αναμετρήσεις για τα τμήματα του Αγίου Νικολάου Europlan",
-    "url": "https://www.newshub.gr/el/athlitika/treis-ektos-edras-anametriseis-gia-ta-tmimata-toy-agioy-nikolaoy-europlan",
-    "date": "2026-11-19T18:36:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/news-logo-basket.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/news-logo-basket.jpg",
-    "summary": "Με τρεις εκτός έδρας αγώνες σε επίπεδο Ανδρών, Παίδων και Εφήβων συνεχίζονται το Σαββατοκύριακο 21 και 22 Νοεμβρίου οι αγωνιστικές υποχρεώσεις των τμημάτων...",
     "author": null,
     "featured": false
   },
