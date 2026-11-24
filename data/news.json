@@ -1,5 +1,17 @@
 [
   {
+    "id": "to-panepistimio-kritis-symmetechei-stin-eyropaiki-evdomada-meiosis-apovliton-2026",
+    "title": "Το Πανεπιστήμιο Κρήτης συμμετέχει στην ευρωπαϊκή Εβδομάδα Μείωσης Αποβλήτων 2026",
+    "url": "https://www.newshub.gr/el/kriti/to-panepistimio-kritis-symmetechei-stin-eyropaiki-evdomada-meiosis-apovliton-2026",
+    "date": "2026-11-24T07:55:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/rrrphph.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/rrrphph.jpg",
+    "summary": "Το Πανεπιστήμιο Κρήτης  προσκαλεί τους πολίτες να συμμετάσχουν σε μια κοινή προσπάθεια για ένα καθαρότερο και πιο βιώσιμο περιβάλλον, με ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "vgainoyn-xana-sto-dromo-oi-agrotes-mas-diochnoyn-apo-ton-topo-mas-veli-gia-neo-opekepe",
     "title": "Βγαίνουν ξανά στο δρόμο οι αγρότες: «Μας διώχνουν από τον τόπο μας»-Βέλη για νέο ΟΠΕΚΕΠΕ",
     "url": "https://www.newshub.gr/el/agronews/vgainoyn-xana-sto-dromo-oi-agrotes-mas-diochnoyn-apo-ton-topo-mas-veli-gia-neo-opekepe",
@@ -57,7 +69,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/psaradika-koules-2.jpg",
     "summary": "Τα προβλήματα και τα αιτήματα των επαγγελματιών της παράκτιας αλιείας βρέθηκαν στο επίκεντρο συνάντησης του υφυπουργού Αγροτικής Ανάπτυξης και Τροφίμων, Θανά...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "bbc-gia-epithesi-sti-rosiki-korveta-sti-livyi-o-polemos-stin-oykrania-exaplonetai-stin-eyropi",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/enxgthxg.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/enxgthxg.jpg",
     "summary": "Οι περιοδικές εκθέσεις του Αρχαιολογικού Μουσείου Ηρακλείου με τις παράλληλες εκδηλώσεις τους αποτελούν προτάσεις ώστε να δούμε τον κόσμο από μία διαφορετική...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "ergazomenoi-venizeleioy-apergoyme-giati-den-apodechomaste-os-monodromo-tin-akriveia-toys-kathilomenoys-misthoys-tin-ergasiaki-exoythenosi",
-    "title": "Εργαζόμενοι Βενιζελείου: «Απεργούμε γιατί δεν αποδεχόμαστε ως μονόδρομο την ακρίβεια, τους καθηλωμένους μισθούς, την εργασιακή εξουθένωση»",
-    "url": "https://www.newshub.gr/el/kriti/ergazomenoi-venizeleioy-apergoyme-giati-den-apodechomaste-os-monodromo-tin-akriveia-toys-kathilomenoys-misthoys-tin-ergasiaki-exoythenosi",
-    "date": "2026-11-19T08:45:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/1-5-3.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/1-5-3.jpg",
-    "summary": "Με ανακοινωση της η Ένωση Εργαζομένων Βενιζελείου καλούν τους πολίτες για μαζική συμμετοχή στην απεργιακη κινητοποίηση της 25ης Νοεμβρίου\r\n\r\nΣυγκεκριμενα η&n...",
     "author": null,
     "featured": false
   },
