@@ -1,5 +1,29 @@
 [
   {
+    "id": "rethymno-vlavi-sto-diktyo-dimotikoy-fotismoy",
+    "title": "Ρέθυμνο: Βλάβη στο δίκτυο δημοτικού φωτισμού",
+    "url": "https://www.newshub.gr/el/kriti/rethymno-vlavi-sto-diktyo-dimotikoy-fotismoy",
+    "date": "2026-11-24T13:14:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/dhmos-reth.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/dhmos-reth.jpg",
+    "summary": "Η Διεύθυνση Τεχνικών Υπηρεσιών του Δήμου Ρεθύμνης ενημερώνει τους δημότες και τις δημότισσες ότι εκδηλώθηκε βλάβη στο δίκτυο δημοτικού φωτισμού κατά μήκος τω...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "anastasios-karampampas-to-israil-sto-fasma-tis-akyvernisias-ti-allazei-choris-netaniachoy-kai-ti-ochi-podcast",
+    "title": "Αναστάσιος Καράμπαμπας: Το Ισραήλ στο φάσμα της ακυβερνησίας!Τι αλλάζει χωρίς Νετανιάχου και τι όχι! (podcast)",
+    "url": "https://www.newshub.gr/el/geopolitiki/anastasios-karampampas-to-israil-sto-fasma-tis-akyvernisias-ti-allazei-choris-netaniachoy-kai-ti-ochi-podcast",
+    "date": "2026-11-24T13:09:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/analyseis-36.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/analyseis-36.jpg",
+    "summary": "Ο Αναστάσιος Καράμπαμπας, ιστορικός και πολιτικός επιστήμονας με ειδίκευση στη Μέση Ανατολή, μίλησε με τον Γιάννη Χαραλαμπίδη  στις \"Αναλύσεις...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "kroyaziera-dyo-tachytiton-stin-ellada-meiomeni-kinisi-se-irakleio-kai-chania-poia-limania-kerdizoyn",
     "title": "Κρουαζιέρα δύο ταχυτήτων στην Ελλάδα: Μειωμένη κίνηση σε Ηράκλειο και Χανιά-Ποια λιμάνια κερδίζουν",
     "url": "https://www.newshub.gr/el/kriti/kroyaziera-dyo-tachytiton-stin-ellada-meiomeni-kinisi-se-irakleio-kai-chania-poia-limania-kerdizoyn",
@@ -9,7 +33,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/kroyaziera-xania.jpg",
     "summary": "Σημαντικές ανακατατάξεις καταγράφονται στον ελληνικό κλάδο της κρουαζιέρας το 2026, με τα λιμάνια της χώρας να παρουσιάζουν διαφορετικές επιδόσεις.\r\n\r\nΤην ώρ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "politiki-ekdilosi-stis-archanes-gia-to-kyvernitiko-programma-toy-pasok-me-epikentro-ton-protogeni-tomea",
@@ -165,7 +189,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/penthos-v.jpg",
     "summary": "Μια ιστορία που ξεκίνησε με την ελπίδα μιας δεύτερης ευκαιρίας στη ζωή, γράφτηκε τελικά με τον πιο τραγικό τρόπο. Η 40χρονη Ελένη, μητέρα τριών παιδιών, άφησ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "oyggaria-stin-oykrania-o-piter-magiar-tha-synantithei-me-ton-zelenski",
@@ -7212,30 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/ivan-greko.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/ivan-greko.jpg",
     "summary": "Αθώος κρίθηκε από το Τριμελές Εφετείο Κακουργημάτων Αθηνών  ο τράπερ Ivan Greko για τις κατηγορίες της αρπαγής, της εκβίασης και της οπλοφορίας.\r\n\r\nΟ τρ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "arches-tis-epomenis-evdomadas-to-epidoma-ton-400-eyro-stoys-syntaxioychoys-stis-30-11-i-epistrofi-enoikioy",
-    "title": "Αρχές της επόμενης εβδομάδας το επίδομα των 400 ευρώ στους συνταξιούχους – Στις 30/11 η επιστροφή ενοικίου",
-    "url": "https://www.newshub.gr/el/oikonomia/arches-tis-epomenis-evdomadas-to-epidoma-ton-400-eyro-stoys-syntaxioychoys-stis-30-11-i-epistrofi-enoikioy",
-    "date": "2026-11-19T15:34:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/epidomata.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/epidomata.jpg",
-    "summary": "Η ακριβής ημερομηνία πίστωσης των λογαριασμών με τα 400 ευρώ της αυξημένης και μόνιμης ενίσχυσης αναμένεται επισήμως να ανακοινωθεί σε λίγες ώρες από το υπου...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "apeilei-o-poytin-kievo-kai-eyropi-na-apodechthoyn-symvivasmoys-allios-tha-antimetopisoyn-alles-pragmatikotites",
-    "title": "Απειλεί ο Πούτιν : «Κίεβο και Ευρώπη να αποδεχθούν συμβιβασμούς, αλλιώς θα αντιμετωπίσουν άλλες πραγματικότητες»",
-    "url": "https://www.newshub.gr/el/geopolitiki/apeilei-o-poytin-kievo-kai-eyropi-na-apodechthoyn-symvivasmoys-allios-tha-antimetopisoyn-alles-pragmatikotites",
-    "date": "2026-11-19T15:26:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/poutin3.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/poutin3.jpg",
-    "summary": "Ο Βλαντίμιρ Πούτιν παραχώρησε συνέντευξη Τύπου μετά τις τριμερείς συνομιλίες με τον Ντόναλντ Τραμπ και τον Σι Τζινπίνγκ.\r\n\r\nΧαρακτήρισε τη συνάντηση με τον Τ...",
     "author": null,
     "featured": false
   },
