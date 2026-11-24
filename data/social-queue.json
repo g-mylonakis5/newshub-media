@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261124205814-news-poso-kalo-mas-kanei-i-mayri-sokolata-ti-deichnoyn-oi-ereynes-gia-entero-kardia-sakcharo-kai-diathesi",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ygeia/poso-kalo-mas-kanei-i-mayri-sokolata-ti-deichnoyn-oi-ereynes-gia-entero-kardia-sakcharo-kai-diathesi",
+      "title": "Πόσο καλό μας κάνει η μαύρη σοκολάτα; – Τι δείχνουν οι έρευνες για έντερο, καρδιά, σάκχαρο και διάθεση",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/chocolate.jpg",
+      "text": "Πόσο καλό μας κάνει η μαύρη σοκολάτα; – Τι δείχνουν οι έρευνες για έντερο, καρδιά, σάκχαρο και διάθεση",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-24T20:58:14.835Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/ygeia/poso-kalo-mas-kanei-i-mayri-sokolata-ti-deichnoyn-oi-ereynes-gia-entero-kardia-sakcharo-kai-diathesi"
+    },
+    {
       "id": "20261124131719-news-oi-agrotes-to-megalo-stoichima-tis-kyvernisis-sti-thessalia-o-kyriakos-mitsotakis",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/agronews/oi-agrotes-to-megalo-stoichima-tis-kyvernisis-sti-thessalia-o-kyriakos-mitsotakis",
