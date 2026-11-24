@@ -1,5 +1,21 @@
 [
   {
+    "id": "kriti-dasikoi-chartes-adiexoda-poy-feroyn-ti-sfragida-toy-kratoys-gia-pano-apo-57-000-idioktites-gis-meros-a",
+    "title": "Κρήτη-Δασικοί Χάρτες: Αδιέξοδα, που φέρουν τη σφραγίδα του Κράτους, για πάνω από 57.000 ιδιοκτήτες γης (Μέρος Α)",
+    "url": "https://www.newshub.gr/el/kriti/kriti-dasikoi-chartes-adiexoda-poy-feroyn-ti-sfragida-toy-kratoys-gia-pano-apo-57-000-idioktites-gis-meros-a",
+    "date": "2026-11-24T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/17-11/dasikoi_xartes-1024x503_1.png.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/17-11/dasikoi_xartes-1024x503_1.png.jpg",
+    "summary": "Σε καθεστώς μιας ιδιότυπης ομηρίας βρίσκονται τα τελευταία χρόνια αγρότες, κτηνοτρόφοι αλλά και απλοί πολίτες που κατέχουν γη στην Κρήτη εξαιτίας των δασικών...",
+    "author": {
+      "name": "Ελένη Βασιλάκη",
+      "url": "https://www.newshub.gr/el/eleni-vasilaki",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/basilake.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "giorgos-ayfantis-i-kyvernisi-ekpoiei-to-ethniko-symferon-i-diafthora-kai-i-akriveia-pnigoyn-tin-koinonia-podcast",
     "title": "Γιώργος Αϋφαντής: Η Κυβέρνηση εκποιεί το εθνικό συμφέρον! Η διαφθορά και η ακρίβεια πνίγουν την κοινωνία»! (podcast)",
     "url": "https://www.newshub.gr/el/geopolitiki/giorgos-ayfantis-i-kyvernisi-ekpoiei-to-ethniko-symferon-i-diafthora-kai-i-akriveia-pnigoyn-tin-koinonia-podcast",
@@ -153,7 +169,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/ekav-ape_2.jpg",
     "summary": "Τραγωδία σημειώθηκε στην περιοχή του Κρουσώνα το βράδυ της Δευτέρας, όπου ένας 44χρονος άνδρας έχασε τη ζωή του ύστερα από πτώση από ταράτσα.\r\n\r\nΣτο σημείο έ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "toxiki-erimia-i-gaza-apo-tis-israilines-epitheseis-to-99-tis-gis-molysmeno-symfona-me-nea-ereyna",
@@ -7220,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/18-11/phgnbphdnphd.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/18-11/phgnbphdnphd.jpg",
     "summary": "Στα 922 εκατ. ευρώ έφτασαν οι ελληνικές εξαγωγές τυριών στο εννεάμηνο του 2026, ενώ το γιαούρτι κατέγραψε άνοδο 36,4% και οι νωπές φράουλες αύξηση 29,7%. Στο...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "istoriki-synantisi-tramp-poytin-si-oi-geopolitikes-isorropies-oi-prosdokies-kai-oi-diafonies",
-    "title": "Ιστορική συνάντηση Τραμπ, Πούτιν, Σι – Οι γεωπολιτικές ισορροπίες, οι προσδοκίες και οι διαφωνίες",
-    "url": "https://www.newshub.gr/el/geopolitiki/istoriki-synantisi-tramp-poytin-si-oi-geopolitikes-isorropies-oi-prosdokies-kai-oi-diafonies",
-    "date": "2026-11-19T05:48:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/19-11/syn.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/19-11/syn.jpg",
-    "summary": "Η αναμνηστική φωτογραφία των τριών ηγετών θα είναι αναμφίβολα ιστορική, όμως τα αποτελέσματα της συνάντησης παραμένουν αβέβαια: ο Σι Τζινπίνγκ, ο Ντόναλντ Τρ...",
     "author": null,
     "featured": false
   },
