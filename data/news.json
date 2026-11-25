@@ -1,5 +1,17 @@
 [
   {
+    "id": "pagkosmio-kypello-k17-proti-ston-omilo-i-ellada-me-tessara-sto-katar",
+    "title": "Παγκόσμιο Κύπελλο Κ17: Πρώτη στον όμιλο η Ελλάδα με τεσσάρα στο Κατάρ",
+    "url": "https://www.newshub.gr/el/athlitika/pagkosmio-kypello-k17-proti-ston-omilo-i-ellada-me-tessara-sto-katar",
+    "date": "2026-11-25T19:10:00.000Z",
+    "category": "Αθλητικά",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/rgrehherh-1024x576.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/rgrehherh-1024x576.jpg",
+    "summary": "Με εντυπωσιακό τρόπο ολοκλήρωσε τις υποχρεώσεις της στη φάση των ομίλων του Παγκοσμίου Κυπέλλου Κ17 η Εθνική Ελλάδας, καθώς επικράτησε με 4-1 του Κατάρ, πραγ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "i-eyropi-echei-synora-kai-sto-aigaio-paremvasi-meimaraki-stin-olomeleia-toy-eyropaikoy-koinovoylioy",
     "title": "«Η Ευρώπη έχει σύνορα και στο Αιγαίο»: Παρέμβαση Μεϊμαράκη στην Ολομέλεια του Ευρωπαϊκού Κοινοβουλίου",
     "url": "https://www.newshub.gr/el/ellada/i-eyropi-echei-synora-kai-sto-aigaio-paremvasi-meimaraki-stin-olomeleia-toy-eyropaikoy-koinovoylioy",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/memr.jpg",
     "summary": "Την ανάγκη η Ευρωπαϊκή Ένωση να επιδείξει την ίδια αποφασιστικότητα στην προστασία όλων των εξωτερικών της συνόρων, συμπεριλαμβανομένων εκείνων στο Αιγαίο κα...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "megali-epicheirisi-se-57-chores-gia-parapoiimena-trofima-kai-pota-elaiolado-maimoy-notheymeno-meli-kreata-me-apagoreymenes-oysies",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/hliofaneia.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/hliofaneia.jpg",
     "summary": "Καλοκαίρι θύμισε σήμερα ο καιρός παρά το γεγονός πως βρισκόμαστε στα μέσα Νοεμβρίου\r\n\r\nΣύμφωνα με το Εθνικό Αστεροσκοπείο Αθηνών οι υψηλότερες μέγιστες θερμο...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "i-nea-kinimatografiki-leschi-irakleioy-paroysiazei-tin-polyvraveymeni-tainia-enas-poiitis",
-    "title": "Η Νέα Κινηματογραφική Λέσχη Ηρακλείου παρουσιάζει την πολυβραβευμένη ταινία «Ένας Ποιητής»",
-    "url": "https://www.newshub.gr/el/exodos/i-nea-kinimatografiki-leschi-irakleioy-paroysiazei-tin-polyvraveymeni-tainia-enas-poiitis",
-    "date": "2026-11-20T18:54:00.000Z",
-    "category": "Έξοδος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/img_4720.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/img_4720.jpg",
-    "summary": "Μετά την sold out πρεμιέρα της σεζόν, η Νέα Κινηματογραφική Λέσχη Ηρακλείου (ΝέΚΛΗ) συνεχίζει τις εβδομαδιαίες προβολές της στον Κινηματογράφο «Βιτσέντ...",
     "author": null,
     "featured": false
   },
