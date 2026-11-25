@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125182441-news-i-kentro-dexia-simera",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/apopseis/i-kentro-dexia-simera",
+      "title": "Η Κεντρο-Δεξιά σήμερα",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/d3lrko7cccjpqf4f4stt_3.jpg",
+      "text": "Η Κεντρο-Δεξιά σήμερα",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T18:24:41.834Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/apopseis/i-kentro-dexia-simera"
+    },
+    {
       "id": "20261125180613-news-epitimos-didaktoras-tis-iatrikis-scholis-toy-panepistimioy-kritis-anagoreytike-o-papas-kai-patriarchis-alexandreias-kai-pasis-afrikis-k-k-theodoros-v",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/epitimos-didaktoras-tis-iatrikis-scholis-toy-panepistimioy-kritis-anagoreytike-o-papas-kai-patriarchis-alexandreias-kai-pasis-afrikis-k-k-theodoros-v",
