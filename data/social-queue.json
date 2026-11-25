@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T14:10:03.805Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ygeia/apo-poia-nosimata-kindyneyoyme-otan-trome-yperepexergasmena-trofima"
+      "link": "https://www.newshub.gr/el/ygeia/apo-poia-nosimata-kindyneyoyme-otan-trome-yperepexergasmena-trofima",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290726136156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290726136156174",
+          "at": "2026-11-25T14:10:21.318Z"
+        }
+      }
     },
     {
       "id": "20261125060316-news-o-naytikos-apokleismos-ton-ipa-straggalizei-to-iran-1-200-fortiga-egklovismena-se-oyra-42-chiliometron-vinteo",
