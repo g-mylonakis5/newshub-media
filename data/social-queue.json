@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125220315-news-deka-fores-akrivotero-to-fysiko-aerio-stin-eyropi-apo-tis-ipa",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/deka-fores-akrivotero-to-fysiko-aerio-stin-eyropi-apo-tis-ipa",
+      "title": "Δέκα φορές ακριβότερο το φυσικό αέριο στην Ευρώπη από τις ΗΠΑ",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/8e3ef79ce5de4d6c8133e04b6091e91d.jpg",
+      "text": "Δέκα φορές ακριβότερο το φυσικό αέριο στην Ευρώπη από τις ΗΠΑ",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T22:03:15.877Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/deka-fores-akrivotero-to-fysiko-aerio-stin-eyropi-apo-tis-ipa"
+    },
+    {
       "id": "20261125220247-news-oi-protoi-klimatikoi-prosfyges-stin-ellada-oi-katoikoi-apo-ti-metamorfosi-karditsas-poy-katastrafike-apo-ton-daniel",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ellada/oi-protoi-klimatikoi-prosfyges-stin-ellada-oi-katoikoi-apo-ti-metamorfosi-karditsas-poy-katastrafike-apo-ton-daniel",
@@ -11,17 +27,10 @@
         "facebook",
         "x"
       ],
-      "status": "done",
+      "status": "pending",
       "at": "2026-11-25T22:02:47.432Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/oi-protoi-klimatikoi-prosfyges-stin-ellada-oi-katoikoi-apo-ti-metamorfosi-karditsas-poy-katastrafike-apo-ton-daniel",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290766966156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290766966156174",
-          "at": "2026-11-25T22:03:15.292Z"
-        }
-      }
+      "link": "https://www.newshub.gr/el/ellada/oi-protoi-klimatikoi-prosfyges-stin-ellada-oi-katoikoi-apo-ti-metamorfosi-karditsas-poy-katastrafike-apo-ton-daniel"
     },
     {
       "id": "20261125214558-podcast-Buzzsprout-20182249",
