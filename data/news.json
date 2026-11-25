@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/ccccccc.jpg",
     "summary": "Σε απεργιακό κλοιό βρίσκεται σήμερα η χώρα, λόγω της 24ωρης πανελλαδικής απεργίας, με εργαζόμενους στον δημόσιο και ιδιωτικό τομέα, εκπαιδευτικούς, μαθητές κ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "indonisia-egklovismenoi-26-ergazomenoi-se-paranomo-orycheio-meta-apo-ischyres-vrochoptoseis",
@@ -165,7 +165,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/aaaaaa.jpg",
     "summary": "Την εμφάνισή τους σε δρόμους του Ηρακλείου έχουν κάνει πινακίδες , καλυμμένες με νάιλον σακούλες, που σε κάποιες περιπτώσεις όμως σκίστηκαν και αποκάλυψαν τι...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "via-kata-ton-gynaikon-18-256-peristatika-kai-11-175-syllipseis-toys-protoys-10-mines-stin-chora",
