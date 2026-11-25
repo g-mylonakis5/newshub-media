@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T18:01:17.871Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/nikos-androylakis-apo-kavala-echoyme-schedio-na-anagennisoyme-tin-elliniki-ypaithro"
+      "link": "https://www.newshub.gr/el/ellada/nikos-androylakis-apo-kavala-echoyme-schedio-na-anagennisoyme-tin-elliniki-ypaithro",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290744976156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290744976156174",
+          "at": "2026-11-25T18:01:43.960Z"
+        }
+      }
     },
     {
       "id": "20261125172007-news-deka-stathmoi-gia-tin-egkairi-proeidopoiisi-gia-plimmyres-apo-tin-perifereia-kritis-kai-to-elkethe",
