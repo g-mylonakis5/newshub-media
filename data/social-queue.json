@@ -11,9 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T20:20:58.390Z",
-      "by": "ioannisram@hotmail.com"
+      "by": "ioannisram@hotmail.com",
+      "link": "https://newshubmedia.gr/episode/20181611-i-kyvernisi-ekpoiei-to-ethniko-symferon-i-diafthora",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290759136156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290759136156174",
+          "at": "2026-11-25T20:21:16.349Z"
+        }
+      }
     },
     {
       "id": "20261125201242-news-aerodromia-mia-anasa-apo-ta-80-ekat-epivates-sto-dekamino-toy-2026-neo-istoriko-rekor-sto-nikos-kazantzakis",
