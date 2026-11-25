@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T20:10:39.558Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/stis-vryxelles-o-mitsotakis-gia-tin-ektakti-synodo-koryfis-sto-epikentro-o-proypologismos-oi-theseis-tis-elladas"
+      "link": "https://www.newshub.gr/el/ellada/stis-vryxelles-o-mitsotakis-gia-tin-ektakti-synodo-koryfis-sto-epikentro-o-proypologismos-oi-theseis-tis-elladas",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290757948156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290757948156174",
+          "at": "2026-11-25T20:10:54.916Z"
+        }
+      }
     },
     {
       "id": "20261125194027-news-i-eyropaiki-enosi-amfisvitei-ti-nomimotita-ton-neon-dasmon-tramp",
