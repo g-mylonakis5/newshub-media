@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125110520-news-o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ellada/o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora",
+      "title": "Ο Έλληνας αστροναύτης Αδριανός Γολέμης: «Μπορούμε να κάνουμε τη διαφορά, στην οικογένειά μας, στην κοινότητα, στη χώρα»",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/andrianos-golemis.jpg",
+      "text": "Ο Έλληνας αστροναύτης Αδριανός Γολέμης: «Μπορούμε να κάνουμε τη διαφορά, στην οικογένειά μας, στην κοινότητα, στη χώρα»",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T11:05:20.683Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/ellada/o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora"
+    },
+    {
       "id": "20261125060316-news-o-naytikos-apokleismos-ton-ipa-straggalizei-to-iran-1-200-fortiga-egklovismena-se-oyra-42-chiliometron-vinteo",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/o-naytikos-apokleismos-ton-ipa-straggalizei-to-iran-1-200-fortiga-egklovismena-se-oyra-42-chiliometron-vinteo",
