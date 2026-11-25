@@ -1,5 +1,17 @@
 [
   {
+    "id": "chania-i-via-kata-ton-gynaikon-den-einai-pote-idiotiki-ypothesi-to-minyma-toy-dimoy-gia-tin-25i-noemvrioy",
+    "title": "Χανιά: «Η βία κατά των γυναικών δεν είναι ποτέ ιδιωτική υπόθεση» – Το μήνυμα του Δήμου για την 25η Νοεμβρίου",
+    "url": "https://www.newshub.gr/el/ta-en-oiko/chania-i-via-kata-ton-gynaikon-den-einai-pote-idiotiki-ypothesi-to-minyma-toy-dimoy-gia-tin-25i-noemvrioy",
+    "date": "2026-11-25T12:35:00.000Z",
+    "category": "Τα εν οίκω",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/gynaika-ape.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/gynaika-ape.jpg",
+    "summary": "«Η βία κατά των γυναικών σπάνια ξεκινά με ένα χτύπημα». Με αυτή την επισήμανση, ο Δήμαρχος Χανίων, Παναγιώτης Σημανδηράκης, και η Αντιδήμαρχος Κο...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "enosi-eisaggeleon-ellados-thesmika-apaxiotiki-i-anafora-toy-proin-antiproedroy-ste-peri-anexelegktis-armodiotitas-toy-eisaggelea-areioy-pagoy",
     "title": "Ένωση Εισαγγελέων Ελλάδος: «Θεσμικά απαξιωτική» η αναφορά του πρώην αντιπροέδρου ΣτΕ περί «ανεξέλεγκτης» αρμοδιότητας του εισαγγελέα Αρείου Πάγου",
     "url": "https://www.newshub.gr/el/ellada/enosi-eisaggeleon-ellados-thesmika-apaxiotiki-i-anafora-toy-proin-antiproedroy-ste-peri-anexelegktis-armodiotitas-toy-eisaggelea-areioy-pagoy",
@@ -93,7 +105,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/scholeio-kale.jpg",
     "summary": "Στα Χανιά θα βρεθούν την Παρασκευή 27 Νοεμβρίου η Υπουργός Παιδείας, Θρησκευμάτων και Αθλητισμού, Σοφία Ζαχαράκη, και ο Αναπληρωτής Υπουργός Εθνικής Οικονομί...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "eaee-entopistikan-268-klemmena-kai-plastografimena-ochimata-se-diethneis-epicheiriseis-1",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/anaptyxiake-erakleiou555phd.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/anaptyxiake-erakleiou555phd.jpg",
     "summary": "Η Αναπτυξιακή Ηρακλείου ΑΑΕ ΟΤΑ, εν όψει της επικείμενης 1ης πρόσκλησης για την υποβολή αιτήσεων στήριξης ιδιωτικών έργων, στο πλαίσιο του Τοπικου Προγράμματ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "ypoik-i-ellada-aporrofise-to-100-ton-poron-toy-tameioy-anakampsis-prasino-fos-komision-gia-ektamieysi-11-32-dis-eyro",
-    "title": "ΥΠΟΙΚ: Η Ελλάδα απορρόφησε το 100% των πόρων του Ταμείου Ανάκαμψης – «Πράσινο φως» Κομισιόν για εκταμίευση 11,32 δισ. ευρώ",
-    "url": "https://www.newshub.gr/el/oikonomia/ypoik-i-ellada-aporrofise-to-100-ton-poron-toy-tameioy-anakampsis-prasino-fos-komision-gia-ektamieysi-11-32-dis-eyro",
-    "date": "2026-11-20T13:11:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/ellada-euro.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/ellada-euro.jpg",
-    "summary": "Θετική αξιολόγηση εξέδωσε η Ευρωπαϊκή Επιτροπή για την επίτευξη του συνόλου των οροσήμων και στόχων των τελευταίων τεσσάρων αιτημάτων πληρωμής που υπέβαλε η ...",
     "author": null,
     "featured": false
   },
