@@ -10,10 +10,17 @@
       "targets": [
         "facebook"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T20:12:42.690Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/aerodromia-mia-anasa-apo-ta-80-ekat-epivates-sto-dekamino-toy-2026-neo-istoriko-rekor-sto-nikos-kazantzakis"
+      "link": "https://www.newshub.gr/el/kriti/aerodromia-mia-anasa-apo-ta-80-ekat-epivates-sto-dekamino-toy-2026-neo-istoriko-rekor-sto-nikos-kazantzakis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290758338156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290758338156174",
+          "at": "2026-11-25T20:13:06.833Z"
+        }
+      }
     },
     {
       "id": "20261125201205-news-efyge-apo-ti-zoi-o-skinothetis-giannis-iordanidis",
