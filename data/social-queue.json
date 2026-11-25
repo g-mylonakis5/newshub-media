@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T18:44:08.265Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/niki-kerameos-sto-ergani-oloi-oi-ergazomenoi-se-platformes-dianomis-ti-eipe-gia-tin-techniti-noimosyni"
+      "link": "https://www.newshub.gr/el/oikonomia/niki-kerameos-sto-ergani-oloi-oi-ergazomenoi-se-platformes-dianomis-ti-eipe-gia-tin-techniti-noimosyni",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290749884156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290749884156174",
+          "at": "2026-11-25T18:44:23.548Z"
+        }
+      }
     },
     {
       "id": "20261125183753-news-eikosi-nea-kentra-imeras-gia-atoma-me-anoia-kai-altschaimer-se-oli-ti-chora-ena-stin-kriti",
