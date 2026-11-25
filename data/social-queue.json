@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T18:37:53.499Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/eikosi-nea-kentra-imeras-gia-atoma-me-anoia-kai-altschaimer-se-oli-ti-chora-ena-stin-kriti"
+      "link": "https://www.newshub.gr/el/kriti/eikosi-nea-kentra-imeras-gia-atoma-me-anoia-kai-altschaimer-se-oli-ti-chora-ena-stin-kriti",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290748750156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290748750156174",
+          "at": "2026-11-25T18:38:09.119Z"
+        }
+      }
     },
     {
       "id": "20261125182441-news-i-kentro-dexia-simera",
