@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125160826-news-indonisia-egklovismenoi-26-ergazomenoi-se-paranomo-orycheio-meta-apo-ischyres-vrochoptoseis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/indonisia-egklovismenoi-26-ergazomenoi-se-paranomo-orycheio-meta-apo-ischyres-vrochoptoseis",
+      "title": "Ινδονησία: Εγκλωβισμένοι 26 εργαζόμενοι σε παράνομο ορυχείο μετά από ισχυρές βροχοπτώσεις",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/ap26232252396606-768x512.jpg",
+      "text": "Ινδονησία: Εγκλωβισμένοι 26 εργαζόμενοι σε παράνομο ορυχείο μετά από ισχυρές βροχοπτώσεις",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T16:08:26.109Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kosmos/indonisia-egklovismenoi-26-ergazomenoi-se-paranomo-orycheio-meta-apo-ischyres-vrochoptoseis"
+    },
+    {
       "id": "20261125141003-news-apo-poia-nosimata-kindyneyoyme-otan-trome-yperepexergasmena-trofima",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ygeia/apo-poia-nosimata-kindyneyoyme-otan-trome-yperepexergasmena-trofima",
