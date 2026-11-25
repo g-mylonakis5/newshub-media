@@ -1,50 +1,20 @@
 {
   "posts": [
     {
-      "id": "20261125110544-news-irakleio-pistoi-stin-agia-aikaterini-gia-na-anapsoyn-ena-keri-sti-chari-tis-foto",
+      "id": "20261125141003-news-apo-poia-nosimata-kindyneyoyme-otan-trome-yperepexergasmena-trofima",
       "kind": "news",
-      "ref": "https://www.newshub.gr/el/kriti/irakleio-pistoi-stin-agia-aikaterini-gia-na-anapsoyn-ena-keri-sti-chari-tis-foto",
-      "title": "Ηράκλειο: Πιστοί στην Αγία Αικατερινη για να ανάψουν ένα κερί στη Χάρη Της (Φωτο)",
-      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/eikona_viber_2026-11-24_20-10-08-602.jpg",
-      "text": "Ηράκλειο: Πιστοί στην Αγία Αικατερινη για να ανάψουν ένα κερί στη Χάρη Της (Φωτο)",
+      "ref": "https://www.newshub.gr/el/ygeia/apo-poia-nosimata-kindyneyoyme-otan-trome-yperepexergasmena-trofima",
+      "title": "Από ποια νοσήματα κινδυνεύουμε όταν τρώμε υπερεπεξεργασμένα τρόφιμα",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/hd-wallpaper-1487599_1280-1024x727.jpg",
+      "text": "Από ποια νοσήματα κινδυνεύουμε όταν τρώμε υπερεπεξεργασμένα τρόφιμα",
       "targets": [
         "facebook",
         "x"
       ],
-      "status": "done",
-      "at": "2026-11-25T11:05:44.150Z",
+      "status": "pending",
+      "at": "2026-11-25T14:10:03.805Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/irakleio-pistoi-stin-agia-aikaterini-gia-na-anapsoyn-ena-keri-sti-chari-tis-foto",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290706630156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290706630156174",
-          "at": "2026-11-25T11:06:02.145Z"
-        }
-      }
-    },
-    {
-      "id": "20261125110520-news-o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora",
-      "kind": "news",
-      "ref": "https://www.newshub.gr/el/ellada/o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora",
-      "title": "Ο Έλληνας αστροναύτης Αδριανός Γολέμης: «Μπορούμε να κάνουμε τη διαφορά, στην οικογένειά μας, στην κοινότητα, στη χώρα»",
-      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/24-11/andrianos-golemis.jpg",
-      "text": "Ο Έλληνας αστροναύτης Αδριανός Γολέμης: «Μπορούμε να κάνουμε τη διαφορά, στην οικογένειά μας, στην κοινότητα, στη χώρα»",
-      "targets": [
-        "facebook",
-        "x"
-      ],
-      "status": "done",
-      "at": "2026-11-25T11:05:20.683Z",
-      "by": "",
-      "link": "https://www.newshub.gr/el/ellada/o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290706648156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290706648156174",
-          "at": "2026-11-25T11:06:04.311Z"
-        }
-      }
+      "link": "https://www.newshub.gr/el/ygeia/apo-poia-nosimata-kindyneyoyme-otan-trome-yperepexergasmena-trofima"
     },
     {
       "id": "20261125060316-news-o-naytikos-apokleismos-ton-ipa-straggalizei-to-iran-1-200-fortiga-egklovismena-se-oyra-42-chiliometron-vinteo",
