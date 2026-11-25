@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-anyparktoi-oi-choroi-stathmeysis-stis-synoikies-kai-o-dimos-etoimazei-neo-charatsi-pinakides-stathmeysis-epi-pliromei",
+    "title": "Ηράκλειο: Ανύπαρκτοι οι χώροι στάθμευσης στις συνοικίες και ο δήμος ετοιμάζει νέο χαράτσι.....πινακίδες στάθμευσης επί πληρωμεί",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-anyparktoi-oi-choroi-stathmeysis-stis-synoikies-kai-o-dimos-etoimazei-neo-charatsi-pinakides-stathmeysis-epi-pliromei",
+    "date": "2026-11-25T07:16:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/aaaaaa.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/aaaaaa.jpg",
+    "summary": "Την εμφάνισή τους σε δρόμους του Ηρακλείου έχουν κάνει πινακίδες , καλυμμένες με νάιλον σακούλες, που σε κάποιες περιπτώσεις όμως σκίστηκαν και αποκάλυψαν τι...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "via-kata-ton-gynaikon-18-256-peristatika-kai-11-175-syllipseis-toys-protoys-10-mines-stin-chora",
     "title": "Βία κατά των γυναικών: 18.256 περιστατικά και 11.175 συλλήψεις τους πρώτους 10 μήνες στην χώρα",
     "url": "https://www.newshub.gr/el/ellada/via-kata-ton-gynaikon-18-256-peristatika-kai-11-175-syllipseis-toys-protoys-10-mines-stin-chora",
@@ -205,7 +217,7 @@
       "url": "https://www.newshub.gr/el/eleni-vasilaki",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/basilake.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "apergia-25-noemvrioy-paralyei-simera-i-chora-stoys-dromoys-ergazomenoi-ekpaideytikoi-kai-mathites-stin-kriti",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/anonymo-2048-x-1152-px-binteo-9.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/anonymo-2048-x-1152-px-binteo-9.jpg",
     "summary": "Η Ευρώπη απουσιάζει από το νέο γεωπολιτικό παιχνίδι και θα το πληρώσει\r\n\r\nΓεωστρατηγικό και γεωπολιτικό απολογισμό των εξελίξεων στις ελληνοτουρκικές σχέσεις...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "gynaikoktonia-sto-thiseio-tin-kyriaki-i-kideia-tis-61chronis",
-    "title": "Γυναικοκτονία στο Θησείο: Την Κυριακή η κηδεία της 61χρονης",
-    "url": "https://www.newshub.gr/el/ellada/gynaikoktonia-sto-thiseio-tin-kyriaki-i-kideia-tis-61chronis",
-    "date": "2026-11-20T09:15:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/pyrgos-mak.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/pyrgos-mak.jpg",
-    "summary": "Την Κυριακή στις 12 το μεσημέρι, στο χωριό Κατσαρού Ηλείας θα γίνει η κηδεία της 61χρονης Μαρίνας που δολοφονήθηκε άγρια από τον σύζυγό της στο Θησείο. Το τε...",
     "author": null,
     "featured": false
   },
