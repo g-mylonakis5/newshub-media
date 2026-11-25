@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125211306-news-efialtis-stin-aigypto-meta-apo-ekrixi-vytioforoy-pano-apo-20-nekroi-dekades-ochimata-stis-floges",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/efialtis-stin-aigypto-meta-apo-ekrixi-vytioforoy-pano-apo-20-nekroi-dekades-ochimata-stis-floges",
+      "title": "Εφιάλτης στην Αίγυπτο μετά από έκρηξη βυτιοφόρου: 30 νεκροί, δεκάδες οχήματα στις φλόγες",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/aigy.jpg",
+      "text": "Εφιάλτης στην Αίγυπτο μετά από έκρηξη βυτιοφόρου: 30 νεκροί, δεκάδες οχήματα στις φλόγες",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T21:13:06.833Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kosmos/efialtis-stin-aigypto-meta-apo-ekrixi-vytioforoy-pano-apo-20-nekroi-dekades-ochimata-stis-floges"
+    },
+    {
       "id": "20261125205855-news-megali-epicheirisi-se-57-chores-gia-parapoiimena-trofima-kai-pota-elaiolado-maimoy-notheymeno-meli-kreata-me-apagoreymenes-oysies",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kosmos/megali-epicheirisi-se-57-chores-gia-parapoiimena-trofima-kai-pota-elaiolado-maimoy-notheymeno-meli-kreata-me-apagoreymenes-oysies",
