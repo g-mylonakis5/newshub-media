@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T20:36:06.773Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/athlitika/ofi-anterlecht-o-kontis-kontra-stin-omada-toy-agapimenoy-toy-filoy-zetermpergk"
+      "link": "https://www.newshub.gr/el/athlitika/ofi-anterlecht-o-kontis-kontra-stin-omada-toy-agapimenoy-toy-filoy-zetermpergk",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290760798156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290760798156174",
+          "at": "2026-11-25T20:36:23.756Z"
+        }
+      }
     },
     {
       "id": "20261125202058-podcast-Buzzsprout-20181611",
