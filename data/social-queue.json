@@ -11,9 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T21:45:58.196Z",
-      "by": "ioannisram@hotmail.com"
+      "by": "ioannisram@hotmail.com",
+      "link": "https://newshubmedia.gr/episode/20182249-to-israil-sto-fasma-tis-akyvernisias-ti-allazei-choris",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290765922156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290765922156174",
+          "at": "2026-11-25T21:46:16.469Z"
+        }
+      }
     },
     {
       "id": "20261125214328-news-kriti-athoos-36chronos-poy-eiche-katigorithei-apo-24chroni-gia-viasmo-emeine-pano-apo-chrono-sti-fylaki",
