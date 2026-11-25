@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/rgrehherh-1024x576.jpg",
     "summary": "Με εντυπωσιακό τρόπο ολοκλήρωσε τις υποχρεώσεις της στη φάση των ομίλων του Παγκοσμίου Κυπέλλου Κ17 η Εθνική Ελλάδας, καθώς επικράτησε με 4-1 του Κατάρ, πραγ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "i-eyropi-echei-synora-kai-sto-aigaio-paremvasi-meimaraki-stin-olomeleia-toy-eyropaikoy-koinovoylioy",
@@ -22,6 +22,18 @@
     "summary": "Την ανάγκη η Ευρωπαϊκή Ένωση να επιδείξει την ίδια αποφασιστικότητα στην προστασία όλων των εξωτερικών της συνόρων, συμπεριλαμβανομένων εκείνων στο Αιγαίο κα...",
     "author": null,
     "featured": false
+  },
+  {
+    "id": "aichmiri-i-apantisi-sisamaki-stin-kinisi-kalokairinoy-na-ton-thesei-ektos-dimotikis-omadas-anafores-se-sygkentrotismo-aytarchismo-anapotelesmatikotita",
+    "title": "Αιχμηρή η απάντηση Σισαμάκη στην κίνηση Καλοκαιρινού να τον θέσει εκτός Δημοτικής Ομάδας: Αναφορές σε συγκεντρωτισμό, αυταρχισμό, αναποτελεσματικότητα",
+    "url": "https://www.newshub.gr/el/kriti/aichmiri-i-apantisi-sisamaki-stin-kinisi-kalokairinoy-na-ton-thesei-ektos-dimotikis-omadas-anafores-se-sygkentrotismo-aytarchismo-anapotelesmatikotita",
+    "date": "2026-11-25T19:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/sisamakis_giorgos.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/sisamakis_giorgos.jpg",
+    "summary": "Με μια αιχμηρή δήλωση του ο Γιώργος Σισαμάκης απαντά στην ενέργεια του Δημάρχου Ηρακλείου Αλέξη Καλοκαιρινού να τον θέσει εκτός της Δημοτικής του Ομάδας...",
+    "author": null,
+    "featured": true
   },
   {
     "id": "megali-epicheirisi-se-57-chores-gia-parapoiimena-trofima-kai-pota-elaiolado-maimoy-notheymeno-meli-kreata-me-apagoreymenes-oysies",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/phphphphphphphtye.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/phphphphphphphtye.jpg",
     "summary": "Κακουργηματικές διώξεις ασκήθηκαν σήμερα Παρασκευή 20/11 σε βάρος των δυο συλληφθέντων που φέρονται να εμπλέκονται στην υπόθεση με την ποσότητα των σχεδόν 8 ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kalokairines-thermokrasies-sta-mesa-noemvrioy-stin-kriti-ti-kategrapse-to-ethniko-asteroskopeio-athinon",
-    "title": "Καλοκαιρινές θερμοκρασίες στα μέσα Νοεμβρίου στην Κρήτη - Τι κατέγραψε το Εθνικό Αστεροσκοπείο Αθηνών",
-    "url": "https://www.newshub.gr/el/kriti/kalokairines-thermokrasies-sta-mesa-noemvrioy-stin-kriti-ti-kategrapse-to-ethniko-asteroskopeio-athinon",
-    "date": "2026-11-20T18:57:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/hliofaneia.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/hliofaneia.jpg",
-    "summary": "Καλοκαίρι θύμισε σήμερα ο καιρός παρά το γεγονός πως βρισκόμαστε στα μέσα Νοεμβρίου\r\n\r\nΣύμφωνα με το Εθνικό Αστεροσκοπείο Αθηνών οι υψηλότερες μέγιστες θερμο...",
     "author": null,
     "featured": false
   },
