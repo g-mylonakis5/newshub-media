@@ -1,5 +1,21 @@
 [
   {
+    "id": "kriti-dasikoi-chartes-o-sevasmos-toy-idiaiteroy-idioktisiakoy-kathestotos-sto-nisi-einai-aytonoiti-synthiki",
+    "title": "Κρήτη-Δασικοί Χάρτες: Ο σεβασμός του ιδιαίτερου ιδιοκτησιακού καθεστώτος στο νησί είναι αυτονόητη συνθήκη",
+    "url": "https://www.newshub.gr/el/kriti/kriti-dasikoi-chartes-o-sevasmos-toy-idiaiteroy-idioktisiakoy-kathestotos-sto-nisi-einai-aytonoiti-synthiki",
+    "date": "2026-11-25T05:06:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/kkk.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/kkk.jpg",
+    "summary": "Πληγή αποτελεί για πάνω από 57.000 ιδιοκτήτες γης στην Κρήτη η σύνταξη των δασικών χαρτών καθώς από τη μια στιγμή στην άλλη βρέθηκαν καλλιεργούμενες εκτάσεις...",
+    "author": {
+      "name": "Ελένη Βασιλάκη",
+      "url": "https://www.newshub.gr/el/eleni-vasilaki",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/basilake.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "apergia-25-noemvrioy-paralyei-simera-i-chora-stoys-dromoys-ergazomenoi-ekpaideytikoi-kai-mathites-stin-kriti",
     "title": "Απεργία 25 Νοεμβρίου: «Παραλύει» σήμερα η χώρα-Στους δρόμους εργαζόμενοι, εκπαιδευτικοί και μαθητές στην Κρήτη",
     "url": "https://www.newshub.gr/el/kriti/apergia-25-noemvrioy-paralyei-simera-i-chora-stoys-dromoys-ergazomenoi-ekpaideytikoi-kai-mathites-stin-kriti",
@@ -201,7 +217,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/24-11/xeiropedes1.jpg",
     "summary": "Έγινε «τσακωτός» με πλαστά... 200ευρα με αποτέλεσμα να φορέσει χειροπέδες και να διώκεται με κακουργηματικού τύπου κατηγορία.\r\n\r\nΟ λόγος για έναν...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "epeteiakes-ekdiloseis-gia-tin-enosi-tis-kritis-me-tin-ellada-kai-ta-90-chronia-apo-ton-thanato-toy-venizeloy",
@@ -7224,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/airbnb-3399753_1280-1200x680-1200x680.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/airbnb-3399753_1280-1200x680-1200x680.jpg",
     "summary": "Αλλαγές στον τρόπο με τον οποίο οι ιδιοκτήτες καταλυμάτων Airbnb μπορούν να καθορίζουν τις υποχρεώσεις των επισκεπτών τους τίθενται σε ισχύ από σήμερα (20/11...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "nea-atypi-psifoforia-gia-tin-anadeixi-genikoy-grammatea-toy-oie",
-    "title": "Νέα άτυπη ψηφοφορία για την ανάδειξη Γενικού Γραμματέα του ΟΗΕ",
-    "url": "https://www.newshub.gr/el/kosmos/nea-atypi-psifoforia-gia-tin-anadeixi-genikoy-grammatea-toy-oie",
-    "date": "2026-11-20T07:00:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/09101c56-united-nations-gaza.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/09101c56-united-nations-gaza.jpg",
-    "summary": "Η διαδικασία επιλογής του επόμενου Γενικού Γραμματέα του ΟΗΕ συνεχίζεται  στο Συμβούλιο Ασφαλείας με την ένατη άτυπη ψηφοφορία η οποία θα γίνει το απόγε...",
     "author": null,
     "featured": false
   },
