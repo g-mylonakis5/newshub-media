@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125204642-news-thanatos-giorgoy-mazonaki-ti-apokalyptei-to-toxikologiko-porisma-gia-to-kokteil-oysion",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ellada/thanatos-giorgoy-mazonaki-ti-apokalyptei-to-toxikologiko-porisma-gia-to-kokteil-oysion",
+      "title": "Θάνατος Γιώργου Μαζωνάκη: Τι αποκαλύπτει το τοξικολογικό πόρισμα για το «κοκτέιλ» ουσιών",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/mazo.jpg",
+      "text": "Θάνατος Γιώργου Μαζωνάκη: Τι αποκαλύπτει το τοξικολογικό πόρισμα για το «κοκτέιλ» ουσιών",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T20:46:42.256Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ellada/thanatos-giorgoy-mazonaki-ti-apokalyptei-to-toxikologiko-porisma-gia-to-kokteil-oysion"
+    },
+    {
       "id": "20261125203606-news-ofi-anterlecht-o-kontis-kontra-stin-omada-toy-agapimenoy-toy-filoy-zetermpergk",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/athlitika/ofi-anterlecht-o-kontis-kontra-stin-omada-toy-agapimenoy-toy-filoy-zetermpergk",
