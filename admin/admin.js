@@ -3213,6 +3213,7 @@ function socPick(key){
 
   drawSocChosen();
   drawSocPicks();
+  socPlaceSave();
   $('[data-soc-chosen]').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
@@ -3221,6 +3222,107 @@ function socClear(){
   soc.text = '';
   drawSocChosen();
   drawSocPicks();
+  socPlaceSave();
+}
+
+// ---------------------------------------------------------------------
+// Πού είχε μείνει
+// ---------------------------------------------------------------------
+
+// Το «Άνοιξέ το στο X» βγάζει τον συντάκτη από το διαχειριστικό. Το
+// κινητό πετά συχνά τη σελίδα από τη μνήμη όσο λείπει, και η επιστροφή
+// είναι καθαρό φόρτωμα: η καρτέλα γυρίζει σωστά από το #social, αλλά η
+// αναζήτηση, το φίλτρο, το πόσα δείχνει ο κατάλογος και το ύψος του
+// σκρολ χάνονται — και βρίσκεται από την αρχή.
+//
+// Κρατάμε λοιπόν τη θέση του. Γράφεται όταν κρύβεται η σελίδα (τότε
+// φεύγει στο X) και σε κάθε διάλεγμα, ώστε να αντέχει και σκέτο
+// κλείσιμο του φυλλομετρητή.
+var SOC_PLACE = 'newshub-soc-thesi';
+
+// Μετά από τόσο η θέση είναι σκουπίδι: γύρισε άλλη μέρα, για άλλη
+// δουλειά, και ένα παλιό διαλεγμένο άρθρο θα ήταν παγίδα.
+var SOC_PLACE_ZOI = 12 * 60 * 60 * 1000;
+
+function socPlaceSave(){
+  var find = $('[data-soc-find]');
+  try {
+    localStorage.setItem(SOC_PLACE, JSON.stringify({
+      at: Date.now(),
+      find: find ? find.value : '',
+      kind: soc.kind,
+      shown: soc.shown,
+      pick: soc.pick ? soc.pick.kind + ':' + soc.pick.id : '',
+      text: soc.text,
+      targets: soc.targets,
+      y: window.scrollY || 0,
+    }));
+  } catch (err) {
+    // Γεμάτος ή κλειδωμένος χώρος — ιδιωτικό παράθυρο. Δεν είναι λόγος
+    // να σταματήσει τίποτα, απλώς δεν έχουμε δίχτυ.
+  }
+}
+
+function socPlaceRead(){
+  try {
+    var raw = localStorage.getItem(SOC_PLACE);
+    if (!raw) return null;
+    var d = JSON.parse(raw);
+    if (!d || typeof d !== 'object') return null;
+    if (!d.at || Date.now() - d.at > SOC_PLACE_ZOI) return null;
+    return d;
+  } catch (err) {
+    return null;
+  }
+}
+
+// Τρέχει μία φορά, στο boot, ΑΦΟΥ φορτώσουν τα items: χωρίς αυτά δεν
+// βρίσκεται το διαλεγμένο.
+function socPlaceRestore(){
+  var d = socPlaceRead();
+  if (!d) return;
+
+  soc.kind = typeof d.kind === 'string' ? d.kind : '';
+  soc.shown = Math.max(PAGE, Number(d.shown) || PAGE);
+
+  var find = $('[data-soc-find]');
+  if (find) {
+    find.value = d.find || '';
+    soc.find = flat(find.value);
+  }
+
+  $$('[data-soc-kind] .chip').forEach(function (c) {
+    c.classList.toggle('is-on', (c.dataset.kind || '') === soc.kind);
+  });
+
+  // Το διαλεγμένο μπορεί να έχει φύγει — οι ειδήσεις κυλούν. Τότε
+  // κρατάμε τα υπόλοιπα και το πλαίσιο μένει άδειο.
+  if (d.pick) {
+    var hit = null;
+    state.items.forEach(function (it) {
+      if (!hit && it.kind + ':' + it.id === d.pick) hit = it;
+    });
+
+    if (hit) {
+      soc.pick = hit;
+      soc.text = typeof d.text === 'string' ? d.text : hit.title;
+
+      // Ό,τι είχε ξετσεκάρει μένει ξετσεκαρισμένο, αλλά ποτέ δεν
+      // ανάβει πλατφόρμα που δεν μπορεί να στείλει.
+      if (d.targets && typeof d.targets === 'object') {
+        Object.keys(SOC_NAMES).forEach(function (t) {
+          soc.targets[t] = !!d.targets[t] && socCan(t) && !socByHand(t);
+        });
+      }
+    }
+  }
+
+  drawSocPicks();
+  drawSocChosen();
+
+  // Το ύψος μόνο όταν κοιτάζει αυτή την καρτέλα — αλλιώς θα άνοιγε η
+  // καρτέλα των άρθρων σκρολαρισμένη στο πουθενά.
+  if (location.hash === '#social' && d.y) window.scrollTo(0, d.y);
 }
 
 function drawSocLog(){
@@ -3346,6 +3448,15 @@ function socOpenX(t){
   }
 
   window.open(socIntent(socXText(), socShareUrl(it, m.url)), '_blank', 'noopener');
+
+  // Από εδώ και πέρα η σελίδα μπορεί να μην ξαναζήσει: το κινητό τη
+  // πετά όσο ο συντάκτης είναι στο X. Γράφουμε τη θέση του ΤΩΡΑ, ώστε
+  // να γυρίσει στο ίδιο σημείο του καταλόγου έστω κι αν πεθάνει.
+  //
+  // Το socClear παρακάτω θα ξαναγράψει τη θέση χωρίς το διαλεγμένο, και
+  // σωστά: γυρίζοντας δεν το ξαναθέλει, θέλει να απαντήσει «Ανέβηκε;»
+  // στο ιστορικό πιο κάτω.
+  socPlaceSave();
 
   var entry = {
     id: new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14) + '-' + it.kind + '-' + it.id,
@@ -3583,14 +3694,20 @@ function wireSocial(){
     if (open) socOpenX(open.dataset.socOpen);
 
     if (e.target.closest('[data-soc-photo]')) socPhoto();
+    else if (e.target.closest('[data-soc-clear]')) socClear();
+    else if (e.target.closest('[data-soc-send]')) socSend();
+  });
 
+  // Το «Ανέβηκε; Ναι / Όχι» ζει στο ιστορικό, που είναι ΑΔΕΡΦΙ του
+  // παραπάνω κουτιού και όχι παιδί του — δες το index.html. Όσο ο
+  // listener ήταν μόνο εκεί πάνω, το πάτημα δεν έφτανε ποτέ και κάθε
+  // ποστ του X έμενε «open» για πάντα.
+  $('[data-soc-log]').addEventListener('click', function (e) {
     var yes = e.target.closest('[data-soc-yes]');
     if (yes) { socAnswer(yes.dataset.socYes, true); return; }
 
     var no = e.target.closest('[data-soc-no]');
-    if (no) { socAnswer(no.dataset.socNo, false); return; }
-    else if (e.target.closest('[data-soc-clear]')) socClear();
-    else if (e.target.closest('[data-soc-send]')) socSend();
+    if (no) socAnswer(no.dataset.socNo, false);
   });
 
   box.addEventListener('input', function (e) {
@@ -3609,7 +3726,20 @@ function wireSocial(){
     soc.targets[t.dataset.socTarget] = t.checked;
     // Redrawn in full: the warning about a second post depends on it.
     drawSocChosen();
+    socPlaceSave();
   });
+
+  // Η θέση γράφεται τη στιγμή που φεύγει το βλέμμα από τη σελίδα: όταν
+  // ανοίγει το X, όταν αλλάζει εφαρμογή, όταν κλείνει η καρτέλα. Ένα
+  // σημείο για όλα — αλλιώς θα χρειαζόταν κλήση σε κάθε πλήκτρο της
+  // αναζήτησης και σε κάθε τσιπάκι.
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) socPlaceSave();
+  });
+
+  // Το pagehide πιάνει ό,τι δεν πιάνει το visibilitychange — κυρίως το
+  // Safari στο iPhone, που φεύγει χωρίς να το δηλώσει.
+  window.addEventListener('pagehide', socPlaceSave);
 }
 
 var AD_PLACES = [
@@ -7135,6 +7265,10 @@ function boot(){
     // mid-write, say — we ask immediately.
     art.ready = true;
     if (location.hash === '#arthra') draftOffer();
+
+    // Τα items είναι πια αληθινά, άρα βρίσκεται το διαλεγμένο: εδώ
+    // γυρίζει ο συντάκτης εκεί που ήταν στα social.
+    socPlaceRestore();
   }).catch(function (err) {
     say('Δεν φόρτωσαν τα δεδομένα: ' + err.message, 'bad');
   });
