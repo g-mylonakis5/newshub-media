@@ -1,6 +1,21 @@
 {
   "posts": [
     {
+      "id": "20261125214558-podcast-Buzzsprout-20182249",
+      "kind": "podcast",
+      "ref": "Buzzsprout-20182249",
+      "title": "Το Ισραήλ στο φάσμα της ακυβερνησίας!Τι αλλάζει χωρίς Νετανιάχου και τι όχι!",
+      "image": "https://storage.buzzsprout.com/t5rsu45qwbz5wrrlhungfrm7fkxl?.jpg",
+      "text": "Το Ισραήλ στο φάσμα της ακυβερνησίας!Τι αλλάζει χωρίς Νετανιάχου και τι όχι!",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T21:45:58.196Z",
+      "by": "ioannisram@hotmail.com"
+    },
+    {
       "id": "20261125214328-news-kriti-athoos-36chronos-poy-eiche-katigorithei-apo-24chroni-gia-viasmo-emeine-pano-apo-chrono-sti-fylaki",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/kriti-athoos-36chronos-poy-eiche-katigorithei-apo-24chroni-gia-viasmo-emeine-pano-apo-chrono-sti-fylaki",
