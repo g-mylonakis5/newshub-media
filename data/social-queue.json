@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125194027-news-i-eyropaiki-enosi-amfisvitei-ti-nomimotita-ton-neon-dasmon-tramp",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/geopolitiki/i-eyropaiki-enosi-amfisvitei-ti-nomimotita-ton-neon-dasmon-tramp",
+      "title": "Η Ευρωπαϊκή Ένωση αμφισβητεί τη νομιμότητα των νέων δασμών Τραμπ",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/ap25195275107901-1024x683.jpg",
+      "text": "Η Ευρωπαϊκή Ένωση αμφισβητεί τη νομιμότητα των νέων δασμών Τραμπ",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T19:40:27.316Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/geopolitiki/i-eyropaiki-enosi-amfisvitei-ti-nomimotita-ton-neon-dasmon-tramp"
+    },
+    {
       "id": "20261125192046-news-i-polonia-zita-adeia-apo-to-nato-na-katarriptei-rosikoys-pyrayloys-pano-apo-tin-oykrania-fovoi-gia-amesi-sygkroysi-me-ti-moscha",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/i-polonia-zita-adeia-apo-to-nato-na-katarriptei-rosikoys-pyrayloys-pano-apo-tin-oykrania-fovoi-gia-amesi-sygkroysi-me-ti-moscha",
