@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T06:03:16.020Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/geopolitiki/o-naytikos-apokleismos-ton-ipa-straggalizei-to-iran-1-200-fortiga-egklovismena-se-oyra-42-chiliometron-vinteo"
+      "link": "https://www.newshub.gr/el/geopolitiki/o-naytikos-apokleismos-ton-ipa-straggalizei-to-iran-1-200-fortiga-egklovismena-se-oyra-42-chiliometron-vinteo",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290680014156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290680014156174",
+          "at": "2026-11-25T06:03:38.011Z"
+        }
+      }
     },
     {
       "id": "20261124214258-news-agkyra-anoixe-i-gi-kai-katapie-fortigo-vinteo",
