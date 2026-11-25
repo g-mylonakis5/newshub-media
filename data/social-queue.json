@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T18:04:35.969Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/thessaloniki-fylakisi-9-minon-me-anastoli-stoys-goneis-poy-afisan-mona-sto-spiti-ta-dyo-paidia-ti-ischyristikan-sto-dikastirio"
+      "link": "https://www.newshub.gr/el/ellada/thessaloniki-fylakisi-9-minon-me-anastoli-stoys-goneis-poy-afisan-mona-sto-spiti-ta-dyo-paidia-ti-ischyristikan-sto-dikastirio",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290745216156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290745216156174",
+          "at": "2026-11-25T18:04:53.603Z"
+        }
+      }
     },
     {
       "id": "20261125180117-news-nikos-androylakis-apo-kavala-echoyme-schedio-na-anagennisoyme-tin-elliniki-ypaithro",
