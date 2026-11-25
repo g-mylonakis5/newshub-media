@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125201205-news-efyge-apo-ti-zoi-o-skinothetis-giannis-iordanidis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/istoria-politismos/efyge-apo-ti-zoi-o-skinothetis-giannis-iordanidis",
+      "title": "Έφυγε από τη ζωή ο σκηνοθέτης Γιάννης Ιορδανίδης",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/iordanidhs.jpg",
+      "text": "Έφυγε από τη ζωή ο σκηνοθέτης Γιάννης Ιορδανίδης",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T20:12:05.590Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/istoria-politismos/efyge-apo-ti-zoi-o-skinothetis-giannis-iordanidis"
+    },
+    {
       "id": "20261125201039-news-stis-vryxelles-o-mitsotakis-gia-tin-ektakti-synodo-koryfis-sto-epikentro-o-proypologismos-oi-theseis-tis-elladas",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ellada/stis-vryxelles-o-mitsotakis-gia-tin-ektakti-synodo-koryfis-sto-epikentro-o-proypologismos-oi-theseis-tis-elladas",
