@@ -1,5 +1,17 @@
 [
   {
+    "id": "lasithi-50-proslipseis-synoriakon-fylakon-gia-tin-enischysi-tis-asfaleias-ton-synoron-fotografia-1",
+    "title": "Λασίθι: 50 προσλήψεις συνοριακών φυλάκων για την ενίσχυση της ασφάλειας των συνόρων (φωτογραφία)",
+    "url": "https://www.newshub.gr/el/kriti/lasithi-50-proslipseis-synoriakon-fylakon-gia-tin-enischysi-tis-asfaleias-ton-synoron-fotografia-1",
+    "date": "2026-11-25T13:32:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/metanastes-kontine-doulemporiko.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/metanastes-kontine-doulemporiko.jpg",
+    "summary": "Στην πρόσληψη 50 Συνοριακών Φυλάκων ορισμένου χρόνου προχωρούν οι αρμόδιες υπηρεσίες, προκειμένου να καλυφθούν οι ανάγκες των αστυνομικών υπηρεσιών στην Περι...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "deka-stathmoi-gia-tin-egkairi-proeidopoiisi-gia-plimmyres-apo-tin-perifereia-kritis-kai-to-elkethe",
     "title": "Δέκα σταθμοί για την έγκαιρη προειδοποίηση για πλημμύρες από την Περιφέρεια Κρήτης και το ΕΛΚΕΘΕ",
     "url": "https://www.newshub.gr/el/kriti/deka-stathmoi-gia-tin-egkairi-proeidopoiisi-gia-plimmyres-apo-tin-perifereia-kritis-kai-to-elkethe",
@@ -57,7 +69,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/dorea-organon.jpg",
     "summary": "Μια ακόμη σημαντική δωρεά οργάνων πραγματοποιήθηκε στο Βενιζέλειο Νοσοκομείο, δίνοντας ελπίδα σε ανθρώπους που περιμένουν μια δεύτερη ευκαιρία στη ζωή.\r\n\r\nΗ ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "enosi-eisaggeleon-ellados-thesmika-apaxiotiki-i-anafora-toy-proin-antiproedroy-ste-peri-anexelegktis-armodiotitas-toy-eisaggelea-areioy-pagoy",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/screenshot-2026-11-20-155552.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/screenshot-2026-11-20-155552.jpg",
     "summary": "Η ρωσική πρεσβεία στην Ολλανδία ανακοίνωσε σήμερα ότι προέτρεψε τη Χάγη να λάβει σοβαρά υπόψη τη σύστασή της, σύμφωνα με την οποία οι ξένοι διπλωμάτες θα πρέ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kriti-ekloges-tin-kyriaki-22-noemvrioy-sto-geotee",
-    "title": "Κρήτη: Εκλογές την Κυριακή 22 Νοεμβρίου στο ΓΕΩΤΕΕ",
-    "url": "https://www.newshub.gr/el/kriti/kriti-ekloges-tin-kyriaki-22-noemvrioy-sto-geotee",
-    "date": "2026-11-20T13:55:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/geotee.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/geotee.jpg",
-    "summary": "Την Κυριακή  22 Νοεμβρίου 2026  θα διεξαχθούν οι εκλογές του Γεωτεχνικού Επιμελητηρίου Ελλάδας (ΓΕΩΤΕΕ) για την ανάδειξη νέων οργάνων διοίκησής του...",
     "author": null,
     "featured": false
   },
