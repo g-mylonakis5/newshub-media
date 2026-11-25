@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T17:20:07.176Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/deka-stathmoi-gia-tin-egkairi-proeidopoiisi-gia-plimmyres-apo-tin-perifereia-kritis-kai-to-elkethe"
+      "link": "https://www.newshub.gr/el/kriti/deka-stathmoi-gia-tin-egkairi-proeidopoiisi-gia-plimmyres-apo-tin-perifereia-kritis-kai-to-elkethe",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290741322156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290741322156174",
+          "at": "2026-11-25T17:20:25.874Z"
+        }
+      }
     },
     {
       "id": "20261125160826-news-indonisia-egklovismenoi-26-ergazomenoi-se-paranomo-orycheio-meta-apo-ischyres-vrochoptoseis",
@@ -27,10 +34,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T16:08:26.109Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kosmos/indonisia-egklovismenoi-26-ergazomenoi-se-paranomo-orycheio-meta-apo-ischyres-vrochoptoseis"
+      "link": "https://www.newshub.gr/el/kosmos/indonisia-egklovismenoi-26-ergazomenoi-se-paranomo-orycheio-meta-apo-ischyres-vrochoptoseis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290741352156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290741352156174",
+          "at": "2026-11-25T17:20:29.246Z"
+        }
+      }
     },
     {
       "id": "20261125141003-news-apo-poia-nosimata-kindyneyoyme-otan-trome-yperepexergasmena-trofima",
