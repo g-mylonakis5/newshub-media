@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125220247-news-oi-protoi-klimatikoi-prosfyges-stin-ellada-oi-katoikoi-apo-ti-metamorfosi-karditsas-poy-katastrafike-apo-ton-daniel",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ellada/oi-protoi-klimatikoi-prosfyges-stin-ellada-oi-katoikoi-apo-ti-metamorfosi-karditsas-poy-katastrafike-apo-ton-daniel",
+      "title": "Oι πρώτοι κλιματικοί πρόσφυγες στην Ελλάδα οι κάτοικοι από τη Μεταμόρφωση Καρδίτσας που καταστράφηκε από τον Daniel",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/kard.jpg",
+      "text": "Oι πρώτοι κλιματικοί πρόσφυγες στην Ελλάδα οι κάτοικοι από τη Μεταμόρφωση Καρδίτσας που καταστράφηκε από τον Daniel",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T22:02:47.432Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ellada/oi-protoi-klimatikoi-prosfyges-stin-ellada-oi-katoikoi-apo-ti-metamorfosi-karditsas-poy-katastrafike-apo-ton-daniel"
+    },
+    {
       "id": "20261125214558-podcast-Buzzsprout-20182249",
       "kind": "podcast",
       "ref": "Buzzsprout-20182249",
