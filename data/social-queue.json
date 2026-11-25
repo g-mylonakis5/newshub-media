@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T11:05:44.150Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/irakleio-pistoi-stin-agia-aikaterini-gia-na-anapsoyn-ena-keri-sti-chari-tis-foto"
+      "link": "https://www.newshub.gr/el/kriti/irakleio-pistoi-stin-agia-aikaterini-gia-na-anapsoyn-ena-keri-sti-chari-tis-foto",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290706630156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290706630156174",
+          "at": "2026-11-25T11:06:02.145Z"
+        }
+      }
     },
     {
       "id": "20261125110520-news-o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora",
@@ -27,10 +34,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T11:05:20.683Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ellada/o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora"
+      "link": "https://www.newshub.gr/el/ellada/o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290706648156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290706648156174",
+          "at": "2026-11-25T11:06:04.311Z"
+        }
+      }
     },
     {
       "id": "20261125060316-news-o-naytikos-apokleismos-ton-ipa-straggalizei-to-iran-1-200-fortiga-egklovismena-se-oyra-42-chiliometron-vinteo",
