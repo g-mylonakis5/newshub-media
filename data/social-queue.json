@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T19:40:27.316Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/geopolitiki/i-eyropaiki-enosi-amfisvitei-ti-nomimotita-ton-neon-dasmon-tramp"
+      "link": "https://www.newshub.gr/el/geopolitiki/i-eyropaiki-enosi-amfisvitei-ti-nomimotita-ton-neon-dasmon-tramp",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290755158156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290755158156174",
+          "at": "2026-11-25T19:40:45.364Z"
+        }
+      }
     },
     {
       "id": "20261125192046-news-i-polonia-zita-adeia-apo-to-nato-na-katarriptei-rosikoys-pyrayloys-pano-apo-tin-oykrania-fovoi-gia-amesi-sygkroysi-me-ti-moscha",
