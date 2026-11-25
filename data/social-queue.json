@@ -1,6 +1,21 @@
 {
   "posts": [
     {
+      "id": "20261125201242-news-aerodromia-mia-anasa-apo-ta-80-ekat-epivates-sto-dekamino-toy-2026-neo-istoriko-rekor-sto-nikos-kazantzakis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/aerodromia-mia-anasa-apo-ta-80-ekat-epivates-sto-dekamino-toy-2026-neo-istoriko-rekor-sto-nikos-kazantzakis",
+      "title": "Αεροδρόμια: Μια ανάσα από τα 80 εκατ. επιβάτες στο δεκάμηνο του 2026 – Νέο ιστορικό ρεκόρ στο «Νίκος Καζαντζάκης»",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/aerodromio-hrakleioy2.jpg",
+      "text": "Αεροδρόμια: Μια ανάσα από τα 80 εκατ. επιβάτες στο δεκάμηνο του 2026 – Νέο ιστορικό ρεκόρ στο «Νίκος Καζαντζάκης»",
+      "targets": [
+        "facebook"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T20:12:42.690Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/aerodromia-mia-anasa-apo-ta-80-ekat-epivates-sto-dekamino-toy-2026-neo-istoriko-rekor-sto-nikos-kazantzakis"
+    },
+    {
       "id": "20261125201205-news-efyge-apo-ti-zoi-o-skinothetis-giannis-iordanidis",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/istoria-politismos/efyge-apo-ti-zoi-o-skinothetis-giannis-iordanidis",
