@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/ap25195275107901-1024x683.jpg",
     "summary": "Η Ευρωπαϊκή Ένωση «αμφισβητεί σθεναρά» τη νομιμότητα των νέων δασμών που ανακοίνωσε η Ουάσινγκτον.\r\n\r\nΟι Ηνωμένες Πολιτείες αιτιολογούν αυτά τα μ...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "irakleio-antidraseis-ergatikon-somateion-prokalei-i-kathodos-toy-ilia-kasidiari",
+    "title": "Ηράκλειο: Αντιδράσεις εργατικών σωματείων προκαλεί η κάθοδος του Ηλία Κασιδιάρη",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-antidraseis-ergatikon-somateion-prokalei-i-kathodos-toy-ilia-kasidiari",
+    "date": "2026-11-25T17:10:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/kasidiaris.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/kasidiaris.jpg",
+    "summary": "Με κοινό ψήφισμά τους, τρία εργατικά σωματεία του νομού, η Ένωση Ιδιωτικών Υπαλλήλων Ν. Ηρακλείου, το Συνδικάτο Οικοδόμων και Συναφών Επαγγελμάτων Ν. Ηρακλεί...",
+    "author": null,
     "featured": true
   },
   {
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/chapi.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/chapi.jpg",
     "summary": "Αισιοδοξία στην ιατρική κοινότητα και στους ασθενείς έχουν προκαλέσει τα αποτελέσματα της αρχικής κλινικής δοκιμής ενός νέου φαρμάκου, το οποίο φαίνεται ότι ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "to-aerodromio-irakleioy-ston-pagkosmio-charti-ton-koryfaion-aerodromion-gia-to-2027-apo-to-periodiko-time",
-    "title": "Το αεροδρόμιο Ηρακλείου στον παγκόσμιο χάρτη των κορυφαίων αεροδρομίων για το 2027, από το περιοδικό Time",
-    "url": "https://www.newshub.gr/el/kriti/to-aerodromio-irakleioy-ston-pagkosmio-charti-ton-koryfaion-aerodromion-gia-to-2027-apo-to-periodiko-time",
-    "date": "2026-11-20T17:02:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/20-11/aerodromio-erakleiou2.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/20-11/aerodromio-erakleiou2.jpg",
-    "summary": "Διεθνή αναγνώριση για την ελληνική αεροπορική αγορά φέρνει η νέα αξιολόγηση «World&rsquo;s Best Airports 2027» του περιοδικού TIME, σε συνεργασία...",
     "author": null,
     "featured": false
   },
