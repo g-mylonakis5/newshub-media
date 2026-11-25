@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125110544-news-irakleio-pistoi-stin-agia-aikaterini-gia-na-anapsoyn-ena-keri-sti-chari-tis-foto",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/irakleio-pistoi-stin-agia-aikaterini-gia-na-anapsoyn-ena-keri-sti-chari-tis-foto",
+      "title": "Ηράκλειο: Πιστοί στην Αγία Αικατερινη για να ανάψουν ένα κερί στη Χάρη Της (Φωτο)",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/eikona_viber_2026-11-24_20-10-08-602.jpg",
+      "text": "Ηράκλειο: Πιστοί στην Αγία Αικατερινη για να ανάψουν ένα κερί στη Χάρη Της (Φωτο)",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T11:05:44.150Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kriti/irakleio-pistoi-stin-agia-aikaterini-gia-na-anapsoyn-ena-keri-sti-chari-tis-foto"
+    },
+    {
       "id": "20261125110520-news-o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ellada/o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora",
@@ -11,17 +27,10 @@
         "facebook",
         "x"
       ],
-      "status": "done",
+      "status": "pending",
       "at": "2026-11-25T11:05:20.683Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ellada/o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290706528156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290706528156174",
-          "at": "2026-11-25T11:05:40.826Z"
-        }
-      }
+      "link": "https://www.newshub.gr/el/ellada/o-ellinas-astronaytis-adrianos-golemis-mporoyme-na-kanoyme-ti-diafora-stin-oikogeneia-mas-stin-koinotita-sti-chora"
     },
     {
       "id": "20261125060316-news-o-naytikos-apokleismos-ton-ipa-straggalizei-to-iran-1-200-fortiga-egklovismena-se-oyra-42-chiliometron-vinteo",
