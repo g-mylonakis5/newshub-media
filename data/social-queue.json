@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T21:13:06.833Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/efialtis-stin-aigypto-meta-apo-ekrixi-vytioforoy-pano-apo-20-nekroi-dekades-ochimata-stis-floges"
+      "link": "https://www.newshub.gr/el/kosmos/efialtis-stin-aigypto-meta-apo-ekrixi-vytioforoy-pano-apo-20-nekroi-dekades-ochimata-stis-floges",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290763708156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290763708156174",
+          "at": "2026-11-25T21:13:32.675Z"
+        }
+      }
     },
     {
       "id": "20261125205855-news-megali-epicheirisi-se-57-chores-gia-parapoiimena-trofima-kai-pota-elaiolado-maimoy-notheymeno-meli-kreata-me-apagoreymenes-oysies",
