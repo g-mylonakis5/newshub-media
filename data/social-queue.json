@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T18:50:50.716Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/geopolitiki/financial-times-o-tramp-ekapse-to-schedio-gia-epicheirimatika-deals-me-ton-poytin-gia-na-ton-peisei-na-ypograpsei-eirini-me-tin-oykrania"
+      "link": "https://www.newshub.gr/el/geopolitiki/financial-times-o-tramp-ekapse-to-schedio-gia-epicheirimatika-deals-me-ton-poytin-gia-na-ton-peisei-na-ypograpsei-eirini-me-tin-oykrania",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290750286156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290750286156174",
+          "at": "2026-11-25T18:51:07.318Z"
+        }
+      }
     },
     {
       "id": "20261125184408-news-niki-kerameos-sto-ergani-oloi-oi-ergazomenoi-se-platformes-dianomis-ti-eipe-gia-tin-techniti-noimosyni",
