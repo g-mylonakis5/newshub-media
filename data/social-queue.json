@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125172007-news-deka-stathmoi-gia-tin-egkairi-proeidopoiisi-gia-plimmyres-apo-tin-perifereia-kritis-kai-to-elkethe",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/deka-stathmoi-gia-tin-egkairi-proeidopoiisi-gia-plimmyres-apo-tin-perifereia-kritis-kai-to-elkethe",
+      "title": "Δέκα σταθμοί για την έγκαιρη προειδοποίηση για πλημμύρες από την Περιφέρεια Κρήτης και το ΕΛΚΕΘΕ",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/plemmyres.jpg",
+      "text": "Δέκα σταθμοί για την έγκαιρη προειδοποίηση για πλημμύρες από την Περιφέρεια Κρήτης και το ΕΛΚΕΘΕ",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T17:20:07.176Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/deka-stathmoi-gia-tin-egkairi-proeidopoiisi-gia-plimmyres-apo-tin-perifereia-kritis-kai-to-elkethe"
+    },
+    {
       "id": "20261125160826-news-indonisia-egklovismenoi-26-ergazomenoi-se-paranomo-orycheio-meta-apo-ischyres-vrochoptoseis",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kosmos/indonisia-egklovismenoi-26-ergazomenoi-se-paranomo-orycheio-meta-apo-ischyres-vrochoptoseis",
