@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125180435-news-thessaloniki-fylakisi-9-minon-me-anastoli-stoys-goneis-poy-afisan-mona-sto-spiti-ta-dyo-paidia-ti-ischyristikan-sto-dikastirio",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ellada/thessaloniki-fylakisi-9-minon-me-anastoli-stoys-goneis-poy-afisan-mona-sto-spiti-ta-dyo-paidia-ti-ischyristikan-sto-dikastirio",
+      "title": "Θεσσαλονίκη: Φυλάκιση 9 μηνών με αναστολή στους γονείς που άφησαν μόνα στο σπίτι τα δύο παιδιά - Τι ισχυρίστηκαν στο δικαστήριο",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/thesgone.jpg",
+      "text": "Θεσσαλονίκη: Φυλάκιση 9 μηνών με αναστολή στους γονείς που άφησαν μόνα στο σπίτι τα δύο παιδιά - Τι ισχυρίστηκαν στο δικαστήριο",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T18:04:35.969Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ellada/thessaloniki-fylakisi-9-minon-me-anastoli-stoys-goneis-poy-afisan-mona-sto-spiti-ta-dyo-paidia-ti-ischyristikan-sto-dikastirio"
+    },
+    {
       "id": "20261125180117-news-nikos-androylakis-apo-kavala-echoyme-schedio-na-anagennisoyme-tin-elliniki-ypaithro",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ellada/nikos-androylakis-apo-kavala-echoyme-schedio-na-anagennisoyme-tin-elliniki-ypaithro",
