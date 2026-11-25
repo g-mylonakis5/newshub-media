@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125183753-news-eikosi-nea-kentra-imeras-gia-atoma-me-anoia-kai-altschaimer-se-oli-ti-chora-ena-stin-kriti",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/eikosi-nea-kentra-imeras-gia-atoma-me-anoia-kai-altschaimer-se-oli-ti-chora-ena-stin-kriti",
+      "title": "Είκοσι νέα Κέντρα Ημέρας για άτομα με άνοια και Αλτσχάιμερ σε όλη τη χώρα – Ένα στην Κρήτη",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/hlikiomenos.jpg",
+      "text": "Είκοσι νέα Κέντρα Ημέρας για άτομα με άνοια και Αλτσχάιμερ σε όλη τη χώρα – Ένα στην Κρήτη",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T18:37:53.499Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/eikosi-nea-kentra-imeras-gia-atoma-me-anoia-kai-altschaimer-se-oli-ti-chora-ena-stin-kriti"
+    },
+    {
       "id": "20261125182441-news-i-kentro-dexia-simera",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/apopseis/i-kentro-dexia-simera",
