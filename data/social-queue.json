@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T20:46:42.256Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/thanatos-giorgoy-mazonaki-ti-apokalyptei-to-toxikologiko-porisma-gia-to-kokteil-oysion"
+      "link": "https://www.newshub.gr/el/ellada/thanatos-giorgoy-mazonaki-ti-apokalyptei-to-toxikologiko-porisma-gia-to-kokteil-oysion",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290761506156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290761506156174",
+          "at": "2026-11-25T20:46:58.131Z"
+        }
+      }
     },
     {
       "id": "20261125203606-news-ofi-anterlecht-o-kontis-kontra-stin-omada-toy-agapimenoy-toy-filoy-zetermpergk",
