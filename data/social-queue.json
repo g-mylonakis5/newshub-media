@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125203606-news-ofi-anterlecht-o-kontis-kontra-stin-omada-toy-agapimenoy-toy-filoy-zetermpergk",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/athlitika/ofi-anterlecht-o-kontis-kontra-stin-omada-toy-agapimenoy-toy-filoy-zetermpergk",
+      "title": "ΟΦΗ-Άντερλεχτ: Ο Κόντης κόντρα στην ομάδα του αγαπημένου του φίλου Ζέτερμπεργκ",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/2852779-1200x796.jpg",
+      "text": "ΟΦΗ-Άντερλεχτ: Ο Κόντης κόντρα στην ομάδα του αγαπημένου του φίλου Ζέτερμπεργκ",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T20:36:06.773Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/athlitika/ofi-anterlecht-o-kontis-kontra-stin-omada-toy-agapimenoy-toy-filoy-zetermpergk"
+    },
+    {
       "id": "20261125202058-podcast-Buzzsprout-20181611",
       "kind": "podcast",
       "ref": "Buzzsprout-20181611",
