@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125184408-news-niki-kerameos-sto-ergani-oloi-oi-ergazomenoi-se-platformes-dianomis-ti-eipe-gia-tin-techniti-noimosyni",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/niki-kerameos-sto-ergani-oloi-oi-ergazomenoi-se-platformes-dianomis-ti-eipe-gia-tin-techniti-noimosyni",
+      "title": "Νίκη Κεραμέως: Στο «Εργάνη» όλοι οι εργαζόμενοι σε πλατφόρμες διανομής – Τι είπε για την Τεχνητή Νοημοσύνη",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/niki-keramews-4.jpg",
+      "text": "Νίκη Κεραμέως: Στο «Εργάνη» όλοι οι εργαζόμενοι σε πλατφόρμες διανομής – Τι είπε για την Τεχνητή Νοημοσύνη",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T18:44:08.265Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/niki-kerameos-sto-ergani-oloi-oi-ergazomenoi-se-platformes-dianomis-ti-eipe-gia-tin-techniti-noimosyni"
+    },
+    {
       "id": "20261125183753-news-eikosi-nea-kentra-imeras-gia-atoma-me-anoia-kai-altschaimer-se-oli-ti-chora-ena-stin-kriti",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/eikosi-nea-kentra-imeras-gia-atoma-me-anoia-kai-altschaimer-se-oli-ti-chora-ena-stin-kriti",
