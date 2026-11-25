@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261125180117-news-nikos-androylakis-apo-kavala-echoyme-schedio-na-anagennisoyme-tin-elliniki-ypaithro",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ellada/nikos-androylakis-apo-kavala-echoyme-schedio-na-anagennisoyme-tin-elliniki-ypaithro",
+      "title": "Νίκος Ανδρουλάκης από Καβάλα: Έχουμε σχέδιο να αναγεννήσουμε την ελληνική ύπαιθρo",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/androyl.jpg",
+      "text": "Νίκος Ανδρουλάκης από Καβάλα: Έχουμε σχέδιο να αναγεννήσουμε την ελληνική ύπαιθρo",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T18:01:17.871Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ellada/nikos-androylakis-apo-kavala-echoyme-schedio-na-anagennisoyme-tin-elliniki-ypaithro"
+    },
+    {
       "id": "20261125172007-news-deka-stathmoi-gia-tin-egkairi-proeidopoiisi-gia-plimmyres-apo-tin-perifereia-kritis-kai-to-elkethe",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/deka-stathmoi-gia-tin-egkairi-proeidopoiisi-gia-plimmyres-apo-tin-perifereia-kritis-kai-to-elkethe",
