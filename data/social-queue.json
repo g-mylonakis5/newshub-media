@@ -1,6 +1,21 @@
 {
   "posts": [
     {
+      "id": "20261125202058-podcast-Buzzsprout-20181611",
+      "kind": "podcast",
+      "ref": "Buzzsprout-20181611",
+      "title": "Η Κυβέρνηση εκποιεί το εθνικό συμφέρον! Η διαφθορά και η ακρίβεια πνίγουν την κοινωνία»!",
+      "image": "https://storage.buzzsprout.com/idv59kbncxsa2tzzcw1t1saj96ae?.jpg",
+      "text": "Η Κυβέρνηση εκποιεί το εθνικό συμφέρον! Η διαφθορά και η ακρίβεια πνίγουν την κοινωνία»!",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-25T20:20:58.390Z",
+      "by": "ioannisram@hotmail.com"
+    },
+    {
       "id": "20261125201242-news-aerodromia-mia-anasa-apo-ta-80-ekat-epivates-sto-dekamino-toy-2026-neo-istoriko-rekor-sto-nikos-kazantzakis",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/aerodromia-mia-anasa-apo-ta-80-ekat-epivates-sto-dekamino-toy-2026-neo-istoriko-rekor-sto-nikos-kazantzakis",
