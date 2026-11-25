@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T19:20:46.789Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/geopolitiki/i-polonia-zita-adeia-apo-to-nato-na-katarriptei-rosikoys-pyrayloys-pano-apo-tin-oykrania-fovoi-gia-amesi-sygkroysi-me-ti-moscha"
+      "link": "https://www.newshub.gr/el/geopolitiki/i-polonia-zita-adeia-apo-to-nato-na-katarriptei-rosikoys-pyrayloys-pano-apo-tin-oykrania-fovoi-gia-amesi-sygkroysi-me-ti-moscha",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290753280156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290753280156174",
+          "at": "2026-11-25T19:21:01.801Z"
+        }
+      }
     },
     {
       "id": "20261125192017-news-toyrkiki-ypikootita-se-ierarches-toy-oikoymenikoy-patriarcheioy-o-katalogos-ton-onomaton-kai-i-epomeni-imera-gia-to-fanari",
@@ -27,10 +34,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T19:20:17.252Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/toyrkiki-ypikootita-se-ierarches-toy-oikoymenikoy-patriarcheioy-o-katalogos-ton-onomaton-kai-i-epomeni-imera-gia-to-fanari"
+      "link": "https://www.newshub.gr/el/ellada/toyrkiki-ypikootita-se-ierarches-toy-oikoymenikoy-patriarcheioy-o-katalogos-ton-onomaton-kai-i-epomeni-imera-gia-to-fanari",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290753298156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290753298156174",
+          "at": "2026-11-25T19:21:04.369Z"
+        }
+      }
     },
     {
       "id": "20261125185050-news-financial-times-o-tramp-ekapse-to-schedio-gia-epicheirimatika-deals-me-ton-poytin-gia-na-ton-peisei-na-ypograpsei-eirini-me-tin-oykrania",
