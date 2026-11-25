@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T20:58:55.167Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/megali-epicheirisi-se-57-chores-gia-parapoiimena-trofima-kai-pota-elaiolado-maimoy-notheymeno-meli-kreata-me-apagoreymenes-oysies"
+      "link": "https://www.newshub.gr/el/kosmos/megali-epicheirisi-se-57-chores-gia-parapoiimena-trofima-kai-pota-elaiolado-maimoy-notheymeno-meli-kreata-me-apagoreymenes-oysies",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290762646156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290762646156174",
+          "at": "2026-11-25T20:59:11.262Z"
+        }
+      }
     },
     {
       "id": "20261125204642-news-thanatos-giorgoy-mazonaki-ti-apokalyptei-to-toxikologiko-porisma-gia-to-kokteil-oysion",
