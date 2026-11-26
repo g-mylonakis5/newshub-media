@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T07:54:31.409Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/kykloma-eikonikon-apodeixeon-se-enstoloys-mechri-kai-stin-italia-eikonikes-diamones-kai-ta-173-spitia-fantasmata"
+      "link": "https://www.newshub.gr/el/ellada/kykloma-eikonikon-apodeixeon-se-enstoloys-mechri-kai-stin-italia-eikonikes-diamones-kai-ta-173-spitia-fantasmata",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290820300156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290820300156174",
+          "at": "2026-11-26T07:54:53.426Z"
+        }
+      }
     },
     {
       "id": "20261126074433-news-emma-dobigny-i-moysa-tis-monmartris-poy-kryvotan-kato-apo-enan-degas",
