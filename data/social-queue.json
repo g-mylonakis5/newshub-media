@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126074225-news-kairos-vroches-kai-kataigides-simera-se-voreio-ionio-kai-ipeiro-nea-voytia-tis-thermokrasias-chionia-kai-10-mpofor-tin-kyriaki",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ellada/kairos-vroches-kai-kataigides-simera-se-voreio-ionio-kai-ipeiro-nea-voytia-tis-thermokrasias-chionia-kai-10-mpofor-tin-kyriaki",
+      "title": "Καιρός: Βροχές και καταιγίδες σήμερα σε βόρειο Ιόνιο και Ήπειρο - Νέα βουτιά της θερμοκρασίας, χιόνια και 10 μποφόρ την Κυριακή",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/1.jpg",
+      "text": "Καιρός: Βροχές και καταιγίδες σήμερα σε βόρειο Ιόνιο και Ήπειρο - Νέα βουτιά της θερμοκρασίας, χιόνια και 10 μποφόρ την Κυριακή",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T07:42:25.494Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ellada/kairos-vroches-kai-kataigides-simera-se-voreio-ionio-kai-ipeiro-nea-voytia-tis-thermokrasias-chionia-kai-10-mpofor-tin-kyriaki"
+    },
+    {
       "id": "20261126072745-news-epidoma-400-eyro-pote-tha-ginoyn-oi-pliromes-se-syntaxioychoys-poy-den-piran-me-tin-proti-katavoli",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ellada/epidoma-400-eyro-pote-tha-ginoyn-oi-pliromes-se-syntaxioychoys-poy-den-piran-me-tin-proti-katavoli",
