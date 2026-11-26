@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T05:23:42.975Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/wsj-aporriti-enimerosi-toy-kogkresoy-gia-tin-eromeni-toy-choyangk-kai-ta-senaria-kataskopeias"
+      "link": "https://www.newshub.gr/el/kosmos/wsj-aporriti-enimerosi-toy-kogkresoy-gia-tin-eromeni-toy-choyangk-kai-ta-senaria-kataskopeias",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290806500156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290806500156174",
+          "at": "2026-11-26T05:23:58.564Z"
+        }
+      }
     },
     {
       "id": "20261125220315-news-deka-fores-akrivotero-to-fysiko-aerio-stin-eyropi-apo-tis-ipa",
@@ -96,11 +103,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-25T21:43:28.780Z",
       "by": "ioannisram@hotmail.com",
       "link": "https://www.newshub.gr/el/kriti/kriti-athoos-36chronos-poy-eiche-katigorithei-apo-24chroni-gia-viasmo-emeine-pano-apo-chrono-sti-fylaki",
-      "note": "Η σελίδα του άρθρου δεν είναι ακόμα στον αέρα. Μένει στην ουρά και φεύγει μόλις χτιστεί."
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290806524156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290806524156174",
+          "at": "2026-11-26T05:24:02.041Z"
+        }
+      }
     },
     {
       "id": "20261125211306-news-efialtis-stin-aigypto-meta-apo-ekrixi-vytioforoy-pano-apo-20-nekroi-dekades-ochimata-stis-floges",
