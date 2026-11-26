@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T18:34:48.520Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/geopolitiki/katadikazei-to-toyrkolivyko-mnimonio-to-eyropaiko-koinovoylio-einai-akyro-den-paragei-ennoma-apotelesmata"
+      "link": "https://www.newshub.gr/el/geopolitiki/katadikazei-to-toyrkolivyko-mnimonio-to-eyropaiko-koinovoylio-einai-akyro-den-paragei-ennoma-apotelesmata",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290883432156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290883432156174",
+          "at": "2026-11-26T18:35:13.005Z"
+        }
+      }
     },
     {
       "id": "20261126183116-news-dyo-nees-epicheiriseis-diasosis-metanaston-se-notia-kriti-kai-gaydo",
