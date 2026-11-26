@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T22:09:05.577Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/geopolitiki/orgi-toyrkias-kata-toy-eyrokoinovoylioy-gia-to-toyrkolivyko-mnimonio"
+      "link": "https://www.newshub.gr/el/geopolitiki/orgi-toyrkias-kata-toy-eyrokoinovoylioy-gia-to-toyrkolivyko-mnimonio",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290913618156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290913618156174",
+          "at": "2026-11-26T22:09:28.070Z"
+        }
+      }
     },
     {
       "id": "20261126214313-news-mpazar-vivlion-tin-paraskeyi-27-noemvrioy-sto-dimarcheio-chanion",
