@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T06:34:41.360Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/apopseis/poios-oriothetei-to-kako"
+      "link": "https://www.newshub.gr/el/apopseis/poios-oriothetei-to-kako",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290813292156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290813292156174",
+          "at": "2026-11-26T06:34:56.321Z"
+        }
+      }
     },
     {
       "id": "20261126063027-news-panagiotis-manolakos-i-eyropi-echase-to-treno-otan-aperripse-tin-politiki-enosi-podcast",
@@ -27,10 +34,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T06:30:27.194Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/geopolitiki/panagiotis-manolakos-i-eyropi-echase-to-treno-otan-aperripse-tin-politiki-enosi-podcast"
+      "link": "https://www.newshub.gr/el/geopolitiki/panagiotis-manolakos-i-eyropi-echase-to-treno-otan-aperripse-tin-politiki-enosi-podcast",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290813322156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290813322156174",
+          "at": "2026-11-26T06:35:03.235Z"
+        }
+      }
     },
     {
       "id": "20261126053410-news-i-liverpoyl-proetoimazetai-gia-to-antio-toy-tsimika-eno-kalovlepei-goyentel",
