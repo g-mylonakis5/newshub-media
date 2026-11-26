@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126072745-news-epidoma-400-eyro-pote-tha-ginoyn-oi-pliromes-se-syntaxioychoys-poy-den-piran-me-tin-proti-katavoli",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ellada/epidoma-400-eyro-pote-tha-ginoyn-oi-pliromes-se-syntaxioychoys-poy-den-piran-me-tin-proti-katavoli",
+      "title": "Επίδομα 400 ευρώ: Πότε θα γίνουν οι πληρωμές σε συνταξιούχους που δεν πήραν με την πρώτη καταβολή",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/777.jpg",
+      "text": "Επίδομα 400 ευρώ: Πότε θα γίνουν οι πληρωμές σε συνταξιούχους που δεν πήραν με την πρώτη καταβολή",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T07:27:45.282Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ellada/epidoma-400-eyro-pote-tha-ginoyn-oi-pliromes-se-syntaxioychoys-poy-den-piran-me-tin-proti-katavoli"
+    },
+    {
       "id": "20261126070009-news-alma-5-9-stis-times-ton-oikodomikon-ylikon-ton-oktovrio-me-pieseis-apo-tin-energeia",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/alma-5-9-stis-times-ton-oikodomikon-ylikon-ton-oktovrio-me-pieseis-apo-tin-energeia",
