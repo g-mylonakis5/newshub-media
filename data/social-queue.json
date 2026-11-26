@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126201143-news-kleidose-o-diadochos-tis-lagkarnt-poios-tha-einai-o-neos-proedros-tis-ekt",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/kleidose-o-diadochos-tis-lagkarnt-poios-tha-einai-o-neos-proedros-tis-ekt",
+      "title": "«Κλείδωσε» ο διάδοχος της Λαγκάρντ - Ποιος θα είναι ο νέος πρόεδρος της ΕΚΤ",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/screenshot-2026-11-26-183340.jpg",
+      "text": "«Κλείδωσε» ο διάδοχος της Λαγκάρντ - Ποιος θα είναι ο νέος πρόεδρος της ΕΚΤ",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T20:11:43.008Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/kleidose-o-diadochos-tis-lagkarnt-poios-tha-einai-o-neos-proedros-tis-ekt"
+    },
+    {
       "id": "20261126201117-news-cyber-monday-oi-agores-apo-to-diadiktyo-theloyn-prosochi-tonizei-i-enosi-ergazomenon-katanaloton-elladas",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/cyber-monday-oi-agores-apo-to-diadiktyo-theloyn-prosochi-tonizei-i-enosi-ergazomenon-katanaloton-elladas",
@@ -11,17 +27,10 @@
         "facebook",
         "x"
       ],
-      "status": "done",
+      "status": "pending",
       "at": "2026-11-26T20:11:17.407Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/cyber-monday-oi-agores-apo-to-diadiktyo-theloyn-prosochi-tonizei-i-enosi-ergazomenon-katanaloton-elladas",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290894052156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290894052156174",
-          "at": "2026-11-26T20:11:32.745Z"
-        }
-      }
+      "link": "https://www.newshub.gr/el/oikonomia/cyber-monday-oi-agores-apo-to-diadiktyo-theloyn-prosochi-tonizei-i-enosi-ergazomenon-katanaloton-elladas"
     },
     {
       "id": "20261126200417-news-spitakia-anakyklosis-pos-ftasame-stis-syllipseis-ereyna-gia-athemiti-epirroi-meso-typoy",
