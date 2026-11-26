@@ -1,5 +1,17 @@
 [
   {
+    "id": "to-politistiko-imerologio-toy-dimoy-irakleioy-5",
+    "title": "Το πολιτιστικό ημερολόγιο του Δήμου Ηρακλείου",
+    "url": "https://www.newshub.gr/el/exodos/to-politistiko-imerologio-toy-dimoy-irakleioy-5",
+    "date": "2026-11-26T18:18:00.000Z",
+    "category": "Έξοδος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/marabegias.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/marabegias.jpg",
+    "summary": "Συνεχίζονται οι πολιτιστικές εκδηλώσεις που διοργανώνονται ή πραγματοποιούνται με την υποστήριξη του Δήμου Ηρακλείου(Αντιδημαρχία Πολιτισμού) και της ΔΕΠΑΝΑΛ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "nekrotafeio-plyntirion-kai-psygeion-anakalyfthike-ston-atlantiko-okeano-vinteo",
     "title": "Νεκροταφείο πλυντηρίων και ψυγείων ανακαλύφθηκε στον Ατλαντικό Ωκεανό (βίντεο)",
     "url": "https://www.newshub.gr/el/kosmos/nekrotafeio-plyntirion-kai-psygeion-anakalyfthike-ston-atlantiko-okeano-vinteo",
@@ -177,7 +189,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/maketa-anakyklosi.jpg",
     "summary": "Ήταν Ιούλιος του 2026 όταν δύο εισαγγελείς στην Ελλάδα έδωσαν εντολή να κατασχεθούν τα ψηφιακά αρχεία της ΤΕΧΑΝ, που τοποθετούσε τα «Σπιτάκια Ανακύκλωσ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "royvikonas-paredose-anapiriko-amaxidio-se-monogoneiki-oikogeneia-sto-irakleio",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/hazmp_2wkaau_zx.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/hazmp_2wkaau_zx.jpg",
     "summary": "Με προπόνηση στο Βαρδινογιάννειο Αθλητικό Κέντρο ολοκλήρωσαν οι ποδοσφαιριστές του ΟΦΗ την προετοιμασία τους ενόψει της αυριανής (22/11, 17:30) αναμέτρησης μ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kriti-enas-chronos-apo-ton-thanato-toy-rafail-galyfianaki-kanoyme-ypomoni-kai-perimenoyme-apantiseis-leei-o-pateras-toy",
-    "title": "Κρήτη: Ένας χρόνος από τον θάνατο του Ραφαήλ Γαλυφιανάκη-«Κάνουμε υπομονή και περιμένουμε απαντήσεις», λέει ο πατέρας του",
-    "url": "https://www.newshub.gr/el/kriti/kriti-enas-chronos-apo-ton-thanato-toy-rafail-galyfianaki-kanoyme-ypomoni-kai-perimenoyme-apantiseis-leei-o-pateras-toy",
-    "date": "2026-11-21T20:00:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/raphaelhr.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/raphaelhr.jpg",
-    "summary": "Ενας χρόνος συμπληρώνεται σε λίγες ημέρες από την τραγωδία που συγκλόνισε την Κρήτη αλλά και ολόκληρη την Ελλάδα, όταν  ο 19χρονος στρατιώτης Ραφαήλ Γαλ...",
     "author": null,
     "featured": false
   },
