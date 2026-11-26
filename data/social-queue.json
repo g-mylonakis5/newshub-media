@@ -1,95 +1,20 @@
 {
   "posts": [
     {
-      "id": "20261126143814-news-venizeleio-protasi-38-ekat-eyro-gia-tin-anakainisi-toy-kentrikoy-ktirioy-ekkremei-i-entaxi-ton-ergon",
+      "id": "20261126145127-news-ekdilosi-me-thema-kritiki-diatrofi-chronia-nosimata-tin-triti-1i-dekemvrioy-sto-irakleio",
       "kind": "news",
-      "ref": "https://www.newshub.gr/el/ygeia/venizeleio-protasi-38-ekat-eyro-gia-tin-anakainisi-toy-kentrikoy-ktirioy-ekkremei-i-entaxi-ton-ergon",
-      "title": "Βενιζέλειο: Πρόταση 38 εκατ. ευρώ για την ανακαίνιση του κεντρικού κτιρίου – Εκκρεμεί η ένταξη των έργων",
-      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/benizeleio.jpg",
-      "text": "Βενιζέλειο: Πρόταση 38 εκατ. ευρώ για την ανακαίνιση του κεντρικού κτιρίου – Εκκρεμεί η ένταξη των έργων",
+      "ref": "https://www.newshub.gr/el/kriti/ekdilosi-me-thema-kritiki-diatrofi-chronia-nosimata-tin-triti-1i-dekemvrioy-sto-irakleio",
+      "title": "Εκδήλωση με θέμα «Κρητική Διατροφή & χρόνια νοσήματα»  την Τρίτη 1η Δεκεμβρίου στο Ηράκλειο",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/phageto-ygieine-diatrophe-pexels.jpg",
+      "text": "Εκδήλωση με θέμα «Κρητική Διατροφή & χρόνια νοσήματα»  την Τρίτη 1η Δεκεμβρίου στο Ηράκλειο",
       "targets": [
         "facebook",
         "x"
       ],
-      "status": "done",
-      "at": "2026-11-26T14:38:14.357Z",
-      "by": "",
-      "link": "https://www.newshub.gr/el/ygeia/venizeleio-protasi-38-ekat-eyro-gia-tin-anakainisi-toy-kentrikoy-ktirioy-ekkremei-i-entaxi-ton-ergon",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290858334156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290858334156174",
-          "at": "2026-11-26T14:38:32.887Z"
-        }
-      }
-    },
-    {
-      "id": "20261126142232-news-kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
-      "kind": "news",
-      "ref": "https://www.newshub.gr/el/kriti/kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
-      "title": "Κρήτη: Δύο επιχειρήσεις διάσωσης νότια της Γαύδου – 92 μετανάστες σε δύο λέμβους",
-      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/metanastes-ploio.jpg",
-      "text": "Κρήτη: Δύο επιχειρήσεις διάσωσης νότια της Γαύδου – 92 μετανάστες σε δύο λέμβους",
-      "targets": [
-        "facebook"
-      ],
-      "status": "done",
-      "at": "2026-11-26T14:22:32.390Z",
-      "by": "",
-      "link": "https://www.newshub.gr/el/kriti/kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290856852156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290856852156174",
-          "at": "2026-11-26T14:22:53.242Z"
-        }
-      }
-    },
-    {
-      "id": "20261126131046-news-elon-mask-kanei-doro-dyo-metoches-tis-spacex-se-kathe-paidi-stis-ipa-pos-tha-leitoyrgisei-i-dorea-ton-18-dis-dolarion",
-      "kind": "news",
-      "ref": "https://www.newshub.gr/el/kosmos/elon-mask-kanei-doro-dyo-metoches-tis-spacex-se-kathe-paidi-stis-ipa-pos-tha-leitoyrgisei-i-dorea-ton-18-dis-dolarion",
-      "title": "Έλον Μασκ: Κάνει δώρο δύο μετοχές της Spacex σε κάθε παιδί στις ΗΠΑ - Πώς θα λειτουργήσει η δωρεά των 18 δισ. δολαρίων",
-      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/elon-mask-reyters.jpg",
-      "text": "Έλον Μασκ: Κάνει δώρο δύο μετοχές της Spacex σε κάθε παιδί στις ΗΠΑ - Πώς θα λειτουργήσει η δωρεά των 18 δισ. δολαρίων",
-      "targets": [
-        "facebook",
-        "x"
-      ],
-      "status": "done",
-      "at": "2026-11-26T13:10:46.141Z",
-      "by": "",
-      "link": "https://www.newshub.gr/el/kosmos/elon-mask-kanei-doro-dyo-metoches-tis-spacex-se-kathe-paidi-stis-ipa-pos-tha-leitoyrgisei-i-dorea-ton-18-dis-dolarion",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290851236156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290851236156174",
-          "at": "2026-11-26T13:11:02.856Z"
-        }
-      }
-    },
-    {
-      "id": "20261126130929-news-menegaki-chairomai-poy-sas-leipo-sas-skeftomai-kai-ego-kapoies-stigmes-den-mporo-na-po-an-tha-yparxei-alli-eleni",
-      "kind": "news",
-      "ref": "https://www.newshub.gr/el/sugar/menegaki-chairomai-poy-sas-leipo-sas-skeftomai-kai-ego-kapoies-stigmes-den-mporo-na-po-an-tha-yparxei-alli-eleni",
-      "title": "Μενεγάκη: \"Χαίρομαι που σας λείπω, σας σκέφτομαι και εγώ κάποιες στιγμές - Δεν μπορώ να πω αν θα υπάρξει άλλη Ελένη»",
-      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/menegake-fb.jpg",
-      "text": "Μενεγάκη: \"Χαίρομαι που σας λείπω, σας σκέφτομαι και εγώ κάποιες στιγμές - Δεν μπορώ να πω αν θα υπάρξει άλλη Ελένη»",
-      "targets": [
-        "facebook",
-        "x"
-      ],
-      "status": "done",
-      "at": "2026-11-26T13:09:29.156Z",
-      "by": "",
-      "link": "https://www.newshub.gr/el/sugar/menegaki-chairomai-poy-sas-leipo-sas-skeftomai-kai-ego-kapoies-stigmes-den-mporo-na-po-an-tha-yparxei-alli-eleni",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290851050156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290851050156174",
-          "at": "2026-11-26T13:09:44.280Z"
-        }
-      }
+      "status": "pending",
+      "at": "2026-11-26T14:51:27.172Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/ekdilosi-me-thema-kritiki-diatrofi-chronia-nosimata-tin-triti-1i-dekemvrioy-sto-irakleio"
     },
     {
       "id": "20261126101843-news-kit-epiviosis-72-oron-to-kostos-ti-katagrafoyn-ta-exeidikeymena-katastimata-kai-giati-i-prolipsi-den-periorizetai-stin-agora-aparaititon-efodion",
