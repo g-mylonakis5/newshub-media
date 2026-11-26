@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126200417-news-spitakia-anakyklosis-pos-ftasame-stis-syllipseis-ereyna-gia-athemiti-epirroi-meso-typoy",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/spitakia-anakyklosis-pos-ftasame-stis-syllipseis-ereyna-gia-athemiti-epirroi-meso-typoy",
+      "title": "«Σπιτάκια Ανακύκλωσης»: Πως φτάσαμε στις συλλήψεις - Έρευνα για αθέμιτη επιρροή μέσω Τύπου",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/maketa-anakyklosi.jpg",
+      "text": "«Σπιτάκια Ανακύκλωσης»: Πως φτάσαμε στις συλλήψεις - Έρευνα για αθέμιτη επιρροή μέσω Τύπου",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T20:04:17.624Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/spitakia-anakyklosis-pos-ftasame-stis-syllipseis-ereyna-gia-athemiti-epirroi-meso-typoy"
+    },
+    {
       "id": "20261126183759-news-black-friday-diafimistiki-kampania-toy-eot-gia-provoli-tis-elladas-sti-gallia",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/black-friday-diafimistiki-kampania-toy-eot-gia-provoli-tis-elladas-sti-gallia",
