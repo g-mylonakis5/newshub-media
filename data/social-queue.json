@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126052342-news-wsj-aporriti-enimerosi-toy-kogkresoy-gia-tin-eromeni-toy-choyangk-kai-ta-senaria-kataskopeias",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/wsj-aporriti-enimerosi-toy-kogkresoy-gia-tin-eromeni-toy-choyangk-kai-ta-senaria-kataskopeias",
+      "title": "Wsj: Απόρρητη ενημέρωση του Κογκρέσου για την ερωμένη του Χουάνγκ και τα σενάρια κατασκοπείας",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/jensen-huang-alice-huang-2-768x449-1.jpg",
+      "text": "Wsj: Απόρρητη ενημέρωση του Κογκρέσου για την ερωμένη του Χουάνγκ και τα σενάρια κατασκοπείας",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T05:23:42.975Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kosmos/wsj-aporriti-enimerosi-toy-kogkresoy-gia-tin-eromeni-toy-choyangk-kai-ta-senaria-kataskopeias"
+    },
+    {
       "id": "20261125220315-news-deka-fores-akrivotero-to-fysiko-aerio-stin-eyropi-apo-tis-ipa",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/deka-fores-akrivotero-to-fysiko-aerio-stin-eyropi-apo-tis-ipa",
@@ -80,17 +96,11 @@
         "facebook",
         "x"
       ],
-      "status": "done",
+      "status": "pending",
       "at": "2026-11-25T21:43:28.780Z",
       "by": "ioannisram@hotmail.com",
       "link": "https://www.newshub.gr/el/kriti/kriti-athoos-36chronos-poy-eiche-katigorithei-apo-24chroni-gia-viasmo-emeine-pano-apo-chrono-sti-fylaki",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290794368156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290794368156174",
-          "at": "2026-11-26T03:10:17.361Z"
-        }
-      }
+      "note": "Η σελίδα του άρθρου δεν είναι ακόμα στον αέρα. Μένει στην ουρά και φεύγει μόλις χτιστεί."
     },
     {
       "id": "20261125211306-news-efialtis-stin-aigypto-meta-apo-ekrixi-vytioforoy-pano-apo-20-nekroi-dekades-ochimata-stis-floges",
