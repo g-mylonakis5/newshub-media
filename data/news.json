@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/elikiomene-diatrophe.jpg",
     "summary": "Μπορεί το πολυπόθητο μυστικό της υγιούς γήρανσης να κρύβεται στο έντερό μας; Επιστήμονες από το Πανεπιστήμιο της Καλιφόρνιας στο Σαν Ντιέγκο εντόπισαν μια ιδ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "to-politistiko-imerologio-toy-dimoy-irakleioy-5",
@@ -22,6 +22,18 @@
     "summary": "Συνεχίζονται οι πολιτιστικές εκδηλώσεις που διοργανώνονται ή πραγματοποιούνται με την υποστήριξη του Δήμου Ηρακλείου(Αντιδημαρχία Πολιτισμού) και της ΔΕΠΑΝΑΛ...",
     "author": null,
     "featured": false
+  },
+  {
+    "id": "spitakia-anakyklosis-parapempontai-gia-egklimatiki-organosi-oi-tesseris-syllifthentes-apologoyntai-ayrio",
+    "title": "«Σπιτάκια ανακύκλωσης»: Παραπέμπονται για εγκληματική οργάνωση οι τέσσερις συλληφθέντες – Απολογούνται αύριο",
+    "url": "https://www.newshub.gr/el/ellada/spitakia-anakyklosis-parapempontai-gia-egklimatiki-organosi-oi-tesseris-syllifthentes-apologoyntai-ayrio",
+    "date": "2026-11-26T18:13:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/spitakia-anakykloshssssss.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/spitakia-anakykloshssssss.jpg",
+    "summary": "Με βαρύτατο κατηγορητήριο παραπέμπονται, σύμφωνα με πληροφορίες, οι για να απολογηθούν αύριο, Παρασκευή 27 Νοεμβρίου οι τέσσερις συλληφθέντες για την προμήθε...",
+    "author": null,
+    "featured": true
   },
   {
     "id": "nekrotafeio-plyntirion-kai-psygeion-anakalyfthike-ston-atlantiko-okeano-vinteo",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/918339161_1920603855570559_5769037367354542988_n.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/918339161_1920603855570559_5769037367354542988_n.jpg",
     "summary": "Αναστάτωση προκλήθηκε το βράδυ του Σαββάτου στο κέντρο του Ηρακλείου, μετά από ένταση που σημειώθηκε μεταξύ αστυνομικών δυνάμεων και ατόμων που συμμετείχαν σ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "tragodia-stin-perifereiaki-ymittoy-nekros-odigos-poy-prosekroyse-sta-diodia",
-    "title": "Τραγωδία στην Περιφερειακή Υμηττού: Νεκρός οδηγός που προσέκρουσε στα διόδια",
-    "url": "https://www.newshub.gr/el/ellada/tragodia-stin-perifereiaki-ymittoy-nekros-odigos-poy-prosekroyse-sta-diodia",
-    "date": "2026-11-21T20:20:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/maketa-troxaio.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/maketa-troxaio.jpg",
-    "summary": "Τροχαίο δυστύχημα σημειώθηκε το βράδυ του Σαββάτου (21/11) στην Περιφερειακή Υμηττού, όταν αυτοκίνητο εξετράπη της πορείας του και προσέκρουσε με σφοδρότητα ...",
     "author": null,
     "featured": false
   },
