@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126212036-news-epistrofi-enoikioy-gia-932-652-polites-xekinisan-oi-pliromes",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/epistrofi-enoikioy-gia-932-652-polites-xekinisan-oi-pliromes",
+      "title": "Eπιστροφή ενοικίου για 932.652 πολίτες: Ξεκίνησαν οι πληρωμές",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/ktiria.jpg",
+      "text": "Eπιστροφή ενοικίου για 932.652 πολίτες: Ξεκίνησαν οι πληρωμές",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T21:20:36.663Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/epistrofi-enoikioy-gia-932-652-polites-xekinisan-oi-pliromes"
+    },
+    {
       "id": "20261126205710-news-m-manoysakis-admie-eimaste-stin-epochi-ton-diethnon-ilektrikon-diasyndeseon",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/m-manoysakis-admie-eimaste-stin-epochi-ton-diethnon-ilektrikon-diasyndeseon",
