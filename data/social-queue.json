@@ -1,6 +1,21 @@
 {
   "posts": [
     {
+      "id": "20261126074433-news-emma-dobigny-i-moysa-tis-monmartris-poy-kryvotan-kato-apo-enan-degas",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/apopseis/emma-dobigny-i-moysa-tis-monmartris-poy-kryvotan-kato-apo-enan-degas",
+      "title": "Emma Dobigny: Η μούσα της Μονμάρτρης που «κρυβόταν» κάτω από έναν Degas",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/anonymo-schedio-15.jpg",
+      "text": "Emma Dobigny: Η μούσα της Μονμάρτρης που «κρυβόταν» κάτω από έναν Degas",
+      "targets": [
+        "facebook"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T07:44:33.593Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/apopseis/emma-dobigny-i-moysa-tis-monmartris-poy-kryvotan-kato-apo-enan-degas"
+    },
+    {
       "id": "20261126074225-news-kairos-vroches-kai-kataigides-simera-se-voreio-ionio-kai-ipeiro-nea-voytia-tis-thermokrasias-chionia-kai-10-mpofor-tin-kyriaki",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ellada/kairos-vroches-kai-kataigides-simera-se-voreio-ionio-kai-ipeiro-nea-voytia-tis-thermokrasias-chionia-kai-10-mpofor-tin-kyriaki",
