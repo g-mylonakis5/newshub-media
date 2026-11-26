@@ -10,10 +10,17 @@
       "targets": [
         "facebook"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T06:16:23.941Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/irakleio-asfyktikes-oi-synthikes-sto-eidiko-dimotiko-scholeio-kofon-kai-to-eidiko-gymnasio"
+      "link": "https://www.newshub.gr/el/kriti/irakleio-asfyktikes-oi-synthikes-sto-eidiko-dimotiko-scholeio-kofon-kai-to-eidiko-gymnasio",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290811198156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290811198156174",
+          "at": "2026-11-26T06:16:40.324Z"
+        }
+      }
     },
     {
       "id": "20261126060210-news-mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
