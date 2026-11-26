@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T15:14:51.684Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/petrelaioforo-vythistike-sta-anoikta-tis-impiza-nekro-ena-melos-toy-pliromatos"
+      "link": "https://www.newshub.gr/el/kosmos/petrelaioforo-vythistike-sta-anoikta-tis-impiza-nekro-ena-melos-toy-pliromatos",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290862828156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290862828156174",
+          "at": "2026-11-26T15:15:11.042Z"
+        }
+      }
     },
     {
       "id": "20261126151156-news-gia-tin-elli-alexioy-i-epomeni-omilia-toy-4oy-kykloy-ton-mikron-istorion-tis-polis",
