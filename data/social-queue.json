@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126151156-news-gia-tin-elli-alexioy-i-epomeni-omilia-toy-4oy-kykloy-ton-mikron-istorion-tis-polis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/gia-tin-elli-alexioy-i-epomeni-omilia-toy-4oy-kykloy-ton-mikron-istorion-tis-polis",
+      "title": "Για την Έλλη Αλεξίου η επόμενη ομιλία του 4ου κύκλου των «Μικρών Ιστοριών της Πόλης»",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/bdb1.jpg",
+      "text": "Για την Έλλη Αλεξίου η επόμενη ομιλία του 4ου κύκλου των «Μικρών Ιστοριών της Πόλης»",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T15:11:56.963Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/gia-tin-elli-alexioy-i-epomeni-omilia-toy-4oy-kykloy-ton-mikron-istorion-tis-polis"
+    },
+    {
       "id": "20261126150058-news-astynomiki-epicheirisi-sti-mesara-tesseris-syllipseis-gia-paranomi-voskisi-katapatisi-agrotemachion-kai-agrozimies",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/astynomiki-epicheirisi-sti-mesara-tesseris-syllipseis-gia-paranomi-voskisi-katapatisi-agrotemachion-kai-agrozimies",
