@@ -1,5 +1,17 @@
 [
   {
+    "id": "kykloma-eikonikon-diamonon-oi-dialogoi-gia-tin-kriti-tis-times-kai-tis-apodeixeis-se-astynomikoys-kai-limenikoys",
+    "title": "Κύκλωμα εικονικών διαμονών: Οι διάλογοι για την Κρήτη, τις τιμές και τις αποδείξεις σε αστυνομικούς και λιμενικούς",
+    "url": "https://www.newshub.gr/el/ellada/kykloma-eikonikon-diamonon-oi-dialogoi-gia-tin-kriti-tis-times-kai-tis-apodeixeis-se-astynomikoys-kai-limenikoys",
+    "date": "2026-11-26T09:40:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/kykloma-timologia-intime.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/kykloma-timologia-intime.jpg",
+    "summary": "Στο επίκεντρο των συνομιλιών που κατέγραψε ο κοριός της ΕΛ.ΑΣ. για το κύκλωμα που φέρεται να εξασφάλιζε εικονικές αποδείξεις διαμονής σε μετακινούμενους αστυ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "opeka-zesto-chrima-tin-paraskeyi-poioi-dikaioychoi-tha-doyn-chrimata-stoys-logariasmoys-toys",
     "title": "ΟΠΕΚΑ: \"Ζεστό\" χρήμα την Παρασκευή: Ποιοι δικαιούχοι θα δουν χρήματα στους λογαριασμούς τους",
     "url": "https://www.newshub.gr/el/oikonomia/opeka-zesto-chrima-tin-paraskeyi-poioi-dikaioychoi-tha-doyn-chrimata-stoys-logariasmoys-toys",
@@ -45,7 +57,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/euro-masouri.jpg",
     "summary": "Ελεύθερος με περιοριστικούς όρους αφέθηκε χθες Τετάρτη 25/11 ο 60χρονος ο οποίος πριν από μερικές ημέρες είχε γίνει \"τσακωτός\" με πλαστά... 200ευρα...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "ena-dentro-diaforetiko-apo-ta-alla-mia-vradia-me-dynata-minymata-gia-tin-pagkosmia-imera-exaleipsis-vias-kata-ton-gynaikon",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/astynomia-2.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/astynomia-2.jpg",
     "summary": "Σορός σε κατάσταση προχωρημένης σήψης εντοπίστηκε σήμερα το πρωί, γύρω στις 9:30, σε εγκαταλελειμμένο κτίριο στην περιοχή του Αγίου Παντελεήμονα.\r\n\r\nΣύμφωνα ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "fos-sto-toynel-apokalypseis-gia-to-kapsoni-thanatoy-ston-21chrono-katadromea-ton-oyk",
-    "title": "«Φως στο Τούνελ»: Αποκαλύψεις για το καψόνι θανάτου στον 21χρονο καταδρομέα των ΟΥΚ",
-    "url": "https://www.newshub.gr/el/ellada/fos-sto-toynel-apokalypseis-gia-to-kapsoni-thanatoy-ston-21chrono-katadromea-ton-oyk",
-    "date": "2026-11-21T08:50:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/oyk.png-1074x800.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/oyk.png-1074x800.jpg",
-    "summary": "Νέα στοιχεία και συγκλονιστικές μαρτυρίες για τις συνθήκες κάτω από τις οποίες έχασε τη ζωή του ο 21χρονος καταδρομέας Αλέξανδρος Κετίκογλου, στις 29 Νοεμβρί...",
     "author": null,
     "featured": false
   },
