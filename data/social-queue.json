@@ -1,49 +1,20 @@
 {
   "posts": [
     {
-      "id": "20261126061623-news-irakleio-asfyktikes-oi-synthikes-sto-eidiko-dimotiko-scholeio-kofon-kai-to-eidiko-gymnasio",
+      "id": "20261126063027-news-panagiotis-manolakos-i-eyropi-echase-to-treno-otan-aperripse-tin-politiki-enosi-podcast",
       "kind": "news",
-      "ref": "https://www.newshub.gr/el/kriti/irakleio-asfyktikes-oi-synthikes-sto-eidiko-dimotiko-scholeio-kofon-kai-to-eidiko-gymnasio",
-      "title": "Ηράκλειο: Ασφυκτικές οι συνθήκες στο Ειδικό Δημοτικό Σχολείο Κωφών και το Ειδικό Γυμνάσιο",
-      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/scholeio-aithousa.jpg",
-      "text": "Ηράκλειο: Ασφυκτικές οι συνθήκες στο Ειδικό Δημοτικό Σχολείο Κωφών και το Ειδικό Γυμνάσιο",
-      "targets": [
-        "facebook"
-      ],
-      "status": "done",
-      "at": "2026-11-26T06:16:23.941Z",
-      "by": "",
-      "link": "https://www.newshub.gr/el/kriti/irakleio-asfyktikes-oi-synthikes-sto-eidiko-dimotiko-scholeio-kofon-kai-to-eidiko-gymnasio",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290811198156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290811198156174",
-          "at": "2026-11-26T06:16:40.324Z"
-        }
-      }
-    },
-    {
-      "id": "20261126060210-news-mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
-      "kind": "news",
-      "ref": "https://www.newshub.gr/el/sugar/mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
-      "title": "Ματ Ντέιμον: Ήταν δύσκολο να επιστρέψω στην οικογενειακή ζωή μετά τα γυρίσματα της «Οδύσσειας»",
-      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/matt-damon-odyssey.jpg",
-      "text": "Ματ Ντέιμον: Ήταν δύσκολο να επιστρέψω στην οικογενειακή ζωή μετά τα γυρίσματα της «Οδύσσειας»",
+      "ref": "https://www.newshub.gr/el/geopolitiki/panagiotis-manolakos-i-eyropi-echase-to-treno-otan-aperripse-tin-politiki-enosi-podcast",
+      "title": "Παναγιώτης Μανωλάκος: Η Ευρώπη έχασε το τρένο όταν απέρριψε την πολιτική ένωση! (podcast)",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/analyseis-37.jpg",
+      "text": "Παναγιώτης Μανωλάκος: Η Ευρώπη έχασε το τρένο όταν απέρριψε την πολιτική ένωση! (podcast)",
       "targets": [
         "facebook",
         "x"
       ],
-      "status": "done",
-      "at": "2026-11-26T06:02:10.938Z",
-      "by": "",
-      "link": "https://www.newshub.gr/el/sugar/mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290809644156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290809644156174",
-          "at": "2026-11-26T06:02:30.842Z"
-        }
-      }
+      "status": "pending",
+      "at": "2026-11-26T06:30:27.194Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/geopolitiki/panagiotis-manolakos-i-eyropi-echase-to-treno-otan-aperripse-tin-politiki-enosi-podcast"
     },
     {
       "id": "20261126053410-news-i-liverpoyl-proetoimazetai-gia-to-antio-toy-tsimika-eno-kalovlepei-goyentel",
