@@ -1,5 +1,17 @@
 [
   {
+    "id": "treis-syllipseis-sti-thesprotia-gia-66-kila-kannavis",
+    "title": "Τρεις συλλήψεις στη Θεσπρωτία για 66 κιλά κάνναβης",
+    "url": "https://www.newshub.gr/el/ellada/treis-syllipseis-sti-thesprotia-gia-66-kila-kannavis",
+    "date": "2026-11-26T14:12:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/narkotika-thess.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/narkotika-thess.jpg",
+    "summary": "Περισσότερα από 66 κιλά ακατέργαστης κάνναβης εντόπισαν και κατέσχεσαν αστυνομικοί σε περιοχή της Θεσπρωτίας, στο πλαίσιο επιχείρησης για την αντιμετώπιση τη...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "synaylia-me-to-moysiko-synolo-giagkini-apo-tin-perifereia-kritis-sta-peza",
     "title": "Συναυλία με το μουσικό σύνολο «Γιαγκίνι» από την Περιφέρεια Κρήτης στα Πεζά",
     "url": "https://www.newshub.gr/el/kriti/synaylia-me-to-moysiko-synolo-giagkini-apo-tin-perifereia-kritis-sta-peza",
@@ -8,6 +20,18 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/giagini_nov2026_story.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/giagini_nov2026_story.jpg",
     "summary": "Η Περιφέρεια Κρήτης, συνεχίζοντας τις 16ήμερες δράσεις της για την πρόληψη και την αντιμετώπιση της βίας κατά των γυναικών και των κοριτσιών, διοργανώνει σήμ...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "dyo-nees-epicheiriseis-diasosis-metanaston-se-notia-kriti-kai-gaydo",
+    "title": "Δύο νέες επιχειρήσεις διάσωσης μεταναστών σε νότια Κρήτη και Γαύδο",
+    "url": "https://www.newshub.gr/el/kriti/dyo-nees-epicheiriseis-diasosis-metanaston-se-notia-kriti-kai-gaydo",
+    "date": "2026-11-26T14:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/metanastes-barka3nng.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/metanastes-barka3nng.jpg",
+    "summary": "Αλλεπάλληλα είναι τα περιστατικά εντοπισμού και διάσωσης μεταναστών, με τον αριθμό τις τελευταίες ώρες να ξεπερνάει τα 240 άτομα, από τουλάχιστον πέντε διαφο...",
     "author": null,
     "featured": false
   },
@@ -7224,30 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/5877866-2.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/5877866-2.jpg",
     "summary": "Συναγερμός έχει σημάνει στις Αρχές για την εξαφάνιση ανήλικης από χώρο παιδικής προστασίας στον Κολωνό, από την Πέμπτη 12 Νοεμβρίου.\r\n\r\nΠρόκειται για την Ευα...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "i-thessaloniki-sto-podi-to-proto-paok-aris-tis-neas-epochis",
-    "title": "Η Θεσσαλονίκη στο πόδι: Το πρώτο ΠΑΟΚ – Άρης της… νέας εποχής",
-    "url": "https://www.newshub.gr/el/athlitika/i-thessaloniki-sto-podi-to-proto-paok-aris-tis-neas-epochis",
-    "date": "2026-11-21T13:40:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/spanoulis_trinkeri.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/spanoulis_trinkeri.jpg",
-    "summary": "Με πέντε αναμετρήσεις ανοίγει σήμερα, Σάββατο (21/11), η αυλαία της 8ης αγωνιστικής της GBL, με τα βλέμματα να στρέφονται στη Θεσσαλονίκη, εκεί όπου ο ΠΑΟΚ υ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "exarthrothike-kykloma-poy-ekleve-polyteli-aytokinita-entopistikan-268-klemmena-ochimata-stin-ellada-pano-apo-5-ekat-eyro-i-axia-toys",
-    "title": "Εξαρθρώθηκε κύκλωμα που έκλεβε πολυτελή αυτοκίνητα-Εντοπίστηκαν 268 κλεμμένα οχήματα στην Ελλάδα, πάνω από 5 εκατ. ευρώ η αξία τους",
-    "url": "https://www.newshub.gr/el/ellada/exarthrothike-kykloma-poy-ekleve-polyteli-aytokinita-entopistikan-268-klemmena-ochimata-stin-ellada-pano-apo-5-ekat-eyro-i-axia-toys",
-    "date": "2026-11-21T13:30:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/aftokinita-1200x675.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/aftokinita-1200x675.jpg",
-    "summary": "Στην εξάρθρωση κυκλώματος που έκλεβε πολυτελή αυτοκίνητα προχώρησε η Ελληνική Αστυνομία που συμμετείχε στις διεθνείς επιχειρησιακές δράσεις «Mobile 9&r...",
     "author": null,
     "featured": false
   },
