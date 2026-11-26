@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126052611-news-karkinos-toy-ipatos-ta-aionia-chimika-poy-syndeontai-me-eos-2-5-fores-megalytero-kindyno",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ygeia/karkinos-toy-ipatos-ta-aionia-chimika-poy-syndeontai-me-eos-2-5-fores-megalytero-kindyno",
+      "title": "Καρκίνος του ήπατος: Τα «αιώνια χημικά» που συνδέονται με έως 2,5 φορές μεγαλύτερο κίνδυνο",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/james-lo-74q3tyd-eyc-unsplash-1200x676.jpg",
+      "text": "Καρκίνος του ήπατος: Τα «αιώνια χημικά» που συνδέονται με έως 2,5 φορές μεγαλύτερο κίνδυνο",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T05:26:11.292Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ygeia/karkinos-toy-ipatos-ta-aionia-chimika-poy-syndeontai-me-eos-2-5-fores-megalytero-kindyno"
+    },
+    {
       "id": "20261126052342-news-wsj-aporriti-enimerosi-toy-kogkresoy-gia-tin-eromeni-toy-choyangk-kai-ta-senaria-kataskopeias",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kosmos/wsj-aporriti-enimerosi-toy-kogkresoy-gia-tin-eromeni-toy-choyangk-kai-ta-senaria-kataskopeias",
