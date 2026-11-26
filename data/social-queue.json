@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126060210-news-mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/sugar/mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
+      "title": "Ματ Ντέιμον: Ήταν δύσκολο να επιστρέψω στην οικογενειακή ζωή μετά τα γυρίσματα της «Οδύσσειας»",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/matt-damon-odyssey.jpg",
+      "text": "Ματ Ντέιμον: Ήταν δύσκολο να επιστρέψω στην οικογενειακή ζωή μετά τα γυρίσματα της «Οδύσσειας»",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T06:02:10.938Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/sugar/mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias"
+    },
+    {
       "id": "20261126053410-news-i-liverpoyl-proetoimazetai-gia-to-antio-toy-tsimika-eno-kalovlepei-goyentel",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/athlitika/i-liverpoyl-proetoimazetai-gia-to-antio-toy-tsimika-eno-kalovlepei-goyentel",
