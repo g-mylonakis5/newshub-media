@@ -1,6 +1,21 @@
 {
   "posts": [
     {
+      "id": "20261126142232-news-kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
+      "title": "Κρήτη: Δύο επιχειρήσεις διάσωσης νότια της Γαύδου – 92 μετανάστες σε δύο λέμβους",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/metanastes-ploio.jpg",
+      "text": "Κρήτη: Δύο επιχειρήσεις διάσωσης νότια της Γαύδου – 92 μετανάστες σε δύο λέμβους",
+      "targets": [
+        "facebook"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T14:22:32.390Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kriti/kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys"
+    },
+    {
       "id": "20261126131046-news-elon-mask-kanei-doro-dyo-metoches-tis-spacex-se-kathe-paidi-stis-ipa-pos-tha-leitoyrgisei-i-dorea-ton-18-dis-dolarion",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kosmos/elon-mask-kanei-doro-dyo-metoches-tis-spacex-se-kathe-paidi-stis-ipa-pos-tha-leitoyrgisei-i-dorea-ton-18-dis-dolarion",
