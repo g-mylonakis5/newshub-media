@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T18:37:59.854Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/black-friday-diafimistiki-kampania-toy-eot-gia-provoli-tis-elladas-sti-gallia"
+      "link": "https://www.newshub.gr/el/oikonomia/black-friday-diafimistiki-kampania-toy-eot-gia-provoli-tis-elladas-sti-gallia",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290884026156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290884026156174",
+          "at": "2026-11-26T18:38:19.156Z"
+        }
+      }
     },
     {
       "id": "20261126183448-news-katadikazei-to-toyrkolivyko-mnimonio-to-eyropaiko-koinovoylio-einai-akyro-den-paragei-ennoma-apotelesmata",
