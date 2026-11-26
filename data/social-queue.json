@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T14:51:27.172Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/ekdilosi-me-thema-kritiki-diatrofi-chronia-nosimata-tin-triti-1i-dekemvrioy-sto-irakleio"
+      "link": "https://www.newshub.gr/el/kriti/ekdilosi-me-thema-kritiki-diatrofi-chronia-nosimata-tin-triti-1i-dekemvrioy-sto-irakleio",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290860212156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290860212156174",
+          "at": "2026-11-26T14:51:48.075Z"
+        }
+      }
     },
     {
       "id": "20261126101843-news-kit-epiviosis-72-oron-to-kostos-ti-katagrafoyn-ta-exeidikeymena-katastimata-kai-giati-i-prolipsi-den-periorizetai-stin-agora-aparaititon-efodion",
