@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T13:10:46.141Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kosmos/elon-mask-kanei-doro-dyo-metoches-tis-spacex-se-kathe-paidi-stis-ipa-pos-tha-leitoyrgisei-i-dorea-ton-18-dis-dolarion"
+      "link": "https://www.newshub.gr/el/kosmos/elon-mask-kanei-doro-dyo-metoches-tis-spacex-se-kathe-paidi-stis-ipa-pos-tha-leitoyrgisei-i-dorea-ton-18-dis-dolarion",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290851236156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290851236156174",
+          "at": "2026-11-26T13:11:02.856Z"
+        }
+      }
     },
     {
       "id": "20261126130929-news-menegaki-chairomai-poy-sas-leipo-sas-skeftomai-kai-ego-kapoies-stigmes-den-mporo-na-po-an-tha-yparxei-alli-eleni",
