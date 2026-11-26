@@ -1,5 +1,17 @@
 [
   {
+    "id": "handelsblatt-i-ellada-apochaireta-ton-titlo-toy-vasilia-toy-chreoys",
+    "title": "Handelsblatt: Η Ελλάδα αποχαιρετά τον τίτλο του «βασιλιά του χρέους»",
+    "url": "https://www.newshub.gr/el/oikonomia/handelsblatt-i-ellada-apochaireta-ton-titlo-toy-vasilia-toy-chreoys",
+    "date": "2026-11-26T05:15:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/elliniki_oikonomia-1280x853.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/elliniki_oikonomia-1280x853.jpg",
+    "summary": "Για πολλά χρόνια η Ελλάδα κατείχε τον τίτλο της πιο υπερχρεωμένης χώρας της Ευρώπης.\r\n\r\nΠλέον, όμως, ετοιμάζεται να απαλλαγεί από αυτή την ανεπιθύμητη πρωτιά...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "paroysia-tis-ypoyrgoy-paideias-i-ypografi-symvasis-sdit-gia-12-sygchrona-scholeia-sta-chania",
     "title": "Παρουσία της Υπουργού Παιδείας η υπογραφή σύμβασης ΣΔΙΤ για 12 σύγχρονα σχολεία στα Χανιά",
     "url": "https://www.newshub.gr/el/kriti/paroysia-tis-ypoyrgoy-paideias-i-ypografi-symvasis-sdit-gia-12-sygchrona-scholeia-sta-chania",
@@ -7233,18 +7245,6 @@
       "url": "https://www.newshub.gr/el/konstantinos-mpalomenos",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/mpalomne.jpg"
     },
-    "featured": false
-  },
-  {
-    "id": "eyrozoni-mikri-ayxisi-ton-misthon-to-g-trimino-para-ton-plithorismo",
-    "title": "Ευρωζώνη: Μικρή αύξηση των μισθών το γ’ τρίμηνο παρά τον πληθωρισμό",
-    "url": "https://www.newshub.gr/el/oikonomia/eyrozoni-mikri-ayxisi-ton-misthon-to-g-trimino-para-ton-plithorismo",
-    "date": "2026-11-21T05:27:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/trxtnxtg.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/trxtnxtg.jpg",
-    "summary": "Ο δείκτης της αύξησης των μισθών στη Ευρωζώνη που καταρτίζει η ΕΚΤ κατέγραψε μόνο ελαφριά επιτάχυνση το τρίτο τρίμηνο, καθησυχάζοντας τις ανησυχίες των υπεύθ...",
-    "author": null,
     "featured": false
   },
   {
