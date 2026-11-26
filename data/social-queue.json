@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T06:54:36.854Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ygeia/meleti-to-giaoyrti-aspida-kata-toy-karkinoy-toy-pacheos-enteroy"
+      "link": "https://www.newshub.gr/el/ygeia/meleti-to-giaoyrti-aspida-kata-toy-karkinoy-toy-pacheos-enteroy",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290815272156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290815272156174",
+          "at": "2026-11-26T06:54:53.058Z"
+        }
+      }
     },
     {
       "id": "20261126063537-news-aplirotoi-dekades-ergazomenoi-sta-spitakia-anakyklosis-stin-kriti-kai-se-oli-tin-ellada",
@@ -27,10 +34,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T06:35:37.943Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/aplirotoi-dekades-ergazomenoi-sta-spitakia-anakyklosis-stin-kriti-kai-se-oli-tin-ellada"
+      "link": "https://www.newshub.gr/el/kriti/aplirotoi-dekades-ergazomenoi-sta-spitakia-anakyklosis-stin-kriti-kai-se-oli-tin-ellada",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290815314156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290815314156174",
+          "at": "2026-11-26T06:54:56.703Z"
+        }
+      }
     },
     {
       "id": "20261126063441-news-poios-oriothetei-to-kako",
