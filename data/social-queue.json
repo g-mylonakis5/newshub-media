@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T22:18:10.409Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/spitakia-anakyklosis-ti-apanta-o-ekdotis-gia-tis-katigories-poy-toy-apodidontai"
+      "link": "https://www.newshub.gr/el/ellada/spitakia-anakyklosis-ti-apanta-o-ekdotis-gia-tis-katigories-poy-toy-apodidontai",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290914380156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290914380156174",
+          "at": "2026-11-26T22:18:25.282Z"
+        }
+      }
     },
     {
       "id": "20261126221601-news-olympiakos-milan-2-4-apo-ton-paradeiso-stin-kolasi-oi-erythroleykoi",
