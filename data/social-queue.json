@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T15:00:58.120Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/astynomiki-epicheirisi-sti-mesara-tesseris-syllipseis-gia-paranomi-voskisi-katapatisi-agrotemachion-kai-agrozimies"
+      "link": "https://www.newshub.gr/el/kriti/astynomiki-epicheirisi-sti-mesara-tesseris-syllipseis-gia-paranomi-voskisi-katapatisi-agrotemachion-kai-agrozimies",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290861556156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290861556156174",
+          "at": "2026-11-26T15:01:17.318Z"
+        }
+      }
     },
     {
       "id": "20261126145913-news-i-crediabank-dieyrynei-tis-chrimatodotikes-lyseis-gia-tis-epicheiriseis-me-ti-nea-credialeasing",
