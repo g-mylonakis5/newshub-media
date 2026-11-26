@@ -9,6 +9,18 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/screenshot-2026-11-26-154835.jpg",
     "summary": "Εικόνες της Ελλάδας «πλημμυρίζουν» τα μεγάλα εθνικά τηλεοπτικά δίκτυα της Γαλλίας την εβδομάδα της Βlack Friday.\r\n\r\nΗ τηλεοπτική διαφημιστική καμ...",
     "author": null,
+    "featured": false
+  },
+  {
+    "id": "diastaseis-chionostivadas-gia-to-skandalo-me-ta-spitakia-anakyklosis-synelifthi-o-ekdotis-giannis-koyrtakis",
+    "title": "Διαστάσεις «χιονοστιβάδας» για το σκάνδαλο με τα σπιτάκια ανακύκλωσης - Συνελήφθη ο εκδότης Γιάννης Κουρτάκης",
+    "url": "https://www.newshub.gr/el/kriti/diastaseis-chionostivadas-gia-to-skandalo-me-ta-spitakia-anakyklosis-synelifthi-o-ekdotis-giannis-koyrtakis",
+    "date": "2026-11-26T14:35:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/erertntn.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/erertntn.jpg",
+    "summary": "Ο εκδότης Γιάννης Κουρτάκης συνελήφθη σήμερα για εμπλοκή στην υπόθεση με τα σπιτάκια ανακύκλωσης. Οι δύο ιδιοκτήτες της εταιρείας ΤΕΧΑΝ, ο πρόεδρος, Απόστολο...",
+    "author": null,
     "featured": true
   },
   {
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/astynomia-2ey.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/astynomia-2ey.jpg",
     "summary": "Έφοδος της αστυνομίας σε οίκους ανοχής της Αθήνας πραγματοποιήθηκε από τη Διεύθυνση Αντιμετώπισης Οργανωμένου Εγκλήματος το μεσημέρι της Πέμπτης 19/11.\r\n\r\nΟ ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "zelenski-i-oykrania-epithymei-diakaos-na-eiselthei-sto-nato",
-    "title": "Ζελένσκι: «Η Ουκρανία επιθυμεί διακαώς να εισέλθει στο ΝΑΤΟ»",
-    "url": "https://www.newshub.gr/el/kosmos/zelenski-i-oykrania-epithymei-diakaos-na-eiselthei-sto-nato",
-    "date": "2026-11-21T14:20:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/1703791537430_zelenskyy.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/1703791537430_zelenskyy.jpg",
-    "summary": "Την διαρκή επιθυμία της ουκρανία να ενταχθεί στο ΝΑΤΟ επανέλαβε ο πρόεδρος της χώρας Βολοντίμιρ Ζελένσκι ενώ η ιδέα να παρασχεθούν στο Κίεβο εγγυήσεις ασφαλε...",
     "author": null,
     "featured": false
   },
