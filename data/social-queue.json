@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T21:43:13.077Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/mpazar-vivlion-tin-paraskeyi-27-noemvrioy-sto-dimarcheio-chanion"
+      "link": "https://www.newshub.gr/el/kriti/mpazar-vivlion-tin-paraskeyi-27-noemvrioy-sto-dimarcheio-chanion",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290909244156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290909244156174",
+          "at": "2026-11-26T21:43:28.724Z"
+        }
+      }
     },
     {
       "id": "20261126212036-news-epistrofi-enoikioy-gia-932-652-polites-xekinisan-oi-pliromes",
