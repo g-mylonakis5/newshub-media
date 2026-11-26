@@ -1,5 +1,17 @@
 [
   {
+    "id": "paroysiazetai-to-vivlio-toy-kosta-mela-meta-ti-meta-epochi-ti",
+    "title": "Παρουσιάζεται το βιβλίο του Κώστα Μελά «Μετά τη «μετά-εποχή» τι;»",
+    "url": "https://www.newshub.gr/el/exodos/paroysiazetai-to-vivlio-toy-kosta-mela-meta-ti-meta-epochi-ti",
+    "date": "2026-11-26T19:51:00.000Z",
+    "category": "Έξοδος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/af.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/af.jpg",
+    "summary": "Παρουσιάζεται το βιβλίο του Κώστα Μελά «Μετά τη «μετά &ndash; εποχή» τι;» την Δευτέρα 30 Νοεμβρίου, στις 6:30 το απόγευμα, στην ΕΣΗΕΑ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "toyrkia-stis-ipa-tin-epomeni-evdomada-o-gkioyler-gia-synantisi-me-chegkseth-epi-tapitos-i-arsi-ton-kyroseon",
     "title": "Τουρκία: Στις ΗΠΑ την επόμενη εβδομάδα ο Γκιουλέρ για συνάντηση με Χέγκσεθ – Επί τάπητος η άρση των κυρώσεων",
     "url": "https://www.newshub.gr/el/geopolitiki/toyrkia-stis-ipa-tin-epomeni-evdomada-o-gkioyler-gia-synantisi-me-chegkseth-epi-tapitos-i-arsi-ton-kyroseon",
@@ -117,7 +129,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/spitakia-anakykloshssssss.jpg",
     "summary": "Με βαρύτατο κατηγορητήριο παραπέμπονται, σύμφωνα με πληροφορίες, οι για να απολογηθούν αύριο, Παρασκευή 27 Νοεμβρίου οι τέσσερις συλληφθέντες για την προμήθε...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "nekrotafeio-plyntirion-kai-psygeion-anakalyfthike-ston-atlantiko-okeano-vinteo",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/autokineta-dromos-kinese-ape.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/autokineta-dromos-kinese-ape.jpg",
     "summary": "Τροποποιήσεις στον Κώδικα Οδικής Κυκλοφορίας (ΚΟΚ) με σκοπό τον εξορθολογισμό των προστίμων και των ποινών, διατηρώντας παράλληλα το αυστηρό πλαίσιο για την ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "farmakeio-aytokinitoy-ti-allazei-apo-to-2027-oi-nees-prodiagrafes",
-    "title": "Φαρμακείο αυτοκινήτου: Τι αλλάζει από το 2027-Οι νέες προδιαγραφές",
-    "url": "https://www.newshub.gr/el/ellada/farmakeio-aytokinitoy-ti-allazei-apo-to-2027-oi-nees-prodiagrafes",
-    "date": "2026-11-21T21:59:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/991c227429a247baafd96b568e74c847.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/991c227429a247baafd96b568e74c847.jpg",
-    "summary": "Αλλαγές θα εφαρμοστούν στους κανόνες που αφορούν το φαρμακείο που έχουμε στο αυτοκίνητό μας, σε περίπτωση έκτακτης ανάγκης, οι οποίες θα ισχύσουν από την 1η ...",
     "author": null,
     "featured": false
   },
