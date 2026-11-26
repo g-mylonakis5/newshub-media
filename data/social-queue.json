@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126222452-news-kapnisma-ta-efiva-koritsia-kapnizoyn-kai-atmizoyn-oso-ta-agoria-i-ellada-stis-protes-theseis-tis-ee-anisychitika-ta-stoicheia-toy-poy",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ygeia/kapnisma-ta-efiva-koritsia-kapnizoyn-kai-atmizoyn-oso-ta-agoria-i-ellada-stis-protes-theseis-tis-ee-anisychitika-ta-stoicheia-toy-poy",
+      "title": "Κάπνισμα: Τα έφηβα κορίτσια καπνίζουν και ατμίζουν όσο τα αγόρια – Η Ελλάδα στις πρώτες θέσεις της ΕΕ, ανησυχητικά τα στοιχεία του ΠΟΥ",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/kapnisma_h_645_450.jpg",
+      "text": "Κάπνισμα: Τα έφηβα κορίτσια καπνίζουν και ατμίζουν όσο τα αγόρια – Η Ελλάδα στις πρώτες θέσεις της ΕΕ, ανησυχητικά τα στοιχεία του ΠΟΥ",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T22:24:52.911Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ygeia/kapnisma-ta-efiva-koritsia-kapnizoyn-kai-atmizoyn-oso-ta-agoria-i-ellada-stis-protes-theseis-tis-ee-anisychitika-ta-stoicheia-toy-poy"
+    },
+    {
       "id": "20261126221810-news-spitakia-anakyklosis-ti-apanta-o-ekdotis-gia-tis-katigories-poy-toy-apodidontai",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ellada/spitakia-anakyklosis-ti-apanta-o-ekdotis-gia-tis-katigories-poy-toy-apodidontai",
