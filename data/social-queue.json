@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126182701-news-papoyra-ora-miden-agonas-dromoy-gia-ti-diasosi-toy-minoikoy-mnimeioy",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/papoyra-ora-miden-agonas-dromoy-gia-ti-diasosi-toy-minoikoy-mnimeioy",
+      "title": "«Παπούρα: Ώρα μηδέν» – Αγώνας δρόμου για τη διάσωση του μινωικού μνημείου",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/papoyra.jpg",
+      "text": "«Παπούρα: Ώρα μηδέν» – Αγώνας δρόμου για τη διάσωση του μινωικού μνημείου",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T18:27:01.704Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/papoyra-ora-miden-agonas-dromoy-gia-ti-diasosi-toy-minoikoy-mnimeioy"
+    },
+    {
       "id": "20261126181413-news-i-fifa-epese-thyma-kyvernoepithesis-chaker-eklepsan-pano-apo-12gb-me-dedomena",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kosmos/i-fifa-epese-thyma-kyvernoepithesis-chaker-eklepsan-pano-apo-12gb-me-dedomena",
