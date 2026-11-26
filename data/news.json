@@ -1,5 +1,17 @@
 [
   {
+    "id": "kairos-ektakto-deltio-epideinosis-apo-tin-emy-pote-erchontai-ischyres-vroches-kai-kataigides-stin-kriti",
+    "title": "Καιρός: Έκτακτο δελτίο επιδείνωσης από την ΕΜΥ-Πότε έρχονται ισχυρές βροχές και καταιγίδες στην Κρήτη",
+    "url": "https://www.newshub.gr/el/kriti/kairos-ektakto-deltio-epideinosis-apo-tin-emy-pote-erchontai-ischyres-vroches-kai-kataigides-stin-kriti",
+    "date": "2026-11-26T11:29:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/broche-omprela-kaleschd.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/broche-omprela-kaleschd.jpg",
+    "summary": "Επιδείνωση θα παρουσιάσει ο καιρός την Παρασκευή (27/11) και από τα βορειοδυτικά της χώρας με τοπικά ισχυρές βροχές και καταιγίδες, με την Εθνική Μετεωρολογι...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "to-savvato-i-politiki-ekdilosi-tis-k-o-irakleioy-toy-kke-me-omiliti-ton-kyrillo-papastayroy-1",
     "title": "Το Σάββατο η Πολιτική εκδήλωση της Κ.Ο. Ηρακλείου του ΚΚΕ με ομιλητή τον Κύριλλο Παπασταύρου",
     "url": "https://www.newshub.gr/el/kriti/to-savvato-i-politiki-ekdilosi-tis-k-o-irakleioy-toy-kke-me-omiliti-ton-kyrillo-papastayroy-1",
@@ -81,7 +93,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/astuynomia111222yik.jpg",
     "summary": "Σε τέσσερις συλλήψεις προχώρησαν οι Αστυνομικές Αρχές στη Μεσαρά την Τετάρτη, στο πλαίσιο αστυνομικής επιχείρησης που πραγματοποιήθηκε σε περιοχή του Δήμου Φ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "i-crediabank-dieyrynei-tis-chrimatodotikes-lyseis-gia-tis-epicheiriseis-me-ti-nea-credialeasing",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/31689976.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/31689976.jpg",
     "summary": "Οι νέοι περιορισμοί, σχολίασε η Washington Post, είναι βέβαιο πως θα εκληφθούν ως «χαστούκι στο πρόσωπο» από πλευράς Καναδά, αν και δεν είναι σαφ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "eos-to-2028-sti-real-madritis-o-koyrtoya",
-    "title": "Έως το 2028 στη Ρεάλ Μαδρίτης ο Κουρτουά",
-    "url": "https://www.newshub.gr/el/athlitika/eos-to-2028-sti-real-madritis-o-koyrtoya",
-    "date": "2026-11-21T10:30:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/w20-155102thibautcourtois.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/w20-155102thibautcourtois.jpg",
-    "summary": "Ο Τιμπό Κουρτουά θα υπερασπίζεται την εστία της Ρεάλ Μαδρίτης έως το 2028, καθώς επέκτεινε γι' ακόμη ένα χρόνο το συμβόλαιο που έληγε το καλοκαίρι του 20...",
     "author": null,
     "featured": false
   },
