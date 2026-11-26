@@ -9,7 +9,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/kykloma-apodeixeis.jpg",
     "summary": "Σπίτια &ndash; «φαντάσματα» χωρίς νερό και ηλεκτρικό ρεύμα, μόλις 44 τετραγωνικών μέτρων που υποτίθεται φιλοξενούσαν ταυτόχρονα ακόμα και 23 άτομ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "kairos-vroches-kai-kataigides-simera-se-voreio-ionio-kai-ipeiro-nea-voytia-tis-thermokrasias-chionia-kai-10-mpofor-tin-kyriaki",
@@ -161,7 +161,7 @@
       "url": "https://www.newshub.gr/el/christoforos-papadakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
