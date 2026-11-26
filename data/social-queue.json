@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T18:14:13.757Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/i-fifa-epese-thyma-kyvernoepithesis-chaker-eklepsan-pano-apo-12gb-me-dedomena"
+      "link": "https://www.newshub.gr/el/kosmos/i-fifa-epese-thyma-kyvernoepithesis-chaker-eklepsan-pano-apo-12gb-me-dedomena",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290880900156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290880900156174",
+          "at": "2026-11-26T18:14:33.300Z"
+        }
+      }
     },
     {
       "id": "20261126152525-news-aigyptos-synelifthi-o-odigos-ich-gia-to-dystychima-me-to-vytioforo-kai-toys-31-nekroys",
