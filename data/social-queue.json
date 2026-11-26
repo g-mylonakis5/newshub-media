@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T07:00:09.287Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/alma-5-9-stis-times-ton-oikodomikon-ylikon-ton-oktovrio-me-pieseis-apo-tin-energeia"
+      "link": "https://www.newshub.gr/el/oikonomia/alma-5-9-stis-times-ton-oikodomikon-ylikon-ton-oktovrio-me-pieseis-apo-tin-energeia",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290816046156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290816046156174",
+          "at": "2026-11-26T07:00:34.999Z"
+        }
+      }
     },
     {
       "id": "20261126065436-news-meleti-to-giaoyrti-aspida-kata-toy-karkinoy-toy-pacheos-enteroy",
