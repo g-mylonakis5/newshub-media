@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T20:11:17.407Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/cyber-monday-oi-agores-apo-to-diadiktyo-theloyn-prosochi-tonizei-i-enosi-ergazomenon-katanaloton-elladas"
+      "link": "https://www.newshub.gr/el/oikonomia/cyber-monday-oi-agores-apo-to-diadiktyo-theloyn-prosochi-tonizei-i-enosi-ergazomenon-katanaloton-elladas",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290894052156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290894052156174",
+          "at": "2026-11-26T20:11:32.745Z"
+        }
+      }
     },
     {
       "id": "20261126200417-news-spitakia-anakyklosis-pos-ftasame-stis-syllipseis-ereyna-gia-athemiti-epirroi-meso-typoy",
