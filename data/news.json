@@ -1,5 +1,17 @@
 [
   {
+    "id": "black-friday-diafimistiki-kampania-toy-eot-gia-provoli-tis-elladas-sti-gallia",
+    "title": "Black Friday: Διαφημιστική καμπάνια του ΕΟΤ για προβολή της Ελλάδας στη Γαλλία",
+    "url": "https://www.newshub.gr/el/oikonomia/black-friday-diafimistiki-kampania-toy-eot-gia-provoli-tis-elladas-sti-gallia",
+    "date": "2026-11-26T14:37:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/screenshot-2026-11-26-154835.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/screenshot-2026-11-26-154835.jpg",
+    "summary": "Εικόνες της Ελλάδας «πλημμυρίζουν» τα μεγάλα εθνικά τηλεοπτικά δίκτυα της Γαλλίας την εβδομάδα της Βlack Friday.\r\n\r\nΗ τηλεοπτική διαφημιστική καμ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "katadikazei-to-toyrkolivyko-mnimonio-to-eyropaiko-koinovoylio-einai-akyro-den-paragei-ennoma-apotelesmata",
     "title": "Καταδικάζει το τουρκολιβυκό μνημόνιο το Ευρωπαϊκό Κοινοβούλιο -«Είναι άκυρο, δεν παράγει έννομα αποτελέσματα»",
     "url": "https://www.newshub.gr/el/geopolitiki/katadikazei-to-toyrkolivyko-mnimonio-to-eyropaiko-koinovoylio-einai-akyro-den-paragei-ennoma-apotelesmata",
@@ -129,7 +141,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/kasidiaresgr.jpg",
     "summary": "Κλιμακώνονται οι αντιδράσεις των τοπικών φορέων με φόντο την ενδεχόμενη παρουσία του Ηλία Κασιδιάρη στην Κρήτη, σε εκδήλωση που προγραμματίζεται για την Κυρι...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "paroysiasi-toy-imerologioy-toy-giuseppe-olivotti-gia-tin-epanakomidi-tis-timias-karas-toy-agioy-titoy",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/1703791537430_zelenskyy.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/1703791537430_zelenskyy.jpg",
     "summary": "Την διαρκή επιθυμία της ουκρανία να ενταχθεί στο ΝΑΤΟ επανέλαβε ο πρόεδρος της χώρας Βολοντίμιρ Ζελένσκι ενώ η ιδέα να παρασχεθούν στο Κίεβο εγγυήσεις ασφαλε...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "xanthi-nteliveras-epitethike-sexoyalika-se-aniliki-poy-epestrefe-sto-spiti-tis",
-    "title": "Ξάνθη: Ντελιβεράς επιτέθηκε σεξουαλικά σε ανήλικη που επέστρεφε στο σπίτι της",
-    "url": "https://www.newshub.gr/el/ellada/xanthi-nteliveras-epitethike-sexoyalika-se-aniliki-poy-epestrefe-sto-spiti-tis",
-    "date": "2026-11-21T14:10:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/astynomiabthth.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/astynomiabthth.jpg",
-    "summary": "Σοβαρό περιστατικό με θύμα ανήλικη κοπέλα σημειώθηκε το βράδυ της Παρασκευής στην Ξάνθη, όταν ένας άνδρας που εργάζεται ως διανομέας φέρεται να της επιτέθηκε...",
     "author": null,
     "featured": false
   },
