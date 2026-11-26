@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126151842-news-kairos-ektakto-deltio-epideinosis-apo-tin-emy-pote-erchontai-ischyres-vroches-kai-kataigides-stin-kriti",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/kairos-ektakto-deltio-epideinosis-apo-tin-emy-pote-erchontai-ischyres-vroches-kai-kataigides-stin-kriti",
+      "title": "Καιρός: Έκτακτο δελτίο επιδείνωσης από την ΕΜΥ-Πότε έρχονται ισχυρές βροχές και καταιγίδες στην Κρήτη",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/broche-omprela-kaleschd.jpg",
+      "text": "Καιρός: Έκτακτο δελτίο επιδείνωσης από την ΕΜΥ-Πότε έρχονται ισχυρές βροχές και καταιγίδες στην Κρήτη",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T15:18:42.267Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/kairos-ektakto-deltio-epideinosis-apo-tin-emy-pote-erchontai-ischyres-vroches-kai-kataigides-stin-kriti"
+    },
+    {
       "id": "20261126151732-news-me-megali-epitychia-pragmatopoiithike-i-imerida-elmepa-sed-oee-acfe-me-thema-tis-ependyseis-stin-kriti",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/me-megali-epitychia-pragmatopoiithike-i-imerida-elmepa-sed-oee-acfe-me-thema-tis-ependyseis-stin-kriti",
