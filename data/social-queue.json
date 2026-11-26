@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T15:11:56.963Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/gia-tin-elli-alexioy-i-epomeni-omilia-toy-4oy-kykloy-ton-mikron-istorion-tis-polis"
+      "link": "https://www.newshub.gr/el/kriti/gia-tin-elli-alexioy-i-epomeni-omilia-toy-4oy-kykloy-ton-mikron-istorion-tis-polis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290862528156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290862528156174",
+          "at": "2026-11-26T15:12:13.143Z"
+        }
+      }
     },
     {
       "id": "20261126150058-news-astynomiki-epicheirisi-sti-mesara-tesseris-syllipseis-gia-paranomi-voskisi-katapatisi-agrotemachion-kai-agrozimies",
