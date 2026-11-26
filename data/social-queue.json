@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126183116-news-dyo-nees-epicheiriseis-diasosis-metanaston-se-notia-kriti-kai-gaydo",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/dyo-nees-epicheiriseis-diasosis-metanaston-se-notia-kriti-kai-gaydo",
+      "title": "Δύο νέες επιχειρήσεις διάσωσης μεταναστών σε νότια Κρήτη και Γαύδο",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/metanastes-barka3nng.jpg",
+      "text": "Δύο νέες επιχειρήσεις διάσωσης μεταναστών σε νότια Κρήτη και Γαύδο",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T18:31:16.903Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/dyo-nees-epicheiriseis-diasosis-metanaston-se-notia-kriti-kai-gaydo"
+    },
+    {
       "id": "20261126182701-news-papoyra-ora-miden-agonas-dromoy-gia-ti-diasosi-toy-minoikoy-mnimeioy",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/papoyra-ora-miden-agonas-dromoy-gia-ti-diasosi-toy-minoikoy-mnimeioy",
