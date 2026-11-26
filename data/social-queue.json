@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126130929-news-menegaki-chairomai-poy-sas-leipo-sas-skeftomai-kai-ego-kapoies-stigmes-den-mporo-na-po-an-tha-yparxei-alli-eleni",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/sugar/menegaki-chairomai-poy-sas-leipo-sas-skeftomai-kai-ego-kapoies-stigmes-den-mporo-na-po-an-tha-yparxei-alli-eleni",
+      "title": "Μενεγάκη: \"Χαίρομαι που σας λείπω, σας σκέφτομαι και εγώ κάποιες στιγμές - Δεν μπορώ να πω αν θα υπάρξει άλλη Ελένη»",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/menegake-fb.jpg",
+      "text": "Μενεγάκη: \"Χαίρομαι που σας λείπω, σας σκέφτομαι και εγώ κάποιες στιγμές - Δεν μπορώ να πω αν θα υπάρξει άλλη Ελένη»",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T13:09:29.156Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/sugar/menegaki-chairomai-poy-sas-leipo-sas-skeftomai-kai-ego-kapoies-stigmes-den-mporo-na-po-an-tha-yparxei-alli-eleni"
+    },
+    {
       "id": "20261126101843-news-kit-epiviosis-72-oron-to-kostos-ti-katagrafoyn-ta-exeidikeymena-katastimata-kai-giati-i-prolipsi-den-periorizetai-stin-agora-aparaititon-efodion",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ygeia/kit-epiviosis-72-oron-to-kostos-ti-katagrafoyn-ta-exeidikeymena-katastimata-kai-giati-i-prolipsi-den-periorizetai-stin-agora-aparaititon-efodion",
