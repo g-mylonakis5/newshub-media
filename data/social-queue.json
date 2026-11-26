@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T05:28:32.424Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/sugar/epitimi-politis-mparankigia-i-sofia-vergkara-gkremisan-ta-teichi-gia-na-tin-ypodechtoyn"
+      "link": "https://www.newshub.gr/el/sugar/epitimi-politis-mparankigia-i-sofia-vergkara-gkremisan-ta-teichi-gia-na-tin-ypodechtoyn",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290806938156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290806938156174",
+          "at": "2026-11-26T05:28:49.668Z"
+        }
+      }
     },
     {
       "id": "20261126052733-news-germania-galopoyla-anoixe-ti-vrysi-kai-plimmyrise-olokliri-polykatoikia",
