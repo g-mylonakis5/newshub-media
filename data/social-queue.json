@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126150058-news-astynomiki-epicheirisi-sti-mesara-tesseris-syllipseis-gia-paranomi-voskisi-katapatisi-agrotemachion-kai-agrozimies",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/astynomiki-epicheirisi-sti-mesara-tesseris-syllipseis-gia-paranomi-voskisi-katapatisi-agrotemachion-kai-agrozimies",
+      "title": "Αστυνομική επιχείρηση στη Μεσαρά: Τέσσερις συλλήψεις για παράνομη βόσκηση, καταπάτηση αγροτεμαχίων και αγροζημιές",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/astuynomia111222yik.jpg",
+      "text": "Αστυνομική επιχείρηση στη Μεσαρά: Τέσσερις συλλήψεις για παράνομη βόσκηση, καταπάτηση αγροτεμαχίων και αγροζημιές",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T15:00:58.120Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/astynomiki-epicheirisi-sti-mesara-tesseris-syllipseis-gia-paranomi-voskisi-katapatisi-agrotemachion-kai-agrozimies"
+    },
+    {
       "id": "20261126145913-news-i-crediabank-dieyrynei-tis-chrimatodotikes-lyseis-gia-tis-epicheiriseis-me-ti-nea-credialeasing",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/i-crediabank-dieyrynei-tis-chrimatodotikes-lyseis-gia-tis-epicheiriseis-me-ti-nea-credialeasing",
