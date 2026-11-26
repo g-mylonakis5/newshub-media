@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T20:04:17.624Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/spitakia-anakyklosis-pos-ftasame-stis-syllipseis-ereyna-gia-athemiti-epirroi-meso-typoy"
+      "link": "https://www.newshub.gr/el/kriti/spitakia-anakyklosis-pos-ftasame-stis-syllipseis-ereyna-gia-athemiti-epirroi-meso-typoy",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290892930156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290892930156174",
+          "at": "2026-11-26T20:04:33.069Z"
+        }
+      }
     },
     {
       "id": "20261126183759-news-black-friday-diafimistiki-kampania-toy-eot-gia-provoli-tis-elladas-sti-gallia",
