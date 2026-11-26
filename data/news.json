@@ -1,5 +1,17 @@
 [
   {
+    "id": "fainomeno-zaigkarnik-symvoyles-poy-mporoyn-na-sas-voithisoyn-na-afisete-tis-skepseis-gia-ti-doyleia-stin-akri-meta-ti-lixi-orarioy",
+    "title": "Φαινόμενο Ζάιγκαρνικ»: Συμβουλές για να ... αφήσετε τις σκέψεις για τη δουλειά στην άκρη μετά τη λήξη ωραρίου",
+    "url": "https://www.newshub.gr/el/sugar/fainomeno-zaigkarnik-symvoyles-poy-mporoyn-na-sas-voithisoyn-na-afisete-tis-skepseis-gia-ti-doyleia-stin-akri-meta-ti-lixi-orarioy",
+    "date": "2026-11-26T10:10:00.000Z",
+    "category": "Sugar",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/gynaika-ergazomene-grapheio-shutterstock_.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/gynaika-ergazomene-grapheio-shutterstock_.jpg",
+    "summary": "Έχετε καθίσει στον καναπέ με τον δίσκο στα γόνατα και πάτε να πατήσετε το κουμπί στο τηλεκοντρόλ για να δείτε την αγαπημένη σας σειρά. Και τότε σας έρχεται μ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "ekdilosi-me-thema-kritiki-diatrofi-chronia-nosimata-tin-triti-1i-dekemvrioy-sto-irakleio",
     "title": "Εκδήλωση με θέμα «Κρητική Διατροφή & χρόνια νοσήματα»  την Τρίτη 1η Δεκεμβρίου στο Ηράκλειο",
     "url": "https://www.newshub.gr/el/kriti/ekdilosi-me-thema-kritiki-diatrofi-chronia-nosimata-tin-triti-1i-dekemvrioy-sto-irakleio",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/phageto-ygieine-diatrophe-pexels.jpg",
     "summary": "Ενημερωτική εκδήλωση με θέμα «Κρητική Διατροφή & χρόνια νοσήματα» διοργανώνει η Ιατρική Σχολή του Πανεπιστημίου Κρήτης, σε συνεργασία με την ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "venizeleio-protasi-38-ekat-eyro-gia-tin-anakainisi-toy-kentrikoy-ktirioy-ekkremei-i-entaxi-ton-ergon",
@@ -33,7 +45,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/kykloma-timologia-intime.jpg",
     "summary": "Στο επίκεντρο των συνομιλιών που κατέγραψε ο κοριός της ΕΛ.ΑΣ. για το κύκλωμα που φέρεται να εξασφάλιζε εικονικές αποδείξεις διαμονής σε μετακινούμενους αστυ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/phdbdphnphd.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/phdbdphnphd.jpg",
     "summary": "Έχοντας σκοράρει 22 πόντους στη νίκη του Ολυμπιακού και μπαίνοντας στα highlights της αναμέτρησης για το buzzer-beater στο ημίχρονο με την Ρεάλ Μαδρίτης, ο Τ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "hpa-apozimioseis-7-25-dis-dolarion-gia-zizanioktono-poy-syndeetai-me-tin-emfanisi-karkinoy",
-    "title": "HΠΑ: Αποζημιώσεις 7,25 δισ. δολαρίων για ζιζανιοκτόνο που συνδέεται με την εμφάνιση καρκίνου",
-    "url": "https://www.newshub.gr/el/kosmos/hpa-apozimioseis-7-25-dis-dolarion-gia-zizanioktono-poy-syndeetai-me-tin-emfanisi-karkinoy",
-    "date": "2026-11-21T09:14:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/dikasthriosfyri-1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/dikasthriosfyri-1.jpg",
-    "summary": "Δικαστής στην αμερικανική πολιτεία Μιζούρι επικύρωσε χθες Παρασκευή συμφωνία με την οποία ο κολοσσός του αγροτοχημικού τομέα Bayer αποδέχεται να καταβάλλει α...",
     "author": null,
     "featured": false
   },
