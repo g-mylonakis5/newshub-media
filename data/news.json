@@ -1,5 +1,17 @@
 [
   {
+    "id": "gia-tin-elli-alexioy-i-epomeni-omilia-toy-4oy-kykloy-ton-mikron-istorion-tis-polis",
+    "title": "Για την Έλλη Αλεξίου η επόμενη ομιλία του 4ου κύκλου των «Μικρών Ιστοριών της Πόλης»",
+    "url": "https://www.newshub.gr/el/kriti/gia-tin-elli-alexioy-i-epomeni-omilia-toy-4oy-kykloy-ton-mikron-istorion-tis-polis",
+    "date": "2026-11-26T10:47:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/bdb1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/bdb1.jpg",
+    "summary": "Με την ομιλία «Η οικογένεια Αλεξίου μέσα από το λογοτεχνικό έργο και το Αρχείο της Έλλης Αλεξίου» από την Επιμελήτρια Βιβλιοθήκης και Αρχείων στο...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "astynomiki-epicheirisi-sti-mesara-tesseris-syllipseis-gia-paranomi-voskisi-katapatisi-agrotemachion-kai-agrozimies",
     "title": "Αστυνομική επιχείρηση στη Μεσαρά: Τέσσερις συλλήψεις για παράνομη βόσκηση, καταπάτηση αγροτεμαχίων και αγροζημιές",
     "url": "https://www.newshub.gr/el/kriti/astynomiki-epicheirisi-sti-mesara-tesseris-syllipseis-gia-paranomi-voskisi-katapatisi-agrotemachion-kai-agrozimies",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/astuynomia111222yik.jpg",
     "summary": "Σε τέσσερις συλλήψεις προχώρησαν οι Αστυνομικές Αρχές στη Μεσαρά την Τετάρτη, στο πλαίσιο αστυνομικής επιχείρησης που πραγματοποιήθηκε σε περιοχή του Δήμου Φ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "i-crediabank-dieyrynei-tis-chrimatodotikes-lyseis-gia-tis-epicheiriseis-me-ti-nea-credialeasing",
@@ -93,7 +105,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/kykloma-timologia-intime.jpg",
     "summary": "Στο επίκεντρο των συνομιλιών που κατέγραψε ο κοριός της ΕΛ.ΑΣ. για το κύκλωμα που φέρεται να εξασφάλιζε εικονικές αποδείξεις διαμονής σε μετακινούμενους αστυ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/turkey_reuters_murad_sezer_-768x480.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/turkey_reuters_murad_sezer_-768x480.jpg",
     "summary": "Τουρκικός κρατικός φορέας απαίτησε από εκατοντάδες φυσικά πρόσωπα και εταιρείες να επιστρέψουν οικειοθελώς κέρδη που αποκόμισαν από ένα σκάνδαλο που αφορούσε...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "dendias-simera-timame-tis-enoples-dynameis-toys-thematofylakes-tis-ethnikis-anexartisias",
-    "title": "Δένδιας: Σήμερα τιμάμε τις Ενοπλες Δυνάμεις, τους θεματοφύλακες της εθνικής ανεξαρτησίας",
-    "url": "https://www.newshub.gr/el/ellada/dendias-simera-timame-tis-enoples-dynameis-toys-thematofylakes-tis-ethnikis-anexartisias",
-    "date": "2026-11-21T09:54:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/5232303-1200x800.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/5232303-1200x800.jpg",
-    "summary": "Με τη μεταρρύθμιση «Ατζέντα 2030», \"διαμορφώνουμε τις Ένοπλες Δυνάμεις της νέας εποχής', ανέφερε ο υπουργός Εθνικής Αμυνας.\r\n\r\n&ldquo;Σή...",
     "author": null,
     "featured": false
   },
