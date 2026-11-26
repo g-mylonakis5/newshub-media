@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T05:27:33.942Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/germania-galopoyla-anoixe-ti-vrysi-kai-plimmyrise-olokliri-polykatoikia"
+      "link": "https://www.newshub.gr/el/kosmos/germania-galopoyla-anoixe-ti-vrysi-kai-plimmyrise-olokliri-polykatoikia",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290806836156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290806836156174",
+          "at": "2026-11-26T05:27:55.947Z"
+        }
+      }
     },
     {
       "id": "20261126052611-news-karkinos-toy-ipatos-ta-aionia-chimika-poy-syndeontai-me-eos-2-5-fores-megalytero-kindyno",
