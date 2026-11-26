@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126221454-news-plaka-i-oikia-kokovikoy-anakirychthike-thisayros-toy-eyropaikoy-kinimatografoy-paroysia-toy-antonaki",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/istoria-politismos/plaka-i-oikia-kokovikoy-anakirychthike-thisayros-toy-eyropaikoy-kinimatografoy-paroysia-toy-antonaki",
+      "title": "Πλάκα: Η «Οικία Κοκοβίκου» ανακηρύχθηκε θησαυρός του Ευρωπαϊκού Κινηματογράφου παρουσία του «Αντωνάκη»",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/kokobikou.jpg",
+      "text": "Πλάκα: Η «Οικία Κοκοβίκου» ανακηρύχθηκε θησαυρός του Ευρωπαϊκού Κινηματογράφου παρουσία του «Αντωνάκη»",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T22:14:54.410Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/istoria-politismos/plaka-i-oikia-kokovikoy-anakirychthike-thisayros-toy-eyropaikoy-kinimatografoy-paroysia-toy-antonaki"
+    },
+    {
       "id": "20261126221341-news-paroysiazetai-to-vivlio-toy-kosta-mela-meta-ti-meta-epochi-ti",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/exodos/paroysiazetai-to-vivlio-toy-kosta-mela-meta-ti-meta-epochi-ti",
