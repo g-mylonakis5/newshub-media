@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T14:38:14.357Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ygeia/venizeleio-protasi-38-ekat-eyro-gia-tin-anakainisi-toy-kentrikoy-ktirioy-ekkremei-i-entaxi-ton-ergon"
+      "link": "https://www.newshub.gr/el/ygeia/venizeleio-protasi-38-ekat-eyro-gia-tin-anakainisi-toy-kentrikoy-ktirioy-ekkremei-i-entaxi-ton-ergon",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290858334156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290858334156174",
+          "at": "2026-11-26T14:38:32.887Z"
+        }
+      }
     },
     {
       "id": "20261126142232-news-kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
