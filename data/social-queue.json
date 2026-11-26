@@ -10,10 +10,17 @@
       "targets": [
         "facebook"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T14:22:32.390Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys"
+      "link": "https://www.newshub.gr/el/kriti/kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290856852156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290856852156174",
+          "at": "2026-11-26T14:22:53.242Z"
+        }
+      }
     },
     {
       "id": "20261126131046-news-elon-mask-kanei-doro-dyo-metoches-tis-spacex-se-kathe-paidi-stis-ipa-pos-tha-leitoyrgisei-i-dorea-ton-18-dis-dolarion",
