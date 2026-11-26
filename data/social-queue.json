@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T22:24:52.911Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ygeia/kapnisma-ta-efiva-koritsia-kapnizoyn-kai-atmizoyn-oso-ta-agoria-i-ellada-stis-protes-theseis-tis-ee-anisychitika-ta-stoicheia-toy-poy"
+      "link": "https://www.newshub.gr/el/ygeia/kapnisma-ta-efiva-koritsia-kapnizoyn-kai-atmizoyn-oso-ta-agoria-i-ellada-stis-protes-theseis-tis-ee-anisychitika-ta-stoicheia-toy-poy",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290915070156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290915070156174",
+          "at": "2026-11-26T22:25:10.435Z"
+        }
+      }
     },
     {
       "id": "20261126221810-news-spitakia-anakyklosis-ti-apanta-o-ekdotis-gia-tis-katigories-poy-toy-apodidontai",
