@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126063537-news-aplirotoi-dekades-ergazomenoi-sta-spitakia-anakyklosis-stin-kriti-kai-se-oli-tin-ellada",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/aplirotoi-dekades-ergazomenoi-sta-spitakia-anakyklosis-stin-kriti-kai-se-oli-tin-ellada",
+      "title": "Απλήρωτοι δεκάδες εργαζόμενοι στα «σπιτάκια ανακύκλωσης» στην Κρήτη και σε όλη την Ελλάδα",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/spitakia-anakykloses.jpg",
+      "text": "Απλήρωτοι δεκάδες εργαζόμενοι στα «σπιτάκια ανακύκλωσης» στην Κρήτη και σε όλη την Ελλάδα",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T06:35:37.943Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/aplirotoi-dekades-ergazomenoi-sta-spitakia-anakyklosis-stin-kriti-kai-se-oli-tin-ellada"
+    },
+    {
       "id": "20261126063441-news-poios-oriothetei-to-kako",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/apopseis/poios-oriothetei-to-kako",
