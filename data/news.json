@@ -1,5 +1,17 @@
 [
   {
+    "id": "venizeleio-protasi-38-ekat-eyro-gia-tin-anakainisi-toy-kentrikoy-ktirioy-ekkremei-i-entaxi-ton-ergon",
+    "title": "Βενιζέλειο: Πρόταση 38 εκατ. ευρώ για την ανακαίνιση του κεντρικού κτιρίου – Εκκρεμεί η ένταξη των έργων",
+    "url": "https://www.newshub.gr/el/ygeia/venizeleio-protasi-38-ekat-eyro-gia-tin-anakainisi-toy-kentrikoy-ktirioy-ekkremei-i-entaxi-ton-ergon",
+    "date": "2026-11-26T09:50:00.000Z",
+    "category": "Υγεία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/benizeleio.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/benizeleio.jpg",
+    "summary": "Πρόταση της Περιφέρειας Κρήτης για τη χρηματοδότηση της ριζικής ανακαίνισης του κεντρικού κτιρίου του Βενιζελείου, ύψους 38 εκατ. ευρώ, περιλαμβάνει η απάντη...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "kykloma-eikonikon-diamonon-oi-dialogoi-gia-tin-kriti-tis-times-kai-tis-apodeixeis-se-astynomikoys-kai-limenikoys",
     "title": "Κύκλωμα εικονικών διαμονών: Οι διάλογοι για την Κρήτη, τις τιμές και τις αποδείξεις σε αστυνομικούς και λιμενικούς",
     "url": "https://www.newshub.gr/el/ellada/kykloma-eikonikon-diamonon-oi-dialogoi-gia-tin-kriti-tis-times-kai-tis-apodeixeis-se-astynomikoys-kai-limenikoys",
@@ -9,7 +21,19 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/kykloma-timologia-intime.jpg",
     "summary": "Στο επίκεντρο των συνομιλιών που κατέγραψε ο κοριός της ΕΛ.ΑΣ. για το κύκλωμα που φέρεται να εξασφάλιζε εικονικές αποδείξεις διαμονής σε μετακινούμενους αστυ...",
     "author": null,
-    "featured": true
+    "featured": false
+  },
+  {
+    "id": "kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
+    "title": "Κρήτη: Δύο επιχειρήσεις διάσωσης νότια της Γαύδου – 92 μετανάστες σε δύο λέμβους",
+    "url": "https://www.newshub.gr/el/kriti/kriti-dyo-epicheiriseis-diasosis-notia-tis-gaydoy-92-metanastes-se-dyo-lemvoys",
+    "date": "2026-11-26T09:34:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/metanastes-ploio.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/metanastes-ploio.jpg",
+    "summary": "Δύο επιχειρήσεις διάσωσης με συνολικά 92 μετανάστες πραγματοποιήθηκαν από το βράδυ της Τετάρτης έως τα ξημερώματα της Πέμπτης 26 Νοεμβρίου, στη θαλάσσια περι...",
+    "author": null,
+    "featured": false
   },
   {
     "id": "opeka-zesto-chrima-tin-paraskeyi-poioi-dikaioychoi-tha-doyn-chrimata-stoys-logariasmoys-toys",
@@ -7224,30 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/erberberbe.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/erberberbe.jpg",
     "summary": "«Η ελευθερία δεν αποτελεί αυτονόητο κεκτημένο. Είναι η πολυτιμότερη παρακαταθήκη της μακραίωνης ιστορίας μας, σφυρηλατημένη με αγώνες και θυσίες, και σ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "nees-karavies-me-metanastes-sta-notia-tis-kritis-anamesa-toys-gynaikes-kai-ena-moro",
-    "title": "Νέες καραβιές με… μετανάστες στα νότια της Κρήτης - Ανάμεσά τους γυναίκες και ένα μωρό",
-    "url": "https://www.newshub.gr/el/kriti/nees-karavies-me-metanastes-sta-notia-tis-kritis-anamesa-toys-gynaikes-kai-ena-moro",
-    "date": "2026-11-21T09:00:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/metanastes22.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/metanastes22.jpg",
-    "summary": "Δεν έχουν τέλος τα καραβάνια με&hellip; μετανάστες που φτάνουν νότια της Κρήτης και σήμερα, ανήμερα της Ημέρας των Εισοδίων της Θεοτόκου.\r\n\r\nΣυγκεκριμένα έχο...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "agios-panteleimonas-soros-se-prochorimeni-sipsi-entopistike-se-egkataleleimmeno-ktirio",
-    "title": "Άγιος Παντελεήμονας: Σορός σε προχωρημένη σήψη εντοπίστηκε σε εγκαταλελειμμένο κτίριο",
-    "url": "https://www.newshub.gr/el/ellada/agios-panteleimonas-soros-se-prochorimeni-sipsi-entopistike-se-egkataleleimmeno-ktirio",
-    "date": "2026-11-21T08:52:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/astynomia-2.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/astynomia-2.jpg",
-    "summary": "Σορός σε κατάσταση προχωρημένης σήψης εντοπίστηκε σήμερα το πρωί, γύρω στις 9:30, σε εγκαταλελειμμένο κτίριο στην περιοχή του Αγίου Παντελεήμονα.\r\n\r\nΣύμφωνα ...",
     "author": null,
     "featured": false
   },
