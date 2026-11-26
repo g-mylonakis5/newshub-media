@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T07:42:25.494Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/kairos-vroches-kai-kataigides-simera-se-voreio-ionio-kai-ipeiro-nea-voytia-tis-thermokrasias-chionia-kai-10-mpofor-tin-kyriaki"
+      "link": "https://www.newshub.gr/el/ellada/kairos-vroches-kai-kataigides-simera-se-voreio-ionio-kai-ipeiro-nea-voytia-tis-thermokrasias-chionia-kai-10-mpofor-tin-kyriaki",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290818632156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290818632156174",
+          "at": "2026-11-26T07:42:43.695Z"
+        }
+      }
     },
     {
       "id": "20261126072745-news-epidoma-400-eyro-pote-tha-ginoyn-oi-pliromes-se-syntaxioychoys-poy-den-piran-me-tin-proti-katavoli",
@@ -27,10 +34,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T07:27:45.282Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/epidoma-400-eyro-pote-tha-ginoyn-oi-pliromes-se-syntaxioychoys-poy-den-piran-me-tin-proti-katavoli"
+      "link": "https://www.newshub.gr/el/ellada/epidoma-400-eyro-pote-tha-ginoyn-oi-pliromes-se-syntaxioychoys-poy-den-piran-me-tin-proti-katavoli",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290818656156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290818656156174",
+          "at": "2026-11-26T07:42:47.765Z"
+        }
+      }
     },
     {
       "id": "20261126070009-news-alma-5-9-stis-times-ton-oikodomikon-ylikon-ton-oktovrio-me-pieseis-apo-tin-energeia",
