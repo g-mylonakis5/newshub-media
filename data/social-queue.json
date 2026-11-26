@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T14:58:13.754Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ygeia/karkinos-pagkreatos-poia-symptomata-prepei-na-mas-kinitopoiisoyn"
+      "link": "https://www.newshub.gr/el/ygeia/karkinos-pagkreatos-poia-symptomata-prepei-na-mas-kinitopoiisoyn",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290860998156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290860998156174",
+          "at": "2026-11-26T14:58:36.421Z"
+        }
+      }
     },
     {
       "id": "20261126145313-news-fainomeno-zaigkarnik-symvoyles-poy-mporoyn-na-sas-voithisoyn-na-afisete-tis-skepseis-gia-ti-doyleia-stin-akri-meta-ti-lixi-orarioy",
