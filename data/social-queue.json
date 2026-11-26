@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126145813-news-karkinos-pagkreatos-poia-symptomata-prepei-na-mas-kinitopoiisoyn",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ygeia/karkinos-pagkreatos-poia-symptomata-prepei-na-mas-kinitopoiisoyn",
+      "title": "Καρκίνος παγκρέατος: Ποια συμπτώματα πρέπει να μας κινητοποιήσουν",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/giatrossssss.jpg",
+      "text": "Καρκίνος παγκρέατος: Ποια συμπτώματα πρέπει να μας κινητοποιήσουν",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T14:58:13.754Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ygeia/karkinos-pagkreatos-poia-symptomata-prepei-na-mas-kinitopoiisoyn"
+    },
+    {
       "id": "20261126145313-news-fainomeno-zaigkarnik-symvoyles-poy-mporoyn-na-sas-voithisoyn-na-afisete-tis-skepseis-gia-ti-doyleia-stin-akri-meta-ti-lixi-orarioy",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/sugar/fainomeno-zaigkarnik-symvoyles-poy-mporoyn-na-sas-voithisoyn-na-afisete-tis-skepseis-gia-ti-doyleia-stin-akri-meta-ti-lixi-orarioy",
