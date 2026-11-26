@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T15:23:55.500Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/94-mathites-toy-52oy-dimotikoy-scholeioy-irakleioy-sto-paraolympiako-panorama-toy-mellon-para-sports-center"
+      "link": "https://www.newshub.gr/el/kriti/94-mathites-toy-52oy-dimotikoy-scholeioy-irakleioy-sto-paraolympiako-panorama-toy-mellon-para-sports-center",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290864442156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290864442156174",
+          "at": "2026-11-26T15:24:20.006Z"
+        }
+      }
     },
     {
       "id": "20261126151842-news-kairos-ektakto-deltio-epideinosis-apo-tin-emy-pote-erchontai-ischyres-vroches-kai-kataigides-stin-kriti",
