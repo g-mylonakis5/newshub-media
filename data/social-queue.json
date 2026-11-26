@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126201117-news-cyber-monday-oi-agores-apo-to-diadiktyo-theloyn-prosochi-tonizei-i-enosi-ergazomenon-katanaloton-elladas",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/cyber-monday-oi-agores-apo-to-diadiktyo-theloyn-prosochi-tonizei-i-enosi-ergazomenon-katanaloton-elladas",
+      "title": "Cyber Monday: Οι αγορές από το διαδίκτυο θέλουν προσοχή, τονίζει η Ένωση Εργαζομένων Καταναλωτών Ελλάδας",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/elektronikes-agores.jpg",
+      "text": "Cyber Monday: Οι αγορές από το διαδίκτυο θέλουν προσοχή, τονίζει η Ένωση Εργαζομένων Καταναλωτών Ελλάδας",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T20:11:17.407Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/cyber-monday-oi-agores-apo-to-diadiktyo-theloyn-prosochi-tonizei-i-enosi-ergazomenon-katanaloton-elladas"
+    },
+    {
       "id": "20261126200417-news-spitakia-anakyklosis-pos-ftasame-stis-syllipseis-ereyna-gia-athemiti-epirroi-meso-typoy",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/spitakia-anakyklosis-pos-ftasame-stis-syllipseis-ereyna-gia-athemiti-epirroi-meso-typoy",
