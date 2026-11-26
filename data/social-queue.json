@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126070009-news-alma-5-9-stis-times-ton-oikodomikon-ylikon-ton-oktovrio-me-pieseis-apo-tin-energeia",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/alma-5-9-stis-times-ton-oikodomikon-ylikon-ton-oktovrio-me-pieseis-apo-tin-energeia",
+      "title": "Άλμα 5,9% στις τιμές των οικοδομικών υλικών τον Οκτώβριο με πιέσεις από την ενέργεια",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/34141504fe234da89740da8b125f6c48.jpg",
+      "text": "Άλμα 5,9% στις τιμές των οικοδομικών υλικών τον Οκτώβριο με πιέσεις από την ενέργεια",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T07:00:09.287Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/alma-5-9-stis-times-ton-oikodomikon-ylikon-ton-oktovrio-me-pieseis-apo-tin-energeia"
+    },
+    {
       "id": "20261126065436-news-meleti-to-giaoyrti-aspida-kata-toy-karkinoy-toy-pacheos-enteroy",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ygeia/meleti-to-giaoyrti-aspida-kata-toy-karkinoy-toy-pacheos-enteroy",
