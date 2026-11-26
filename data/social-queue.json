@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126223329-news-i-ethniki-ittithike-stin-paratasi-apo-ti-georgia-me-88-92-kai-to-oneiro-toy-pagkosmioy-kypelloy-apomakrynetai",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/athlitika/i-ethniki-ittithike-stin-paratasi-apo-ti-georgia-me-88-92-kai-to-oneiro-toy-pagkosmioy-kypelloy-apomakrynetai",
+      "title": "Η Εθνική ηττήθηκε στην παράταση από τη Γεωργία με 88-92 και το όνειρο του Παγκοσμίου Κυπέλλου απομακρύνεται",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/regreh.jpg",
+      "text": "Η Εθνική ηττήθηκε στην παράταση από τη Γεωργία με 88-92 και το όνειρο του Παγκοσμίου Κυπέλλου απομακρύνεται",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T22:33:29.211Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/athlitika/i-ethniki-ittithike-stin-paratasi-apo-ti-georgia-me-88-92-kai-to-oneiro-toy-pagkosmioy-kypelloy-apomakrynetai"
+    },
+    {
       "id": "20261126222555-news-ee-adiexodo-stis-vryxelles-gia-ton-proypologismo-o-notos-epimenei-na-mi-ginoyn-perikopes-o-merts-apeilei-me-veto",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/ee-adiexodo-stis-vryxelles-gia-ton-proypologismo-o-notos-epimenei-na-mi-ginoyn-perikopes-o-merts-apeilei-me-veto",
