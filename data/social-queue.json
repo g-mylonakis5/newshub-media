@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T14:53:13.004Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/sugar/fainomeno-zaigkarnik-symvoyles-poy-mporoyn-na-sas-voithisoyn-na-afisete-tis-skepseis-gia-ti-doyleia-stin-akri-meta-ti-lixi-orarioy"
+      "link": "https://www.newshub.gr/el/sugar/fainomeno-zaigkarnik-symvoyles-poy-mporoyn-na-sas-voithisoyn-na-afisete-tis-skepseis-gia-ti-doyleia-stin-akri-meta-ti-lixi-orarioy",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290860530156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290860530156174",
+          "at": "2026-11-26T14:53:31.164Z"
+        }
+      }
     },
     {
       "id": "20261126145127-news-ekdilosi-me-thema-kritiki-diatrofi-chronia-nosimata-tin-triti-1i-dekemvrioy-sto-irakleio",
