@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T15:25:25.900Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/aigyptos-synelifthi-o-odigos-ich-gia-to-dystychima-me-to-vytioforo-kai-toys-31-nekroys"
+      "link": "https://www.newshub.gr/el/kosmos/aigyptos-synelifthi-o-odigos-ich-gia-to-dystychima-me-to-vytioforo-kai-toys-31-nekroys",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290864640156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290864640156174",
+          "at": "2026-11-26T15:25:46.111Z"
+        }
+      }
     },
     {
       "id": "20261126152355-news-94-mathites-toy-52oy-dimotikoy-scholeioy-irakleioy-sto-paraolympiako-panorama-toy-mellon-para-sports-center",
