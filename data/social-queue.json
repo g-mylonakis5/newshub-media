@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T22:25:55.211Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/geopolitiki/ee-adiexodo-stis-vryxelles-gia-ton-proypologismo-o-notos-epimenei-na-mi-ginoyn-perikopes-o-merts-apeilei-me-veto"
+      "link": "https://www.newshub.gr/el/geopolitiki/ee-adiexodo-stis-vryxelles-gia-ton-proypologismo-o-notos-epimenei-na-mi-ginoyn-perikopes-o-merts-apeilei-me-veto",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290915304156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290915304156174",
+          "at": "2026-11-26T22:26:10.515Z"
+        }
+      }
     },
     {
       "id": "20261126222452-news-kapnisma-ta-efiva-koritsia-kapnizoyn-kai-atmizoyn-oso-ta-agoria-i-ellada-stis-protes-theseis-tis-ee-anisychitika-ta-stoicheia-toy-poy",
