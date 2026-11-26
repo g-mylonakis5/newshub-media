@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T22:14:54.410Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/istoria-politismos/plaka-i-oikia-kokovikoy-anakirychthike-thisayros-toy-eyropaikoy-kinimatografoy-paroysia-toy-antonaki"
+      "link": "https://www.newshub.gr/el/istoria-politismos/plaka-i-oikia-kokovikoy-anakirychthike-thisayros-toy-eyropaikoy-kinimatografoy-paroysia-toy-antonaki",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290914068156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290914068156174",
+          "at": "2026-11-26T22:15:11.134Z"
+        }
+      }
     },
     {
       "id": "20261126221341-news-paroysiazetai-to-vivlio-toy-kosta-mela-meta-ti-meta-epochi-ti",
