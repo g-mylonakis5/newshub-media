@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126221310-news-agrotikes-enischyseis-ti-deytera-i-proti-pliromi-meso-tis-neas-platformas-ti-allazei-apo-to-2027",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/agrotikes-enischyseis-ti-deytera-i-proti-pliromi-meso-tis-neas-platformas-ti-allazei-apo-to-2027",
+      "title": "Αγροτικές ενισχύσεις: Τη Δευτέρα η πρώτη πληρωμή μέσω της νέας πλατφόρμας -Τι αλλάζει από το 2027",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/agrotis-xorafi-trakter1.jpg",
+      "text": "Αγροτικές ενισχύσεις: Τη Δευτέρα η πρώτη πληρωμή μέσω της νέας πλατφόρμας -Τι αλλάζει από το 2027",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T22:13:10.715Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/agrotikes-enischyseis-ti-deytera-i-proti-pliromi-meso-tis-neas-platformas-ti-allazei-apo-to-2027"
+    },
+    {
       "id": "20261126220905-news-orgi-toyrkias-kata-toy-eyrokoinovoylioy-gia-to-toyrkolivyko-mnimonio",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/orgi-toyrkias-kata-toy-eyrokoinovoylioy-gia-to-toyrkolivyko-mnimonio",
