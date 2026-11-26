@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T13:09:29.156Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/sugar/menegaki-chairomai-poy-sas-leipo-sas-skeftomai-kai-ego-kapoies-stigmes-den-mporo-na-po-an-tha-yparxei-alli-eleni"
+      "link": "https://www.newshub.gr/el/sugar/menegaki-chairomai-poy-sas-leipo-sas-skeftomai-kai-ego-kapoies-stigmes-den-mporo-na-po-an-tha-yparxei-alli-eleni",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290851050156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290851050156174",
+          "at": "2026-11-26T13:09:44.280Z"
+        }
+      }
     },
     {
       "id": "20261126101843-news-kit-epiviosis-72-oron-to-kostos-ti-katagrafoyn-ta-exeidikeymena-katastimata-kai-giati-i-prolipsi-den-periorizetai-stin-agora-aparaititon-efodion",
