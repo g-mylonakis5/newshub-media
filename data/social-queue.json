@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T22:13:41.776Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/exodos/paroysiazetai-to-vivlio-toy-kosta-mela-meta-ti-meta-epochi-ti"
+      "link": "https://www.newshub.gr/el/exodos/paroysiazetai-to-vivlio-toy-kosta-mela-meta-ti-meta-epochi-ti",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290913930156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290913930156174",
+          "at": "2026-11-26T22:14:04.291Z"
+        }
+      }
     },
     {
       "id": "20261126221310-news-agrotikes-enischyseis-ti-deytera-i-proti-pliromi-meso-tis-neas-platformas-ti-allazei-apo-to-2027",
@@ -27,10 +34,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T22:13:10.715Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/agrotikes-enischyseis-ti-deytera-i-proti-pliromi-meso-tis-neas-platformas-ti-allazei-apo-to-2027"
+      "link": "https://www.newshub.gr/el/oikonomia/agrotikes-enischyseis-ti-deytera-i-proti-pliromi-meso-tis-neas-platformas-ti-allazei-apo-to-2027",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290913942156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290913942156174",
+          "at": "2026-11-26T22:14:07.057Z"
+        }
+      }
     },
     {
       "id": "20261126220905-news-orgi-toyrkias-kata-toy-eyrokoinovoylioy-gia-to-toyrkolivyko-mnimonio",
