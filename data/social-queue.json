@@ -1,6 +1,21 @@
 {
   "posts": [
     {
+      "id": "20261126061623-news-irakleio-asfyktikes-oi-synthikes-sto-eidiko-dimotiko-scholeio-kofon-kai-to-eidiko-gymnasio",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/irakleio-asfyktikes-oi-synthikes-sto-eidiko-dimotiko-scholeio-kofon-kai-to-eidiko-gymnasio",
+      "title": "Ηράκλειο: Ασφυκτικές οι συνθήκες στο Ειδικό Δημοτικό Σχολείο Κωφών και το Ειδικό Γυμνάσιο",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/scholeio-aithousa.jpg",
+      "text": "Ηράκλειο: Ασφυκτικές οι συνθήκες στο Ειδικό Δημοτικό Σχολείο Κωφών και το Ειδικό Γυμνάσιο",
+      "targets": [
+        "facebook"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T06:16:23.941Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kriti/irakleio-asfyktikes-oi-synthikes-sto-eidiko-dimotiko-scholeio-kofon-kai-to-eidiko-gymnasio"
+    },
+    {
       "id": "20261126060210-news-mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/sugar/mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
