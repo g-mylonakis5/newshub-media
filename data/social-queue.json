@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126065436-news-meleti-to-giaoyrti-aspida-kata-toy-karkinoy-toy-pacheos-enteroy",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ygeia/meleti-to-giaoyrti-aspida-kata-toy-karkinoy-toy-pacheos-enteroy",
+      "title": "Μελέτη: Το γιαούρτι- ασπίδα κατά του καρκίνου του παχέος εντέρου",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/giaourt.jpg",
+      "text": "Μελέτη: Το γιαούρτι- ασπίδα κατά του καρκίνου του παχέος εντέρου",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T06:54:36.854Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ygeia/meleti-to-giaoyrti-aspida-kata-toy-karkinoy-toy-pacheos-enteroy"
+    },
+    {
       "id": "20261126063537-news-aplirotoi-dekades-ergazomenoi-sta-spitakia-anakyklosis-stin-kriti-kai-se-oli-tin-ellada",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/aplirotoi-dekades-ergazomenoi-sta-spitakia-anakyklosis-stin-kriti-kai-se-oli-tin-ellada",
