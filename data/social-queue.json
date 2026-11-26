@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T22:16:01.226Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/athlitika/olympiakos-milan-2-4-apo-ton-paradeiso-stin-kolasi-oi-erythroleykoi"
+      "link": "https://www.newshub.gr/el/athlitika/olympiakos-milan-2-4-apo-ton-paradeiso-stin-kolasi-oi-erythroleykoi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290914164156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290914164156174",
+          "at": "2026-11-26T22:16:22.137Z"
+        }
+      }
     },
     {
       "id": "20261126221454-news-plaka-i-oikia-kokovikoy-anakirychthike-thisayros-toy-eyropaikoy-kinimatografoy-paroysia-toy-antonaki",
