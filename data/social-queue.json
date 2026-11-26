@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T08:19:06.844Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/teli-kykloforias-oi-epiloges-poy-echoyn-eos-to-telos-toy-etoys-oi-idioktites-ochimaton-gia-na-apofygoyn-tis-epivarynseis"
+      "link": "https://www.newshub.gr/el/oikonomia/teli-kykloforias-oi-epiloges-poy-echoyn-eos-to-telos-toy-etoys-oi-idioktites-ochimaton-gia-na-apofygoyn-tis-epivarynseis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290822334156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290822334156174",
+          "at": "2026-11-26T08:19:22.390Z"
+        }
+      }
     },
     {
       "id": "20261126075431-news-kykloma-eikonikon-apodeixeon-se-enstoloys-mechri-kai-stin-italia-eikonikes-diamones-kai-ta-173-spitia-fantasmata",
