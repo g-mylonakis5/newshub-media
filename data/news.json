@@ -1,5 +1,17 @@
 [
   {
+    "id": "ekdilosi-me-thema-kritiki-diatrofi-chronia-nosimata-tin-triti-1i-dekemvrioy-sto-irakleio",
+    "title": "Εκδήλωση με θέμα «Κρητική Διατροφή & χρόνια νοσήματα»  την Τρίτη 1η Δεκεμβρίου στο Ηράκλειο",
+    "url": "https://www.newshub.gr/el/kriti/ekdilosi-me-thema-kritiki-diatrofi-chronia-nosimata-tin-triti-1i-dekemvrioy-sto-irakleio",
+    "date": "2026-11-26T10:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/phageto-ygieine-diatrophe-pexels.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/phageto-ygieine-diatrophe-pexels.jpg",
+    "summary": "Ενημερωτική εκδήλωση με θέμα «Κρητική Διατροφή & χρόνια νοσήματα» διοργανώνει η Ιατρική Σχολή του Πανεπιστημίου Κρήτης, σε συνεργασία με την ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "venizeleio-protasi-38-ekat-eyro-gia-tin-anakainisi-toy-kentrikoy-ktirioy-ekkremei-i-entaxi-ton-ergon",
     "title": "Βενιζέλειο: Πρόταση 38 εκατ. ευρώ για την ανακαίνιση του κεντρικού κτιρίου – Εκκρεμεί η ένταξη των έργων",
     "url": "https://www.newshub.gr/el/ygeia/venizeleio-protasi-38-ekat-eyro-gia-tin-anakainisi-toy-kentrikoy-ktirioy-ekkremei-i-entaxi-ton-ergon",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/benizeleio.jpg",
     "summary": "Πρόταση της Περιφέρειας Κρήτης για τη χρηματοδότηση της ριζικής ανακαίνισης του κεντρικού κτιρίου του Βενιζελείου, ύψους 38 εκατ. ευρώ, περιλαμβάνει η απάντη...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "kykloma-eikonikon-diamonon-oi-dialogoi-gia-tin-kriti-tis-times-kai-tis-apodeixeis-se-astynomikoys-kai-limenikoys",
@@ -7236,18 +7248,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/dikasthriosfyri-1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/dikasthriosfyri-1.jpg",
     "summary": "Δικαστής στην αμερικανική πολιτεία Μιζούρι επικύρωσε χθες Παρασκευή συμφωνία με την οποία ο κολοσσός του αγροτοχημικού τομέα Bayer αποδέχεται να καταβάλλει α...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "archigos-geetha-me-aytaparnisi-oi-enoples-dynameis-diafylassoyn-tin-patrida",
-    "title": "Αρχηγός ΓΕΕΘΑ: Με αυταπάρνηση οι Ενοπλες Δυνάμεις διαφυλάσσουν την πατρίδα",
-    "url": "https://www.newshub.gr/el/ellada/archigos-geetha-me-aytaparnisi-oi-enoples-dynameis-diafylassoyn-tin-patrida",
-    "date": "2026-11-21T09:05:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/erberberbe.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/erberberbe.jpg",
-    "summary": "«Η ελευθερία δεν αποτελεί αυτονόητο κεκτημένο. Είναι η πολυτιμότερη παρακαταθήκη της μακραίωνης ιστορίας μας, σφυρηλατημένη με αγώνες και θυσίες, και σ...",
     "author": null,
     "featured": false
   },
