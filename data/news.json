@@ -1,5 +1,21 @@
 [
   {
+    "id": "aplirotoi-dekades-ergazomenoi-sta-spitakia-anakyklosis-stin-kriti-kai-se-oli-tin-ellada",
+    "title": "Απλήρωτοι δεκάδες εργαζόμενοι στα «σπιτάκια ανακύκλωσης» στην Κρήτη και σε όλη την Ελλάδα",
+    "url": "https://www.newshub.gr/el/kriti/aplirotoi-dekades-ergazomenoi-sta-spitakia-anakyklosis-stin-kriti-kai-se-oli-tin-ellada",
+    "date": "2026-11-26T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/25-11/spitakia-anakykloses.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/spitakia-anakykloses.jpg",
+    "summary": "Απλήρωτοι παραμένουν μέχρι σήμερα περίπου 30 εργαζόμενοι στα «σπιτάκια ανακύκλωσης» του Ηρακλείου και η εργοδότρια εταιρεία τους ζητάει πίστωση χ...",
+    "author": {
+      "name": "Χριστόφορος Παπαδάκης",
+      "url": "https://www.newshub.gr/el/christoforos-papadakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
     "title": "Ματ Ντέιμον: Ήταν δύσκολο να επιστρέψω στην οικογενειακή ζωή μετά τα γυρίσματα της «Οδύσσειας»",
     "url": "https://www.newshub.gr/el/sugar/mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
@@ -93,7 +109,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/25-11/klim.jpg",
     "summary": "Την ώρα που στην Αττάλεια ολοκληρώνονταν οι εργασίες της COP31 και οι εκπρόσωποι των κρατών συζητούσαν για την αντιμετώπιση της κλιματικής αλλαγής, οι θερμοκ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "plithainoyn-oi-antidraseis-gia-ti-schediazomeni-anatheorisi-tis-eyropaikis-odigias-gia-ta-proionta-kapnoy",
@@ -7228,18 +7244,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/tourismos-diakopes.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/tourismos-diakopes.jpg",
     "summary": "Τις εκτιμήσεις για νέα ρεκόρ στον τουρισμό επιβεβαιώνουν τα στοιχεία της Τράπεζας της Ελλάδος για το ισοζύγιο πληρωμών του Σεπτεμβρίου. Οι ταξιδιωτικές εισπρ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "nea-antidrasi-gia-ti-mega-toyristiki-ependysi-500-ekat-eyro-stin-triopetra-rethymnoy",
-    "title": "Νέα αντίδραση για τη Mega τουριστική επένδυση 500 εκατ. ευρώ στην Τριόπετρα Ρεθύμνου",
-    "url": "https://www.newshub.gr/el/kriti/nea-antidrasi-gia-ti-mega-toyristiki-ependysi-500-ekat-eyro-stin-triopetra-rethymnoy",
-    "date": "2026-11-21T05:06:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/21-11/triopetra.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/21-11/triopetra.jpg",
-    "summary": "Την ανάκληση των αδειών και των εγκρίσεων που έχει λάβει το νέο μεγάλο, επενδυτικό, τουριστικό έργο στην Τριόπετρα Ρεθύμνου ζητά από την Πολιτεία η Ελληνική ...",
     "author": null,
     "featured": false
   },
