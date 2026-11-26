@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126214313-news-mpazar-vivlion-tin-paraskeyi-27-noemvrioy-sto-dimarcheio-chanion",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/mpazar-vivlion-tin-paraskeyi-27-noemvrioy-sto-dimarcheio-chanion",
+      "title": "Μπαζάρ βιβλίων την Παρασκευή 27 Νοεμβρίου στο Δημαρχείο Χανίων",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/drase---biblia-aphisa.jpg",
+      "text": "Μπαζάρ βιβλίων την Παρασκευή 27 Νοεμβρίου στο Δημαρχείο Χανίων",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T21:43:13.077Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/mpazar-vivlion-tin-paraskeyi-27-noemvrioy-sto-dimarcheio-chanion"
+    },
+    {
       "id": "20261126212036-news-epistrofi-enoikioy-gia-932-652-polites-xekinisan-oi-pliromes",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/epistrofi-enoikioy-gia-932-652-polites-xekinisan-oi-pliromes",
