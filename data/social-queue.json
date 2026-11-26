@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126220905-news-orgi-toyrkias-kata-toy-eyrokoinovoylioy-gia-to-toyrkolivyko-mnimonio",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/geopolitiki/orgi-toyrkias-kata-toy-eyrokoinovoylioy-gia-to-toyrkolivyko-mnimonio",
+      "title": "Οργή Τουρκίας κατά του Ευρωκοινοβουλίου για το τουρκολιβυκό μνημόνιο",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/tourkia-semaia-bosporos.jpg",
+      "text": "Οργή Τουρκίας κατά του Ευρωκοινοβουλίου για το τουρκολιβυκό μνημόνιο",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T22:09:05.577Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/geopolitiki/orgi-toyrkias-kata-toy-eyrokoinovoylioy-gia-to-toyrkolivyko-mnimonio"
+    },
+    {
       "id": "20261126214313-news-mpazar-vivlion-tin-paraskeyi-27-noemvrioy-sto-dimarcheio-chanion",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/mpazar-vivlion-tin-paraskeyi-27-noemvrioy-sto-dimarcheio-chanion",
