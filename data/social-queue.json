@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261126183759-news-black-friday-diafimistiki-kampania-toy-eot-gia-provoli-tis-elladas-sti-gallia",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/black-friday-diafimistiki-kampania-toy-eot-gia-provoli-tis-elladas-sti-gallia",
+      "title": "Black Friday: Διαφημιστική καμπάνια του ΕΟΤ για προβολή της Ελλάδας στη Γαλλία",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/screenshot-2026-11-26-154835.jpg",
+      "text": "Black Friday: Διαφημιστική καμπάνια του ΕΟΤ για προβολή της Ελλάδας στη Γαλλία",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-26T18:37:59.854Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/black-friday-diafimistiki-kampania-toy-eot-gia-provoli-tis-elladas-sti-gallia"
+    },
+    {
       "id": "20261126183448-news-katadikazei-to-toyrkolivyko-mnimonio-to-eyropaiko-koinovoylio-einai-akyro-den-paragei-ennoma-apotelesmata",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/katadikazei-to-toyrkolivyko-mnimonio-to-eyropaiko-koinovoylio-einai-akyro-den-paragei-ennoma-apotelesmata",
