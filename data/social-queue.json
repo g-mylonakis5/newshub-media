@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T06:02:10.938Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/sugar/mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias"
+      "link": "https://www.newshub.gr/el/sugar/mat-nteimon-itan-dyskolo-na-epistrepso-stin-oikogeneiaki-zoi-meta-ta-gyrismata-tis-odysseias",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290809644156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290809644156174",
+          "at": "2026-11-26T06:02:30.842Z"
+        }
+      }
     },
     {
       "id": "20261126053410-news-i-liverpoyl-proetoimazetai-gia-to-antio-toy-tsimika-eno-kalovlepei-goyentel",
