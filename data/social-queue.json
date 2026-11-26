@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T15:18:42.267Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/kairos-ektakto-deltio-epideinosis-apo-tin-emy-pote-erchontai-ischyres-vroches-kai-kataigides-stin-kriti"
+      "link": "https://www.newshub.gr/el/kriti/kairos-ektakto-deltio-epideinosis-apo-tin-emy-pote-erchontai-ischyres-vroches-kai-kataigides-stin-kriti",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290863350156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290863350156174",
+          "at": "2026-11-26T15:19:05.256Z"
+        }
+      }
     },
     {
       "id": "20261126151732-news-me-megali-epitychia-pragmatopoiithike-i-imerida-elmepa-sed-oee-acfe-me-thema-tis-ependyseis-stin-kriti",
