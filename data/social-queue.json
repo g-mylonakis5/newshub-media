@@ -10,10 +10,17 @@
       "targets": [
         "facebook"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T07:44:33.593Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/apopseis/emma-dobigny-i-moysa-tis-monmartris-poy-kryvotan-kato-apo-enan-degas"
+      "link": "https://www.newshub.gr/el/apopseis/emma-dobigny-i-moysa-tis-monmartris-poy-kryvotan-kato-apo-enan-degas",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290818776156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290818776156174",
+          "at": "2026-11-26T07:44:47.812Z"
+        }
+      }
     },
     {
       "id": "20261126074225-news-kairos-vroches-kai-kataigides-simera-se-voreio-ionio-kai-ipeiro-nea-voytia-tis-thermokrasias-chionia-kai-10-mpofor-tin-kyriaki",
