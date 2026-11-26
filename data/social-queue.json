@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-26T18:31:16.903Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/dyo-nees-epicheiriseis-diasosis-metanaston-se-notia-kriti-kai-gaydo"
+      "link": "https://www.newshub.gr/el/kriti/dyo-nees-epicheiriseis-diasosis-metanaston-se-notia-kriti-kai-gaydo",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290882898156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290882898156174",
+          "at": "2026-11-26T18:31:33.929Z"
+        }
+      }
     },
     {
       "id": "20261126182701-news-papoyra-ora-miden-agonas-dromoy-gia-ti-diasosi-toy-minoikoy-mnimeioy",
