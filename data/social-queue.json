@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T14:12:16.331Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/apati-me-eikonikes-apodeixeis-gia-enstoloys-kai-stin-kriti-oi-apokalyptikoi-dialogoi-tis-markellas-kai-toy-giorgoy"
+      "link": "https://www.newshub.gr/el/kriti/apati-me-eikonikes-apodeixeis-gia-enstoloys-kai-stin-kriti-oi-apokalyptikoi-dialogoi-tis-markellas-kai-toy-giorgoy",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291002550156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291002550156174",
+          "at": "2026-11-27T14:12:32.983Z"
+        }
+      }
     },
     {
       "id": "20261127130722-news-symmetochi-tis-perifereias-kritis-sti-diethni-toyristiki-ekthesi-ittf-warsaw-2026",
