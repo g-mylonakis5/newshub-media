@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T19:06:29.177Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/ispania-toylachiston-okto-metanastes-vrethikan-nekroi-se-varka-sta-anoichta-ton-kanarion-nison"
+      "link": "https://www.newshub.gr/el/kosmos/ispania-toylachiston-okto-metanastes-vrethikan-nekroi-se-varka-sta-anoichta-ton-kanarion-nison",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291027954156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291027954156174",
+          "at": "2026-11-27T19:06:43.350Z"
+        }
+      }
     },
     {
       "id": "20261127190040-news-papoyra-ora-miden-kraygi-agonias-ton-archaiologon-gia-ti-diasosi-toy-mnimeioy-megali-i-symmetochi-sti-syskepsi-foto",
