@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T09:19:06.672Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/programma-kriti-2021-2027-chrimatodotisi-840-000-eyro-gia-tin-anavathmisi-toy-dromoy-loykia-kapetaniana"
+      "link": "https://www.newshub.gr/el/kriti/programma-kriti-2021-2027-chrimatodotisi-840-000-eyro-gia-tin-anavathmisi-toy-dromoy-loykia-kapetaniana",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290974596156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290974596156174",
+          "at": "2026-11-27T09:19:29.621Z"
+        }
+      }
     },
     {
       "id": "20261127091708-news-irakleio-xekinoyn-oi-dia-zosis-ergasies-toy-diethnoys-synedrioy-metanus-kentrikos-omilitis-o-proedros-toy-ite",
