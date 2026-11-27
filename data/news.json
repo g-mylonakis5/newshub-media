@@ -1,5 +1,17 @@
 [
   {
+    "id": "kriti-mponamas-78-1-ekat-eyro-gia-tin-apokatastasi-zimion-apo-tis-katastrofikes-plimmyres-toy-oktovrioy",
+    "title": "Κρήτη: \" Μποναμάς\" 78,1 εκατ. ευρώ για την αποκατάσταση ζημιών από τις καταστροφικές  πλημμύρες του Οκτωβρίου",
+    "url": "https://www.newshub.gr/el/kriti/kriti-mponamas-78-1-ekat-eyro-gia-tin-apokatastasi-zimion-apo-tis-katastrofikes-plimmyres-toy-oktovrioy",
+    "date": "2026-11-27T08:53:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/plemmyres.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/plemmyres.jpg",
+    "summary": "Πόροι ύψους 78,1 εκατ. ευρώ κατανέμονται στην Κρήτη για την αποκατάσταση ζημιών που προκλήθηκαν από φυσικές καταστροφές, με έμφαση στα ακραία καιρικά φαινόμε...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "tee-tak-antithesi-stin-episkepsi-kasidiari-i-kriti-paramenei-topos-eleytherias-kai-dimokratias",
     "title": "ΤΕΕ/ΤΑΚ: Αντίθεση στην επίσκεψη Κασιδιάρη – «Η Κρήτη παραμένει τόπος ελευθερίας και δημοκρατίας»",
     "url": "https://www.newshub.gr/el/kriti/tee-tak-antithesi-stin-episkepsi-kasidiari-i-kriti-paramenei-topos-eleytherias-kai-dimokratias",
@@ -57,7 +69,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/lesteia-diarrektes-kale.jpg",
     "summary": "Ένοπλη ληστεία σε βάρος 64χρονης εργαζόμενης επιχείρησης και συγκεκριμένα περιπτέρου,  σημειώθηκε το βράδυ της Τετάρτης 25 Νοεμβρίου σε περιοχή του...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "siteia-entopistike-soros-andra-se-prochorimeni-sipsi-sti-thalassia-periochi-toy-goydoyra",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/scholeio-ekphobismos-pexels.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/scholeio-ekphobismos-pexels.jpg",
     "summary": "Όπλα και πολεμικό εξοπλισμό αναζητούσε 14χρονος μαθητής Γυμνασίου, με σκοπό να εισβάλει σε σχολείο και να τιμωρήσει άλλα παιδιά που του έκαναν bullying, σχέδ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "dimitra-liapi-i-pio-epikindyni-lexi-stin-endooikogeneiaki-via-einai-i-siopi-o-rolos-tis-el-as-kai-ta-462-fetina-peristatika-sto-irakleio-podcast",
-    "title": "Δήμητρα Λιάπη «Η πιο επικίνδυνη λέξη στην ενδοοικογενειακή βία είναι η σιωπή» – Ο ρόλος της ΕΛ.ΑΣ. και τα 462 φετινά περιστατικά στο Ηράκλειο (podcast)",
-    "url": "https://www.newshub.gr/el/ellada/dimitra-liapi-i-pio-epikindyni-lexi-stin-endooikogeneiaki-via-einai-i-siopi-o-rolos-tis-el-as-kai-ta-462-fetina-peristatika-sto-irakleio-podcast",
-    "date": "2026-11-22T11:57:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/koinonia-se-1o-prosopo-3.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/koinonia-se-1o-prosopo-3.jpg",
-    "summary": "«Η πιο επικίνδυνη λέξη στη βία είναι η σιωπή». Με αυτό το ξεκάθαρο μήνυμα, η κα Δήμητρα Λιάπη, Υ/Α,  προϊσταμένη του Γραφείου Αντιμετώπ...",
     "author": null,
     "featured": false
   },
