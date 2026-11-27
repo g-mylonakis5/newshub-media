@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127130617-news-uefa-i-vathmologia-meta-apo-mia-katastrofiki-evdomada-gia-tin-ellada-me-ittes-gia-aek-olympiako-panathinaiko-kai-ofi",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/athlitika/uefa-i-vathmologia-meta-apo-mia-katastrofiki-evdomada-gia-tin-ellada-me-ittes-gia-aek-olympiako-panathinaiko-kai-ofi",
+      "title": "Uefa: Η βαθμολογία μετά από μια καταστροφική εβδομάδα για την Ελλάδα, με ήττες για ΑΕΚ, Ολυμπιακό, Παναθηναϊκό και ΟΦΗ",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/podosphairo-mpala-pexels.jpg",
+      "text": "Uefa: Η βαθμολογία μετά από μια καταστροφική εβδομάδα για την Ελλάδα, με ήττες για ΑΕΚ, Ολυμπιακό, Παναθηναϊκό και ΟΦΗ",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T13:06:17.571Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/athlitika/uefa-i-vathmologia-meta-apo-mia-katastrofiki-evdomada-gia-tin-ellada-me-ittes-gia-aek-olympiako-panathinaiko-kai-ofi"
+    },
+    {
       "id": "20261127130544-news-kriti-mponamas-78-1-ekat-eyro-gia-tin-apokatastasi-zimion-apo-tis-katastrofikes-plimmyres-toy-oktovrioy",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/kriti-mponamas-78-1-ekat-eyro-gia-tin-apokatastasi-zimion-apo-tis-katastrofikes-plimmyres-toy-oktovrioy",
@@ -11,17 +27,10 @@
         "facebook",
         "x"
       ],
-      "status": "done",
+      "status": "pending",
       "at": "2026-11-27T13:05:44.874Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/kriti-mponamas-78-1-ekat-eyro-gia-tin-apokatastasi-zimion-apo-tis-katastrofikes-plimmyres-toy-oktovrioy",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290995002156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290995002156174",
-          "at": "2026-11-27T13:06:04.221Z"
-        }
-      }
+      "link": "https://www.newshub.gr/el/kriti/kriti-mponamas-78-1-ekat-eyro-gia-tin-apokatastasi-zimion-apo-tis-katastrofikes-plimmyres-toy-oktovrioy"
     },
     {
       "id": "20261127091959-news-lasithi-paketo-4-ekat-eyro-apo-perifereia-kritis-gia-ti-dimosia-ygeia-chrimatodotisi-magnitikoy-tomografoy-kai-dimopratisi-toy-kefiap-neapolis",
