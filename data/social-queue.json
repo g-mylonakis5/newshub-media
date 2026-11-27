@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T09:12:46.156Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/akinita-nea-rythmisi-gia-na-apotrapoyn-exoseis-eyaloton-daneiolipton-poy-echasan-se-pleistiriasmo"
+      "link": "https://www.newshub.gr/el/oikonomia/akinita-nea-rythmisi-gia-na-apotrapoyn-exoseis-eyaloton-daneiolipton-poy-echasan-se-pleistiriasmo",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290973690156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290973690156174",
+          "at": "2026-11-27T09:13:05.160Z"
+        }
+      }
     },
     {
       "id": "20261127072523-news-spitakia-anakyklosis-stin-eyropaiki-eisaggelia-oi-tesseris-syllifthentes-oi-apokalypseis-toy-newshub-gr-gia-tin-kriti-1",
