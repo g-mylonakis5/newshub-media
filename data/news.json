@@ -1,5 +1,17 @@
 [
   {
+    "id": "inomeno-vasileio-den-yparchoyn-endeixeis-diarrois-prosopikon-dedomenon-meta-tin-kyvernoepithesi",
+    "title": "Ηνωμένο Βασίλειο: Δεν υπάρχουν ενδείξεις διαρροής προσωπικών δεδομένων μετά την κυβερνοεπίθεση",
+    "url": "https://www.newshub.gr/el/kosmos/inomeno-vasileio-den-yparchoyn-endeixeis-diarrois-prosopikon-dedomenon-meta-tin-kyvernoepithesi",
+    "date": "2026-11-27T17:32:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/cyberattack2.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/cyberattack2.jpg",
+    "summary": "Δεν υπάρχουν μέχρι στιγμής ενδείξεις ότι παραβιάστηκαν προσωπικά δεδομένα από την κυβερνοεπίθεση στο υπουργείο Εργασίας και Συντάξεων της Βρετανίας, διαβεβαί...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "synagermos-gia-tin-exafanisi-64chronoy-sti-thessaloniki",
     "title": "Συναγερμός για την εξαφάνιση 64χρονου στη Θεσσαλονίκη",
     "url": "https://www.newshub.gr/el/ellada/synagermos-gia-tin-exafanisi-64chronoy-sti-thessaloniki",
@@ -7220,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/image-3.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/image-3.jpg",
     "summary": "Πώς μπορεί το φως να αλλάξει τις ιδιότητες ενός υλικού; Πώς μπορούμε να αξιοποιήσουμε αυτή την αλληλεπίδραση για να δημιουργήσουμε νέα υλικά και να...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi",
-    "title": "ΙΝΚΑ: Ακριβότερο κατά σχεδόν 18% το φετινό χριστουγεννιάτικο τραπέζι",
-    "url": "https://www.newshub.gr/el/oikonomia/inka-akrivotero-kata-schedon-18-to-fetino-christoygenniatiko-trapezi",
-    "date": "2026-11-23T08:45:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/3f1ce361b0e74fe88c6d32e1ac670a7f.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/3f1ce361b0e74fe88c6d32e1ac670a7f.jpg",
-    "summary": "Στα 220,75 ευρώ ανέρχεται το κόστος του χριστουγεννιάτικου τραπεζιού για το 2026, αυξημένο κατά περίπου 18% σε σχέση με το 2025, όταν είχε διαμορφωθεί στα 18...",
     "author": null,
     "featured": false
   },
