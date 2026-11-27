@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T18:44:44.115Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/santiago-ampaskal-o-50chronos-polyteknos-igetis-toy-akrodexioy-vox-poy-diekdikei-rolo-kleidi-stis-ekloges-tis-ispanias"
+      "link": "https://www.newshub.gr/el/kosmos/santiago-ampaskal-o-50chronos-polyteknos-igetis-toy-akrodexioy-vox-poy-diekdikei-rolo-kleidi-stis-ekloges-tis-ispanias",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291024984156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291024984156174",
+          "at": "2026-11-27T18:45:09.875Z"
+        }
+      }
     },
     {
       "id": "20261127144022-news-to-anakoinothen-tis-ieras-synodoy-tis-ekklisias-tis-kritis-me-tin-oloklirosi-ton-ergasion-tis",
