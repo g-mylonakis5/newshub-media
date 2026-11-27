@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T09:17:08.524Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/irakleio-xekinoyn-oi-dia-zosis-ergasies-toy-diethnoys-synedrioy-metanus-kentrikos-omilitis-o-proedros-toy-ite"
+      "link": "https://www.newshub.gr/el/kriti/irakleio-xekinoyn-oi-dia-zosis-ergasies-toy-diethnoys-synedrioy-metanus-kentrikos-omilitis-o-proedros-toy-ite",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290974260156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290974260156174",
+          "at": "2026-11-27T09:17:24.778Z"
+        }
+      }
     },
     {
       "id": "20261127091246-news-akinita-nea-rythmisi-gia-na-apotrapoyn-exoseis-eyaloton-daneiolipton-poy-echasan-se-pleistiriasmo",
