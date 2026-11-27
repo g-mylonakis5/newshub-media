@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127212311-news-i-roymania-zita-apo-to-nato-na-ti-voithisei-na-antimetopisei-tis-yvridikes-rosikes-epitheseis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/i-roymania-zita-apo-to-nato-na-ti-voithisei-na-antimetopisei-tis-yvridikes-rosikes-epitheseis",
+      "title": "Η Ρουμανία ζητά από το ΝΑΤΟ να τη βοηθήσει να αντιμετωπίσει τις υβριδικές ρωσικές επιθέσεις",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/hacker2-mkt.jpg",
+      "text": "Η Ρουμανία ζητά από το ΝΑΤΟ να τη βοηθήσει να αντιμετωπίσει τις υβριδικές ρωσικές επιθέσεις",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T21:23:11.117Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kosmos/i-roymania-zita-apo-to-nato-na-ti-voithisei-na-antimetopisei-tis-yvridikes-rosikes-epitheseis"
+    },
+    {
       "id": "20261127212203-news-gia-kakoyrgimata-diokontai-oi-tesseris-syllifthentes-gia-ta-spitakia-anakyklosis-apologoyntai-ti-deytera",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ellada/gia-kakoyrgimata-diokontai-oi-tesseris-syllifthentes-gia-ta-spitakia-anakyklosis-apologoyntai-ti-deytera",
