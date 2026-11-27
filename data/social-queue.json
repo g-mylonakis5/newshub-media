@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127061057-news-kostas-karamanlis-apo-ti-thessaloniki-ischyri-ellada-choris-akmaia-paragogiki-kai-eyimeroysa-perifereia-den-mporei-na-yparxei",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ellada/kostas-karamanlis-apo-ti-thessaloniki-ischyri-ellada-choris-akmaia-paragogiki-kai-eyimeroysa-perifereia-den-mporei-na-yparxei",
+      "title": "Κώστας Καραμανλής από τη Θεσσαλονίκη: Ισχυρή Ελλάδα χωρίς ακμαία, παραγωγική και ευημερούσα Περιφέρεια δεν μπορεί να υπάρξει",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/kostas-karamanlis-tehnopolis-thessalonikis-1024x681.jpg",
+      "text": "Κώστας Καραμανλής από τη Θεσσαλονίκη: Ισχυρή Ελλάδα χωρίς ακμαία, παραγωγική και ευημερούσα Περιφέρεια δεν μπορεί να υπάρξει",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T06:10:57.056Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/ellada/kostas-karamanlis-apo-ti-thessaloniki-ischyri-ellada-choris-akmaia-paragogiki-kai-eyimeroysa-perifereia-den-mporei-na-yparxei"
+    },
+    {
       "id": "20261127060933-news-toyrkia-o-erntogan-etoimazetai-gia-ekloges-to-2028-anoichto-to-endechomeno-prooris-prosfygis-stis-kalpes-anaferei-o-tz-gilmaz",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/toyrkia-o-erntogan-etoimazetai-gia-ekloges-to-2028-anoichto-to-endechomeno-prooris-prosfygis-stis-kalpes-anaferei-o-tz-gilmaz",
