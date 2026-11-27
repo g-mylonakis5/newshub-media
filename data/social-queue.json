@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T07:25:23.522Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/spitakia-anakyklosis-stin-eyropaiki-eisaggelia-oi-tesseris-syllifthentes-oi-apokalypseis-toy-newshub-gr-gia-tin-kriti-1"
+      "link": "https://www.newshub.gr/el/kriti/spitakia-anakyklosis-stin-eyropaiki-eisaggelia-oi-tesseris-syllifthentes-oi-apokalypseis-toy-newshub-gr-gia-tin-kriti-1",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290964414156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290964414156174",
+          "at": "2026-11-27T07:25:38.118Z"
+        }
+      }
     },
     {
       "id": "20261127070957-news-kriti-erchontai-ischyres-kataigides-kai-thyellodeis-anemoi-tin-kyriaki-ektakto-deltio-epideinosis-toy-kairoy",
