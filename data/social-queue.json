@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T19:58:12.179Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/inomeno-vasileio-den-yparchoyn-endeixeis-diarrois-prosopikon-dedomenon-meta-tin-kyvernoepithesi"
+      "link": "https://www.newshub.gr/el/kosmos/inomeno-vasileio-den-yparchoyn-endeixeis-diarrois-prosopikon-dedomenon-meta-tin-kyvernoepithesi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291034416156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291034416156174",
+          "at": "2026-11-27T19:58:28.505Z"
+        }
+      }
     },
     {
       "id": "20261127195256-news-metanasteytiko-adiakopes-oi-afixeis-pros-tin-kriti-alles-dyo-lemvoi-notia-tis-agias-galinis",
