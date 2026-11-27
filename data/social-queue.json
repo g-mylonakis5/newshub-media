@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T18:49:29.296Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/spitakia-anakyklosis-kakoyrgimatikes-dioxeis-stoys-tesseris-syllifthentes"
+      "link": "https://www.newshub.gr/el/ellada/spitakia-anakyklosis-kakoyrgimatikes-dioxeis-stoys-tesseris-syllifthentes",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291025782156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291025782156174",
+          "at": "2026-11-27T18:49:43.035Z"
+        }
+      }
     },
     {
       "id": "20261127184805-news-irakleio-choris-stegastra-kai-prostateymenoys-choroys-oi-mathites-sta-eidika-scholeia-ti-zitoyn-oi-goneis-foto",
