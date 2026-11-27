@@ -1,5 +1,17 @@
 [
   {
+    "id": "manoysakis-admie-eimaste-stin-epochi-ton-diethnon-ilektrikon-diasyndeseon",
+    "title": "Μανουσάκης-ΑΔΜΗΕ: Είμαστε στην εποχή των διεθνών ηλεκτρικών διασυνδέσεων",
+    "url": "https://www.newshub.gr/el/oikonomia/manoysakis-admie-eimaste-stin-epochi-ton-diethnon-ilektrikon-diasyndeseon",
+    "date": "2026-11-27T12:00:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/manousakes.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/manousakes.jpg",
+    "summary": "Στη σημασία του σχεδιαζόμενου έργου της ηλεκτρικής διασύνδεσης Ελλάδας-Σαουδικής Αραβίας, Saudi-Greek Interconnection για την Ευρώπη και τη Μέση Ανατολή, ανα...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "syllogos-ergazomenon-nosokomeioy-agioy-nikolaoy-i-foni-ton-ergazomenon-den-fimonetai",
     "title": "Σύλλογος Εργαζομένων Νοσοκομείου Αγίου Νικολάου: Η φωνή των εργαζομένων δεν φιμώνεται",
     "url": "https://www.newshub.gr/el/kriti/syllogos-ergazomenon-nosokomeioy-agioy-nikolaoy-i-foni-ton-ergazomenon-den-fimonetai",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/nosokomeio-agios-nikolaos-1.jpg",
     "summary": "\"Η φωνή των εργαζομένων δεν φιμώνεται &ndash; Ο Σύλλογος δεν εκφοβίζεται\", τονίζει με έμφαση του ΔΣ του Συλλόγου Εργαζομένων Γενικού Νοσοκομεί...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "elstat-ptosi-2-8-stis-eggrafes-neon-epicheiriseon-to-g-trimino-ayxisi-stis-ptocheyseis",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/kostis_xatzidakis.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/kostis_xatzidakis.jpg",
     "summary": "Ανοιχτό αφήνει το ενδεχόμενο νέων παρεμβάσεων για τη στήριξη των νοικοκυριών, εφόσον συνεχιστούν οι πιέσεις στις τιμές της ενέργειας και των βασικών αγαθών, ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "katadioxi-sti-syggroy-i-antidrasi-ton-astynomikon-den-itan-ypervoliki-itan-kath-ola-nomimi-leei-o-epikefalis-tis-dias",
-    "title": "Καταδίωξη στη Συγγρού: «Η αντίδραση των αστυνομικών δεν ήταν υπερβολική, ήταν καθ'όλα νόμιμη», λέει ο επικεφαλής της ΔΙΑΣ",
-    "url": "https://www.newshub.gr/el/ellada/katadioxi-sti-syggroy-i-antidrasi-ton-astynomikon-den-itan-ypervoliki-itan-kath-ola-nomimi-leei-o-epikefalis-tis-dias",
-    "date": "2026-11-22T17:27:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/sigkrou_katadioxi_arthrou.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/sigkrou_katadioxi_arthrou.jpg",
-    "summary": "Απάντηση στις αιτιάσεις περί υπερβολικής αντίδρασης των αστυνομικών κατά την επεισοδιακή καταδίωξη γυναίκας οδηγού, που ολοκληρώθηκε με τη σύλληψή της στη λε...",
     "author": null,
     "featured": false
   },
