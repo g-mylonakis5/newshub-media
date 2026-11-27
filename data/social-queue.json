@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T09:19:59.490Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/lasithi-paketo-4-ekat-eyro-apo-perifereia-kritis-gia-ti-dimosia-ygeia-chrimatodotisi-magnitikoy-tomografoy-kai-dimopratisi-toy-kefiap-neapolis"
+      "link": "https://www.newshub.gr/el/kriti/lasithi-paketo-4-ekat-eyro-apo-perifereia-kritis-gia-ti-dimosia-ygeia-chrimatodotisi-magnitikoy-tomografoy-kai-dimopratisi-toy-kefiap-neapolis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290974746156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290974746156174",
+          "at": "2026-11-27T09:20:14.555Z"
+        }
+      }
     },
     {
       "id": "20261127091906-news-programma-kriti-2021-2027-chrimatodotisi-840-000-eyro-gia-tin-anavathmisi-toy-dromoy-loykia-kapetaniana",
