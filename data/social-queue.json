@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127141216-news-apati-me-eikonikes-apodeixeis-gia-enstoloys-kai-stin-kriti-oi-apokalyptikoi-dialogoi-tis-markellas-kai-toy-giorgoy",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/apati-me-eikonikes-apodeixeis-gia-enstoloys-kai-stin-kriti-oi-apokalyptikoi-dialogoi-tis-markellas-kai-toy-giorgoy",
+      "title": "Απάτη με εικονικές αποδείξεις για ενστόλους και στην Κρήτη: Οι αποκαλυπτικοί διάλογοι της «Μαρκέλλας» και του «Γιώργου»",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/26-11/rtbrtrtbt.jpg",
+      "text": "Απάτη με εικονικές αποδείξεις για ενστόλους και στην Κρήτη: Οι αποκαλυπτικοί διάλογοι της «Μαρκέλλας» και του «Γιώργου»",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T14:12:16.331Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/apati-me-eikonikes-apodeixeis-gia-enstoloys-kai-stin-kriti-oi-apokalyptikoi-dialogoi-tis-markellas-kai-toy-giorgoy"
+    },
+    {
       "id": "20261127130722-news-symmetochi-tis-perifereias-kritis-sti-diethni-toyristiki-ekthesi-ittf-warsaw-2026",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/symmetochi-tis-perifereias-kritis-sti-diethni-toyristiki-ekthesi-ittf-warsaw-2026",
