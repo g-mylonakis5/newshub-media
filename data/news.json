@@ -1,5 +1,17 @@
 [
   {
+    "id": "irakleio-se-exelixi-oi-ergasies-apokatastasi-stin-krini-morozini-pote-tha-trexei-xana-nero-apo-ta-istorika-liontaria",
+    "title": "Ηράκλειο: Σε εξέλιξη οι εργασίες αποκατάσταση στην Κρήνη Μοροζίνι – Πότε θα τρέξει ξανά νερό από τα ιστορικά \"Λιοντάρια\"",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-se-exelixi-oi-ergasies-apokatastasi-stin-krini-morozini-pote-tha-trexei-xana-nero-apo-ta-istorika-liontaria",
+    "date": "2026-11-27T09:50:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/liontaria-krene-morozini-.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/liontaria-krene-morozini-.jpg",
+    "summary": "Έως τα τέλη Μαρτίου 2027 αναμένεται να ολοκληρωθούν οι εργασίες συντήρησης και αποκατάστασης στην Κρήνη Μοροζίνι, με στόχο να επανέλθει η λειτουργία της και ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "chania-paroysia-zacharaki-kai-papathanasi-ypografike-i-symvasi-gia-12-nea-scholeia-kai-tin-anavathmisi-toy-parkoy-eirinis-kai-filias",
     "title": "Χανιά: Παρουσία Ζαχαράκη και Παπαθανάση υπογράφηκε η σύμβαση για 12 νέα σχολεία και την αναβάθμιση του Πάρκου Ειρήνης και Φιλίας",
     "url": "https://www.newshub.gr/el/kriti/chania-paroysia-zacharaki-kai-papathanasi-ypografike-i-symvasi-gia-12-nea-scholeia-kai-tin-anavathmisi-toy-parkoy-eirinis-kai-filias",
@@ -105,7 +117,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/plemmyres.jpg",
     "summary": "Πόροι ύψους 78,1 εκατ. ευρώ κατανέμονται στην Κρήτη για την αποκατάσταση ζημιών που προκλήθηκαν από φυσικές καταστροφές, με έμφαση στα ακραία καιρικά φαινόμε...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "tee-tak-antithesi-stin-episkepsi-kasidiari-i-kriti-paramenei-topos-eleytherias-kai-dimokratias",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/ekloges_gallia.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/ekloges_gallia.jpg",
     "summary": "Μια σειρά κρίσιμων εκλογικών αναμετρήσεων μέσα στους επόμενους 13 μήνες απειλεί να αλλάξει τις πολιτικές ισορροπίες στην Ευρώπη, την ώρα που τα εθνικιστικά κ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "episimi-proti-gia-to-neo-tartan-sto-stadio-toy-galloy",
-    "title": "«Επίσημη πρώτη» για το νέο ταρτάν στο στάδιο του Γάλλου",
-    "url": "https://www.newshub.gr/el/athlitika/episimi-proti-gia-to-neo-tartan-sto-stadio-toy-galloy",
-    "date": "2026-11-22T14:04:00.000Z",
-    "category": "Αθλητικά",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/tartan-stadio-gallou-5.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/tartan-stadio-gallou-5.jpg",
-    "summary": "Ως μια «μεγάλη μέρα για τον Δήμο Ρεθύμνου» χαρακτήρισε ο Δήμαρχος κ. Γιώργης Χ. Μαρινάκης την «επίσημη πρώτη» της χρήσης του νέου ταρ...",
     "author": null,
     "featured": false
   },
