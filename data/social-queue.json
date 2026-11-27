@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127195812-news-inomeno-vasileio-den-yparchoyn-endeixeis-diarrois-prosopikon-dedomenon-meta-tin-kyvernoepithesi",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/inomeno-vasileio-den-yparchoyn-endeixeis-diarrois-prosopikon-dedomenon-meta-tin-kyvernoepithesi",
+      "title": "Ηνωμένο Βασίλειο: Δεν υπάρχουν ενδείξεις διαρροής προσωπικών δεδομένων μετά την κυβερνοεπίθεση",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/cyberattack2.jpg",
+      "text": "Ηνωμένο Βασίλειο: Δεν υπάρχουν ενδείξεις διαρροής προσωπικών δεδομένων μετά την κυβερνοεπίθεση",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T19:58:12.179Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kosmos/inomeno-vasileio-den-yparchoyn-endeixeis-diarrois-prosopikon-dedomenon-meta-tin-kyvernoepithesi"
+    },
+    {
       "id": "20261127195256-news-metanasteytiko-adiakopes-oi-afixeis-pros-tin-kriti-alles-dyo-lemvoi-notia-tis-agias-galinis",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/metanasteytiko-adiakopes-oi-afixeis-pros-tin-kriti-alles-dyo-lemvoi-notia-tis-agias-galinis",
