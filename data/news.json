@@ -1,5 +1,17 @@
 [
   {
+    "id": "peza-theatriki-parastasi-mia-spoydi-sto-aneipoto-gia-tin-exaleipsi-tis-vias-kata-ton-gynaikon-kai-ton-koritsion",
+    "title": "Πεζά: Θεατρική παράσταση \"Μια Σπουδή στο Ανείπωτο\"-Για την Εξάλειψη της Βίας κατά των Γυναικών και των Κοριτσιών",
+    "url": "https://www.newshub.gr/el/istoria-politismos/peza-theatriki-parastasi-mia-spoydi-sto-aneipoto-gia-tin-exaleipsi-tis-vias-kata-ton-gynaikon-kai-ton-koritsion",
+    "date": "2026-11-27T12:10:00.000Z",
+    "category": "Ιστορία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/ttt.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/ttt.jpg",
+    "summary": "Η Περιφέρεια Κρήτης, η Διεύθυνση Πολιτισμού και Αθλητισμού και το Αυτοτελές Γραφείο Ισότητας, στο πλαίσιο των 16ήμερων Δράσεων για την Πρόληψη και ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "manoysakis-admie-eimaste-stin-epochi-ton-diethnon-ilektrikon-diasyndeseon",
     "title": "Μανουσάκης-ΑΔΜΗΕ: Είμαστε στην εποχή των διεθνών ηλεκτρικών διασυνδέσεων",
     "url": "https://www.newshub.gr/el/oikonomia/manoysakis-admie-eimaste-stin-epochi-ton-diethnon-ilektrikon-diasyndeseon",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/manousakes.jpg",
     "summary": "Στη σημασία του σχεδιαζόμενου έργου της ηλεκτρικής διασύνδεσης Ελλάδας-Σαουδικής Αραβίας, Saudi-Greek Interconnection για την Ευρώπη και τη Μέση Ανατολή, ανα...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "syllogos-ergazomenon-nosokomeioy-agioy-nikolaoy-i-foni-ton-ergazomenon-den-fimonetai",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/7172075.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/7172075.jpg",
     "summary": "Στα εγκαίνια του Παλαιού Μουσείου Ακρόπολης θα παραστεί τη Δευτέρα 23 Νοεμβρίου ο Κυριάκος Μητσοτάκης.\r\n\r\nΟ πρωθυπουργός θα μιλήσει στις 12:00 στα εγκαίνια τ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "chatzidakis-anoichtoi-se-nea-metra-gia-tin-akriveia-analoga-me-tis-dimosionomikes-antoches",
-    "title": "Χατζηδάκης: Ανοιχτοί σε νέα μέτρα για την ακρίβεια ανάλογα με τις δημοσιονομικές αντοχές",
-    "url": "https://www.newshub.gr/el/ellada/chatzidakis-anoichtoi-se-nea-metra-gia-tin-akriveia-analoga-me-tis-dimosionomikes-antoches",
-    "date": "2026-11-22T17:43:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/kostis_xatzidakis.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/kostis_xatzidakis.jpg",
-    "summary": "Ανοιχτό αφήνει το ενδεχόμενο νέων παρεμβάσεων για τη στήριξη των νοικοκυριών, εφόσον συνεχιστούν οι πιέσεις στις τιμές της ενέργειας και των βασικών αγαθών, ...",
     "author": null,
     "featured": false
   },
