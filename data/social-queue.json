@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T21:20:39.351Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/ekloges-stin-ispania-o-santseth-vlepei-sigoyri-niki-alla-vox-kai-pp-proigoyntai-stis-dimoskopiseis"
+      "link": "https://www.newshub.gr/el/kosmos/ekloges-stin-ispania-o-santseth-vlepei-sigoyri-niki-alla-vox-kai-pp-proigoyntai-stis-dimoskopiseis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291040470156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291040470156174",
+          "at": "2026-11-27T21:20:59.162Z"
+        }
+      }
     },
     {
       "id": "20261127211947-news-i-oykrania-katethese-protasi-ekecheirias-sti-mayri-thalassa-gia-tin-apofygi-mias-episitistikis-krisis",
