@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127142431-news-ereyna-ekt-i-techniti-noimosyni-kanei-ti-doyleia-eykoloteri-alla-enteinei-tin-ergasiaki-anasfaleia",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/ereyna-ekt-i-techniti-noimosyni-kanei-ti-doyleia-eykoloteri-alla-enteinei-tin-ergasiaki-anasfaleia",
+      "title": "Έρευνα ΕΚΤ: Η τεχνητή νοημοσύνη κάνει τη δουλειά ευκολότερη, αλλά εντείνει την εργασιακή ανασφάλεια",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/ai-texniti-noymosyni.jpg",
+      "text": "Έρευνα ΕΚΤ: Η τεχνητή νοημοσύνη κάνει τη δουλειά ευκολότερη, αλλά εντείνει την εργασιακή ανασφάλεια",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T14:24:31.894Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/ereyna-ekt-i-techniti-noimosyni-kanei-ti-doyleia-eykoloteri-alla-enteinei-tin-ergasiaki-anasfaleia"
+    },
+    {
       "id": "20261127141529-news-deutsche-welle-gsi-to-kalodio-poy-filodoxei-na-enosei-tin-eyropi-me-ti-mesi-anatoli",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/deutsche-welle-gsi-to-kalodio-poy-filodoxei-na-enosei-tin-eyropi-me-ti-mesi-anatoli",
