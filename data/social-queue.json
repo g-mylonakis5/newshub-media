@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T07:09:57.928Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/kriti-erchontai-ischyres-kataigides-kai-thyellodeis-anemoi-tin-kyriaki-ektakto-deltio-epideinosis-toy-kairoy"
+      "link": "https://www.newshub.gr/el/kriti/kriti-erchontai-ischyres-kataigides-kai-thyellodeis-anemoi-tin-kyriaki-ektakto-deltio-epideinosis-toy-kairoy",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290962860156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290962860156174",
+          "at": "2026-11-27T07:10:22.647Z"
+        }
+      }
     },
     {
       "id": "20261127065928-news-giati-ektoxeyetai-i-timi-toy-ryzioy-stin-india-para-ta-apothemata-rekor",
