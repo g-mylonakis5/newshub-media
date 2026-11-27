@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T18:52:40.912Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/norvigia-i-aeroporiki-etaireia-chamiloy-kostoys-norse-atlantic-kiryxe-ptocheysi"
+      "link": "https://www.newshub.gr/el/kosmos/norvigia-i-aeroporiki-etaireia-chamiloy-kostoys-norse-atlantic-kiryxe-ptocheysi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291026100156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291026100156174",
+          "at": "2026-11-27T18:52:57.019Z"
+        }
+      }
     },
     {
       "id": "20261127185219-news-in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit",
@@ -27,10 +34,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T18:52:19.679Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit"
+      "link": "https://www.newshub.gr/el/kosmos/in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291026112156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291026112156174",
+          "at": "2026-11-27T18:52:59.712Z"
+        }
+      }
     },
     {
       "id": "20261127185018-news-in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit",
