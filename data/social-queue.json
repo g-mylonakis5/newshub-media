@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T06:59:28.975Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/giati-ektoxeyetai-i-timi-toy-ryzioy-stin-india-para-ta-apothemata-rekor"
+      "link": "https://www.newshub.gr/el/oikonomia/giati-ektoxeyetai-i-timi-toy-ryzioy-stin-india-para-ta-apothemata-rekor",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290961864156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290961864156174",
+          "at": "2026-11-27T06:59:44.586Z"
+        }
+      }
     },
     {
       "id": "20261127064854-news-ektakti-synodos-koryfis-choris-symfonia-gia-ton-neo-polyeti-proypologismo-poies-oi-diafonies-kai-poia-i-elliniki-kokkini-grammi",
