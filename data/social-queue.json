@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T20:24:42.487Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/fortigo-ploio-me-208-emporeymatokivotia-vythistike-anoichta-tis-koyvas-enas-nekros-kai-treis-agnooymenoi"
+      "link": "https://www.newshub.gr/el/kosmos/fortigo-ploio-me-208-emporeymatokivotia-vythistike-anoichta-tis-koyvas-enas-nekros-kai-treis-agnooymenoi",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291036528156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291036528156174",
+          "at": "2026-11-27T20:24:56.104Z"
+        }
+      }
     },
     {
       "id": "20261127202358-news-dikaiosi-kai-apokatastasi-gia-ton-ierea-tis-vonis-p-ioanni-aggelaki-poy-ypochreothike-se-syntaxiodotisi-para-ti-thelisi-toy",
