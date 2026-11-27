@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127185219-news-in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit",
+      "title": "Ην. Βασίλειο: Πιθανή κακόβουλη κυβερνοεπίθεση στο υπουργείο Εργασίας λέει η Ντάουνινγκ Στριτ",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/809b9120-ap18234738705587.jpg",
+      "text": "Ην. Βασίλειο: Πιθανή κακόβουλη κυβερνοεπίθεση στο υπουργείο Εργασίας λέει η Ντάουνινγκ Στριτ",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T18:52:19.679Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kosmos/in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit"
+    },
+    {
       "id": "20261127185018-news-in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kosmos/in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit",
