@@ -1,5 +1,17 @@
 [
   {
+    "id": "katerina-notopoyloy-gia-paschali-tsaroycha-einai-poly-dotikos-anthropos-ton-agapao-i-zoi-mazi-toy-einai-giorti",
+    "title": "Κατερίνα Νοτοπούλου για Πασχάλη Τσαρούχα: Είναι πολύ δοτικός άνθρωπος, τον αγαπάω, η ζωή μαζί του είναι γιορτή",
+    "url": "https://www.newshub.gr/el/ta-en-oiko/katerina-notopoyloy-gia-paschali-tsaroycha-einai-poly-dotikos-anthropos-ton-agapao-i-zoi-mazi-toy-einai-giorti",
+    "date": "2026-11-27T11:00:00.000Z",
+    "category": "Τα εν οίκω",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/nou.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/nou.jpg",
+    "summary": "Μια ιδιαίτερα αποκαλυπτική συνέντευξη έδωσε η Κατερίνα Νοτοπούλου, η οποία μίλησε ανοιχτά για επαγγελματικά και προσωπικά θέματα κ&rsquo;ανοντας αναφορά μάλι...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "aids-ligotera-nea-peristatika-gia-to-2026-stin-ellada-kathysterimeni-diagnosi-gia-1-stoys-2",
     "title": "Aids: Λιγότερα νέα περιστατικά για το 2026 στην Ελλάδα-kαθυστερημένη διάγνωση για 1 στους 2",
     "url": "https://www.newshub.gr/el/ygeia/aids-ligotera-nea-peristatika-gia-to-2026-stin-ellada-kathysterimeni-diagnosi-gia-1-stoys-2",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/aids.jpg",
     "summary": "Το φετινό μήνυμα του προγράμματος των Ηνωμένων Εθνών για την αντιμετώπιση του HIV/AIDS (UNAIDS) για την Παγκόσμια Ημέρα κατά του AIDS είναι «Ending AID...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "i-thesi-toy-geot-e-e-parartimatos-kritis-epi-tis-mpe-gia-daneiothalamo-stis-foyskies-toy-mochoy",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/thumbs-b-c-73d35cbd836791d725cdabaa1a239131a.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/thumbs-b-c-73d35cbd836791d725cdabaa1a239131a.jpg",
     "summary": "Τα κόμματα του Μπενιαμίν Νετανιάχου και του αντιπάλου του Γκάντι Άιζενκοτ, που έχει λάβει εντολή σχηματισμού της επόμενης κυβέρνησης του Ισραήλ, ξεκίνησαν νέ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "vretania-nea-politiki-thyella-meta-ti-symfonia-mpernam-me-tis-vryxelles",
-    "title": "Βρετανία: Νέα πολιτική θύελλα μετά τη συμφωνία Μπέρναμ με τις Βρυξέλλες",
-    "url": "https://www.newshub.gr/el/geopolitiki/vretania-nea-politiki-thyella-meta-ti-symfonia-mpernam-me-tis-vryxelles",
-    "date": "2026-11-22T15:56:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/ap26324506358326-1024x683.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/ap26324506358326-1024x683.jpg",
-    "summary": "Νέα πολιτική σύγκρουση προκαλεί στη Βρετανία η προοπτική μελλοντικής επιστροφής στην Ευρωπαϊκή Ένωση, μετά τη συμφωνία του πρωθυπουργού Άντι Μπέρναμ με τις Β...",
     "author": null,
     "featured": false
   },
