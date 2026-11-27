@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T06:48:27.463Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/scope-ratings-simantiki-apoklimakosi-toy-ellinikoy-chreoys-eos-to-2031"
+      "link": "https://www.newshub.gr/el/oikonomia/scope-ratings-simantiki-apoklimakosi-toy-ellinikoy-chreoys-eos-to-2031",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290961024156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290961024156174",
+          "at": "2026-11-27T06:48:48.378Z"
+        }
+      }
     },
     {
       "id": "20261127061057-news-kostas-karamanlis-apo-ti-thessaloniki-ischyri-ellada-choris-akmaia-paragogiki-kai-eyimeroysa-perifereia-den-mporei-na-yparxei",
