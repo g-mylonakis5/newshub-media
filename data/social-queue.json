@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127070957-news-kriti-erchontai-ischyres-kataigides-kai-thyellodeis-anemoi-tin-kyriaki-ektakto-deltio-epideinosis-toy-kairoy",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/kriti-erchontai-ischyres-kataigides-kai-thyellodeis-anemoi-tin-kyriaki-ektakto-deltio-epideinosis-toy-kairoy",
+      "title": "Κρήτη: Έρχονται ισχυρές καταιγίδες και θυελλώδεις άνεμοι την Κυριακή – Έκτακτο δελτίο επιδείνωσης του καιρού",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/kataigida.jpg",
+      "text": "Κρήτη: Έρχονται ισχυρές καταιγίδες και θυελλώδεις άνεμοι την Κυριακή – Έκτακτο δελτίο επιδείνωσης του καιρού",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T07:09:57.928Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/kriti-erchontai-ischyres-kataigides-kai-thyellodeis-anemoi-tin-kyriaki-ektakto-deltio-epideinosis-toy-kairoy"
+    },
+    {
       "id": "20261127065928-news-giati-ektoxeyetai-i-timi-toy-ryzioy-stin-india-para-ta-apothemata-rekor",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/giati-ektoxeyetai-i-timi-toy-ryzioy-stin-india-para-ta-apothemata-rekor",
