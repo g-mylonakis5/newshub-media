@@ -1,5 +1,17 @@
 [
   {
+    "id": "ereyna-ekt-i-techniti-noimosyni-kanei-ti-doyleia-eykoloteri-alla-enteinei-tin-ergasiaki-anasfaleia",
+    "title": "Έρευνα ΕΚΤ: Η τεχνητή νοημοσύνη κάνει τη δουλειά ευκολότερη, αλλά εντείνει την εργασιακή ανασφάλεια",
+    "url": "https://www.newshub.gr/el/oikonomia/ereyna-ekt-i-techniti-noimosyni-kanei-ti-doyleia-eykoloteri-alla-enteinei-tin-ergasiaki-anasfaleia",
+    "date": "2026-11-27T12:20:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/ai-texniti-noymosyni.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/ai-texniti-noymosyni.jpg",
+    "summary": "Η τεχνητή νοημοσύνη (ΤΝ) περνά από το στάδιο του πειραματισμού στην καθημερινή εργασία, χωρίς όμως να έχει ακόμη μετατραπεί σε καθολικό μοχλό αύξησης της παρ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "peza-theatriki-parastasi-mia-spoydi-sto-aneipoto-gia-tin-exaleipsi-tis-vias-kata-ton-gynaikon-kai-ton-koritsion",
     "title": "Πεζά: Θεατρική παράσταση \"Μια Σπουδή στο Ανείπωτο\"-Για την Εξάλειψη της Βίας κατά των Γυναικών και των Κοριτσιών",
     "url": "https://www.newshub.gr/el/istoria-politismos/peza-theatriki-parastasi-mia-spoydi-sto-aneipoto-gia-tin-exaleipsi-tis-vias-kata-ton-gynaikon-kai-ton-koritsion",
@@ -9,7 +21,19 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/ttt.jpg",
     "summary": "Η Περιφέρεια Κρήτης, η Διεύθυνση Πολιτισμού και Αθλητισμού και το Αυτοτελές Γραφείο Ισότητας, στο πλαίσιο των 16ήμερων Δράσεων για την Πρόληψη και ...",
     "author": null,
-    "featured": true
+    "featured": false
+  },
+  {
+    "id": "chaker-paraviasan-tin-psifiaki-platforma-tis-polemikis-aeroporias-ton-ipa-fovos-gia-diarroi-eyaisthiton-dedomenon",
+    "title": "Χάκερ παραβίασαν την ψηφιακή πλατφόρμα της Πολεμικής Αεροπορίας των ΗΠΑ-Φόβος για διαρροή ευαίσθητων δεδομένων",
+    "url": "https://www.newshub.gr/el/geopolitiki/chaker-paraviasan-tin-psifiaki-platforma-tis-polemikis-aeroporias-ton-ipa-fovos-gia-diarroi-eyaisthiton-dedomenon",
+    "date": "2026-11-27T12:05:00.000Z",
+    "category": "Γεωπολιτική",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/us-air-force-m.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/us-air-force-m.jpg",
+    "summary": "Χάκερ κατάφεραν να παραβιάσουν την κεντρική πλατφόρμα υπολογιστικού νέφους (cloud) της Πολεμικής Αεροπορίας των Ηνωμένων Πολιτειών, όπως αποκάλυψαν στο Reute...",
+    "author": null,
+    "featured": false
   },
   {
     "id": "manoysakis-admie-eimaste-stin-epochi-ton-diethnon-ilektrikon-diasyndeseon",
@@ -7212,30 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/maketa-adwnis.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/maketa-adwnis.jpg",
     "summary": "Στη Θεία Λειτουργία στον Πανίερο Ναό της Αναστάσεως στα Ιεροσόλυμα παρέστη σήμερα ο  υπουργός Υγείας Άδωνις Γεωργιάδης, ενώ στη συνέχεια προσκύνησε τον ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "insete-sto-9-1-i-toyristiki-empeiria-stin-ellada-pano-apo-ton-eyropaiko-meso-oro-poso-sygkentrose-i-kriti",
-    "title": "ΙΝΣΕΤΕ: Στο 9,1 η τουριστική εμπειρία στην Ελλάδα, πάνω από τον ευρωπαϊκό μέσο όρο – Πόσο συγκέντρωσε η Κρήτη",
-    "url": "https://www.newshub.gr/el/kriti/insete-sto-9-1-i-toyristiki-empeiria-stin-ellada-pano-apo-ton-eyropaiko-meso-oro-poso-sygkentrose-i-kriti",
-    "date": "2026-11-22T18:05:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/toyrismos-krhth-exo-1200ch.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/toyrismos-krhth-exo-1200ch.jpg",
-    "summary": "Ιδιαίτερα υψηλά επίπεδα ικανοποίησης εξακολουθεί να καταγράφει ο ελληνικός τουρισμός, ακόμη και κατά την κορύφωση της θερινής περιόδου, με την Ελλάδα να επιτ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "sta-egkainia-toy-palaioy-moyseioy-akropolis-ayrio-o-kyriakos-mitsotakis",
-    "title": "Στα εγκαίνια του Παλαιού Μουσείου Ακρόπολης αύριο ο Κυριάκος Μητσοτάκης",
-    "url": "https://www.newshub.gr/el/ellada/sta-egkainia-toy-palaioy-moyseioy-akropolis-ayrio-o-kyriakos-mitsotakis",
-    "date": "2026-11-22T17:59:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/7172075.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/7172075.jpg",
-    "summary": "Στα εγκαίνια του Παλαιού Μουσείου Ακρόπολης θα παραστεί τη Δευτέρα 23 Νοεμβρίου ο Κυριάκος Μητσοτάκης.\r\n\r\nΟ πρωθυπουργός θα μιλήσει στις 12:00 στα εγκαίνια τ...",
     "author": null,
     "featured": false
   },
