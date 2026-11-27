@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T18:45:51.847Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/kriti-choris-stamatimo-oi-metanasteytikes-roes-nees-afixeis-sta-notia-paralia"
+      "link": "https://www.newshub.gr/el/kriti/kriti-choris-stamatimo-oi-metanasteytikes-roes-nees-afixeis-sta-notia-paralia",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291025062156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291025062156174",
+          "at": "2026-11-27T18:46:06.919Z"
+        }
+      }
     },
     {
       "id": "20261127184444-news-santiago-ampaskal-o-50chronos-polyteknos-igetis-toy-akrodexioy-vox-poy-diekdikei-rolo-kleidi-stis-ekloges-tis-ispanias",
