@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127212039-news-ekloges-stin-ispania-o-santseth-vlepei-sigoyri-niki-alla-vox-kai-pp-proigoyntai-stis-dimoskopiseis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/ekloges-stin-ispania-o-santseth-vlepei-sigoyri-niki-alla-vox-kai-pp-proigoyntai-stis-dimoskopiseis",
+      "title": "Εκλογές στην Ισπανία: Ο Σάντσεθ βλέπει σίγουρη νίκη, αλλά Vox και Pp προηγούνται στις δημοσκοπήσεις",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/ef200f92-ap26330745461824.jpg",
+      "text": "Εκλογές στην Ισπανία: Ο Σάντσεθ βλέπει σίγουρη νίκη, αλλά Vox και Pp προηγούνται στις δημοσκοπήσεις",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T21:20:39.351Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kosmos/ekloges-stin-ispania-o-santseth-vlepei-sigoyri-niki-alla-vox-kai-pp-proigoyntai-stis-dimoskopiseis"
+    },
+    {
       "id": "20261127211947-news-i-oykrania-katethese-protasi-ekecheirias-sti-mayri-thalassa-gia-tin-apofygi-mias-episitistikis-krisis",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/i-oykrania-katethese-protasi-ekecheirias-sti-mayri-thalassa-gia-tin-apofygi-mias-episitistikis-krisis",
