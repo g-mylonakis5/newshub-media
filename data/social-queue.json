@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T14:37:06.381Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/geopolitiki/diethnes-institoyto-stratigikon-meleton-i-rosia-klimakonei-ton-aorato-polemo-kata-tis-eyropis"
+      "link": "https://www.newshub.gr/el/geopolitiki/diethnes-institoyto-stratigikon-meleton-i-rosia-klimakonei-ton-aorato-polemo-kata-tis-eyropis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291004758156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291004758156174",
+          "at": "2026-11-27T14:37:33.357Z"
+        }
+      }
     },
     {
       "id": "20261127142431-news-ereyna-ekt-i-techniti-noimosyni-kanei-ti-doyleia-eykoloteri-alla-enteinei-tin-ergasiaki-anasfaleia",
