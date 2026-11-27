@@ -1,5 +1,41 @@
 [
   {
+    "id": "voles-sto-kentro-tis-paraskeyis-147",
+    "title": "Βολές στο κέντρο... της Παρασκευής!",
+    "url": "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-paraskeyis-147",
+    "date": "2026-11-27T10:30:00.000Z",
+    "category": "Τα εν οίκω",
+    "image_large": "https://static.newshub.gr/765x435/img_8831.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/img_8831.jpg",
+    "summary": "Τοπικά... πικάντικα!\r\n\r\nΝέα βόμβα...\r\n\r\nΤι να πρωτοπεί κανείς για την νέα δικαστική βόμβα που έσκασε χθες στη χώρα&hellip; Τέσσερεις συλλήψεις, μεταξύ των οπ...",
+    "author": null,
+    "featured": true
+  },
+  {
+    "id": "efyge-apo-ti-zoi-i-ithopoios-magda-tsaggani-osa-eiche-exomologithei-gia-ti-machi-tis-me-ton-karkino",
+    "title": "Έφυγε από τη ζωή η ηθοποιός Μάγδα Τσαγγάνη: Όσα είχε εξομολογηθεί για τη μάχη της με τον καρκίνο",
+    "url": "https://www.newshub.gr/el/ellada/efyge-apo-ti-zoi-i-ithopoios-magda-tsaggani-osa-eiche-exomologithei-gia-ti-machi-tis-me-ton-karkino",
+    "date": "2026-11-27T10:25:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/tsag.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/tsag.jpg",
+    "summary": "Σε βαρύ πένθος έχει βυθιστεί ο χώρος της ελληνικής υποκριτικής μετά τον θάνατο της Μάγδας Τσαγγάνη σε ηλικία 75 ετών.\r\n\r\nΗ ηθοποιός είχε μιλήσει ανοιχτά στο ...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "idioktitria-peripteroy-sto-irakleio-eiche-710-000-eyro-sto-spiti-tis-o-elegchos-tis-eforias-kai-o-foros-poy-tis-katalogistike",
+    "title": "Iδιοκτήτρια περιπτέρου στο Ηράκλειο είχε 710.000 ευρώ στο σπίτι της-Ο έλεγχος της Εφορίας και ο φόρος που της καταλογίστηκε",
+    "url": "https://www.newshub.gr/el/oikonomia/idioktitria-peripteroy-sto-irakleio-eiche-710-000-eyro-sto-spiti-tis-o-elegchos-tis-eforias-kai-o-foros-poy-tis-katalogistike",
+    "date": "2026-11-27T10:20:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/periptero-mak.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/periptero-mak.jpg",
+    "summary": "Από το σπίτι μιας περιπτερούχου στην εφορία ταξίδεψε η υπόθεση των 710.000 ευρώ που βρέθηκαν στοιβαγμένα σε χαρτονομίσματα των 50 ευρώ.\r\n\r\nΗ αφετηρία ήταν η ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "to-mellon-ton-metron-elafrynsis-perna-mesa-kai-apo-tis-amyntikes-dapanes-kai-tin-paratasi-tis-ritras-diafygis",
     "title": "Το μέλλον των μέτρων ελάφρυνσης περνά μέσα και από τις αμυντικές δαπάνες και την παράταση της ρήτρας διαφυγής",
     "url": "https://www.newshub.gr/el/oikonomia/to-mellon-ton-metron-elafrynsis-perna-mesa-kai-apo-tis-amyntikes-dapanes-kai-tin-paratasi-tis-ritras-diafygis",
@@ -33,7 +69,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/liontaria-krene-morozini-.jpg",
     "summary": "Έως τα τέλη Μαρτίου 2027 αναμένεται να ολοκληρωθούν οι εργασίες συντήρησης και αποκατάστασης στην Κρήνη Μοροζίνι, με στόχο να επανέλθει η λειτουργία της και ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "chania-paroysia-zacharaki-kai-papathanasi-ypografike-i-symvasi-gia-12-nea-scholeia-kai-tin-anavathmisi-toy-parkoy-eirinis-kai-filias",
@@ -7200,42 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/ap25084699916284-768x511-1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/ap25084699916284-768x511-1.jpg",
     "summary": "Το «ισραηλινό και ελληνικό λόμπι» των Ηνωμένων Πολιτειών κατηγόρησε ο Χακάν Φιντάν υποστηρίζοντας ότι μπλοκάρουν την άρση των αμερικανικών κυρώσε...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "proeidopoiiseis-apo-ton-eythymio-lekka-idiaitera-ypsiles-seismikes-epitachynseis-se-xylokastro-kai-loytraki",
-    "title": "Προειδοποιήσεις από τον Ευθύμιο Λέκκα: «Ιδιαίτερα υψηλές σεισμικές επιταχύνσεις σε Ξυλόκαστρο και Λουτράκι»",
-    "url": "https://www.newshub.gr/el/ellada/proeidopoiiseis-apo-ton-eythymio-lekka-idiaitera-ypsiles-seismikes-epitachynseis-se-xylokastro-kai-loytraki",
-    "date": "2026-11-22T15:08:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/paralia-loytraki.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/paralia-loytraki.jpg",
-    "summary": "Για ιδιαίτερα υψηλές σεισμικές επιταχύνσεις σε Ξυλόκαστρο και Λουτράκι προειδοποίησε ο πρόεδρος του ΟΑΣΠ, Ευθύμιος Λέκκας, μιλώντας πρόσφατα σε διάλεξη στην ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "sygklonizei-i-mitera-tis-emmas-karyotaki-tessera-chronia-apo-ton-thanato-tis-giati-na-zo-ego-kai-ochi-esy",
-    "title": "Συγκλονίζει η μητέρα της Έμμας Καρυωτάκη τέσσερα χρόνια από τον θάνατό της – «Γιατί να ζω εγώ και όχι εσύ»",
-    "url": "https://www.newshub.gr/el/kriti/sygklonizei-i-mitera-tis-emmas-karyotaki-tessera-chronia-apo-ton-thanato-tis-giati-na-zo-ego-kai-ochi-esy",
-    "date": "2026-11-22T14:59:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/emma-.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/emma-.jpg",
-    "summary": "Τέσσερα χρόνια έχουν περάσει από το τραγικό τροχαίο στο οποίο έχασε τη ζωή της η 21χρονη φοιτήτρια Έμμα Καρυωτάκη όταν παρασύρθηκε από αυτοκίνητο στο κέντρο ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "tragodia-stin-kypro-nekri-mathitria-sti-diarkeia-scholikis-ekdomis",
-    "title": "Τραγωδία στην Κύπρο: Νεκρή μαθήτρια στη διάρκεια σχολικής εκδομής",
-    "url": "https://www.newshub.gr/el/kosmos/tragodia-stin-kypro-nekri-mathitria-sti-diarkeia-scholikis-ekdomis",
-    "date": "2026-11-22T14:52:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/ekab-kypros.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/ekab-kypros.jpg",
-    "summary": "Σε σχολική εκδρομή στη Λεμεσό της Κύπρου, μια 17χρονη μαθήτρια εντοπίστηκε νεκρή σε δωμάτιο ξενοδοχείου.\r\n\r\nΣύμφωνα με τις πληροφορίες που δημοσίευσε το phil...",
     "author": null,
     "featured": false
   },
