@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T14:15:29.077Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/deutsche-welle-gsi-to-kalodio-poy-filodoxei-na-enosei-tin-eyropi-me-ti-mesi-anatoli"
+      "link": "https://www.newshub.gr/el/oikonomia/deutsche-welle-gsi-to-kalodio-poy-filodoxei-na-enosei-tin-eyropi-me-ti-mesi-anatoli",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291003198156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291003198156174",
+          "at": "2026-11-27T14:15:48.905Z"
+        }
+      }
     },
     {
       "id": "20261127141258-news-irakleio-se-exelixi-oi-ergasies-apokatastasi-stin-krini-morozini-pote-tha-trexei-xana-nero-apo-ta-istorika-liontaria",
