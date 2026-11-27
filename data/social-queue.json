@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T20:29:48.519Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/sugar/makis-delaportas-gia-gianni-papamichail-echei-na-palepsei-kai-me-ta-esoterika-toy-thiria"
+      "link": "https://www.newshub.gr/el/sugar/makis-delaportas-gia-gianni-papamichail-echei-na-palepsei-kai-me-ta-esoterika-toy-thiria",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291036894156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291036894156174",
+          "at": "2026-11-27T20:30:03.852Z"
+        }
+      }
     },
     {
       "id": "20261127202442-news-fortigo-ploio-me-208-emporeymatokivotia-vythistike-anoichta-tis-koyvas-enas-nekros-kai-treis-agnooymenoi",
