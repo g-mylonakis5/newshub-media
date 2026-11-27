@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127184444-news-santiago-ampaskal-o-50chronos-polyteknos-igetis-toy-akrodexioy-vox-poy-diekdikei-rolo-kleidi-stis-ekloges-tis-ispanias",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/santiago-ampaskal-o-50chronos-polyteknos-igetis-toy-akrodexioy-vox-poy-diekdikei-rolo-kleidi-stis-ekloges-tis-ispanias",
+      "title": "Σαντιάγο Αμπασκάλ: Ο 50χρονος πολύτεκνος ηγέτης του ακροδεξιού «vox» που διεκδικεί ρόλο-κλειδί στις εκλογές της Ισπανίας",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/ampas.jpg",
+      "text": "Σαντιάγο Αμπασκάλ: Ο 50χρονος πολύτεκνος ηγέτης του ακροδεξιού «vox» που διεκδικεί ρόλο-κλειδί στις εκλογές της Ισπανίας",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T18:44:44.115Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kosmos/santiago-ampaskal-o-50chronos-polyteknos-igetis-toy-akrodexioy-vox-poy-diekdikei-rolo-kleidi-stis-ekloges-tis-ispanias"
+    },
+    {
       "id": "20261127144022-news-to-anakoinothen-tis-ieras-synodoy-tis-ekklisias-tis-kritis-me-tin-oloklirosi-ton-ergasion-tis",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/to-anakoinothen-tis-ieras-synodoy-tis-ekklisias-tis-kritis-me-tin-oloklirosi-ton-ergasion-tis",
