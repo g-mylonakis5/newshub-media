@@ -1,5 +1,17 @@
 [
   {
+    "id": "epistrofi-enoikioy-archizei-i-diadikasia-diorthoseon-analytikes-odigies-kai-13-erotiseis-kai-apantiseis-apo-tin-aade",
+    "title": "Επιστροφή ενοικίου: Αρχίζει η διαδικασία διορθώσεων – Αναλυτικές οδηγίες και 13 ερωτήσεις και απαντήσεις από την ΑΑΔΕ",
+    "url": "https://www.newshub.gr/el/oikonomia/epistrofi-enoikioy-archizei-i-diadikasia-diorthoseon-analytikes-odigies-kai-13-erotiseis-kai-apantiseis-apo-tin-aade",
+    "date": "2026-11-27T06:52:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/enoikiazetai-stylos-erakleio.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/enoikiazetai-stylos-erakleio.jpg",
+    "summary": "Με την καταβολή 236 εκατ. ευρώ σε 932.652 δικαιούχους, ολοκληρώθηκε από χθες η α΄ φάση της επιστροφής ενοικίου, με καταβολή χωρίς αίτηση στον τραπεζικό λογαρ...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "spitakia-anakyklosis-stin-eyropaiki-eisaggelia-oi-tesseris-syllifthentes-oi-apokalypseis-toy-newshub-gr-gia-tin-kriti-1",
     "title": "Σπιτάκια ανακύκλωσης: Στην Ευρωπαϊκή Εισαγγελία οι τέσσερις συλληφθέντες – Οι αποκαλύψεις του Newshub.gr για την Κρήτη",
     "url": "https://www.newshub.gr/el/kriti/spitakia-anakyklosis-stin-eyropaiki-eisaggelia-oi-tesseris-syllifthentes-oi-apokalypseis-toy-newshub-gr-gia-tin-kriti-1",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/anakyklose-spitakia.jpg",
     "summary": "Ενώπιον της Ευρωπαϊκής Εισαγγελίας αναμένεται να οδηγηθούν σήμερα, Παρασκευή 27 Νοεμβρίου, οι τέσσερις συλληφθέντες για την υπόθεση των «σπιτιών ανακύκ...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "kriti-erchontai-ischyres-kataigides-kai-thyellodeis-anemoi-tin-kyriaki-ektakto-deltio-epideinosis-toy-kairoy",
@@ -153,7 +165,7 @@
     "image_thumb": "",
     "summary": "",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "ofi-anterlecht-1-3-palepsan-mechri-teloys-oi-kritikoi-alla-den-apefygan-tin-itta",
@@ -7228,18 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/metsotakes-apeeeee.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/metsotakes-apeeeee.jpg",
     "summary": "Στις προοπτικές της ελληνικής οικονομίας, στα μέτρα στήριξης των νοικοκυριών αλλά και στις εθνικές εκλογές του 2027 αναφέρεται ο πρωθυπουργός Κυριάκος Μητσοτ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "timi-stoys-agonistes-tis-ethnikis-antistasis-ekdilosi-tin-tetarti-sto-arkalochori",
-    "title": "Τιμή στους αγωνιστές της Εθνικής Αντίστασης- Εκδήλωση την Τετάρτη  στο Αρκαλοχώρι",
-    "url": "https://www.newshub.gr/el/istoria-politismos/timi-stoys-agonistes-tis-ethnikis-antistasis-ekdilosi-tin-tetarti-sto-arkalochori",
-    "date": "2026-11-22T09:48:00.000Z",
-    "category": "Ιστορία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/ebb.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/ebb.jpg",
-    "summary": "Ο Δήμος Μινώα Πεδιάδας τιμά και φέτος την Εθνική Αντίσταση, διοργανώνοντας εκδήλωση τιμής και μνήμης, την Τετάρτη 25 Νοεμβρίου 2026, στο Αρκαλοχώρι. Αρχ...",
     "author": null,
     "featured": false
   },
