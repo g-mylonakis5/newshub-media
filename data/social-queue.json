@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T06:10:57.056Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/ellada/kostas-karamanlis-apo-ti-thessaloniki-ischyri-ellada-choris-akmaia-paragogiki-kai-eyimeroysa-perifereia-den-mporei-na-yparxei"
+      "link": "https://www.newshub.gr/el/ellada/kostas-karamanlis-apo-ti-thessaloniki-ischyri-ellada-choris-akmaia-paragogiki-kai-eyimeroysa-perifereia-den-mporei-na-yparxei",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290957694156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290957694156174",
+          "at": "2026-11-27T06:11:10.082Z"
+        }
+      }
     },
     {
       "id": "20261127060933-news-toyrkia-o-erntogan-etoimazetai-gia-ekloges-to-2028-anoichto-to-endechomeno-prooris-prosfygis-stis-kalpes-anaferei-o-tz-gilmaz",
