@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T13:07:22.276Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/kriti/symmetochi-tis-perifereias-kritis-sti-diethni-toyristiki-ekthesi-ittf-warsaw-2026"
+      "link": "https://www.newshub.gr/el/kriti/symmetochi-tis-perifereias-kritis-sti-diethni-toyristiki-ekthesi-ittf-warsaw-2026",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290995434156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290995434156174",
+          "at": "2026-11-27T13:07:42.695Z"
+        }
+      }
     },
     {
       "id": "20261127130617-news-uefa-i-vathmologia-meta-apo-mia-katastrofiki-evdomada-gia-tin-ellada-me-ittes-gia-aek-olympiako-panathinaiko-kai-ofi",
