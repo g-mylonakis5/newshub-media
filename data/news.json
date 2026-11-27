@@ -1,5 +1,41 @@
 [
   {
+    "id": "drama-dioxi-gia-anthropoktonia-ston-50chrono-ktinotrofo-poy-dolofonise-24chrono-ergazomeno-toy",
+    "title": "Δράμα: Δίωξη για ανθρωποκτονία στον 50χρονο κτηνοτρόφο που δολοφόνησε 24χρονο εργαζόμενό του",
+    "url": "https://www.newshub.gr/el/ellada/drama-dioxi-gia-anthropoktonia-ston-50chrono-ktinotrofo-poy-dolofonise-24chrono-ergazomeno-toy",
+    "date": "2026-11-27T14:47:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/db427ddc-drama-new-1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/db427ddc-drama-new-1.jpg",
+    "summary": "Ενώπιον του εισαγγελέα οδηγήθηκε σήμερα το πρωί της Παρασκευής 27/11 ο 50χρονος κτηνοτρόφος που κατηγορείται για τη δολοφονία ενός 24χρονου στο Κάτω Νευροκόπ...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "irakleio-o-dimitris-spyridakis-antidimarchos-ypiresias-gia-to-savvatokyriako",
+    "title": "Ηράκλειο: Ο Δημήτρης Σπυριδάκης Αντιδήμαρχος Υπηρεσίας για το Σαββατοκύριακο",
+    "url": "https://www.newshub.gr/el/kriti/irakleio-o-dimitris-spyridakis-antidimarchos-ypiresias-gia-to-savvatokyriako",
+    "date": "2026-11-27T14:40:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/dsh-2-1-6.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/dsh-2-1-6.jpg",
+    "summary": "Ο Αντιδήμαρχος Δημήτρης Σπυριδάκης θα είναι ο Αντιδήμαρχος Υπηρεσίας για το Σάββατο 28 και την Κυριακή 29 Νοεμβρίου 2026.\r\n\r\nΥπενθυμίζεται ότι οι Δημότες μπο...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "kriti-choris-stamatimo-oi-metanasteytikes-roes-nees-afixeis-sta-notia-paralia",
+    "title": "Κρήτη: Χωρίς σταματημό οι μεταναστευτικές ροές-Νέες αφίξεις στα νότια παράλια",
+    "url": "https://www.newshub.gr/el/kriti/kriti-choris-stamatimo-oi-metanasteytikes-roes-nees-afixeis-sta-notia-paralia",
+    "date": "2026-11-27T14:33:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/metanastes-genike.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/metanastes-genike.jpg",
+    "summary": "Η μία μετά την άλλη φτάνουν οι «καραβιές» μεταναστών στην Κρήτη, όπου από τα ξημερώματα της Παρασκευής έχουν καταγραφεί εννέα διαφορετικά περιστα...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "paroysiasi-toy-paidikoy-vivlioy-o-glaros-me-ta-chrysa-ftera-tis-melinas-saridaki",
     "title": "Παρουσίαση του παιδικού βιβλίου «Ο Γλάρος με τα Χρυσά Φτερά» της Μελίνας Σαριδάκη",
     "url": "https://www.newshub.gr/el/istoria-politismos/paroysiasi-toy-paidikoy-vivlioy-o-glaros-me-ta-chrysa-ftera-tis-melinas-saridaki",
@@ -225,7 +261,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/pol.jpg",
     "summary": "Παρέμβαση στο επόμενο Δημοτικό Συμβούλιο Ηρακλείου για τους απλήρωτους μουσικούς από το Πολιτιστικό Κέντρο ετοιμάζει το Παράρτημα Κρήτης του Πανελλήνιου Μουσ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "epistrofi-enoikioy-pos-tha-xemplokaroyn-oi-pliromes-ti-prepei-na-kanoyn-osoi-emeinan-ektos",
@@ -7196,42 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/analyseis-35.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/analyseis-35.jpg",
     "summary": "Ο Κώστας Πικραμένος, διευθυντής ερευνών της εταιρείας εκπόνησης στρατηγικών μελετών CP Consulting με έδρα τη Μασσαλία, εμπειρογνώμων του Ευρωπαϊκού Κοινοβουλ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "synnefia-me-vroches-simera-se-perioches-tis-choras-thermokrasia-eos-24-vathmoys-kelsioy",
-    "title": "Συννεφιά με βροχές σήμερα σε περιοχές της χώρας-Θερμοκρασία έως 24 βαθμούς Κελσίου",
-    "url": "https://www.newshub.gr/el/ellada/synnefia-me-vroches-simera-se-perioches-tis-choras-thermokrasia-eos-24-vathmoys-kelsioy",
-    "date": "2026-11-23T06:10:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/br.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/br.jpg",
-    "summary": "Ο καιρός σήμερα, Δευτέρα (23.11.2026), θα είναι σχεδόν αίθριος έως μερικώς νεφελώδης, με θερμοκρασία από 11&deg;C έως 24&deg;C. Άνεμοι έως 6-7 μποφόρ στα πελ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "stis-30-noemvrioy-i-epistrofi-enoikioy-pos-ypologizetai-to-poso-ti-ischyei-gia-ti-foititiki-katoikia",
-    "title": "Στις 30 Νοεμβρίου η επιστροφή ενοικίου – Πώς υπολογίζεται το ποσό, τι ισχύει για τη φοιτητική κατοικία",
-    "url": "https://www.newshub.gr/el/oikonomia/stis-30-noemvrioy-i-epistrofi-enoikioy-pos-ypologizetai-to-poso-ti-ischyei-gia-ti-foititiki-katoikia",
-    "date": "2026-11-23T06:06:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/epistrofi-enoikioy-1-1536x674.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/epistrofi-enoikioy-1-1536x674.jpg",
-    "summary": "Στις 30 Νοεμβρίου θα καταβληθεί η ετήσια επιστροφή ενός ενοικίου για την κύρια και τη φοιτητική κατοικία, με βάση τα μισθώματα που δηλώθηκαν το 2025. Η ενίσχ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "skotia-oi-siopiloi-daskaloi-toy-edimvoyrgoy-dorizoyn-to-soma-toys-stin-epistimi-kai-ekpaideyoyn-toys-giatroys-toy-ayrio",
-    "title": "Σκωτία: «Οι σιωπηλοί δάσκαλοι» του Εδιμβούργου: Δωρίζουν το σώμα τους στην επιστήμη και «εκπαιδεύουν» τους γιατρούς του αύριο",
-    "url": "https://www.newshub.gr/el/kosmos/skotia-oi-siopiloi-daskaloi-toy-edimvoyrgoy-dorizoyn-to-soma-toys-stin-epistimi-kai-ekpaideyoyn-toys-giatroys-toy-ayrio",
-    "date": "2026-11-23T05:55:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/surgery_2453598283.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/surgery_2453598283.jpg",
-    "summary": "Πριν από 15 χρόνια, η Μπάρμπαρα Σκοτ υπέγραψε τα έγγραφα για να δωρίσει το σώμα της στην ιατρική επιστήμη. Ο γιος της, Όλιβερ ΜακΝιλ Σκοτ, ενθουσιάστηκε με τ...",
     "author": null,
     "featured": false
   },
