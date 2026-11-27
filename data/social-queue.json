@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127091246-news-akinita-nea-rythmisi-gia-na-apotrapoyn-exoseis-eyaloton-daneiolipton-poy-echasan-se-pleistiriasmo",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/akinita-nea-rythmisi-gia-na-apotrapoyn-exoseis-eyaloton-daneiolipton-poy-echasan-se-pleistiriasmo",
+      "title": "Ακίνητα: Νέα ρύθμιση για να αποτραπούν εξώσεις ευάλωτων δανειοληπτών που έχασαν σε πλειστηριασμό",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/akineta-pleisteriasmoi.jpg",
+      "text": "Ακίνητα: Νέα ρύθμιση για να αποτραπούν εξώσεις ευάλωτων δανειοληπτών που έχασαν σε πλειστηριασμό",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T09:12:46.156Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/akinita-nea-rythmisi-gia-na-apotrapoyn-exoseis-eyaloton-daneiolipton-poy-echasan-se-pleistiriasmo"
+    },
+    {
       "id": "20261127072523-news-spitakia-anakyklosis-stin-eyropaiki-eisaggelia-oi-tesseris-syllifthentes-oi-apokalypseis-toy-newshub-gr-gia-tin-kriti-1",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/spitakia-anakyklosis-stin-eyropaiki-eisaggelia-oi-tesseris-syllifthentes-oi-apokalypseis-toy-newshub-gr-gia-tin-kriti-1",
