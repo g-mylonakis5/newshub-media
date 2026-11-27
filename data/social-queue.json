@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T21:22:03.667Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ellada/gia-kakoyrgimata-diokontai-oi-tesseris-syllifthentes-gia-ta-spitakia-anakyklosis-apologoyntai-ti-deytera"
+      "link": "https://www.newshub.gr/el/ellada/gia-kakoyrgimata-diokontai-oi-tesseris-syllifthentes-gia-ta-spitakia-anakyklosis-apologoyntai-ti-deytera",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291040698156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291040698156174",
+          "at": "2026-11-27T21:22:18.901Z"
+        }
+      }
     },
     {
       "id": "20261127212039-news-ekloges-stin-ispania-o-santseth-vlepei-sigoyri-niki-alla-vox-kai-pp-proigoyntai-stis-dimoskopiseis",
