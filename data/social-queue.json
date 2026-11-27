@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T18:50:18.162Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit"
+      "link": "https://www.newshub.gr/el/kosmos/in-vasileio-pithani-kakovoyli-kyvernoepithesi-sto-ypoyrgeio-ergasias-leei-i-ntaoyningk-strit",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291025842156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291025842156174",
+          "at": "2026-11-27T18:50:33.319Z"
+        }
+      }
     },
     {
       "id": "20261127184929-news-spitakia-anakyklosis-kakoyrgimatikes-dioxeis-stoys-tesseris-syllifthentes",
