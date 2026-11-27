@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T21:23:11.117Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/i-roymania-zita-apo-to-nato-na-ti-voithisei-na-antimetopisei-tis-yvridikes-rosikes-epitheseis"
+      "link": "https://www.newshub.gr/el/kosmos/i-roymania-zita-apo-to-nato-na-ti-voithisei-na-antimetopisei-tis-yvridikes-rosikes-epitheseis",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291040908156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291040908156174",
+          "at": "2026-11-27T21:23:31.084Z"
+        }
+      }
     },
     {
       "id": "20261127212203-news-gia-kakoyrgimata-diokontai-oi-tesseris-syllifthentes-gia-ta-spitakia-anakyklosis-apologoyntai-ti-deytera",
