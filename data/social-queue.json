@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127144022-news-to-anakoinothen-tis-ieras-synodoy-tis-ekklisias-tis-kritis-me-tin-oloklirosi-ton-ergasion-tis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/to-anakoinothen-tis-ieras-synodoy-tis-ekklisias-tis-kritis-me-tin-oloklirosi-ton-ergasion-tis",
+      "title": "Το ανακοινωθέν της Ιεράς Συνόδου της Εκκλησίας της Κρήτης με την ολοκλήρωση των εργασιών της",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/archiepiskope-kretes-11.jpg",
+      "text": "Το ανακοινωθέν της Ιεράς Συνόδου της Εκκλησίας της Κρήτης με την ολοκλήρωση των εργασιών της",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T14:40:22.031Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/to-anakoinothen-tis-ieras-synodoy-tis-ekklisias-tis-kritis-me-tin-oloklirosi-ton-ergasion-tis"
+    },
+    {
       "id": "20261127143706-news-diethnes-institoyto-stratigikon-meleton-i-rosia-klimakonei-ton-aorato-polemo-kata-tis-eyropis",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/geopolitiki/diethnes-institoyto-stratigikon-meleton-i-rosia-klimakonei-ton-aorato-polemo-kata-tis-eyropis",
