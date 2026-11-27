@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127195256-news-metanasteytiko-adiakopes-oi-afixeis-pros-tin-kriti-alles-dyo-lemvoi-notia-tis-agias-galinis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/metanasteytiko-adiakopes-oi-afixeis-pros-tin-kriti-alles-dyo-lemvoi-notia-tis-agias-galinis",
+      "title": "Μεταναστευτικό: Αδιάκοπες οι αφίξεις προς την Κρήτη- Άλλες δυο λέμβοι νότια της Αγίας Γαλήνης",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/metanastes-barka-phrontex.jpg",
+      "text": "Μεταναστευτικό: Αδιάκοπες οι αφίξεις προς την Κρήτη- Άλλες δυο λέμβοι νότια της Αγίας Γαλήνης",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T19:52:56.313Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kriti/metanasteytiko-adiakopes-oi-afixeis-pros-tin-kriti-alles-dyo-lemvoi-notia-tis-agias-galinis"
+    },
+    {
       "id": "20261127190629-news-ispania-toylachiston-okto-metanastes-vrethikan-nekroi-se-varka-sta-anoichta-ton-kanarion-nison",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kosmos/ispania-toylachiston-okto-metanastes-vrethikan-nekroi-se-varka-sta-anoichta-ton-kanarion-nison",
