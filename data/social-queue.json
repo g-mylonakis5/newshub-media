@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T06:09:33.301Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/geopolitiki/toyrkia-o-erntogan-etoimazetai-gia-ekloges-to-2028-anoichto-to-endechomeno-prooris-prosfygis-stis-kalpes-anaferei-o-tz-gilmaz"
+      "link": "https://www.newshub.gr/el/geopolitiki/toyrkia-o-erntogan-etoimazetai-gia-ekloges-to-2028-anoichto-to-endechomeno-prooris-prosfygis-stis-kalpes-anaferei-o-tz-gilmaz",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122290957466156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122290957466156174",
+          "at": "2026-11-27T06:09:49.477Z"
+        }
+      }
     },
     {
       "id": "20261126223329-news-i-ethniki-ittithike-stin-paratasi-apo-ti-georgia-me-88-92-kai-to-oneiro-toy-pagkosmioy-kypelloy-apomakrynetai",
