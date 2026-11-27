@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T14:24:31.894Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/ereyna-ekt-i-techniti-noimosyni-kanei-ti-doyleia-eykoloteri-alla-enteinei-tin-ergasiaki-anasfaleia"
+      "link": "https://www.newshub.gr/el/oikonomia/ereyna-ekt-i-techniti-noimosyni-kanei-ti-doyleia-eykoloteri-alla-enteinei-tin-ergasiaki-anasfaleia",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291003798156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291003798156174",
+          "at": "2026-11-27T14:24:52.884Z"
+        }
+      }
     },
     {
       "id": "20261127141529-news-deutsche-welle-gsi-to-kalodio-poy-filodoxei-na-enosei-tin-eyropi-me-ti-mesi-anatoli",
