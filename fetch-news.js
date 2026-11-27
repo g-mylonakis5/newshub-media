@@ -318,6 +318,27 @@ async function details(item, wantBody = false) {
   const date = when(html, item.date);
   if (!date) return null;               // published later — not yet
 
+  const summary = decode(meta(head, 'og:description'));
+
+  // Κενή φωτογραφία ΚΑΙ κενή περίληψη σημαίνει ότι από τη σελίδα τους
+  // δεν διαβάστηκε απολύτως τίποτα: άδειο ή μισό κατέβασμα, ή challenge
+  // του Cloudflare τους. Άρθρο τους χωρίς og:image ΚΑΙ χωρίς
+  // og:description δεν υπάρχει.
+  //
+  // ΓΙΑΤΙ ΣΚΑΕΙ ΑΝΤΙ ΝΑ ΓΥΡΙΣΕΙ null: το null σημαίνει «δημοσιεύεται
+  // αργότερα» και δεν ξαναδοκιμάζεται μέσα στο ίδιο τρέξιμο. Εδώ θέλουμε
+  // τη δεύτερη ευκαιρία που δίνει η fetchAll, γιατί η αστοχία είναι
+  // στιγμιαία.
+  //
+  // Πριν από αυτόν τον έλεγχο, η when() έσωζε την κατάσταση με την
+  // ημερομηνία του sitemap, το άρθρο γραφόταν μισοάδειο, και το have
+  // στην main δεν το ξανακοιτούσε ΠΟΤΕ: κενή φωτογραφία στο
+  // διαχειριστικό και γενικό share.jpg στην κάρτα του Facebook, για
+  // πάντα. Βρέθηκαν 8 τέτοια στις 27 Νοε 2026.
+  if (!img && !summary) {
+    throw new Error('η σελίδα δεν διαβάστηκε — ούτε φωτογραφία ούτε περίληψη');
+  }
+
   return {
     id: item.id,
     title: decode(meta(head, 'og:title') || item.title).replace(/\s*-\s*Newshub\.gr\s*$/i, ''),
@@ -327,7 +348,7 @@ async function details(item, wantBody = false) {
     // They come in two sizes. Small for the cards, large for the hero.
     image_large: img,
     image_thumb: img.replace('/765x435/', '/400x227/'),
-    summary: decode(meta(head, 'og:description')),
+    summary,
     // Who signs it. Almost always present; where it is missing it stays
     // null and the site simply shows no face.
     author: authorOf(html),
@@ -575,11 +596,53 @@ async function main() {
   // The samples go as soon as real articles arrive.
   old = old.filter((a) => a.url && !/\[ΔΕΙΓΜΑ\]/.test(a.title || ''));
 
-  const have = new Set(old.map((a) => a.url));
-  const fresh = listed.filter((a) => !have.has(a.url));
-  console.log(`  ${old.length} ήδη αποθηκευμένα, ${fresh.length} καινούρια`);
+  // Μισοάδεια: χωρίς φωτογραφία ΚΑΙ χωρίς περίληψη. Μπήκαν έτσι από
+  // παλιότερη αστοχία — δες τον έλεγχο στην details(). Βγαίνουν από το
+  // have ώστε να ξανακατεβεί η σελίδα τους, και μπαίνουν στη λίστα
+  // κατεβάσματος με το χέρι: το sitemap κρατά μόνο τρεις μέρες, ενώ το
+  // url τους το ξέρουμε για πάντα.
+  //
+  // Αυτό γιατρεύει και κάθε μελλοντική ζημιά μόνο του, χωρίς να το
+  // προσέξει κανείς.
+  const misoadeia = old.filter((a) => !a.image_large && !a.summary);
+  const misa = new Set(misoadeia.map((a) => a.url));
 
-  const added = fresh.length ? await fetchAll(fresh) : [];
+  const have = new Set(old.filter((a) => !misa.has(a.url)).map((a) => a.url));
+  const fresh = listed.filter((a) => !have.has(a.url));
+
+  // Όσα μισοάδεια δεν είναι πια στο sitemap, μπαίνουν από εδώ.
+  const stoSitemap = new Set(fresh.map((a) => a.url));
+  const xana = misoadeia
+    .filter((a) => !stoSitemap.has(a.url))
+    .map((a) => ({ id: a.id, url: a.url, cat: a.category, date: a.date, title: a.title }));
+
+  const naParoyme = fresh.concat(xana);
+
+  console.log(`  ${old.length} ήδη αποθηκευμένα, ${fresh.length} καινούρια`);
+  if (misa.size) {
+    console.log(`  ${misa.size} μισοάδεια — ξαναδοκιμάζω τη σελίδα τους`);
+  }
+
+  const added = naParoyme.length ? await fetchAll(naParoyme) : [];
+
+  // Ό,τι ξανακατέβηκε αντικαθιστά την παλιά μισοάδεια εγγραφή. Όποιο δεν
+  // πέτυχε ΜΕΝΕΙ ως έχει: μισό άρθρο είναι καλύτερο από κανένα, και το
+  // επόμενο τρέξιμο θα το ξαναδοκιμάσει.
+  const irthan = new Set(added.map((a) => a.url));
+  const prin = old.length;
+  old = old.filter((a) => !irthan.has(a.url));
+  const giatrementa = misoadeia.filter((a) => irthan.has(a.url)).length;
+  if (giatrementa) {
+    console.log(`  ${giatrementa} μισοάδεια γιατρεύτηκαν`);
+  } else if (prin !== old.length) {
+    // Δεν θα έπρεπε να συμβεί: μόνο μισοάδεια βγαίνουν από το have.
+    console.warn('  ΠΡΟΣΟΧΗ: αντικαταστάθηκε εγγραφή που δεν ήταν μισοάδεια.');
+  }
+
+  // Τα μισοάδεια που ΔΕΝ ξανακατέβηκαν γυρίζουν στο have: η seedOpinions
+  // παρακάτω το χρησιμοποιεί για να μη διπλογράψει άρθρο, και η παλιά
+  // τους εγγραφή είναι ακόμα εκεί.
+  misa.forEach((u) => have.add(u));
 
   // And Opinion from its own page — see seedOpinions().
   for (const a of added) have.add(a.url);
