@@ -1,5 +1,101 @@
 [
   {
+    "id": "toyrismos-kai-ai-schedon-enas-stoys-dyo-taxidiotes-allazei-ta-schedia-toy",
+    "title": "Τουρισμός και AI: Σχεδόν ένας στους δύο ταξιδιώτες αλλάζει τα σχέδιά του",
+    "url": "https://www.newshub.gr/el/kosmos/toyrismos-kai-ai-schedon-enas-stoys-dyo-taxidiotes-allazei-ta-schedia-toy",
+    "date": "2026-11-27T00:00:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "",
+    "image_thumb": "",
+    "summary": "",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "ypoyrgeio-paideias-promitheia-718-ilektrikon-scholika-gia-ti-metakinisi-mathiton-me-anapiria",
+    "title": "Υπουργείο Παιδείας: Προμήθεια 718 ηλεκτρικών σχολικά για τη μετακίνηση μαθητών με αναπηρία",
+    "url": "https://www.newshub.gr/el/ellada/ypoyrgeio-paideias-promitheia-718-ilektrikon-scholika-gia-ti-metakinisi-mathiton-me-anapiria",
+    "date": "2026-11-27T00:00:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "",
+    "image_thumb": "",
+    "summary": "",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "agrotikes-enischyseis-oles-oi-pliromes-poy-tha-ginoyn-mechri-30-noemvrioy-kai-prin-ta-christoygenna",
+    "title": "Αγροτικές ενισχύσεις: Όλες οι πληρωμές που θα γίνουν μέχρι 30 Νοεμβρίου και πριν τα Χριστούγεννα",
+    "url": "https://www.newshub.gr/el/agronews/agrotikes-enischyseis-oles-oi-pliromes-poy-tha-ginoyn-mechri-30-noemvrioy-kai-prin-ta-christoygenna",
+    "date": "2026-11-27T00:00:00.000Z",
+    "category": "Agronews",
+    "image_large": "",
+    "image_thumb": "",
+    "summary": "",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "black-friday-kai-giortes-ta-epta-simeia-poy-prepei-na-prosexete-stis-ilektronikes-agores",
+    "title": "Black Friday και γιορτές: Τα επτά σημεία που πρέπει να προσέξετε στις ηλεκτρονικές αγορές",
+    "url": "https://www.newshub.gr/el/oikonomia/black-friday-kai-giortes-ta-epta-simeia-poy-prepei-na-prosexete-stis-ilektronikes-agores",
+    "date": "2026-11-27T00:00:00.000Z",
+    "category": "Οικονομία",
+    "image_large": "",
+    "image_thumb": "",
+    "summary": "",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "eyvoia-anakalyfthike-tholotos-vasilikos-mykinaikos-tafos-3-200-eton-sta-psachna",
+    "title": "Εύβοια: Ανακαλύφθηκε θολωτός βασιλικός μυκηναϊκός τάφος 3.200 ετών στα Ψαχνά",
+    "url": "https://www.newshub.gr/el/istoria-politismos/eyvoia-anakalyfthike-tholotos-vasilikos-mykinaikos-tafos-3-200-eton-sta-psachna",
+    "date": "2026-11-27T00:00:00.000Z",
+    "category": "Ιστορία",
+    "image_large": "",
+    "image_thumb": "",
+    "summary": "",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "to-tyri-poy-mporeite-na-trote-kathimerina-dynamonei-ta-osta-choris-na-anevazei-ti-cholisteroli",
+    "title": "Το τυρί που μπορείτε να τρώτε καθημερινά-Δυναμώνει τα οστά χωρίς να ανεβάζει τη χοληστερόλη",
+    "url": "https://www.newshub.gr/el/ygeia/to-tyri-poy-mporeite-na-trote-kathimerina-dynamonei-ta-osta-choris-na-anevazei-ti-cholisteroli",
+    "date": "2026-11-27T00:00:00.000Z",
+    "category": "Υγεία",
+    "image_large": "",
+    "image_thumb": "",
+    "summary": "",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "papoyra-ora-miden-eyreia-syskepsi-sto-irakleio-gia-ti-diasosi-toy-mnimeioy",
+    "title": "«Παπούρα ώρα μηδέν»: Ευρεία σύσκεψη στο Ηράκλειο για τη διάσωση του μνημείου",
+    "url": "https://www.newshub.gr/el/kriti/papoyra-ora-miden-eyreia-syskepsi-sto-irakleio-gia-ti-diasosi-toy-mnimeioy",
+    "date": "2026-11-27T00:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "",
+    "image_thumb": "",
+    "summary": "",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "apati-me-eikonikes-apodeixeis-gia-enstoloys-kai-stin-kriti-oi-apokalyptikoi-dialogoi-tis-markellas-kai-toy-giorgoy",
+    "title": "Απάτη με εικονικές αποδείξεις για ενστόλους και στην Κρήτη: Οι αποκαλυπτικοί διάλογοι της «Μαρκέλλας» και του «Γιώργου»",
+    "url": "https://www.newshub.gr/el/kriti/apati-me-eikonikes-apodeixeis-gia-enstoloys-kai-stin-kriti-oi-apokalyptikoi-dialogoi-tis-markellas-kai-toy-giorgoy",
+    "date": "2026-11-27T00:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "",
+    "image_thumb": "",
+    "summary": "",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "ofi-anterlecht-1-3-palepsan-mechri-teloys-oi-kritikoi-alla-den-apefygan-tin-itta",
     "title": "ΟΦΗ – Άντερλεχτ 1-3: Πάλεψαν μέχρι τέλους οι Κρητικοί, αλλά δεν απέφυγαν την ήττα",
     "url": "https://www.newshub.gr/el/athlitika/ofi-anterlecht-1-3-palepsan-mechri-teloys-oi-kritikoi-alla-den-apefygan-tin-itta",
@@ -9,7 +105,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/5ry4t6u6i6i.jpg",
     "summary": "Ο ΟΦΗ δεν κατάφερε να δώσει συνέχεια στη θετική του πορεία στη League Phase του Europa League, καθώς γνώρισε την ήττα με 3-1 από την Άντερλεχτ στο Παγκρήτιο,...",
     "author": null,
-    "featured": false
+    "featured": true
   },
   {
     "id": "nortzelant-panathinaikos-3-2-echase-diko-toy-mats-sti-dania-to-trifylli",
@@ -213,7 +309,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/26-11/agrotis-xorafi-trakter1.jpg",
     "summary": "Την ερχόμενη Δευτέρα θα πραγματοποιηθεί η πρώτη πληρωμή αγροτικών ενισχύσεων μέσω της νέας πλατφόρμας, μετά τη μεταφορά του ΟΠΕΚΕΠΕ στην Ανεξάρτητη Αρχή Δημο...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "toyrkia-stis-ipa-tin-epomeni-evdomada-o-gkioyler-gia-synantisi-me-chegkseth-epi-tapitos-i-arsi-ton-kyroseon",
@@ -7144,102 +7240,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/aeroplano.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/aeroplano.jpg",
     "summary": "Οι περισσότερες πτήσεις αναχώρησης και άφιξης στο αεροδρόμιο των Βρυξελλών αναμένεται να ακυρωθούν τη Δευτέρα (23.11.2026), καθώς ορισμένοι ελεγκτές εναέριας...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "meleti-se-300-000-eyropaioys-apo-poia-nosimata-kindyneyoyme-otan-trome-yperepexergasmena-trofima",
-    "title": "Μελέτη σε 300.000 Ευρωπαίους – Από ποια νοσήματα κινδυνεύουμε όταν τρώμε υπερεπεξεργασμένα τρόφιμα",
-    "url": "https://www.newshub.gr/el/ygeia/meleti-se-300-000-eyropaioys-apo-poia-nosimata-kindyneyoyme-otan-trome-yperepexergasmena-trofima",
-    "date": "2026-11-22T08:37:00.000Z",
-    "category": "Υγεία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/mpernker-pexels.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/mpernker-pexels.jpg",
-    "summary": "Με αυξημένο κίνδυνο καρδιαγγειακών και μεταβολικών νοσημάτων, προβλημάτων του γαστρεντερικού συστήματος, κατάθλιψης και άγχους, καρκίνου, αλλά και θνησιμότητ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "mparaz-enischyseon-kai-foroelafrynseon-eos-kai-to-2027-oi-mines-me-ta-dora-poioys-aforoyn",
-    "title": "Μπαράζ ενισχύσεων και φοροελαφρύνσεων έως και το 2027: Οι μήνες με τα «δώρα» - Ποιους αφορούν",
-    "url": "https://www.newshub.gr/el/oikonomia/mparaz-enischyseon-kai-foroelafrynseon-eos-kai-to-2027-oi-mines-me-ta-dora-poioys-aforoyn",
-    "date": "2026-11-22T08:24:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/chrema-ape.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/chrema-ape.jpg",
-    "summary": "Ένα εκτεταμένο πακέτο οικονομικών ενισχύσεωνκαι φορολογικών ελαφρύνσεων τίθεται σταδιακά σε εφαρμογή, με ορίζοντα τα μέσα του 2027. Η αρχή έγινε με την καταβ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kriti-dyo-epicheiriseis-diasosis-me-98-metanastes-stoys-kaloys-limenes-synelifthisan-dyo-anilikoi-os-diakinites",
-    "title": "Κρήτη: Δύο επιχειρήσεις διάσωσης με 98 μετανάστες στους Καλούς Λιμένες – Συνελήφθησαν δύο ανήλικοι ως διακινητές",
-    "url": "https://www.newshub.gr/el/kriti/kriti-dyo-epicheiriseis-diasosis-me-98-metanastes-stoys-kaloys-limenes-synelifthisan-dyo-anilikoi-os-diakinites",
-    "date": "2026-11-22T08:24:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/metanastes-genike.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/metanastes-genike.jpg",
-    "summary": "Δύο επιχειρήσεις εντοπισμού και διάσωσης μεταναστών πραγματοποιήθηκαν στη θαλάσσια περιοχή νοτιοανατολικά των Καλών Λιμένων, με συνολικά 98 αλλοδαπούς να δια...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "irakleio-ethelontiki-aimodosia-kai-eggrafi-sto-mitroo-doton-myeloy-ton-oston-tin-triti-24-noemvrioy",
-    "title": "Ηράκλειο: Εθελοντική αιμοδοσία και εγγραφή στο Μητρώο Δοτών Μυελού των Οστών την Τρίτη 24 Νοεμβρίου",
-    "url": "https://www.newshub.gr/el/ygeia/irakleio-ethelontiki-aimodosia-kai-eggrafi-sto-mitroo-doton-myeloy-ton-oston-tin-triti-24-noemvrioy",
-    "date": "2026-11-22T08:12:00.000Z",
-    "category": "Υγεία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/aimodosia-aimolepsia.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/aimodosia-aimolepsia.jpg",
-    "summary": "Μια σημαντική δράση προσφοράς και αλληλεγγύης διοργανώνεται την Τρίτη 24 Νοεμβρίου 2026 στο Ηράκλειο, με στόχο την ενίσχυση της εθελοντικής αιμοδοσίας και τη...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "aspropyrgos-thyma-xylodarmoy-apo-ton-syzygo-kai-ton-gio-tis-epese-mia-51chroni-gynaika-akoma-dechomai-apeiles",
-    "title": "Ασπρόπυργος: Θύμα ξυλοδαρμού από τον σύζυγο και τον γιο της έπεσε μια 51χρονη γυναίκα -  «Ακόμα δέχομαι απειλές»",
-    "url": "https://www.newshub.gr/el/ellada/aspropyrgos-thyma-xylodarmoy-apo-ton-syzygo-kai-ton-gio-tis-epese-mia-51chroni-gynaika-akoma-dechomai-apeiles",
-    "date": "2026-11-22T08:00:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/peripoliko-astynomia-apee.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/peripoliko-astynomia-apee.jpg",
-    "summary": "Θύμα ξυλοδαρμού από τον σύζυγο και τον γιο της έπεσε μια 51χρονη γυναίκα στον Ασπρόπυργο, η οποία καταγγέλλει ότι εξακολουθεί να δέχεται απειλές από την οικο...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "anoichta-katastimata-poies-kyriakes-tha-leitoyrgisei-i-agora-eos-to-telos-toy-2026",
-    "title": "«Ανοιχτά καταστήματα: Ποιες Κυριακές θα λειτουργήσει η αγορά έως το τέλος του 2026",
-    "url": "https://www.newshub.gr/el/ellada/anoichta-katastimata-poies-kyriakes-tha-leitoyrgisei-i-agora-eos-to-telos-toy-2026",
-    "date": "2026-11-22T07:47:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/agora-erakleio-brady.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/agora-erakleio-brady.jpg",
-    "summary": "Σε εορταστικούς ρυθμούς ετοιμάζεται να κινηθεί η αγορά, με την Black Friday να σηματοδοτεί την έναρξη μιας ιδιαίτερα εμπορικής περιόδου που θα κορυφωθεί τα Χ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "kriti-se-exelixi-oi-ekloges-toy-geotee-mechri-tis-18-00-i-psifoforia-fotografies",
-    "title": "Κρήτη: Σε εξέλιξη οι εκλογές του ΓΕΩΤΕΕ – Μέχρι τις 18:00 η ψηφοφορία (Φωτογραφίες)",
-    "url": "https://www.newshub.gr/el/kriti/kriti-se-exelixi-oi-ekloges-toy-geotee-mechri-tis-18-00-i-psifoforia-fotografies",
-    "date": "2026-11-22T07:34:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/20261122_081251.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/20261122_081251.jpg",
-    "summary": "Σε εξέλιξη βρίσκεται από τις 8 το πρωί της Κυριακής 22 Νοεμβρίου η εκλογική διαδικασία για την ανάδειξη των νέων οργάνων διοίκησης του Γεωτεχνικού Επιμελητηρ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "ypothesi-kyklomatos-me-eikonika-timologia-apo-ayrio-oi-apologies-ton-15-syllifthenton-ton-syntrofo-tis-deichnei-i-logistria",
-    "title": "Υπόθεση κυκλώματος με εικονικά τιμολόγια: Από αύριο οι απολογίες των 15 συλληφθέντων – Τον σύντροφό της «δείχνει» η λογίστρια",
-    "url": "https://www.newshub.gr/el/ellada/ypothesi-kyklomatos-me-eikonika-timologia-apo-ayrio-oi-apologies-ton-15-syllifthenton-ton-syntrofo-tis-deichnei-i-logistria",
-    "date": "2026-11-22T07:24:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/dikasteria-ape.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/dikasteria-ape.jpg",
-    "summary": "Αύριο, Δευτέρα, 23 Νοεμβρίου ξεκινούν οι απολογίες των 15 συλληφθέντων για την υπόθεση του κυκλώματος με τα εικονικά τιμολόγια, ενώ η διαδικασία θα συνεχιστε...",
     "author": null,
     "featured": false
   },
