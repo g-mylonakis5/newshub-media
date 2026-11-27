@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T18:46:58.779Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/servia-o-akadimaikos-rantomir-saitsits-ypopsifios-ton-foititon-gia-tis-proedrikes-ekloges"
+      "link": "https://www.newshub.gr/el/kosmos/servia-o-akadimaikos-rantomir-saitsits-ypopsifios-ton-foititon-gia-tis-proedrikes-ekloges",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291025356156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291025356156174",
+          "at": "2026-11-27T18:47:22.684Z"
+        }
+      }
     },
     {
       "id": "20261127184551-news-kriti-choris-stamatimo-oi-metanasteytikes-roes-nees-afixeis-sta-notia-paralia",
