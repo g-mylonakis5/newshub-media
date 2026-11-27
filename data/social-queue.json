@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127190629-news-ispania-toylachiston-okto-metanastes-vrethikan-nekroi-se-varka-sta-anoichta-ton-kanarion-nison",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/ispania-toylachiston-okto-metanastes-vrethikan-nekroi-se-varka-sta-anoichta-ton-kanarion-nison",
+      "title": "Ισπανία: Τουλάχιστον οκτώ μετανάστες βρέθηκαν νεκροί σε βάρκα στα ανοιχτά των Καναρίων Νήσων",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/canaria-metanastes.jpg",
+      "text": "Ισπανία: Τουλάχιστον οκτώ μετανάστες βρέθηκαν νεκροί σε βάρκα στα ανοιχτά των Καναρίων Νήσων",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T19:06:29.177Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kosmos/ispania-toylachiston-okto-metanastes-vrethikan-nekroi-se-varka-sta-anoichta-ton-kanarion-nison"
+    },
+    {
       "id": "20261127190040-news-papoyra-ora-miden-kraygi-agonias-ton-archaiologon-gia-ti-diasosi-toy-mnimeioy-megali-i-symmetochi-sti-syskepsi-foto",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/papoyra-ora-miden-kraygi-agonias-ton-archaiologon-gia-ti-diasosi-toy-mnimeioy-megali-i-symmetochi-sti-syskepsi-foto",
