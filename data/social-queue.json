@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T19:00:40.711Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kriti/papoyra-ora-miden-kraygi-agonias-ton-archaiologon-gia-ti-diasosi-toy-mnimeioy-megali-i-symmetochi-sti-syskepsi-foto"
+      "link": "https://www.newshub.gr/el/kriti/papoyra-ora-miden-kraygi-agonias-ton-archaiologon-gia-ti-diasosi-toy-mnimeioy-megali-i-symmetochi-sti-syskepsi-foto",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291026832156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291026832156174",
+          "at": "2026-11-27T19:00:56.733Z"
+        }
+      }
     },
     {
       "id": "20261127185240-news-norvigia-i-aeroporiki-etaireia-chamiloy-kostoys-norse-atlantic-kiryxe-ptocheysi",
