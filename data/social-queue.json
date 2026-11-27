@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-27T21:18:25.318Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/giortes-gia-oloys-pote-xekina-to-programma-sta-soyper-market-kai-poso-tha-diarkesei"
+      "link": "https://www.newshub.gr/el/oikonomia/giortes-gia-oloys-pote-xekina-to-programma-sta-soyper-market-kai-poso-tha-diarkesei",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291040182156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291040182156174",
+          "at": "2026-11-27T21:18:54.930Z"
+        }
+      }
     },
     {
       "id": "20261127202948-news-makis-delaportas-gia-gianni-papamichail-echei-na-palepsei-kai-me-ta-esoterika-toy-thiria",
