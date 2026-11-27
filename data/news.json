@@ -1,5 +1,17 @@
 [
   {
+    "id": "i-thesi-toy-geot-e-e-parartimatos-kritis-epi-tis-mpe-gia-daneiothalamo-stis-foyskies-toy-mochoy",
+    "title": "Η θέση του ΓΕΩΤ.Ε.Ε-Παραρτήματος Κρήτης επί της ΜΠΕ για δανειοθάλαμο στις Φουσκιές του Μοχού",
+    "url": "https://www.newshub.gr/el/kriti/i-thesi-toy-geot-e-e-parartimatos-kritis-epi-tis-mpe-gia-daneiothalamo-stis-foyskies-toy-mochoy",
+    "date": "2026-11-27T10:40:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/dddd.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/dddd.jpg",
+    "summary": "Το Παράρτημα Κρήτης του ΓΕΩΤ.Ε.Ε. εκφράζει την ανησυχία του για την τροποποίηση της Απόφασης Έγκρισης Περιβαλλοντικών Όρων του Νέου Διεθνούς Αερολιμένα Ηρακλ...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "voles-sto-kentro-tis-paraskeyis-147",
     "title": "Βολές στο κέντρο... της Παρασκευής!",
     "url": "https://www.newshub.gr/el/ta-en-oiko/voles-sto-kentro-tis-paraskeyis-147",
@@ -9,7 +21,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/img_8831.jpg",
     "summary": "Τοπικά... πικάντικα!\r\n\r\nΝέα βόμβα...\r\n\r\nΤι να πρωτοπεί κανείς για την νέα δικαστική βόμβα που έσκασε χθες στη χώρα&hellip; Τέσσερεις συλλήψεις, μεταξύ των οπ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "efyge-apo-ti-zoi-i-ithopoios-magda-tsaggani-osa-eiche-exomologithei-gia-ti-machi-tis-me-ton-karkino",
@@ -7224,18 +7236,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/ms_3763.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/ms_3763.jpg",
     "summary": "Οι πιθανότητες «λένε» πως σε όλους μας έχει συμβεί το εξής σενάριο: συζητάμε και, ξαφνικά, σταματάμε στη μέση μιας πρότασης, ψάχνοντας ένα όνομα ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "ch-fintan-elliniko-kai-israilino-lompi-stis-ipa-mplokaroyn-tin-arsi-ton-kyroseon-caatsa",
-    "title": "Χ. Φιντάν: Ελληνικό και ισραηλινό λόμπι στις ΗΠΑ μπλοκάρουν την άρση των κυρώσεων Caatsa",
-    "url": "https://www.newshub.gr/el/geopolitiki/ch-fintan-elliniko-kai-israilino-lompi-stis-ipa-mplokaroyn-tin-arsi-ton-kyroseon-caatsa",
-    "date": "2026-11-22T15:24:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/22-11/ap25084699916284-768x511-1.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/22-11/ap25084699916284-768x511-1.jpg",
-    "summary": "Το «ισραηλινό και ελληνικό λόμπι» των Ηνωμένων Πολιτειών κατηγόρησε ο Χακάν Φιντάν υποστηρίζοντας ότι μπλοκάρουν την άρση των αμερικανικών κυρώσε...",
     "author": null,
     "featured": false
   },
