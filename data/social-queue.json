@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127184658-news-servia-o-akadimaikos-rantomir-saitsits-ypopsifios-ton-foititon-gia-tis-proedrikes-ekloges",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kosmos/servia-o-akadimaikos-rantomir-saitsits-ypopsifios-ton-foititon-gia-tis-proedrikes-ekloges",
+      "title": "Σερβία: Ο ακαδημαϊκός Ράντομιρ Σάιτσιτς υποψήφιος των φοιτητών για τις προεδρικές εκλογές",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/servos-akadimaikos-foitites.jpg",
+      "text": "Σερβία: Ο ακαδημαϊκός Ράντομιρ Σάιτσιτς υποψήφιος των φοιτητών για τις προεδρικές εκλογές",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T18:46:58.779Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/kosmos/servia-o-akadimaikos-rantomir-saitsits-ypopsifios-ton-foititon-gia-tis-proedrikes-ekloges"
+    },
+    {
       "id": "20261127184551-news-kriti-choris-stamatimo-oi-metanasteytikes-roes-nees-afixeis-sta-notia-paralia",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/kriti-choris-stamatimo-oi-metanasteytikes-roes-nees-afixeis-sta-notia-paralia",
