@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127064854-news-ektakti-synodos-koryfis-choris-symfonia-gia-ton-neo-polyeti-proypologismo-poies-oi-diafonies-kai-poia-i-elliniki-kokkini-grammi",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/ektakti-synodos-koryfis-choris-symfonia-gia-ton-neo-polyeti-proypologismo-poies-oi-diafonies-kai-poia-i-elliniki-kokkini-grammi",
+      "title": "Έκτακτη Σύνοδος Κορυφής : Χωρίς συμφωνία για τον νέο πολυετή προϋπολογισμό – Ποιες οι διαφωνίες και ποια η ελληνική κόκκινη γραμμή",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/syndos-koryphes.jpg",
+      "text": "Έκτακτη Σύνοδος Κορυφής : Χωρίς συμφωνία για τον νέο πολυετή προϋπολογισμό – Ποιες οι διαφωνίες και ποια η ελληνική κόκκινη γραμμή",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T06:48:54.731Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/ektakti-synodos-koryfis-choris-symfonia-gia-ton-neo-polyeti-proypologismo-poies-oi-diafonies-kai-poia-i-elliniki-kokkini-grammi"
+    },
+    {
       "id": "20261127064827-news-scope-ratings-simantiki-apoklimakosi-toy-ellinikoy-chreoys-eos-to-2031",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/scope-ratings-simantiki-apoklimakosi-toy-ellinikoy-chreoys-eos-to-2031",
@@ -11,17 +27,10 @@
         "facebook",
         "x"
       ],
-      "status": "done",
+      "status": "pending",
       "at": "2026-11-27T06:48:27.463Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/scope-ratings-simantiki-apoklimakosi-toy-ellinikoy-chreoys-eos-to-2031",
-      "results": {
-        "facebook": {
-          "id": "202690759587075_122290961024156174",
-          "url": "https://www.facebook.com/202690759587075/posts/122290961024156174",
-          "at": "2026-11-27T06:48:48.378Z"
-        }
-      }
+      "link": "https://www.newshub.gr/el/oikonomia/scope-ratings-simantiki-apoklimakosi-toy-ellinikoy-chreoys-eos-to-2031"
     },
     {
       "id": "20261127061057-news-kostas-karamanlis-apo-ti-thessaloniki-ischyri-ellada-choris-akmaia-paragogiki-kai-eyimeroysa-perifereia-den-mporei-na-yparxei",
