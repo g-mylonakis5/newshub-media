@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261127211947-news-i-oykrania-katethese-protasi-ekecheirias-sti-mayri-thalassa-gia-tin-apofygi-mias-episitistikis-krisis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/geopolitiki/i-oykrania-katethese-protasi-ekecheirias-sti-mayri-thalassa-gia-tin-apofygi-mias-episitistikis-krisis",
+      "title": "Η Ουκρανία κατέθεσε πρόταση εκεχειρίας στη Μαύρη Θάλασσα για την αποφυγή μιας επισιτιστικής κρίσης",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/black_sea.jpg",
+      "text": "Η Ουκρανία κατέθεσε πρόταση εκεχειρίας στη Μαύρη Θάλασσα για την αποφυγή μιας επισιτιστικής κρίσης",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-27T21:19:47.668Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/geopolitiki/i-oykrania-katethese-protasi-ekecheirias-sti-mayri-thalassa-gia-tin-apofygi-mias-episitistikis-krisis"
+    },
+    {
       "id": "20261127211825-news-giortes-gia-oloys-pote-xekina-to-programma-sta-soyper-market-kai-poso-tha-diarkesei",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/giortes-gia-oloys-pote-xekina-to-programma-sta-soyper-market-kai-poso-tha-diarkesei",
