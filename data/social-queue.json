@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-28T07:44:06.318Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/ygeia/ta-simadia-tis-kardias-dekaeties-prin-apo-to-emfragma-i-to-egkefaliko"
+      "link": "https://www.newshub.gr/el/ygeia/ta-simadia-tis-kardias-dekaeties-prin-apo-to-emfragma-i-to-egkefaliko",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291097086156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291097086156174",
+          "at": "2026-11-28T07:44:26.523Z"
+        }
+      }
     },
     {
       "id": "20261128072710-news-h-finos-film-apochaireta-ton-dimitri-kallivoka-ypirxe-i-epitomi-toy-ithoys-kai-tis-axioprepeias-vinteo",
