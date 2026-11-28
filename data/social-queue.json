@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-28T07:23:20.470Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/kosmos/afganistan-oi-talimpan-steroyn-apo-tis-gynaikes-to-eponymo-kai-tis-apokaloyn-giagiades-i-katsikes"
+      "link": "https://www.newshub.gr/el/kosmos/afganistan-oi-talimpan-steroyn-apo-tis-gynaikes-to-eponymo-kai-tis-apokaloyn-giagiades-i-katsikes",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291094656156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291094656156174",
+          "at": "2026-11-28T07:23:36.264Z"
+        }
+      }
     },
     {
       "id": "20261128072222-news-o-tramp-xanachtypa-egine-don-veto-corleone-kai-thymizei-stoys-dimokratikoys-poios-einai-o-nonos-sto-kapitolio",
