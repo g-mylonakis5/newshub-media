@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261128074406-news-ta-simadia-tis-kardias-dekaeties-prin-apo-to-emfragma-i-to-egkefaliko",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/ygeia/ta-simadia-tis-kardias-dekaeties-prin-apo-to-emfragma-i-to-egkefaliko",
+      "title": "Τα σημάδια της καρδιάς δεκαετίες πριν από το έμφραγμα ή το εγκεφαλικό",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/kardiake-prosbole.jpg",
+      "text": "Τα σημάδια της καρδιάς δεκαετίες πριν από το έμφραγμα ή το εγκεφαλικό",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-28T07:44:06.318Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/ygeia/ta-simadia-tis-kardias-dekaeties-prin-apo-to-emfragma-i-to-egkefaliko"
+    },
+    {
       "id": "20261128072710-news-h-finos-film-apochaireta-ton-dimitri-kallivoka-ypirxe-i-epitomi-toy-ithoys-kai-tis-axioprepeias-vinteo",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/sugar/h-finos-film-apochaireta-ton-dimitri-kallivoka-ypirxe-i-epitomi-toy-ithoys-kai-tis-axioprepeias-vinteo",
