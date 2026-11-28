@@ -1,5 +1,17 @@
 [
   {
+    "id": "kriti-fylagan-epicheiriseis-choris-adeia-deka-syllipseis-ston-agio-nikolao",
+    "title": "Κρήτη: Φύλαγαν επιχειρήσεις χωρίς άδεια - Δέκα συλλήψεις στον Άγιο Νικόλαο",
+    "url": "https://www.newshub.gr/el/kriti/kriti-fylagan-epicheiriseis-choris-adeia-deka-syllipseis-ston-agio-nikolao",
+    "date": "2026-11-28T09:20:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/astynomiag.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/astynomiag.jpg",
+    "summary": "Στη σύλληψη δέκα ατόμων, έξι ανδρών και τεσσάρων γυναικών, τα οποία φέρονται να παρείχαν υπηρεσίες φύλαξης χωρίς να διαθέτουν την προβλεπόμενη από τον νόμο ά...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "mia-xechoristi-christoygenniatiki-episkepsi-sto-1o-nipiagogeio-agias-marinas",
     "title": "Μία ξεχωριστή Χριστουγεννιάτικη επίσκεψη στο 1ο Νηπιαγωγείο Αγίας Μαρίνας",
     "url": "https://www.newshub.gr/el/kriti/mia-xechoristi-christoygenniatiki-episkepsi-sto-1o-nipiagogeio-agias-marinas",
@@ -129,7 +141,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/735847f13f17c81970ae284f1db92a6.jpg",
     "summary": "Την ώρα που την ερχόμενη Δευτέρα (30/11) αναμένεται να βρεθούν ενώπιον της Ευρωπαίας εισαγγελέως οι τέσσερις συλληφθέντες για την υπόθεση των «σπιτιών ...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "ft-oi-amerikanikes-enoples-dynameis-apothisan-drones-se-vasi-tis-raf-stin-vretania",
@@ -7216,18 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/batmobile1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/batmobile1.jpg",
     "summary": "Ένα από τα τρία ειδικά κατασκευασμένα οχήματα που χρησιμοποιήθηκαν στην ταινία του Tim Burton «Batman Returns» το 1992 βγαίνει στο «σφυρί&r...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "me-mia-semni-teleti-timisan-tin-epeteio-tis-ethnikis-antistasis-sta-palaia-roymata-toy-dimoy-platania",
-    "title": "Με μια σεμνή τελετή τίμησαν την επέτειο της Εθνικής Αντίστασης, στα Παλαιά Ρούματα του Δήμου Πλατανιά",
-    "url": "https://www.newshub.gr/el/kriti/me-mia-semni-teleti-timisan-tin-epeteio-tis-ethnikis-antistasis-sta-palaia-roymata-toy-dimoy-platania",
-    "date": "2026-11-23T16:31:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/20261123_132525.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/20261123_132525.jpg",
-    "summary": "Με μια λιτή και σεμνή τελετή, ο Δήμος Πλατανιά, η Δημοτική Κοινότητα Παλαιών Ρουμάτων και οι τοπικοί φορείς τίμησαν την επέτειο της Εθνικής Αντίστασης, στο Μ...",
     "author": null,
     "featured": false
   },
