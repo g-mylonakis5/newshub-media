@@ -1,5 +1,53 @@
 [
   {
+    "id": "ereyna-tis-el-as-meta-apo-vinteo-me-7chrono-sto-timoni-fortigoy",
+    "title": "Έρευνα της ΕΛ.ΑΣ. μετά από βίντεο με 7χρονο στο τιμόνι φορτηγού",
+    "url": "https://www.newshub.gr/el/ellada/ereyna-tis-el-as-meta-apo-vinteo-me-7chrono-sto-timoni-fortigoy",
+    "date": "2026-11-28T06:40:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/fotigo-768x463.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/fotigo-768x463.jpg",
+    "summary": "Στον σχηματισμό δικογραφίας σε βάρος ενός 53χρονου και της μητέρας ενός 7χρονου παιδιού προχώρησε η ΕΛ.ΑΣ., μετά τον εντοπισμό βίντεο σε μέσο κοινωνικής δικτ...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "tragodia-sta-kanaria-nisia-stoys-14-anilthan-oi-nekroi-metanastes-poy-vrethikan-se-ploiario",
+    "title": "Τραγωδία στα Κανάρια Νησιά: Στους 14 ανήλθαν οι νεκροί μετανάστες που βρέθηκαν σε πλοιάριο",
+    "url": "https://www.newshub.gr/el/kosmos/tragodia-sta-kanaria-nisia-stoys-14-anilthan-oi-nekroi-metanastes-poy-vrethikan-se-ploiario",
+    "date": "2026-11-28T06:30:00.000Z",
+    "category": "Κόσμος",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/gphedte.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/gphedte.jpg",
+    "summary": "Δεκατέσσερις νεκροί εντοπίστηκαν σε πλοιάριο που μετέφερε περίπου 100 μετανάστες στα Κανάρια Νησιά της Ισπανίας, όπως μετέδωσε το ισπανικό πρακτορείο ειδήσεω...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "kairos-broches-kataigides-kai-thyellodeis-anemoi-sto-aigaio-mikri-ptosi-tis-thermokrasias",
+    "title": "Καιρός: Bροχές, καταιγίδες και θυελλώδεις ανέμοι στο Αιγαίο-Μικρή πτώση της θερμοκρασίας",
+    "url": "https://www.newshub.gr/el/ellada/kairos-broches-kataigides-kai-thyellodeis-anemoi-sto-aigaio-mikri-ptosi-tis-thermokrasias",
+    "date": "2026-11-28T06:20:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/1.jpg",
+    "summary": "Αγριεύει κι άλλο ο καιρός σήμερα Σάββατο (28.11.2026) με βροχές και τοπικά έντονες καταιγίδες. Η θερμοκρασία θα σημειώσει μικρή πτώση κυρίως στα βόρεια. Βορε...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "kriti-sto-kokkino-oi-metanasteytikes-roes-chanetai-to-metrima-me-tis-synecheis-afixeis-sta-notia-paralia",
+    "title": "Κρήτη: Στο «κόκκινο» οι μεταναστευτικές ροές-Χάνεται το μέτρημα με τις συνεχείς αφίξεις στα νότια παράλια",
+    "url": "https://www.newshub.gr/el/kriti/kriti-sto-kokkino-oi-metanasteytikes-roes-chanetai-to-metrima-me-tis-synecheis-afixeis-sta-notia-paralia",
+    "date": "2026-11-28T06:10:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/metanastes-genike.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/metanastes-genike.jpg",
+    "summary": "Έκρηξη των μεταναστευτικών ροών καταγράφεται στην Κρήτη τις τελευταίες ώρες, με τις αφίξεις στα νότια παράλια να συνεχίζονται με αμείωτη ένταση και τις λιμεν...",
+    "author": null,
+    "featured": true
+  },
+  {
     "id": "pote-anoigei-to-mitroo-parochon-gia-ta-koyponia-toy-market-pass",
     "title": "Πότε ανοίγει το Μητρώο Παρόχων για τα κουπόνια του Market Pass",
     "url": "https://www.newshub.gr/el/oikonomia/pote-anoigei-to-mitroo-parochon-gia-ta-koyponia-toy-market-pass",
@@ -125,7 +173,7 @@
       "url": "https://www.newshub.gr/el/christoforos-papadakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "ta-simadia-tis-kardias-dekaeties-prin-apo-to-emfragma-i-to-egkefaliko",
@@ -7180,54 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/kefalogiannis.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/kefalogiannis.jpg",
     "summary": "Ο Μανώλης Κ. Κεφαλογιάννης με ερώτησή του προς την Ευρωπαική Επιτροπή ζητά τη στήριξη των ελαιοπαραγωγών που πλήττονται από τις χαμηλές τιμές και την ενίσχυσ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "i-techni-tis-lyras-stin-kriti-neo-ntokimanter-toy-moyseioy-thyrathen",
-    "title": "«Η τέχνη της λύρας στην Κρήτη»: Νέο ντοκιμαντέρ του Μουσείου Θύραθεν",
-    "url": "https://www.newshub.gr/el/istoria-politismos/i-techni-tis-lyras-stin-kriti-neo-ntokimanter-toy-moyseioy-thyrathen",
-    "date": "2026-11-23T14:28:00.000Z",
-    "category": "Ιστορία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/screenshot-2026-11-23-153341.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/screenshot-2026-11-23-153341.jpg",
-    "summary": "Το Μουσείο Παραδοσιακής Μουσικής, Οργάνων, Έρευνας και Τεκμηρίωσης «Θύραθεν» και η Περιφέρεια Κρήτης παρουσιάζουν το νέο ντοκιμαντέρ «Η τέχ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "novartis-stin-anthropic-i-techniti-noimosyni-den-tha-therapeysei-ton-karkino-se-5-i-10-chronia",
-    "title": "Novartis στην Anthropic: Η τεχνητή νοημοσύνη δεν θα θεραπεύσει τον καρκίνο σε 5 ή 10 χρόνια",
-    "url": "https://www.newshub.gr/el/ygeia/novartis-stin-anthropic-i-techniti-noimosyni-den-tha-therapeysei-ton-karkino-se-5-i-10-chronia",
-    "date": "2026-11-23T14:18:00.000Z",
-    "category": "Υγεία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/screenshot-2026-11-23-120416.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/screenshot-2026-11-23-120416.jpg",
-    "summary": "Η τεχνητή νοημοσύνη υπόσχεται να αλλάξει ριζικά την ιατρική, να επιταχύνει την ανακάλυψη φαρμάκων και, σύμφωνα με ορισμένους από τους ισχυρότερους παράγοντες...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "velgio-se-apergiako-kloio-i-chora-chiliades-diadilotes-kata-tis-litotitas",
-    "title": "Βέλγιο: Σε απεργιακό κλοιό η χώρα – Χιλιάδες διαδηλωτές κατά της λιτότητας",
-    "url": "https://www.newshub.gr/el/kosmos/velgio-se-apergiako-kloio-i-chora-chiliades-diadilotes-kata-tis-litotitas",
-    "date": "2026-11-23T14:15:00.000Z",
-    "category": "Κόσμος",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/ap26327368021626-1024x683.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/ap26327368021626-1024x683.jpg",
-    "summary": "Σε απεργιακό κλοιό εθνικής κλίμακας το Βέλγιο, καθώς συνδικάτα και πολίτες βγήκαν στους δρόμους διαμαρτυρόμενοι για τα μέτρα λιτότητας του προϋπολογισμού που...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "ekthesi-mikrasiatikon-keimilion-sto-kastelli",
-    "title": "Έκθεση μικρασιατικών κειμηλίων στο Καστέλλι",
-    "url": "https://www.newshub.gr/el/kriti/ekthesi-mikrasiatikon-keimilion-sto-kastelli",
-    "date": "2026-11-23T14:10:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/xxxxx.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/xxxxx.jpg",
-    "summary": "Τα εγκαίνια μιας ξεχωριστής έκθεσης με μικρασιατικά κειμήλια, από τη συλλογή του Συνδέσμου Μικρασιατών και Κωνσταντινουπολιτών Χαλανδρίου «Ρίζες»...",
     "author": null,
     "featured": false
   },
