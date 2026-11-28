@@ -1,5 +1,41 @@
 [
   {
+    "id": "kakokairia-argos-neo-ektakto-deltio-tis-emy-sto-kokkino-i-kriti-tin-deytera",
+    "title": "Κακοκαιρία «ΑΡΓΟΣ»: Νέο έκτακτο δελτίο της ΕΜΥ-Στο «κόκκινο» η Κρήτη την Δευτέρα",
+    "url": "https://www.newshub.gr/el/kriti/kakokairia-argos-neo-ektakto-deltio-tis-emy-sto-kokkino-i-kriti-tin-deytera",
+    "date": "2026-11-28T11:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/broches.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/broches.jpg",
+    "summary": "Αλλάζει δραματικά ο καιρός τις επόμενες ώρες και σύμφωνα με την επικαιροποίηση του Έκτακτου Δελτίου Επικίνδυνων Καιρικών Φαινομένων, αρκετές περιοχές της Ελλ...",
+    "author": null,
+    "featured": true
+  },
+  {
+    "id": "thessaloniki-dyo-19chronoi-nearoi-kai-mia-18chroni-exapatisan-82chrono-kai-apespasan-chrimata-kai-chrysafika",
+    "title": "Θεσσαλονίκη: Δύο 19χρονοι νεαροί και μία 18χρονη εξαπάτησαν 82χρονο και απέσπασαν χρήματα και χρυσαφικά",
+    "url": "https://www.newshub.gr/el/ellada/thessaloniki-dyo-19chronoi-nearoi-kai-mia-18chroni-exapatisan-82chrono-kai-apespasan-chrimata-kai-chrysafika",
+    "date": "2026-11-28T10:50:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/apate-telephono-cheri-kale.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/apate-telephono-cheri-kale.jpg",
+    "summary": "Δικογραφία σε βάρος δύο 19χρονων νεαρών και μιας 18χρονης, σχηματίστηκε από το Αστυνομικό Τμήμα Βόλβης, για περίπτωση απάτης, στο πλαίσιο συνεχιζόμενων ερευν...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "magiki-vradia-sto-irakleio-plithos-kosmoy-sti-fotagogisi-toy-christoygenniatikoy-dentroy-foto",
+    "title": "Μαγική βραδιά στο Ηράκλειο: Πλήθος κόσμου στη φωταγώγηση του χριστουγεννιάτικου δέντρου (Φωτο)",
+    "url": "https://www.newshub.gr/el/kriti/magiki-vradia-sto-irakleio-plithos-kosmoy-sti-fotagogisi-toy-christoygenniatikoy-dentroy-foto",
+    "date": "2026-11-28T10:40:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/photagogese_9-1.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/photagogese_9-1.jpg",
+    "summary": "Μέσα σε μια ζεστή και άκρως γιορτινή ατμόσφαιρα, ο Δήμαρχος Ηρακλείου Αλέξης Καλοκαιρινός μαζί με Αντιδημάρχους, Πρόεδρους Δημοτικών Οργανισμών και Δημοτικού...",
+    "author": null,
+    "featured": false
+  },
+  {
     "id": "nba-cup-oi-omades-poy-prokrithikan-sta-proimitelika",
     "title": "Nba Cup: Οι ομάδες που προκρίθηκαν στα προημιτελικά",
     "url": "https://www.newshub.gr/el/athlitika/nba-cup-oi-omades-poy-prokrithikan-sta-proimitelika",
@@ -49,7 +85,7 @@
       "url": "https://www.newshub.gr/el/andreas-kritsotakis",
       "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
     },
-    "featured": true
+    "featured": false
   },
   {
     "id": "i-tripoli-anevale-aifnidiastika-ti-synodo-koryfis-afrikis-toyrkias",
@@ -7196,42 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/pexels-cottonbro-5701007-1024x682.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/pexels-cottonbro-5701007-1024x682.jpg",
     "summary": "Ξεκίνησε στη Βρετανία μια μεγάλης κλίμακας κλινική μελέτη που αξιοποιεί την τεχνητή νοημοσύνη για την ανίχνευση του καρκίνου του μαστού, όπως ανακοίνωσε το β...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "i-techerani-apaitei-apozimioseis-290-dis-dolarion-apo-tis-ipa-apeilei-me-skliri-apantisi-gia-ton-naytiko-apokleismo",
-    "title": "Η Τεχεράνη απαιτεί αποζημιώσεις 290 δισ. δολαρίων από τις ΗΠΑ - Απειλεί με σκληρή απάντηση για τον ναυτικό αποκλεισμό",
-    "url": "https://www.newshub.gr/el/geopolitiki/i-techerani-apaitei-apozimioseis-290-dis-dolarion-apo-tis-ipa-apeilei-me-skliri-apantisi-gia-ton-naytiko-apokleismo",
-    "date": "2026-11-23T17:26:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/esmail-baghaei-mak.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/esmail-baghaei-mak.jpg",
-    "summary": "Αποζημιώσεις ύψους 290 δισεκατομμυρίων δολαρίων από τις Ηνωμένες Πολιτείες απαιτεί το Ιράν, επικαλούμενο αποφάσεις ιρανικών δικαστηρίων για σειρά ενεργειών π...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "o-erntogan-episkeptetai-sti-livyi-gia-proti-fora-meta-apo-15-chronia-tha-vrethei-stin-tripoli-stis-8-kai-9-dekemvrioy",
-    "title": "Ο Ερντογάν επισκέπτεται στη Λιβύη για πρώτη φορά μετά από 15 χρόνια: Θα βρεθεί στην Τρίπολη στις 8 και 9 Δεκεμβρίου",
-    "url": "https://www.newshub.gr/el/geopolitiki/o-erntogan-episkeptetai-sti-livyi-gia-proti-fora-meta-apo-15-chronia-tha-vrethei-stin-tripoli-stis-8-kai-9-dekemvrioy",
-    "date": "2026-11-23T17:15:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/erdogan_arthrou.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/erdogan_arthrou.jpg",
-    "summary": "Τη Λιβύη θα επισκεφτεί τον Δεκέμβριο ο Ρετζέπ Ταγίπ Ερντογάν, πραγματοποιώντας την πρώτη του επίσκεψη στη βορειοαφρικανική χώρα έπειτα από περισσότερα από 15...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "periodeia-alexi-tsipra-sti-dytiki-makedonia-sto-epikentro-agrotiki-politiki-kai-apolignitopoiisi",
-    "title": "Περιοδεία Αλέξη Τσίπρα στη Δυτική Μακεδονία – Στο… επίκεντρο αγροτική πολιτική και απολιγνιτοποίηση",
-    "url": "https://www.newshub.gr/el/ellada/periodeia-alexi-tsipra-sti-dytiki-makedonia-sto-epikentro-agrotiki-politiki-kai-apolignitopoiisi",
-    "date": "2026-11-23T17:15:00.000Z",
-    "category": "Ελλάδα",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/tsipras-makedonia-1024x604.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/tsipras-makedonia-1024x604.jpg",
-    "summary": "Ο πρόεδρος της ΕΛ.Α.Σ. Αλέξης Τσίπρας ξεκίνησε διήμερη περιοδεία στη Δυτική Μακεδονία από το Μεσόβουνο και τους Πύργους Εορδαίας, εστιάζοντας στην ιστορική μ...",
     "author": null,
     "featured": false
   },
