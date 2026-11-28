@@ -1,5 +1,21 @@
 [
   {
+    "id": "elaioyrgoi-kritis-xechaste-ti-megali-ventema-sto-elaiolado-poy-kymainontai-oi-times-toy-proiontos-pinakas",
+    "title": "Ελαιουργοί Κρήτης: «Ξεχάστε τη μεγάλη βεντέμα στο ελαιόλαδο» - Που κυμαίνονται οι τιμές του προϊόντος (Πίνακας)",
+    "url": "https://www.newshub.gr/el/kriti/elaioyrgoi-kritis-xechaste-ti-megali-ventema-sto-elaiolado-poy-kymainontai-oi-times-toy-proiontos-pinakas",
+    "date": "2026-11-28T05:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/29-11/elaioparagogoi-ladi.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/29-11/elaioparagogoi-ladi.jpg",
+    "summary": "Μπορεί μία περιοχή φέτος να έχει υπερβεντέμα στις ελιές και να βρίσκεται ακριβώς δίπλα της μία άλλη περιοχή που έχει από λίγη έως ελάχιστη παραγωγή ελαιοκάρπ...",
+    "author": {
+      "name": "Χριστόφορος Παπαδάκης",
+      "url": "https://www.newshub.gr/el/christoforos-papadakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/437541844_1861797820927193_3188064257127102048_n.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "ta-simadia-tis-kardias-dekaeties-prin-apo-to-emfragma-i-to-egkefaliko",
     "title": "Τα σημάδια της καρδιάς δεκαετίες πριν από το έμφραγμα ή το εγκεφαλικό",
     "url": "https://www.newshub.gr/el/ygeia/ta-simadia-tis-kardias-dekaeties-prin-apo-to-emfragma-i-to-egkefaliko",
@@ -9,7 +25,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/kardiake-prosbole.jpg",
     "summary": "Οι ενδείξεις αυξημένου κινδύνου για έμφραγμα ή εγκεφαλικό επεισόδιο μπορούν να ανιχνευθούν ακόμη και 30 χρόνια πριν από την εκδήλωσή τους. Αυτό είναι το βα...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "h-finos-film-apochaireta-ton-dimitri-kallivoka-ypirxe-i-epitomi-toy-ithoys-kai-tis-axioprepeias-vinteo",
@@ -7212,18 +7228,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/tttttt.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/tttttt.jpg",
     "summary": "Φρένο στη συνέχιση των εργασιών στη Μονάδα του Εθνικού Οργανισμού Πρόληψης και Αντιμετώπισης Εξαρτήσεων ατόμων στην λεωφόρο Αρχιεπισκόπου Μακαρίου, από το αρ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "rethymno-synelifthi-28chronos-gia-katochi-narkotikon-oysion-fotovolidon-kai-pyrotechnimaton",
-    "title": "Ρέθυμνο: Συνελήφθη 28χρονος για κατοχή ναρκωτικών ουσιών, φωτοβολίδων και πυροτεχνημάτων",
-    "url": "https://www.newshub.gr/el/kriti/rethymno-synelifthi-28chronos-gia-katochi-narkotikon-oysion-fotovolidon-kai-pyrotechnimaton",
-    "date": "2026-11-23T12:48:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/ydee-rethymnou.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/ydee-rethymnou.jpg",
-    "summary": "Ένας 28χρονος συνελήφθη σήμερα Δευτέρα στο Ρέθυμνο από αστυνομικούς του Τμήματος Δίωξης Ναρκωτικών της Υποδιεύθυνσης Δίωξης και Εξιχνίασης Εγκλημάτων Ρεθύμνο...",
     "author": null,
     "featured": false
   },
