@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261128102947-news-klimatiki-krisi-protofanis-meiosi-toy-neroy-se-potamia-kai-limnes-se-olo-ton-kosmo",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/perivallon/klimatiki-krisi-protofanis-meiosi-toy-neroy-se-potamia-kai-limnes-se-olo-ton-kosmo",
+      "title": "Κλιματική κρίση: Πρωτοφανής μείωση του νερού σε ποτάμια και λίμνες σε όλο τον κόσμο",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/potamia.jpg",
+      "text": "Κλιματική κρίση: Πρωτοφανής μείωση του νερού σε ποτάμια και λίμνες σε όλο τον κόσμο",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-28T10:29:47.008Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/perivallon/klimatiki-krisi-protofanis-meiosi-toy-neroy-se-potamia-kai-limnes-se-olo-ton-kosmo"
+    },
+    {
       "id": "20261128102905-news-otan-i-agapi-ginetai-fylaki-i-atheati-pleyra-tis-psychologikis-kakopoiisis",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/kriti/otan-i-agapi-ginetai-fylaki-i-atheati-pleyra-tis-psychologikis-kakopoiisis",
