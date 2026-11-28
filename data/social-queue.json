@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-28T10:29:47.008Z",
       "by": "",
-      "link": "https://www.newshub.gr/el/perivallon/klimatiki-krisi-protofanis-meiosi-toy-neroy-se-potamia-kai-limnes-se-olo-ton-kosmo"
+      "link": "https://www.newshub.gr/el/perivallon/klimatiki-krisi-protofanis-meiosi-toy-neroy-se-potamia-kai-limnes-se-olo-ton-kosmo",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291110118156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291110118156174",
+          "at": "2026-11-28T10:30:02.920Z"
+        }
+      }
     },
     {
       "id": "20261128102905-news-otan-i-agapi-ginetai-fylaki-i-atheati-pleyra-tis-psychologikis-kakopoiisis",
