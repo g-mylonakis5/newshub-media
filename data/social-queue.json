@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261128083529-news-elstat-meiosi-2-8-sti-dimioyrgia-neon-epicheiriseon-to-g-trimino-ayxisi-0-7-stis-ptocheyseis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/elstat-meiosi-2-8-sti-dimioyrgia-neon-epicheiriseon-to-g-trimino-ayxisi-0-7-stis-ptocheyseis",
+      "title": "ΕΛΣΤΑΤ: Μείωση 2,8% στη δημιουργία νέων επιχειρήσεων το γ’ τρίμηνο-Αύξηση 0,7% στις πτωχεύσεις",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/elstat-ape.jpg",
+      "text": "ΕΛΣΤΑΤ: Μείωση 2,8% στη δημιουργία νέων επιχειρήσεων το γ’ τρίμηνο-Αύξηση 0,7% στις πτωχεύσεις",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-28T08:35:29.834Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/elstat-meiosi-2-8-sti-dimioyrgia-neon-epicheiriseon-to-g-trimino-ayxisi-0-7-stis-ptocheyseis"
+    },
+    {
       "id": "20261128075806-news-diesel-kampanaki-gia-elleipseis-to-2027-sto-epikentro-i-eyropi",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/diesel-kampanaki-gia-elleipseis-to-2027-sto-epikentro-i-eyropi",
