@@ -1,5 +1,21 @@
 [
   {
+    "id": "gialta-ap-ta-temu",
+    "title": "Γιάλτα απ’ τα Temu",
+    "url": "https://www.newshub.gr/el/apopseis/gialta-ap-ta-temu",
+    "date": "2026-11-28T05:32:00.000Z",
+    "category": "Απόψεις",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/27-11/tramp-si-poutin.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/27-11/tramp-si-poutin.jpg",
+    "summary": "Οι Ηνωμένες Πολιτείες, τουλάχιστον στη σημερινή τους μορφή,\r\nείναι μια εγωκεντρική, μηδενιστική ολιγαρχία χωρίς εξωτερική πολιτική,\r\nπου οι ηγέτες της γυρίζο...",
+    "author": {
+      "name": "Γιώργος Ρακκάς",
+      "url": "https://www.newshub.gr/el/giorgos-rakkas",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/rakas-1.jpg"
+    },
+    "featured": false
+  },
+  {
     "id": "elstat-meiosi-2-8-sti-dimioyrgia-neon-epicheiriseon-to-g-trimino-ayxisi-0-7-stis-ptocheyseis",
     "title": "ΕΛΣΤΑΤ: Μείωση 2,8% στη δημιουργία νέων επιχειρήσεων το γ’ τρίμηνο-Αύξηση 0,7% στις πτωχεύσεις",
     "url": "https://www.newshub.gr/el/oikonomia/elstat-meiosi-2-8-sti-dimioyrgia-neon-epicheiriseon-to-g-trimino-ayxisi-0-7-stis-ptocheyseis",
@@ -7216,18 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/eikona_viber_2026-11-21_11-58-48-804.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/eikona_viber_2026-11-21_11-58-48-804.jpg",
     "summary": "Με ουσιαστική συμμετοχή και τη δυναμική παρουσία της νεολαίας της πόλης πραγματοποιήθηκε (19/11) στην αίθουσα του Δημοτικού Συμβουλίου η ενημερωτική συνάντησ...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "protovoylia-toy-dimoy-platania-gia-tin-parachorisi-toy-istorikoy-aerodromioy-maleme-stochos-i-dimioyrgia-moyseioy-istorikis-mnimis",
-    "title": "Πρωτοβουλία του Δήμου Πλατανιά για την παραχώρηση του Ιστορικού Αεροδρομίου Μάλεμε – Στόχος η δημιουργία Μουσείου Ιστορικής Μνήμης",
-    "url": "https://www.newshub.gr/el/kriti/protovoylia-toy-dimoy-platania-gia-tin-parachorisi-toy-istorikoy-aerodromioy-maleme-stochos-i-dimioyrgia-moyseioy-istorikis-mnimis",
-    "date": "2026-11-23T13:28:00.000Z",
-    "category": "Κρήτη",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/aerodromio-maleme-1000x580.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/aerodromio-maleme-1000x580.jpg",
-    "summary": "Την παραχώρηση χρήσης τμημάτων του Ιστορικού Αεροδρομίου Μάλεμε, με σκοπό τη δημιουργία ενός σύγχρονου Μουσείου Ιστορικής Μνήμης και ενός ευρύτερου χώρου ιστ...",
     "author": null,
     "featured": false
   },
