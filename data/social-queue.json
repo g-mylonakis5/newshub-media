@@ -11,10 +11,17 @@
         "facebook",
         "x"
       ],
-      "status": "pending",
+      "status": "done",
       "at": "2026-11-28T09:30:16.711Z",
       "by": "ioannisram@hotmail.com",
-      "link": "https://www.newshub.gr/el/oikonomia/ipa-ektinachthike-kata-10-7-to-emporiko-elleimma-ton-oktovrio"
+      "link": "https://www.newshub.gr/el/oikonomia/ipa-ektinachthike-kata-10-7-to-emporiko-elleimma-ton-oktovrio",
+      "results": {
+        "facebook": {
+          "id": "202690759587075_122291106542156174",
+          "url": "https://www.facebook.com/202690759587075/posts/122291106542156174",
+          "at": "2026-11-28T09:30:32.686Z"
+        }
+      }
     },
     {
       "id": "20261128083529-news-elstat-meiosi-2-8-sti-dimioyrgia-neon-epicheiriseon-to-g-trimino-ayxisi-0-7-stis-ptocheyseis",
