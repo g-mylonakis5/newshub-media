@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261128075806-news-diesel-kampanaki-gia-elleipseis-to-2027-sto-epikentro-i-eyropi",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/oikonomia/diesel-kampanaki-gia-elleipseis-to-2027-sto-epikentro-i-eyropi",
+      "title": "Diesel: «Καμπανάκι» για ελλείψεις το 2027-Στο επίκεντρο η Ευρώπη",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/frwf.jpg",
+      "text": "Diesel: «Καμπανάκι» για ελλείψεις το 2027-Στο επίκεντρο η Ευρώπη",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-28T07:58:06.785Z",
+      "by": "ioannisram@hotmail.com",
+      "link": "https://www.newshub.gr/el/oikonomia/diesel-kampanaki-gia-elleipseis-to-2027-sto-epikentro-i-eyropi"
+    },
+    {
       "id": "20261128074406-news-ta-simadia-tis-kardias-dekaeties-prin-apo-to-emfragma-i-to-egkefaliko",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/ygeia/ta-simadia-tis-kardias-dekaeties-prin-apo-to-emfragma-i-to-egkefaliko",
