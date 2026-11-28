@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "id": "20261128102905-news-otan-i-agapi-ginetai-fylaki-i-atheati-pleyra-tis-psychologikis-kakopoiisis",
+      "kind": "news",
+      "ref": "https://www.newshub.gr/el/kriti/otan-i-agapi-ginetai-fylaki-i-atheati-pleyra-tis-psychologikis-kakopoiisis",
+      "title": "Όταν η αγάπη γίνεται φυλακή – Η αθέατη πλευρά της ψυχολογικής κακοποίησης",
+      "image": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/otan-e-agape-ginetai-phylake.jpg",
+      "text": "Όταν η αγάπη γίνεται φυλακή – Η αθέατη πλευρά της ψυχολογικής κακοποίησης",
+      "targets": [
+        "facebook",
+        "x"
+      ],
+      "status": "pending",
+      "at": "2026-11-28T10:29:05.675Z",
+      "by": "",
+      "link": "https://www.newshub.gr/el/kriti/otan-i-agapi-ginetai-fylaki-i-atheati-pleyra-tis-psychologikis-kakopoiisis"
+    },
+    {
       "id": "20261128093016-news-ipa-ektinachthike-kata-10-7-to-emporiko-elleimma-ton-oktovrio",
       "kind": "news",
       "ref": "https://www.newshub.gr/el/oikonomia/ipa-ektinachthike-kata-10-7-to-emporiko-elleimma-ton-oktovrio",
