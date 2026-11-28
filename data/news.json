@@ -1,5 +1,21 @@
 [
   {
+    "id": "mnimeio-papoyras-spilaioseis-kai-egkoila-simeia-kato-apo-to-mnimeio-o-kindynos-poy-yparchei-gia-tin-katastrofi-toy",
+    "title": "Μνημείο Παπούρας: Σπηλαιώσεις και έγκοιλα σημεία κάτω από το μνημείο - Ο κίνδυνος που υπάρχει για την καταστροφή του",
+    "url": "https://www.newshub.gr/el/kriti/mnimeio-papoyras-spilaioseis-kai-egkoila-simeia-kato-apo-to-mnimeio-o-kindynos-poy-yparchei-gia-tin-katastrofi-toy",
+    "date": "2026-11-28T10:00:00.000Z",
+    "category": "Κρήτη",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/vevev.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/vevev.jpg",
+    "summary": "Με τη συμμετοχή αρχαιολόγων, τοπικών βουλευτών και εκπροσώπων τους, αυτοδιοικητικών στελεχών, επιστημόνων και πολιτών, πραγματοποιήθηκε η σύσκεψη για την Παπ...",
+    "author": {
+      "name": "Ανδρέας Κριτσωτάκης",
+      "url": "https://www.newshub.gr/el/andreas-kritsotakis",
+      "photo": "https://static.newshub.gr/files/2020/arthrografoi/kritsotakis.jpg"
+    },
+    "featured": true
+  },
+  {
     "id": "i-tripoli-anevale-aifnidiastika-ti-synodo-koryfis-afrikis-toyrkias",
     "title": "Η Τρίπολη ανέβαλε αιφνιδιαστικά τη Σύνοδο Κορυφής Αφρικής – Τουρκίας",
     "url": "https://www.newshub.gr/el/kosmos/i-tripoli-anevale-aifnidiastika-ti-synodo-koryfis-afrikis-toyrkias",
@@ -8,6 +24,18 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/erdogan-e1795858675890.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/erdogan-e1795858675890.jpg",
     "summary": "Ο πρόεδρος του Προεδρικού Συμβουλίου της Λιβύης, Μοχάμεντ αλ Μένφι, ανακοίνωσε την αναβολή της 4ης Συνόδου Κορυφής Εταιρικής Σχέσης Αφρικής &ndash; Τουρκίας,...",
+    "author": null,
+    "featured": false
+  },
+  {
+    "id": "giorgos-lechoyritis-proedros-inka-i-akriveia-echei-dimioyrgisei-taxikes-diafores-akomi-kai-sti-trofi-podcast",
+    "title": "Γιώργος Λεχουρίτης Πρόεδρος ΙΝΚΑ: Η ακρίβεια έχει δημιουργήσει ταξικές διαφορές ακόμη και στη τροφή! (podcast)",
+    "url": "https://www.newshub.gr/el/ellada/giorgos-lechoyritis-proedros-inka-i-akriveia-echei-dimioyrgisei-taxikes-diafores-akomi-kai-sti-trofi-podcast",
+    "date": "2026-11-28T09:50:00.000Z",
+    "category": "Ελλάδα",
+    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/28-11/anonymo-2048-x-1152-px-binteo-12.jpg",
+    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/anonymo-2048-x-1152-px-binteo-12.jpg",
+    "summary": "Ακριβότερο κατά 18,3% το Χριστουγεννιάτικο τραπέζι!\r\n\r\nΑυξημένο κατά 18,3% σε σχέση με πέρυσι θα είναι το κόστος του Χριστουγεννιάτικου τραπεζιού γ...",
     "author": null,
     "featured": false
   },
@@ -45,7 +73,7 @@
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/28-11/astynomiag.jpg",
     "summary": "Στη σύλληψη δέκα ατόμων, έξι ανδρών και τεσσάρων γυναικών, τα οποία φέρονται να παρείχαν υπηρεσίες φύλαξης χωρίς να διαθέτουν την προβλεπόμενη από τον νόμο ά...",
     "author": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": "mia-xechoristi-christoygenniatiki-episkepsi-sto-1o-nipiagogeio-agias-marinas",
@@ -7204,30 +7232,6 @@
     "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/a1.jpg",
     "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/a1.jpg",
     "summary": "Η Κομματική Οργάνωση Ηρακλείου του ΚΚΕ διοργανώνει πολιτική εκδήλωση με θέμα: «Απεμπλοκή από τους ενεργειακούς σχεδιασμούς και τους πολέμους των ιμπερι...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "toyrkia-exedose-navtex-gia-ereynes-toy-cesme-se-periochi-notia-toy-kastelorizoy",
-    "title": "Τουρκία: Εξέδωσε Navtex  για έρευνες του Cesme σε περιοχή νότια του Καστελόριζου",
-    "url": "https://www.newshub.gr/el/geopolitiki/toyrkia-exedose-navtex-gia-ereynes-toy-cesme-se-periochi-notia-toy-kastelorizoy",
-    "date": "2026-11-23T16:55:00.000Z",
-    "category": "Γεωπολιτική",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/navtex.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/navtex.jpg",
-    "summary": "Σε νέα κίνηση έμπρακτης αμφισβήτησης και άσκησης δικαιοδοσίας επί του πεδίου προχωρά η Τουρκία στην ανατολική Μεσόγειο, βγάζοντας ξανά στη θάλασσα το υδρογρα...",
-    "author": null,
-    "featured": false
-  },
-  {
-    "id": "takis-theodorikakos-150-ekat-eyro-gia-tin-techniti-noimosyni-ergaleio-gia-kalyteri-paragogikotita-kai-ochi-pedio-neon-anisotiton",
-    "title": "Τάκης Θεοδωρικάκος: 150 εκατ. ευρώ για την τεχνητή νοημοσύνη – Εργαλείο για καλύτερη παραγωγικότητα και όχι πεδίο νέων ανισοτήτων",
-    "url": "https://www.newshub.gr/el/oikonomia/takis-theodorikakos-150-ekat-eyro-gia-tin-techniti-noimosyni-ergaleio-gia-kalyteri-paragogikotita-kai-ochi-pedio-neon-anisotiton",
-    "date": "2026-11-23T16:53:00.000Z",
-    "category": "Οικονομία",
-    "image_large": "https://static.newshub.gr/765x435/2026-fotografies-gia-roh/noembrios/23-11/theodorikakos-digital-economy02-1024x682.jpg",
-    "image_thumb": "https://static.newshub.gr/400x227/2026-fotografies-gia-roh/noembrios/23-11/theodorikakos-digital-economy02-1024x682.jpg",
-    "summary": "Τη δημιουργία νέου καθεστώτος του Αναπτυξιακού Νόμου με 150 εκατ. ευρώ έως το τέλος του έτους για την αξιοποίηση της Τεχνητής Νοημοσύνης από τις μικρομεσαίες...",
     "author": null,
     "featured": false
   },
